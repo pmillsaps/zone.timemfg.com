@@ -1,0 +1,13 @@
+Name: Active Directory Authentication
+AntiForgery: enabled
+Author: Ventajou
+Website: http://orchardproject.net
+Version: 1.1.2
+OrchardVersion: 1.8.0
+Description: Active Directory authentication support for Orchard
+Features:
+    Ventajou.ActiveDirectory:
+        Name: Active Directory Authentication
+        Description: Active Directory authentication support for Orchard
+        Category: Authentication
+        Dependencies: Orchard.Users,Orchard.Roles
