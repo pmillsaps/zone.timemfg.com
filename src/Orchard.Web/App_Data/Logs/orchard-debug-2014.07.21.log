@@ -531,3 +531,706 @@ System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was
    at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
    at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+2014-07-21 09:27:13,849 [12] Orchard.Environment.Extensions.ExtensionManager - (null) - No suitable loader found for extension "Time.Epicor"
+2014-07-21 09:27:15,082 [12] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:15,130 [12] Orchard.Environment.Extensions.ExtensionManager - (null) - No suitable loader found for extension "Time.Legacy"
+2014-07-21 09:27:15,584 [12] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.AssemblyBuilder.Compile()
+   at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:15,584 [12] Orchard.Environment.Extensions.ExtensionManager - (null) - No suitable loader found for extension "Time.OrderLog"
+2014-07-21 09:27:20,176 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,177 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,194 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,194 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,199 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,200 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,204 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,205 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,243 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,243 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,250 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,251 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,255 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,256 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,262 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,263 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,267 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,267 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,274 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,274 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,281 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,281 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,291 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,292 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,296 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,297 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,301 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,302 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,307 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,308 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,315 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,317 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,323 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,324 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,331 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,332 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,336 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,336 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,340 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,341 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,344 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,345 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,349 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,349 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,360 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,361 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,365 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,366 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,370 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,370 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,375 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,376 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,380 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,380 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,385 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,386 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,390 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,391 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,395 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,395 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,399 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,399 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,403 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,404 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,408 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,408 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,414 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.Legacy/Time.Legacy.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Legacy\Controllers\HomeController.cs(85): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
+2014-07-21 09:27:20,415 [8] Orchard.Environment.DefaultBuildManager - (null) - Error when compiling assembly under ~/Modules/Time.OrderLog/Time.OrderLog.csproj.
+System.Web.HttpCompileException (0x80004005): c:\Users\PaulL\Documents\Visual Studio 2013\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.OrderLog\Controllers\OrderLogController.cs(89): error CS0104: 'EntityState' is an ambiguous reference between 'System.Data.EntityState' and 'System.Data.Entity.EntityState'
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResult(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean ensureIsUpToDate)
+   at System.Web.Compilation.BuildManager.GetCompiledAssembly(String virtualPath)
+   at Orchard.Environment.DefaultBuildManager.GetCompiledAssembly(String virtualPath) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IBuildManager.cs:line 53
