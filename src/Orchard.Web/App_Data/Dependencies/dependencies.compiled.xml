@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <Dependency>
+    <ExtensionId>HelloWorld</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/HelloWorld/bin/HelloWorld.dll</VirtualPath>
+    <Hash>48f350ffc4bbcdf9</Hash>
+  </Dependency>
+  <Dependency>
     <ExtensionId>Lucene</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Lucene/bin/Lucene.dll</VirtualPath>
@@ -349,10 +355,40 @@
     <Hash>dbaba9d7f336d479</Hash>
   </Dependency>
   <Dependency>
+    <ExtensionId>PJS.Bootstrap</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Themes/PJS.Bootstrap/PJS.Bootstrap.csproj</VirtualPath>
+    <Hash>8111af3bc0cfa8ff</Hash>
+  </Dependency>
+  <Dependency>
     <ExtensionId>SysCache</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/SysCache/bin/SysCache.dll</VirtualPath>
     <Hash>9264e14576223645</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Epicor</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
+    <Hash>48f468fd468c98cf</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.HelloWorld</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.HelloWorld/bin/Time.HelloWorld.dll</VirtualPath>
+    <Hash>49023b2f7e47ab2e</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Legacy</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Legacy/bin/Time.Legacy.dll</VirtualPath>
+    <Hash>dbc6be082166af51</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.OrderLog</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.OrderLog/bin/Time.OrderLog.dll</VirtualPath>
+    <Hash>48fb49042764f00e</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>TinyMce</ExtensionId>
