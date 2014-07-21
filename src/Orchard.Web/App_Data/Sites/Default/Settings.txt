@@ -1,0 +1,13 @@
+State: Running
+Themes: 
+Modules: 
+Name: Default
+DataProvider: SqlServer
+DataConnectionString: Data Source=Aruba-Sql1;Initial Catalog=Zone;Persist Security Info=True;User ID=TimeMFGApp;Password=Tm@Time$!
+DataTablePrefix: Zone
+RequestUrlHost: null
+RequestUrlPrefix: null
+EncryptionAlgorithm: AES
+EncryptionKey: 428378EE7011C92877B0BE191EFE22811D77EAA07E798EA91F09C5609A246F78
+HashAlgorithm: HMACSHA256
+HashKey: 58A19F095B4591F8B0C4E0B0FC355E84F37F33D238501A9118D2CFBF85C0AF4EEE2C2CDBCA84DB44EFF9F6313BBAB2EE4BB1DDFF37F27D06A66D2B608EE96F8B
