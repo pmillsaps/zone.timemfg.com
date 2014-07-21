@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <Dependency>
+    <ExtensionId>HelloWorld</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/HelloWorld/HelloWorld.csproj</VirtualPath>
+    <Hash>da963931f907198e</Hash>
+  </Dependency>
+  <Dependency>
     <ExtensionId>Lucene</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Lucene/bin/Lucene.dll</VirtualPath>
@@ -349,17 +355,41 @@
     <Hash>dbaba9d7f336d479</Hash>
   </Dependency>
   <Dependency>
+    <ExtensionId>PJS.Bootstrap</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Themes/PJS.Bootstrap/PJS.Bootstrap.csproj</VirtualPath>
+    <Hash>8111c93ece9093ba</Hash>
+  </Dependency>
+  <Dependency>
     <ExtensionId>SysCache</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/SysCache/bin/SysCache.dll</VirtualPath>
-    <Hash>9264e49207b04870</Hash>
+    <Hash>9264e14576223645</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Epicor</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Epicor/Time.Epicor.csproj</VirtualPath>
+    <Hash>48f46b2866b0e22f</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.HelloWorld</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.HelloWorld/Time.HelloWorld.csproj</VirtualPath>
+    <Hash>daa52140e309a5c1</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Legacy</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Legacy/Time.Legacy.csproj</VirtualPath>
+    <Hash>d29466dd4896a93d</Hash>
   </Dependency>
   <Dependency>
     <Hash>dbc6be09d4f04169</Hash>
     <ExtensionId>Time.OrderLog</ExtensionId>
     <LoaderName>DynamicExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Time.OrderLog/Time.OrderLog.csproj</VirtualPath>
-    <Hash>459f38108e9d9376</Hash>
+    <Hash>45846681b045a581</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>TinyMce</ExtensionId>
