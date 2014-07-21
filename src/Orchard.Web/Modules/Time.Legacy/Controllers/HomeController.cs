@@ -1,11 +1,13 @@
 ﻿using Orchard.Themes;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using Time.Legacy.EntityModels.Legacy;
 
@@ -14,7 +16,21 @@ namespace Time.Legacy.Controllers
     [Themed]
     public class HomeController : Controller
     {
-        private LegacyEntities db = new LegacyEntities();
+        private LegacyEntities db;
+
+        public HomeController()
+        {
+            //var fileMap = new ExeConfigurationFileMap();
+            //fileMap.ExeConfigFilename = HostingEnvironment.MapPath("~/Modules/Time.Legacy/web.config");
+            //var _configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            //var _connection = _configuration.ConnectionStrings.ConnectionStrings["LegacyEntities"].ConnectionString;
+            db = new LegacyEntities();
+        }
+
+        public HomeController(LegacyEntities _db)
+        {
+            db = _db;
+        }
 
         // GET: Legacy
         public ActionResult Index()

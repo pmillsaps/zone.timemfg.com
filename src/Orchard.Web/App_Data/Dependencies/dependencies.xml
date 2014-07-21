@@ -32,8 +32,8 @@
   </Dependency>
   <Dependency>
     <ModuleName>HelloWorld</ModuleName>
-    <VirtualPath>~/Modules/HelloWorld/HelloWorld.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/HelloWorld/bin/HelloWorld.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>
@@ -1057,47 +1057,47 @@
   </Dependency>
   <Dependency>
     <ModuleName>Time.Epicor</ModuleName>
-    <VirtualPath>~/Modules/Time.Epicor/Time.Epicor.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>
     <ModuleName>Time.HelloWorld</ModuleName>
-    <VirtualPath>~/Modules/Time.HelloWorld/Time.HelloWorld.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.HelloWorld/bin/Time.HelloWorld.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>
     <ModuleName>Time.Legacy</ModuleName>
-    <VirtualPath>~/Modules/Time.Legacy/Time.Legacy.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Legacy/bin/Time.Legacy.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
       <Reference>
         <Name>EntityFramework</Name>
-        <LoaderName>DynamicExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.dll</VirtualPath>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Legacy/bin/EntityFramework.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>EntityFramework.SqlServer</Name>
-        <LoaderName>DynamicExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.SqlServer.dll</VirtualPath>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Legacy/bin/EntityFramework.SqlServer.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
   <Dependency>
     <ModuleName>Time.OrderLog</ModuleName>
-    <VirtualPath>~/Modules/Time.OrderLog/Time.OrderLog.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.OrderLog/bin/Time.OrderLog.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
       <Reference>
         <Name>EntityFramework</Name>
-        <LoaderName>DynamicExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.dll</VirtualPath>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Legacy/bin/EntityFramework.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>EntityFramework.SqlServer</Name>
-        <LoaderName>DynamicExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.SqlServer.dll</VirtualPath>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Legacy/bin/EntityFramework.SqlServer.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
