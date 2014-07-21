@@ -388,7 +388,7 @@
     <ExtensionId>Time.OrderLog</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Time.OrderLog/bin/Time.OrderLog.dll</VirtualPath>
-    <Hash>dbce062c5a5bd605</Hash>
+    <Hash>dbce06336ec4793b</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>TinyMce</ExtensionId>

@@ -77,6 +77,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\Time.OrderLog.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -147,6 +148,7 @@
     <Compile Include="EntityModels\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>

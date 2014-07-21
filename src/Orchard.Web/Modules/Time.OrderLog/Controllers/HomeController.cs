@@ -1,4 +1,6 @@
-﻿using Orchard.Themes;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,11 +16,22 @@ namespace Time.OrderLog.Controllers
     [Themed]
     public class HomeController : Controller
     {
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
         private OrderLogEntities db = new OrderLogEntities();
+
+        public HomeController(IOrchardServices services)
+        {
+            Services = services;
+
+            T = NullLocalizer.Instance;
+        }
 
         // GET: /OrderLog/
         public ActionResult Index()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ViewOrders, T("Couldn't View Orders")))
+                return new HttpUnauthorizedResult();
             var orders = db.Orders.Include(o => o.Dealer);
             return View(orders.ToList());
         }
