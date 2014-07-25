@@ -1,0 +1,10 @@
+﻿Name: Time.Drawings
+AntiForgery: enabled
+Author: Time Manufacturing
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Program for searching and opening PDF Drawings.
+Features:
+    Time.Drawings:
+        Description: Program for searching and opening PDF Drawings.

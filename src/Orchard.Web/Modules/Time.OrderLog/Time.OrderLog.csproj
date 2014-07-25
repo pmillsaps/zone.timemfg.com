@@ -76,7 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Content\webgrid.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -84,7 +83,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
     <Content Include="Properties\AssemblyInfo.cs" />
@@ -92,11 +93,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\OrderLog\Create.cshtml" />
-    <Content Include="Views\OrderLog\Delete.cshtml" />
-    <Content Include="Views\OrderLog\Details.cshtml" />
-    <Content Include="Views\OrderLog\Edit.cshtml" />
-    <Content Include="Views\OrderLog\Index.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -115,7 +116,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\OrderLogController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EntityModels\Dealer.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
@@ -153,6 +154,7 @@
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderLog.cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +176,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

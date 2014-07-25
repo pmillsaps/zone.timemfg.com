@@ -1096,10 +1096,38 @@
     <References />
   </Dependency>
   <Dependency>
+    <ModuleName>Time.Drawings</ModuleName>
+    <VirtualPath>~/Modules/Time.Drawings/bin/Time.Drawings.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <References>
+      <Reference>
+        <Name>EntityFramework</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>EntityFramework.SqlServer</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.SqlServer.dll</VirtualPath>
+      </Reference>
+    </References>
+  </Dependency>
+  <Dependency>
     <ModuleName>Time.Epicor</ModuleName>
-    <VirtualPath>~/Modules/Time.Epicor/Time.Epicor.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
-    <References />
+    <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <References>
+      <Reference>
+        <Name>EntityFramework</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>EntityFramework.SqlServer</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.SqlServer.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Time.HelloWorld</ModuleName>
@@ -1115,12 +1143,12 @@
       <Reference>
         <Name>EntityFramework</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.dll</VirtualPath>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>EntityFramework.SqlServer</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.SqlServer.dll</VirtualPath>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.SqlServer.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -1132,12 +1160,12 @@
       <Reference>
         <Name>EntityFramework</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.dll</VirtualPath>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>EntityFramework.SqlServer</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Time.OrderLog/bin/EntityFramework.SqlServer.dll</VirtualPath>
+        <VirtualPath>~/Modules/Time.Epicor/bin/EntityFramework.SqlServer.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
