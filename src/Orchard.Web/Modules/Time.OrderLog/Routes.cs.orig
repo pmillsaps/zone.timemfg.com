@@ -1,0 +1,56 @@
+﻿using Orchard.Mvc.Routes;
+<<<<<<< local
+using System;
+=======
+>>>>>>> other
+using System.Collections.Generic;
+<<<<<<< local
+using System.Linq;
+using System.Web;
+=======
+>>>>>>> other
+using System.Web.Mvc;
+using System.Web.Routing;
+
+namespace Time.OrderLog
+{
+    public class Routes : IRouteProvider
+    {
+        public void GetRoutes(ICollection<RouteDescriptor> routes)
+        {
+            foreach (var routeDescriptor in GetRoutes())
+                routes.Add(routeDescriptor);
+        }
+
+        public IEnumerable<RouteDescriptor> GetRoutes()
+        {
+            return new[] {
+                new RouteDescriptor {
+                    Priority = 5,
+                     Route = new Route(
+                        "OrderLog/{action}/{id}",
+                        new RouteValueDictionary {
+                                                    {"area", "Time.OrderLog"},
+<<<<<<< local
+                                                    {"controller", "Home"},
+=======
+                                                    {"controller", "OrderLog"},
+>>>>>>> other
+                                                    {"action", "Index"},
+                                                    {"id", null}
+                                                },
+                        new RouteValueDictionary {
+                                                    {"area", "Time.OrderLog"},
+<<<<<<< local
+                                                    {"controller", "Home"},
+=======
+                                                    {"controller", "OrderLog"},
+>>>>>>> other
+                                                },
+                        new RouteValueDictionary {
+                                                    {"area", "Time.OrderLog"}
+                                                },
+                        new MvcRouteHandler())}};
+        }
+    }
+}

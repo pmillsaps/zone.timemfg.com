@@ -1,0 +1,10 @@
+﻿Name: Time.Domain
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: TIME Domain specific utilities
+Features:
+    Time.Domain:
+        Description: TIME Domain specific utilities.

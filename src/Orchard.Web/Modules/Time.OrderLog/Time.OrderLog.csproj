@@ -91,11 +91,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\OrderLog\Create.cshtml" />
-    <Content Include="Views\OrderLog\Delete.cshtml" />
-    <Content Include="Views\OrderLog\Details.cshtml" />
-    <Content Include="Views\OrderLog\Edit.cshtml" />
-    <Content Include="Views\OrderLog\Index.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -114,7 +114,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\OrderLogController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EntityModels\Dealer.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
@@ -145,6 +145,7 @@
     <Compile Include="EntityModels\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
