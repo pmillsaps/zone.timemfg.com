@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\webgrid.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -118,6 +119,9 @@
     <Compile Include="EntityModels\Dealer.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Install.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\LiftModel.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
@@ -125,6 +129,9 @@
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLine.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLineUnit.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLogModel.Context.cs">
@@ -145,6 +152,7 @@
     <Compile Include="EntityModels\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderLog.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,9 +174,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

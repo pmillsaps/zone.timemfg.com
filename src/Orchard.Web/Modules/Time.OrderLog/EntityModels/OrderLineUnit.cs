@@ -12,16 +12,15 @@ namespace Time.OrderLog.EntityModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Dealer
+    public partial class OrderLineUnit
     {
-        public Dealer()
-        {
-            this.Orders = new HashSet<Order>();
-        }
+        public int OrderLineUnitId { get; set; }
+        public int OrderLineId { get; set; }
+        public Nullable<System.DateTime> ATSDate { get; set; }
+        public string SalesOrderNum { get; set; }
+        public Nullable<System.DateTime> InvoiceDate { get; set; }
+        public Nullable<decimal> InvoiceAmt { get; set; }
     
-        public int DealerId { get; set; }
-        public string DealerName { get; set; }
-    
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual OrderLine OrderLine { get; set; }
     }
 }
