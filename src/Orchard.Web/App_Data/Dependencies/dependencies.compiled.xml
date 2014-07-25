@@ -358,7 +358,7 @@
     <ExtensionId>PJS.Bootstrap</ExtensionId>
     <LoaderName>DynamicExtensionLoader</LoaderName>
     <VirtualPath>~/Themes/PJS.Bootstrap/PJS.Bootstrap.csproj</VirtualPath>
-    <Hash>811214d9eb6326d9</Hash>
+    <Hash>81121e8e191e1be9</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>SysCache</ExtensionId>
@@ -370,7 +370,7 @@
     <ExtensionId>Time.Epicor</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
-    <Hash>48f468fd468c98cf</Hash>
+    <Hash>dbc728a8c4095b14</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Time.HelloWorld</ExtensionId>
@@ -386,9 +386,9 @@
   </Dependency>
   <Dependency>
     <ExtensionId>Time.OrderLog</ExtensionId>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <VirtualPath>~/Modules/Time.OrderLog/bin/Time.OrderLog.dll</VirtualPath>
-    <Hash>dbce06336ec4793b</Hash>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.OrderLog/Time.OrderLog.csproj</VirtualPath>
+    <Hash>d7423b7e3fd5c8ef</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>TinyMce</ExtensionId>

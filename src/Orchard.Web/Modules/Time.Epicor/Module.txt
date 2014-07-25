@@ -4,7 +4,7 @@ Author: The Orchard Team
 Website: http://orchardproject.net
 Version: 1.0
 OrchardVersion: 1.0
-Description: Description for the module
+Description: Epicor Specific functionality
 Features:
     Time.Epicor:
-        Description: Description for feature Time.Epicor.
+        Description: Epicor Specific functionality.
