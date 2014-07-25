@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Time.Epicor.EntityModels.Epicor.imjoboper>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.jobnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.assemblyseq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oprseq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.opcode)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.jobnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.assemblyseq)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oprseq)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.opcode)
+            </td>
+        </tr>
+    }
+</table>
