@@ -14,16 +14,30 @@ namespace Time.OrderLog.EntityModels
     
     public partial class OrderLine
     {
+        public OrderLine()
+        {
+            this.OrderLineUnits = new HashSet<OrderLineUnit>();
+        }
+    
         public int OrderLineId { get; set; }
         public int OrderId { get; set; }
         public int LiftModelId { get; set; }
         public int NewQty { get; set; }
         public int CancelQty { get; set; }
         public bool Special { get; set; }
-        public bool Install { get; set; }
+        public Nullable<int> InstallId { get; set; }
+        public Nullable<bool> Stock { get; set; }
+        public Nullable<bool> RTG { get; set; }
+        public Nullable<bool> Demo { get; set; }
+        public string Customer { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
         public string Comment { get; set; }
     
+        public virtual Install Install { get; set; }
         public virtual LiftModel LiftModel { get; set; }
         public virtual Order Order { get; set; }
+        public virtual ICollection<OrderLineUnit> OrderLineUnits { get; set; }
     }
 }

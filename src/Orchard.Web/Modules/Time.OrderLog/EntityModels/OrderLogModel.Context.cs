@@ -26,9 +26,11 @@ namespace Time.OrderLog.EntityModels
         }
     
         public virtual DbSet<Dealer> Dealers { get; set; }
+        public virtual DbSet<Install> Installs { get; set; }
         public virtual DbSet<LiftModel> LiftModels { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<OrderLine> OrderLines { get; set; }
+        public virtual DbSet<OrderLineUnit> OrderLineUnits { get; set; }
+        public virtual DbSet<Territory> Territories { get; set; }
     }
 }

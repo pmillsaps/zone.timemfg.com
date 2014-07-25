@@ -32,8 +32,8 @@
   </Dependency>
   <Dependency>
     <ModuleName>HelloWorld</ModuleName>
-    <VirtualPath>~/Modules/HelloWorld/bin/HelloWorld.dll</VirtualPath>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/HelloWorld/HelloWorld.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>
@@ -151,6 +151,16 @@
         <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.ApplicationServer.Caching.Core.dll</VirtualPath>
       </Reference>
       <Reference>
+        <Name>Microsoft.Data.Edm</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.Edm.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>Microsoft.Data.OData</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.OData.dll</VirtualPath>
+      </Reference>
+      <Reference>
         <Name>Microsoft.Data.Services.Client</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.Services.Client.dll</VirtualPath>
@@ -200,6 +210,21 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Orchard.TaskLease/bin/Orchard.TaskLease.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>System.Spatial</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/System.Spatial.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>WindowsAzureEventSource</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureEventSource.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>WindowsAzureTelemetryEvents</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureTelemetryEvents.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
@@ -233,12 +258,12 @@
       <Reference>
         <Name>Microsoft.Data.Edm</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Microsoft.Data.Edm.dll</VirtualPath>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.Edm.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>Microsoft.Data.OData</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Microsoft.Data.OData.dll</VirtualPath>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.OData.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>Microsoft.Data.Services.Client</Name>
@@ -271,6 +296,11 @@
         <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Microsoft.WindowsAzure.MediaServices.Client.dll</VirtualPath>
       </Reference>
       <Reference>
+        <Name>Microsoft.WindowsAzure.ServiceRuntime</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.WindowsAzure.ServiceRuntime.dll</VirtualPath>
+      </Reference>
+      <Reference>
         <Name>Microsoft.WindowsAzure.Storage</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.WindowsAzure.Storage.dll</VirtualPath>
@@ -298,7 +328,17 @@
       <Reference>
         <Name>System.Spatial</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/System.Spatial.dll</VirtualPath>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/System.Spatial.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>WindowsAzureEventSource</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureEventSource.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>WindowsAzureTelemetryEvents</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureTelemetryEvents.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -1057,8 +1097,8 @@
   </Dependency>
   <Dependency>
     <ModuleName>Time.Epicor</ModuleName>
-    <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Epicor/Time.Epicor.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>

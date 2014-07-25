@@ -17,7 +17,9 @@ namespace Time.OrderLog.Controllers
     public class HomeController : Controller
     {
         public IOrchardServices Services { get; set; }
+
         public Localizer T { get; set; }
+
         private OrderLogEntities db = new OrderLogEntities();
 
         public HomeController(IOrchardServices services)
@@ -32,7 +34,7 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.ViewOrders, T("Couldn't View Orders")))
                 return new HttpUnauthorizedResult();
-            var orders = db.Orders.Include(o => o.Dealer);
+            var orders = db.Orders.Include(o => o.Dealer).Include(t => t.Territory);
             return View(orders.ToList());
         }
 
