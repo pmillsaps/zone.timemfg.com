@@ -190,7 +190,6 @@
           <EntitySet Name="Orders" EntityType="OrderLogModel.Order" />
           <EntitySet Name="OrderLines" EntityType="OrderLogModel.OrderLine" />
           <EntitySet Name="OrderLineUnits" EntityType="OrderLogModel.OrderLineUnit" />
-          <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
           <AssociationSet Name="FK_Order_Dealer" Association="OrderLogModel.FK_Order_Dealer">
             <End Role="Dealer" EntitySet="Dealers" />
             <End Role="Order" EntitySet="Orders" />
@@ -203,10 +202,6 @@
             <End Role="LiftModel" EntitySet="LiftModels" />
             <End Role="OrderLine" EntitySet="OrderLines" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Territory" Association="OrderLogModel.FK_Order_Territory">
-            <End Role="Territory" EntitySet="Territories" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderLine_Order1" Association="OrderLogModel.FK_OrderLine_Order1">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderLine" EntitySet="OrderLines" />
@@ -214,6 +209,11 @@
           <AssociationSet Name="FK_OrderLineUnit_OrderLine" Association="OrderLogModel.FK_OrderLineUnit_OrderLine">
             <End Role="OrderLine" EntitySet="OrderLines" />
             <End Role="OrderLineUnit" EntitySet="OrderLineUnits" />
+          </AssociationSet>
+          <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
+          <AssociationSet Name="FK_Order_Territory" Association="OrderLogModel.FK_Order_Territory">
+            <End Role="Territory" EntitySet="Territories" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Dealer">
@@ -250,8 +250,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TerritoryId" Type="Int32" />
           <NavigationProperty Name="Dealer" Relationship="OrderLogModel.FK_Order_Dealer" FromRole="Order" ToRole="Dealer" />
-          <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
           <NavigationProperty Name="OrderLines" Relationship="OrderLogModel.FK_OrderLine_Order1" FromRole="Order" ToRole="OrderLine" />
+          <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
         </EntityType>
         <EntityType Name="OrderLine">
           <Key>
@@ -289,14 +289,6 @@
           <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="OrderLine" Relationship="OrderLogModel.FK_OrderLineUnit_OrderLine" FromRole="OrderLineUnit" ToRole="OrderLine" />
         </EntityType>
-        <EntityType Name="Territory">
-          <Key>
-            <PropertyRef Name="TerritoryId" />
-          </Key>
-          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
-        </EntityType>
         <Association Name="FK_Order_Dealer">
           <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="1" />
           <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
@@ -333,18 +325,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Territory">
-          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="0..1" />
-          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Territory">
-              <PropertyRef Name="TerritoryId" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="TerritoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderLine_Order1">
           <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
           <End Type="OrderLogModel.OrderLine" Role="OrderLine" Multiplicity="*" />
@@ -366,6 +346,26 @@
             </Principal>
             <Dependent Role="OrderLineUnit">
               <PropertyRef Name="OrderLineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="TerritoryId" />
+          </Key>
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Order_Territory">
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="0..1" />
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TerritoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

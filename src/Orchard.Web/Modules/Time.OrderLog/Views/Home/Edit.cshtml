@@ -1,10 +1,10 @@
 ﻿@model Time.OrderLog.EntityModels.Order
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Purchase Order";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Order</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.OrderId)
@@ -26,10 +25,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DealerId, "DealerId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DealerId, "Dealer", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("DealerId", String.Empty)
                 @Html.ValidationMessageFor(model => model.DealerId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TerritoryId, "Territory", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TerritoryId", String.Empty)
+                @Html.ValidationMessageFor(model => model.TerritoryId)
             </div>
         </div>
 
@@ -50,9 +57,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="javascript:history.back()">Back to Order Details</a>
+
+</div>

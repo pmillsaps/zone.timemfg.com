@@ -26,7 +26,7 @@ namespace Time.OrderLog.EntityModels
         public Nullable<int> TerritoryId { get; set; }
     
         public virtual Dealer Dealer { get; set; }
-        public virtual Territory Territory { get; set; }
         public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual Territory Territory { get; set; }
     }
 }

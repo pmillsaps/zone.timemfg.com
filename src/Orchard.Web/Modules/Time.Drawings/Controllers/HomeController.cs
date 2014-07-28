@@ -2,11 +2,9 @@ using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Time.Drawings.EntityModels;
 using Time.Drawings.ViewModels;
@@ -14,6 +12,7 @@ using Time.Drawings.ViewModels;
 namespace Time.Drawings.Controllers
 {
     [Themed]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly DrawingsEntities _db;
