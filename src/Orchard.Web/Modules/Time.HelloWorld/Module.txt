@@ -8,3 +8,4 @@ Description: Description for the module
 Features:
     Time.HelloWorld:
         Description: Description for feature Time.HelloWorld.
+		Category: .Time

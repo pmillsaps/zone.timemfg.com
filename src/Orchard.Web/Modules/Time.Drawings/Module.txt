@@ -8,3 +8,4 @@ Description: Program for searching and opening PDF Drawings.
 Features:
     Time.Drawings:
         Description: Program for searching and opening PDF Drawings.
+		Category: .Time

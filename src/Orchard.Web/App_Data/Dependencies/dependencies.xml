@@ -32,8 +32,8 @@
   </Dependency>
   <Dependency>
     <ModuleName>HelloWorld</ModuleName>
-    <VirtualPath>~/Modules/HelloWorld/HelloWorld.csproj</VirtualPath>
-    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/HelloWorld/bin/HelloWorld.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>
@@ -151,16 +151,6 @@
         <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.ApplicationServer.Caching.Core.dll</VirtualPath>
       </Reference>
       <Reference>
-        <Name>Microsoft.Data.Edm</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.Edm.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>Microsoft.Data.OData</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.OData.dll</VirtualPath>
-      </Reference>
-      <Reference>
         <Name>Microsoft.Data.Services.Client</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.Services.Client.dll</VirtualPath>
@@ -210,21 +200,6 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Orchard.TaskLease/bin/Orchard.TaskLease.dll</VirtualPath>
       </Reference>
-      <Reference>
-        <Name>System.Spatial</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/System.Spatial.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>WindowsAzureEventSource</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureEventSource.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>WindowsAzureTelemetryEvents</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureTelemetryEvents.dll</VirtualPath>
-      </Reference>
     </References>
   </Dependency>
   <Dependency>
@@ -258,12 +233,12 @@
       <Reference>
         <Name>Microsoft.Data.Edm</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.Edm.dll</VirtualPath>
+        <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Microsoft.Data.Edm.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>Microsoft.Data.OData</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.Data.OData.dll</VirtualPath>
+        <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Microsoft.Data.OData.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>Microsoft.Data.Services.Client</Name>
@@ -296,11 +271,6 @@
         <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Microsoft.WindowsAzure.MediaServices.Client.dll</VirtualPath>
       </Reference>
       <Reference>
-        <Name>Microsoft.WindowsAzure.ServiceRuntime</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.WindowsAzure.ServiceRuntime.dll</VirtualPath>
-      </Reference>
-      <Reference>
         <Name>Microsoft.WindowsAzure.Storage</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Orchard.Azure/bin/Microsoft.WindowsAzure.Storage.dll</VirtualPath>
@@ -328,17 +298,7 @@
       <Reference>
         <Name>System.Spatial</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/System.Spatial.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>WindowsAzureEventSource</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureEventSource.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>WindowsAzureTelemetryEvents</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Orchard.Azure/bin/WindowsAzureTelemetryEvents.dll</VirtualPath>
+        <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/System.Spatial.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -1096,9 +1056,15 @@
     <References />
   </Dependency>
   <Dependency>
+    <ModuleName>Time.Domain</ModuleName>
+    <VirtualPath>~/Modules/Time.Domain/Time.Domain.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
+  <Dependency>
     <ModuleName>Time.Drawings</ModuleName>
-    <VirtualPath>~/Modules/Time.Drawings/bin/Time.Drawings.dll</VirtualPath>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Drawings/Time.Drawings.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
     <References>
       <Reference>
         <Name>EntityFramework</Name>
@@ -1114,8 +1080,8 @@
   </Dependency>
   <Dependency>
     <ModuleName>Time.Epicor</ModuleName>
-    <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Epicor/Time.Epicor.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
     <References>
       <Reference>
         <Name>EntityFramework</Name>
@@ -1153,9 +1119,15 @@
     </References>
   </Dependency>
   <Dependency>
+    <ModuleName>Time.Maps</ModuleName>
+    <VirtualPath>~/Modules/Time.Maps/Time.Maps.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
+  <Dependency>
     <ModuleName>Time.OrderLog</ModuleName>
-    <VirtualPath>~/Modules/Time.OrderLog/bin/Time.OrderLog.dll</VirtualPath>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.OrderLog/Time.OrderLog.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
     <References>
       <Reference>
         <Name>EntityFramework</Name>

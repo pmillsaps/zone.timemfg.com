@@ -8,3 +8,4 @@ Description: Order Log for Sales
 Features:
     Time.OrderLog:
         Description: Interal Order Log for Sales.
+		Category: .Time
