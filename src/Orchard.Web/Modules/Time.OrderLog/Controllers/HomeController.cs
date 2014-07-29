@@ -34,8 +34,8 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.ViewOrders, T("Couldn't View Orders")))
                 return new HttpUnauthorizedResult();
-            var orders = db.Orders.Include(o => o.Dealer).Include(t => t.Territory);
-            return View(orders.ToList());
+            var orders = db.Orders.Include(o => o.Dealer).Include(t => t.Territory).ToList();
+            return View(orders);
         }
 
         // GET: /OrderLog/Details/5
@@ -56,7 +56,7 @@ namespace Time.OrderLog.Controllers
         // GET: /OrderLog/Create
         public ActionResult Create()
         {
-            ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName");
+            getDropDowns();
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderId,PO,DealerId,Date")] Order order)
+        public ActionResult Create([Bind(Include = "OrderId,PO,DealerId,TerritoryID,Date")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace Time.OrderLog.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName", order.DealerId);
+            getDropDowns();
             return View(order);
         }
 
@@ -90,7 +90,7 @@ namespace Time.OrderLog.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName", order.DealerId);
+            getDropDowns(order);
             return View(order);
         }
 
@@ -99,16 +99,32 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderId,PO,DealerId,Date")] Order order)
+        //public ActionResult Edit([Bind(Include = "OrderId,PO,DealerId,TerritoryID,Date")] Order order)
+        public ActionResult Edit(Order order, string returnUrl)
         {
             if (ModelState.IsValid)
             {
+                var foo = ViewBag.returnUrl;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = order.OrderId });
+                //Redirect to Details page instead of Index -- see: http://stackoverflow.com/questions/9772947/c-sharp-asp-net-mvc-return-to-previous-page
+                //return Redirect(returnUrl);
             }
-            ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName", order.DealerId);
+            getDropDowns(order);
             return View(order);
+        }
+
+        private void getDropDowns()
+        {
+            ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName");
+            ViewBag.TerritoryId = new SelectList(db.Territories, "TerritoryId", "TerritoryName");
+        }
+
+        private void getDropDowns(Order order)
+        {
+            ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName", order.DealerId);
+            ViewBag.TerritoryId = new SelectList(db.Territories, "TerritoryId", "TerritoryName", order.TerritoryId);
         }
 
         // GET: /OrderLog/Delete/5

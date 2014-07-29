@@ -22,13 +22,13 @@ namespace Time.OrderLog
                         "OrderLog/{action}/{id}",
                         new RouteValueDictionary {
                                                     {"area", "Time.OrderLog"},
-                                                    {"controller", "OrderLog"},
+                                                    {"controller", "Home"},
                                                     {"action", "Index"},
                                                     {"id", null}
                                                 },
                         new RouteValueDictionary {
                                                     {"area", "Time.OrderLog"},
-                                                    {"controller", "OrderLog"},
+                                                    {"controller", "Home"},
                                                 },
                         new RouteValueDictionary {
                                                     {"area", "Time.OrderLog"}

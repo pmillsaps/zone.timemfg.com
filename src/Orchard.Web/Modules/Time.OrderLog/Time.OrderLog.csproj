@@ -153,7 +153,13 @@
     <Compile Include="EntityModels\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderLog.cs" />
+    <Compile Include="Models\Dealer.cs" />
+    <Compile Include="Models\LiftModel.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Install.cs" />
+    <Compile Include="Models\OrderLine.cs" />
+    <Compile Include="Models\OrderLineUnit.cs" />
+    <Compile Include="Models\Territory.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
