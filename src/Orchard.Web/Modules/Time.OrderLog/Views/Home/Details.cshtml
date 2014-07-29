@@ -43,6 +43,12 @@
 
     </dl>
 </div>
+
+<div>
+    @{Html.RenderAction("_OrderLines", "Home", new { id = Model.OrderId }); }
+
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |
     @Html.ActionLink("Back to List", "Index")

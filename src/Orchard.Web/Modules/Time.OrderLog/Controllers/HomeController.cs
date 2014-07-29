@@ -153,6 +153,42 @@ namespace Time.OrderLog.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult _OrderLines(int id = 0)
+        {
+            if (id != 0)
+            {
+                var lines = db.OrderLines.Where(x => x.OrderId == id).Include(o => o.LiftModel).ToList();
+                return PartialView(lines);
+            }
+
+            return new EmptyResult();
+        }
+
+        // GET: /OrderLine/OrderLineEdit/5
+        public ActionResult OrderLineEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            OrderLine orderline = db.OrderLines.Find(id);
+            if (orderline == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.LiftModelId = new SelectList(db.LiftModels, "LiftModelId", "LiftModelName", orderline.LiftModelId);
+
+            //ViewBag.OrderId = new SelectList(db.Orders, "OrderId", "PO", orderline.OrderId);
+
+            // Grab the previous URL and add it to the Model using ViewData or ViewBag
+            //ViewBag.returnUrl = Request.UrlReferrer;
+
+            //return View(orderline);
+
+            return RedirectToAction("Details", new { id = orderline.OrderId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
