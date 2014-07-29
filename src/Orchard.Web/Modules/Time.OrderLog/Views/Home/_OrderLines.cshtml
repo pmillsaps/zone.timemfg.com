@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<Time.OrderLog.EntityModels.OrderLine>
+
+<h3>Order Lines</h3>
+<div class="wrap">
+    <table align="center">
+        <tr>
+            <th width="150">@Html.DisplayNameFor(model => model.LiftModel.LiftModelName)</th>
+            <th width="100">@Html.DisplayNameFor(model => model.NewQty)</th>
+            <th width="100">@Html.DisplayNameFor(model => model.CancelQty)</th>
+            <th width="400">@Html.DisplayNameFor(model => model.Comment)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.LiftModel.LiftModelName)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.NewQty)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.CancelQty)</td>
+                <td>@Html.DisplayFor(modelItem => item.Comment)</td>
+                <td>@Html.ActionLink("Edit", "OrderLineEdit", "Home", new { id = item.OrderLineId }, null)</td>
+            </tr>
+        }
+    </table>
+    <br />
+</div>
