@@ -25,10 +25,10 @@ namespace Time.OrderLog.EntityModels
         public int NewQty { get; set; }
         public int CancelQty { get; set; }
         public bool Special { get; set; }
-        public Nullable<int> InstallId { get; set; }
-        public Nullable<bool> Stock { get; set; }
-        public Nullable<bool> RTG { get; set; }
-        public Nullable<bool> Demo { get; set; }
+        public int InstallId { get; set; }
+        public bool Stock { get; set; }
+        public bool RTG { get; set; }
+        public bool Demo { get; set; }
         public string Customer { get; set; }
         public string City { get; set; }
         public string State { get; set; }

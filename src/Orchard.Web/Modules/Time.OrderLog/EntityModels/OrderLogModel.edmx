@@ -34,22 +34,22 @@
           <Property Name="PO" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DealerId" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="TerritoryId" Type="int" />
+          <Property Name="TerritoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderLine">
           <Key>
             <PropertyRef Name="OrderLineId" />
           </Key>
-          <Property Name="OrderLineId" Type="int" Nullable="false" />
+          <Property Name="OrderLineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="LiftModelId" Type="int" Nullable="false" />
           <Property Name="NewQty" Type="int" Nullable="false" />
           <Property Name="CancelQty" Type="int" Nullable="false" />
           <Property Name="Special" Type="bit" Nullable="false" />
-          <Property Name="InstallId" Type="int" />
-          <Property Name="Stock" Type="bit" />
-          <Property Name="RTG" Type="bit" />
-          <Property Name="Demo" Type="bit" />
+          <Property Name="InstallId" Type="int" Nullable="false" />
+          <Property Name="Stock" Type="bit" Nullable="false" />
+          <Property Name="RTG" Type="bit" Nullable="false" />
+          <Property Name="Demo" Type="bit" Nullable="false" />
           <Property Name="Customer" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
@@ -87,7 +87,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Territory">
-          <End Role="Territory" Type="Self.Territory" Multiplicity="0..1" />
+          <End Role="Territory" Type="Self.Territory" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Territory">
@@ -99,7 +99,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderLine_Install">
-          <End Role="Install" Type="Self.Install" Multiplicity="0..1" />
+          <End Role="Install" Type="Self.Install" Multiplicity="1" />
           <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Install">
@@ -190,6 +190,7 @@
           <EntitySet Name="Orders" EntityType="OrderLogModel.Order" />
           <EntitySet Name="OrderLines" EntityType="OrderLogModel.OrderLine" />
           <EntitySet Name="OrderLineUnits" EntityType="OrderLogModel.OrderLineUnit" />
+          <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
           <AssociationSet Name="FK_Order_Dealer" Association="OrderLogModel.FK_Order_Dealer">
             <End Role="Dealer" EntitySet="Dealers" />
             <End Role="Order" EntitySet="Orders" />
@@ -202,6 +203,10 @@
             <End Role="LiftModel" EntitySet="LiftModels" />
             <End Role="OrderLine" EntitySet="OrderLines" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Territory" Association="OrderLogModel.FK_Order_Territory">
+            <End Role="Territory" EntitySet="Territories" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderLine_Order1" Association="OrderLogModel.FK_OrderLine_Order1">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderLine" EntitySet="OrderLines" />
@@ -209,11 +214,6 @@
           <AssociationSet Name="FK_OrderLineUnit_OrderLine" Association="OrderLogModel.FK_OrderLineUnit_OrderLine">
             <End Role="OrderLine" EntitySet="OrderLines" />
             <End Role="OrderLineUnit" EntitySet="OrderLineUnits" />
-          </AssociationSet>
-          <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
-          <AssociationSet Name="FK_Order_Territory" Association="OrderLogModel.FK_Order_Territory">
-            <End Role="Territory" EntitySet="Territories" />
-            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Dealer">
@@ -248,10 +248,10 @@
           <Property Name="PO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DealerId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TerritoryId" Type="Int32" />
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dealer" Relationship="OrderLogModel.FK_Order_Dealer" FromRole="Order" ToRole="Dealer" />
-          <NavigationProperty Name="OrderLines" Relationship="OrderLogModel.FK_OrderLine_Order1" FromRole="Order" ToRole="OrderLine" />
           <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
+          <NavigationProperty Name="OrderLines" Relationship="OrderLogModel.FK_OrderLine_Order1" FromRole="Order" ToRole="OrderLine" />
         </EntityType>
         <EntityType Name="OrderLine">
           <Key>
@@ -263,10 +263,10 @@
           <Property Name="NewQty" Type="Int32" Nullable="false" />
           <Property Name="CancelQty" Type="Int32" Nullable="false" />
           <Property Name="Special" Type="Boolean" Nullable="false" />
-          <Property Name="InstallId" Type="Int32" />
-          <Property Name="Stock" Type="Boolean" />
-          <Property Name="RTG" Type="Boolean" />
-          <Property Name="Demo" Type="Boolean" />
+          <Property Name="InstallId" Type="Int32" Nullable="false" />
+          <Property Name="Stock" Type="Boolean" Nullable="false" />
+          <Property Name="RTG" Type="Boolean" Nullable="false" />
+          <Property Name="Demo" Type="Boolean" Nullable="false" />
           <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -289,6 +289,14 @@
           <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="OrderLine" Relationship="OrderLogModel.FK_OrderLineUnit_OrderLine" FromRole="OrderLineUnit" ToRole="OrderLine" />
         </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="TerritoryId" />
+          </Key>
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
+        </EntityType>
         <Association Name="FK_Order_Dealer">
           <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="1" />
           <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
@@ -302,7 +310,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderLine_Install">
-          <End Type="OrderLogModel.Install" Role="Install" Multiplicity="0..1" />
+          <End Type="OrderLogModel.Install" Role="Install" Multiplicity="1" />
           <End Type="OrderLogModel.OrderLine" Role="OrderLine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Install">
@@ -322,6 +330,18 @@
             </Principal>
             <Dependent Role="OrderLine">
               <PropertyRef Name="LiftModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Territory">
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="1" />
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TerritoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -346,26 +366,6 @@
             </Principal>
             <Dependent Role="OrderLineUnit">
               <PropertyRef Name="OrderLineId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Territory">
-          <Key>
-            <PropertyRef Name="TerritoryId" />
-          </Key>
-          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
-        </EntityType>
-        <Association Name="FK_Order_Territory">
-          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="0..1" />
-          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Territory">
-              <PropertyRef Name="TerritoryId" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="TerritoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

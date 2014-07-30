@@ -153,7 +153,7 @@ namespace Time.OrderLog.Controllers
             return RedirectToAction("Index");
         }
 
-        // ###########################| ORDER LINES |########################### \\
+        // #########################################################| ORDER LINES |######################################################### \\
 
         //Partial View displays order lines on Order Details page
         public ActionResult _OrderLines(int id = 0)
@@ -169,7 +169,7 @@ namespace Time.OrderLog.Controllers
         // GET: /OrderLog/OrderLineCreate
         public ActionResult OrderLineCreate(int id)
         {
-            var orderline = new OrderLine { OrderId = id };
+            var orderline = new OrderLine { OrderId = id }; // <-- Required to pass OrderId to POST method
             getOrderLineDropDowns();
             return View(orderline);
         }
@@ -179,7 +179,7 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult OrderLineCreate([Bind(Include = "OrderId,LiftModelId,NewQty,CancelQty,Special,InstallId,Comment")] OrderLine orderline)
+        public ActionResult OrderLineCreate([Bind(Include = "OrderId,LiftModelId,NewQty,CancelQty,Special,InstallId,Stock,RTG,Demo,Customer,City,State,Zip,Comment")] OrderLine orderline)
         {
             if (ModelState.IsValid)
             {
@@ -213,8 +213,7 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult OrderLineEdit([Bind(Include = "OrderLineId,OrderId,LiftModelId,NewQty,CancelQty,Special,InstallId,Comment")] OrderLine orderline)
-        //public ActionResult OrderLineEdit(OrderLine orderline, string returnUrl)
+        public ActionResult OrderLineEdit([Bind(Include = "OrderLineId,OrderId,LiftModelId,NewQty,CancelQty,Special,InstallId,Stock,RTG,Demo,Customer,City,State,Zip,Comment")] OrderLine orderline)
         {
             if (ModelState.IsValid)
             {

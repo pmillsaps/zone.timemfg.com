@@ -14,10 +14,10 @@ namespace Time.OrderLog.EntityModels
 
     public class OrderLineMetadata
     {
-        [DisplayName("New Qty")]
+        [DisplayName("Qty")]
         public string NewQty { get; set; }
 
-        [DisplayName("Cancel Qty")]
+        [DisplayName("Cancel")]
         public string CancelQty { get; set; }
     }
 }

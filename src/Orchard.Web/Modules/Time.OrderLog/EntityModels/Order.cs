@@ -23,10 +23,10 @@ namespace Time.OrderLog.EntityModels
         public string PO { get; set; }
         public int DealerId { get; set; }
         public System.DateTime Date { get; set; }
-        public Nullable<int> TerritoryId { get; set; }
+        public int TerritoryId { get; set; }
     
         public virtual Dealer Dealer { get; set; }
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
         public virtual Territory Territory { get; set; }
+        public virtual ICollection<OrderLine> OrderLines { get; set; }
     }
 }

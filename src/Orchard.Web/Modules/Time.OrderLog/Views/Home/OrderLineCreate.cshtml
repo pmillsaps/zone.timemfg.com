@@ -15,25 +15,7 @@
         <h4>OrderLine</h4>
         <hr />
         @Html.ValidationSummary(true)
-
-        @*@Html.HiddenFor(model => model.OrderLineId)*@
         @Html.HiddenFor(model => model.OrderId)
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.OrderLineId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OrderLineId)
-                @Html.ValidationMessageFor(model => model.OrderLineId)
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.OrderId, "OrderId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OrderId", String.Empty)
-                @Html.ValidationMessageFor(model => model.OrderId)
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.LiftModelId, "LiftModelId", new { @class = "control-label col-md-2" })
@@ -67,14 +49,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Install, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Install)
-                @Html.ValidationMessageFor(model => model.Install)
-            </div>
-        </div>*@
-
         <div class="form-group">
             @Html.LabelFor(model => model.InstallId, "InstallId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -88,6 +62,62 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Comment)
                 @Html.ValidationMessageFor(model => model.Comment)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stock, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Stock)
+                @Html.ValidationMessageFor(model => model.Stock)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RTG, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RTG)
+                @Html.ValidationMessageFor(model => model.RTG)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Demo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Demo)
+                @Html.ValidationMessageFor(model => model.Demo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer)
+                @Html.ValidationMessageFor(model => model.Customer)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City)
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.State, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.State)
+                @Html.ValidationMessageFor(model => model.State)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zip, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zip)
+                @Html.ValidationMessageFor(model => model.Zip)
             </div>
         </div>
 
