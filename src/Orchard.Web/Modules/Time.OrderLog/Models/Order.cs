@@ -16,5 +16,8 @@ namespace Time.OrderLog.EntityModels
     {
         [System.ComponentModel.DisplayName("PO#")]
         public string PO { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime Date { get; set; }
     }
 }

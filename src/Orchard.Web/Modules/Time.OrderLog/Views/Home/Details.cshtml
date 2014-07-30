@@ -1,7 +1,7 @@
 ﻿@model Time.OrderLog.EntityModels.Order
 
 @{
-    ViewBag.Title = "Purchase Order Details";
+    ViewBag.Title = "Purchase Order #" + @ViewBag.PONum;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,13 +9,13 @@
 <div>
 	<hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.PO)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.PO)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Date)
@@ -50,6 +50,8 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |    
+    @*@Html.ActionLink("Delete", "Delete", new { id = Model.OrderId }) |*@
+    @Html.ActionLink("Add Order Line", "OrderLineCreate", new { id = Model.OrderId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -50,13 +50,14 @@ namespace Time.OrderLog.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.PONum = order.PO;
             return View(order);
         }
 
         // GET: /OrderLog/Create
         public ActionResult Create()
         {
-            getDropDowns();
+            getOrderDropDowns();
             return View();
         }
 
@@ -74,7 +75,7 @@ namespace Time.OrderLog.Controllers
                 return RedirectToAction("Index");
             }
 
-            getDropDowns();
+            getOrderDropDowns();
             return View(order);
         }
 
@@ -90,7 +91,9 @@ namespace Time.OrderLog.Controllers
             {
                 return HttpNotFound();
             }
-            getDropDowns(order);
+
+            ViewBag.PONum = order.PO;
+            getOrderDropDowns(order);
             return View(order);
         }
 
@@ -104,24 +107,21 @@ namespace Time.OrderLog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var foo = ViewBag.returnUrl;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = order.OrderId });
-                //Redirect to Details page instead of Index -- see: http://stackoverflow.com/questions/9772947/c-sharp-asp-net-mvc-return-to-previous-page
-                //return Redirect(returnUrl);
             }
-            getDropDowns(order);
+
             return View(order);
         }
 
-        private void getDropDowns()
+        private void getOrderDropDowns()
         {
             ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName");
             ViewBag.TerritoryId = new SelectList(db.Territories, "TerritoryId", "TerritoryName");
         }
 
-        private void getDropDowns(Order order)
+        private void getOrderDropDowns(Order order)
         {
             ViewBag.DealerId = new SelectList(db.Dealers, "DealerId", "DealerName", order.DealerId);
             ViewBag.TerritoryId = new SelectList(db.Territories, "TerritoryId", "TerritoryName", order.TerritoryId);
@@ -153,6 +153,9 @@ namespace Time.OrderLog.Controllers
             return RedirectToAction("Index");
         }
 
+        // ###########################| ORDER LINES |########################### \\
+
+        //Partial View displays order lines on Order Details page
         public ActionResult _OrderLines(int id = 0)
         {
             if (id != 0)
@@ -160,11 +163,35 @@ namespace Time.OrderLog.Controllers
                 var lines = db.OrderLines.Where(x => x.OrderId == id).Include(o => o.LiftModel).ToList();
                 return PartialView(lines);
             }
-
             return new EmptyResult();
         }
 
-        // GET: /OrderLine/OrderLineEdit/5
+        // GET: /OrderLog/OrderLineCreate
+        public ActionResult OrderLineCreate(int id)
+        {
+            var orderline = new OrderLine { OrderId = id };
+            getOrderLineDropDowns();
+            return View(orderline);
+        }
+
+        // POST: /OrderLog/OrderLineCreate
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OrderLineCreate([Bind(Include = "OrderId,LiftModelId,NewQty,CancelQty,Special,InstallId,Comment")] OrderLine orderline)
+        {
+            if (ModelState.IsValid)
+            {
+                db.OrderLines.Add(orderline);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = orderline.OrderId });
+            }
+            getOrderLineDropDowns(orderline);
+            return View(orderline);
+        }
+
+        // GET: /OrderLog/OrderLineEdit/5
         public ActionResult OrderLineEdit(int? id)
         {
             if (id == null)
@@ -177,16 +204,37 @@ namespace Time.OrderLog.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.LiftModelId = new SelectList(db.LiftModels, "LiftModelId", "LiftModelName", orderline.LiftModelId);
+            getOrderLineDropDowns(orderline);
+            return View(orderline);
+        }
 
-            //ViewBag.OrderId = new SelectList(db.Orders, "OrderId", "PO", orderline.OrderId);
-
-            // Grab the previous URL and add it to the Model using ViewData or ViewBag
-            //ViewBag.returnUrl = Request.UrlReferrer;
-
-            //return View(orderline);
-
+        // POST: /OrderLog/OrderLineEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OrderLineEdit([Bind(Include = "OrderLineId,OrderId,LiftModelId,NewQty,CancelQty,Special,InstallId,Comment")] OrderLine orderline)
+        //public ActionResult OrderLineEdit(OrderLine orderline, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(orderline).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = orderline.OrderId });
+            }
             return RedirectToAction("Details", new { id = orderline.OrderId });
+        }
+
+        private void getOrderLineDropDowns()
+        {
+            ViewBag.LiftModelId = new SelectList(db.LiftModels, "LiftModelId", "LiftModelName");
+            ViewBag.InstallId = new SelectList(db.Installs, "InstallId", "InstallName");
+        }
+
+        private void getOrderLineDropDowns(OrderLine orderline)
+        {
+            ViewBag.LiftModelId = new SelectList(db.LiftModels, "LiftModelId", "LiftModelName", orderline.LiftModelId);
+            ViewBag.InstallId = new SelectList(db.Installs, "InstallId", "InstallName", orderline.InstallId);
         }
 
         protected override void Dispose(bool disposing)

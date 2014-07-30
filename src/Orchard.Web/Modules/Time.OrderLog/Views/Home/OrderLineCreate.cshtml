@@ -1,23 +1,31 @@
 ﻿@model Time.OrderLog.EntityModels.OrderLine
 
 @{
-    ViewBag.Title = "Edit Order Line";
+    ViewBag.Title = "Create";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Create</h2>
 
 
 @using (Html.BeginForm())
 {
-    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h4>OrderLine</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.OrderLineId)
+
+        @*@Html.HiddenFor(model => model.OrderLineId)*@
         @Html.HiddenFor(model => model.OrderId)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.OrderLineId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OrderLineId)
+                @Html.ValidationMessageFor(model => model.OrderLineId)
+            </div>
+        </div>*@
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.OrderId, "OrderId", new { @class = "control-label col-md-2" })
@@ -59,6 +67,14 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Install, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Install)
+                @Html.ValidationMessageFor(model => model.Install)
+            </div>
+        </div>*@
+
         <div class="form-group">
             @Html.LabelFor(model => model.InstallId, "InstallId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -77,16 +93,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+ }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

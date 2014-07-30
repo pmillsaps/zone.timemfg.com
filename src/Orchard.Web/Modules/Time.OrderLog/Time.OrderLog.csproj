@@ -100,6 +100,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_OrderLines.cshtml" />
     <Content Include="Views\Home\OrderLineEdit.cshtml" />
+    <Content Include="Views\Home\OrderLineCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
