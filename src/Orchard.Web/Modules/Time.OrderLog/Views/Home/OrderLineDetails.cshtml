@@ -1,0 +1,142 @@
+﻿@model Time.OrderLog.EntityModels.OrderLine
+
+@{
+    ViewBag.Title = "Order Line Details";
+}
+<p>
+    @Html.ActionLink("Order List", "Index") / @Html.ActionLink("Order Details", "Details", new { id = Model.OrderId }) / Order Line Details
+</p>
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @*<h4>OrderLine</h4>*@
+	<hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiftModel.LiftModelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiftModel.LiftModelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CancelQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CancelQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Install.InstallName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Install.InstallName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Special)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Special)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RTG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RTG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Demo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Demo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+    </dl>
+</div>
+
+<div style="clear:left">
+    <br />
+    @{Html.RenderAction("_OrderLineUnits", "Home", new { id = Model.OrderLineId }); }
+
+</div>
+
+<div style="clear:left">
+    <p><br />
+        | @Html.ActionLink("Edit Order Line", "OrderLineEdit", new { id = Model.OrderLineId }) | 
+        @Html.ActionLink("Delete Order Line", "OrderLineDelete", new { id = Model.OrderLineId }) |
+    </p>
+</div>

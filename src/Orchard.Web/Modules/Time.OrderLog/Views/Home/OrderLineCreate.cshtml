@@ -42,14 +42,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Special, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Special)
-                @Html.ValidationMessageFor(model => model.Special)
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.InstallId, "InstallId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("InstallId", String.Empty)
@@ -62,6 +54,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Comment)
                 @Html.ValidationMessageFor(model => model.Comment)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Special, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Special)
+                @Html.ValidationMessageFor(model => model.Special)
             </div>
         </div>
 

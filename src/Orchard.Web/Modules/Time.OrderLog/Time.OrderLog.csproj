@@ -101,6 +101,19 @@
     <Content Include="Views\Home\_OrderLines.cshtml" />
     <Content Include="Views\Home\OrderLineEdit.cshtml" />
     <Content Include="Views\Home\OrderLineCreate.cshtml" />
+    <Content Include="Views\TEMP_OrderLineUnit\Create.cshtml" />
+    <Content Include="Views\TEMP_OrderLineUnit\Delete.cshtml" />
+    <Content Include="Views\TEMP_OrderLineUnit\Details.cshtml" />
+    <Content Include="Views\TEMP_OrderLineUnit\Edit.cshtml" />
+    <Content Include="Views\TEMP_OrderLineUnit\Index.cshtml" />
+    <Content Include="Views\Home\OrderLineUnitCreate.cshtml" />
+    <Content Include="Views\TEMP_OrderLine\Create.cshtml" />
+    <Content Include="Views\TEMP_OrderLine\Delete.cshtml" />
+    <Content Include="Views\TEMP_OrderLine\Details.cshtml" />
+    <Content Include="Views\TEMP_OrderLine\Edit.cshtml" />
+    <Content Include="Views\TEMP_OrderLine\Index.cshtml" />
+    <Content Include="Views\Home\OrderLineDetails.cshtml" />
+    <Content Include="Views\Home\_OrderLineUnits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -120,6 +133,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TEMPController.cs" />
+    <Compile Include="Controllers\TEMP_OrderLineController.cs" />
     <Compile Include="EntityModels\Dealer.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>

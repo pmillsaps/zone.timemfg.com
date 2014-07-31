@@ -1,13 +1,9 @@
 ﻿using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Time.OrderLog.EntityModels;
 
@@ -166,6 +162,21 @@ namespace Time.OrderLog.Controllers
             return new EmptyResult();
         }
 
+        // GET: /OrderLog/OrderLineDetails/5
+        public ActionResult OrderLineDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OrderLine orderline = db.OrderLines.Find(id);
+            if (orderline == null)
+            {
+                return HttpNotFound();
+            }
+            return View(orderline);
+        }
+
         // GET: /OrderLog/OrderLineCreate
         public ActionResult OrderLineCreate(int id)
         {
@@ -219,7 +230,8 @@ namespace Time.OrderLog.Controllers
             {
                 db.Entry(orderline).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", new { id = orderline.OrderId });
+                //return RedirectToAction("Details", new { id = orderline.OrderId });
+                return RedirectToAction("OrderLineDetails", new { id = orderline.OrderLineId });
             }
             return RedirectToAction("Details", new { id = orderline.OrderId });
         }
@@ -234,6 +246,19 @@ namespace Time.OrderLog.Controllers
         {
             ViewBag.LiftModelId = new SelectList(db.LiftModels, "LiftModelId", "LiftModelName", orderline.LiftModelId);
             ViewBag.InstallId = new SelectList(db.Installs, "InstallId", "InstallName", orderline.InstallId);
+        }
+
+        // ######################################################| ORDER LINE UNITS |###################################################### \\
+
+        //Partial View displays order line units on Order Line Details page
+        public ActionResult _OrderLineUnits(int id = 0)
+        {
+            if (id != 0)
+            {
+                var units = db.OrderLineUnits.Where(x => x.OrderLineId == id).ToList();
+                return PartialView(units);
+            }
+            return new EmptyResult();
         }
 
         protected override void Dispose(bool disposing)

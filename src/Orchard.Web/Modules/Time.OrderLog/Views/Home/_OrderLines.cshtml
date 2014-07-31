@@ -22,7 +22,8 @@
         <td style="text-align:center">@Html.DisplayFor(modelItem => item.NewQty)</td>
         <td style="text-align:center">@Html.DisplayFor(modelItem => item.CancelQty)</td>
         <td>@Html.DisplayFor(modelItem => item.Comment)</td>
-        <td>@Html.ActionLink("Edit", "OrderLineEdit", "Home", new { id = item.OrderLineId }, null)</td>
+        <td>@Html.ActionLink("Details", "OrderLineDetails", "Home", new { id = item.OrderLineId }, null)</td>
+         @*| @Html.ActionLink("Edit", "OrderLineEdit", "Home", new { id = item.OrderLineId }, null)*@
     </tr>
 }
     <tr>

@@ -4,6 +4,10 @@
     ViewBag.Title = "Purchase Order #" + @ViewBag.PONum;
 }
 
+<p>
+    @Html.ActionLink("Order List", "Index") / Order Details
+</p>
+
 <h2>@ViewBag.Title</h2>
 
 <div>
@@ -50,8 +54,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit Purchase Order", "Edit", new { id = Model.OrderId }) |    
+    | @Html.ActionLink("Edit Purchase Order", "Edit", new { id = Model.OrderId }) |    
     @*@Html.ActionLink("Delete", "Delete", new { id = Model.OrderId }) |*@
     @Html.ActionLink("Add New Order Line", "OrderLineCreate", new { id = Model.OrderId }) |
-    @Html.ActionLink("Back to List", "Index")
 </p>
