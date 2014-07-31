@@ -20,6 +20,8 @@ namespace Time.OrderLog.EntityModels
         public string SalesOrderNum { get; set; }
         public Nullable<System.DateTime> InvoiceDate { get; set; }
         public Nullable<decimal> InvoiceAmt { get; set; }
+        public string UnitComment { get; set; }
+        public bool Cancel { get; set; }
     
         public virtual OrderLine OrderLine { get; set; }
     }

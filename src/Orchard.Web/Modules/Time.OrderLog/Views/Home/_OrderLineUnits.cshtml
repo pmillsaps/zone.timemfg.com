@@ -10,6 +10,9 @@
             <th width="100">@Html.DisplayNameFor(model => model.SalesOrderNum)</th>
             <th width="100">@Html.DisplayNameFor(model => model.InvoiceDate)</th>
             <th width="100">@Html.DisplayNameFor(model => model.InvoiceAmt)</th>
+            <th width="55">@Html.DisplayNameFor(model => model.Cancel)</th>
+            <th width="400">@Html.DisplayNameFor(model => model.UnitComment)</th>
+            <th width="50"></th>
 
             @*<th width="400">@Html.DisplayNameFor(model => model.Comment)</th>*@
             <th></th>
@@ -18,14 +21,17 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td colspan="5"><hr /></td>
+            <td colspan="8"><hr /></td>
         </tr>
         <tr style="vertical-align:top">
             <td>@Html.DisplayFor(modelItem => item.OrderLine.LiftModel.LiftModelName)</td>
             <td>@Html.DisplayFor(modelItem => item.ATSDate)</td>
-            <td>@Html.DisplayFor(modelItem => item.SalesOrderNum)</td>
+            <td>@Html.DisplayFor(modelItem => item.SalesOrderNum)</td>  
             <td>@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
             <td>@Html.DisplayFor(modelItem => item.InvoiceAmt)</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Cancel)</td> @* <<-- How to center justify a checkbox in a table cell????*@
+            <td>@Html.DisplayFor(modelItem => item.UnitComment)</td>
+            <td>@Html.ActionLink("Edit", "OrderLineUnitEdit", "Home", new { id = item.OrderLineUnitId }, null)</td>
 
             @*<td>@Html.DisplayFor(modelItem => item.Comment)</td>
             <td>@Html.ActionLink("Details", "OrderLineDetails", "Home", new { id = item.OrderLineId }, null)</td>*@
@@ -33,7 +39,7 @@
         </tr>
     }
         <tr>
-            <td colspan="5"><hr /></td>
+            <td colspan="7"><hr /></td>
         </tr>
     </table>
     <br />

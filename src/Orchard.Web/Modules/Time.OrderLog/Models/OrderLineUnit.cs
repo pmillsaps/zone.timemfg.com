@@ -15,15 +15,21 @@ namespace Time.OrderLog.EntityModels
     public class OrderLineUnitMetadata
     {
         [DisplayName("ATS Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public string ATSDate { get; set; }
 
         [DisplayName("Sales Order #")]
         public string SalesOrderNum { get; set; }
 
         [DisplayName("Invoice Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public string InvoiceDate { get; set; }
 
         [DisplayName("Invoice Amount")]
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public string InvoiceAmt { get; set; }
+
+        [DisplayName("Comment")]
+        public string UnitComment { get; set; }
     }
 }

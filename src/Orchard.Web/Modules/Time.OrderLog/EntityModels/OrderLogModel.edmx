@@ -66,6 +66,8 @@
           <Property Name="SalesOrderNum" Type="nvarchar" MaxLength="50" />
           <Property Name="InvoiceDate" Type="datetime" />
           <Property Name="InvoiceAmt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UnitComment" Type="nvarchar" MaxLength="512" />
+          <Property Name="Cancel" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Territory">
           <Key>
@@ -288,6 +290,8 @@
           <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
           <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="OrderLine" Relationship="OrderLogModel.FK_OrderLineUnit_OrderLine" FromRole="OrderLineUnit" ToRole="OrderLine" />
+          <Property Name="UnitComment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Cancel" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Territory">
           <Key>
@@ -434,6 +438,8 @@
           <EntitySetMapping Name="OrderLineUnits">
             <EntityTypeMapping TypeName="OrderLogModel.OrderLineUnit">
               <MappingFragment StoreEntitySet="OrderLineUnit">
+                <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+                <ScalarProperty Name="UnitComment" ColumnName="UnitComment" />
                 <ScalarProperty Name="InvoiceAmt" ColumnName="InvoiceAmt" />
                 <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
                 <ScalarProperty Name="SalesOrderNum" ColumnName="SalesOrderNum" />
