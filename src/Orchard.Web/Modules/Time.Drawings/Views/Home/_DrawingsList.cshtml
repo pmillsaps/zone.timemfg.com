@@ -1,6 +1,4 @@
-﻿
-@model IEnumerable<Time.Drawings.EntityModels.Drawings_PDF>
-
+﻿@model IEnumerable<Time.Drawings.EntityModels.Drawings_PDF>
 
 <table class="table">
     <tr>
@@ -20,14 +18,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Directory)
             </th>*@
-
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.ActionLink(item.FileName, "DownloadDrawing", new { id = item.Id })
+                @Html.ActionLink(item.FileName, "ViewDrawing", new { id = item.Id })
             </td>
 
             @*<td>
@@ -39,8 +36,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Directory)
                 </td>*@
-
         </tr>
     }
-
 </table>

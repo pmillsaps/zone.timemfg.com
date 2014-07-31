@@ -87,36 +87,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="ViewerJS\AGPL-3.0.txt" />
-    <Content Include="ViewerJS\compatibility.js" />
-    <Content Include="ViewerJS\example.local.css" />
-    <Content Include="ViewerJS\images\kogmbh.png" />
-    <Content Include="ViewerJS\images\nlnet.png" />
-    <Content Include="ViewerJS\images\texture.png" />
-    <Content Include="ViewerJS\images\toolbarButton-download.png" />
-    <Content Include="ViewerJS\images\toolbarButton-fullscreen.png" />
-    <Content Include="ViewerJS\images\toolbarButton-menuArrows.png" />
-    <Content Include="ViewerJS\images\toolbarButton-pageDown.png" />
-    <Content Include="ViewerJS\images\toolbarButton-pageUp.png" />
-    <Content Include="ViewerJS\images\toolbarButton-presentation.png" />
-    <Content Include="ViewerJS\images\toolbarButton-zoomIn.png" />
-    <Content Include="ViewerJS\images\toolbarButton-zoomOut.png" />
-    <Content Include="ViewerJS\index.html" />
-    <Content Include="ViewerJS\ODFViewerPlugin.css" />
-    <Content Include="ViewerJS\ODFViewerPlugin.js" />
-    <Content Include="ViewerJS\pdf.js" />
-    <Content Include="ViewerJS\pdf.worker.js" />
-    <Content Include="ViewerJS\pdfjsversion.js" />
-    <Content Include="ViewerJS\PDFViewerPlugin.css" />
-    <Content Include="ViewerJS\PDFViewerPlugin.js" />
-    <Content Include="ViewerJS\pdf_find_bar.js" />
-    <Content Include="ViewerJS\pdf_find_controller.js" />
-    <Content Include="ViewerJS\PluginLoader.js" />
-    <Content Include="ViewerJS\text_layer_builder.js" />
-    <Content Include="ViewerJS\ui_utils.js" />
-    <Content Include="ViewerJS\viewer.css" />
-    <Content Include="ViewerJS\viewer.js" />
-    <Content Include="ViewerJS\webodf.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -127,7 +97,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_DrawingsList.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Home\ViewDrawing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

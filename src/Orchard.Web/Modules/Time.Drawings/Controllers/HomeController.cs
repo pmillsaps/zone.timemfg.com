@@ -11,7 +11,6 @@ using Time.Drawings.ViewModels;
 
 namespace Time.Drawings.Controllers
 {
-    [Themed]
     [Authorize]
     public class HomeController : Controller
     {
@@ -38,12 +37,14 @@ namespace Time.Drawings.Controllers
         //    _db = db;
         //}
 
+        [Themed]
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Themed]
         [HttpPost]
         public ActionResult Index(SearchDrawingsViewModel vm)
         {
@@ -85,6 +86,7 @@ namespace Time.Drawings.Controllers
             return View();
         }
 
+        [Themed]
         public ActionResult DownloadDrawing(int id)
         {
             var doc = _db.Drawings_PDF.Where(x => x.Id == id).FirstOrDefault();
@@ -118,12 +120,12 @@ namespace Time.Drawings.Controllers
             return View("Index");
         }
 
-        //[ChildActionOnly]
-        public FileResult AutoDownloadDrawing(int id)
+        public ActionResult ViewDrawing(int id)
         {
             var doc = _db.Drawings_PDF.Where(x => x.Id == id).FirstOrDefault();
             string dir = doc.Directory;
-            string path = ConfigurationManager.AppSettings["PartsPDFDirectory"];
+            //string path = ConfigurationManager.AppSettings["PartsPDFDirectory"];
+            string path = Properties.Settings.Default.PartsPDFDirectory;
             if (doc != null)
             {
                 string docPath = Path.Combine(path, dir);
@@ -137,17 +139,26 @@ namespace Time.Drawings.Controllers
                     switch (fileExtension)
                     {
                         case ".pdf":
-                            fileType = "application/octet-stream";
+                            fileType = "application/pdf";
                             break;
 
                         default:
                             fileType = "application/octet-stream";
                             break;
                     }
-                    return File(gpath, fileType, doc.FileName);
+                    ViewBag.File = docPath;
+                    ViewBag.FileName = doc.FileName;
+                    //return View();
+
+                    Response.ClearContent();
+                    Response.ClearHeaders();
+                    Response.AppendHeader("Content-Disposition", String.Format("inline; filename={0}", doc.FileName));
+
+                    return File(gpath, fileType);
                 }
             }
-            return null;
+
+            return View("Index");
         }
     }
 }
