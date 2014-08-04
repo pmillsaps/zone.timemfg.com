@@ -12,18 +12,16 @@ namespace Time.OrderLog.EntityModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Territory
+    public partial class Region
     {
-        public Territory()
+        public Region()
         {
-            this.Orders = new HashSet<Order>();
+            this.Territories = new HashSet<Territory>();
         }
     
-        public int TerritoryId { get; set; }
-        public string TerritoryName { get; set; }
         public int RegionId { get; set; }
+        public string RegionName { get; set; }
     
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual Region Region { get; set; }
+        public virtual ICollection<Territory> Territories { get; set; }
     }
 }

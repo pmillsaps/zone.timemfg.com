@@ -32,5 +32,6 @@ namespace Time.OrderLog.EntityModels
         public virtual DbSet<OrderLine> OrderLines { get; set; }
         public virtual DbSet<OrderLineUnit> OrderLineUnits { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
     }
 }
