@@ -1,0 +1,58 @@
+﻿@model Time.OrderLog.EntityModels.OrderLineUnit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderLineUnit</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ATSDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ATSDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesOrderNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesOrderNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderLine.Customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderLine.Customer)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderLineUnitId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

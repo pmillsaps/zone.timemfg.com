@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="489b393948234c629ecc64e4d4bbd099" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="OrderLogModel.Dealer" Width="1.5" PointX="0.75" PointY="0.875" />
-        <EntityTypeShape EntityType="OrderLogModel.Install" Width="1.5" PointX="3" PointY="7.125" />
-        <EntityTypeShape EntityType="OrderLogModel.LiftModel" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="OrderLogModel.Order" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="OrderLogModel.OrderLine" Width="1.5" PointX="5.25" PointY="2.375" />
-        <EntityTypeShape EntityType="OrderLogModel.OrderLineUnit" Width="1.5" PointX="7.5" PointY="3.5" />
-        <EntityTypeShape EntityType="OrderLogModel.Territory" Width="1.5" PointX="0.75" PointY="3.875" />
+      <Diagram DiagramId="489b393948234c629ecc64e4d4bbd099" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="OrderLogModel.Dealer" Width="1.5" PointX="2.75" PointY="3.625" />
+        <EntityTypeShape EntityType="OrderLogModel.Install" Width="1.5" PointX="4.875" PointY="5.75" />
+        <EntityTypeShape EntityType="OrderLogModel.LiftModel" Width="1.5" PointX="6.875" PointY="0.625" />
+        <EntityTypeShape EntityType="OrderLogModel.Order" Width="1.5" PointX="2.75" PointY="0.625" />
+        <EntityTypeShape EntityType="OrderLogModel.OrderLine" Width="1.5" PointX="4.875" PointY="0.625" />
+        <EntityTypeShape EntityType="OrderLogModel.OrderLineUnit" Width="1.5" PointX="6.875" PointY="2.5" />
+        <EntityTypeShape EntityType="OrderLogModel.Territory" Width="1.5" PointX="0.625" PointY="0.625" />
         <AssociationConnector Association="OrderLogModel.FK_Order_Dealer" />
         <AssociationConnector Association="OrderLogModel.FK_OrderLine_Install" />
         <AssociationConnector Association="OrderLogModel.FK_OrderLine_LiftModel" />
         <AssociationConnector Association="OrderLogModel.FK_Order_Territory" />
         <AssociationConnector Association="OrderLogModel.FK_OrderLine_Order1" />
         <AssociationConnector Association="OrderLogModel.FK_OrderLineUnit_OrderLine" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

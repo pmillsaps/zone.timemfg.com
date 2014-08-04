@@ -18,7 +18,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.PO, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.PO)
                 @Html.ValidationMessageFor(model => model.PO)
             </div>
@@ -26,7 +26,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.DealerId, "DealerId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.DropDownList("DealerId", String.Empty)
                 @Html.ValidationMessageFor(model => model.DealerId)
             </div>
@@ -34,7 +34,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.TerritoryId, "Territory", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.DropDownList("TerritoryId", String.Empty)
                 @Html.ValidationMessageFor(model => model.TerritoryId)
             </div>
@@ -42,7 +42,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.Date)
                 @Html.ValidationMessageFor(model => model.Date)
             </div>

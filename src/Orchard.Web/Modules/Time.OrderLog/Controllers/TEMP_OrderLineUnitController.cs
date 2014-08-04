@@ -10,18 +10,18 @@ using Time.OrderLog.EntityModels;
 
 namespace Time.OrderLog.Controllers
 {
-    public class TEMPController : Controller
+    public class TEMP_OrderLineUnitController : Controller
     {
         private OrderLogEntities db = new OrderLogEntities();
 
-        // GET: /TEMP/
+        // GET: /OrderLineUnit/
         public ActionResult Index()
         {
             var orderlineunits = db.OrderLineUnits.Include(o => o.OrderLine);
             return View(orderlineunits.ToList());
         }
 
-        // GET: /TEMP/Details/5
+        // GET: /OrderLineUnit/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,19 @@ namespace Time.OrderLog.Controllers
             return View(orderlineunit);
         }
 
-        // GET: /TEMP/Create
+        // GET: /OrderLineUnit/Create
         public ActionResult Create()
         {
             ViewBag.OrderLineId = new SelectList(db.OrderLines, "OrderLineId", "Customer");
             return View();
         }
 
-        // POST: /TEMP/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: /OrderLineUnit/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="OrderLineUnitId,OrderLineId,ATSDate,SalesOrderNum,InvoiceDate,InvoiceAmt")] OrderLineUnit orderlineunit)
+        public ActionResult Create([Bind(Include = "OrderLineUnitId,OrderLineId,ATSDate,SalesOrderNum,InvoiceDate,InvoiceAmt")] OrderLineUnit orderlineunit)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace Time.OrderLog.Controllers
             return View(orderlineunit);
         }
 
-        // GET: /TEMP/Edit/5
+        // GET: /OrderLineUnit/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,12 +77,12 @@ namespace Time.OrderLog.Controllers
             return View(orderlineunit);
         }
 
-        // POST: /TEMP/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: /OrderLineUnit/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="OrderLineUnitId,OrderLineId,ATSDate,SalesOrderNum,InvoiceDate,InvoiceAmt")] OrderLineUnit orderlineunit)
+        public ActionResult Edit([Bind(Include = "OrderLineUnitId,OrderLineId,ATSDate,SalesOrderNum,InvoiceDate,InvoiceAmt")] OrderLineUnit orderlineunit)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Time.OrderLog.Controllers
             return View(orderlineunit);
         }
 
-        // GET: /TEMP/Delete/5
+        // GET: /OrderLineUnit/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace Time.OrderLog.Controllers
             return View(orderlineunit);
         }
 
-        // POST: /TEMP/Delete/5
+        // POST: /OrderLineUnit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

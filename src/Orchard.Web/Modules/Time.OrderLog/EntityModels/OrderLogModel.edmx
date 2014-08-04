@@ -180,7 +180,7 @@
             <End Role="OrderLine" EntitySet="OrderLine" />
             <End Role="OrderLineUnit" EntitySet="OrderLineUnit" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -217,7 +217,7 @@
             <End Role="OrderLine" EntitySet="OrderLines" />
             <End Role="OrderLineUnit" EntitySet="OrderLineUnits" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Dealer">
           <Key>
             <PropertyRef Name="DealerId" />
