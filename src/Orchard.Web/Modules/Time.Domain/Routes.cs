@@ -22,21 +22,19 @@ namespace Time.Domain
                 new RouteDescriptor {
                     Priority = 5,
                      Route = new Route(
-                        "Domain/{action}/{id}",
+                        "Domain/{controller}/{action}/{id}",
                         new RouteValueDictionary {
                                                     {"area", "Time.Domain"},
                                                     {"controller", "Home"},
                                                     {"action", "Index"},
                                                     {"id", null}
                                                 },
-                        new RouteValueDictionary {
-                                                    {"area", "Time.Domain"},
-                                                    {"controller", "Home"},
-                                                },
+                        new RouteValueDictionary (),
                         new RouteValueDictionary {
                                                     {"area", "Time.Domain"}
                                                 },
                         new MvcRouteHandler())}
+                 
             };
         }
     }
