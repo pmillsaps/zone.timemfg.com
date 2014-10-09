@@ -1,0 +1,272 @@
+﻿@*@model Time.Support.EntityModels.TimeMfg.TicketProject*@
+@model Time.Support.Models.TicketViewModel
+
+@using Time.Support.Helpers
+
+@{
+    ViewBag.Title = "Support Ticket Info";
+}
+
+<div class="container">
+    <div class="row">
+
+        @Html.Action("SideBar")
+
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <div class="row">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="row text-info">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Ticket.Title)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    Ticket #: @Html.DisplayFor(model => model.Ticket.TicketID)
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="col-md-8">
+                    Description
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayWithBreaksFor(model => model.Ticket.Description)
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-3">
+                    Request By:
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Ticket.RequestedBy)
+                </div>
+                <div class="col-md-2">
+                    @Html.ActionLink("Change User", "ChangeUser")
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    Requested Date:
+                </div>
+                <div class="col-md-6">
+                    @Model.Ticket.RequestedDate.Value.ToShortDateString()
+                </div>
+            </div>
+
+            @using (Html.BeginForm("Update", "Ticket", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.Hidden("TicketID", Model.Ticket.TicketID)
+
+                @*@Html.HiddenFor(model => model.Ticket.TicketID)*@
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Priority:
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Admin)
+                        {
+                            @Html.DropDownList("PriorityID", null, htmlAttributes: new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.Ticket.TicketPriority.Name)
+                        }
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Department:
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Admin)
+                        {
+                            @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.Ticket.TicketDepartment.Name)
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Category:
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Admin)
+                        {
+                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.Ticket.TicketCategory.Name)
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Assigned To:
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Admin)
+                        {
+                            @Html.DropDownList("AssignedEmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.Ticket.TicketEmployee.FullName)
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Resource:
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Admin)
+                        {
+                            @Html.DropDownList("ResourceEmployeeID", null, htmlAttributes: new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.Ticket.TicketEmployee1.FullName)
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Status:
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.Admin)
+                        {
+                            @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.Ticket.TicketStatus.Name)
+                        }
+                    </div>
+                </div>
+
+                if (Model.IT || Model.Admin)
+                {
+                    <br />
+                    <div class="row form-group">
+                        <div class="col-md-10">
+                            <input type="submit" value="Update Ticket" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            }
+
+
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <h5><strong>Public Notes</strong></h5>
+                </div>
+            </div>
+            @foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility >= 5))
+            {
+                <div class="row">
+                    <div class="col-md-9">
+                        @Html.DisplayWithBreaksFor(m => item.Note)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
+                    </div>
+                </div>
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <h5><strong>Private Notes</strong></h5>
+                </div>
+            </div>
+
+            @if (Model.IT || Model.Admin)
+            {
+                foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility < 5))
+                {
+                    <div class="row">
+                        <div class="col-md-9">
+                            @Html.DisplayWithBreaksFor(m => item.Note)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
+                        </div>
+                    </div>
+                }
+
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-1">
+                    <h5><strong>Tasks</strong></h5>
+                </div>
+                <div class="col-md-2">
+                    <h5>@Html.ActionLink("Add Task", "AddTask", new { id = Model.Ticket.TicketID })</h5>
+                </div>
+            </div>
+            @foreach (var item in Model.Tasks)
+            {
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.DisplayFor(m => item.Completed)
+                        @*@Html.CheckBox("Completed", item.Completed == true, new { @Enabled = false })*@
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink(item.Task, "EditTask", new { id = item.ID })
+                        @*@Html.DisplayFor(m => item.Task)*@
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DisplayFor(m => item.Notes)
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DisplayFor(m => item.TicketEmployee.FullName)
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -39,5 +39,23 @@ namespace Time.Domain.Controllers
 
             return View(User);
         }
+
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(string User)
+        {
+            if (User != null)
+            {
+                return View("ChangeConfirmed");
+            }
+
+            return View(User);
+        }
     }
 }

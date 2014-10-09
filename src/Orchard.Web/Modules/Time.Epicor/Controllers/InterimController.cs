@@ -1,10 +1,7 @@
 ﻿using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Time.Epicor.EntityModels.Epicor;
 using Time.Epicor.ViewModels;
@@ -30,6 +27,7 @@ namespace Time.Epicor.Controllers
                 return new HttpUnauthorizedResult();
             using (var db = new EpicorEntities())
             {
+                db.Database.CommandTimeout = 600;
                 IMViewModel vm = new IMViewModel()
                 {
                     ImJobOper = db.imjobopers.ToList(),

@@ -21,40 +21,20 @@ namespace Time.Epicor
             return new[] {
                 new RouteDescriptor {
                     Priority = 5,
-                     Route = new Route(
-                        "Epicor/Interim/{action}/{id}",
+                    Route = new Route(
+                        "Epicor/{controller}/{action}/{id}",
                         new RouteValueDictionary {
-                                                    {"area", "Time.Epicor"},
-                                                    {"controller", "Interim"},
-                                                    {"action", "Index"},
-                                                    {"id", null}
-                                                },
+                            {"area", "Time.Epicor"},
+                            {"controller", "Home"},
+                            {"action", "Index"},
+                            {"id", null}
+                        },
+                        new RouteValueDictionary(),
                         new RouteValueDictionary {
-                                                    {"area", "Time.Epicor"},
-                                                    {"controller", "Interim"},
-                                                },
-                        new RouteValueDictionary {
-                                                    {"area", "Time.Epicor"}
-                                                },
-                        new MvcRouteHandler())},
-                new RouteDescriptor {
-                    Priority = 5,
-                     Route = new Route(
-                        "Epicor/{action}/{id}",
-                        new RouteValueDictionary {
-                                                    {"area", "Time.Epicor"},
-                                                    {"controller", "Home"},
-                                                    {"action", "Index"},
-                                                    {"id", null}
-                                                },
-                        new RouteValueDictionary {
-                                                    {"area", "Time.Epicor"},
-                                                    {"controller", "Home"},
-                                                },
-                        new RouteValueDictionary {
-                                                    {"area", "Time.Epicor"}
-                                                },
-                        new MvcRouteHandler())}
+                            {"area", "Time.Epicor"}
+                        },
+                        new MvcRouteHandler())
+                }
             };
         }
     }

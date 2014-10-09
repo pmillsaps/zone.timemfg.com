@@ -1,0 +1,230 @@
+﻿@model Time.Support.EntityModels.TimeMfg.TicketProject
+@using Time.Support.Helpers
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.ActionLink(Model.Title, "Info", new { id = Model.TicketID })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        Ticket #: @Model.TicketID
+    </div>
+    <div class="col-md-push-5">
+        Status: @Model.TicketStatus.Name
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        Priority #: @Model.TicketPriority.Name
+    </div>
+    <div class="col-md-push-5">
+        @if (Model.TicketEmployee != null)
+	    {
+            @:Assigned To: @Model.TicketEmployee.FullName
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        Category: @Model.TicketCategory.Name
+    </div>
+    <div class="col-md-push-5">
+        Dept: @Model.TicketDepartment.Name
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="container">
+        <div class="col-md-8">
+            @Html.DisplayWithBreaksFor(model => model.Description)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <i>Requested By: @Html.DisplayFor(model => model.RequestedBy)</i>
+    </div>
+    <div class="col-md-push-5">
+        <i>Request Date: @Model.RequestedDate.Value.ToShortDateString()</i>
+    </div>
+</div>
+<hr />
+
+@*<div class="container">
+        <h4>TicketProject</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TicketID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DepartmentID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DepartmentID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PriorityID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PriorityID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CategoryID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Notes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Notes)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PrivateNotes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PrivateNotes)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RequestedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestedByFriendly)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RequestedByFriendly)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RequestedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AssignedEmployeeID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AssignedEmployeeID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ResourceEmployeeID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ResourceEmployeeID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ApprovalDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ApprovalDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ApprovedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ApprovedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectBeginDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProjectBeginDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectEndDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProjectEndDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketSequence)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TicketSequence)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CompletionDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CompletionDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ApprovalCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ApprovalCode)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
