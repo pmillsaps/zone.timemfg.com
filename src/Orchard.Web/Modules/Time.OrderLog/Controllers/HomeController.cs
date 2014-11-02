@@ -9,7 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Time.OrderLog.EntityModels;
+using Time.Data.EntityModels.OrderLog;
+//using Time.Data.EntityModels.OrderLog;
 
 namespace Time.OrderLog.Controllers
 {
@@ -20,13 +21,20 @@ namespace Time.OrderLog.Controllers
 
         public Localizer T { get; set; }
 
-        private OrderLogEntities db = new OrderLogEntities();
+        private OrderLogEntities db;
 
         public HomeController(IOrchardServices services)
         {
             Services = services;
-
             T = NullLocalizer.Instance;
+            db = new OrderLogEntities();
+        }
+
+        public HomeController(IOrchardServices services, OrderLogEntities _db)
+        {
+            Services = services;
+            T = NullLocalizer.Instance;
+            db = _db;
         }
 
         // GET: /OrderLog/
@@ -34,7 +42,8 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.ViewOrders, T("Couldn't View Orders")))
                 return new HttpUnauthorizedResult();
-            var orders = db.Orders.Include(o => o.Dealer).Include(t => t.Territory).ToList();
+            var orders = db.Orders.ToList();
+            //var orders = db.Orders.Include(o => o.Dealer).Include(t => t.Territory).ToList();
             return View(orders);
         }
 

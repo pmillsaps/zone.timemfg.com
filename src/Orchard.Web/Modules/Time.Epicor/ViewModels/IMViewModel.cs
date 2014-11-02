@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Time.Epicor.EntityModels.Epicor;
+using Time.Data.EntityModels.Epicor;
 
 namespace Time.Epicor.ViewModels
 {

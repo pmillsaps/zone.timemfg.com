@@ -1,7 +1,42 @@
-﻿@{
-    ViewBag.Title = "Load List Index";
+﻿@model Time.Epicor.ViewModels.AsmInspectViewModel
+
+@{
+    ViewBag.Title = "Assembly Inspection List - " + DateTime.Now.ToShortTimeString();
 }
 
 <h2>@ViewBag.Title</h2>
+<p>
+    To appear on this list, a unit must be on an Open Load List. The date here is based on the Load List Shipping Date.
+</p>
 
-<h4>Not Yet Implemented</h4>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.DisplayNameFor(model => model.EndDate)
+    @Html.EditorFor(model => model.EndDate)
+    @Html.DisplayNameFor(model => model.Claimed)
+    @Html.EditorFor(model => model.Claimed)
+    @Html.DisplayNameFor(model => model.Tested)
+    @Html.EditorFor(model => model.Tested)
+    @Html.DisplayNameFor(model => model.Posted)
+    @Html.EditorFor(model => model.Posted)
+    @Html.DisplayNameFor(model => model.Green)
+    @Html.EditorFor(model => model.Green)
+    <input type="submit" value="Refresh" name="Refresh" />
+    @Html.Label("If checked, the List will ignore that operation")
+}
+
+<br /><br />
+<div class="table">
+    @Html.Partial("_AsmInspect", Model.JobList)
+</div>
+
+<script type="text/javascript">
+    function reFresh() {
+        //document.form.submit();
+        document.all("Refresh").click();
+    }
+    window.setInterval("reFresh()", 300000);
+</script>

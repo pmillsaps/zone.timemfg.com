@@ -59,6 +59,12 @@
       <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MoreLinq">
+      <HintPath>..\..\..\packages\morelinq.1.1.0\lib\net35\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -83,11 +89,19 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\CheckboxEmpty.png" />
+    <Content Include="Content\Images\CheckboxFull.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Images\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\Time.Epicor.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -115,6 +129,41 @@
     <Content Include="Views\Home\ChangePrimBin.cshtml" />
     <Content Include="Views\Inventory\ReturnTags.cshtml" />
     <Content Include="Views\DistributorOrders\Index.cshtml" />
+    <Content Include="Views\LoadList\CommentWorkFlow.cshtml" />
+    <Content Include="Views\LoadList\CompleteLoadList.cshtml" />
+    <Content Include="Views\LoadList\Create.cshtml" />
+    <Content Include="Views\LoadList\Delete.cshtml" />
+    <Content Include="Views\LoadList\DeleteJob.cshtml" />
+    <Content Include="Views\LoadList\Details.cshtml" />
+    <Content Include="Views\LoadList\Edit.cshtml" />
+    <Content Include="Views\LoadList\EditJob.cshtml" />
+    <Content Include="Views\LoadList\EmailCreate.cshtml" />
+    <Content Include="Views\LoadList\EmailDelete.cshtml" />
+    <Content Include="Views\LoadList\EmailEdit.cshtml" />
+    <Content Include="Views\LoadList\EmailIndex.cshtml" />
+    <Content Include="Views\LoadList\EmailLoadList.cshtml" />
+    <Content Include="Views\LoadList\EmailLoadLists.cshtml" />
+    <Content Include="Views\LoadList\IndexComplete.cshtml" />
+    <Content Include="Views\LoadList\JobDetails.cshtml" />
+    <Content Include="Views\LoadList\JobSearch.cshtml" />
+    <Content Include="Views\LoadList\MoveLoadListJob.cshtml" />
+    <Content Include="Views\LoadList\PrintLoadLists.cshtml" />
+    <Content Include="Views\LoadList\SearchLoadLists.cshtml" />
+    <Content Include="Views\LoadList\UploadPictures.cshtml" />
+    <Content Include="Views\LoadList\_AsmInspect.cshtml" />
+    <Content Include="Views\LoadList\_CommentWorkFlow.cshtml" />
+    <Content Include="Views\LoadList\_CustomerList.cshtml" />
+    <Content Include="Views\LoadList\_DisplayThumbNails.cshtml" />
+    <Content Include="Views\LoadList\_EmailList.cshtml" />
+    <Content Include="Views\LoadList\_JobList.cshtml" />
+    <Content Include="Views\LoadList\_JobStatus.cshtml" />
+    <Content Include="Views\LoadList\_JobStatusRaw.cshtml" />
+    <Content Include="Views\LoadList\_List.cshtml" />
+    <Content Include="Views\LoadList\_ListJobComments.cshtml" />
+    <Content Include="Views\LoadList\_ListLifts.cshtml" />
+    <Content Include="Views\LoadList\_ListLoadComments.cshtml" />
+    <Content Include="Views\LoadList\_ViewLifts.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -125,62 +174,37 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BOMCostingController.cs" />
     <Compile Include="Controllers\DistributorOrdersController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoadListController.cs" />
+    <Compile Include="Controllers\OldLoadListController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
-    <Compile Include="EntityModels\Epicor\EpicorModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EpicorModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Epicor\EpicorModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EpicorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Epicor\EpicorModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EpicorModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Epicor\imjoboper.cs">
-      <DependentUpon>EpicorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Epicor\impartbin.cs">
-      <DependentUpon>EpicorModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Helpers\EmailNotifier.cs" />
+    <Compile Include="Helpers\ErrorTools.cs" />
+    <Compile Include="Helpers\FileUploadHelpers.cs" />
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\ImageResult.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ViewModels\AddLiftViewModel.cs" />
+    <Compile Include="ViewModels\AsmInspectViewModel.cs" />
+    <Compile Include="ViewModels\EmailLoadListVM.cs" />
     <Compile Include="ViewModels\IMViewModel.cs" />
+    <Compile Include="ViewModels\LoadListView.cs" />
+    <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="EntityModels\Epicor\EpicorModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EpicorModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EntityModels\Epicor\EpicorModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EpicorModel.edmx</DependentUpon>
-      <LastGenOutput>EpicorModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityModels\Epicor\EpicorModel.edmx.diagram">
-      <DependentUpon>EpicorModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="EntityModels\Epicor\EpicorModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EpicorModel.edmx</DependentUpon>
-      <LastGenOutput>EpicorModel.cs</LastGenOutput>
-    </Content>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,11 @@ namespace Time.Epicor.Controllers
 
         public Localizer T { get; set; }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult SendRTI()
         {
             return View();

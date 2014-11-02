@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Time.Support.EntityModels.TimeMfg;
+using Time.Data.EntityModels.TimeMFG;
 
 namespace Time.Support.Models
 {

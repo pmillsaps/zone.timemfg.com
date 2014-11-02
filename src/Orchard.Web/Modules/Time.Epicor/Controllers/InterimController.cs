@@ -3,7 +3,7 @@ using Orchard.Localization;
 using Orchard.Themes;
 using System.Linq;
 using System.Web.Mvc;
-using Time.Epicor.EntityModels.Epicor;
+using Time.Data.EntityModels.Epicor;
 using Time.Epicor.ViewModels;
 
 namespace Time.Epicor.Controllers

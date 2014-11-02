@@ -9,7 +9,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Time.Support.EntityModels.TimeMfg;
+using Time.Data.EntityModels.TimeMFG;
+using Time.Support.Helpers;
 using Time.Support.Models;
 
 namespace Time.Support.Controllers
@@ -297,13 +298,19 @@ namespace Time.Support.Controllers
             if (ticket.AssignedEmployeeID != ticketProject.AssignedEmployeeID)
             {
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.AssignedEmployeeID);
-                msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
+                if (ticket.TicketEmployee != null) 
+                    msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
+                else
+                    msg += string.Format("Assigned ticket to {0}", emp.FullName);
             }
 
             if (ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
             {
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
-                msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee1.FullName, emp.FullName);
+                if (ticket.TicketEmployee1 != null)
+                    msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee1.FullName, emp.FullName);
+                else
+                    msg += string.Format("Set Resource Employee to {0}", emp.FullName);
             }
 
             if (ticket.Status != ticketProject.Status)
@@ -311,7 +318,9 @@ namespace Time.Support.Controllers
                 var stat = _db.TicketStatuses.Single(x => x.StatusID == ticketProject.Status);
                 msg += string.Format("Status was changed: {0} -> {1}", ticket.TicketStatus.Name, stat.Name);
             }
+            var ex = new FormatException();
 
+            ErrorTools.SendEmail(Request.Url, ex);
 
             //public ActionResult Edit([Bind(Include = "TicketID,DepartmentID,PriorityID,CategoryID,Title,Description,Notes,PrivateNotes,RequestedBy,RequestedByFriendly,RequestedDate,AssignedEmployeeID,ResourceEmployeeID,Status,ApprovalDate,ApprovedBy,ProjectBeginDate,ProjectEndDate,TicketSequence,CompletionDate,ApprovalCode")] TicketProject ticketProject)
 
@@ -383,12 +392,12 @@ namespace Time.Support.Controllers
 
         private void GenerateDropDowns()
         {
-            ViewBag.CategoryID = new SelectList(_db.TicketCategories, "CategoryID", "Name");
-            ViewBag.DepartmentID = new SelectList(_db.TicketDepartments, "DepartmentID", "Name");
-            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName");
-            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName");
+            ViewBag.CategoryID = new SelectList(_db.TicketCategories.OrderBy(x => x.Name), "CategoryID", "Name");
+            ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name");
+            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "LastName");
+            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "LastName");
             ViewBag.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name");
-            ViewBag.Status = new SelectList(_db.TicketStatuses, "StatusID", "Name");
+            ViewBag.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name");
         }
 
         private void GenerateDropDowns(TicketProject ticketProject)

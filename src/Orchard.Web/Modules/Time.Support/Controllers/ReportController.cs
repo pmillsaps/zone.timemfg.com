@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using Time.Support.EntityModels.TimeMfg;
+using Time.Data.EntityModels.TimeMFG;
 using Time.Support.Helpers;
 using Time.Support.Models;
 

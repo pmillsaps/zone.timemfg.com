@@ -8,4 +8,5 @@ Description: Support Ticket System
 Features:
     Time.Support:
         Description: Support Ticket System.
+		Dependencies: Time.Data
 		Category: .Time

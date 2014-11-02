@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Time.Support.EntityModels.TimeMfg;
+using Time.Data.EntityModels.TimeMFG;
 
 namespace Time.Support.Controllers
 {

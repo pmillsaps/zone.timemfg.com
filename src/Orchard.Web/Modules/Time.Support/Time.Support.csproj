@@ -66,6 +66,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -85,27 +86,19 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\EmailTemplates\ApprovedNotification.htm" />
+    <Content Include="Content\EmailTemplates\AssignmentNotification.htm" />
+    <Content Include="Content\EmailTemplates\AssignmentNotificationUser.htm" />
+    <Content Include="Content\EmailTemplates\CompletionPendingNotification.htm" />
+    <Content Include="Content\EmailTemplates\NewTicketNotification.htm" />
+    <Content Include="Content\EmailTemplates\NotificationFooter.htm" />
+    <Content Include="Content\EmailTemplates\NotificationHeader.htm" />
+    <Content Include="Content\EmailTemplates\SupervisorNewTicketNotification.htm" />
+    <Content Include="Content\EmailTemplates\UpdateNotification.htm" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="EntityModels\TimeMfg\TimeMFGModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TimeMFGModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="EntityModels\TimeMfg\TimeMFGModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TimeMFGModel.edmx</DependentUpon>
-      <LastGenOutput>TimeMFGModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityModels\TimeMfg\TimeMFGModel.edmx.diagram">
-      <DependentUpon>TimeMFGModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="EntityModels\TimeMfg\TimeMFGModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TimeMFGModel.edmx</DependentUpon>
-      <LastGenOutput>TimeMFGModel.cs</LastGenOutput>
-    </Content>
     <None Include="Properties\PublishProfiles\Time.Support.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -133,6 +126,7 @@
     <Content Include="Views\TicketTasks\Edit.cshtml" />
     <Content Include="Views\TicketTasks\Index.cshtml" />
     <Content Include="Views\Ticket\EditTask.cshtml" />
+    <Content Include="Views\EditorTemplates\SupportSettingsPart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -143,72 +137,26 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\TicketProjectsController.cs" />
     <Compile Include="Controllers\TicketTasksController.cs" />
-    <Compile Include="EntityModels\TimeMfg\TicketAttachment.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketCategory.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketDepartment.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketDivision.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketEmployee.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketLink.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketNote.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketPriority.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketProject.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketRequestor.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketStatus.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketStatusHistory.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TicketTask.cs">
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TimeMFGModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeMFGModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TimeMFGModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeMFGModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\TimeMfg\TimeMFGModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeMFGModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Handlers\SupportSettingsPartHandler.cs" />
     <Compile Include="Helpers\CrystalReportPdfResult.cs" />
+    <Compile Include="Helpers\ErrorTools.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\Notifications.cs" />
+    <Compile Include="Helpers\TicketExtensions.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
-    <Compile Include="Models\TicketProject.cs" />
-    <Compile Include="Models\TicketTask.cs" />
-    <Compile Include="Models\TicketEmployee.cs" />
+    <Compile Include="Models\SupportSettingsPart.cs" />
+    <Compile Include="Models\SupportSettingsPartRecord.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
@@ -317,6 +265,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

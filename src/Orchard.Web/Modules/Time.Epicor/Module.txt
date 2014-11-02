@@ -8,4 +8,5 @@ Description: Epicor Specific functionality
 Features:
     Time.Epicor:
         Description: Epicor Specific functionality.
+		Dependencies: Time.Data
 		Category: .Time
