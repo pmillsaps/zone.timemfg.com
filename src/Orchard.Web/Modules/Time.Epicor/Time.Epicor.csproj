@@ -48,7 +48,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -164,6 +163,11 @@
     <Content Include="Views\LoadList\_ListLoadComments.cshtml" />
     <Content Include="Views\LoadList\_ViewLifts.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Status\_Tasks.cshtml" />
+    <Content Include="Views\Status\_Interim.cshtml" />
+    <Content Include="Views\Status\_imjoboper.cshtml" />
+    <Content Include="Views\Status\_impartbin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -186,6 +190,7 @@
     <Compile Include="Controllers\LoadListController.cs" />
     <Compile Include="Controllers\OldLoadListController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Helpers\EmailNotifier.cs" />
     <Compile Include="Helpers\ErrorTools.cs" />
     <Compile Include="Helpers\FileUploadHelpers.cs" />
@@ -202,6 +207,7 @@
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Reports\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

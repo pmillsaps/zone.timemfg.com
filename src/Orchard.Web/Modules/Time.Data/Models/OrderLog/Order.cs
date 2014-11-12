@@ -10,11 +10,12 @@ namespace Time.Data.EntityModels.OrderLog
     [MetadataType(typeof(OrderMetadata))]
     public partial class Order
     {
+        public string CityStateZip { get {return String.Format("{0} {1} {2}", City, State, Zip);} }
     }
 
     public class OrderMetadata
     {
-        [System.ComponentModel.DisplayName("PO#")]
+        [DisplayName("PO#")]
         public string PO { get; set; }
     }
 }

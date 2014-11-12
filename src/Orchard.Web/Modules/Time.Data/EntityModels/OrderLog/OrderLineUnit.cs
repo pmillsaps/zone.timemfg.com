@@ -15,7 +15,7 @@ namespace Time.Data.EntityModels.OrderLog
     public partial class OrderLineUnit
     {
         public int OrderLineUnitId { get; set; }
-        public int OrderLineId { get; set; }
+        public int OrderId { get; set; }
         public Nullable<System.DateTime> ATSDate { get; set; }
         public string SalesOrderNum { get; set; }
         public Nullable<System.DateTime> InvoiceDate { get; set; }
@@ -23,6 +23,6 @@ namespace Time.Data.EntityModels.OrderLog
         public string UnitComment { get; set; }
         public bool Cancel { get; set; }
     
-        public virtual OrderLine OrderLine { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

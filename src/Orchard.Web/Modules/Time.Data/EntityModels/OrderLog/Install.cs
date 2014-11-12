@@ -16,12 +16,12 @@ namespace Time.Data.EntityModels.OrderLog
     {
         public Install()
         {
-            this.OrderLines = new HashSet<OrderLine>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int InstallId { get; set; }
         public string InstallName { get; set; }
     
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

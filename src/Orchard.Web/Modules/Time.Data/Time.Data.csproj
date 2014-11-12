@@ -127,6 +127,18 @@
     <Compile Include="EntityModels\Epicor\joboper.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Epicor\systask.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\systaskkill.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\systasklog.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\systaskparam.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Epicor\v_CustomersWithOpenOrderPartLines.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
@@ -139,13 +151,13 @@
     <Compile Include="EntityModels\OrderLog\Install.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\OrderLog\Installer.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\OrderLog\LiftModel.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\Order.cs">
-      <DependentUpon>OrderLogModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\OrderLog\OrderLine.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\OrderLineUnit.cs">
@@ -165,6 +177,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OrderLogModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderTran.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\Region.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
@@ -251,6 +266,7 @@
       <DependentUpon>TimeMfgModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderLog\Dealer.cs" />
+    <Compile Include="Models\OrderLog\Installer.cs" />
     <Compile Include="Models\OrderLog\Install.cs" />
     <Compile Include="Models\OrderLog\LiftModel.cs" />
     <Compile Include="Models\TimeMFG\LoadList.cs" />
@@ -258,7 +274,7 @@
     <Compile Include="Models\TimeMFG\LoadListJob.cs" />
     <Compile Include="Models\TimeMFG\LoadListJobStatus.cs" />
     <Compile Include="Models\OrderLog\Order.cs" />
-    <Compile Include="Models\OrderLog\OrderLine.cs" />
+    <Compile Include="Models\OrderLog\OrderTran.cs" />
     <Compile Include="Models\OrderLog\OrderLineUnit.cs" />
     <Compile Include="Models\OrderLog\Territory.cs" />
     <Compile Include="Models\TimeMFG\TicketEmployee.cs" />

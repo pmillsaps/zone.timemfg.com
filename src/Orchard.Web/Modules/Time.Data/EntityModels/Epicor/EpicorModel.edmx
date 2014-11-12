@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MfgSys803Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MfgSys803Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MfgSys803.dbo.imjoboper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="imjoboper">
@@ -501,6 +501,82 @@ warning 6002: The table/view 'MfgSys803.dbo.joboper' does not have a primary key
           <Property Name="usermapdata" Type="text" />
           <Property Name="roughcutsched" Type="tinyint" />
           <Property Name="schedcomment" Type="text" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.systask' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="systask">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="int" />
+          <Property Name="taskdescription" Type="varchar" MaxLength="50" />
+          <Property Name="tasktype" Type="varchar" MaxLength="20" />
+          <Property Name="startdate" Type="datetime" />
+          <Property Name="starttime" Type="int" />
+          <Property Name="enddate" Type="datetime" />
+          <Property Name="endtime" Type="int" />
+          <Property Name="submituser" Type="varchar" MaxLength="20" />
+          <Property Name="taskstatus" Type="varchar" MaxLength="20" />
+          <Property Name="company" Type="varchar" MaxLength="8" />
+          <Property Name="agentid" Type="varchar" MaxLength="20" />
+          <Property Name="agentschednum" Type="int" />
+          <Property Name="agenttasknum" Type="int" />
+          <Property Name="runprocedure" Type="varchar" MaxLength="200" />
+          <Property Name="initiatorsource" Type="varchar" MaxLength="8" />
+          <Property Name="activitymsg" Type="varchar" MaxLength="100" />
+          <Property Name="history" Type="tinyint" />
+          <Property Name="tasknote" Type="varchar" MaxLength="60" />
+          <Property Name="lastactivitydate" Type="datetime" />
+          <Property Name="lastactivitytime" Type="int" />
+          <Property Name="userpidinfo" Type="varchar" MaxLength="10" />
+          <Property Name="processid" Type="varchar" MaxLength="50" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.systaskkill' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="systaskkill">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="int" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.systasklog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="systasklog">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="int" />
+          <Property Name="entrynum" Type="int" />
+          <Property Name="entrydate" Type="datetime" />
+          <Property Name="entrytime" Type="int" />
+          <Property Name="iserror" Type="tinyint" />
+          <Property Name="msgtext" Type="text" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.systaskparam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="systaskparam">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="int" />
+          <Property Name="paramname" Type="varchar" MaxLength="100" />
+          <Property Name="paramlabel" Type="varchar" MaxLength="100" />
+          <Property Name="paramtype" Type="varchar" MaxLength="20" />
+          <Property Name="paramdatatype" Type="varchar" MaxLength="20" />
+          <Property Name="paramcharacter" Type="text" />
+          <Property Name="paramdate" Type="datetime" />
+          <Property Name="paramlogical" Type="tinyint" />
+          <Property Name="paraminteger" Type="int" />
+          <Property Name="paramdecimal" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="paramtoken" Type="varchar" MaxLength="20" />
           <Property Name="PROGRESS_RECID" Type="bigint" />
           <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -1045,6 +1121,70 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
     [joboper].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
     FROM [dbo].[joboper] AS [joboper]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="systask" EntityType="Self.systask" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [systask].[systasknum] AS [systasknum], 
+    [systask].[taskdescription] AS [taskdescription], 
+    [systask].[tasktype] AS [tasktype], 
+    [systask].[startdate] AS [startdate], 
+    [systask].[starttime] AS [starttime], 
+    [systask].[enddate] AS [enddate], 
+    [systask].[endtime] AS [endtime], 
+    [systask].[submituser] AS [submituser], 
+    [systask].[taskstatus] AS [taskstatus], 
+    [systask].[company] AS [company], 
+    [systask].[agentid] AS [agentid], 
+    [systask].[agentschednum] AS [agentschednum], 
+    [systask].[agenttasknum] AS [agenttasknum], 
+    [systask].[runprocedure] AS [runprocedure], 
+    [systask].[initiatorsource] AS [initiatorsource], 
+    [systask].[activitymsg] AS [activitymsg], 
+    [systask].[history] AS [history], 
+    [systask].[tasknote] AS [tasknote], 
+    [systask].[lastactivitydate] AS [lastactivitydate], 
+    [systask].[lastactivitytime] AS [lastactivitytime], 
+    [systask].[userpidinfo] AS [userpidinfo], 
+    [systask].[processid] AS [processid], 
+    [systask].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [systask].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[systask] AS [systask]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="systaskkill" EntityType="Self.systaskkill" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [systaskkill].[systasknum] AS [systasknum], 
+    [systaskkill].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [systaskkill].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[systaskkill] AS [systaskkill]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="systasklog" EntityType="Self.systasklog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [systasklog].[systasknum] AS [systasknum], 
+    [systasklog].[entrynum] AS [entrynum], 
+    [systasklog].[entrydate] AS [entrydate], 
+    [systasklog].[entrytime] AS [entrytime], 
+    [systasklog].[iserror] AS [iserror], 
+    [systasklog].[msgtext] AS [msgtext], 
+    [systasklog].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [systasklog].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[systasklog] AS [systasklog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="systaskparam" EntityType="Self.systaskparam" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [systaskparam].[systasknum] AS [systasknum], 
+    [systaskparam].[paramname] AS [paramname], 
+    [systaskparam].[paramlabel] AS [paramlabel], 
+    [systaskparam].[paramtype] AS [paramtype], 
+    [systaskparam].[paramdatatype] AS [paramdatatype], 
+    [systaskparam].[paramcharacter] AS [paramcharacter], 
+    [systaskparam].[paramdate] AS [paramdate], 
+    [systaskparam].[paramlogical] AS [paramlogical], 
+    [systaskparam].[paraminteger] AS [paraminteger], 
+    [systaskparam].[paramdecimal] AS [paramdecimal], 
+    [systaskparam].[paramtoken] AS [paramtoken], 
+    [systaskparam].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [systaskparam].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[systaskparam] AS [systaskparam]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="v_CustomersWithOpenOrderPartLines" EntityType="Self.v_CustomersWithOpenOrderPartLines" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [v_CustomersWithOpenOrderPartLines].[custnum] AS [custnum], 
@@ -1092,8 +1232,7 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
     FROM [dbo].[v_JobInformation] AS [v_JobInformation]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MfgSys803Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1644,7 +1783,79 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <EntitySet Name="jobopers" EntityType="Self.joboper" />
           <EntitySet Name="v_CustomersWithOpenOrderPartLines" EntityType="Self.v_CustomersWithOpenOrderPartLines" />
           <EntitySet Name="v_JobInformation" EntityType="Self.v_JobInformation" />
+          <EntitySet Name="systasks" EntityType="MfgSys803Model.systask" />
+          <EntitySet Name="systaskkills" EntityType="MfgSys803Model.systaskkill" />
+          <EntitySet Name="systasklogs" EntityType="MfgSys803Model.systasklog" />
+          <EntitySet Name="systaskparams" EntityType="MfgSys803Model.systaskparam" />
         </EntityContainer>
+        <EntityType Name="systask">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="Int32" />
+          <Property Name="taskdescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tasktype" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="startdate" Type="DateTime" Precision="3" />
+          <Property Name="starttime" Type="Int32" />
+          <Property Name="enddate" Type="DateTime" Precision="3" />
+          <Property Name="endtime" Type="Int32" />
+          <Property Name="submituser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="taskstatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="company" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="agentid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="agentschednum" Type="Int32" />
+          <Property Name="agenttasknum" Type="Int32" />
+          <Property Name="runprocedure" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="initiatorsource" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="activitymsg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="history" Type="Byte" />
+          <Property Name="tasknote" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="lastactivitydate" Type="DateTime" Precision="3" />
+          <Property Name="lastactivitytime" Type="Int32" />
+          <Property Name="userpidinfo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="processid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="systaskkill">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="Int32" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="systasklog">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="Int32" />
+          <Property Name="entrynum" Type="Int32" />
+          <Property Name="entrydate" Type="DateTime" Precision="3" />
+          <Property Name="entrytime" Type="Int32" />
+          <Property Name="iserror" Type="Byte" />
+          <Property Name="msgtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="systaskparam">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="systasknum" Type="Int32" />
+          <Property Name="paramname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="paramlabel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="paramtype" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="paramdatatype" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="paramcharacter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="paramdate" Type="DateTime" Precision="3" />
+          <Property Name="paramlogical" Type="Byte" />
+          <Property Name="paraminteger" Type="Int32" />
+          <Property Name="paramdecimal" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="paramtoken" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2192,6 +2403,78 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
                 <ScalarProperty Name="CustName" ColumnName="CustName" />
                 <ScalarProperty Name="ponum" ColumnName="ponum" />
                 <ScalarProperty Name="custid" ColumnName="custid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systasks">
+            <EntityTypeMapping TypeName="MfgSys803Model.systask">
+              <MappingFragment StoreEntitySet="systask">
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="processid" ColumnName="processid" />
+                <ScalarProperty Name="userpidinfo" ColumnName="userpidinfo" />
+                <ScalarProperty Name="lastactivitytime" ColumnName="lastactivitytime" />
+                <ScalarProperty Name="lastactivitydate" ColumnName="lastactivitydate" />
+                <ScalarProperty Name="tasknote" ColumnName="tasknote" />
+                <ScalarProperty Name="history" ColumnName="history" />
+                <ScalarProperty Name="activitymsg" ColumnName="activitymsg" />
+                <ScalarProperty Name="initiatorsource" ColumnName="initiatorsource" />
+                <ScalarProperty Name="runprocedure" ColumnName="runprocedure" />
+                <ScalarProperty Name="agenttasknum" ColumnName="agenttasknum" />
+                <ScalarProperty Name="agentschednum" ColumnName="agentschednum" />
+                <ScalarProperty Name="agentid" ColumnName="agentid" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="taskstatus" ColumnName="taskstatus" />
+                <ScalarProperty Name="submituser" ColumnName="submituser" />
+                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="tasktype" ColumnName="tasktype" />
+                <ScalarProperty Name="taskdescription" ColumnName="taskdescription" />
+                <ScalarProperty Name="systasknum" ColumnName="systasknum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systaskkills">
+            <EntityTypeMapping TypeName="MfgSys803Model.systaskkill">
+              <MappingFragment StoreEntitySet="systaskkill">
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="systasknum" ColumnName="systasknum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systasklogs">
+            <EntityTypeMapping TypeName="MfgSys803Model.systasklog">
+              <MappingFragment StoreEntitySet="systasklog">
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="msgtext" ColumnName="msgtext" />
+                <ScalarProperty Name="iserror" ColumnName="iserror" />
+                <ScalarProperty Name="entrytime" ColumnName="entrytime" />
+                <ScalarProperty Name="entrydate" ColumnName="entrydate" />
+                <ScalarProperty Name="entrynum" ColumnName="entrynum" />
+                <ScalarProperty Name="systasknum" ColumnName="systasknum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systaskparams">
+            <EntityTypeMapping TypeName="MfgSys803Model.systaskparam">
+              <MappingFragment StoreEntitySet="systaskparam">
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="paramtoken" ColumnName="paramtoken" />
+                <ScalarProperty Name="paramdecimal" ColumnName="paramdecimal" />
+                <ScalarProperty Name="paraminteger" ColumnName="paraminteger" />
+                <ScalarProperty Name="paramlogical" ColumnName="paramlogical" />
+                <ScalarProperty Name="paramdate" ColumnName="paramdate" />
+                <ScalarProperty Name="paramcharacter" ColumnName="paramcharacter" />
+                <ScalarProperty Name="paramdatatype" ColumnName="paramdatatype" />
+                <ScalarProperty Name="paramtype" ColumnName="paramtype" />
+                <ScalarProperty Name="paramlabel" ColumnName="paramlabel" />
+                <ScalarProperty Name="paramname" ColumnName="paramname" />
+                <ScalarProperty Name="systasknum" ColumnName="systasknum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

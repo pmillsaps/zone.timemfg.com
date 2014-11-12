@@ -8,13 +8,14 @@ namespace Time.OrderLog
     {
         public static readonly Permission ViewOrders = new Permission { Description = "View Orders", Name = "ViewOrders" };
         public static readonly Permission EditOrders = new Permission { Description = "Edit Orders", Name = "EditOrders" };
+        public static readonly Permission OrderLogReporting = new Permission { Description = "Order Log Reporting", Name = "OrderLogReporting" };
 
         public virtual Feature Feature { get; set; }
 
         public IEnumerable<Permission> GetPermissions()
         {
             return new[] {
-                ViewOrders, EditOrders
+                ViewOrders, EditOrders, OrderLogReporting
             };
         }
 
@@ -23,12 +24,8 @@ namespace Time.OrderLog
             return new[] {
                 new PermissionStereotype {
                     Name = "Administrator",
-                    Permissions = new[] {ViewOrders, EditOrders}
+                    Permissions = new[] {ViewOrders, EditOrders, OrderLogReporting}
                 },
-                new PermissionStereotype {
-                    Name = "Authenticated",
-                    Permissions = new[] {ViewOrders}
-                }
             };
         }
     }

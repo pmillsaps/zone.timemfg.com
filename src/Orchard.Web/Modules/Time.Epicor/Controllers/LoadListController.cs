@@ -1,5 +1,5 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
+﻿//using CrystalDecisions.CrystalReports.Engine;
+//using CrystalDecisions.Shared;
 using Orchard.Logging;
 //using EpicWeb.Helpers;
 //using EpicWeb.Logging;
@@ -23,6 +23,8 @@ using Orchard;
 using Orchard.Localization;
 using Time.Data.EntityModels.TimeMFG;
 using Time.Data.EntityModels.Epicor;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 //using VersaliftDataServices.EntityModels.Epicor;
 //using VersaliftDataServices.EntityModels.TimeMfg;
 //using VersaliftDataServices.Models;

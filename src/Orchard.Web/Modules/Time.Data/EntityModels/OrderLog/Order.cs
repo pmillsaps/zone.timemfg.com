@@ -16,17 +16,31 @@ namespace Time.Data.EntityModels.OrderLog
     {
         public Order()
         {
-            this.OrderLines = new HashSet<OrderLine>();
+            this.OrderLineUnits = new HashSet<OrderLineUnit>();
+            this.OrderTrans = new HashSet<OrderTran>();
         }
     
         public int OrderId { get; set; }
         public string PO { get; set; }
         public int DealerId { get; set; }
         public System.DateTime Date { get; set; }
+        public string Customer { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
         public int TerritoryId { get; set; }
+        public Nullable<int> InstallId { get; set; }
+        public Nullable<int> InstallerId { get; set; }
+        public bool Special { get; set; }
+        public bool Stock { get; set; }
+        public bool Demo { get; set; }
+        public bool RTG { get; set; }
     
         public virtual Dealer Dealer { get; set; }
+        public virtual Install Install { get; set; }
+        public virtual Installer Installer { get; set; }
         public virtual Territory Territory { get; set; }
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual ICollection<OrderLineUnit> OrderLineUnits { get; set; }
+        public virtual ICollection<OrderTran> OrderTrans { get; set; }
     }
 }

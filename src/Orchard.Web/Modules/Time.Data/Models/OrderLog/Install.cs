@@ -14,7 +14,7 @@ namespace Time.Data.EntityModels.OrderLog
 
     public class InstallMetadata
     {
-        [DisplayName("Install")]
+        [DisplayName("Install Type")]
         public string InstallName { get; set; }
     }
 }

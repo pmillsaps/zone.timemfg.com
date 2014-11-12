@@ -16,12 +16,12 @@ namespace Time.Data.EntityModels.OrderLog
     {
         public LiftModel()
         {
-            this.OrderLines = new HashSet<OrderLine>();
+            this.OrderTrans = new HashSet<OrderTran>();
         }
     
         public int LiftModelId { get; set; }
         public string LiftModelName { get; set; }
     
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual ICollection<OrderTran> OrderTrans { get; set; }
     }
 }

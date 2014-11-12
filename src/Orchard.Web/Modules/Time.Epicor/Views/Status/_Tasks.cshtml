@@ -1,0 +1,190 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Epicor.systask>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.systasknum)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.taskdescription)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.tasktype)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.startdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.starttime)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.enddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endtime)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.submituser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.taskstatus)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agentid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agentschednum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agenttasknum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.runprocedure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.initiatorsource)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.activitymsg)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.history)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.tasknote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastactivitydate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastactivitytime)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.userpidinfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.processid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROGRESS_RECID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROGRESS_RECID_IDENT_)
+            </th>
+            <th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.systasknum)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.taskdescription)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.tasktype)
+                </td>*@
+            <td>
+                @item.startdate.Value.ToShortDateString()
+                @*@Html.DisplayFor(modelItem => item.startdate)*@
+            </td>
+            <td>
+                @if (item.starttime != null)
+                {
+                    
+                    TimeSpan t = TimeSpan.FromSeconds((double)item.starttime);
+
+                    string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        t.Hours,
+                        t.Minutes,
+                        t.Seconds);
+
+                    <span>@answer</span>
+                }
+                @*@Html.DisplayFor(modelItem => item.starttime)*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.enddate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endtime)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.submituser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.taskstatus)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.agentid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.agentschednum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.agenttasknum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.runprocedure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.initiatorsource)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.activitymsg)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.history)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.tasknote)
+            </td>
+            <td>
+                @if (item.lastactivitydate != null)
+                { <span>@item.lastactivitydate.Value.ToShortDateString()</span> }
+
+                @*@Html.DisplayFor(modelItem => item.lastactivitydate)*@
+            </td>
+            <td>
+                @if (item.lastactivitytime != null && item.lastactivitytime != 0)
+                {
+                    TimeSpan t2 = TimeSpan.FromSeconds((double)item.lastactivitytime);
+
+                    string answer2 = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        t2.Hours,
+                        t2.Minutes,
+                        t2.Seconds);
+                    <span>@answer2</span>
+                }
+                    
+                @*@Html.DisplayFor(modelItem => item.lastactivitytime)*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.userpidinfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.processid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PROGRESS_RECID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PROGRESS_RECID_IDENT_)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+        </tr>
+    }
+
+</table>

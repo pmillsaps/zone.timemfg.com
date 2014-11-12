@@ -15,6 +15,9 @@ namespace Time.Data.EntityModels.OrderLog
     public class DealerMetadata
     {
         [DisplayName("Dealer")]
+        [Required]
         public string DealerName { get; set; }
+        [DisplayName("Territory")]
+        public int TerritoryId { get; set; }
     }
 }

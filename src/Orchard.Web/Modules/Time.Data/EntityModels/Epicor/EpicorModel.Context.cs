@@ -30,5 +30,9 @@ namespace Time.Data.EntityModels.Epicor
         public virtual DbSet<joboper> jobopers { get; set; }
         public virtual DbSet<v_CustomersWithOpenOrderPartLines> v_CustomersWithOpenOrderPartLines { get; set; }
         public virtual DbSet<v_JobInformation> v_JobInformation { get; set; }
+        public virtual DbSet<systask> systasks { get; set; }
+        public virtual DbSet<systaskkill> systaskkills { get; set; }
+        public virtual DbSet<systasklog> systasklogs { get; set; }
+        public virtual DbSet<systaskparam> systaskparams { get; set; }
     }
 }

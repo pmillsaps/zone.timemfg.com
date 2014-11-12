@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Epicor.systask>
+
+@{
+    ViewBag.Title = "Epicor Status";
+}
+<h2>@ViewBag.Title</h2>
+
+<h5>MRP Status: <strong>@ViewBag.MRPStatus</strong><br /></h5>
+<hr />
+<h3>Active Tasks</h3>
+
+@Html.Partial("_Tasks")
+
+<hr />
+@Html.Action("_Interim")
+
+

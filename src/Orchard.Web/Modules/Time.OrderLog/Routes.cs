@@ -19,21 +19,20 @@ namespace Time.OrderLog
                 new RouteDescriptor {
                     Priority = 5,
                      Route = new Route(
-                        "OrderLog/{action}/{id}",
+                        "OrderLog/{controller}/{action}/{id}",
                         new RouteValueDictionary {
                                                     {"area", "Time.OrderLog"},
-                                                    {"controller", "Home"},
+                                                    {"controller", "OrderLog"},
                                                     {"action", "Index"},
                                                     {"id", null}
                                                 },
+                        new RouteValueDictionary(),
                         new RouteValueDictionary {
-                                                    {"area", "Time.OrderLog"},
-                                                    {"controller", "Home"},
-                                                },
-                        new RouteValueDictionary {
-                                                    {"area", "Time.OrderLog"}
-                                                },
-                        new MvcRouteHandler())}};
+                            {"area", "Time.OrderLog"}
+                        },
+                        new MvcRouteHandler())
+                }
+            };
         }
     }
 }

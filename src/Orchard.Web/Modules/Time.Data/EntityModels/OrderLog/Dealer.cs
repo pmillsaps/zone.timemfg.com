@@ -21,7 +21,9 @@ namespace Time.Data.EntityModels.OrderLog
     
         public int DealerId { get; set; }
         public string DealerName { get; set; }
+        public int TerritoryId { get; set; }
     
+        public virtual Territory Territory { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
