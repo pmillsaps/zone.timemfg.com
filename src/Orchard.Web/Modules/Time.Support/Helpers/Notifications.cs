@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using Time.Data.EntityModels.TimeMFG;
+using Time.Data.Models.TimeMFG;
 
 namespace Time.Support.Helpers
 {
@@ -19,6 +20,13 @@ namespace Time.Support.Helpers
 
     public abstract class EmailNotifications : INotifications
     {
+        private SettingRepository sr;
+
+        public EmailNotifications()
+        {
+            sr = new SettingRepository();
+        }
+
         #region Properties
 
         private string _TemplatePath;
@@ -28,7 +36,12 @@ namespace Time.Support.Helpers
             get
             {
                 if (String.IsNullOrEmpty(_TemplatePath))
-                    throw new Exception("Template Path was not set");
+                {
+                    _TemplatePath = sr.GetSettings("TemplatePath");
+                    if (String.IsNullOrEmpty(_TemplatePath))
+                        throw new Exception("Template Path was not set");
+                }
+                    
                 return _TemplatePath;
             }
             set
@@ -87,8 +100,11 @@ namespace Time.Support.Helpers
         internal EmailNotifications(TicketProject ticket, string additionalBody = "")
         {
             this.tp = ticket;
-            this._Server = ConfigurationManager.AppSettings["emailServer"];
+
+            //this._Server = ConfigurationManager.AppSettings["emailServer"];
+            this._Server = sr.GetSettings("EmailServer");
             this._SentFrom = "intranet-support@timemfg.com";
+            this._SentFrom = sr.GetSettings("MailFrom");
             this._HtmlBody = string.Empty;
             this.SendTo = new List<string>();
             this.BCCTo = new List<string>();
@@ -173,7 +189,8 @@ namespace Time.Support.Helpers
 
         public void AddEmailSendToBcc(string e)
         {
-            var sendTo = new List<string>(ConfigurationManager.AppSettings["emailSendTo"].Split(','));
+            //var sendTo = new List<string>(ConfigurationManager.AppSettings["emailSendTo"].Split(','));
+            var sendTo = new List<string>(sr.GetSettings("EmailBCC").Split(','));
             // Section for CC'ing ITAdmin group
             foreach (var email in sendTo)
             {
@@ -188,8 +205,8 @@ namespace Time.Support.Helpers
 
         private void BuildEmailBody()
         {
-            var header = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\NotificationHeader.htm");
-            var footer = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\NotificationFooter.htm");
+            var header = HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationHeader.htm"));
+            var footer = HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationFooter.htm"));
             string h, f;
             
             using (var path = new StreamReader(header))
@@ -214,7 +231,7 @@ namespace Time.Support.Helpers
                 var blah = path.ReadToEnd();
                 this._HtmlBody += blah
                     .Replace("[ticketnumber]", tp.TicketID.ToString())
-                    .Replace("[ticketurl]", String.Format("http://my.timemfg.com/support/info/{0}", tp.TicketID))
+                    .Replace("[ticketurl]", String.Format("http://zone.timemfg.com/Support/Ticket/Info/{0}", tp.TicketID))
                     .Replace("[tickettitle]", tp.Title)
                     .Replace("[ticketdescription]", tp.Description)
                     .Replace("[ticketapprovalcode]", tp.ApprovalCode)

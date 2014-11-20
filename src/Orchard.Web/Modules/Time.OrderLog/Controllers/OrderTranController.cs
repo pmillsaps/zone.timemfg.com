@@ -96,6 +96,9 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.EditOrders, T("You Do Not Have Permission to Edit")))
                 return new HttpUnauthorizedResult();
+            if (ordertran.NewQty < 0) ModelState.AddModelError("NewQty", "Negative Quantities are Not Allowed");
+            if (ordertran.CancelQty < 0) ModelState.AddModelError("CancelQty", "Negative Quantities are Not Allowed");
+            if (ordertran.NewQty == 0 && ordertran.CancelQty == 0) ModelState.AddModelError("", "At Least One of the Quantities Must Be Used");
             if (ModelState.IsValid)
             {
                 if (ordertran.AsOfDate == null) ordertran.AsOfDate = ordertran.Date;

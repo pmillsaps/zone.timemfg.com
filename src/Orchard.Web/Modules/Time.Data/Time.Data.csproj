@@ -127,13 +127,13 @@
     <Compile Include="EntityModels\Epicor\joboper.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Epicor\sysagentsched.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\sysagenttask.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Epicor\systask.cs">
-      <DependentUpon>EpicorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Epicor\systaskkill.cs">
-      <DependentUpon>EpicorModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Epicor\systasklog.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Epicor\systaskparam.cs">
@@ -211,6 +211,9 @@
     <Compile Include="EntityModels\TimeMFG\LoadListJobStatu.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\Setting.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\TicketAttachment.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
@@ -277,6 +280,8 @@
     <Compile Include="Models\OrderLog\OrderTran.cs" />
     <Compile Include="Models\OrderLog\OrderLineUnit.cs" />
     <Compile Include="Models\OrderLog\Territory.cs" />
+    <Compile Include="Models\TimeMFG\Setting.cs" />
+    <Compile Include="Models\TimeMFG\SettingRepository.cs" />
     <Compile Include="Models\TimeMFG\TicketEmployee.cs" />
     <Compile Include="Models\TimeMFG\TicketProject.cs" />
     <Compile Include="Models\TimeMFG\TicketTask.cs" />

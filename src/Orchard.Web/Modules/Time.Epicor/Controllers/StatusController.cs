@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Epicor;
 using Time.Epicor.ViewModels;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Time.Epicor.Controllers
 {
@@ -40,8 +44,9 @@ namespace Time.Epicor.Controllers
 
             string returnMessage = "Idle";
             var qry = db.systasks
-                .Where(x => x.taskstatus == "ACTIVE" && x.enddate == null && x.endtime == 0)
+                .Where(x => x.taskstatus.ToUpper() == "ACTIVE" && x.enddate == null && x.endtime == 0)
                 .OrderByDescending(x => x.systasknum);
+
             if (qry.Where(x => x.taskdescription == "Process MRP").Count() > 0)
             {
                 var record = qry.First();
@@ -50,9 +55,22 @@ namespace Time.Epicor.Controllers
                 returnMessage = String.Format("Running! - MRP started: {0:d} @ {1} by {2}: Status-{3}", record.startdate, starttime, record.submituser, record.activitymsg);
             }
 
+            //var vm = new EpicorStatusViewModel();
+            
+            //var tasks = db.sysagenttasks
+            //    .Join(db.sysagentscheds,
+            //        c => c.agentschednum,
+            //        t => t.agentschednum,
+            //        (c, t) => new myTask
+            //        {
+            //            sysagenttask = c,
+            //            tasksched = t
+            //        }
+            //    );
+            //vm.ScheduledTasks = tasks;
             ViewBag.MRPStatus = returnMessage;
 
-            return View(qry);
+            return View();
         }
 
         public ActionResult _Interim()
@@ -62,6 +80,28 @@ namespace Time.Epicor.Controllers
                 ImJobOper = db.imjobopers.ToList(),
                 ImPartBin = db.impartbins.ToList()
             };
+
+            return PartialView(vm);
+        }
+
+        public ActionResult _Tasks()
+        {
+            var qry = db.systasks
+               .Where(x => x.taskstatus.ToUpper() == "ACTIVE" && x.enddate == null && x.endtime == 0)
+               .OrderByDescending(x => x.systasknum);
+
+            return PartialView(qry);
+        }
+
+        public ActionResult _SchedTasks()
+        {
+            var qry = db.sysagenttasks;
+
+            var vm = new List<TaskVM>();
+            Parallel.ForEach(qry, item =>
+            {
+                vm.Add(new TaskVM { task = item, tasksched = db.sysagentscheds.FirstOrDefault(x => x.agentschednum == item.agentschednum) });
+            });
 
             return PartialView(vm);
         }

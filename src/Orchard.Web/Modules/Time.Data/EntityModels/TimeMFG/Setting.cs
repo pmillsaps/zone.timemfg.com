@@ -7,15 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Data.EntityModels.Epicor
+namespace Time.Data.EntityModels.TimeMFG
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class systaskkill
+    public partial class Setting
     {
-        public Nullable<int> systasknum { get; set; }
-        public Nullable<long> PROGRESS_RECID { get; set; }
-        public long PROGRESS_RECID_IDENT_ { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Value { get; set; }
+        public bool String { get; set; }
+        public bool Int { get; set; }
     }
 }

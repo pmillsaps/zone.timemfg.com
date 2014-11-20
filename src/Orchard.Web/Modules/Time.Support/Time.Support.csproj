@@ -126,6 +126,11 @@
     <Content Include="Views\TicketTasks\Index.cshtml" />
     <Content Include="Views\Ticket\EditTask.cshtml" />
     <Content Include="Views\EditorTemplates\SupportSettingsPart.cshtml" />
+    <Content Include="Views\AdminSupport\Create.cshtml" />
+    <Content Include="Views\AdminSupport\Delete.cshtml" />
+    <Content Include="Views\AdminSupport\Details.cshtml" />
+    <Content Include="Views\AdminSupport\Edit.cshtml" />
+    <Content Include="Views\AdminSupport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -143,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\AdminSupportController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\TicketProjectsController.cs" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Time.Data.EntityModels.Epicor.systask>
+﻿@*@model Time.Epicor.ViewModels.EpicorStatusViewModel*@
 
 @{
     ViewBag.Title = "Epicor Status";
@@ -9,9 +9,11 @@
 <hr />
 <h3>Active Tasks</h3>
 
-@Html.Partial("_Tasks")
+@Html.Action("_Tasks")
 
 <hr />
 @Html.Action("_Interim")
 
-
+<hr />
+<h3>Scheduled Tasks</h3>
+@Html.Action("_SchedTasks")

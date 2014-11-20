@@ -259,11 +259,14 @@ namespace Time.Support.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (ticketProject.PriorityID > 4) ticketProject.PriorityID = 4; // highest a new ticket can be set is 4=High
+                ticketProject.Status = 1;   // Set Ticket Status to 1=Waiting Supervisor Approval
                 ticketProject.RequestedDate = DateTime.Now;
                 ticketProject.RequestedBy = HttpContext.User.Identity.Name;
                 ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
                 _db.TicketProjects.Add(ticketProject);
                 _db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 

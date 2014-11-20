@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TimeMFGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TimeMFGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LoadList">
           <Key>
             <PropertyRef Name="Id" />
@@ -105,6 +105,17 @@
           <Property Name="OpCode" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="OpComplete" Type="tinyint" Nullable="false" />
           <Property Name="IgnoreFlag" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="String" Type="bit" Nullable="false" />
+          <Property Name="Int" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketAttachments">
           <Key>
@@ -542,6 +553,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySet Name="LoadListJobComment" EntityType="Self.LoadListJobComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadListJobStatus" EntityType="Self.LoadListJobStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketAttachments" EntityType="Self.TicketAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketCategories" EntityType="Self.TicketCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketDepartment" EntityType="Self.TicketDepartment" Schema="dbo" store:Type="Tables" />
@@ -661,8 +673,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
             <End Role="TicketTasks" EntitySet="TicketTasks" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TimeMFGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1309,7 +1320,19 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
             <End Role="LoadList" EntitySet="LoadLists" />
             <End Role="LoadListDistributors" EntitySet="LoadListDistributors" />
           </AssociationSet>
+          <EntitySet Name="Settings" EntityType="TimeMFGModel.Setting" />
         </EntityContainer>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="String" Type="Boolean" Nullable="false" />
+          <Property Name="Int" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1590,6 +1613,18 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
               <ScalarProperty Name="Id" ColumnName="DistributorId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="TimeMFGModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Int" ColumnName="Int" />
+                <ScalarProperty Name="String" ColumnName="String" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

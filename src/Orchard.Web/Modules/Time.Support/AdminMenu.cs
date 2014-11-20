@@ -20,7 +20,7 @@ namespace Time.Support
 			builder
 				.Add(T("Settings"), menu => menu
 					.Add(T("Time.Support"), "1", item =>
-                        item.Action("Settings", "Support", new { area = "Time.Support" }).Permission(StandardPermissions.SiteOwner)));
+                        item.Action("Index", "AdminSupport", new { area = "Time.Support" }).Permission(StandardPermissions.SiteOwner)));
 		}
 	}
 }

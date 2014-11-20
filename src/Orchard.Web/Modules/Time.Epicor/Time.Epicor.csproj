@@ -168,6 +168,7 @@
     <Content Include="Views\Status\_Interim.cshtml" />
     <Content Include="Views\Status\_imjoboper.cshtml" />
     <Content Include="Views\Status\_impartbin.cshtml" />
+    <Content Include="Views\Status\_SchedTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -205,6 +206,7 @@
     <Compile Include="ViewModels\IMViewModel.cs" />
     <Compile Include="ViewModels\LoadListView.cs" />
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
+    <Compile Include="ViewModels\TaskVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Reports\" />

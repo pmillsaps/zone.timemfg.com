@@ -505,6 +505,64 @@ warning 6002: The table/view 'MfgSys803.dbo.joboper' does not have a primary key
           <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.sysagentsched' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sysagentsched">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="agentid" Type="varchar" MaxLength="20" />
+          <Property Name="agentschednum" Type="int" />
+          <Property Name="scheddesc" Type="varchar" MaxLength="50" />
+          <Property Name="schedtype" Type="varchar" MaxLength="8" />
+          <Property Name="nextrundate" Type="datetime" />
+          <Property Name="nextruntime" Type="int" />
+          <Property Name="recurrences" Type="int" />
+          <Property Name="effectivedate" Type="datetime" />
+          <Property Name="monthlyoption" Type="varchar" MaxLength="8" />
+          <Property Name="dayofmonth" Type="int" />
+          <Property Name="weekofmonth" Type="varchar" MaxLength="8" />
+          <Property Name="dayofweek" Type="int" />
+          <Property Name="everynweeks" Type="int" />
+          <Property Name="lastrundate" Type="datetime" />
+          <Property Name="lastruntime" Type="int" />
+          <Property Name="mondays" Type="tinyint" />
+          <Property Name="tuesdays" Type="tinyint" />
+          <Property Name="wednesdays" Type="tinyint" />
+          <Property Name="thursdays" Type="tinyint" />
+          <Property Name="fridays" Type="tinyint" />
+          <Property Name="saturdays" Type="tinyint" />
+          <Property Name="sundays" Type="tinyint" />
+          <Property Name="enabled" Type="tinyint" />
+          <Property Name="appsrvconnectionid" Type="varchar" MaxLength="256" />
+          <Property Name="intervaltime" Type="int" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.sysagenttask' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sysagenttask">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="agentid" Type="varchar" MaxLength="20" />
+          <Property Name="agentschednum" Type="int" />
+          <Property Name="agenttasknum" Type="int" />
+          <Property Name="taskdesc" Type="varchar" MaxLength="50" />
+          <Property Name="tasktype" Type="varchar" MaxLength="8" />
+          <Property Name="runprocedure" Type="varchar" MaxLength="200" />
+          <Property Name="runmethod" Type="varchar" MaxLength="30" />
+          <Property Name="submitdate" Type="datetime" />
+          <Property Name="submituser" Type="varchar" MaxLength="20" />
+          <Property Name="submittime" Type="int" />
+          <Property Name="parammaintprogram" Type="varchar" MaxLength="50" />
+          <Property Name="company" Type="varchar" MaxLength="8" />
+          <Property Name="tasknote" Type="varchar" MaxLength="60" />
+          <Property Name="processid" Type="varchar" MaxLength="50" />
+          <Property Name="processtasknum" Type="int" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'MfgSys803.dbo.systask' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="systask">
           <Key>
@@ -532,31 +590,6 @@ warning 6002: The table/view 'MfgSys803.dbo.systask' does not have a primary key
           <Property Name="lastactivitytime" Type="int" />
           <Property Name="userpidinfo" Type="varchar" MaxLength="10" />
           <Property Name="processid" Type="varchar" MaxLength="50" />
-          <Property Name="PROGRESS_RECID" Type="bigint" />
-          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MfgSys803.dbo.systaskkill' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="systaskkill">
-          <Key>
-            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
-          </Key>
-          <Property Name="systasknum" Type="int" />
-          <Property Name="PROGRESS_RECID" Type="bigint" />
-          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MfgSys803.dbo.systasklog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="systasklog">
-          <Key>
-            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
-          </Key>
-          <Property Name="systasknum" Type="int" />
-          <Property Name="entrynum" Type="int" />
-          <Property Name="entrydate" Type="datetime" />
-          <Property Name="entrytime" Type="int" />
-          <Property Name="iserror" Type="tinyint" />
-          <Property Name="msgtext" Type="text" />
           <Property Name="PROGRESS_RECID" Type="bigint" />
           <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -1121,6 +1154,58 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
     [joboper].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
     FROM [dbo].[joboper] AS [joboper]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="sysagentsched" EntityType="Self.sysagentsched" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sysagentsched].[agentid] AS [agentid], 
+    [sysagentsched].[agentschednum] AS [agentschednum], 
+    [sysagentsched].[scheddesc] AS [scheddesc], 
+    [sysagentsched].[schedtype] AS [schedtype], 
+    [sysagentsched].[nextrundate] AS [nextrundate], 
+    [sysagentsched].[nextruntime] AS [nextruntime], 
+    [sysagentsched].[recurrences] AS [recurrences], 
+    [sysagentsched].[effectivedate] AS [effectivedate], 
+    [sysagentsched].[monthlyoption] AS [monthlyoption], 
+    [sysagentsched].[dayofmonth] AS [dayofmonth], 
+    [sysagentsched].[weekofmonth] AS [weekofmonth], 
+    [sysagentsched].[dayofweek] AS [dayofweek], 
+    [sysagentsched].[everynweeks] AS [everynweeks], 
+    [sysagentsched].[lastrundate] AS [lastrundate], 
+    [sysagentsched].[lastruntime] AS [lastruntime], 
+    [sysagentsched].[mondays] AS [mondays], 
+    [sysagentsched].[tuesdays] AS [tuesdays], 
+    [sysagentsched].[wednesdays] AS [wednesdays], 
+    [sysagentsched].[thursdays] AS [thursdays], 
+    [sysagentsched].[fridays] AS [fridays], 
+    [sysagentsched].[saturdays] AS [saturdays], 
+    [sysagentsched].[sundays] AS [sundays], 
+    [sysagentsched].[enabled] AS [enabled], 
+    [sysagentsched].[appsrvconnectionid] AS [appsrvconnectionid], 
+    [sysagentsched].[intervaltime] AS [intervaltime], 
+    [sysagentsched].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [sysagentsched].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[sysagentsched] AS [sysagentsched]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sysagenttask" EntityType="Self.sysagenttask" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sysagenttask].[agentid] AS [agentid], 
+    [sysagenttask].[agentschednum] AS [agentschednum], 
+    [sysagenttask].[agenttasknum] AS [agenttasknum], 
+    [sysagenttask].[taskdesc] AS [taskdesc], 
+    [sysagenttask].[tasktype] AS [tasktype], 
+    [sysagenttask].[runprocedure] AS [runprocedure], 
+    [sysagenttask].[runmethod] AS [runmethod], 
+    [sysagenttask].[submitdate] AS [submitdate], 
+    [sysagenttask].[submituser] AS [submituser], 
+    [sysagenttask].[submittime] AS [submittime], 
+    [sysagenttask].[parammaintprogram] AS [parammaintprogram], 
+    [sysagenttask].[company] AS [company], 
+    [sysagenttask].[tasknote] AS [tasknote], 
+    [sysagenttask].[processid] AS [processid], 
+    [sysagenttask].[processtasknum] AS [processtasknum], 
+    [sysagenttask].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [sysagenttask].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[sysagenttask] AS [sysagenttask]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="systask" EntityType="Self.systask" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [systask].[systasknum] AS [systasknum], 
@@ -1148,25 +1233,6 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
     [systask].[PROGRESS_RECID] AS [PROGRESS_RECID], 
     [systask].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
     FROM [dbo].[systask] AS [systask]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="systaskkill" EntityType="Self.systaskkill" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [systaskkill].[systasknum] AS [systasknum], 
-    [systaskkill].[PROGRESS_RECID] AS [PROGRESS_RECID], 
-    [systaskkill].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
-    FROM [dbo].[systaskkill] AS [systaskkill]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="systasklog" EntityType="Self.systasklog" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [systasklog].[systasknum] AS [systasknum], 
-    [systasklog].[entrynum] AS [entrynum], 
-    [systasklog].[entrydate] AS [entrydate], 
-    [systasklog].[entrytime] AS [entrytime], 
-    [systasklog].[iserror] AS [iserror], 
-    [systasklog].[msgtext] AS [msgtext], 
-    [systasklog].[PROGRESS_RECID] AS [PROGRESS_RECID], 
-    [systasklog].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
-    FROM [dbo].[systasklog] AS [systasklog]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="systaskparam" EntityType="Self.systaskparam" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1784,9 +1850,9 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <EntitySet Name="v_CustomersWithOpenOrderPartLines" EntityType="Self.v_CustomersWithOpenOrderPartLines" />
           <EntitySet Name="v_JobInformation" EntityType="Self.v_JobInformation" />
           <EntitySet Name="systasks" EntityType="MfgSys803Model.systask" />
-          <EntitySet Name="systaskkills" EntityType="MfgSys803Model.systaskkill" />
-          <EntitySet Name="systasklogs" EntityType="MfgSys803Model.systasklog" />
           <EntitySet Name="systaskparams" EntityType="MfgSys803Model.systaskparam" />
+          <EntitySet Name="sysagentscheds" EntityType="MfgSys803Model.sysagentsched" />
+          <EntitySet Name="sysagenttasks" EntityType="MfgSys803Model.sysagenttask" />
         </EntityContainer>
         <EntityType Name="systask">
           <Key>
@@ -1817,27 +1883,6 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <Property Name="PROGRESS_RECID" Type="Int64" />
           <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
-        <EntityType Name="systaskkill">
-          <Key>
-            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
-          </Key>
-          <Property Name="systasknum" Type="Int32" />
-          <Property Name="PROGRESS_RECID" Type="Int64" />
-          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityType Name="systasklog">
-          <Key>
-            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
-          </Key>
-          <Property Name="systasknum" Type="Int32" />
-          <Property Name="entrynum" Type="Int32" />
-          <Property Name="entrydate" Type="DateTime" Precision="3" />
-          <Property Name="entrytime" Type="Int32" />
-          <Property Name="iserror" Type="Byte" />
-          <Property Name="msgtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PROGRESS_RECID" Type="Int64" />
-          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
         <EntityType Name="systaskparam">
           <Key>
             <PropertyRef Name="PROGRESS_RECID_IDENT_" />
@@ -1853,6 +1898,60 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <Property Name="paraminteger" Type="Int32" />
           <Property Name="paramdecimal" Type="Decimal" Precision="18" Scale="5" />
           <Property Name="paramtoken" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="sysagentsched">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="agentid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="agentschednum" Type="Int32" />
+          <Property Name="scheddesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="schedtype" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="nextrundate" Type="DateTime" Precision="3" />
+          <Property Name="nextruntime" Type="Int32" />
+          <Property Name="recurrences" Type="Int32" />
+          <Property Name="effectivedate" Type="DateTime" Precision="3" />
+          <Property Name="monthlyoption" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="dayofmonth" Type="Int32" />
+          <Property Name="weekofmonth" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="dayofweek" Type="Int32" />
+          <Property Name="everynweeks" Type="Int32" />
+          <Property Name="lastrundate" Type="DateTime" Precision="3" />
+          <Property Name="lastruntime" Type="Int32" />
+          <Property Name="mondays" Type="Byte" />
+          <Property Name="tuesdays" Type="Byte" />
+          <Property Name="wednesdays" Type="Byte" />
+          <Property Name="thursdays" Type="Byte" />
+          <Property Name="fridays" Type="Byte" />
+          <Property Name="saturdays" Type="Byte" />
+          <Property Name="sundays" Type="Byte" />
+          <Property Name="enabled" Type="Byte" />
+          <Property Name="appsrvconnectionid" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="intervaltime" Type="Int32" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="sysagenttask">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="agentid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="agentschednum" Type="Int32" />
+          <Property Name="agenttasknum" Type="Int32" />
+          <Property Name="taskdesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tasktype" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="runprocedure" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="runmethod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="submitdate" Type="DateTime" Precision="3" />
+          <Property Name="submituser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="submittime" Type="Int32" />
+          <Property Name="parammaintprogram" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="company" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="tasknote" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="processid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="processtasknum" Type="Int32" />
           <Property Name="PROGRESS_RECID" Type="Int64" />
           <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
@@ -2436,29 +2535,6 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="systaskkills">
-            <EntityTypeMapping TypeName="MfgSys803Model.systaskkill">
-              <MappingFragment StoreEntitySet="systaskkill">
-                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
-                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
-                <ScalarProperty Name="systasknum" ColumnName="systasknum" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="systasklogs">
-            <EntityTypeMapping TypeName="MfgSys803Model.systasklog">
-              <MappingFragment StoreEntitySet="systasklog">
-                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
-                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
-                <ScalarProperty Name="msgtext" ColumnName="msgtext" />
-                <ScalarProperty Name="iserror" ColumnName="iserror" />
-                <ScalarProperty Name="entrytime" ColumnName="entrytime" />
-                <ScalarProperty Name="entrydate" ColumnName="entrydate" />
-                <ScalarProperty Name="entrynum" ColumnName="entrynum" />
-                <ScalarProperty Name="systasknum" ColumnName="systasknum" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="systaskparams">
             <EntityTypeMapping TypeName="MfgSys803Model.systaskparam">
               <MappingFragment StoreEntitySet="systaskparam">
@@ -2475,6 +2551,62 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
                 <ScalarProperty Name="paramlabel" ColumnName="paramlabel" />
                 <ScalarProperty Name="paramname" ColumnName="paramname" />
                 <ScalarProperty Name="systasknum" ColumnName="systasknum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysagentscheds">
+            <EntityTypeMapping TypeName="MfgSys803Model.sysagentsched">
+              <MappingFragment StoreEntitySet="sysagentsched">
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="intervaltime" ColumnName="intervaltime" />
+                <ScalarProperty Name="appsrvconnectionid" ColumnName="appsrvconnectionid" />
+                <ScalarProperty Name="enabled" ColumnName="enabled" />
+                <ScalarProperty Name="sundays" ColumnName="sundays" />
+                <ScalarProperty Name="saturdays" ColumnName="saturdays" />
+                <ScalarProperty Name="fridays" ColumnName="fridays" />
+                <ScalarProperty Name="thursdays" ColumnName="thursdays" />
+                <ScalarProperty Name="wednesdays" ColumnName="wednesdays" />
+                <ScalarProperty Name="tuesdays" ColumnName="tuesdays" />
+                <ScalarProperty Name="mondays" ColumnName="mondays" />
+                <ScalarProperty Name="lastruntime" ColumnName="lastruntime" />
+                <ScalarProperty Name="lastrundate" ColumnName="lastrundate" />
+                <ScalarProperty Name="everynweeks" ColumnName="everynweeks" />
+                <ScalarProperty Name="dayofweek" ColumnName="dayofweek" />
+                <ScalarProperty Name="weekofmonth" ColumnName="weekofmonth" />
+                <ScalarProperty Name="dayofmonth" ColumnName="dayofmonth" />
+                <ScalarProperty Name="monthlyoption" ColumnName="monthlyoption" />
+                <ScalarProperty Name="effectivedate" ColumnName="effectivedate" />
+                <ScalarProperty Name="recurrences" ColumnName="recurrences" />
+                <ScalarProperty Name="nextruntime" ColumnName="nextruntime" />
+                <ScalarProperty Name="nextrundate" ColumnName="nextrundate" />
+                <ScalarProperty Name="schedtype" ColumnName="schedtype" />
+                <ScalarProperty Name="scheddesc" ColumnName="scheddesc" />
+                <ScalarProperty Name="agentschednum" ColumnName="agentschednum" />
+                <ScalarProperty Name="agentid" ColumnName="agentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysagenttasks">
+            <EntityTypeMapping TypeName="MfgSys803Model.sysagenttask">
+              <MappingFragment StoreEntitySet="sysagenttask">
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="processtasknum" ColumnName="processtasknum" />
+                <ScalarProperty Name="processid" ColumnName="processid" />
+                <ScalarProperty Name="tasknote" ColumnName="tasknote" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="parammaintprogram" ColumnName="parammaintprogram" />
+                <ScalarProperty Name="submittime" ColumnName="submittime" />
+                <ScalarProperty Name="submituser" ColumnName="submituser" />
+                <ScalarProperty Name="submitdate" ColumnName="submitdate" />
+                <ScalarProperty Name="runmethod" ColumnName="runmethod" />
+                <ScalarProperty Name="runprocedure" ColumnName="runprocedure" />
+                <ScalarProperty Name="tasktype" ColumnName="tasktype" />
+                <ScalarProperty Name="taskdesc" ColumnName="taskdesc" />
+                <ScalarProperty Name="agenttasknum" ColumnName="agenttasknum" />
+                <ScalarProperty Name="agentschednum" ColumnName="agentschednum" />
+                <ScalarProperty Name="agentid" ColumnName="agentid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
