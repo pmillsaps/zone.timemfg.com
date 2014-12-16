@@ -197,6 +197,7 @@ namespace Time.OrderLog.Controllers
             int year = DateTime.Now.Year;
             if (model.StartDate == null) model.StartDate = new DateTime(year, 1, 1);
             if (model.EndDate == null) model.EndDate = new DateTime(year, 12, 31);
+            model.EndDate = model.EndDate.Value.Date.AddDays(1).AddSeconds(-1);
             return model;
         }
 
@@ -205,7 +206,10 @@ namespace Time.OrderLog.Controllers
             var qry = db.OrderTrans.AsQueryable();
 
             if (model.StartDate != null) qry = qry.Where(x => x.AsOfDate >= model.StartDate);
-            if (model.EndDate != null) qry = qry.Where(x => x.AsOfDate <= model.EndDate);
+            if (model.EndDate != null) {
+                model.EndDate = model.EndDate.Value.Date.AddDays(1).AddSeconds(-1);
+                qry = qry.Where(x => x.AsOfDate < model.EndDate); 
+            }
             if (model.DealerId != null) qry = qry.Where(x => x.Order.DealerId == model.DealerId);
             if (model.RegionId != null) qry = qry.Where(x => x.Order.Territory.RegionId == model.RegionId);
             if (model.TerritoryId != null) qry = qry.Where(x => x.Order.TerritoryId == model.TerritoryId);
