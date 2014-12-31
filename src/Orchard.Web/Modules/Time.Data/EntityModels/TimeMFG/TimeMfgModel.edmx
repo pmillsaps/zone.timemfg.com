@@ -223,6 +223,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketDivision' does not have a primar
           <Property Name="TicketSequence" Type="int" />
           <Property Name="CompletionDate" Type="datetime" />
           <Property Name="ApprovalCode" Type="varchar" MaxLength="50" />
+          <Property Name="Focused" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -272,6 +273,13 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <Property Name="Completed" Type="bit" Nullable="false" />
           <Property Name="CompletionDate" Type="datetime" />
           <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TicketVisibility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_LoadList_Distributor_LoadList">
           <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
@@ -565,6 +573,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySet Name="TicketStatuses" EntityType="Self.TicketStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketStatusHistory" EntityType="Self.TicketStatusHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketTasks" EntityType="Self.TicketTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketVisibility" EntityType="Self.TicketVisibility" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketDivision" EntityType="Self.TicketDivision" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TicketDivision].[DivisionID] AS [DivisionID], 
@@ -903,6 +912,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <NavigationProperty Name="TicketStatus" Relationship="Self.FK_TicketProjects_TicketStatuses" FromRole="TicketProjects" ToRole="TicketStatuses" />
           <NavigationProperty Name="TicketStatusHistories" Relationship="Self.FK_TicketStatusHistory_TicketProjects" FromRole="TicketProjects" ToRole="TicketStatusHistory" />
           <NavigationProperty Name="TicketTasks" Relationship="Self.FK_TicketTasks_TicketProjects" FromRole="TicketProjects" ToRole="TicketTasks" />
+          <Property Name="Focused" Type="Boolean" />
         </EntityType>
         <EntityType Name="TicketStatus">
           <Key>
@@ -1321,6 +1331,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
             <End Role="LoadListDistributors" EntitySet="LoadListDistributors" />
           </AssociationSet>
           <EntitySet Name="Settings" EntityType="TimeMFGModel.Setting" />
+          <EntitySet Name="TicketVisibilities" EntityType="TimeMFGModel.TicketVisibility" />
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -1332,6 +1343,13 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="String" Type="Boolean" Nullable="false" />
           <Property Name="Int" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketVisibility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1522,6 +1540,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySetMapping Name="TicketProjects">
             <EntityTypeMapping TypeName="TimeMFGModel.TicketProject">
               <MappingFragment StoreEntitySet="TicketProjects">
+                <ScalarProperty Name="Focused" ColumnName="Focused" />
                 <ScalarProperty Name="TicketID" ColumnName="TicketID" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
@@ -1620,6 +1639,14 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
                 <ScalarProperty Name="String" ColumnName="String" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketVisibilities">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketVisibility">
+              <MappingFragment StoreEntitySet="TicketVisibility">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

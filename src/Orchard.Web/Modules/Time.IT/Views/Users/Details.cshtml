@@ -1,0 +1,90 @@
+﻿@model Time.Data.EntityModels.ITInventory.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComputerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComputerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CableId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CableId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SwitchPortId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SwitchPortId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEditedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastEditedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEditedby)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastEditedby)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Building.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Building.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Location.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Location.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

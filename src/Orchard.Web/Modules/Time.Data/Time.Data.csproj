@@ -47,18 +47,25 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -103,6 +110,51 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityModels\CustomManuals\CustomManualModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomManualModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\CustomManualModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\CustomManualModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\Formatting.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LanguageCode.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\Lift.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LiftGroup.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LiftOption.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LocalMessage.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\NoPrint.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\OptionPart.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\ProblemJob.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\Setting.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Epicor\EpicorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +196,87 @@
     </Compile>
     <Compile Include="EntityModels\Epicor\v_JobInformation.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Computer.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ITInventoryModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITInventoryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ITInventoryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ITInventoryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\License.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Monitor.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Building.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_BuildYear.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_CableNo.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_DeviceType.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_LicenseType.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Location.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Manufacturer.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Memory.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Model.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_MonitorSizes.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_NIC.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_NICSpeed.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_OS.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Processor.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Sound.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Status.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_SwitchPort.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_VideoCard.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\User.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\Dealer.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
@@ -253,6 +386,9 @@
     <Compile Include="EntityModels\TimeMFG\TicketTask.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketVisibility.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\TimeMfgModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -268,6 +404,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeMfgModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\MessageQueue\EmailMessage.cs" />
+    <Compile Include="Models\MessageQueue\EmptyMessage.cs" />
+    <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
+    <Compile Include="Models\MessageQueue\MSMQ.cs" />
     <Compile Include="Models\OrderLog\Dealer.cs" />
     <Compile Include="Models\OrderLog\Installer.cs" />
     <Compile Include="Models\OrderLog\Install.cs" />
@@ -343,6 +484,40 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderLogModel.edmx</DependentUpon>
       <LastGenOutput>OrderLogModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\ITInventory\ITInventoryModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ITInventoryModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\ITInventory\ITInventoryModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+      <LastGenOutput>ITInventoryModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\ITInventory\ITInventoryModel.edmx.diagram">
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\ITInventory\ITInventoryModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+      <LastGenOutput>ITInventoryModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\CustomManuals\CustomManualModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CustomManualModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\CustomManuals\CustomManualModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+      <LastGenOutput>CustomManualModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\CustomManuals\CustomManualModel.edmx.diagram">
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\CustomManuals\CustomManualModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+      <LastGenOutput>CustomManualModel.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
   </ItemGroup>

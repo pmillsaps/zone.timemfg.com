@@ -45,6 +45,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public Nullable<int> TicketSequence { get; set; }
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public string ApprovalCode { get; set; }
+        public Nullable<bool> Focused { get; set; }
     
         public virtual ICollection<TicketAttachment> TicketAttachments { get; set; }
         public virtual TicketCategory TicketCategory { get; set; }

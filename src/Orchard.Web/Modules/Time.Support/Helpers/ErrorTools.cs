@@ -30,6 +30,7 @@ namespace Time.Support.Helpers
             Body.Append(String.Format("Raw Error Data: {0}", ex.ToString()));
             mail.Body = Body.ToString();
             mail.IsBodyHtml = true;
+            // TODO: Change this to use the MSMQ service
 
             SmtpClient smtp = new SmtpClient();
             var h = ConfigurationManager.AppSettings["emailServer"];

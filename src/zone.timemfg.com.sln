@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}"
 EndProject
@@ -269,6 +269,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.CustomManuals", "Orchard.Web\Modules\Time.CustomManuals\Time.CustomManuals.csproj", "{2838D951-58A9-477E-9364-24CC4CB87F0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.Data", "Orchard.Web\Modules\Time.Data\Time.Data.csproj", "{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.IT", "Orchard.Web\Modules\Time.IT\Time.IT.csproj", "{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1148,6 +1150,16 @@ Global
 		{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Coverage|Any CPU.Build.0 = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.FxCop|Any CPU.Build.0 = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1241,5 +1253,6 @@ Global
 		{E2719503-E6ED-425A-A865-9A3A8F7D29E2} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{2838D951-58A9-477E-9364-24CC4CB87F0E} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
+		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 	EndGlobalSection
 EndGlobal

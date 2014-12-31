@@ -1,7 +1,6 @@
 ﻿@*@model Time.Support.EntityModels.TimeMfg.TicketProject*@
 @model Time.Support.Models.TicketViewModel
 
-@using Time.Support.Helpers
 
 @{
     ViewBag.Title = "Support Ticket Info";
@@ -12,7 +11,7 @@
 
         @Html.Action("SideBar")
 
-        <div class="col-md-9 col-sm-9 col-xs-9">
+        <div class="form-horizontal col-md-9 col-sm-9 col-xs-9">
             <div class="row">
                 <h2>@ViewBag.Title</h2>
             </div>
@@ -42,7 +41,7 @@
             <br />
             <div class="row">
                 @*<div class="col-md-1">
-                    </div>*@
+                </div>*@
                 <div class="col-md-8">
                     Description
                 </div>
@@ -56,19 +55,19 @@
             <br />
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     Request By:
                 </div>
                 <div class="col-md-4">
                     @Html.DisplayFor(model => model.Ticket.RequestedBy)
                 </div>
                 <div class="col-md-2">
-                    @Html.ActionLink("Change User", "ChangeUser")
+                    @Html.ActionLink("Change User", "ChangeUser", new { id = Model.Ticket.TicketID })
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     Requested Date:
                 </div>
                 <div class="col-md-6">
@@ -84,8 +83,8 @@
 
                 @*@Html.HiddenFor(model => model.Ticket.TicketID)*@
 
-                <div class="row">
-                    <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-2">
                         Priority:
                     </div>
                     <div class="col-md-4">
@@ -101,91 +100,91 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        Department:
-                    </div>
-                    <div class="col-md-4">
-                        @if (Model.Admin)
-                        {
-                            @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" })
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(model => model.Ticket.TicketDepartment.Name)
-                        }
-                    </div>
-                </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            Department:
+        </div>
+        <div class="col-md-4">
+            @if (Model.Admin)
+            {
+                @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Ticket.TicketDepartment.Name)
+            }
+        </div>
+    </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        Category:
-                    </div>
-                    <div class="col-md-4">
-                        @if (Model.Admin)
-                        {
-                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(model => model.Ticket.TicketCategory.Name)
-                        }
-                    </div>
-                </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            Category:
+        </div>
+        <div class="col-md-4">
+            @if (Model.Admin)
+            {
+                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Ticket.TicketCategory.Name)
+            }
+        </div>
+    </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        Assigned To:
-                    </div>
-                    <div class="col-md-4">
-                        @if (Model.Admin)
-                        {
-                            @Html.DropDownList("AssignedEmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(model => model.Ticket.TicketEmployee.FullName)
-                        }
-                    </div>
-                </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            Assigned To:
+        </div>
+        <div class="col-md-4">
+            @if (Model.Admin)
+            {
+                @Html.DropDownList("AssignedEmployeeID", null, htmlAttributes: new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Ticket.TicketEmployee.FullName)
+            }
+        </div>
+    </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        Resource:
-                    </div>
-                    <div class="col-md-4">
-                        @if (Model.Admin)
-                        {
-                            @Html.DropDownList("ResourceEmployeeID", null, htmlAttributes: new { @class = "form-control" })
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(model => model.Ticket.TicketEmployee1.FullName)
-                        }
-                    </div>
-                </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            Resource:
+        </div>
+        <div class="col-md-4">
+            @if (Model.Admin)
+            {
+                @Html.DropDownList("ResourceEmployeeID", null, htmlAttributes: new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Ticket.TicketEmployee1.FullName)
+            }
+        </div>
+    </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        Status:
-                    </div>
-                    <div class="col-md-4">
-                        @if (Model.Admin)
-                        {
-                            @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(model => model.Ticket.TicketStatus.Name)
-                        }
-                    </div>
-                </div>
+    <div class="form-group">
+        <div class="col-md-2">
+            Status:
+        </div>
+        <div class="col-md-4">
+            @if (Model.Admin)
+            {
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Ticket.TicketStatus.Name)
+            }
+        </div>
+    </div>
 
                 if (Model.IT || Model.Admin)
                 {
                     <br />
                     <div class="row form-group">
-                        <div class="col-md-10">
+                        <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Update Ticket" class="btn btn-default" />
                         </div>
                     </div>
@@ -193,21 +192,56 @@
             }
 
 
+            @* Add Ticket Note Section *@
+            @using (Html.BeginForm("AddNote"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @*<h4>Add Note</h4>
+                    <hr />*@
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TicketVisibility, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("TicketVisibility", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TicketVisibility, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TicketNote, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TicketNote, new { htmlAttributes = new { @class = "form-control", @rows = 7 } })
+                            @Html.ValidationMessageFor(model => model.TicketNote, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add note" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+
             <br />
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-offset-2 col-md-2">
                     <h5><strong>Public Notes</strong></h5>
                 </div>
             </div>
             @foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility >= 5))
             {
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-offset-2 col-md-9">
                         @Html.DisplayWithBreaksFor(m => item.Note)
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-offset-2 col-md-9">
                         <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
                     </div>
                 </div>
@@ -215,7 +249,7 @@
 
             <br />
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-offset-2 col-md-2">
                     <h5><strong>Private Notes</strong></h5>
                 </div>
             </div>
@@ -225,12 +259,12 @@
                 foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility < 5))
                 {
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-offset-2 col-md-9">
                             @Html.DisplayWithBreaksFor(m => item.Note)
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-offset-2 col-md-9">
                             <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
                         </div>
                     </div>
@@ -243,7 +277,7 @@
                 <div class="col-md-1">
                     <h5><strong>Tasks</strong></h5>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-offset-2 col-md-2">
                     <h5>@Html.ActionLink("Add Task", "AddTask", new { id = Model.Ticket.TicketID })</h5>
                 </div>
             </div>

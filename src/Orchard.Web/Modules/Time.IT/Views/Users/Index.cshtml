@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComputerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CableId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SwitchPortId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEditedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEditedby)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Building.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Location.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComputerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CableId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SwitchPortId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditedby)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Building.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Location.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

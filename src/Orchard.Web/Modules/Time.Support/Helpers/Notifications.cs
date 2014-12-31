@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using Time.Data.EntityModels.TimeMFG;
+using Time.Data.Models.MessageQueue;
 using Time.Data.Models.TimeMFG;
 
 namespace Time.Support.Helpers
@@ -61,7 +62,7 @@ namespace Time.Support.Helpers
 
         internal string _Server;
 
-        public string Server
+        public string EmailServer
         {
             get { return _Server; }
         }
@@ -102,9 +103,10 @@ namespace Time.Support.Helpers
             this.tp = ticket;
 
             //this._Server = ConfigurationManager.AppSettings["emailServer"];
-            this._Server = sr.GetSettings("EmailServer");
-            this._SentFrom = "intranet-support@timemfg.com";
-            this._SentFrom = sr.GetSettings("MailFrom");
+            this._Server = "mail.timemfg.com";
+            // this._Server = sr.GetSettings("EmailServer");
+            this._SentFrom = "noreply@timemfg.com";
+            // this._SentFrom = sr.GetSettings("MailFrom");
             this._HtmlBody = string.Empty;
             this.SendTo = new List<string>();
             this.BCCTo = new List<string>();
@@ -115,27 +117,35 @@ namespace Time.Support.Helpers
 
         public void SendEmail()
         {
-            var mail = new MailMessage();
-            if (SendTo.Count == 0 && BCCTo.Count == 0)
-                throw new Exception("Email could not be sent. There is no one to send to");
-            foreach (var e in SendTo)
-                mail.To.Add(new MailAddress(e));
-            foreach (var e in BCCTo)
-                mail.Bcc.Add(new MailAddress(e));
-            mail.From = new MailAddress(_SentFrom, "My Time Intranet");
-            mail.Body = _HtmlBody;
-            MailAddress replyTo = new MailAddress("NoReplyHere@timemfg.com");
-            mail.ReplyToList.Add(replyTo);
-            mail.IsBodyHtml = true;
-            mail.Subject = _Subject;
-            mail.Sender = new MailAddress(_SentFrom, "My Time Intranet");
-            var smtp = new SmtpClient();
-            smtp.Host = _Server;
+            var message = new EmailMessage();
+            message.To = string.Join(",", SendTo);
+            message.BCC = string.Join(",", BCCTo);
+            message.Message = _HtmlBody;
+            message.HTML = true;
+            message.Subject = _Subject;
+            var success = MSMQ.SendQueueMessage(message, "EmailMessage");
 
-            smtp.SendCompleted += new SendCompletedEventHandler(mail_SendCompleted);
-            string userState = String.Format("Sending Message: To: '{0}'  Subject: '{1}'  ", mail.To, mail.Subject);
+            //var mail = new MailMessage();
+            //if (SendTo.Count == 0 && BCCTo.Count == 0)
+            //    throw new Exception("Email could not be sent. There is no one to send to");
+            //foreach (var e in SendTo)
+            //    mail.To.Add(new MailAddress(e));
+            //foreach (var e in BCCTo)
+            //    mail.Bcc.Add(new MailAddress(e));
+            //mail.From = new MailAddress(_SentFrom, "My Time Intranet");
+            //mail.Body = _HtmlBody;
+            //MailAddress replyTo = new MailAddress("NoReplyHere@timemfg.com");
+            //mail.ReplyToList.Add(replyTo);
+            //mail.IsBodyHtml = true;
+            //mail.Subject = _Subject;
+            //mail.Sender = new MailAddress(_SentFrom, "My Time Intranet");
+            //var smtp = new SmtpClient();
+            //smtp.Host = _Server;
 
-            smtp.SendAsync(mail, userState);
+            //smtp.SendCompleted += new SendCompletedEventHandler(mail_SendCompleted);
+            //string userState = String.Format("Sending Message: To: '{0}'  Subject: '{1}'  ", mail.To, mail.Subject);
+
+            //smtp.SendAsync(mail, userState);
         }
 
         private void mail_SendCompleted(object sender, AsyncCompletedEventArgs e)
@@ -264,7 +274,9 @@ namespace Time.Support.Helpers
         {
             //if (!tp.TicketEmployeesReference.IsLoaded)
             //    tp.TicketEmployeesReference.Load();
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\AssignmentNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/AssignmentNotification.htm");
+
+            // TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\AssignmentNotification.htm");
             SendTo.Add(GetEmailforNTUser(tp.TicketEmployee.NTLogin));
             Subject = String.Format("[Ticket #{0}] Assigned - {1}", tp.TicketID, tp.Title);
         }
@@ -281,7 +293,9 @@ namespace Time.Support.Helpers
         {
             //if (!tp.TicketEmployeesReference.IsLoaded)
             //    tp.TicketEmployeesReference.Load();
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\AssignmentNotificationUser.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/AssignmentNotificationUser.htm");
+
+            // TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\AssignmentNotificationUser.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             SendTo.Add(e);
             //AddEmailSendToBcc(e);
@@ -299,7 +313,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\NewTicketNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/NewTicketNotification.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
@@ -317,7 +331,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\SupervisorNewTicketNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/SupervisorNewTicketNotification.htm");
             var e = GetEmailforNTUser(tp.TicketDepartment.TicketEmployee.NTLogin);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
@@ -335,7 +349,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\CompletionPendingNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/CompletionPendingNotification.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
@@ -353,7 +367,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\ApprovedNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/ApprovedNotification.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             AddEmailSendToBcc(e);
 
@@ -388,7 +402,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\UpdateNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/UpdateNotification.htm");
             Subject = String.Format("[Ticket #{0}] Updated - {1}", tp.TicketID, tp.Title);
         }
     }

@@ -131,6 +131,12 @@
     <Content Include="Views\AdminSupport\Details.cshtml" />
     <Content Include="Views\AdminSupport\Edit.cshtml" />
     <Content Include="Views\AdminSupport\Index.cshtml" />
+    <Content Include="Views\Ticket\ChangeUser.cshtml" />
+    <Content Include="Views\_TicketNotes\Create.cshtml" />
+    <Content Include="Views\_TicketNotes\Delete.cshtml" />
+    <Content Include="Views\_TicketNotes\Details.cshtml" />
+    <Content Include="Views\_TicketNotes\Edit.cshtml" />
+    <Content Include="Views\_TicketNotes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -153,15 +159,16 @@
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\TicketProjectsController.cs" />
     <Compile Include="Controllers\TicketTasksController.cs" />
+    <Compile Include="Controllers\_TicketNotesController.cs" />
     <Compile Include="Handlers\SupportSettingsPartHandler.cs" />
     <Compile Include="Helpers\CrystalReportPdfResult.cs" />
     <Compile Include="Helpers\ErrorTools.cs" />
-    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\Notifications.cs" />
     <Compile Include="Helpers\TicketExtensions.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\SupportSettingsPart.cs" />
     <Compile Include="Models\SupportSettingsPartRecord.cs" />
+    <Compile Include="Models\TicketProjectUpdate.cs" />
     <Compile Include="Models\TicketViewModel.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />

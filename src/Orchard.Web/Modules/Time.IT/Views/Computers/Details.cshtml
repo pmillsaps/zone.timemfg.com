@@ -1,0 +1,153 @@
+﻿@model Time.Data.EntityModels.ITInventory.Computer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Computer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WindowsKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WindowsKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEditedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastEditedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastDateEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastDateEdited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_BuildYear.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_BuildYear.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Memory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Memory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Status.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Status.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_VideoCard.VideoCard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_VideoCard.VideoCard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_DeviceType.DeviceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_DeviceType.DeviceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Processor.Processor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Processor.Processor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Sound.Sound)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Sound.Sound)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_OS.OS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_OS.OS)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div class="col-md-12">
+    <p>
+        @Html.ActionLink("Add NIC Card", "Create", "NIC", null, new { id = Model.Id })
+    </p>
+    @Html.Partial("_NIC",Model.Ref_NIC)
+</div>

@@ -1,4 +1,4 @@
-@using Orchard.ContentManagement;
+﻿@using Orchard.ContentManagement;
 @using PJS.Bootstrap.Models;
 
 @{
@@ -16,6 +16,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="robots" content="index, follow, archive" />
+    <meta name="description" content="Time Manufacturing Extranet" />
     <title>@Html.Title(title, siteName)</title>
 
     @Display(Model.Head)
@@ -24,6 +25,7 @@
         (function (d) { d.className = "dyn" + d.className.substring(6, d.className.length); })(document.documentElement);
         window.applicationBaseUrl = @Html.Raw(HttpUtility.JavaScriptStringEncode(Url.Content("~/"), true));
     </script>
+    
 </head>
 
 <body class="theme-@WorkContext.CurrentTheme.Id">

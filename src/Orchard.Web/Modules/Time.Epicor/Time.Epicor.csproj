@@ -61,6 +61,10 @@
     <Reference Include="MoreLinq">
       <HintPath>..\..\..\packages\morelinq.1.1.0\lib\net35\MoreLinq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -70,6 +74,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -121,7 +126,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Interim\_imjoboper.cshtml" />
     <Content Include="Views\Interim\_impartbin.cshtml" />
-    <Content Include="Views\Home\SendRTI.cshtml" />
+    <Content Include="Views\Home\RTI.cshtml" />
     <Content Include="Views\BOMCosting\Index.cshtml" />
     <Content Include="Views\LoadList\Index.cshtml" />
     <Content Include="Views\LoadList\AsmInspect.cshtml" />
@@ -169,6 +174,8 @@
     <Content Include="Views\Status\_imjoboper.cshtml" />
     <Content Include="Views\Status\_impartbin.cshtml" />
     <Content Include="Views\Status\_SchedTasks.cshtml" />
+    <Content Include="Views\Home\MessageResult.cshtml" />
+    <Content Include="Views\Home\ProblemJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -195,6 +202,7 @@
     <Compile Include="Helpers\EmailNotifier.cs" />
     <Compile Include="Helpers\ErrorTools.cs" />
     <Compile Include="Helpers\FileUploadHelpers.cs" />
+    <Compile Include="Helpers\HelperClass.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\ImageResult.cs" />
     <Compile Include="Permissions.cs" />

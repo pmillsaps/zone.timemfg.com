@@ -6,7 +6,7 @@ Version: 1.0
 OrchardVersion: 1.0
 Description: Order Log for Sales
 Features:
-    Time.OrderLog:
-        Description: Internal Order Log for Sales.
+	Time.OrderLog:
+		Description: Internal Order Log for Sales.
 		Dependencies: Time.Data
 		Category: .Time

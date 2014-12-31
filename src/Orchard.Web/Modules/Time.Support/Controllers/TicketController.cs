@@ -3,6 +3,7 @@ using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -20,59 +21,6 @@ namespace Time.Support.Controllers
     public class TicketController : Controller
     {
         #region Public Properties
-
-        //private Dictionary<string, int> _openTicketsbyDepartment;
-
-        //public Dictionary<string, int> OpenTicketsbyDepartment
-        //{
-        //    get
-        //    {
-        //        return _openTicketsbyDepartment;
-        //    }
-        //    set
-        //    {
-        //        _openTicketsbyDepartment = value;
-        //        ViewData["OpenTicketsbyDepartment"] = _openTicketsbyDepartment;
-        //    }
-        //}
-
-        //private Dictionary<string, int> _myOpenTicketsbyStatus;
-
-        //public Dictionary<string, int> MyOpenTicketsbyStatus
-        //{
-        //    get { return _myOpenTicketsbyStatus; }
-        //    set
-        //    {
-        //        _myOpenTicketsbyStatus = value;
-        //        ViewData["MyOpenTicketsbyStatus"] = _myOpenTicketsbyStatus;
-        //    }
-        //}
-
-        //private Dictionary<string, int> _openTicketsbyCategory;
-
-        //public Dictionary<string, int> OpenTicketsbyCategory
-        //{
-        //    get { return _openTicketsbyCategory; }
-        //    set
-        //    {
-        //        _openTicketsbyCategory = value;
-        //        ViewData["OpenTicketsbyCategory"] = _openTicketsbyCategory;
-        //    }
-        //}
-
-        //private List<AssignedTo> _openTicketsbyAssignment;
-
-        //public List<AssignedTo> OpenTicketsbyAssignment
-        //{
-        //    get { return _openTicketsbyAssignment; }
-        //    set
-        //    {
-        //        _openTicketsbyAssignment = value;
-        //        ViewData["OpenTicketsbyAssignedTo"] = _openTicketsbyAssignment;
-        //    }
-        //}
-
-        //public IQueryable<TicketProject> MyModel { get; set; }
 
         #endregion Public Properties
 
@@ -275,10 +223,68 @@ namespace Time.Support.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update([Bind(Include = "TicketID,DepartmentID,PriorityID,CategoryID,Title,Description,Notes,PrivateNotes,RequestedBy,RequestedByFriendly,RequestedDate,AssignedEmployeeID,ResourceEmployeeID,Status,TicketSequence")] TicketProject ticketProject)
+        public ActionResult Update(TicketProject ticketProject)
         {
             string msg = string.Empty;
+            var currentUser = System.Web.HttpContext.Current.User.Identity.Name;
             var ticket = _db.TicketProjects.Single(x => x.TicketID == ticketProject.TicketID);
+            string notificationList = String.Empty;
+
+            if (ticket.AssignedEmployeeID != ticketProject.AssignedEmployeeID)
+            {
+                var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.AssignedEmployeeID);
+
+                if (ticket.TicketEmployee != null)
+                {
+                    msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
+                }
+                else
+                {
+                    msg += string.Format("Assigned ticket to {0}", emp.FullName);
+                    ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
+                    msg += string.Format("{1}Assigned Ticket Resource to {0}", emp.FullName, Environment.NewLine);
+                }
+
+                ticket.AssignedEmployeeID = ticketProject.AssignedEmployeeID;
+                ticket.TicketEmployee = emp;
+                ticket.SendAssignmentNotification();
+                ticket.TicketNotes.Add(new TicketNote
+                {
+                    CreatedBy = currentUser,
+                    CreatedDate = DateTime.Now,
+                    TicketID = ticket.TicketID,
+                    Visibility = 1, // Private Note
+                    Note = msg
+                });
+            }
+
+            if (ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
+            {
+                var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
+
+                //if (ticket.TicketEmployee != null)
+                //{
+                //    msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
+                //}
+                //else
+                //{
+                //    msg += string.Format("Assigned ticket to {0}", emp.FullName);
+                //    ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
+                //    msg += string.Format("{1}Assigned Ticket Resource to {0}", emp.FullName, Environment.NewLine);
+                //}
+
+                //ticket.AssignedEmployeeID = ticketProject.AssignedEmployeeID;
+                //ticket.TicketEmployee = emp;
+                //ticket.SendAssignmentNotification();
+                //ticket.TicketNotes.Add(new TicketNote
+                //{
+                //    CreatedBy = currentUser,
+                //    CreatedDate = DateTime.Now,
+                //    TicketID = ticket.TicketID,
+                //    Visibility = 1, // Private Note
+                //    Note = msg
+                //});
+            }
 
             if (ticket.PriorityID != ticketProject.PriorityID)
             {
@@ -298,15 +304,6 @@ namespace Time.Support.Controllers
                 msg += string.Format("Category was changed: {0} -> {1}", ticket.TicketCategory.Name, cat.Name);
             }
 
-            if (ticket.AssignedEmployeeID != ticketProject.AssignedEmployeeID)
-            {
-                var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.AssignedEmployeeID);
-                if (ticket.TicketEmployee != null) 
-                    msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
-                else
-                    msg += string.Format("Assigned ticket to {0}", emp.FullName);
-            }
-
             if (ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
             {
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
@@ -321,9 +318,11 @@ namespace Time.Support.Controllers
                 var stat = _db.TicketStatuses.Single(x => x.StatusID == ticketProject.Status);
                 msg += string.Format("Status was changed: {0} -> {1}", ticket.TicketStatus.Name, stat.Name);
             }
-            var ex = new FormatException();
 
-            ErrorTools.SendEmail(Request.Url, ex);
+            
+            // Save all database changes 
+
+            _db.SaveChanges();
 
             //public ActionResult Edit([Bind(Include = "TicketID,DepartmentID,PriorityID,CategoryID,Title,Description,Notes,PrivateNotes,RequestedBy,RequestedByFriendly,RequestedDate,AssignedEmployeeID,ResourceEmployeeID,Status,ApprovalDate,ApprovedBy,ProjectBeginDate,ProjectEndDate,TicketSequence,CompletionDate,ApprovalCode")] TicketProject ticketProject)
 
@@ -425,12 +424,64 @@ namespace Time.Support.Controllers
 
         private void GenerateDropDowns(TicketViewModel vm, TicketProject ticketProject)
         {
+
             vm.CategoryID = new SelectList(_db.TicketCategories.Where(x => x.isActive == true).OrderBy(x => x.Name), "CategoryID", "Name", ticketProject.CategoryID);
             vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
             vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
             vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
             vm.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name", ticketProject.PriorityID);
             vm.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name", ticketProject.Status);
+
+            vm.TicketVisibility = new SelectList(_db.TicketVisibilities.OrderByDescending(x => x.Id), "Id", "Name");
+        }
+
+        [HttpGet]
+        public ActionResult ChangeUser(int id)
+        {
+            TicketProject ticketProject = _db.TicketProjects.Find(id);
+
+            var requestors = new SelectList(_db.TicketProjects.DistinctBy(x => x.RequestedBy).ToList(), "RequestedBy", "RequestedBy", ticketProject.RequestedBy);
+            //select new SelectListItem
+            //{
+            //    Text = col.RequestedBy,
+            //    Value = col.RequestedBy,
+            //    Selected = (ticketProject.RequestedBy == col.RequestedBy)
+            //}).ToList();
+
+            ViewData["requestor"] = requestors;
+            ViewBag.requestor = requestors;
+
+            return View(ticketProject);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeUser(int id, string requestor)
+        {
+            TicketProject ticketProject = _db.TicketProjects.Find(id);
+            //var tr = new TicketRepository();
+            ////var id = Convert.ToInt32(formValues.GetValue("id"));
+            //var ticket = tr.Single(c => c.TicketID == id);
+            var oldRequestor = ticketProject.RequestedBy;
+
+            if (oldRequestor != requestor)
+            {
+                ticketProject.RequestedBy = requestor;
+                ticketProject.RequestedByFriendly = requestor;
+                //var saved = tr.Update(ent);
+                //tr.SaveAll();
+
+                // Log the change as a private note
+                ticketProject.TicketNotes.Add(new TicketNote
+                {
+                    Note = string.Format("Requestor was changed: {0} -> {1}", oldRequestor, requestor),
+                    CreatedBy = User.Identity.Name,
+                    CreatedDate = DateTime.Now,
+                    Visibility = 1
+                });
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("Info", new { id });
         }
 
         #region TicketTasks
