@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.WaterTest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GallonsUsed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SysDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SysUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SysComputer)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GallonsUsed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SysDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SysUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SysComputer)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+            </td>
+        </tr>
+    }
+
+</table>

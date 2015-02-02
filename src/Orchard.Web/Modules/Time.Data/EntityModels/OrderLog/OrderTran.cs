@@ -22,6 +22,10 @@ namespace Time.Data.EntityModels.OrderLog
         public string Comment { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<System.DateTime> AsOfDate { get; set; }
+        public bool Special { get; set; }
+        public bool Stock { get; set; }
+        public bool Demo { get; set; }
+        public bool RTG { get; set; }
     
         public virtual LiftModel LiftModel { get; set; }
         public virtual Order Order { get; set; }

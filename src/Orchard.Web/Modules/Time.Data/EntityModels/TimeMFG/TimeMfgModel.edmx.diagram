@@ -49,6 +49,7 @@
         <AssociationConnector Association="TimeMFGModel.LoadList_Distributor" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TimeMFGModel.Setting" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketVisibility" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.WaterTest" Width="1.5" PointX="13.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

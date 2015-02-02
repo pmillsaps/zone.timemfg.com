@@ -17,7 +17,7 @@ namespace Time.OrderLog.Controllers
     [Themed]
     public class ReportController : Controller
     {
-        public IOrchardServices Services { get; set; }
+        public IOrchardServices Services { get; set; }    
         public Localizer T { get; set; }
         private OrderLogEntities db;
         private const string _db_logon = "TimeMFGApp";
@@ -72,6 +72,7 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
                 return new HttpUnauthorizedResult();
+            model.ReportName = "ExecutiveSummary";
             model = SetDates(model);
             if (!CheckReportData(model)) ModelState.AddModelError("", "This Report has no Data... Please check your parameters");
             if (ModelState.IsValid)
@@ -100,6 +101,14 @@ namespace Time.OrderLog.Controllers
             rptH.SetParameterValue("TerritoryId", model.TerritoryId ?? 0);
             rptH.SetParameterValue("RegionId", model.RegionId ?? 0);
 
+            if (model.ReportName == "DailyOrders")
+            {
+                rptH.SetParameterValue("Special", model.Special);
+                rptH.SetParameterValue("Stock", model.Stock);
+                rptH.SetParameterValue("Demo", model.Demo);
+                rptH.SetParameterValue("RTG", model.RTG);
+            }
+
             Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return stream;
         }
@@ -121,6 +130,7 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
                 return new HttpUnauthorizedResult();
+            model.ReportName = "DealerSummary";
             model = SetDates(model);
             if (!CheckReportData(model)) ModelState.AddModelError("", "This Report has no Data... Please check your parameters");
             if (ModelState.IsValid)
@@ -150,6 +160,7 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
                 return new HttpUnauthorizedResult();
+            model.ReportName = "ModelSummary";
             model = SetDates(model);
             if (!CheckReportData(model)) ModelState.AddModelError("", "This Report has no Data... Please check your parameters");
             if (ModelState.IsValid)
@@ -179,7 +190,9 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
                 return new HttpUnauthorizedResult();
+            model.ReportName = "DailyOrders";
             model = SetDates(model);
+            if (CheckMultipleFlags(model)) ModelState.AddModelError("", "Only One Lift Type Flag can be selected at a time");
             if (!CheckReportData(model)) ModelState.AddModelError("", "This Report has no Data... Please check your parameters");
             if (ModelState.IsValid)
             {
@@ -190,6 +203,16 @@ namespace Time.OrderLog.Controllers
             getDropDowns();
 
             return View(model);
+        }
+
+        private bool CheckMultipleFlags(ReportViewModel model)
+        {
+            if (model.Demo) return (model.RTG || model.Stock || model.Special);
+            if (model.RTG) return (model.Demo || model.Stock || model.Special);
+            if (model.Stock) return (model.Demo || model.RTG || model.Special);
+            if (model.Special) return (model.Demo || model.RTG || model.Stock);
+
+            return false;
         }
 
         private ReportViewModel SetDates(ReportViewModel model)
@@ -213,6 +236,14 @@ namespace Time.OrderLog.Controllers
             if (model.DealerId != null) qry = qry.Where(x => x.Order.DealerId == model.DealerId);
             if (model.RegionId != null) qry = qry.Where(x => x.Order.Territory.RegionId == model.RegionId);
             if (model.TerritoryId != null) qry = qry.Where(x => x.Order.TerritoryId == model.TerritoryId);
+
+            if (model.ReportName == "DailyOrders")
+            {
+                if (model.Demo) qry = qry.Where(x => x.Demo);
+                if (model.RTG) qry = qry.Where(x => x.RTG);
+                if (model.Special) qry = qry.Where(x => x.Special);
+                if (model.Stock) qry = qry.Where(x => x.Stock);
+            }
 
             return qry.Count() > 0;
 

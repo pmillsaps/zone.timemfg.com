@@ -66,6 +66,10 @@
           <Property Name="InvoiceAmt" Type="decimal" Precision="18" Scale="0" />
           <Property Name="UnitComment" Type="nvarchar" MaxLength="512" />
           <Property Name="Cancel" Type="bit" Nullable="false" />
+          <Property Name="Special" Type="bit" />
+          <Property Name="Stock" Type="bit" />
+          <Property Name="Demo" Type="bit" />
+          <Property Name="RTG" Type="bit" />
         </EntityType>
         <EntityType Name="OrderTran">
           <Key>
@@ -79,6 +83,10 @@
           <Property Name="Comment" Type="nvarchar" MaxLength="512" />
           <Property Name="Date" Type="datetime" />
           <Property Name="AsOfDate" Type="datetime" />
+          <Property Name="Special" Type="bit" Nullable="false" />
+          <Property Name="Stock" Type="bit" Nullable="false" />
+          <Property Name="Demo" Type="bit" Nullable="false" />
+          <Property Name="RTG" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -374,6 +382,10 @@
           <Property Name="UnitComment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Cancel" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="OrderLineUnit" ToRole="Order" />
+          <Property Name="Special" Type="Boolean" />
+          <Property Name="Stock" Type="Boolean" />
+          <Property Name="Demo" Type="Boolean" />
+          <Property Name="RTG" Type="Boolean" />
         </EntityType>
         <EntityType Name="OrderTran">
           <Key>
@@ -389,6 +401,10 @@
           <Property Name="AsOfDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="LiftModel" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="OrderTran" ToRole="LiftModel" />
           <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="OrderTran" ToRole="Order" />
+          <Property Name="Special" Type="Boolean" Nullable="false" />
+          <Property Name="Stock" Type="Boolean" Nullable="false" />
+          <Property Name="Demo" Type="Boolean" Nullable="false" />
+          <Property Name="RTG" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -580,6 +596,10 @@
           <EntitySetMapping Name="OrderLineUnits">
             <EntityTypeMapping TypeName="OrderLogModel.OrderLineUnit">
               <MappingFragment StoreEntitySet="OrderLineUnit">
+                <ScalarProperty Name="RTG" ColumnName="RTG" />
+                <ScalarProperty Name="Demo" ColumnName="Demo" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
                 <ScalarProperty Name="Cancel" ColumnName="Cancel" />
                 <ScalarProperty Name="UnitComment" ColumnName="UnitComment" />
                 <ScalarProperty Name="InvoiceAmt" ColumnName="InvoiceAmt" />
@@ -594,6 +614,10 @@
           <EntitySetMapping Name="OrderTrans">
             <EntityTypeMapping TypeName="OrderLogModel.OrderTran">
               <MappingFragment StoreEntitySet="OrderTran">
+                <ScalarProperty Name="RTG" ColumnName="RTG" />
+                <ScalarProperty Name="Demo" ColumnName="Demo" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
                 <ScalarProperty Name="AsOfDate" ColumnName="AsOfDate" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />

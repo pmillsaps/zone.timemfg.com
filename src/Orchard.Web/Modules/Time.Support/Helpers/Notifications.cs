@@ -38,7 +38,8 @@ namespace Time.Support.Helpers
             {
                 if (String.IsNullOrEmpty(_TemplatePath))
                 {
-                    _TemplatePath = sr.GetSettings("TemplatePath");
+                    // _TemplatePath = sr.GetSettings("TemplatePath");
+                    _TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates");
                     if (String.IsNullOrEmpty(_TemplatePath))
                         throw new Exception("Template Path was not set");
                 }
@@ -215,8 +216,10 @@ namespace Time.Support.Helpers
 
         private void BuildEmailBody()
         {
-            var header = HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationHeader.htm"));
-            var footer = HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationFooter.htm"));
+            var header = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/NotificationHeader.htm");
+                // HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationHeader.htm"));
+            var footer = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/NotificationFooter.htm");
+                // HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationFooter.htm"));
             string h, f;
             
             using (var path = new StreamReader(header))

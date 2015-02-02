@@ -137,6 +137,11 @@
     <Content Include="Views\_TicketNotes\Details.cshtml" />
     <Content Include="Views\_TicketNotes\Edit.cshtml" />
     <Content Include="Views\_TicketNotes\Index.cshtml" />
+    <Content Include="Views\Water\Create.cshtml" />
+    <Content Include="Views\Water\Delete.cshtml" />
+    <Content Include="Views\Water\Details.cshtml" />
+    <Content Include="Views\Water\Edit.cshtml" />
+    <Content Include="Views\Water\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -159,6 +164,7 @@
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\TicketProjectsController.cs" />
     <Compile Include="Controllers\TicketTasksController.cs" />
+    <Compile Include="Controllers\WaterController.cs" />
     <Compile Include="Controllers\_TicketNotesController.cs" />
     <Compile Include="Handlers\SupportSettingsPartHandler.cs" />
     <Compile Include="Helpers\CrystalReportPdfResult.cs" />

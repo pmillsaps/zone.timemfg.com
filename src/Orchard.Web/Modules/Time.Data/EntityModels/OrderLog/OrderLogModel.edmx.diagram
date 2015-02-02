@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="OrderLogModel.Installer" Width="1.5" PointX="5.25" PointY="7.125" />
         <EntityTypeShape EntityType="OrderLogModel.LiftModel" Width="1.5" PointX="7.5" PointY="9.875" />
         <EntityTypeShape EntityType="OrderLogModel.Order" Width="1.5" PointX="7.5" PointY="2.25" />
-        <EntityTypeShape EntityType="OrderLogModel.OrderLineUnit" Width="1.5" PointX="9.75" PointY="7" />
+        <EntityTypeShape EntityType="OrderLogModel.OrderLineUnit" Width="1.5" PointX="11.875" PointY="2.25" />
         <EntityTypeShape EntityType="OrderLogModel.OrderTran" Width="1.5" PointX="9.75" PointY="3.25" />
         <EntityTypeShape EntityType="OrderLogModel.Region" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="OrderLogModel.Territory" Width="1.5" PointX="3" PointY="3.625" />

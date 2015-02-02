@@ -22,6 +22,10 @@ namespace Time.Data.EntityModels.OrderLog
         public Nullable<decimal> InvoiceAmt { get; set; }
         public string UnitComment { get; set; }
         public bool Cancel { get; set; }
+        public Nullable<bool> Special { get; set; }
+        public Nullable<bool> Stock { get; set; }
+        public Nullable<bool> Demo { get; set; }
+        public Nullable<bool> RTG { get; set; }
     
         public virtual Order Order { get; set; }
     }

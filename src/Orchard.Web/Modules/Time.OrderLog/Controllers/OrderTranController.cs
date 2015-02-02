@@ -70,6 +70,15 @@ namespace Time.OrderLog.Controllers
                 return new HttpUnauthorizedResult();
             var ordertran = new OrderTran() { OrderId = id, Date = DateTime.Now };
             var orderTrans = db.OrderTrans.FirstOrDefault(x => x.OrderId == id);
+            var orderHeader = db.Orders.FirstOrDefault(x => x.OrderId == id);
+            if (orderHeader != null)
+            {
+                ordertran.Special = orderHeader.Special;
+                ordertran.Stock = orderHeader.Stock;
+                ordertran.Demo = orderHeader.Demo;
+                ordertran.RTG = orderHeader.RTG;
+            }
+
             if (orderTrans != null) ordertran.LiftModelId = orderTrans.LiftModelId;
             getDropDowns(ordertran);
             ViewBag.OrderId = id;
