@@ -8,13 +8,12 @@
 
 <h2>@ViewBag.Title</h2>
 
-
 @using (Html.BeginForm())
 {
     <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
 
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)
@@ -26,12 +25,12 @@
         @Html.HiddenFor(model => model.Date)
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.OrderId, "OrderId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OrderId", String.Empty)
-                @Html.ValidationMessageFor(model => model.OrderId)
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.OrderId, "OrderId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OrderId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.OrderId)
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
@@ -98,18 +97,26 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Install, new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TruGuard, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Install)
-                @Html.ValidationMessageFor(model => model.Install)
+                @Html.EditorFor(model => model.TruGuard)
+                @Html.ValidationMessageFor(model => model.TruGuard)
             </div>
-        </div>*@
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Install, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Install)
+                    @Html.ValidationMessageFor(model => model.Install)
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.AsOfDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AsOfDate, new { @class="datepicker"})
+                @Html.EditorFor(model => model.AsOfDate, new { @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.AsOfDate)
             </div>
         </div>

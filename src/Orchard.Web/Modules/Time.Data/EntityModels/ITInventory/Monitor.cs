@@ -14,15 +14,12 @@ namespace Time.Data.EntityModels.ITInventory
     
     public partial class Monitor
     {
-        public Monitor()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public int Id { get; set; }
+        public Nullable<int> UserId { get; set; }
         public int ManufacturerId { get; set; }
+        public string Model { get; set; }
         public string SerialNo { get; set; }
-        public Nullable<int> AssetId { get; set; }
+        public string AssetId { get; set; }
         public int SizeId { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string PurchasedFrom { get; set; }
@@ -30,7 +27,7 @@ namespace Time.Data.EntityModels.ITInventory
         public Nullable<decimal> Cost { get; set; }
     
         public virtual Ref_Manufacturer Ref_Manufacturer { get; set; }
-        public virtual ICollection<User> Users { get; set; }
         public virtual Ref_MonitorSizes Ref_MonitorSizes { get; set; }
+        public virtual User User { get; set; }
     }
 }

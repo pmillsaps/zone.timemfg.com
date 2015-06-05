@@ -12,6 +12,7 @@ using Time.Data.EntityModels.ITInventory;
 namespace Time.IT.Controllers
 {
     [Themed]
+    [Authorize]
     public class LicensesController : Controller
     {
         private ITInventoryEntities db = new ITInventoryEntities();
@@ -19,7 +20,7 @@ namespace Time.IT.Controllers
         // GET: Licenses
         public ActionResult Index()
         {
-            var licenses = db.Licenses.Include(l => l.Ref_LicenseType);
+            var licenses = db.Licenses.OrderBy(x => x.Name).ThenBy(x => x.LicenseKey).ThenBy(x => x.Quantity).Include(l => l.Ref_LicenseType);
             return View(licenses.ToList());
         }
 
@@ -46,12 +47,14 @@ namespace Time.IT.Controllers
         }
 
         // POST: Licenses/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Quantity,LicenseKey,QuantityAssigned,ComputerId,LicenseTypeId,Note")] License license)
+        public ActionResult Create([Bind(Exclude = "Id")] License license)
         {
+            ValidateLicenseNumber(license);
+
             if (ModelState.IsValid)
             {
                 db.Licenses.Add(license);
@@ -61,6 +64,12 @@ namespace Time.IT.Controllers
 
             ViewBag.LicenseTypeId = new SelectList(db.Ref_LicenseType, "Id", "LicenseType", license.LicenseTypeId);
             return View(license);
+        }
+
+        private void ValidateLicenseNumber(License license)
+        {
+            var lic = db.Licenses.Where(x => x.LicenseKey == license.LicenseKey && x.Id != license.Id);
+            if (lic.Count() > 0) ModelState.AddModelError("LicenseKey", "License Key is a Duplicate Entry");
         }
 
         // GET: Licenses/Edit/5
@@ -80,12 +89,13 @@ namespace Time.IT.Controllers
         }
 
         // POST: Licenses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Quantity,LicenseKey,QuantityAssigned,ComputerId,LicenseTypeId,Note")] License license)
+        public ActionResult Edit(License license)
         {
+            ValidateLicenseNumber(license);
             if (ModelState.IsValid)
             {
                 db.Entry(license).State = EntityState.Modified;

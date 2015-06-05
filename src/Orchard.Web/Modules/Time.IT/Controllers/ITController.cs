@@ -11,6 +11,7 @@ namespace Time.IT.Controllers
     {
         // GET: IT
         [Themed]
+        [Authorize]
         public ActionResult Index()
         {
             return View();

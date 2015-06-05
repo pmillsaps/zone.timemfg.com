@@ -16,26 +16,23 @@ namespace Time.Data.EntityModels.ITInventory
     {
         public User()
         {
+            this.Monitors = new HashSet<Monitor>();
             this.Computers = new HashSet<Computer>();
             this.Licenses = new HashSet<License>();
-            this.Monitors = new HashSet<Monitor>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> ComputerId { get; set; }
         public Nullable<int> BuildingId { get; set; }
         public Nullable<int> LocationId { get; set; }
-        public Nullable<int> CableId { get; set; }
-        public Nullable<int> SwitchPortId { get; set; }
         public string Notes { get; set; }
-        public Nullable<System.DateTime> LastEditedDate { get; set; }
-        public string LastEditedby { get; set; }
+        public Nullable<System.DateTime> LastDateEdited { get; set; }
+        public string LastEditedBy { get; set; }
     
+        public virtual ICollection<Monitor> Monitors { get; set; }
         public virtual Ref_Building Ref_Building { get; set; }
         public virtual Ref_Location Ref_Location { get; set; }
         public virtual ICollection<Computer> Computers { get; set; }
         public virtual ICollection<License> Licenses { get; set; }
-        public virtual ICollection<Monitor> Monitors { get; set; }
     }
 }

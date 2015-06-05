@@ -117,7 +117,7 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PO,DealerId,InstallId,InstallerId,Special,Stock,Demo,RTG,Customer,City,State,Zip")] Order order)
+        public ActionResult Create([Bind(Exclude = "OrderId")] Order order)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditOrders, T("You Do Not Have Permission to Edit Orders")))
                 return new HttpUnauthorizedResult();

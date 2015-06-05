@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Delete";
 }
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
 
 <h2>Delete</h2>
 
@@ -44,14 +45,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.PO)
         </dt>
 
@@ -68,11 +61,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ref_BuildYear.Name)
+            @Html.DisplayNameFor(model => model.LastBuildDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ref_BuildYear.Name)
+            @Html.DisplayFor(model => model.LastBuildDate)
         </dd>
 
         <dt>
@@ -116,6 +109,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Ref_Processor.Processor)
         </dt>
 
@@ -139,9 +140,25 @@
             @Html.DisplayFor(model => model.Ref_OS.OS)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalHW)
+        </dt>
+
+        <dd>
+            @Html.DisplayWithBreaksFor(model => model.AdditionalHW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayWithBreaksFor(model => model.Note)
+        </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

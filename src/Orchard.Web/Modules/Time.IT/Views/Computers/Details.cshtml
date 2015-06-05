@@ -1,10 +1,25 @@
 ﻿@model Time.Data.EntityModels.ITInventory.Computer
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Computer Details";
+}
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.ErrorMessage
+    </div>
 }
 
-<h2>Details</h2>
+@if (ViewBag.StatusMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.StatusMessage
+    </div>
+}
 
 <div>
     <h4>Computer</h4>
@@ -27,11 +42,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastEditedBy)
+            @Html.DisplayNameFor(model => model.BIOS_Version)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastEditedBy)
+            @Html.DisplayFor(model => model.BIOS_Version)
         </dd>
 
         <dt>
@@ -40,14 +55,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.LastDateEdited)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
         </dd>
 
         <dt>
@@ -67,11 +74,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ref_BuildYear.Name)
+            @Html.DisplayNameFor(model => model.LastBuildDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ref_BuildYear.Name)
+            @Html.DisplayFor(model => model.LastBuildDate)
         </dd>
 
         <dt>
@@ -115,6 +122,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Ref_Processor.Processor)
         </dt>
 
@@ -138,16 +153,73 @@
             @Html.DisplayFor(model => model.Ref_OS.OS)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEditedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastEditedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalHW)
+        </dt>
+
+        <dd>
+            @Html.DisplayWithBreaksFor(model => model.AdditionalHW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayWithBreaksFor(model => model.Note)
+        </dd>
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Computer List", "Index") |
+    @if (Model.UserId != null)
+    {
+        <a href="@Url.Action("Details", "Users", new { id = Model.UserId })">User Details</a>
+    }
 </p>
 
 <div class="col-md-12">
     <p>
-        @Html.ActionLink("Add NIC Card", "Create", "NIC", null, new { id = Model.Id })
+        @Html.ActionLink("Add NIC Card", "AddNIC", new { id = Model.Id })
     </p>
-    @Html.Partial("_NIC",Model.Ref_NIC)
+    @Html.Partial("_NIC", Model.Ref_NIC)
+</div>
+
+<div class="col-md-12">
+    <p>
+        @Html.ActionLink("Link License", "LinkLicense", new { id = Model.Id })
+    </p>
+    @Html.Partial("_Licenses", Model.Licenses)
+</div>
+
+<div class="col-md-12">
+    <p>
+        @Html.ActionLink("Add Scheduled Task", "AddScheduledTask", new { id = Model.Id })
+    </p>
+    @Html.Partial("_ScheduledTasks", Model.ScheduledTasks)
 </div>

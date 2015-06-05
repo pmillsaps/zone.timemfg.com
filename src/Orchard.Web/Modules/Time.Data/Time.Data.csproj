@@ -49,16 +49,16 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -224,9 +224,6 @@
     <Compile Include="EntityModels\ITInventory\Ref_Building.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\ITInventory\Ref_BuildYear.cs">
-      <DependentUpon>ITInventoryModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModels\ITInventory\Ref_CableNo.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
@@ -275,6 +272,9 @@
     <Compile Include="EntityModels\ITInventory\Ref_VideoCard.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\ITInventory\ScheduledTask.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\ITInventory\User.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
@@ -291,9 +291,6 @@
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\Order.cs">
-      <DependentUpon>OrderLogModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\OrderLog\OrderLineUnit.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\OrderLogModel.Context.cs">
@@ -408,6 +405,14 @@
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\ITInventory\License.cs" />
+    <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
+    <Compile Include="Models\ITInventory\Ref_Location.cs" />
+    <Compile Include="Models\ITInventory\Ref_Building.cs" />
+    <Compile Include="Models\ITInventory\Computer.cs" />
+    <Compile Include="Models\ITInventory\ScheduledTask.cs" />
+    <Compile Include="Models\ITInventory\User.cs" />
+    <Compile Include="Models\ITInventory\Ref_Memory.cs" />
     <Compile Include="Models\MessageQueue\EmailMessage.cs" />
     <Compile Include="Models\MessageQueue\EmptyMessage.cs" />
     <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />

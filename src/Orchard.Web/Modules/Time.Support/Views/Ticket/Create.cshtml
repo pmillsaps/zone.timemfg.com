@@ -22,7 +22,7 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
@@ -32,9 +32,9 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @rows=5} })
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @rows = 5 } })
                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -42,8 +42,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
-                            @Html.DropDownListFor(model => model.CategoryID, null, "--Select--", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.CategoryID, null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
                             @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -52,8 +51,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.DepartmentID, "DepartmentID", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @Html.DropDownListFor(model => model.DepartmentID, null, "--Select--", htmlAttributes: new { @class = "form-control" })
-                            @*@Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" })*@
+                            @Html.DropDownListFor(model => model.DepartmentID, null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
                             @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -61,13 +59,10 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.PriorityID, "PriorityID", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @Html.DropDownListFor(model => model.PriorityID, null, "--Select--", htmlAttributes: new { @class = "form-control" })
-                            @*@Html.DropDownList("PriorityID", null, htmlAttributes: new { @class = "form-control" })*@
+                            @Html.DropDownListFor(model => model.PriorityID, null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
                             @Html.ValidationMessageFor(model => model.PriorityID, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
-                    
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-4">
@@ -80,7 +75,6 @@
             <div>
                 @Html.ActionLink("Back to List", "Index")
             </div>
-
         </div>
     </div>
 </div>

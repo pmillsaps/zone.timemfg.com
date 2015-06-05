@@ -12,6 +12,7 @@ using Time.Data.EntityModels.ITInventory;
 namespace Time.IT.Controllers
 {
     [Themed]
+    [Authorize]
     public class LicenseTypeController : Controller
     {
         private ITInventoryEntities db = new ITInventoryEntities();
@@ -19,7 +20,7 @@ namespace Time.IT.Controllers
         // GET: LicenseType
         public ActionResult Index()
         {
-            return View(db.Ref_LicenseType.ToList());
+            return View(db.Ref_LicenseType.OrderBy(x => x.LicenseType).ToList());
         }
 
         // GET: LicenseType/Details/5
@@ -44,11 +45,11 @@ namespace Time.IT.Controllers
         }
 
         // POST: LicenseType/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LicenseType")] Ref_LicenseType ref_LicenseType)
+        public ActionResult Create([Bind(Exclude = "Id")] Ref_LicenseType ref_LicenseType)
         {
             if (ModelState.IsValid)
             {
@@ -76,11 +77,11 @@ namespace Time.IT.Controllers
         }
 
         // POST: LicenseType/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LicenseType")] Ref_LicenseType ref_LicenseType)
+        public ActionResult Edit(Ref_LicenseType ref_LicenseType)
         {
             if (ModelState.IsValid)
             {

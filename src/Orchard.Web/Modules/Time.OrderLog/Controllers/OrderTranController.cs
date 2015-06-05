@@ -77,6 +77,7 @@ namespace Time.OrderLog.Controllers
                 ordertran.Stock = orderHeader.Stock;
                 ordertran.Demo = orderHeader.Demo;
                 ordertran.RTG = orderHeader.RTG;
+                ordertran.TruGuard = orderHeader.TruGuard;
             }
 
             if (orderTrans != null) ordertran.LiftModelId = orderTrans.LiftModelId;
@@ -101,7 +102,7 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderId,LiftModelId,NewQty,CancelQty,Special,Stock,RTG,Comment,Date,AsOfDate")] OrderTran ordertran)
+        public ActionResult Create([Bind(Exclude = "OrderTranId")] OrderTran ordertran)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditOrders, T("You Do Not Have Permission to Edit")))
                 return new HttpUnauthorizedResult();

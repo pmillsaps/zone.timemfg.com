@@ -41,7 +41,7 @@
             <br />
             <div class="row">
                 @*<div class="col-md-1">
-                </div>*@
+                    </div>*@
                 <div class="col-md-8">
                     Description
                 </div>
@@ -63,14 +63,13 @@
                 </div>
             </div>
 
-
             <div class="row">
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => Model.TicketID)
                     <div class="col-md-3">
-                        Assigned To: @Html.DropDownList("requestor", (SelectList)ViewBag.requestor)
+                        Assigned To: @Html.DropDownList("requestor", (SelectList)ViewBag.requestor, optionLabel: "-- Select --")
                     </div>
                     <div class="col-md-4">
                         <button type="submit" value="submit">Update Requestor</button><br />
@@ -81,4 +80,3 @@
         </div>
     </div>
 </div>
-

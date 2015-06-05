@@ -11,13 +11,14 @@ namespace Time.Support
         public static readonly Permission SupportIT = new Permission { Description = "Support IT", Name = "SupportIT" };
         public static readonly Permission ViewWaterReports = new Permission { Description = "View Water Reports", Name = "ViewWaterReports" };
         public static readonly Permission EnterWaterReports = new Permission { Description = "Enter Water Reports", Name = "EnterWaterReports" };
+        public static readonly Permission EditWaterReports = new Permission { Description = "Edit Water Reports", Name = "EditWaterReports" };
 
         public virtual Feature Feature { get; set; }
 
         public IEnumerable<Permission> GetPermissions()
         {
             return new[] {
-                SupportAdmin, SupportApprover, SupportIT
+                SupportAdmin, SupportApprover, SupportIT, ViewWaterReports, EnterWaterReports, EditWaterReports
             };
         }
 

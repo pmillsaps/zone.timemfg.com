@@ -53,23 +53,7 @@
           <Property Name="Stock" Type="bit" Nullable="false" />
           <Property Name="Demo" Type="bit" Nullable="false" />
           <Property Name="RTG" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OrderLineUnit">
-          <Key>
-            <PropertyRef Name="OrderLineUnitId" />
-          </Key>
-          <Property Name="OrderLineUnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="ATSDate" Type="datetime" />
-          <Property Name="SalesOrderNum" Type="nvarchar" MaxLength="50" />
-          <Property Name="InvoiceDate" Type="datetime" />
-          <Property Name="InvoiceAmt" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="UnitComment" Type="nvarchar" MaxLength="512" />
-          <Property Name="Cancel" Type="bit" Nullable="false" />
-          <Property Name="Special" Type="bit" />
-          <Property Name="Stock" Type="bit" />
-          <Property Name="Demo" Type="bit" />
-          <Property Name="RTG" Type="bit" />
+          <Property Name="TruGuard" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderTran">
           <Key>
@@ -87,6 +71,7 @@
           <Property Name="Stock" Type="bit" Nullable="false" />
           <Property Name="Demo" Type="bit" Nullable="false" />
           <Property Name="RTG" Type="bit" Nullable="false" />
+          <Property Name="TruGuard" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -163,18 +148,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderLineUnit_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderLineUnit" Type="Self.OrderLineUnit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="OrderLineUnit">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderTran_LiftModel">
           <End Role="LiftModel" Type="Self.LiftModel" Multiplicity="1" />
           <End Role="OrderTran" Type="Self.OrderTran" Multiplicity="*" />
@@ -217,7 +190,6 @@
           <EntitySet Name="Installer" EntityType="Self.Installer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LiftModel" EntityType="Self.LiftModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderLineUnit" EntityType="Self.OrderLineUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTran" EntityType="Self.OrderTran" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
@@ -240,10 +212,6 @@
           <AssociationSet Name="FK_Order_Territory" Association="Self.FK_Order_Territory">
             <End Role="Territory" EntitySet="Territory" />
             <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLineUnit_Order" Association="Self.FK_OrderLineUnit_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderLineUnit" EntitySet="OrderLineUnit" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderTran_LiftModel" Association="Self.FK_OrderTran_LiftModel">
             <End Role="LiftModel" EntitySet="LiftModel" />
@@ -268,7 +236,6 @@
           <EntitySet Name="Installers" EntityType="OrderLogModel.Installer" />
           <EntitySet Name="LiftModels" EntityType="OrderLogModel.LiftModel" />
           <EntitySet Name="Orders" EntityType="OrderLogModel.Order" />
-          <EntitySet Name="OrderLineUnits" EntityType="OrderLogModel.OrderLineUnit" />
           <EntitySet Name="OrderTrans" EntityType="OrderLogModel.OrderTran" />
           <EntitySet Name="Regions" EntityType="OrderLogModel.Region" />
           <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
@@ -295,10 +262,6 @@
           <AssociationSet Name="FK_Order_Territory" Association="OrderLogModel.FK_Order_Territory">
             <End Role="Territory" EntitySet="Territories" />
             <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLineUnit_Order" Association="OrderLogModel.FK_OrderLineUnit_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderLineUnit" EntitySet="OrderLineUnits" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderTran_Order" Association="OrderLogModel.FK_OrderTran_Order">
             <End Role="Order" EntitySet="Orders" />
@@ -366,26 +329,8 @@
           <NavigationProperty Name="Install" Relationship="OrderLogModel.FK_Order_Install" FromRole="Order" ToRole="Install" />
           <NavigationProperty Name="Installer" Relationship="OrderLogModel.FK_Order_Installer" FromRole="Order" ToRole="Installer" />
           <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
-          <NavigationProperty Name="OrderLineUnits" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="Order" ToRole="OrderLineUnit" />
           <NavigationProperty Name="OrderTrans" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="Order" ToRole="OrderTran" />
-        </EntityType>
-        <EntityType Name="OrderLineUnit">
-          <Key>
-            <PropertyRef Name="OrderLineUnitId" />
-          </Key>
-          <Property Name="OrderLineUnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="ATSDate" Type="DateTime" Precision="3" />
-          <Property Name="SalesOrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
-          <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="UnitComment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Cancel" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="OrderLineUnit" ToRole="Order" />
-          <Property Name="Special" Type="Boolean" />
-          <Property Name="Stock" Type="Boolean" />
-          <Property Name="Demo" Type="Boolean" />
-          <Property Name="RTG" Type="Boolean" />
+          <Property Name="TruGuard" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderTran">
           <Key>
@@ -405,6 +350,7 @@
           <Property Name="Stock" Type="Boolean" Nullable="false" />
           <Property Name="Demo" Type="Boolean" Nullable="false" />
           <Property Name="RTG" Type="Boolean" Nullable="false" />
+          <Property Name="TruGuard" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -497,18 +443,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderLineUnit_Order">
-          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="OrderLogModel.OrderLineUnit" Role="OrderLineUnit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="OrderLineUnit">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderTran_Order">
           <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
           <End Type="OrderLogModel.OrderTran" Role="OrderTran" Multiplicity="*" />
@@ -575,6 +509,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="OrderLogModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
                 <ScalarProperty Name="RTG" ColumnName="RTG" />
                 <ScalarProperty Name="Demo" ColumnName="Demo" />
                 <ScalarProperty Name="Stock" ColumnName="Stock" />
@@ -593,27 +528,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderLineUnits">
-            <EntityTypeMapping TypeName="OrderLogModel.OrderLineUnit">
-              <MappingFragment StoreEntitySet="OrderLineUnit">
-                <ScalarProperty Name="RTG" ColumnName="RTG" />
-                <ScalarProperty Name="Demo" ColumnName="Demo" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Special" ColumnName="Special" />
-                <ScalarProperty Name="Cancel" ColumnName="Cancel" />
-                <ScalarProperty Name="UnitComment" ColumnName="UnitComment" />
-                <ScalarProperty Name="InvoiceAmt" ColumnName="InvoiceAmt" />
-                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
-                <ScalarProperty Name="SalesOrderNum" ColumnName="SalesOrderNum" />
-                <ScalarProperty Name="ATSDate" ColumnName="ATSDate" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="OrderLineUnitId" ColumnName="OrderLineUnitId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderTrans">
             <EntityTypeMapping TypeName="OrderLogModel.OrderTran">
               <MappingFragment StoreEntitySet="OrderTran">
+                <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
                 <ScalarProperty Name="RTG" ColumnName="RTG" />
                 <ScalarProperty Name="Demo" ColumnName="Demo" />
                 <ScalarProperty Name="Stock" ColumnName="Stock" />

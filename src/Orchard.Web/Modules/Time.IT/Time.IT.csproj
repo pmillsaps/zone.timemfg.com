@@ -47,16 +47,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -83,10 +85,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Controllers\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Styles\style.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -113,17 +117,111 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Monitors\Create.cshtml" />
-    <Content Include="Views\Monitors\Delete.cshtml" />
-    <Content Include="Views\Monitors\Details.cshtml" />
-    <Content Include="Views\Monitors\Edit.cshtml" />
-    <Content Include="Views\Monitors\Index.cshtml" />
     <Content Include="Views\Computers\_NIC.cshtml" />
     <Content Include="Views\NIC\Create.cshtml" />
     <Content Include="Views\NIC\Delete.cshtml" />
     <Content Include="Views\NIC\Details.cshtml" />
     <Content Include="Views\NIC\Edit.cshtml" />
     <Content Include="Views\NIC\Index.cshtml" />
+    <Content Include="Views\Computers\AddNIC.cshtml" />
+    <Content Include="Views\Users\_Monitors.cshtml" />
+    <Content Include="Views\Users\_Licenses.cshtml" />
+    <Content Include="Views\Users\AddMonitor.cshtml" />
+    <Content Include="Views\Manufacturer\Create.cshtml" />
+    <Content Include="Views\Manufacturer\Delete.cshtml" />
+    <Content Include="Views\Manufacturer\Details.cshtml" />
+    <Content Include="Views\Manufacturer\Edit.cshtml" />
+    <Content Include="Views\Manufacturer\Index.cshtml" />
+    <Content Include="Views\Users\_Computers.cshtml" />
+    <Content Include="Views\Users\LinkMonitor.cshtml" />
+    <Content Include="Views\Users\LinkComputer.cshtml" />
+    <Content Include="Views\Users\LinkLicense.cshtml" />
+    <Content Include="Views\Monitor\Create.cshtml" />
+    <Content Include="Views\Monitor\Delete.cshtml" />
+    <Content Include="Views\Monitor\Details.cshtml" />
+    <Content Include="Views\Monitor\Edit.cshtml" />
+    <Content Include="Views\Monitor\Index.cshtml" />
+    <Content Include="Views\Building\Create.cshtml" />
+    <Content Include="Views\Building\Delete.cshtml" />
+    <Content Include="Views\Building\Details.cshtml" />
+    <Content Include="Views\Building\Edit.cshtml" />
+    <Content Include="Views\Building\Index.cshtml" />
+    <Content Include="Views\DeviceType\Create.cshtml" />
+    <Content Include="Views\DeviceType\Delete.cshtml" />
+    <Content Include="Views\DeviceType\Details.cshtml" />
+    <Content Include="Views\DeviceType\Edit.cshtml" />
+    <Content Include="Views\DeviceType\Index.cshtml" />
+    <Content Include="Views\CableNo\Create.cshtml" />
+    <Content Include="Views\CableNo\Delete.cshtml" />
+    <Content Include="Views\CableNo\Details.cshtml" />
+    <Content Include="Views\CableNo\Edit.cshtml" />
+    <Content Include="Views\CableNo\Index.cshtml" />
+    <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\Location\Delete.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\Location\Edit.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Memory\Create.cshtml" />
+    <Content Include="Views\Memory\Delete.cshtml" />
+    <Content Include="Views\Memory\Details.cshtml" />
+    <Content Include="Views\Memory\Edit.cshtml" />
+    <Content Include="Views\Memory\Index.cshtml" />
+    <Content Include="Views\Model\Create.cshtml" />
+    <Content Include="Views\Model\Delete.cshtml" />
+    <Content Include="Views\Model\Details.cshtml" />
+    <Content Include="Views\Model\Edit.cshtml" />
+    <Content Include="Views\Model\Index.cshtml" />
+    <Content Include="Views\MonitorSize\Create.cshtml" />
+    <Content Include="Views\MonitorSize\Delete.cshtml" />
+    <Content Include="Views\MonitorSize\Details.cshtml" />
+    <Content Include="Views\MonitorSize\Edit.cshtml" />
+    <Content Include="Views\MonitorSize\Index.cshtml" />
+    <Content Include="Views\NICSpeed\Create.cshtml" />
+    <Content Include="Views\NICSpeed\Delete.cshtml" />
+    <Content Include="Views\NICSpeed\Details.cshtml" />
+    <Content Include="Views\NICSpeed\Edit.cshtml" />
+    <Content Include="Views\NICSpeed\Index.cshtml" />
+    <Content Include="Views\OS\Create.cshtml" />
+    <Content Include="Views\OS\Delete.cshtml" />
+    <Content Include="Views\OS\Details.cshtml" />
+    <Content Include="Views\OS\Edit.cshtml" />
+    <Content Include="Views\OS\Index.cshtml" />
+    <Content Include="Views\Processor\Create.cshtml" />
+    <Content Include="Views\Processor\Delete.cshtml" />
+    <Content Include="Views\Processor\Details.cshtml" />
+    <Content Include="Views\Processor\Edit.cshtml" />
+    <Content Include="Views\Processor\Index.cshtml" />
+    <Content Include="Views\Sound\Create.cshtml" />
+    <Content Include="Views\Sound\Delete.cshtml" />
+    <Content Include="Views\Sound\Details.cshtml" />
+    <Content Include="Views\Sound\Edit.cshtml" />
+    <Content Include="Views\Sound\Index.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Delete.cshtml" />
+    <Content Include="Views\Status\Details.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Port\Create.cshtml" />
+    <Content Include="Views\Port\Delete.cshtml" />
+    <Content Include="Views\Port\Details.cshtml" />
+    <Content Include="Views\Port\Edit.cshtml" />
+    <Content Include="Views\Port\Index.cshtml" />
+    <Content Include="Views\Video\Create.cshtml" />
+    <Content Include="Views\Video\Delete.cshtml" />
+    <Content Include="Views\Video\Details.cshtml" />
+    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\Licenses\_Computers.cshtml" />
+    <Content Include="Views\Licenses\_Users.cshtml" />
+    <Content Include="Views\Computers\_Licenses.cshtml" />
+    <Content Include="Views\Computers\LinkLicense.cshtml" />
+    <Content Include="Views\ScheduledTasks\Create.cshtml" />
+    <Content Include="Views\ScheduledTasks\Delete.cshtml" />
+    <Content Include="Views\ScheduledTasks\Details.cshtml" />
+    <Content Include="Views\ScheduledTasks\Edit.cshtml" />
+    <Content Include="Views\ScheduledTasks\Index.cshtml" />
+    <Content Include="Views\Computers\_ScheduledTasks.cshtml" />
+    <Content Include="Views\Computers\AddScheduledTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -136,16 +234,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BuildingController.cs" />
+    <Compile Include="Controllers\CableNoController.cs" />
     <Compile Include="Controllers\ComputersController.cs" />
+    <Compile Include="Controllers\DeviceTypeController.cs" />
     <Compile Include="Controllers\ITController.cs" />
     <Compile Include="Controllers\LicensesController.cs" />
     <Compile Include="Controllers\LicenseTypeController.cs" />
-    <Compile Include="Controllers\MonitorsController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\MemoryController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
+    <Compile Include="Controllers\MonitorController.cs" />
+    <Compile Include="Controllers\MonitorSizeController.cs" />
     <Compile Include="Controllers\NICController.cs" />
+    <Compile Include="Controllers\NICSpeedController.cs" />
+    <Compile Include="Controllers\OSController.cs" />
+    <Compile Include="Controllers\PortController.cs" />
+    <Compile Include="Controllers\ProcessorController.cs" />
+    <Compile Include="Controllers\ScheduledTasksController.cs" />
+    <Compile Include="Controllers\SoundController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="ViewModel\LinkLicenseViewModel.cs" />
+    <Compile Include="ViewModel\LinkComputerViewModel.cs" />
+    <Compile Include="ViewModel\LinkMonitorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helpers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

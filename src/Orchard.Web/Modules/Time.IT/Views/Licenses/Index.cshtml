@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.License>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "License Index";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,13 +18,16 @@
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LicenseKey)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.QuantityAssigned)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ComputerId)
+            @Html.DisplayNameFor(model => model.LicenseKey)
+        </th>
+        <th>
+            Computer
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PO)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Note)
@@ -39,19 +42,34 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                @*@Html.DisplayFor(modelItem => item.Name)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityAssigned)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LicenseKey)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuantityAssigned)
+                @if (item.Computers.Count() + item.Users.Count() == 1)
+                {
+                    if (item.Computers.Count() == 1)
+                    {
+                        @item.Computers.FirstOrDefault().Name
+                    }
+                    if (item.Users.Count() == 1)
+                    {
+                        @item.Users.FirstOrDefault().Name
+                    }
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ComputerId)
+                @Html.DisplayFor(modelItem => item.PO)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
@@ -60,11 +78,8 @@
                 @Html.DisplayFor(modelItem => item.Ref_LicenseType.LicenseType)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
-
 </table>

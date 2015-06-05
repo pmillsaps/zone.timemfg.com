@@ -16,6 +16,7 @@ namespace Time.Support.Helpers
     public interface INotifications
     {
         void SetupEmail();
+
         void SendEmail();
     }
 
@@ -39,11 +40,11 @@ namespace Time.Support.Helpers
                 if (String.IsNullOrEmpty(_TemplatePath))
                 {
                     // _TemplatePath = sr.GetSettings("TemplatePath");
-                    _TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates");
+                    _TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.Support/Content/EmailTemplates");
                     if (String.IsNullOrEmpty(_TemplatePath))
                         throw new Exception("Template Path was not set");
                 }
-                    
+
                 return _TemplatePath;
             }
             set
@@ -216,24 +217,24 @@ namespace Time.Support.Helpers
 
         private void BuildEmailBody()
         {
-            var header = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/NotificationHeader.htm");
-                // HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationHeader.htm"));
-            var footer = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/NotificationFooter.htm");
-                // HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationFooter.htm"));
+            var header = HttpContext.Current.Server.MapPath("~/Modules/Time.Support/Content/EmailTemplates/NotificationHeader.htm");
+            // HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationHeader.htm"));
+            var footer = HttpContext.Current.Server.MapPath("~/Modules/Time.Support/Content/EmailTemplates/NotificationFooter.htm");
+            // HttpContext.Current.Server.MapPath(Path.Combine(TemplatePath, "NotificationFooter.htm"));
             string h, f;
-            
+
             using (var path = new StreamReader(header))
             {
                 var blah = path.ReadToEnd();
                 h = blah;
             }
-            
+
             using (var path = new StreamReader(footer))
             {
                 var blah = path.ReadToEnd();
                 f = blah;
             }
-            
+
             using (var path = new StreamReader(TemplatePath))
             {
                 //if (!tp.TicketStatusesReference.IsLoaded)
@@ -277,7 +278,7 @@ namespace Time.Support.Helpers
         {
             //if (!tp.TicketEmployeesReference.IsLoaded)
             //    tp.TicketEmployeesReference.Load();
-            TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/AssignmentNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.Support/Content/EmailTemplates/AssignmentNotification.htm");
 
             // TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\AssignmentNotification.htm");
             SendTo.Add(GetEmailforNTUser(tp.TicketEmployee.NTLogin));
@@ -296,7 +297,7 @@ namespace Time.Support.Helpers
         {
             //if (!tp.TicketEmployeesReference.IsLoaded)
             //    tp.TicketEmployeesReference.Load();
-            TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.OrderLog/Content/EmailTemplates/AssignmentNotificationUser.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath("~/Modules/Time.Support/Content/EmailTemplates/AssignmentNotificationUser.htm");
 
             // TemplatePath = HttpContext.Current.Server.MapPath(@"~\Content\EmailTemplates\AssignmentNotificationUser.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
@@ -316,7 +317,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/NewTicketNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/NewTicketNotification.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
@@ -334,7 +335,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/SupervisorNewTicketNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/SupervisorNewTicketNotification.htm");
             var e = GetEmailforNTUser(tp.TicketDepartment.TicketEmployee.NTLogin);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
@@ -352,7 +353,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/CompletionPendingNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/CompletionPendingNotification.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
@@ -370,7 +371,7 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/ApprovedNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/ApprovedNotification.htm");
             var e = GetEmailforNTUser(tp.RequestedBy);
             AddEmailSendToBcc(e);
 
@@ -405,8 +406,72 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.OrderLog/Content/EmailTemplates/UpdateNotification.htm");
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/UpdateNotification.htm");
             Subject = String.Format("[Ticket #{0}] Updated - {1}", tp.TicketID, tp.Title);
+        }
+    }
+
+    public class TaskAssignmentNotification : EmailNotifications
+    {
+        public TaskAssignmentNotification(TicketProject ticket)
+            : base(ticket)
+        {
+            var e = GetEmailforNTUser(tp.RequestedBy);
+            SendTo.Add(e);
+        }
+
+        public TaskAssignmentNotification(TicketProject ticket, string userName)
+            : base(ticket)
+        {
+            var e = GetEmailforNTUser(userName);
+            SendTo.Add(e);
+        }
+
+        public TaskAssignmentNotification(TicketProject ticket, string userName, string statusMessage = "")
+            : base(ticket, statusMessage)
+        {
+            var e = GetEmailforNTUser(userName);
+            SendTo.Add(e);
+            // Additionalbody = note.Note;
+            if (!String.IsNullOrEmpty(statusMessage)) Additionalbody = statusMessage;
+        }
+
+        public override void SetupEmail()
+        {
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/TaskAssignmentNotification.htm");
+            Subject = String.Format("[Ticket #{0}] {1} A New Task Has Been Assigned To You", tp.TicketID, tp.Title);
+        }
+    }
+
+    public class TaskCompletedNotification : EmailNotifications
+    {
+        public TaskCompletedNotification(TicketProject ticket)
+            : base(ticket)
+        {
+            var e = GetEmailforNTUser(tp.RequestedBy);
+            SendTo.Add(e);
+        }
+
+        public TaskCompletedNotification(TicketProject ticket, string userName)
+            : base(ticket)
+        {
+            var e = GetEmailforNTUser(userName);
+            SendTo.Add(e);
+        }
+
+        public TaskCompletedNotification(TicketProject ticket, string userName, string statusMessage = "")
+            : base(ticket, statusMessage)
+        {
+            var e = GetEmailforNTUser(userName);
+            SendTo.Add(e);
+            // Additionalbody = note.Note;
+            if (!String.IsNullOrEmpty(statusMessage)) Additionalbody = statusMessage;
+        }
+
+        public override void SetupEmail()
+        {
+            TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/TaskCompletedNotification.htm");
+            Subject = String.Format("[Ticket #{0}] {1} The Task Below has been completed", tp.TicketID, tp.Title);
         }
     }
 }

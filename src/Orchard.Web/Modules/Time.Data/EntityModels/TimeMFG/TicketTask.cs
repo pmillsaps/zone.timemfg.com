@@ -21,6 +21,8 @@ namespace Time.Data.EntityModels.TimeMFG
         public bool Completed { get; set; }
         public Nullable<System.DateTime> CompletionDate { get; set; }
         public string Notes { get; set; }
+        public string Requestor { get; set; }
+        public System.DateTime RequestDate { get; set; }
     
         public virtual TicketEmployee TicketEmployee { get; set; }
         public virtual TicketProject TicketProject { get; set; }

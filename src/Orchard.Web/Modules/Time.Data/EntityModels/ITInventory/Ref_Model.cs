@@ -23,7 +23,7 @@ namespace Time.Data.EntityModels.ITInventory
         public string Model { get; set; }
         public Nullable<int> ManufacturerId { get; set; }
     
-        public virtual ICollection<Computer> Computers { get; set; }
         public virtual Ref_Manufacturer Ref_Manufacturer { get; set; }
+        public virtual ICollection<Computer> Computers { get; set; }
     }
 }

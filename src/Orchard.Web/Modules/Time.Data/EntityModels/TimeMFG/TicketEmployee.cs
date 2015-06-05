@@ -31,7 +31,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public string EmailName { get; set; }
         public string Extension { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
-        public Nullable<bool> InActive { get; set; }
+        public bool InActive { get; set; }
     
         public virtual ICollection<TicketDepartment> TicketDepartments { get; set; }
         public virtual ICollection<TicketProject> TicketProjects { get; set; }

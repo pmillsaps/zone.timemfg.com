@@ -10,11 +10,14 @@ namespace Time.Support.Models
     {
         public bool Admin { get; set; }
         public bool IT { get; set; }
+        public int TaskCount { get; set; }
+        public int MyTicketCount { get; set; }
+        public int MyOpenTicketCount { get; set; }
 
         public List<Department> OpenTicketsbyDepartment { get; set; }
         public List<Status> OpenTicketsbyStatus { get; set; }
         public List<Status> MyOpenTicketsbyStatus { get; set; }
-        
+
         public List<Category> OpenTicketsbyCategory { get; set; }
         public List<AssignedTo> OpenTicketsbyAssignment { get; set; }
     }

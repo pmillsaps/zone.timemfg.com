@@ -20,10 +20,6 @@ namespace Time.Support.Controllers
     [Themed]
     public class TicketController : Controller
     {
-        #region Public Properties
-
-        #endregion Public Properties
-
         public IOrchardServices Services { get; set; }
 
         public Localizer T { get; set; }
@@ -76,6 +72,10 @@ namespace Time.Support.Controllers
                 .Select(data => new Status { TicketStatus = data.TicketStatus, Count = data.TicketStatus.TicketProjects.Count(x => x.TicketStatus.isOpen) })
                 .OrderBy(x => x.TicketStatus.Name).ToList();
 
+            vm.TaskCount = _db.TicketTasks.Count(x => x.TicketEmployee.NTLogin == HttpContext.User.Identity.Name && x.Completed != true);
+            vm.MyTicketCount = _db.TicketProjects.Count(x => x.RequestedBy == HttpContext.User.Identity.Name);
+            vm.MyOpenTicketCount = _db.TicketProjects.Count(x => x.RequestedBy == HttpContext.User.Identity.Name && x.TicketStatus.isOpen);
+
             if (Services.Authorizer.Authorize(Permissions.SupportAdmin))
             {
                 vm.Admin = true;
@@ -120,7 +120,7 @@ namespace Time.Support.Controllers
             var qry = _db.TicketProjects.Where(c => c.TicketID == id).FirstOrDefault();
             if (qry == null) return RedirectToAction("Index");
 
-            var vm = new TicketViewModel() { Ticket = qry , Tasks= qry.TicketTasks};
+            var vm = new TicketViewModel() { Ticket = qry, Tasks = qry.TicketTasks };
             if (Services.Authorizer.Authorize(Permissions.SupportAdmin))
             {
                 vm.Admin = true;
@@ -130,7 +130,6 @@ namespace Time.Support.Controllers
                 vm.IT = true;
             }
             GenerateDropDowns(vm, qry);
-
 
             //qry = SortandPage(qry);
 
@@ -319,8 +318,7 @@ namespace Time.Support.Controllers
                 msg += string.Format("Status was changed: {0} -> {1}", ticket.TicketStatus.Name, stat.Name);
             }
 
-            
-            // Save all database changes 
+            // Save all database changes
 
             _db.SaveChanges();
 
@@ -328,7 +326,7 @@ namespace Time.Support.Controllers
 
             //int PriorityID = items.GetValue("PriorityID").ConvertTo(int);
             TempData["message"] = msg;
-            return RedirectToAction("Info", new { id = ticketProject.TicketID});
+            return RedirectToAction("Info", new { id = ticketProject.TicketID });
         }
 
         //[HttpPost]
@@ -337,13 +335,12 @@ namespace Time.Support.Controllers
         //    return RedirectToAction("Info", new { id = ticketProject.Ticket.TicketID });
         //}
 
-
         public ActionResult MyStatus(int id)
         {
             var login = HttpContext.User.Identity.Name;
             var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketStatus.StatusID == id && x.TicketEmployee.NTLogin == login);
             ViewBag.Title = string.Format("[{0}] My Tickets", _db.TicketStatuses.Single(x => x.StatusID == id).Name);
-            return View("Index",tickets);
+            return View("Index", tickets);
         }
 
         public ActionResult Status(int id)
@@ -424,7 +421,6 @@ namespace Time.Support.Controllers
 
         private void GenerateDropDowns(TicketViewModel vm, TicketProject ticketProject)
         {
-
             vm.CategoryID = new SelectList(_db.TicketCategories.Where(x => x.isActive == true).OrderBy(x => x.Name), "CategoryID", "Name", ticketProject.CategoryID);
             vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
             vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
@@ -486,28 +482,46 @@ namespace Time.Support.Controllers
 
         #region TicketTasks
 
+        // GET: TicketTasks
+        public async Task<ActionResult> MyTasks()
+        {
+            var user = System.Web.HttpContext.Current.User.Identity.Name;
+            var ticketTasks = _db.TicketTasks.Where(x => x.TicketEmployee.NTLogin == user && x.Completed != true).OrderBy(x => x.TicketProject.Title).ThenBy(x => x.ID).Include(t => t.TicketEmployee).Include(t => t.TicketProject);
+            return View(await ticketTasks.ToListAsync());
+        }
+
         // GET: TicketTasks/Create
         [HttpGet]
         public ActionResult AddTask(int id)
         {
-            var task = new TicketTask{ TicketID = id };
+            var task = new TicketTask { TicketID = id };
             ViewBag.AssignedTo = new SelectList(_db.TicketEmployees.OrderBy(x => x.FirstName), "EmployeeID", "FullName");
             //ViewBag.TicketID = new SelectList(_db.TicketProjects, "TicketID", "Title");
             return View(task);
         }
 
         // POST: TicketTasks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddTask([Bind(Include = "ID,TicketID,AssignedTo,Task,Completed,CompletionDate,Notes")] TicketTask ticketTask)
+        public async Task<ActionResult> AddTask([Bind(Exclude = "ID")] TicketTask ticketTask)
         {
+            ticketTask.RequestDate = DateTime.Now;
+            ticketTask.Requestor = System.Web.HttpContext.Current.User.Identity.Name;
+
             if (ModelState.IsValid)
             {
                 _db.TicketTasks.Add(ticketTask);
                 await _db.SaveChangesAsync();
-                return RedirectToAction("Info", new { id = ticketTask.TicketID});
+                if (ticketTask.AssignedTo != null)
+                {
+                    var ticket = _db.TicketProjects.Single(x => x.TicketID == ticketTask.TicketID);
+                    var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketTask.AssignedTo);
+                    ticketTask.TicketEmployee = emp;
+                    ticket.SendTaskAssignmentNotification(ticketTask);
+                }
+                return RedirectToAction("Info", new { id = ticketTask.TicketID });
             }
 
             ViewBag.AssignedTo = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName", ticketTask.AssignedTo);
@@ -523,15 +537,50 @@ namespace Time.Support.Controllers
 
             ViewBag.AssignedTo = new SelectList(_db.TicketEmployees.OrderBy(x => x.FirstName), "EmployeeID", "FullName", task.AssignedTo);
             //ViewBag.TicketID = new SelectList(_db.TicketProjects, "TicketID", "Title");
+
             return View(task);
         }
 
         // POST: TicketTasks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditTask(TicketTask task)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var original = _db.TicketTasks.AsNoTracking().Single(x => x.ID == task.ID);
+
+        //        _db.Entry(task).State = EntityState.Modified;
+        //        _db.SaveChanges();
+
+        //        if (original.AssignedTo != null && (task.AssignedTo == null || original.AssignedTo != task.AssignedTo))
+        //        {
+        //            var ticket = _db.TicketProjects.Single(x => x.TicketID == task.TicketID);
+        //            var emp = _db.TicketEmployees.Single(x => x.EmployeeID == task.AssignedTo);
+        //            task.TicketEmployee = emp;
+        //            ticket.SendTaskAssignmentNotification(task);
+        //        }
+
+        //        if (task.Completed && !original.Completed)
+        //        {
+        //            var ticket = _db.TicketProjects.Single(x => x.TicketID == task.TicketID);
+        //            var emp = _db.TicketEmployees.Single(x => x.EmployeeID == task.AssignedTo);
+        //            task.TicketEmployee = emp;
+        //            ticket.SendTaskCompletedNotification(task);
+        //        }
+
+        //        return RedirectToAction("Info", new { id = task.TicketID });
+        //    }
+
+        //    ViewBag.AssignedTo = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName", task.AssignedTo);
+        //    return View(task);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditTask([Bind(Include = "ID,TicketID,AssignedTo,Task,Completed,CompletionDate,Notes")] TicketTask ticketTask)
+        public async Task<ActionResult> EditTask(TicketTask ticketTask)
         {
             if (ModelState.IsValid)
             {
@@ -539,8 +588,8 @@ namespace Time.Support.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Info", new { id = ticketTask.TicketID });
             }
-
             ViewBag.AssignedTo = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName", ticketTask.AssignedTo);
+            //ViewBag.TicketID = new SelectList(_db.TicketProjects, "TicketID", "Title", ticketTask.TicketID);
             return View(ticketTask);
         }
 
@@ -568,10 +617,9 @@ namespace Time.Support.Controllers
             var ticketID = ticketTask.TicketID;
             _db.TicketTasks.Remove(ticketTask);
             await _db.SaveChangesAsync();
-            return RedirectToAction("Info", new { id = ticketID});
+            return RedirectToAction("Info", new { id = ticketID });
         }
 
-        #endregion
-
+        #endregion TicketTasks
     }
 }

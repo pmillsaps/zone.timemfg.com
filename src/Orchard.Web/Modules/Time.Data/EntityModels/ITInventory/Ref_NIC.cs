@@ -14,11 +14,6 @@ namespace Time.Data.EntityModels.ITInventory
     
     public partial class Ref_NIC
     {
-        public Ref_NIC()
-        {
-            this.Computers = new HashSet<Computer>();
-        }
-    
         public int Id { get; set; }
         public string MAC { get; set; }
         public string IP { get; set; }
@@ -26,10 +21,11 @@ namespace Time.Data.EntityModels.ITInventory
         public string Type { get; set; }
         public Nullable<int> SwitchPortId { get; set; }
         public Nullable<int> CableId { get; set; }
+        public Nullable<int> ComputerId { get; set; }
     
         public virtual Ref_CableNo Ref_CableNo { get; set; }
         public virtual Ref_NICSpeed Ref_NICSpeed { get; set; }
         public virtual Ref_SwitchPort Ref_SwitchPort { get; set; }
-        public virtual ICollection<Computer> Computers { get; set; }
+        public virtual Computer Computer { get; set; }
     }
 }

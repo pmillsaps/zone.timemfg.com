@@ -142,7 +142,7 @@
           <Key>
             <PropertyRef Name="DepartmentID" />
           </Key>
-          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Prefix" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
@@ -166,11 +166,11 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketDivision' does not have a primar
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="30" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="NTLogin" Type="varchar" MaxLength="50" />
-          <Property Name="EmailName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NTLogin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Extension" Type="nvarchar" MaxLength="30" />
           <Property Name="Birthdate" Type="datetime" />
-          <Property Name="InActive" Type="bit" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketLinks">
           <Key>
@@ -273,6 +273,8 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <Property Name="Completed" Type="bit" Nullable="false" />
           <Property Name="CompletionDate" Type="datetime" />
           <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Requestor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketVisibility">
           <Key>
@@ -850,11 +852,11 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NTLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmailName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NTLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Extension" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="3" />
-          <Property Name="InActive" Type="Boolean" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TicketDepartments" Relationship="Self.FK_TicketDepartment_TicketEmployees" FromRole="TicketEmployees" ToRole="TicketDepartment" />
           <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketEmployees" FromRole="TicketEmployees" ToRole="TicketProjects" />
           <NavigationProperty Name="TicketProjects1" Relationship="Self.FK_TicketProjects_TicketEmployees1" FromRole="TicketEmployees" ToRole="TicketProjects" />
@@ -967,6 +969,8 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TicketEmployee" Relationship="Self.FK_TicketTasks_TicketEmployees" FromRole="TicketTasks" ToRole="TicketEmployees" />
           <NavigationProperty Name="TicketProject" Relationship="Self.FK_TicketTasks_TicketProjects" FromRole="TicketTasks" ToRole="TicketProjects" />
+          <Property Name="Requestor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="TicketDivision">
           <Key>
@@ -1621,6 +1625,8 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySetMapping Name="TicketTasks">
             <EntityTypeMapping TypeName="TimeMFGModel.TicketTask">
               <MappingFragment StoreEntitySet="TicketTasks">
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Requestor" ColumnName="Requestor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TicketID" ColumnName="TicketID" />
                 <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />

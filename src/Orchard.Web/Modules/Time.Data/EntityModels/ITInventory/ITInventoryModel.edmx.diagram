@@ -4,53 +4,53 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="89a44c85ef754f91a7a7018135960e8e" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="ITInventoryModel.Computer" Width="1.5" PointX="10.75" PointY="3.875" />
-        <EntityTypeShape EntityType="ITInventoryModel.License" Width="1.5" PointX="13" PointY="1.25" />
-        <EntityTypeShape EntityType="ITInventoryModel.Monitor" Width="1.5" PointX="8.5" PointY="8.5" />
+      <Diagram DiagramId="89a44c85ef754f91a7a7018135960e8e" Name="Diagram1" ZoomLevel="108">
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Building" Width="1.5" PointX="6.375" PointY="10.125" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_BuildYear" Width="1.5" PointX="5.875" PointY="1" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_CableNo" Width="1.5" PointX="15.625" PointY="1.25" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_DeviceType" Width="1.5" PointX="3.25" PointY="8.625" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_LicenseType" Width="1.5" PointX="10.75" PointY="1.125" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Location" Width="1.5" PointX="10.75" PointY="10.75" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_Manufacturer" Width="1.5" PointX="6.25" PointY="7.875" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Memory" Width="1.5" PointX="3.25" PointY="1.125" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Model" Width="1.5" PointX="8.5" PointY="5.75" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_NIC" Width="1.5" PointX="16" PointY="5.25" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_NICSpeed" Width="1.5" PointX="13.75" PointY="10.625" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Processor" Width="1.5" PointX="3.25" PointY="11" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Sound" Width="1.5" PointX="3.25" PointY="3.625" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_Status" Width="1.5" PointX="8.5" PointY="1.125" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_SwitchPort" Width="1.5" PointX="15.75" PointY="10.625" />
         <EntityTypeShape EntityType="ITInventoryModel.Ref_VideoCard" Width="1.5" PointX="3.25" PointY="6" />
-        <EntityTypeShape EntityType="ITInventoryModel.User" Width="1.5" PointX="13" PointY="5.75" />
-        <AssociationConnector Association="ITInventoryModel.FK_Computer__BuildYear" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_OS" Width="1.5" PointX="5.375" PointY="3.875" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_MonitorSizes" Width="1.5" PointX="5.375" PointY="12.875" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_Manufacturer" Width="1.5" PointX="6.25" PointY="7.125" />
+        <AssociationConnector Association="ITInventoryModel.FK__Model_Manufacturer" />
+        <EntityTypeShape EntityType="ITInventoryModel.Monitor" Width="1.5" PointX="20.5" PointY="8.5" />
+        <EntityTypeShape EntityType="ITInventoryModel.User" Width="1.5" PointX="18.25" PointY="6.125" />
+        <AssociationConnector Association="ITInventoryModel.FK_Monitor_Manufacturer" />
+        <AssociationConnector Association="ITInventoryModel.FK_Monitor_Ref_MonitorSizes" />
+        <AssociationConnector Association="ITInventoryModel.FK_Monitor_User" />
+        <AssociationConnector Association="ITInventoryModel.FK_User__Building" />
+        <AssociationConnector Association="ITInventoryModel.FK_User__Location" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_CableNo" Width="1.5" PointX="10.75" PointY="13.375" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_NIC" Width="1.5" PointX="13" PointY="8.875" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_NICSpeed" Width="1.5" PointX="10.75" PointY="15.75" />
+        <EntityTypeShape EntityType="ITInventoryModel.Ref_SwitchPort" Width="1.5" PointX="10.75" PointY="18.125" />
+        <AssociationConnector Association="ITInventoryModel.FK_Ref_NIC_Ref_CableNo" />
+        <AssociationConnector Association="ITInventoryModel.FK_NIC__NICSpeed" />
+        <AssociationConnector Association="ITInventoryModel.FK_Ref_NIC_Ref_SwitchPort" />
+        <EntityTypeShape EntityType="ITInventoryModel.Computer" Width="1.5" PointX="20.5" PointY="0.75" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer__Memory" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer__Model" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer__Status" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer__VideoCard" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer_Ref_DeviceType" />
+        <AssociationConnector Association="ITInventoryModel.FK_Computer_Ref_OS" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer_Ref_Processor" />
         <AssociationConnector Association="ITInventoryModel.FK_Computer_Ref_Sound" />
+        <AssociationConnector Association="ITInventoryModel.FK_Computer_User" />
+        <AssociationConnector Association="ITInventoryModel.FK_Ref_NIC_Computer" />
+        <EntityTypeShape EntityType="ITInventoryModel.License" Width="1.5" PointX="12.5" PointY="4.625" />
         <AssociationConnector Association="ITInventoryModel.FK_License_Ref_LicenseType" />
-        <AssociationConnector Association="ITInventoryModel.FK_Monitor_Manufacturer" />
-        <AssociationConnector Association="ITInventoryModel.FK_User__Building" />
-        <AssociationConnector Association="ITInventoryModel.FK_NIC__CableNo" />
-        <AssociationConnector Association="ITInventoryModel.FK_User__Location" />
-        <AssociationConnector Association="ITInventoryModel.FK__Model_Manufacturer" />
-        <AssociationConnector Association="ITInventoryModel.FK_NIC__NICSpeed" />
-        <AssociationConnector Association="ITInventoryModel.FK_NIC__SwitchPort" />
         <AssociationConnector Association="ITInventoryModel.Computer_License" />
-        <AssociationConnector Association="ITInventoryModel.Computer_NIC" />
-        <AssociationConnector Association="ITInventoryModel.User_Computer" />
         <AssociationConnector Association="ITInventoryModel.User_License" />
-        <AssociationConnector Association="ITInventoryModel.User_Monitor" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_OS" Width="1.5" PointX="5.375" PointY="3.875" />
-        <AssociationConnector Association="ITInventoryModel.FK_Computer_Ref_OS" />
-        <EntityTypeShape EntityType="ITInventoryModel.Ref_MonitorSizes" Width="1.5" PointX="5.375" PointY="12.875" />
-        <AssociationConnector Association="ITInventoryModel.FK_Monitor_Ref_MonitorSizes" />
-      </Diagram>
+        <EntityTypeShape EntityType="ITInventoryModel.ScheduledTask" Width="1.5" PointX="22.75" PointY="2.25" />
+        <AssociationConnector Association="ITInventoryModel.FK_ScheduledTasks_Computer" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

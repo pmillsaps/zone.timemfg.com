@@ -16,14 +16,14 @@ namespace Time.Data.EntityModels.ITInventory
     {
         public Ref_Manufacturer()
         {
-            this.Monitors = new HashSet<Monitor>();
             this.Ref_Model = new HashSet<Ref_Model>();
+            this.Monitors = new HashSet<Monitor>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Monitor> Monitors { get; set; }
         public virtual ICollection<Ref_Model> Ref_Model { get; set; }
+        public virtual ICollection<Monitor> Monitors { get; set; }
     }
 }

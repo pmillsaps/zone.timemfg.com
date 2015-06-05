@@ -50,11 +50,13 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MoreLinq">
@@ -86,6 +88,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\EmailTemplates\ApprovedNotification.htm" />
+    <Content Include="Content\EmailTemplates\TaskCompletedNotification.htm" />
+    <Content Include="Content\EmailTemplates\TaskAssignmentNotification.htm" />
     <Content Include="Content\EmailTemplates\AssignmentNotification.htm" />
     <Content Include="Content\EmailTemplates\AssignmentNotificationUser.htm" />
     <Content Include="Content\EmailTemplates\CompletionPendingNotification.htm" />
@@ -102,7 +106,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -124,7 +128,7 @@
     <Content Include="Views\TicketTasks\Details.cshtml" />
     <Content Include="Views\TicketTasks\Edit.cshtml" />
     <Content Include="Views\TicketTasks\Index.cshtml" />
-    <Content Include="Views\Ticket\EditTask.cshtml" />
+    <Content Include="Views\Ticket\EditTask_Old.cshtml" />
     <Content Include="Views\EditorTemplates\SupportSettingsPart.cshtml" />
     <Content Include="Views\AdminSupport\Create.cshtml" />
     <Content Include="Views\AdminSupport\Delete.cshtml" />
@@ -142,6 +146,10 @@
     <Content Include="Views\Water\Details.cshtml" />
     <Content Include="Views\Water\Edit.cshtml" />
     <Content Include="Views\Water\Index.cshtml" />
+    <Content Include="Views\TicketTasks\MyTasks.cshtml" />
+    <Content Include="Views\Ticket\MyTasks.cshtml" />
+    <Content Include="Views\Ticket\_TicketTask.cshtml" />
+    <Content Include="Views\Ticket\EditTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

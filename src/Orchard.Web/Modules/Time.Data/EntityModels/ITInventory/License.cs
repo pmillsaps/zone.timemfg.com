@@ -22,11 +22,13 @@ namespace Time.Data.EntityModels.ITInventory
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public int Quantity { get; set; }
         public string LicenseKey { get; set; }
-        public Nullable<int> QuantityAssigned { get; set; }
+        public int QuantityAssigned { get; set; }
         public Nullable<int> ComputerId { get; set; }
         public Nullable<int> LicenseTypeId { get; set; }
+        public string PO { get; set; }
+        public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string Note { get; set; }
     
         public virtual Ref_LicenseType Ref_LicenseType { get; set; }

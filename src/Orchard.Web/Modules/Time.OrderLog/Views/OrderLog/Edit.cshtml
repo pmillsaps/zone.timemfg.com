@@ -8,7 +8,6 @@
 <h2>@ViewBag.Title</h2>
 <hr />
 
-
 @using (Html.BeginForm())
 {
     <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
@@ -88,6 +87,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.RTG)
                 @Html.ValidationMessageFor(model => model.RTG)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TruGuard, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TruGuard)
+                @Html.ValidationMessageFor(model => model.TruGuard)
             </div>
         </div>
 

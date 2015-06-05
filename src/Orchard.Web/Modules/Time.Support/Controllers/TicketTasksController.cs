@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Orchard.Themes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.TimeMFG;
+using Time.Support.Helpers;
 
 namespace Time.Support.Controllers
 {
+    [Themed]
     public class TicketTasksController : Controller
     {
         private TimeMFGEntities db = new TimeMFGEntities();
@@ -19,6 +22,14 @@ namespace Time.Support.Controllers
         public async Task<ActionResult> Index()
         {
             var ticketTasks = db.TicketTasks.Include(t => t.TicketEmployee).Include(t => t.TicketProject);
+            return View(await ticketTasks.ToListAsync());
+        }
+
+        // GET: TicketTasks
+        public async Task<ActionResult> MyTasks()
+        {
+            var user = System.Web.HttpContext.Current.User.Identity.Name;
+            var ticketTasks = db.TicketTasks.Where(x => x.TicketEmployee.NTLogin == user).Include(t => t.TicketEmployee).Include(t => t.TicketProject);
             return View(await ticketTasks.ToListAsync());
         }
 
@@ -46,16 +57,22 @@ namespace Time.Support.Controllers
         }
 
         // POST: TicketTasks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,TicketID,AssignedTo,Task,Completed,CompletionDate,Notes")] TicketTask ticketTask)
+        public ActionResult Create([Bind(Exclude = "ID")] TicketTask ticketTask)
         {
+            ticketTask.RequestDate = DateTime.Now;
+            ticketTask.Requestor = System.Web.HttpContext.Current.User.Identity.Name;
+
             if (ModelState.IsValid)
             {
                 db.TicketTasks.Add(ticketTask);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
+                var ticket = db.TicketProjects.Single(x => x.TicketID == ticketTask.TicketID);
+                ticket.SendTaskAssignmentNotification(ticketTask);
+
                 return RedirectToAction("Index");
             }
 
@@ -82,11 +99,11 @@ namespace Time.Support.Controllers
         }
 
         // POST: TicketTasks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,TicketID,AssignedTo,Task,Completed,CompletionDate,Notes")] TicketTask ticketTask)
+        public async Task<ActionResult> Edit(TicketTask ticketTask)
         {
             if (ModelState.IsValid)
             {

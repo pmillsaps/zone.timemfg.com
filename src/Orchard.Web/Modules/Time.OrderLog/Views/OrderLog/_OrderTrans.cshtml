@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Time.Data.EntityModels.OrderLog.OrderTran>
+﻿@model IEnumerable<Time.Data.EntityModels.OrderLog.OrderTran>
 
 <h3>Order Transactions</h3>
 <div class="wrap">
@@ -14,6 +13,7 @@
             <th width="20">@Html.DisplayNameFor(model => model.Stock)</th>
             <th width="20">@Html.DisplayNameFor(model => model.Demo)</th>
             <th width="20">@Html.DisplayNameFor(model => model.RTG)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.TruGuard)</th>
             <th width="400">@Html.DisplayNameFor(model => model.Comment)</th>
             <th></th>
         </tr>
@@ -44,6 +44,7 @@
                 <td align="center">@Html.DisplayFor(modelItem => item.Stock)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.Demo)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.RTG)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.TruGuard)</td>
                 <td>@Html.DisplayFor(modelItem => item.Comment)</td>
                 <td>@Html.ActionLink("Edit", "Edit", "OrderTran", new { id = item.OrderTranId }, null)</td>
             </tr>

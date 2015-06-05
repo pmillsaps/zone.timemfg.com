@@ -1,21 +1,45 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.Ref_NIC>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "NIC Index";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.TextBox("search")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-1">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    Search includes:MAC, IP, Type, Cable No, SwitchPort
+</div>
+<table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.MAC)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Computer)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Type)
@@ -32,32 +56,38 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MAC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ref_CableNo.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ref_NICSpeed.NIC_Speed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ref_SwitchPort.SwitchPort)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MAC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IP)
+            </td>
+            <td>
+                @if (item.Computer != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Computer.Name)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_CableNo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_NICSpeed.NIC_Speed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_SwitchPort.SwitchPort)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>
