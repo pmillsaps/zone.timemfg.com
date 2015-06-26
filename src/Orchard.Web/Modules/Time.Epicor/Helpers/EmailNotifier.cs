@@ -32,7 +32,7 @@ namespace Time.Support.Helpers
             message.Message = p_Body;
             message.HTML = true;
             message.Subject = p_Subject;
-            var success = MSMQ.SendQueueMessage(message, "EmailMessage");
+            var success = MSMQ.SendQueueMessage(message, MSMQ.MessageType.EmailMessage);
 
             //var svr = new SmtpClient();
             //svr.DeliveryMethod = SmtpDeliveryMethod.Network;

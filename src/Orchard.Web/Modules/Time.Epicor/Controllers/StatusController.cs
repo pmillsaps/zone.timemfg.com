@@ -51,6 +51,13 @@ namespace Time.Epicor.Controllers
                 returnMessage = String.Format("Running! - MRP started: {0:d} @ {1} by {2}: Status-{3}", record.startdate, starttime, record.submituser, record.activitymsg);
             }
 
+            var status = db.C_TMC_Status.FirstOrDefault(x => x.Name == "MRP");
+            if (status != null)
+            {
+                returnMessage += String.Format("{0}Latest MRP Status : {1}{0}{2}", Environment.NewLine, status.Complete, status.Status);
+                returnMessage = returnMessage.Replace(Environment.NewLine, "<br />").Replace("<br /><br />", "<br />");
+            }
+
             return returnMessage;
         }
 

@@ -1,0 +1,74 @@
+﻿@model Time.Data.EntityModels.TimeMFG.SysTask
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SysTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskMessage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmitUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmitUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Recurring)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recurring)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SysTaskSchedule.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SysTaskSchedule.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MfgSys803Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_TMC_Status">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="300" />
+          <Property Name="Complete" Type="bit" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MfgSys803.dbo.imjoboper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="imjoboper">
@@ -666,6 +674,7 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <Property Name="custid" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="MfgSys803ModelStoreContainer">
+          <EntitySet Name="_TMC_Status" EntityType="Self._TMC_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imjoboper" EntityType="Self.imjoboper" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [imjoboper].[intqueid] AS [intqueid], 
@@ -1853,6 +1862,7 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <EntitySet Name="systaskparams" EntityType="MfgSys803Model.systaskparam" />
           <EntitySet Name="sysagentscheds" EntityType="MfgSys803Model.sysagentsched" />
           <EntitySet Name="sysagenttasks" EntityType="MfgSys803Model.sysagenttask" />
+          <EntitySet Name="C_TMC_Status" EntityType="MfgSys803Model.C_TMC_Status" />
         </EntityContainer>
         <EntityType Name="systask">
           <Key>
@@ -1954,6 +1964,14 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <Property Name="processtasknum" Type="Int32" />
           <Property Name="PROGRESS_RECID" Type="Int64" />
           <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="C_TMC_Status">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Complete" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2607,6 +2625,15 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
                 <ScalarProperty Name="agenttasknum" ColumnName="agenttasknum" />
                 <ScalarProperty Name="agentschednum" ColumnName="agentschednum" />
                 <ScalarProperty Name="agentid" ColumnName="agentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_TMC_Status">
+            <EntityTypeMapping TypeName="MfgSys803Model.C_TMC_Status">
+              <MappingFragment StoreEntitySet="_TMC_Status">
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

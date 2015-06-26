@@ -50,6 +50,9 @@
         <EntityTypeShape EntityType="TimeMFGModel.Setting" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketVisibility" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="TimeMFGModel.WaterTest" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.SysTask" Width="1.5" PointX="16.625" PointY="6.5" />
+        <EntityTypeShape EntityType="TimeMFGModel.SysTaskSchedule" Width="1.5" PointX="13.75" PointY="4" />
+        <AssociationConnector Association="TimeMFGModel.FK_SysTask_SysTaskSchedule" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,7 +23,7 @@ namespace Time.CustomManuals.Controllers
             Services = services;
             T = NullLocalizer.Instance;
         }
-        
+
         // GET: Process
         public ActionResult Index()
         {
@@ -45,8 +45,8 @@ namespace Time.CustomManuals.Controllers
         public ActionResult CheckManuals()
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, "CustomManualCheckProblemJobs");
-            
+            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.CustomManualCheckProblemJobs);
+
             ViewBag.Title = "Send Custom Manual Status Email";
             if (success)
             {
@@ -64,7 +64,7 @@ namespace Time.CustomManuals.Controllers
         public ActionResult QueueJobsForManuals()
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, "CustomManualJobQueue");
+            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.CustomManualJobQueue);
 
             ViewBag.Title = "Queue New Jobs for Custom Manuals";
             if (success)

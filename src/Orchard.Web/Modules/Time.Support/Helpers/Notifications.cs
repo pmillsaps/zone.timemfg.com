@@ -125,7 +125,7 @@ namespace Time.Support.Helpers
             message.Message = _HtmlBody;
             message.HTML = true;
             message.Subject = _Subject;
-            var success = MSMQ.SendQueueMessage(message, "EmailMessage");
+            var success = MSMQ.SendQueueMessage(message, MSMQ.MessageType.EmailMessage);
 
             //var mail = new MailMessage();
             //if (SendTo.Count == 0 && BCCTo.Count == 0)

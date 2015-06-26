@@ -49,5 +49,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<TicketVisibility> TicketVisibilities { get; set; }
         public virtual DbSet<WaterTest> WaterTests { get; set; }
+        public virtual DbSet<SysTask> SysTasks { get; set; }
+        public virtual DbSet<SysTaskSchedule> SysTaskSchedules { get; set; }
     }
 }

@@ -117,6 +117,50 @@
           <Property Name="String" Type="bit" Nullable="false" />
           <Property Name="Int" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="SysTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="SysTaskSchedNum" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskMessage" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubmitUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Recurring" Type="bit" Nullable="false" />
+          <Property Name="EmailRecipients" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="SysTaskSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchedType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NextRunOn" Type="datetime" />
+          <Property Name="Recurrences" Type="int" Nullable="false" />
+          <Property Name="EffectiveDate" Type="datetime" />
+          <Property Name="MonthlyOption" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DayOfMonth" Type="int" Nullable="false" />
+          <Property Name="WeekOfMonth" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DayOfWeek" Type="int" Nullable="false" />
+          <Property Name="EveryNWeeks" Type="int" Nullable="false" />
+          <Property Name="LastRunOn" Type="datetime" />
+          <Property Name="Mondays" Type="bit" Nullable="false" />
+          <Property Name="Tuesdays" Type="bit" Nullable="false" />
+          <Property Name="Wednesdays" Type="bit" Nullable="false" />
+          <Property Name="Thursdays" Type="bit" Nullable="false" />
+          <Property Name="Fridays" Type="bit" Nullable="false" />
+          <Property Name="Saturdays" Type="bit" Nullable="false" />
+          <Property Name="Sundays" Type="bit" Nullable="false" />
+          <Property Name="StartHour" Type="int" Nullable="false" />
+          <Property Name="StartMinute" Type="int" Nullable="false" />
+          <Property Name="WindowStart" Type="int" Nullable="false" />
+          <Property Name="WindowEnd" Type="int" Nullable="false" />
+          <Property Name="WindowMinutes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TicketAttachments">
           <Key>
             <PropertyRef Name="AttachmentID" />
@@ -224,6 +268,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketDivision' does not have a primar
           <Property Name="CompletionDate" Type="datetime" />
           <Property Name="ApprovalCode" Type="varchar" MaxLength="50" />
           <Property Name="Focused" Type="bit" />
+          <Property Name="DateLastChanged" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -384,6 +429,18 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
             </Principal>
             <Dependent Role="LoadListJobStatus">
               <PropertyRef Name="LoadListJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysTask_SysTaskSchedule">
+          <End Role="SysTaskSchedule" Type="Self.SysTaskSchedule" Multiplicity="1" />
+          <End Role="SysTask" Type="Self.SysTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysTaskSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysTask">
+              <PropertyRef Name="SysTaskSchedNum" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -578,6 +635,8 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadListJobStatus" EntityType="Self.LoadListJobStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysTask" EntityType="Self.SysTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysTaskSchedule" EntityType="Self.SysTaskSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketAttachments" EntityType="Self.TicketAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketCategories" EntityType="Self.TicketCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketDepartment" EntityType="Self.TicketDepartment" Schema="dbo" store:Type="Tables" />
@@ -637,6 +696,10 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <AssociationSet Name="FK_LoadListJobStatus_LoadListJobs" Association="Self.FK_LoadListJobStatus_LoadListJobs">
             <End Role="LoadListJobs" EntitySet="LoadListJobs" />
             <End Role="LoadListJobStatus" EntitySet="LoadListJobStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysTask_SysTaskSchedule" Association="Self.FK_SysTask_SysTaskSchedule">
+            <End Role="SysTaskSchedule" EntitySet="SysTaskSchedule" />
+            <End Role="SysTask" EntitySet="SysTask" />
           </AssociationSet>
           <AssociationSet Name="FK_TicketAttachments_TicketProjects" Association="Self.FK_TicketAttachments_TicketProjects">
             <End Role="TicketProjects" EntitySet="TicketProjects" />
@@ -930,6 +993,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <NavigationProperty Name="TicketStatusHistories" Relationship="Self.FK_TicketStatusHistory_TicketProjects" FromRole="TicketProjects" ToRole="TicketStatusHistory" />
           <NavigationProperty Name="TicketTasks" Relationship="Self.FK_TicketTasks_TicketProjects" FromRole="TicketProjects" ToRole="TicketTasks" />
           <Property Name="Focused" Type="Boolean" />
+          <Property Name="DateLastChanged" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TicketStatus">
           <Key>
@@ -1352,6 +1416,12 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySet Name="Settings" EntityType="TimeMFGModel.Setting" />
           <EntitySet Name="TicketVisibilities" EntityType="TimeMFGModel.TicketVisibility" />
           <EntitySet Name="WaterTests" EntityType="TimeMFGModel.WaterTest" />
+          <EntitySet Name="SysTasks" EntityType="TimeMFGModel.SysTask" />
+          <EntitySet Name="SysTaskSchedules" EntityType="TimeMFGModel.SysTaskSchedule" />
+          <AssociationSet Name="FK_SysTask_SysTaskSchedule" Association="TimeMFGModel.FK_SysTask_SysTaskSchedule">
+            <End Role="SysTaskSchedule" EntitySet="SysTaskSchedules" />
+            <End Role="SysTask" EntitySet="SysTasks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -1385,6 +1455,64 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <Property Name="SysUser" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SysComputer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="SysTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="SysTaskSchedNum" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubmitUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Recurring" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysTaskSchedule" Relationship="TimeMFGModel.FK_SysTask_SysTaskSchedule" FromRole="SysTask" ToRole="SysTaskSchedule" />
+          <Property Name="EmailRecipients" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysTaskSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SchedType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NextRunOn" Type="DateTime" Precision="3" />
+          <Property Name="Recurrences" Type="Int32" Nullable="false" />
+          <Property Name="EffectiveDate" Type="DateTime" Precision="3" />
+          <Property Name="MonthlyOption" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DayOfMonth" Type="Int32" Nullable="false" />
+          <Property Name="WeekOfMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DayOfWeek" Type="Int32" Nullable="false" />
+          <Property Name="EveryNWeeks" Type="Int32" Nullable="false" />
+          <Property Name="LastRunOn" Type="DateTime" Precision="3" />
+          <Property Name="Mondays" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesdays" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesdays" Type="Boolean" Nullable="false" />
+          <Property Name="Thursdays" Type="Boolean" Nullable="false" />
+          <Property Name="Fridays" Type="Boolean" Nullable="false" />
+          <Property Name="Saturdays" Type="Boolean" Nullable="false" />
+          <Property Name="Sundays" Type="Boolean" Nullable="false" />
+          <Property Name="StartHour" Type="Int32" Nullable="false" />
+          <Property Name="StartMinute" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysTasks" Relationship="TimeMFGModel.FK_SysTask_SysTaskSchedule" FromRole="SysTaskSchedule" ToRole="SysTask" />
+          <Property Name="WindowStart" Type="Int32" Nullable="false" />
+          <Property Name="WindowEnd" Type="Int32" Nullable="false" />
+          <Property Name="WindowMinutes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_SysTask_SysTaskSchedule">
+          <End Type="TimeMFGModel.SysTaskSchedule" Role="SysTaskSchedule" Multiplicity="1" />
+          <End Type="TimeMFGModel.SysTask" Role="SysTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysTaskSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysTask">
+              <PropertyRef Name="SysTaskSchedNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1574,6 +1702,7 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
           <EntitySetMapping Name="TicketProjects">
             <EntityTypeMapping TypeName="TimeMFGModel.TicketProject">
               <MappingFragment StoreEntitySet="TicketProjects">
+                <ScalarProperty Name="DateLastChanged" ColumnName="DateLastChanged" />
                 <ScalarProperty Name="Focused" ColumnName="Focused" />
                 <ScalarProperty Name="TicketID" ColumnName="TicketID" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
@@ -1699,6 +1828,52 @@ warning 6002: The table/view 'TimeMFG.dbo.TicketRequestors' does not have a prim
                 <ScalarProperty Name="GallonsUsed" ColumnName="GallonsUsed" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysTasks">
+            <EntityTypeMapping TypeName="TimeMFGModel.SysTask">
+              <MappingFragment StoreEntitySet="SysTask">
+                <ScalarProperty Name="EmailRecipients" ColumnName="EmailRecipients" />
+                <ScalarProperty Name="Recurring" ColumnName="Recurring" />
+                <ScalarProperty Name="SubmitUser" ColumnName="SubmitUser" />
+                <ScalarProperty Name="TaskMessage" ColumnName="TaskMessage" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SysTaskSchedNum" ColumnName="SysTaskSchedNum" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysTaskSchedules">
+            <EntityTypeMapping TypeName="TimeMFGModel.SysTaskSchedule">
+              <MappingFragment StoreEntitySet="SysTaskSchedule">
+                <ScalarProperty Name="WindowMinutes" ColumnName="WindowMinutes" />
+                <ScalarProperty Name="WindowEnd" ColumnName="WindowEnd" />
+                <ScalarProperty Name="WindowStart" ColumnName="WindowStart" />
+                <ScalarProperty Name="StartMinute" ColumnName="StartMinute" />
+                <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+                <ScalarProperty Name="Sundays" ColumnName="Sundays" />
+                <ScalarProperty Name="Saturdays" ColumnName="Saturdays" />
+                <ScalarProperty Name="Fridays" ColumnName="Fridays" />
+                <ScalarProperty Name="Thursdays" ColumnName="Thursdays" />
+                <ScalarProperty Name="Wednesdays" ColumnName="Wednesdays" />
+                <ScalarProperty Name="Tuesdays" ColumnName="Tuesdays" />
+                <ScalarProperty Name="Mondays" ColumnName="Mondays" />
+                <ScalarProperty Name="LastRunOn" ColumnName="LastRunOn" />
+                <ScalarProperty Name="EveryNWeeks" ColumnName="EveryNWeeks" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+                <ScalarProperty Name="MonthlyOption" ColumnName="MonthlyOption" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="Recurrences" ColumnName="Recurrences" />
+                <ScalarProperty Name="NextRunOn" ColumnName="NextRunOn" />
+                <ScalarProperty Name="SchedType" ColumnName="SchedType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

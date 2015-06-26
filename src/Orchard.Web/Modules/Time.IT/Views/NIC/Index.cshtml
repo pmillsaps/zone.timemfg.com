@@ -26,6 +26,9 @@
             </div>
         </div>
     }
+    <div class="col-md-2">
+        [@Model.Count()]
+    </div>
 </div>
 <div class="row">
     Search includes:MAC, IP, Type, Cable No, SwitchPort
@@ -40,6 +43,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Computer)
+        </th>
+        <th>
+            User
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Type)
@@ -69,6 +75,15 @@
                 @if (item.Computer != null)
                 {
                     @Html.DisplayFor(modelItem => item.Computer.Name)
+                }
+            </td>
+            <td>
+                @if (item.Computer != null)
+                {
+                    if (item.Computer.User != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Computer.User.Name)
+                    }
                 }
             </td>
             <td>

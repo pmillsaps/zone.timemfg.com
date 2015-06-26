@@ -155,6 +155,9 @@
     <Compile Include="EntityModels\CustomManuals\Setting.cs">
       <DependentUpon>CustomManualModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Epicor\C_TMC_Status.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Epicor\EpicorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -344,6 +347,12 @@
     <Compile Include="EntityModels\TimeMFG\Setting.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\SysTask.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\SysTaskSchedule.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\TicketAttachment.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
@@ -417,6 +426,7 @@
     <Compile Include="Models\MessageQueue\EmptyMessage.cs" />
     <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
     <Compile Include="Models\MessageQueue\MSMQ.cs" />
+    <Compile Include="Models\MessageQueue\WOLMessage.cs" />
     <Compile Include="Models\OrderLog\Dealer.cs" />
     <Compile Include="Models\OrderLog\Installer.cs" />
     <Compile Include="Models\OrderLog\Install.cs" />
@@ -431,6 +441,7 @@
     <Compile Include="Models\OrderLog\Territory.cs" />
     <Compile Include="Models\TimeMFG\Setting.cs" />
     <Compile Include="Models\TimeMFG\SettingRepository.cs" />
+    <Compile Include="Models\TimeMFG\SysTaskSchedule.cs" />
     <Compile Include="Models\TimeMFG\TicketEmployee.cs" />
     <Compile Include="Models\TimeMFG\TicketProject.cs" />
     <Compile Include="Models\TimeMFG\TicketTask.cs" />

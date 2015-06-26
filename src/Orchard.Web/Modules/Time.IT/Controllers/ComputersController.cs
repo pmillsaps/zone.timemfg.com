@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.ITInventory;
+using Time.Data.Models.MessageQueue;
 using Time.IT.ViewModel;
 
 namespace Time.IT.Controllers
@@ -90,14 +91,21 @@ namespace Time.IT.Controllers
 
             string pingAddress = nic.MAC;
             bool success = WakeLan(pingAddress);
+            var command = new WOLMessage
+            {
+                IP = nic.IP,
+                MAC = nic.MAC
+            };
+            success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.WOL);
 
             if (success)
-                TempData["IPStatus"] = "WOL Packet Sent";
+                ViewBag.StatusMessage = "WOL Packet Sent";
             else
-                TempData["IPStatus"] = "Error Sending WOL Packet";
+                ViewBag.ErrorMessage = "Error Sending WOL Packet";
 
-            ViewBag.ComputerId = id;
-            return RedirectToAction("Details", new { id = nic.Computer.Id });
+            Computer computer = db.Computers.Find(nic.Computer.Id);
+
+            return View("Details", computer);
         }
 
         public bool WakeLan(string macAddress)

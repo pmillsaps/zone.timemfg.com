@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using Time.Data.Models.MessageQueue;
 using Time.Epicor.Helpers;
 
-
 namespace Time.Epicor.Controllers
 {
     [Themed]
@@ -17,7 +16,7 @@ namespace Time.Epicor.Controllers
     {
         // private string queueAddress = @"FormatName:Direct=OS:Aruba-Connect\private$\time.messagequeue";
         // private string queueAddress = "FormatName:Direct=OS:Aruba-Connect\\private$\\time.messagequeue";
-        
+
         public IOrchardServices Services { get; set; }
         private string ErrorMessage { get; set; }
 
@@ -44,9 +43,9 @@ namespace Time.Epicor.Controllers
         public ActionResult RTI(FormCollection col)
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, "SendRTIMessage");
+            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.SendRTIMessage);
             if (!string.IsNullOrEmpty(ErrorMessage)) ViewBag.ErrorMessage = ErrorMessage;
-            
+
             ViewBag.Title = "Send RTI Email";
             if (success)
             {
@@ -70,7 +69,7 @@ namespace Time.Epicor.Controllers
         public ActionResult ProblemJobs(FormCollection col)
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, "EmailProblemJobs");
+            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.EmailProblemJobs);
             if (!string.IsNullOrEmpty(ErrorMessage)) ViewBag.Message = ErrorMessage;
             ViewBag.Title = "Send Problem Job Email";
             if (success)
@@ -88,7 +87,5 @@ namespace Time.Epicor.Controllers
         {
             return View();
         }
-
-        
     }
 }
