@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>SysTask</h4>
         <hr />
@@ -73,6 +73,14 @@
                     @Html.EditorFor(model => model.Recurring)
                     @Html.ValidationMessageFor(model => model.Recurring, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailRecipients, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailRecipients, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailRecipients, "", new { @class = "text-danger" })
             </div>
         </div>
 

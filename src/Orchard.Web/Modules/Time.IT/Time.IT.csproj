@@ -232,6 +232,8 @@
     <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\_SysTaskSchedules.cshtml" />
+    <Content Include="Views\Schedules\_SysTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

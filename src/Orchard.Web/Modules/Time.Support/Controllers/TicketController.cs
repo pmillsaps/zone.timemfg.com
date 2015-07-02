@@ -57,7 +57,7 @@ namespace Time.Support.Controllers
             {
                 vm.OpenTicketsbyAssignment = tickets.Where(x => x.TicketEmployee != null).DistinctBy(x => x.TicketEmployee)
                     .Select(data => new AssignedTo { Employee = data.TicketEmployee, Count = data.TicketEmployee.TicketProjects.Count(x => x.TicketStatus.isOpen) })
-                    .OrderByDescending(x => x.Count).ToList();
+                    .OrderBy(x => x.Employee.FirstName).ToList();
             }
 
             vm.OpenTicketsbyCategory = tickets.DistinctBy(x => x.TicketCategory)
