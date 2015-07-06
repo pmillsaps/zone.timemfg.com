@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c9f59051108e4e3f9ff2482c1e1e8943" Name="Diagram1">
+      <Diagram DiagramId="c9f59051108e4e3f9ff2482c1e1e8943" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="TimeMFGModel.LoadList" Width="1.5" PointX="9.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.LoadListComment" Width="1.5" PointX="12" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.LoadListDistributor" Width="1.5" PointX="12" PointY="14.5" IsExpanded="true" />
@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="TimeMFGModel.TicketCategory" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketDepartment" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketEmployee" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimeMFGModel.TicketLink" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketLink" Width="1.5" PointX="8.125" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketNote" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketPriority" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketProject" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
@@ -49,7 +49,7 @@
         <AssociationConnector Association="TimeMFGModel.LoadList_Distributor" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TimeMFGModel.Setting" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketVisibility" Width="1.5" PointX="9.375" PointY="0.75" />
-        <EntityTypeShape EntityType="TimeMFGModel.WaterTest" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.WaterTest" Width="1.5" PointX="11.75" PointY="0.75" />
         <EntityTypeShape EntityType="TimeMFGModel.SysTask" Width="1.5" PointX="16.625" PointY="6.5" />
         <EntityTypeShape EntityType="TimeMFGModel.SysTaskSchedule" Width="1.5" PointX="13.75" PointY="4" />
         <AssociationConnector Association="TimeMFGModel.FK_SysTask_SysTaskSchedule" />

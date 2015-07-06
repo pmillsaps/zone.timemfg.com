@@ -272,6 +272,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.Data", "Orchard.Web\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.IT", "Orchard.Web\Modules\Time.IT\Time.IT.csproj", "{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time.Configurator", "Orchard.Web\Modules\Time.Configurator\Time.Configurator.csproj", "{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1160,6 +1162,16 @@ Global
 		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.FxCop|Any CPU.Build.0 = Release|Any CPU
 		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.Coverage|Any CPU.Build.0 = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.FxCop|Any CPU.Build.0 = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1254,5 +1266,6 @@ Global
 		{2838D951-58A9-477E-9364-24CC4CB87F0E} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{8DFCF8CF-2C75-4FB4-91EB-782C8EE720A2} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
+		{74376FF7-4A07-4722-8FCC-915E5FEE2DCE} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 	EndGlobalSection
 EndGlobal

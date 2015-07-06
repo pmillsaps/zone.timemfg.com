@@ -110,6 +110,63 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityModels\Configurator\Config.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigData.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigID.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup1.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup10.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup2.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup3.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup4.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup5.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup6.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup7.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup8.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigLookup9.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigPricing.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Configurator.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Configurator.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Configurator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Configurator.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Configurator.edmx</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\CustomManuals\CustomManualModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -537,6 +594,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CustomManualModel.edmx</DependentUpon>
       <LastGenOutput>CustomManualModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Configurator\Configurator.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Configurator.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Configurator\Configurator.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Configurator.edmx</DependentUpon>
+      <LastGenOutput>Configurator.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Configurator\Configurator.edmx.diagram">
+      <DependentUpon>Configurator.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Configurator\Configurator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Configurator.edmx</DependentUpon>
+      <LastGenOutput>Configurator.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
   </ItemGroup>
