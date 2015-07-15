@@ -1,4 +1,6 @@
-﻿using Orchard.Themes;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,6 +18,21 @@ namespace Time.Configurator.Controllers
     public class ConfigOption2Controller : Controller
     {
         private ConfiguratorEntities db = new ConfiguratorEntities();
+
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public ConfigOption2Controller(IOrchardServices services)
+        {
+            Services = services;
+            db = new ConfiguratorEntities();
+        }
+
+        public ConfigOption2Controller(IOrchardServices services, ConfiguratorEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
 
         // GET: /ConfigOption2/
         public ActionResult Index()
