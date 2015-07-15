@@ -25,19 +25,23 @@ namespace Time.Data.EntityModels.Configurator
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Config> Configs { get; set; }
-        public virtual DbSet<ConfigData> ConfigDatas { get; set; }
-        public virtual DbSet<ConfigID> ConfigIDs { get; set; }
-        public virtual DbSet<ConfigLookup1> ConfigLookup1 { get; set; }
-        public virtual DbSet<ConfigLookup10> ConfigLookup10 { get; set; }
-        public virtual DbSet<ConfigLookup2> ConfigLookup2 { get; set; }
-        public virtual DbSet<ConfigLookup3> ConfigLookup3 { get; set; }
-        public virtual DbSet<ConfigLookup4> ConfigLookup4 { get; set; }
-        public virtual DbSet<ConfigLookup5> ConfigLookup5 { get; set; }
-        public virtual DbSet<ConfigLookup6> ConfigLookup6 { get; set; }
-        public virtual DbSet<ConfigLookup7> ConfigLookup7 { get; set; }
-        public virtual DbSet<ConfigLookup8> ConfigLookup8 { get; set; }
-        public virtual DbSet<ConfigLookup9> ConfigLookup9 { get; set; }
+        public virtual DbSet<ConfigBuild> ConfigBuilds { get; set; }
+        public virtual DbSet<ConfigOption1> ConfigOption1 { get; set; }
+        public virtual DbSet<ConfigOption10> ConfigOption10 { get; set; }
+        public virtual DbSet<ConfigOption2> ConfigOption2 { get; set; }
+        public virtual DbSet<ConfigOption3> ConfigOption3 { get; set; }
+        public virtual DbSet<ConfigOption4> ConfigOption4 { get; set; }
+        public virtual DbSet<ConfigOption5> ConfigOption5 { get; set; }
+        public virtual DbSet<ConfigOption6> ConfigOption6 { get; set; }
+        public virtual DbSet<ConfigOption7> ConfigOption7 { get; set; }
+        public virtual DbSet<ConfigOption8> ConfigOption8 { get; set; }
+        public virtual DbSet<ConfigOption9> ConfigOption9 { get; set; }
         public virtual DbSet<ConfigPricing> ConfigPricings { get; set; }
+        public virtual DbSet<ConfiguratorName> ConfiguratorNames { get; set; }
+        public virtual DbSet<Structure> Structures { get; set; }
+        public virtual DbSet<StructureSeq> StructureSeqs { get; set; }
+        public virtual DbSet<Lookup> Lookups { get; set; }
+        public virtual DbSet<ComplexLookup> ComplexLookups { get; set; }
+        public virtual DbSet<ComplexStructure> ComplexStructures { get; set; }
     }
 }

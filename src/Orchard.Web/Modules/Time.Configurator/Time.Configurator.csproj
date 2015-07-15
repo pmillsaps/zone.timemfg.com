@@ -90,6 +90,91 @@
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\ConfigPricing\Create.cshtml" />
+    <Content Include="Views\ConfigPricing\Delete.cshtml" />
+    <Content Include="Views\ConfigPricing\Details.cshtml" />
+    <Content Include="Views\ConfigPricing\Edit.cshtml" />
+    <Content Include="Views\ConfigPricing\Index.cshtml" />
+    <Content Include="Views\Lookup\Create.cshtml" />
+    <Content Include="Views\Lookup\Delete.cshtml" />
+    <Content Include="Views\Lookup\Details.cshtml" />
+    <Content Include="Views\Lookup\Edit.cshtml" />
+    <Content Include="Views\Lookup\Index.cshtml" />
+    <Content Include="Views\Structure\Create.cshtml" />
+    <Content Include="Views\Structure\Delete.cshtml" />
+    <Content Include="Views\Structure\Details.cshtml" />
+    <Content Include="Views\Structure\Edit.cshtml" />
+    <Content Include="Views\Structure\Index.cshtml" />
+    <Content Include="Views\StructureSeq\Create.cshtml" />
+    <Content Include="Views\StructureSeq\Delete.cshtml" />
+    <Content Include="Views\StructureSeq\Details.cshtml" />
+    <Content Include="Views\StructureSeq\Edit.cshtml" />
+    <Content Include="Views\StructureSeq\Index.cshtml" />
+    <Content Include="Views\ConfigOption1\Create.cshtml" />
+    <Content Include="Views\ConfigOption1\Delete.cshtml" />
+    <Content Include="Views\ConfigOption1\Details.cshtml" />
+    <Content Include="Views\ConfigOption1\Edit.cshtml" />
+    <Content Include="Views\ConfigOption1\Index.cshtml" />
+    <Content Include="Views\ConfigOption2\Create.cshtml" />
+    <Content Include="Views\ConfigOption2\Delete.cshtml" />
+    <Content Include="Views\ConfigOption2\Details.cshtml" />
+    <Content Include="Views\ConfigOption2\Edit.cshtml" />
+    <Content Include="Views\ConfigOption2\Index.cshtml" />
+    <Content Include="Views\ConfigOption3\Create.cshtml" />
+    <Content Include="Views\ConfigOption3\Delete.cshtml" />
+    <Content Include="Views\ConfigOption3\Details.cshtml" />
+    <Content Include="Views\ConfigOption3\Edit.cshtml" />
+    <Content Include="Views\ConfigOption3\Index.cshtml" />
+    <Content Include="Views\ConfigOption4\Create.cshtml" />
+    <Content Include="Views\ConfigOption4\Delete.cshtml" />
+    <Content Include="Views\ConfigOption4\Details.cshtml" />
+    <Content Include="Views\ConfigOption4\Edit.cshtml" />
+    <Content Include="Views\ConfigOption4\Index.cshtml" />
+    <Content Include="Views\ConfigOption5\Create.cshtml" />
+    <Content Include="Views\ConfigOption5\Delete.cshtml" />
+    <Content Include="Views\ConfigOption5\Details.cshtml" />
+    <Content Include="Views\ConfigOption5\Edit.cshtml" />
+    <Content Include="Views\ConfigOption5\Index.cshtml" />
+    <Content Include="Views\ConfigOption6\Create.cshtml" />
+    <Content Include="Views\ConfigOption6\Delete.cshtml" />
+    <Content Include="Views\ConfigOption6\Details.cshtml" />
+    <Content Include="Views\ConfigOption6\Edit.cshtml" />
+    <Content Include="Views\ConfigOption6\Index.cshtml" />
+    <Content Include="Views\ConfigOption7\Create.cshtml" />
+    <Content Include="Views\ConfigOption7\Delete.cshtml" />
+    <Content Include="Views\ConfigOption7\Details.cshtml" />
+    <Content Include="Views\ConfigOption7\Edit.cshtml" />
+    <Content Include="Views\ConfigOption7\Index.cshtml" />
+    <Content Include="Views\ConfigOption8\Create.cshtml" />
+    <Content Include="Views\ConfigOption8\Delete.cshtml" />
+    <Content Include="Views\ConfigOption8\Details.cshtml" />
+    <Content Include="Views\ConfigOption8\Edit.cshtml" />
+    <Content Include="Views\ConfigOption8\Index.cshtml" />
+    <Content Include="Views\ConfigOption9\Create.cshtml" />
+    <Content Include="Views\ConfigOption9\Delete.cshtml" />
+    <Content Include="Views\ConfigOption9\Details.cshtml" />
+    <Content Include="Views\ConfigOption9\Edit.cshtml" />
+    <Content Include="Views\ConfigOption9\Index.cshtml" />
+    <Content Include="Views\ConfigOption10\Create.cshtml" />
+    <Content Include="Views\ConfigOption10\Delete.cshtml" />
+    <Content Include="Views\ConfigOption10\Details.cshtml" />
+    <Content Include="Views\ConfigOption10\Edit.cshtml" />
+    <Content Include="Views\ConfigOption10\Index.cshtml" />
+    <Content Include="Views\ConfiguratorName\Create.cshtml" />
+    <Content Include="Views\ConfiguratorName\Delete.cshtml" />
+    <Content Include="Views\ConfiguratorName\Details.cshtml" />
+    <Content Include="Views\ConfiguratorName\Edit.cshtml" />
+    <Content Include="Views\ConfiguratorName\Index.cshtml" />
+    <Content Include="Views\ComplexLookups\Create.cshtml" />
+    <Content Include="Views\ComplexLookups\Delete.cshtml" />
+    <Content Include="Views\ComplexLookups\Details.cshtml" />
+    <Content Include="Views\ComplexLookups\Edit.cshtml" />
+    <Content Include="Views\ComplexLookups\Index.cshtml" />
+    <Content Include="Views\ComplexStructures\Create.cshtml" />
+    <Content Include="Views\ComplexStructures\Delete.cshtml" />
+    <Content Include="Views\ComplexStructures\Details.cshtml" />
+    <Content Include="Views\ComplexStructures\Edit.cshtml" />
+    <Content Include="Views\ComplexStructures\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -105,7 +190,24 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ComplexLookupsController.cs" />
+    <Compile Include="Controllers\ComplexStructuresController.cs" />
+    <Compile Include="Controllers\ConfigOption10Controller.cs" />
+    <Compile Include="Controllers\ConfigOption1Controller.cs" />
+    <Compile Include="Controllers\ConfigOption2Controller.cs" />
+    <Compile Include="Controllers\ConfigOption3Controller.cs" />
+    <Compile Include="Controllers\ConfigOption4Controller.cs" />
+    <Compile Include="Controllers\ConfigOption5Controller.cs" />
+    <Compile Include="Controllers\ConfigOption6Controller.cs" />
+    <Compile Include="Controllers\ConfigOption7Controller.cs" />
+    <Compile Include="Controllers\ConfigOption8Controller.cs" />
+    <Compile Include="Controllers\ConfigOption9Controller.cs" />
+    <Compile Include="Controllers\ConfiguratorNameController.cs" />
+    <Compile Include="Controllers\LookupController.cs" />
+    <Compile Include="Controllers\ConfigPricingController.cs" />
     <Compile Include="Controllers\ConfiguratorController.cs" />
+    <Compile Include="Controllers\StructureController.cs" />
+    <Compile Include="Controllers\StructureSeqController.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

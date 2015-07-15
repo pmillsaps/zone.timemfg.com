@@ -101,7 +101,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\Epicor\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EntityModels\TimeMFG\TimeMfgModel.edmx">
@@ -110,43 +109,43 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityModels\Configurator\Config.cs">
+    <Compile Include="EntityModels\Configurator\ComplexLookup.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigData.cs">
+    <Compile Include="EntityModels\Configurator\ComplexStructure.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigID.cs">
+    <Compile Include="EntityModels\Configurator\ConfigBuild.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup1.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption1.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup10.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption10.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup2.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption2.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup3.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption3.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup4.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption4.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup5.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption5.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup6.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption6.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup7.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption7.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup8.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption8.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigLookup9.cs">
+    <Compile Include="EntityModels\Configurator\ConfigOption9.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Configurator\ConfigPricing.cs">
@@ -166,6 +165,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Configurator.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfiguratorName.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Lookup.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Structure.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\StructureSeq.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\CustomManuals\CustomManualModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -471,6 +482,7 @@
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\Configurator\ConfigID.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
     <Compile Include="Models\ITInventory\Ref_Location.cs" />
@@ -613,6 +625,13 @@
       <LastGenOutput>Configurator.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ConfigSetup\Create.cshtml" />
+    <Content Include="Views\ConfigSetup\Delete.cshtml" />
+    <Content Include="Views\ConfigSetup\Details.cshtml" />
+    <Content Include="Views\ConfigSetup\Edit.cshtml" />
+    <Content Include="Views\ConfigSetup\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
