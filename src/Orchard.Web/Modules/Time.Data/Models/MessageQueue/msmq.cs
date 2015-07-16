@@ -16,14 +16,15 @@ namespace Time.Data.Models.MessageQueue
 
         public enum MessageType
         {
-            EmailMessage,
-            MoveFile,
-            SendRTIMessage,
-            EmailProblemJobs,
+            BuildComplexLookups,
+            CheckWaterReports,
             CustomManualCheckProblemJobs,
             CustomManualJobQueue,
+            EmailMessage,
+            EmailProblemJobs,
+            MoveFile,
             Refresh_Drawings_DB,
-            CheckWaterReports,
+            SendRTIMessage,
             WOL
         }
 

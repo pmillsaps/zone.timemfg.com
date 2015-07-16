@@ -175,6 +175,7 @@
     <Content Include="Views\ComplexStructures\Details.cshtml" />
     <Content Include="Views\ComplexStructures\Edit.cshtml" />
     <Content Include="Views\ComplexStructures\Index.cshtml" />
+    <Content Include="Views\MessageResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
