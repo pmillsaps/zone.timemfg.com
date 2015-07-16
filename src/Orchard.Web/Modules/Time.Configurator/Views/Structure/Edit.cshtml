@@ -16,21 +16,25 @@
         @*@Html.ValidationSummary(true)*@
         @Html.HiddenFor(model => model.Id)
 @*******************************************************************Makes Only Inactive Checkbox Editable*********************************************************************************************@
-<div class="form-group">
-    @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(model => model.ConfigName, new { @readonly = "readonly" })
-        @Html.ValidationMessageFor(model => model.ConfigName)
-    </div>
-</div>
+   <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigName)
+        </dt>
 
-<div class="form-group">
-    @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(model => model.ConfigData, new { @readonly = "readonly" })
-        @Html.ValidationMessageFor(model => model.ConfigData)
-    </div>
-</div>
+        <dd>
+            @Html.DisplayFor(model => model.ConfigName)
+            @Html.HiddenFor(model => model.ConfigName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigData)
+            @Html.HiddenFor(model => model.ConfigData)
+        </dd>
+    </dl>
 @*****************************************************************Makes Edits Enabled With Drop Down Menus********************************************************************************************@
 @*<div class="form-group">
         @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
