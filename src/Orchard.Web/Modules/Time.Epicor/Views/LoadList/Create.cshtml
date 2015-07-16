@@ -1,0 +1,94 @@
+﻿@model Time.Epicor.ViewModels.LoadListView
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+</ul>
+<br />
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>LoadList</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LoadList.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LoadList.Name)
+            @Html.ValidationMessageFor(model => model.LoadList.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LoadList.DateIssued)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.LoadList.DateIssued)
+            @Html.DisplayFor(model => model.LoadList.DateIssued)
+            @Html.ValidationMessageFor(model => model.LoadList.DateIssued)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LoadList.DateRevised)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.LoadList.DateRevised)
+            @Html.DisplayFor(model => model.LoadList.DateRevised)
+            @Html.ValidationMessageFor(model => model.LoadList.DateRevised)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LoadList.DateSchedShip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LoadList.DateSchedShip)
+            @Html.ValidationMessageFor(model => model.LoadList.DateSchedShip)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MakeReady)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MakeReady)
+            @Html.ValidationMessageFor(model => model.MakeReady)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LoadList.TruckingCompany)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LoadList.TruckingCompany)
+            @Html.ValidationMessageFor(model => model.LoadList.TruckingCompany)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LoadList.Comments)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LoadList.Comments)
+            @Html.ValidationMessageFor(model => model.LoadList.Comments)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Complete)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Complete)
+            @*@Html.CheckBoxFor(model => (model.Complete == 1 ? true : false))*@
+            @Html.ValidationMessageFor(model => model.Complete)
+        </div>
+
+        <div class="editor-button2">
+            <input type="submit" value="Create" />
+        </div>
+    </fieldset>
+}
+
+

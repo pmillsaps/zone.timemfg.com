@@ -1,0 +1,33 @@
+﻿@model Time.Data.EntityModels.ITInventory.Ref_Model
+
+@{
+    ViewBag.Title = "Computer Model Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Ref_Model</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Manufacturer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Manufacturer.Name)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

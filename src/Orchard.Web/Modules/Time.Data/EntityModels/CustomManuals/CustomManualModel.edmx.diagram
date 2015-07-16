@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="335fe5c5f6f74d408918bcb42013bd54" Name="Diagram1">
+        <EntityTypeShape EntityType="CustomManualsModel.Formatting" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.LanguageCode" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.LiftGroup" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.LiftOption" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.Lift" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.LocalMessage" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.NoPrint" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.OptionPart" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.ProblemJob" Width="1.5" PointX="10.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CustomManualsModel.Setting" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="CustomManualsModel.FK_Formatting_LiftGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="CustomManualsModel.FK_Messages_LanguageCode" ManuallyRouted="false" />
+        <AssociationConnector Association="CustomManualsModel.FK_Lifts_LiftGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="CustomManualsModel.FK_OptionPart_LiftOption" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

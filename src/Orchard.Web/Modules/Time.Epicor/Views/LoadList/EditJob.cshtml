@@ -1,0 +1,125 @@
+﻿@model Time.Data.EntityModels.TimeMFG.LoadListJob
+
+@{
+    ViewBag.Title = "Edit Job : " + Model.JobNumber;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Back to List", "Details", new { id = Model.LoadListId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Move Job to Other LoadList", "MoveLoadListJob", new { id = Model.Id }, new { @class = "btn btn-primary" })
+</div>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>LoadListJob</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.LoadListId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobNumber)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.JobNumber)
+            @Html.HiddenFor(model => model.JobNumber)
+            @Html.ValidationMessageFor(model => model.JobNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CustomerName)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.CustomerName)
+            @Html.HiddenFor(model => model.CustomerName)
+            @Html.ValidationMessageFor(model => model.CustomerName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LiftModel)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.LiftModel)
+            @Html.HiddenFor(model => model.LiftModel)
+            @Html.ValidationMessageFor(model => model.LiftModel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SerialNo)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.SerialNo)
+            @Html.HiddenFor(model => model.SerialNo)
+            @Html.ValidationMessageFor(model => model.SerialNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DistributorPO)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.DistributorPO)
+            @Html.HiddenFor(model => model.DistributorPO)
+            @Html.ValidationMessageFor(model => model.DistributorPO)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateATS)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.DateATS)
+            @Html.HiddenFor(model => model.DateATS)
+            @Html.ValidationMessageFor(model => model.DateATS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comments)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Comments)
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Destination)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Destination)
+            @Html.ValidationMessageFor(model => model.Destination)
+        </div>
+
+        <div class="editor-button2">
+            <input type="submit" value="Save" />
+        </div>
+    </fieldset>
+}
+
+@Html.Partial("_JobStatus", Model.LoadListJobStatus)
+
+<br /><br /><br />
+<a id="commentToggle" href="javascript:toggle();">Show Job Comment History</a>
+
+<div id="CommentList" class="hidden">
+    @{Html.RenderAction("_ListJobComments", "LoadList", new { id = Model.Id });}
+</div>
+
+@section Scripts {
+    <script language='javascript'>
+        function toggle() {
+            var ele = document.getElementById("CommentList");
+            var text = document.getElementById("commentToggle");
+            if (ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show Job Comment History";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Job Comment History";
+            }
+        }
+    </script>
+}

@@ -1,0 +1,80 @@
+﻿@model Time.Data.EntityModels.Configurator.Lookup
+
+@{
+    ViewBag.Title = "Edit Lookup";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Lookup</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @*@Html.EditorFor(model => model.ConfigName)*@
+                @Html.ValidationMessageFor(model => model.ConfigName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
+                @*@Html.EditorFor(model => model.ConfigData)*@
+                @Html.ValidationMessageFor(model => model.ConfigData)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Sequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
+                @*@Html.EditorFor(model => model.Sequence)*@
+                @Html.ValidationMessageFor(model => model.Sequence)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Data, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Data", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
+                @*@Html.EditorFor(model => model.Data)*@
+                @Html.ValidationMessageFor(model => model.Data)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PickDefault, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PickDefault)
+                @Html.ValidationMessageFor(model => model.PickDefault)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inactive)
+                @Html.ValidationMessageFor(model => model.Inactive)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

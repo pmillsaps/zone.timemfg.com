@@ -1,0 +1,41 @@
+﻿@model Time.Data.EntityModels.Configurator.Structure
+
+@{
+    ViewBag.Title = "Structure Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Structure</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigData)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<br />
+<p>
+    s
+</p>
