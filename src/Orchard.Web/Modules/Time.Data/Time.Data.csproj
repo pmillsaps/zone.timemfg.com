@@ -430,9 +430,6 @@
     <Compile Include="EntityModels\TimeMFG\TicketDepartment.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\TimeMFG\TicketDivision.cs">
-      <DependentUpon>TimeMfgModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModels\TimeMFG\TicketEmployee.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>

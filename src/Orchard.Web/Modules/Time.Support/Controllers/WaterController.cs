@@ -72,7 +72,7 @@ namespace Time.Support.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(WaterTest waterTest)
+        public ActionResult Create([Bind(Exclude = "Id")] WaterTest waterTest)
         {
             if (!Services.Authorizer.Authorize(Permissions.EnterWaterReports, T("You do not have access to enter data. Please log in.")))
                 return new HttpUnauthorizedResult();
@@ -86,7 +86,7 @@ namespace Time.Support.Controllers
             {
                 db.WaterTests.Add(waterTest);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Ticket");
+                return RedirectToAction("Index", "Water");
             }
 
             return View(waterTest);

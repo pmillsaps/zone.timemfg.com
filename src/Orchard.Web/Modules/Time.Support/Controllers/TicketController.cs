@@ -142,7 +142,7 @@ namespace Time.Support.Controllers
             //{
             //    ViewData["SortBy"] = "";
             //}
-            if (TempData["message"] != "") ViewBag.Message = TempData["message"];
+            if ((string)TempData["message"] != "") ViewBag.Message = TempData["message"];
 
             return View(vm);
         }

@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="TimeMFGModel.TicketStatus" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketStatusHistory" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketTask" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimeMFGModel.TicketDivision" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeMFGModel.TicketRequestor" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="TimeMFGModel.FK_LoadListComment_LoadList" ManuallyRouted="false" />
         <AssociationConnector Association="TimeMFGModel.FK_LoadListImage_LoadList" ManuallyRouted="false" />
