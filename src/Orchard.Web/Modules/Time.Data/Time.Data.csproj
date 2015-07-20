@@ -109,13 +109,13 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityModels\Configurator\ComplexLink.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Configurator\ComplexLookup.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Configurator\ComplexStructure.cs">
-      <DependentUpon>Configurator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigBuild.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Configurator\ConfigOption1.cs">

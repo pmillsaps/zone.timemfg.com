@@ -112,7 +112,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData 
                 && x.Sequence == structureseq.Sequence && x.Lookup == structureseq.Lookup && x.LookupSequence == structureseq.LookupSequence && x.Id != structureseq.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Sequence Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Sequence Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {

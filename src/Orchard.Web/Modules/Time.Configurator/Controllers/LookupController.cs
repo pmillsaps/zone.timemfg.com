@@ -72,7 +72,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence
             && x.Data == lookup.Data);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence 
                 && x.Data == lookup.Data && x.Id != lookup.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Data");
             
             if (ModelState.IsValid)
             {

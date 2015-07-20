@@ -40,7 +40,8 @@ namespace Time.Data.EntityModels.Configurator
         public virtual DbSet<Structure> Structures { get; set; }
         public virtual DbSet<StructureSeq> StructureSeqs { get; set; }
         public virtual DbSet<Lookup> Lookups { get; set; }
-        public virtual DbSet<ComplexLookup> ComplexLookups { get; set; }
         public virtual DbSet<ComplexStructure> ComplexStructures { get; set; }
+        public virtual DbSet<ComplexLink> ComplexLinks { get; set; }
+        public virtual DbSet<ComplexLookup> ComplexLookups { get; set; }
     }
 }

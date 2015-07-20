@@ -214,7 +214,7 @@
           <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Sequence" Type="int" Nullable="false" />
-          <Property Name="Data" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PickDefault" Type="bit" Nullable="false" />
           <Property Name="Inactive" Type="bit" Nullable="false" />
         </EntityType>
@@ -504,11 +504,16 @@
           <EntitySet Name="Structures" EntityType="Self.Structure" />
           <EntitySet Name="StructureSeqs" EntityType="Self.StructureSeq" />
           <EntitySet Name="Lookups" EntityType="ConfiguratorModel.Lookup" />
-          <EntitySet Name="ComplexLookups" EntityType="ConfiguratorModel.ComplexLookup" />
           <EntitySet Name="ComplexStructures" EntityType="ConfiguratorModel.ComplexStructure" />
-          <AssociationSet Name="ComplexLinks" Association="ConfiguratorModel.ComplexLinks">
+          <EntitySet Name="ComplexLinks" EntityType="ConfiguratorModel.ComplexLink" />
+          <EntitySet Name="ComplexLookups" EntityType="ConfiguratorModel.ComplexLookup" />
+          <AssociationSet Name="FK_ComplexLinks_ComplexLookup" Association="ConfiguratorModel.FK_ComplexLinks_ComplexLookup">
             <End Role="ComplexLookup" EntitySet="ComplexLookups" />
+            <End Role="ComplexLink" EntitySet="ComplexLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComplexLinks_Lookup" Association="ConfiguratorModel.FK_ComplexLinks_Lookup">
             <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="ComplexLink" EntitySet="ComplexLinks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Lookup">
@@ -519,20 +524,10 @@
           <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Sequence" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PickDefault" Type="Boolean" Nullable="false" />
           <Property Name="Inactive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ComplexLookups" Relationship="ConfiguratorModel.ComplexLinks" FromRole="Lookup" ToRole="ComplexLookup" />
-        </EntityType>
-        <EntityType Name="ComplexLookup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LookupData" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Lookups" Relationship="ConfiguratorModel.ComplexLinks" FromRole="ComplexLookup" ToRole="Lookup" />
+          <NavigationProperty Name="ComplexLinks" Relationship="ConfiguratorModel.FK_ComplexLinks_Lookup" FromRole="Lookup" ToRole="ComplexLink" />
         </EntityType>
         <EntityType Name="ComplexStructure">
           <Key>
@@ -545,9 +540,52 @@
           <Property Name="LookupData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LookupSeq" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="ComplexLinks">
-          <End Type="ConfiguratorModel.ComplexLookup" Role="ComplexLookup" Multiplicity="*" />
-          <End Type="ConfiguratorModel.Lookup" Role="Lookup" Multiplicity="*" />
+        <EntityType Name="ComplexLink">
+          <Key>
+            <PropertyRef Name="ComplexDataId" />
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="ComplexDataId" Type="Int32" Nullable="false" />
+          <Property Name="LookupId" Type="Int32" Nullable="false" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ComplexLookup" Relationship="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" FromRole="ComplexLink" ToRole="ComplexLookup" />
+          <NavigationProperty Name="Lookup" Relationship="ConfiguratorModel.FK_ComplexLinks_Lookup" FromRole="ComplexLink" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="ComplexLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LookupData" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ComplexLinks" Relationship="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" FromRole="ComplexLookup" ToRole="ComplexLink" />
+        </EntityType>
+        <Association Name="FK_ComplexLinks_ComplexLookup">
+          <End Type="ConfiguratorModel.ComplexLookup" Role="ComplexLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ConfiguratorModel.ComplexLink" Role="ComplexLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplexLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComplexLink">
+              <PropertyRef Name="ComplexDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComplexLinks_Lookup">
+          <End Type="ConfiguratorModel.Lookup" Role="Lookup" Multiplicity="1" />
+          <End Type="ConfiguratorModel.ComplexLink" Role="ComplexLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComplexLink">
+              <PropertyRef Name="LookupId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -773,16 +811,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ComplexLookups">
-            <EntityTypeMapping TypeName="ConfiguratorModel.ComplexLookup">
-              <MappingFragment StoreEntitySet="ComplexLookup">
-                <ScalarProperty Name="LookupData" ColumnName="LookupData" />
-                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
-                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ComplexStructures">
             <EntityTypeMapping TypeName="ConfiguratorModel.ComplexStructure">
               <MappingFragment StoreEntitySet="ComplexStructure">
@@ -795,14 +823,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ComplexLinks" TypeName="ConfiguratorModel.ComplexLinks" StoreEntitySet="ComplexLinks">
-            <EndProperty Name="Lookup">
-              <ScalarProperty Name="Id" ColumnName="LookupId" />
-            </EndProperty>
-            <EndProperty Name="ComplexLookup">
-              <ScalarProperty Name="Id" ColumnName="ComplexDataId" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="ComplexLinks">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ComplexLink">
+              <MappingFragment StoreEntitySet="ComplexLinks">
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <ScalarProperty Name="ComplexDataId" ColumnName="ComplexDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplexLookups">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ComplexLookup">
+              <MappingFragment StoreEntitySet="ComplexLookup">
+                <ScalarProperty Name="LookupData" ColumnName="LookupData" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

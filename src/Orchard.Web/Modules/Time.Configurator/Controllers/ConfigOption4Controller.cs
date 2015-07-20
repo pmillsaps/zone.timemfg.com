@@ -69,6 +69,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] ConfigOption4 configoption4)
         {
+            var Configs = db.ConfigOption4.FirstOrDefault(x => x.ConfigName == configoption4.ConfigName && x.ConfigData == configoption4.ConfigData && x.Key1 == configoption4.Key1
+            && x.Key2 == configoption4.Key2 && x.Key3 == configoption4.Key3 && x.Key4 == configoption4.Key4 && x.ConfigOption == configoption4.ConfigOption);
+
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
+
             if (ModelState.IsValid)
             {
                 db.ConfigOption4.Add(configoption4);
@@ -105,7 +110,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.ConfigOption4.FirstOrDefault(x => x.ConfigName == configoption4.ConfigName && x.ConfigData == configoption4.ConfigData && x.Key1 == configoption4.Key1
                 && x.Key2 == configoption4.Key2 && x.Key3 == configoption4.Key3 && x.Key4 == configoption4.Key4 && x.ConfigOption == configoption4.ConfigOption);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {

@@ -72,7 +72,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.ConfigOption2.FirstOrDefault(x => x.ConfigName == configoption2.ConfigName && x.ConfigData == configoption2.ConfigData && x.Key1 == configoption2.Key1
             && x.Key2 == configoption2.Key2);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.ConfigOption2.FirstOrDefault(x => x.ConfigName == configoption2.ConfigName && x.ConfigData == configoption2.ConfigData && x.Key1 == configoption2.Key1
                 && x.Key2 == configoption2.Key2 && x.Id != configoption2.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {

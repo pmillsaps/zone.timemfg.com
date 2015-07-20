@@ -73,7 +73,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price
                 && x.AltPrice == configpricing.AltPrice);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price 
                 && x.AltPrice == configpricing.AltPrice);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {

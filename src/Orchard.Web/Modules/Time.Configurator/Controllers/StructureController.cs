@@ -36,11 +36,18 @@ namespace Time.Configurator.Controllers
         }
 
         // GET: Structures
-        public ActionResult Index()
+        public ActionResult Index(string ConfigDropDown)
         {
-            ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-            return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            
+            if (!String.IsNullOrEmpty(ConfigDropDown))
+            {
+                ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
+                return View(db.Structures.Where(x => x.ConfigName == ConfigDropDown).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }
+            else
+            {
+                ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
+                return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }
             //return View(db.Structures.OrderBy(x => x.ConfigName).Distinct().ToList());
         }
 
@@ -56,7 +63,59 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
+            var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
+            ViewBag.StructureSeq = structureSeq;
             return View(structure);
+        }
+
+        //GET: /Strucute/Edit_Seq --- this method is being called from the Details view
+        public ActionResult Edit_Seq(int? id)
+        {
+            StructureSeq structureSeq = db.StructureSeqs.Find(id);
+            if (structureSeq == null)
+            {
+                return HttpNotFound();
+            }
+            return View(structureSeq);
+        }
+
+        // POST: /Structure/Edit_Seq
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit_Seq(StructureSeq structureSeq)
+        {
+            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData 
+                && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
+                && x.Id != structureSeq.Id);
+
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(structureSeq).State = EntityState.Modified;
+                db.SaveChanges();
+                var structure = db.Structures.First(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData);
+                return RedirectToAction("Details", new { id = structure.Id});
+            }
+            return View(structureSeq);
+        }
+
+        public ActionResult Add_Seq(int id)
+        {
+
+            return View();
+        }
+
+        public ActionResult Copy_Seq(StructureSeq structureSeq)
+        {
+            return View();
+        }
+
+        public ActionResult Import_Seq(StructureSeq structureSeq)
+        {
+            return View();
         }
 
         // GET: /Structure/Create
@@ -76,7 +135,7 @@ namespace Time.Configurator.Controllers
 
             var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
 
             if (ModelState.IsValid)
             {
@@ -114,7 +173,7 @@ namespace Time.Configurator.Controllers
         {
             var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData && x.Id != structure.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
 
             if (ModelState.IsValid)
             {

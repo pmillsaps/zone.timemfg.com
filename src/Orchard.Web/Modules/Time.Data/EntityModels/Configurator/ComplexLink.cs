@@ -12,18 +12,13 @@ namespace Time.Data.EntityModels.Configurator
     using System;
     using System.Collections.Generic;
     
-    public partial class ComplexLookup
+    public partial class ComplexLink
     {
-        public ComplexLookup()
-        {
-            this.ComplexLinks = new HashSet<ComplexLink>();
-        }
+        public int ComplexDataId { get; set; }
+        public int LookupId { get; set; }
+        public bool Available { get; set; }
     
-        public int Id { get; set; }
-        public string ConfigName { get; set; }
-        public string ConfigData { get; set; }
-        public string LookupData { get; set; }
-    
-        public virtual ICollection<ComplexLink> ComplexLinks { get; set; }
+        public virtual ComplexLookup ComplexLookup { get; set; }
+        public virtual Lookup Lookup { get; set; }
     }
 }

@@ -73,7 +73,7 @@ namespace Time.Configurator.Controllers
             && x.Key2 == configoption8.Key2 && x.Key3 == configoption8.Key3 && x.Key4 == configoption8.Key4 && x.Key5 == configoption8.Key5 && x.Key6 == configoption8.Key6
             && x.Key7 == configoption8.Key7 && x.Key8 == configoption8.Key8 && x.ConfigOption == configoption8.ConfigOption);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
@@ -112,7 +112,7 @@ namespace Time.Configurator.Controllers
             && x.Key2 == configoption8.Key2 && x.Key3 == configoption8.Key3 && x.Key4 == configoption8.Key4 && x.Key5 == configoption8.Key5 && x.Key6 == configoption8.Key6
             && x.Key7 == configoption8.Key7 && x.Key8 == configoption8.Key8 && x.ConfigOption == configoption8.ConfigOption && x.Id != configoption8.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {

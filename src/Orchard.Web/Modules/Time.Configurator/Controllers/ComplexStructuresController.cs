@@ -68,7 +68,7 @@ namespace Time.Configurator.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ConfigName,ConfigData,Sequence,LookupData,LookupSeq")] ComplexStructure complexStructure)
+        public ActionResult Create([Bind(Exclude = "Id")] ComplexStructure complexStructure)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace Time.Configurator.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ConfigName,ConfigData,Sequence,LookupData,LookupSeq")] ComplexStructure complexStructure)
+        public ActionResult Edit(ComplexStructure complexStructure)
         {
             if (ModelState.IsValid)
             {

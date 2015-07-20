@@ -16,7 +16,7 @@ namespace Time.Data.EntityModels.Configurator
     {
         public Lookup()
         {
-            this.ComplexLookups = new HashSet<ComplexLookup>();
+            this.ComplexLinks = new HashSet<ComplexLink>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace Time.Data.EntityModels.Configurator
         public bool PickDefault { get; set; }
         public bool Inactive { get; set; }
     
-        public virtual ICollection<ComplexLookup> ComplexLookups { get; set; }
+        public virtual ICollection<ComplexLink> ComplexLinks { get; set; }
     }
 }

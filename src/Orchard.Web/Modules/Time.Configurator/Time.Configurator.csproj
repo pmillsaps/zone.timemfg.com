@@ -187,6 +187,10 @@
     <Content Include="Views\ComplexStructures\Index.cshtml" />
     <Content Include="Views\MessageResult.cshtml" />
     <Content Include="Views\Shared\_PartialConfigName.cshtml" />
+    <Content Include="Views\Structure\Edit_Seq.cshtml" />
+    <Content Include="Views\Structure\Copy_Seq.cshtml" />
+    <Content Include="Views\Structure\Import_Seq.cshtml" />
+    <Content Include="Views\Structure\Add_Seq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

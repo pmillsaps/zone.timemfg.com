@@ -69,10 +69,10 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] ComplexLookup complexLookup)
         {
-            var Configs = db.ComplexLookups.FirstOrDefault(x => x.ConfigName == complexLookup.ConfigName && x.ConfigData == complexLookup.ConfigData && x.LookupData == complexLookup.LookupData
-            && x.Id != complexLookup.Id);
+            var Configs = db.ComplexLookups.FirstOrDefault(x => x.ConfigName == complexLookup.ConfigName && x.ConfigData == complexLookup.ConfigData 
+            && x.LookupData == complexLookup.LookupData);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace Time.Configurator.Controllers
             var Configs = db.ComplexLookups.FirstOrDefault(x => x.ConfigName == complexLookup.ConfigName && x.ConfigData == complexLookup.ConfigData && x.LookupData == complexLookup.LookupData
             && x.Id != complexLookup.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
