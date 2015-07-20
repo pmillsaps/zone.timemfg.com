@@ -33,20 +33,6 @@
           <Property Name="LookupData" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LookupSeq" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="ConfigBuild">
-          <Key>
-            <PropertyRef Name="ConfigID" />
-            <PropertyRef Name="ConfigData" />
-            <PropertyRef Name="Sequence" />
-            <PropertyRef Name="Data" />
-          </Key>
-          <Property Name="ConfigID" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Sequence" Type="int" Nullable="false" />
-          <Property Name="Data" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PickDefault" Type="bit" Nullable="false" />
-          <Property Name="Inactive" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="ConfigOption1">
           <Key>
             <PropertyRef Name="Id" />
@@ -279,7 +265,6 @@
           <EntitySet Name="ComplexLinks" EntityType="Self.ComplexLinks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComplexLookup" EntityType="Self.ComplexLookup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComplexStructure" EntityType="Self.ComplexStructure" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ConfigBuild" EntityType="Self.ConfigBuild" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigOption1" EntityType="Self.ConfigOption1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigOption10" EntityType="Self.ConfigOption10" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigOption2" EntityType="Self.ConfigOption2" Schema="dbo" store:Type="Tables" />
@@ -308,20 +293,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ConfiguratorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ConfigBuild">
-          <Key>
-            <PropertyRef Name="ConfigID" />
-            <PropertyRef Name="ConfigData" />
-            <PropertyRef Name="Sequence" />
-            <PropertyRef Name="Data" />
-          </Key>
-          <Property Name="ConfigID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sequence" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PickDefault" Type="Boolean" Nullable="false" />
-          <Property Name="Inactive" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="ConfigOption1">
           <Key>
             <PropertyRef Name="Id" />
@@ -515,7 +486,6 @@
           <Property Name="Global" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ConfiguratorEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ConfigBuilds" EntityType="Self.ConfigBuild" />
           <EntitySet Name="ConfigOption1" EntityType="Self.ConfigOption1" />
           <EntitySet Name="ConfigOption10" EntityType="Self.ConfigOption10" />
           <EntitySet Name="ConfigOption2" EntityType="Self.ConfigOption2" />
@@ -582,18 +552,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ConfiguratorModelStoreContainer" CdmEntityContainer="ConfiguratorEntities">
-          <EntitySetMapping Name="ConfigBuilds">
-            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigBuild">
-              <MappingFragment StoreEntitySet="ConfigBuild">
-                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
-                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
-                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="PickDefault" ColumnName="PickDefault" />
-                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ConfigOption1">
             <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption1">
               <MappingFragment StoreEntitySet="ConfigOption1">

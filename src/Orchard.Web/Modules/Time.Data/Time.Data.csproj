@@ -115,9 +115,6 @@
     <Compile Include="EntityModels\Configurator\ComplexStructure.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Configurator\ConfigBuild.cs">
-      <DependentUpon>Configurator.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModels\Configurator\ConfigOption1.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
