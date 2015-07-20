@@ -25,6 +25,7 @@ namespace Time.Data.EntityModels.Configurator
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ConfigBuild> ConfigBuilds { get; set; }
         public virtual DbSet<ConfigOption1> ConfigOption1 { get; set; }
         public virtual DbSet<ConfigOption10> ConfigOption10 { get; set; }
         public virtual DbSet<ConfigOption2> ConfigOption2 { get; set; }
