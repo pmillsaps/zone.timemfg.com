@@ -103,7 +103,7 @@ namespace Time.Configurator.Controllers
         public ActionResult Edit(ConfigOption4 configoption4)
         {
             var Configs = db.ConfigOption4.FirstOrDefault(x => x.ConfigName == configoption4.ConfigName && x.ConfigData == configoption4.ConfigData && x.Key1 == configoption4.Key1
-                && x.Key2 == configoption4.Key2 && x.Key3 == configoption4.Key3 && x.Key4 == configoption4.Key4 && x.ConfigOption == configoption4.ConfigOption && x.Id != configoption4.Id);
+                && x.Key2 == configoption4.Key2 && x.Key3 == configoption4.Key3 && x.Key4 == configoption4.Key4 && x.ConfigOption == configoption4.ConfigOption);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
 

@@ -71,7 +71,7 @@ namespace Time.Configurator.Controllers
         {
             var Configs = db.ConfigOption8.FirstOrDefault(x => x.ConfigName == configoption8.ConfigName && x.ConfigData == configoption8.ConfigData && x.Key1 == configoption8.Key1
             && x.Key2 == configoption8.Key2 && x.Key3 == configoption8.Key3 && x.Key4 == configoption8.Key4 && x.Key5 == configoption8.Key5 && x.Key6 == configoption8.Key6
-            && x.Key7 == configoption8.Key7 && x.Key8 == configoption8.Key8 && x.ConfigOption == configoption8.ConfigOption && x.Id != configoption8.Id);
+            && x.Key7 == configoption8.Key7 && x.Key8 == configoption8.Key8 && x.ConfigOption == configoption8.ConfigOption);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
 

@@ -69,6 +69,12 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] ConfigOption9 configoption9)
         {
+            var Configs = db.ConfigOption9.FirstOrDefault(x => x.ConfigName == configoption9.ConfigName && x.ConfigData == configoption9.ConfigData && x.Key1 == configoption9.Key1
+            && x.Key2 == configoption9.Key2 && x.Key3 == configoption9.Key3 && x.Key4 == configoption9.Key4 && x.Key5 == configoption9.Key5 && x.Key6 == configoption9.Key6
+            && x.Key7 == configoption9.Key7 && x.Key8 == configoption9.Key8 && x.Key9 == configoption9.Key9 && x.ConfigOption == configoption9.ConfigOption);
+
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+
             if (ModelState.IsValid)
             {
                 db.ConfigOption9.Add(configoption9);
@@ -102,6 +108,12 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigOption9 configoption9)
         {
+            var Configs = db.ConfigOption9.FirstOrDefault(x => x.ConfigName == configoption9.ConfigName && x.ConfigData == configoption9.ConfigData && x.Key1 == configoption9.Key1
+            && x.Key2 == configoption9.Key2 && x.Key3 == configoption9.Key3 && x.Key4 == configoption9.Key4 && x.Key5 == configoption9.Key5 && x.Key6 == configoption9.Key6
+            && x.Key7 == configoption9.Key7 && x.Key8 == configoption9.Key8 && x.Key9 == configoption9.Key9 && x.ConfigOption == configoption9.ConfigOption);
+
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Inputed Data");
+
             if (ModelState.IsValid)
             {
                 db.Entry(configoption9).State = EntityState.Modified;

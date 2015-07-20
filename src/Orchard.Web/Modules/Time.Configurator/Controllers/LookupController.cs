@@ -37,7 +37,7 @@ namespace Time.Configurator.Controllers
         // GET: /Lookup/
         public ActionResult Index()
         {
-            return View(db.Lookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            return View(db.Lookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList());
         }
 
         // GET: /Lookup/Details/5
@@ -70,7 +70,7 @@ namespace Time.Configurator.Controllers
         public ActionResult Create([Bind(Exclude="Id")] Lookup lookup)
         {
             var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence
-            && x.Data == lookup.Data && x.Id != lookup.Id);
+            && x.Data == lookup.Data);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Inputed Data");
 

@@ -162,24 +162,24 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            var ConfigIDList = from firstList in db.ConfigPricings
-                                 group firstList by firstList.ConfigID into newList1
-                                 let x = newList1.FirstOrDefault()
-                                 select x;
+            //var ConfigIDList = from firstList in db.ConfiguratorNames
+            //                     group firstList by firstList.ConfigName into newList1
+            //                     let x = newList1.FirstOrDefault()
+            //                     select x;
 
-            var ConfigOptionList = from secondList in db.ConfigPricings
-                                 group secondList by secondList.ConfigOption into newList2
-                                 let x = newList2.FirstOrDefault()
-                                 select x;
+            //var ConfigOptionList = from secondList in db.ConfigPricings
+            //                     group secondList by secondList.ConfigOption into newList2
+            //                     let x = newList2.FirstOrDefault()
+            //                     select x;
 
-            ViewBag.ConfigID = new SelectList(ConfigIDList.ToList(), "ConfigID", "ConfigID");
-            ViewBag.ConfigOption = new SelectList(ConfigOptionList.ToList(), "ConfigOption", "ConfigOption");
+            ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "Id", "ConfigName");
+            ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
         }
         
         private void GenerateDropDowns(ConfigPricing configpricing)
         {
-            ViewBag.ConfigID = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigID), "ConfigID", "ConfigID");
-            ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
+            ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "Id", "ConfigName", configpricing.ConfigID);
+            ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption", configpricing.ConfigOption);
         }
     }
 }

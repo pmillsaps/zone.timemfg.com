@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using MoreLinq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -30,23 +31,17 @@ namespace Time.Configurator.Controllers
 
         public StructureController(IOrchardServices services, ConfiguratorEntities _db)
         {
-            Services = services;
+           Services = services;
             db = _db;
         }
 
         // GET: Structures
-        public ActionResult Index(string search = "")
-        {
-            var structure = db.Structures.OrderBy(x => x.ConfigName).Include(x => x.ConfigData);
-            if (!String.IsNullOrEmpty(search))
-                structure = structure.Where(x => x.ConfigName.Contains(search) || x.ConfigData.Contains(search));
-            return View(structure.ToList());
-        }
-
-        // GET: /Structure/
         public ActionResult Index()
         {
+            ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
             return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            
+            //return View(db.Structures.OrderBy(x => x.ConfigName).Distinct().ToList());
         }
 
         // GET: /Structure/Details/5
@@ -79,13 +74,14 @@ namespace Time.Configurator.Controllers
         public ActionResult Create([Bind(Exclude="Id")] Structure structure)
         {
 
-            var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData && x.Id != structure.Id);
+            var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Inputed Data");
 
             if (ModelState.IsValid)
             {
                 db.Structures.Add(structure);
+                db.StructureSeqs.Add(new StructureSeq { ConfigName = structure.ConfigName, ConfigData = structure.ConfigData, Sequence = 1, Global = false});
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -169,23 +165,23 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            var ConfigNameList = from firstList in db.Structures
-                                 group firstList by firstList.ConfigName into newList1
-                                 let x = newList1.FirstOrDefault()
-                                 select x;
+            //var ConfigNameList = from firstList in db.Structures
+            //                     group firstList by firstList.ConfigName into newList1
+            //                     let x = newList1.FirstOrDefault()
+            //                     select x;
 
             var ConfigDataList = from secondList in db.Structures
                                  group secondList by secondList.ConfigName into newList2
                                  let x = newList2.FirstOrDefault()
                                  select x;
 
-            ViewBag.ConfigName = new SelectList(ConfigNameList.ToList(), "ConfigName", "ConfigName");
-            ViewBag.ConfigData = new SelectList(ConfigNameList.ToList(), "ConfigData", "ConfigData");
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName"); 
+            ViewBag.ConfigData = new SelectList(ConfigDataList.ToList(), "ConfigData", "ConfigData");
         }
 
         private void GenerateDropDowns(Structure structure)
         {
-            ViewBag.ConfigName = new SelectList(db.Structures.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
             ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structure.ConfigData);
         }
     }

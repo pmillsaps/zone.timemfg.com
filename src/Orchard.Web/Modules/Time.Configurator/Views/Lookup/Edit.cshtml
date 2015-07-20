@@ -15,57 +15,62 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-                @*@Html.EditorFor(model => model.ConfigName)*@
-                @Html.ValidationMessageFor(model => model.ConfigName)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @*@Html.EditorFor(model => model.ConfigData)*@
-                @Html.ValidationMessageFor(model => model.ConfigData)
-            </div>
-        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigName)
+            </dt>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Sequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @*@Html.EditorFor(model => model.Sequence)*@
-                @Html.ValidationMessageFor(model => model.Sequence)
-            </div>
-        </div>
+            <dd>
+                @Html.DisplayFor(model => model.ConfigName)
+                @Html.HiddenFor(model => model.ConfigName)
+            </dd>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Data, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Data", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @*@Html.EditorFor(model => model.Data)*@
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigData)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigData)
+                @Html.HiddenFor(model => model.ConfigData)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Sequence)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Sequence)
+                @Html.HiddenFor(model => model.Sequence)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Data)
+            </dt>
+
+            <dd>
+                @Html.EditorFor(model => model.Data)
                 @Html.ValidationMessageFor(model => model.Data)
-            </div>
-        </div>
+            </dd>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PickDefault, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <dt>
+                @Html.DisplayNameFor(model => model.PickDefault)
+            </dt>
+
+            <dd>
                 @Html.EditorFor(model => model.PickDefault)
                 @Html.ValidationMessageFor(model => model.PickDefault)
-            </div>
-        </div>
+            </dd>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <dt>
+                @Html.DisplayNameFor(model => model.Inactive)
+            </dt>
+
+            <dd>
                 @Html.EditorFor(model => model.Inactive)
                 @Html.ValidationMessageFor(model => model.Inactive)
-            </div>
-        </div>
+            </dd>
+        </dl>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

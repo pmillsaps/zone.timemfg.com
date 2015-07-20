@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -15,38 +15,35 @@
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-                @*@Html.EditorFor(model => model.ConfigName)*@
-                @Html.ValidationMessageFor(model => model.ConfigName)
-            </div>
+@*********************************************************************Makes Create Enabled With Drop Down Menus***************************************************************************************@
+@*<div class="form-group">
+        @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            @Html.ValidationMessageFor(model => model.ConfigName)
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @*@Html.EditorFor(model => model.ConfigData)*@
-                @Html.ValidationMessageFor(model => model.ConfigData)
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            @Html.ValidationMessageFor(model => model.ConfigData)
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Sequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @*@Html.EditorFor(model => model.Sequence)*@
-                @Html.ValidationMessageFor(model => model.Sequence)
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Sequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            @Html.ValidationMessageFor(model => model.Sequence)
         </div>
+    </div>
 
-        <div class="form-group">
+    <div class="form-group">
             @Html.LabelFor(model => model.Data, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Data", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @*@Html.EditorFor(model => model.Data)*@
+                @Html.EditorFor(model => model.Data)
                 @Html.ValidationMessageFor(model => model.Data)
             </div>
         </div>
@@ -65,14 +62,63 @@
                 @Html.EditorFor(model => model.Inactive)
                 @Html.ValidationMessageFor(model => model.Inactive)
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        </div>*@
+@*************************************************************************Makes you able to create by typing******************************************************************************************@
+<div class="form-group">
+        @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ConfigName)
+            @Html.ValidationMessageFor(model => model.ConfigName)
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ConfigData)
+            @Html.ValidationMessageFor(model => model.ConfigData)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Sequence)
+            @Html.ValidationMessageFor(model => model.Sequence)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Data, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Data)
+            @Html.ValidationMessageFor(model => model.Data)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PickDefault, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PickDefault)
+            @Html.ValidationMessageFor(model => model.PickDefault)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Inactive)
+            @Html.ValidationMessageFor(model => model.Inactive)
+        </div>
+    </div>
+@*****************************************************************************************************************************************************************************************************@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
 }
 
 <div>
