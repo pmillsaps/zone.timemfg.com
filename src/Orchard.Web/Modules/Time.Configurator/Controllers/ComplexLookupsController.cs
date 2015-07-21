@@ -40,6 +40,67 @@ namespace Time.Configurator.Controllers
             return View(db.ComplexLookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
         }
 
+        public ActionResult ComplexLinks(int? id)
+        {
+            // id = ComplexStructure.Id
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var complexLinks = db.ComplexLinks.Where(x => x.ComplexDataId == id);
+
+            if (complexLinks == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View();
+        }
+
+        public ActionResult _ComplexLinkMatrix(int? id)
+        {
+            // id = ComplexStructure.Id
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var complexLinks = db.ComplexLinks.Where(x => x.ComplexDataId == id);
+
+            if (complexLinks == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View();
+        }
+
+        private void SaveOrderOptionMatrix(int id, List<string> matrix)
+        {
+            //var details = db.OrderDetails
+            //    .Include(x => x.OrderDetailsOrderOptionsLinks)
+            //    .Where(x => x.OrderHeaderId == id);
+
+            //foreach (var orderDetail in details.OrderBy(x => x.Id))
+            //{
+            //    foreach (var source in orderDetail.OrderDetailsOrderOptionsLinks.OrderBy(x => x.OrderOptionId))
+            //    {
+            //        string lookup = String.Format("{0}, {1}", source.OrderDetailId, source.OrderOptionId);
+            //        if (matrix != null && matrix.Contains(lookup))
+            //        {
+            //            source.Include = true;
+            //        }
+            //        else
+            //        {
+            //            source.Include = false;
+            //        }
+            //    }
+            //}
+
+            //db.SaveChanges();
+        }
+
         // GET: ComplexLookups/Details/5
         public ActionResult Details(int? id)
         {
@@ -63,13 +124,13 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: ComplexLookups/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] ComplexLookup complexLookup)
         {
-            var Configs = db.ComplexLookups.FirstOrDefault(x => x.ConfigName == complexLookup.ConfigName && x.ConfigData == complexLookup.ConfigData 
+            var Configs = db.ComplexLookups.FirstOrDefault(x => x.ConfigName == complexLookup.ConfigName && x.ConfigData == complexLookup.ConfigData
             && x.LookupData == complexLookup.LookupData);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
@@ -101,7 +162,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: ComplexLookups/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -172,9 +233,9 @@ namespace Time.Configurator.Controllers
                                  select x;
 
             var LookupDataList = from thirdList in db.ComplexLookups
-                           group thirdList by thirdList.LookupData into newList3
-                           let x = newList3.FirstOrDefault()
-                           select x;
+                                 group thirdList by thirdList.LookupData into newList3
+                                 let x = newList3.FirstOrDefault()
+                                 select x;
 
             ViewBag.ConfigName = new SelectList(ConfigNameList.ToList(), "ConfigName", "ConfigName");
             ViewBag.ConfigData = new SelectList(ConfigDataList.ToList(), "ConfigData", "ConfigData");

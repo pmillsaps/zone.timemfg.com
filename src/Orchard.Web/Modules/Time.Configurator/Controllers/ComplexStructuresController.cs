@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Time.Configurator.Models;
 using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
@@ -16,7 +17,7 @@ namespace Time.Configurator.Controllers
     [Themed]
     [Authorize]
     public class ComplexStructuresController : Controller
-    {        
+    {
         private ConfiguratorEntities db = new ConfiguratorEntities();
 
         public IOrchardServices Services { get; set; }
@@ -33,8 +34,6 @@ namespace Time.Configurator.Controllers
             Services = services;
             db = _db;
         }
-
-
 
         // GET: ComplexStructures
         public ActionResult Index()
@@ -57,6 +56,136 @@ namespace Time.Configurator.Controllers
             return View(complexStructure);
         }
 
+        //public ActionResult ComplexLinks(int? id)
+        //{
+        //    // id = ComplexStructure.Id
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    var complexLinks = db.ComplexLinks.Where(x => x.ComplexDataId == id);
+
+        //    if (complexLinks == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View();
+        //}
+
+        public ActionResult _LookupMatrix(int id)
+        {
+            //var lookups = new List<Lookup>();
+            var complexStructure = db.ComplexStructures.Find(id);
+            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            //foreach (var item in cxLookups)
+            //{
+            //    foreach (var link in item.ComplexLinks)
+            //    {
+            //        lookups.Add(link.Lookup);
+            //    }
+            //}
+            return PartialView(lookups);
+        }
+
+        public ActionResult _ComplexLinkMatrix(int id)
+        {
+            // id = ComplexStructure.Id
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+
+            var complexStructure = db.ComplexStructures.Find(id);
+
+            var cbArray = BuildCheckBoxArray(complexStructure);
+
+            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            ComplexLinkMatrixViewModel vm = new ComplexLinkMatrixViewModel
+            {
+                ComplexLinks = cbArray,
+                complexStructure = complexStructure,
+                Lookups = lookups
+            };
+
+            return PartialView(vm);
+        }
+
+        private List<List<ComplexLink>> BuildCheckBoxArray(ComplexStructure complexStructure)
+        {
+            var list = new List<List<ComplexLink>>();
+            var details = db.ComplexLookups
+                .Include(x => x.ComplexLinks)
+                .Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+
+            foreach (var detail in details.OrderBy(x => x.Id))
+            {
+                var innerList = new List<ComplexLink>();
+                foreach (var source in detail.ComplexLinks.OrderBy(x => x.ComplexDataId))
+                {
+                    innerList.Add(source);
+                }
+                list.Add(innerList);
+            }
+
+            return list;
+        }
+
+        [HttpGet]
+        public ActionResult EditComplexLinkMatrix(int id)
+        {
+            var complexStructure = db.ComplexStructures.Find(id);
+
+            var cbArray = BuildCheckBoxArray(complexStructure);
+
+            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            ComplexLinkMatrixViewModel vm = new ComplexLinkMatrixViewModel
+            {
+                ComplexLinks = cbArray,
+                complexStructure = complexStructure,
+                Lookups = lookups
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult EditComplexLinkMatrix(List<string> Matrix, int id)
+        {
+            //if (Matrix != null)
+            //{
+            // removed null check, as I need to remove them all if I want to delete the linkages
+            SaveComplexLinkMatrix(id, Matrix);
+            //}
+
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        private void SaveComplexLinkMatrix(int id, List<string> matrix)
+        {
+            var cxStructure = db.ComplexStructures.Find(id);
+            var cxLookups = db.ComplexLookups.Where(x => x.ConfigName == cxStructure.ConfigName && x.ConfigData == cxStructure.ConfigData);
+
+            foreach (var lookup in cxLookups.OrderBy(x => x.Id))
+            {
+                foreach (var source in lookup.ComplexLinks.OrderBy(x => x.LookupId))
+                {
+                    string exists = String.Format("{0}, {1}", source.ComplexDataId, source.LookupId);
+                    if (matrix != null && matrix.Contains(exists))
+                    {
+                        source.Available = true;
+                    }
+                    else
+                    {
+                        source.Available = false;
+                    }
+                }
+            }
+
+            db.SaveChanges();
+        }
+
         // GET: ComplexStructures/Create
         public ActionResult Create()
         {
@@ -64,7 +193,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: ComplexStructures/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -96,7 +225,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: ComplexStructures/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
