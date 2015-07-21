@@ -191,6 +191,10 @@
     <Content Include="Views\Structure\Copy_Seq.cshtml" />
     <Content Include="Views\Structure\Import_Seq.cshtml" />
     <Content Include="Views\Structure\Add_Seq.cshtml" />
+    <Content Include="Views\ComplexStructures\_ComplexLinkMatrix.cshtml" />
+    <Content Include="Views\ComplexStructures\_LookupMatrix.cshtml" />
+    <Content Include="Views\ComplexStructures\EditComplexLinkMatrix.cshtml" />
+    <Content Include="Views\ComplexStructures\_EditComplexLinkMatrix.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -224,11 +228,10 @@
     <Compile Include="Controllers\ConfiguratorController.cs" />
     <Compile Include="Controllers\StructureController.cs" />
     <Compile Include="Controllers\StructureSeqController.cs" />
+    <Compile Include="Models\ComplexLinkMatrixViewModel.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

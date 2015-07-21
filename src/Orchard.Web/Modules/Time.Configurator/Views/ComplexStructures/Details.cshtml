@@ -49,10 +49,13 @@
         <dd>
             @Html.DisplayFor(model => model.LookupSeq)
         </dd>
-
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@Html.Action("_LookupMatrix", new { id = Model.Id })
+
+@Html.Action("_ComplexLinkMatrix", new { id = Model.Id })
