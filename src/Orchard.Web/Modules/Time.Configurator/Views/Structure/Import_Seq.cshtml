@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfigName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ConfigName, new { disabled = "disabled", htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.ConfigName, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfigData, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ConfigData, new { disabled = "disabled", htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.ConfigData, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ConfigData, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Sequence, new { disabled = "disabled", htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Sequence, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
             </div>
         </div>

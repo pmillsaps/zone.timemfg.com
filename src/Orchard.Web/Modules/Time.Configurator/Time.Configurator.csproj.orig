@@ -188,15 +188,17 @@
     <Content Include="Views\MessageResult.cshtml" />
     <Content Include="Views\Shared\_PartialConfigName.cshtml" />
     <Content Include="Views\Structure\Edit_Seq.cshtml" />
+    <Content Include="Views\Structure\Copy_Seq.cshtml" />
+    <Content Include="Views\Structure\Add_Seq.cshtml" />
+    <Content Include="Views\Structure\Import_Seq.cshtml" />
+<<<<<<< local
+=======
     <Content Include="Views\Structure\Add_Seq.cshtml" />
     <Content Include="Views\ComplexStructures\_ComplexLinkMatrix.cshtml" />
     <Content Include="Views\ComplexStructures\_LookupMatrix.cshtml" />
     <Content Include="Views\ComplexStructures\EditComplexLinkMatrix.cshtml" />
     <Content Include="Views\ComplexStructures\_EditComplexLinkMatrix.cshtml" />
-    <Content Include="Views\Structure\Import_Seq.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Structure\Copy_Seq.cshtml" />
+>>>>>>> other
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
