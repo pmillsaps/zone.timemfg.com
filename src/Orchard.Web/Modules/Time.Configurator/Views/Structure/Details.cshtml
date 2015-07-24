@@ -46,6 +46,7 @@
             Global
         </th>
         <th></th>
+        <th></th>
     </tr>
     @foreach (var item in ViewBag.StructureSeq as IEnumerable<Time.Data.EntityModels.Configurator.StructureSeq>)
     {
@@ -63,9 +64,11 @@
                 @Html.CheckBox("StructureSeq", @item.Global, new { @disabled = "disabled" })
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit_Seq", new { id = @item.Id }) |
-                @Html.ActionLink("Copy", "Copy_Seq", new { id = @item.Id }) |
-                @*@Html.ActionLink("Import", "Import_Seq", new { structureSeq = ViewData["StructureSeq"] as IEnumerable<Time.Data.EntityModels.Configurator.StructureSeq> })*@
+                @Html.ActionLink("Edit", "Edit_Seq", new { id = @item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Import To Lookup", "Import_Seq", new { id = @item.Id }) |
+                @Html.ActionLink("Copy To Other Configurator", "Copy_Seq", new { id = @item.Id})
             </td>
         </tr>
     }

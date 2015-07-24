@@ -67,7 +67,7 @@ namespace Time.Configurator.Controllers
             ViewBag.StructureSeq = structureSeq;
             return View(structure);
         }
-
+///////////////////////////////////////////////////////////////////////////////////////////Edit_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //GET: /Strucute/Edit_Seq --- this method is being called from the Details view
         public ActionResult Edit_Seq(int? id)
         {
@@ -90,33 +90,178 @@ namespace Time.Configurator.Controllers
                 && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
                 && x.Id != structureSeq.Id);
 
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Sequence Created---Please Check Data");
 
             if (ModelState.IsValid)
             {
                 db.Entry(structureSeq).State = EntityState.Modified;
                 db.SaveChanges();
                 var structure = db.Structures.First(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData);
+                return RedirectToAction("Details", new { id = structure.Id });
+            }
+            return View(structureSeq);
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////Add_Seq///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //GET: /Structure/Add_Seq
+        public ActionResult Add_Seq(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Structure structure = db.Structures.Find(id);
+            if (structure == null)
+            {
+                return HttpNotFound();
+            }
+            //var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
+            ViewBag.ConfigName = structure.ConfigName;
+            ViewBag.ConfigData = structure.ConfigData;
+            var sequenceNum = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList().Max(x => Convert.ToInt32(x.Sequence));
+            ViewBag.Sequence = sequenceNum + 1; 
+            return View();
+        }
+
+        // POST: /Structure/Add_Seq
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_Seq([Bind(Exclude = "Id")] StructureSeq structureSeq)
+        {
+
+            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
+                && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
+                && x.Id != structureSeq.Id);
+
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Sequence Created---Please Check Data");
+
+            if (ModelState.IsValid)
+            {
+                db.StructureSeqs.Add(structureSeq);
+                db.SaveChanges();
+                var structure = db.Structures.First(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData);
                 return RedirectToAction("Details", new { id = structure.Id});
             }
             return View(structureSeq);
         }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public ActionResult Add_Seq(int id)
+//////////////////////////////////////////////////////////////////////////////////////Import_Seq//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //GET: /Structure/Import_Seq
+        public ActionResult Import_Seq(int id)
         {
-
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            StructureSeq structureSeq = db.StructureSeqs.Find(id);
+            if (structureSeq == null)
+            {
+                return HttpNotFound();
+            }
+            Lookup lookup = new Lookup();
+            lookup.ConfigName = structureSeq.ConfigName;
+            lookup.ConfigData = structureSeq.ConfigData;
+            lookup.Sequence = structureSeq.Sequence;
+            lookup.PickDefault = false;
+            lookup.Inactive = false;
+            return View(lookup);
         }
 
-        public ActionResult Copy_Seq(StructureSeq structureSeq)
+        // POST: /Structure/Import_Seq
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Import_Seq(Lookup lookup)
         {
-            return View();
+            string[] tokens = SplitLookupData(lookup.Data);
+
+            foreach (var item in tokens)
+            {
+                var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence && x.Data == item.Trim());
+
+                if (Configs != null) ModelState.AddModelError("", " Item '" + item + "' is a Duplicate---Remove Duplicate (No data imported)");
+            }
+
+            if (ModelState.IsValid)
+            {
+                foreach (var item in tokens)
+                {
+                    
+                    Lookup lookupNew = new Lookup { ConfigName= lookup.ConfigName,
+                                                    ConfigData = lookup.ConfigData,                                                   
+                                                    Sequence = lookup.Sequence,
+                                                    Data = item.Trim(),
+                                                    PickDefault = lookup.PickDefault,
+                                                    Inactive = lookup.Inactive };
+
+                    db.Lookups.Add(lookupNew);
+                 }
+                
+                db.SaveChanges();
+                return RedirectToAction("Index", "Lookup");
+            }
+            return View(lookup);
         }
 
-        public ActionResult Import_Seq(StructureSeq structureSeq)
+        // This method is called from Import_Seq to parse the input in the Data textbox
+        private string[] SplitLookupData(string rawString)
         {
-            return View();
+            string[] newData = rawString.Split(new String[] { "\t", ",", "\n", "\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+
+            return newData;
         }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////Copy_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET: /Structure/Copy_Seq
+        public ActionResult Copy_Seq(int id)
+        {
+            StructureSeq structureSeq = db.StructureSeqs.Find(id);
+            if (structureSeq == null)
+            {
+                return HttpNotFound();
+            }
+            // Creates the drop down list for ConfigName in the view
+            var ddlConfigNames = db.ConfiguratorNames.Select(x => x.ConfigName).Distinct();
+            List<SelectListItem> configNames = new List<SelectListItem>();
+            foreach (var item in ddlConfigNames)
+            {
+                configNames.Add(new SelectListItem { Text = item, Value = item });
+            }
+            ViewBag.ConfigNamesTo = configNames;
+
+            var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
+            ViewBag.Lookup = lookup;
+            return View(structureSeq);
+        }
+
+        // POST: /Structure/Copy_Seq
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Copy_Seq([Bind(Exclude = "Id")] StructureSeq structureSeq)
+        //{
+
+        //    var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
+        //        && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
+        //        && x.Id != structureSeq.Id);
+
+        //    if (Configs != null) ModelState.AddModelError("", "Duplicate Sequence Created---Please Check Data");
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(structureSeq);
+        //}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // GET: /Structure/Create
         public ActionResult Create()

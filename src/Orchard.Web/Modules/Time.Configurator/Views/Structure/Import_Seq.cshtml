@@ -1,24 +1,23 @@
-﻿@model Time.Data.EntityModels.Configurator.StructureSeq
+﻿@model Time.Data.EntityModels.Configurator.Lookup
 
 @{
-    ViewBag.Title = "Import Sequence";
+    ViewBag.Title = "Import Sequence to Lookup";
 }
 
 <h2>@ViewBag.Title</h2>
-
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Structure Seq</h4>
+        <h4>Lookup</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.ConfigName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfigName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.ConfigName, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfigData, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfigData, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.ConfigData, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ConfigData, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,40 +33,42 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Sequence, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Sequence, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Lookup, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Lookup, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lookup, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Data, new { @rows = 4, htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LookupSequence, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LookupSequence, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LookupSequence, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Global, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PickDefault, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Global)
-                    @Html.ValidationMessageFor(model => model.Global, "", new { @class = "text-danger" })
+                    @Html.CheckBoxFor(model => model.PickDefault, new { disabled = "disabled"})
+                    @Html.ValidationMessageFor(model => model.PickDefault, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inactive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(model => model.Inactive, new { disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Inactive, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Import Lookup" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -76,7 +77,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
