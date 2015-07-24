@@ -1,0 +1,392 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfigOption10
+
+@{
+    ViewBag.Title = "Edit Config Option 10";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Config Option 10</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)   
+
+
+@*******************************************************************Makes Only Inactive Checkbox Editable*********************************************************************************************@
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigName)
+                @Html.HiddenFor(model => model.ConfigName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigData)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigData)
+                @Html.HiddenFor(model => model.ConfigData)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key1)
+                @Html.HiddenFor(model => model.Key1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key2)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key2)
+                @Html.HiddenFor(model => model.Key2)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key3)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key3)
+                @Html.HiddenFor(model => model.Key3)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key4)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key4)
+                @Html.HiddenFor(model => model.Key4)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key5)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key5)
+                @Html.HiddenFor(model => model.Key5)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key6)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key6)
+                @Html.HiddenFor(model => model.Key6)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key7)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key7)
+                @Html.HiddenFor(model => model.Key7)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key8)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key8)
+                @Html.HiddenFor(model => model.Key8)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key9)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key9)
+                @Html.HiddenFor(model => model.Key9)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Key10)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Key10)
+                @Html.HiddenFor(model => model.Key10)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigOption)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigOption)
+                @Html.HiddenFor(model => model.ConfigOption)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Inactive)
+            </dt>
+
+            <dd>
+                @Html.EditorFor(model => model.Inactive)
+                @Html.ValidationMessageFor(model => model.Inactive)
+            </dd>
+        </dl>
+@*****************************************************************Makes Edits Enabled With Drop Down Menus********************************************************************************************@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.ConfigName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.ConfigData)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key1, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key1", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key2, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key2", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key2)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key3, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key3", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key3)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key4, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key4", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key4)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key5, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key5", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key5)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key6, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key6", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key6)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key7, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key7", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key7)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key8, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key8", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key8)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key9, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key9", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key9)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key10, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key10", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key10)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigOption, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigOption", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.ConfigOption)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inactive)
+                @Html.ValidationMessageFor(model => model.Inactive)
+            </div>
+        </div>*@
+@**********************************************************************Makes you able to type edits in************************************************************************************************@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfigName)
+                @Html.ValidationMessageFor(model => model.ConfigName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfigData)
+                @Html.ValidationMessageFor(model => model.ConfigData)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key1, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key1)
+                @Html.ValidationMessageFor(model => model.Key1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key2, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key2)
+                @Html.ValidationMessageFor(model => model.Key2)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key2, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key2)
+                @Html.ValidationMessageFor(model => model.Key2)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key3, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key3)
+                @Html.ValidationMessageFor(model => model.Key3)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key4, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key4)
+                @Html.ValidationMessageFor(model => model.Key4)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key5, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key5)
+                @Html.ValidationMessageFor(model => model.Key5)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key6, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key6)
+                @Html.ValidationMessageFor(model => model.Key6)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key7, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key7)
+                @Html.ValidationMessageFor(model => model.Key7)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key8, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key8)
+                @Html.ValidationMessageFor(model => model.Key8)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key9, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key9)
+                @Html.ValidationMessageFor(model => model.Key9)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key10, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Key10)
+                @Html.ValidationMessageFor(model => model.Key10)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigOption, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfigOption)
+                @Html.ValidationMessageFor(model => model.ConfigOption)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inactive)
+                @Html.ValidationMessageFor(model => model.Inactive)
+            </div>
+        </div>*@
+@*****************************************************************************************************************************************************************************************************@
+            
+            <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

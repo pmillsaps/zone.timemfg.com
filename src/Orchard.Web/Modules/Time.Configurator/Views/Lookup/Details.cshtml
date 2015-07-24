@@ -1,0 +1,68 @@
+﻿@model Time.Data.EntityModels.Configurator.Lookup
+
+@{
+    ViewBag.Title = "Lookup Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Lookup</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PickDefault)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickDefault)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inactive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
