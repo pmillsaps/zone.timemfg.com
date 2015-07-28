@@ -62,7 +62,7 @@ namespace Time.Configurator.Controllers
                 {
                     lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
 
-		            return View(lookups);
+                    return View(lookups);
                 }
 
                 lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
@@ -70,13 +70,13 @@ namespace Time.Configurator.Controllers
                 return View(lookups);
             }
             else if (!String.IsNullOrEmpty(ConfigData))
-	        {
+            {
                 lookups = db.Lookups.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
 
-		        return View(lookups);
-	        }
+                return View(lookups);
+            }
             else
-            {                
+            {
                 return View(lookups);
             }
         }
@@ -99,8 +99,25 @@ namespace Time.Configurator.Controllers
         // GET: /Lookup/Create
         public ActionResult Create()
         {
-            GenerateDropDowns();
-            return View();
+            // Creates the drop down list for ConfigName in the view
+            var ddlConfigNames = db.ConfiguratorNames.Select(x => x.ConfigName).Distinct();
+            List<SelectListItem> configNames = new List<SelectListItem>();
+            foreach (var item in ddlConfigNames)
+            {
+                configNames.Add(new SelectListItem { Text = item, Value = item });
+            }
+            ViewBag.ConfigNamesTo = configNames;
+
+            // Creates the drop down list for ConfigData in the view
+            var ddlConfigData = db.Structures.Select(x => x.ConfigData).Distinct();
+            List<SelectListItem> configData = new List<SelectListItem>();
+            foreach (var item in ddlConfigData)
+            {
+                configData.Add(new SelectListItem { Text = item, Value = item });
+            }
+            ViewBag.ConfigDataTo = configData;
+            Lookup lookup = new Lookup();
+            return View(lookup);
         }
 
         // POST: /Lookup/Create
@@ -108,12 +125,16 @@ namespace Time.Configurator.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude="Id")] Lookup lookup)
+        public ActionResult Create([Bind(Exclude = "Id")] Lookup lookup, string ConfigName, string ConfigData)
         {
+            //duplicate checking
             var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence
             && x.Data == lookup.Data);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Data");
+
+            //error checking for the model
+            var errors = ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => new { x.Key, x.Value.Errors }).ToArray();
 
             if (ModelState.IsValid)
             {
@@ -121,7 +142,23 @@ namespace Time.Configurator.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            GenerateDropDowns(lookup);
+            // Creates the drop down list for ConfigName in the view
+            var ddlConfigNames = db.ConfiguratorNames.Select(x => x.ConfigName).Distinct();
+            List<SelectListItem> configNames = new List<SelectListItem>();
+            foreach (var item in ddlConfigNames)
+            {
+                configNames.Add(new SelectListItem { Text = item, Value = item });
+            }
+            ViewBag.ConfigNamesTo = configNames;
+
+            // Creates the drop down list for ConfigData in the view
+            var ddlConfigData = db.Structures.Select(x => x.ConfigData).Distinct();
+            List<SelectListItem> configData = new List<SelectListItem>();
+            foreach (var item in ddlConfigData)
+            {
+                configData.Add(new SelectListItem { Text = item, Value = item });
+            }
+            ViewBag.ConfigDataTo = configData;
             return View(lookup);
         }
 
@@ -137,7 +174,6 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
-            GenerateDropDowns();
             return View(lookup);
         }
 
@@ -148,18 +184,17 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Lookup lookup)
         {
-            var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence 
+            var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence
                 && x.Data == lookup.Data && x.Id != lookup.Id);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Data");
-            
+
             if (ModelState.IsValid)
             {
                 db.Entry(lookup).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            GenerateDropDowns(lookup);
             return View(lookup);
         }
 
@@ -196,44 +231,6 @@ namespace Time.Configurator.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private void GenerateDropDowns()
-        {
-            //prevent duplicates from showing up in drop down
-            //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            var ConfigNameList = from firstList in db.Lookups
-                                 group firstList by firstList.ConfigName into newList1
-                                 let x = newList1.FirstOrDefault()
-                                 select x;
-
-            var ConfigDataList = from secondList in db.Lookups
-                                 group secondList by secondList.ConfigData into newList2
-                                 let x = newList2.FirstOrDefault()
-                                 select x;
-
-            var SequenceList = from thirdList in db.Lookups
-                               group thirdList by thirdList.Sequence into newList3
-                               let x = newList3.FirstOrDefault()
-                               select x;
-
-            var DataList = from fourthList in db.Lookups
-                           group fourthList by fourthList.Data into newList4
-                           let x = newList4.FirstOrDefault()
-                           select x;
-
-            ViewBag.ConfigName = new SelectList(ConfigNameList.ToList(), "ConfigName", "ConfigName");
-            ViewBag.ConfigData = new SelectList(ConfigDataList.ToList(), "ConfigData", "ConfigData");
-            ViewBag.Sequence = new SelectList(SequenceList.ToList(), "Sequence", "Sequence");
-            ViewBag.Data = new SelectList(DataList.ToList(), "Data", "Data");
-        }
-
-        private void GenerateDropDowns(Lookup lookup)
-        {
-            ViewBag.ConfigName = new SelectList(db.Lookups.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", lookup.ConfigName);
-            ViewBag.ConfigData = new SelectList(db.Lookups.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", lookup.ConfigData);
-            ViewBag.Sequence = new SelectList(db.Lookups.OrderBy(x => x.Sequence), "Sequence", "Sequence", lookup.Sequence);
-            ViewBag.Data = new SelectList(db.Lookups.OrderBy(x => x.Data), "Data", "Data", lookup.Data);
         }
     }
 }

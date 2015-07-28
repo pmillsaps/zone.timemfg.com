@@ -105,7 +105,6 @@
     <Content Include="Views\ConfigPricing\Details.cshtml" />
     <Content Include="Views\ConfigPricing\Edit.cshtml" />
     <Content Include="Views\ConfigPricing\Index.cshtml" />
-    <Content Include="Views\Lookup\Create.cshtml" />
     <Content Include="Views\Lookup\Delete.cshtml" />
     <Content Include="Views\Lookup\Details.cshtml" />
     <Content Include="Views\Lookup\Edit.cshtml" />
@@ -197,6 +196,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Structure\Copy_Seq.cshtml" />
+    <Content Include="Views\ConfiguratorName\Copy.cshtml" />
+    <Content Include="Views\Lookup\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

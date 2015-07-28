@@ -3,12 +3,9 @@ using Orchard.Localization;
 using Orchard.Themes;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using MoreLinq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Configurator;
 
@@ -31,7 +28,7 @@ namespace Time.Configurator.Controllers
 
         public StructureController(IOrchardServices services, ConfiguratorEntities _db)
         {
-           Services = services;
+            Services = services;
             db = _db;
         }
 
@@ -40,6 +37,8 @@ namespace Time.Configurator.Controllers
         {
             if (!String.IsNullOrEmpty(ConfigDropDown))
             {
+                //adds data to drop down menus that filter data on the index page
+                //return view sorts the table by configname then config data
                 ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
                 return View(db.Structures.Where(x => x.ConfigName == ConfigDropDown).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
             }
@@ -67,7 +66,8 @@ namespace Time.Configurator.Controllers
             ViewBag.StructureSeq = structureSeq;
             return View(structure);
         }
-///////////////////////////////////////////////////////////////////////////////////////////Edit_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////////////////Edit_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //GET: /Strucute/Edit_Seq --- this method is being called from the Details view
         public ActionResult Edit_Seq(int? id)
         {
@@ -80,13 +80,14 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /Structure/Edit_Seq
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit_Seq(StructureSeq structureSeq)
         {
-            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData 
+            //prevents duplicate data from being saved while editing
+            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
                 && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
                 && x.Id != structureSeq.Id);
 
@@ -101,9 +102,10 @@ namespace Time.Configurator.Controllers
             }
             return View(structureSeq);
         }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////Add_Seq///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////Add_Seq///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //GET: /Structure/Add_Seq
         public ActionResult Add_Seq(int id)
         {
@@ -120,18 +122,18 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigName = structure.ConfigName;
             ViewBag.ConfigData = structure.ConfigData;
             var sequenceNum = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList().Max(x => Convert.ToInt32(x.Sequence));
-            ViewBag.Sequence = sequenceNum + 1; 
+            ViewBag.Sequence = sequenceNum + 1;
             return View();
         }
 
         // POST: /Structure/Add_Seq
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add_Seq([Bind(Exclude = "Id")] StructureSeq structureSeq)
         {
-
+            //prevents duplicate code when adding a sequence
             var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
                 && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
                 && x.Id != structureSeq.Id);
@@ -143,13 +145,14 @@ namespace Time.Configurator.Controllers
                 db.StructureSeqs.Add(structureSeq);
                 db.SaveChanges();
                 var structure = db.Structures.First(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData);
-                return RedirectToAction("Details", new { id = structure.Id});
+                return RedirectToAction("Details", new { id = structure.Id });
             }
             return View(structureSeq);
         }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////Import_Seq//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////////////////////////////////////////Import_Seq//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //GET: /Structure/Import_Seq
         public ActionResult Import_Seq(int id)
         {
@@ -172,7 +175,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /Structure/Import_Seq
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -191,17 +194,19 @@ namespace Time.Configurator.Controllers
             {
                 foreach (var item in tokens)
                 {
-                    
-                    Lookup lookupNew = new Lookup { ConfigName= lookup.ConfigName,
-                                                    ConfigData = lookup.ConfigData,                                                   
-                                                    Sequence = lookup.Sequence,
-                                                    Data = item.Trim(),
-                                                    PickDefault = lookup.PickDefault,
-                                                    Inactive = lookup.Inactive };
+                    Lookup lookupNew = new Lookup
+                    {
+                        ConfigName = lookup.ConfigName,
+                        ConfigData = lookup.ConfigData,
+                        Sequence = lookup.Sequence,
+                        Data = item.Trim(),
+                        PickDefault = lookup.PickDefault,
+                        Inactive = lookup.Inactive
+                    };
 
                     db.Lookups.Add(lookupNew);
-                 }
-                
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index", "Lookup");
             }
@@ -211,13 +216,14 @@ namespace Time.Configurator.Controllers
         // This method is called from Import_Seq to parse the input in the Data textbox
         private string[] SplitLookupData(string rawString)
         {
-            string[] newData = rawString.Split(new String[] { "\t", ",", "\n", "\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            string[] newData = rawString.Split(new String[] { "\t", ",", "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             return newData;
         }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////Copy_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////////////////////////////////////////Copy_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GET: /Structure/Copy_Seq
         public ActionResult Copy_Seq(int id)
         {
@@ -234,34 +240,115 @@ namespace Time.Configurator.Controllers
                 configNames.Add(new SelectListItem { Text = item, Value = item });
             }
             ViewBag.ConfigNamesTo = configNames;
-
+            // Storing the Lookup data for the sequence in ViewBag
             var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
             ViewBag.Lookup = lookup;
             return View(structureSeq);
         }
 
         // POST: /Structure/Copy_Seq
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Copy_Seq([Bind(Exclude = "Id")] StructureSeq structureSeq)
-        //{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Copy_Seq(StructureSeq structureSeq, string ConfigNamesTo)
+        {
+            // Alerting user if no item was selected in the drop down list
+            if (String.IsNullOrEmpty(ConfigNamesTo)) ModelState.AddModelError("", "Select a Configurator from the list above.");
 
-        //    var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
-        //        && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
-        //        && x.Id != structureSeq.Id);
+            //validation for structure data
+            var ConfigStrct = db.Structures.FirstOrDefault(x => x.ConfigName == ConfigNamesTo && x.ConfigData == structureSeq.ConfigData);
 
-        //    if (Configs != null) ModelState.AddModelError("", "Duplicate Sequence Created---Please Check Data");
+            if (ConfigStrct != null)
+            {
+                ModelState.AddModelError("", structureSeq.ConfigName + " and/or " + structureSeq.ConfigData + " already exists in Structure Table.");
+            }
+            if (ModelState.IsValid)
+            {
+                //validation for structure sequence data
+                var ConfigSeq = db.StructureSeqs.FirstOrDefault(y => y.ConfigName == ConfigNamesTo && y.ConfigData == structureSeq.ConfigData && y.Sequence == structureSeq.Sequence);
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(structureSeq);
-        //}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (ConfigSeq != null)
+                {
+                    ModelState.AddModelError("", structureSeq.ConfigName + " and/or " + structureSeq.ConfigData + " and/or Sequence " + structureSeq.Sequence + " already exists in StructureSeq Table.");
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                // Inserting the data in the Structure and StructureSeq tables after validation
+                Structure structureNew = new Structure { ConfigName = ConfigNamesTo, ConfigData = structureSeq.ConfigData };
+                db.Structures.Add(structureNew);
+                StructureSeq structureSeqNew = new StructureSeq
+                {
+                    ConfigName = ConfigNamesTo,
+                    ConfigData = structureSeq.ConfigData,
+                    Sequence = structureSeq.Sequence,
+                    Lookup = structureSeq.Lookup,
+                    LookupSequence = structureSeq.LookupSequence,
+                    Global = structureSeq.Global
+                };
+                db.StructureSeqs.Add(structureSeqNew);
+                db.SaveChanges();
+                // Call to Copy Lookup that copies each Lookup Data into new existing Configurator
+                CopyLookups(structureSeq, ConfigNamesTo, structureNew);
+
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            // Creates the drop down list for ConfigName in the view
+            var ddlConfigNames = db.ConfiguratorNames.Select(x => x.ConfigName).Distinct();
+            List<SelectListItem> configNames = new List<SelectListItem>();
+            foreach (var item in ddlConfigNames)
+            {
+                configNames.Add(new SelectListItem { Text = item, Value = item });
+            }
+            ViewBag.ConfigNamesTo = configNames;
+            // Storing the Lookup data for the sequence in ViewBag
+            var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
+            ViewBag.Lookup = lookup;
+
+            return View(structureSeq);
+        }
+
+        /// <summary>
+        /// This method copies each Lookup Data into new existing Configurator
+        /// </summary>
+        /// <param name="structureSeq"></param>
+        /// <param name="ConfigNamesTo"></param>
+        /// <param name="structureNew"></param>
+        private void CopyLookups(StructureSeq structureSeq, string ConfigNamesTo, Structure structureNew)
+        {
+            var lookupRows = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData && x.Sequence == structureSeq.Sequence).ToList();
+            foreach (var item in lookupRows)
+            {
+                var ConfigLkp = db.Lookups.FirstOrDefault(z => z.ConfigName == structureNew.ConfigName && z.ConfigData == item.ConfigData && z.Sequence == item.Sequence
+                    && z.Data == item.Data);
+
+                //if (ConfigLkp != null) ModelState.AddModelError("", item.ConfigName + " and/or " + item.ConfigData + " and/or Sequence " + item.Sequence + " and/or " + item.Data + " already exists in Lookup Table.");
+                if (ConfigLkp != null)
+                {
+                }
+                else
+                {
+                    Lookup lookupNew = new Lookup
+                    {
+                        ConfigName = ConfigNamesTo,
+                        ConfigData = item.ConfigData,
+                        Sequence = item.Sequence,
+                        Data = item.Data,
+                        PickDefault = item.PickDefault,
+                        Inactive = item.Inactive
+                    };
+                    db.Lookups.Add(lookupNew);
+                }
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // GET: /Structure/Create
         public ActionResult Create()
@@ -271,13 +358,13 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /Structure/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude="Id")] Structure structure)
+        public ActionResult Create([Bind(Exclude = "Id")] Structure structure)
         {
-
+            //prevents duplicate structures when creating a new structure
             var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
@@ -285,7 +372,7 @@ namespace Time.Configurator.Controllers
             if (ModelState.IsValid)
             {
                 db.Structures.Add(structure);
-                db.StructureSeqs.Add(new StructureSeq { ConfigName = structure.ConfigName, ConfigData = structure.ConfigData, Sequence = 1, Global = false});
+                db.StructureSeqs.Add(new StructureSeq { ConfigName = structure.ConfigName, ConfigData = structure.ConfigData, Sequence = 1, Global = false });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -310,12 +397,13 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /Structure/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Structure structure)
         {
+            //prevents data from being duplicated when editing a structure
             var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData && x.Id != structure.Id);
 
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
@@ -326,7 +414,7 @@ namespace Time.Configurator.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            GenerateDropDowns(structure);
+                GenerateDropDowns(structure);
             return View(structure);
         }
 
@@ -369,23 +457,23 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            //var ConfigNameList = from firstList in db.Structures
-            //                     group firstList by firstList.ConfigName into newList1
-            //                     let x = newList1.FirstOrDefault()
-            //                     select x;
+            var ConfigNameList = from firstList in db.Structures
+                                 group firstList by firstList.ConfigName into newList1
+                                 let x = newList1.FirstOrDefault()
+                                 select x;
 
             var ConfigDataList = from secondList in db.Structures
-                                 group secondList by secondList.ConfigName into newList2
+                                 group secondList by secondList.ConfigData into newList2
                                  let x = newList2.FirstOrDefault()
                                  select x;
 
-            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName"); 
+            ViewBag.ConfigName = new SelectList(ConfigNameList.ToList(), "ConfigName", "ConfigName");
             ViewBag.ConfigData = new SelectList(ConfigDataList.ToList(), "ConfigData", "ConfigData");
         }
 
         private void GenerateDropDowns(Structure structure)
         {
-            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
+            ViewBag.ConfigName = new SelectList(db.Structures.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
             ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structure.ConfigData);
         }
     }

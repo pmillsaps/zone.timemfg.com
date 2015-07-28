@@ -4,100 +4,98 @@
     ViewBag.Title = "Copy Sequence To New Configurator";
 }
 
-<h2>Copy_Seq</h2>
+
+
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="row">
-        <div class="col-md-3">@Html.DropDownList("ConfigNamesTo", optionLabel: "-- Select ConfigName--")</div>
+        <div class="col-md-3">@Html.DropDownList("ConfigNamesTo", optionLabel: "--Select ConfigName--")</div>
+        <div class="col-md-3"><input type="submit" value="Copy Sequence" class="btn btn-default" /></div>
     </div>
-    
-        <div class="form-horizontal">
-            <h4>Structure Sequence</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfigName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.ConfigName, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
-                </div>
+
+    <div class="form-horizontal">
+        <h4>Structure Sequence</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ConfigName, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfigData, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.ConfigData, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ConfigData, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigData, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ConfigData, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfigData, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Sequence, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sequence, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Sequence, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Lookup, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Lookup, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Lookup, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lookup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Lookup, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lookup, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.LookupSequence, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.LookupSequence, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LookupSequence, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LookupSequence, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.LookupSequence, new { @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LookupSequence, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Global, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.CheckBoxFor(model => model.Global, new { disabled = "disabled" })
-                        @Html.ValidationMessageFor(model => model.Global, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <table class="table table-striped table-bordered table-condensed">
-                <tr>
-                    <th>Data</th>
-                    <th>PickDefault</th>
-                    <th>Inactive</th>
-                </tr>
-                @foreach (var item in ViewBag.Lookup as IEnumerable<Time.Data.EntityModels.Configurator.Lookup>)
-            {
-                    <tr>
-                        <td>
-                            @item.Data
-                        </td>
-                        <td>
-                            @Html.CheckBox("Lookup", @item.PickDefault, new { @disabled = "disabled" })
-                        </td>
-                        <td>
-                            @Html.CheckBox("Lookup", @item.Inactive, new { @disabled = "disabled" })
-                        </td>
-                    </tr>
-            }
-            </table>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Global, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(model => model.Global, new { disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Global, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        }
+    </div>
+}
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>Data</th>
+        <th>PickDefault</th>
+        <th>Inactive</th>
+    </tr>
+    @foreach (var item in ViewBag.Lookup as IEnumerable<Time.Data.EntityModels.Configurator.Lookup>)
+    {
+        <tr>
+            <td>
+                @item.Data
+            </td>
+            <td>
+                @Html.CheckBox("Lookup", @item.PickDefault, new { @disabled = "disabled" })
+            </td>
+            <td>
+                @Html.CheckBox("Lookup", @item.Inactive, new { @disabled = "disabled" })
+            </td>
+        </tr>
+    }
+</table>
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

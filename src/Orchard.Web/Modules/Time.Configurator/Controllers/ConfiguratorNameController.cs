@@ -55,6 +55,104 @@ namespace Time.Configurator.Controllers
             return View(configuratorname);
         }
 
+        // GET: /ConfiguratorName/Copy
+        //this is used to copy all the configurator data in one configurator to a brand new one that you create
+        public ActionResult Copy(int id = 0)
+        {
+            var configName = db.ConfiguratorNames.Where(x => x.Id == id).Select(x => new { cName = x.ConfigName }).Single();
+            string conName = configName.cName;
+            ViewBag.ConfiguratorName = conName;
+
+            var structure = db.Structures.Where(x => x.ConfigName == conName).ToList();
+            ViewBag.Structure = structure;
+
+            var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == conName).ToList();
+            ViewBag.StructureSeq = structureSeq;
+
+            var lookup = db.Lookups.Where(x => x.ConfigName == conName).ToList();
+            ViewBag.Lookup = lookup;
+
+            return View();
+        }
+
+        // POST: /ConfiguratorName/Copy
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Copy(ConfiguratorName configuratorname)
+        {
+            var Configs = db.ConfiguratorNames.FirstOrDefault(x => x.ConfigName == configuratorname.ConfigName);
+
+            if (Configs != null) ModelState.AddModelError("ConfigName", "Configurator Name Already Exists");
+
+            if (ModelState.IsValid)
+            {
+                // Inserting the data in the Configurator Name, Structure, and Structure Sequence tables after validation
+                ConfiguratorName configuratorNameNew = new ConfiguratorName { ConfigName = configuratorname.ConfigName };
+                db.ConfiguratorNames.Add(configuratorNameNew);
+                db.SaveChanges();
+
+                var cN = db.ConfiguratorNames.Find(configuratorname.Id);
+                var st = db.Structures.Where(x => x.ConfigName == cN.ConfigName).ToList();
+                foreach (var item in st)
+                {
+                    Structure structureNew = new Structure { ConfigName = configuratorname.ConfigName, ConfigData = item.ConfigData };
+                    db.Structures.Add(structureNew);
+                }
+                db.SaveChanges();
+
+                var stSq = db.StructureSeqs.Where(x => x.ConfigName == cN.ConfigName).ToList();
+                foreach (var item in stSq)
+                {
+                    StructureSeq structureSeqNew = new StructureSeq
+                    {
+                        ConfigName = configuratorname.ConfigName,
+                        ConfigData = item.ConfigData,
+                        Sequence = item.Sequence,
+                        Lookup = item.Lookup,
+                        LookupSequence = item.LookupSequence,
+                        Global = item.Global
+                    };
+                    db.StructureSeqs.Add(structureSeqNew);
+                }
+                db.SaveChanges();
+
+                var lkp = db.Lookups.Where(x => x.ConfigName == cN.ConfigName).ToList();
+                foreach (var item in lkp)
+                {
+                    Lookup lookupNew = new Lookup
+                    {
+                        ConfigName = configuratorname.ConfigName,
+                        ConfigData = item.ConfigData,
+                        Sequence = item.Sequence,
+                        Data = item.Data,
+                        PickDefault = item.PickDefault,
+                        Inactive = item.Inactive
+                    };
+                    db.Lookups.Add(lookupNew);
+                }
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            var configName = db.ConfiguratorNames.Where(x => x.Id == configuratorname.Id).Select(x => new { cName = x.ConfigName }).Single();
+            string conName = configName.cName;
+            ViewBag.ConfiguratorName = conName;
+
+            var structure = db.Structures.Where(x => x.ConfigName == conName).ToList();
+            ViewBag.Structure = structure;
+
+            var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == conName).ToList();
+            ViewBag.StructureSeq = structureSeq;
+
+            var lookup = db.Lookups.Where(x => x.ConfigName == conName).ToList();
+            ViewBag.Lookup = lookup;
+
+            return View();
+        }
+
         // GET: /ConfiguratorName/Create
         public ActionResult Create()
         {
@@ -66,11 +164,11 @@ namespace Time.Configurator.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude="Id")] ConfiguratorName configuratorname)
+        public ActionResult Create([Bind(Exclude = "Id")] ConfiguratorName configuratorname)
         {
             var Configs = db.ConfiguratorNames.FirstOrDefault(x => x.ConfigName == configuratorname.ConfigName);
 
-            if (Configs != null) ModelState.AddModelError("ConfigName", "Duplicate Configurator Name");
+            if (Configs != null) ModelState.AddModelError("ConfigName", "Configurator Name Already Exists");
 
             if (ModelState.IsValid)
             {
