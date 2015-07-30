@@ -198,6 +198,9 @@
     <Content Include="Views\Structure\Copy_Seq.cshtml" />
     <Content Include="Views\ConfiguratorName\Copy.cshtml" />
     <Content Include="Views\Lookup\Create.cshtml" />
+    <Content Include="Views\Structure\_ComplexStructure.cshtml" />
+    <Content Include="Views\Structure\_ComplexLookup.cshtml" />
+    <Content Include="Views\Structure\Add_CS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

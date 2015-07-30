@@ -64,6 +64,13 @@ namespace Time.Configurator.Controllers
             }
             var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
             ViewBag.StructureSeq = structureSeq;
+
+            List<ComplexStructure> complexStructure = db.ComplexStructures.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
+            ViewBag.ComplexStructure = complexStructure;
+
+            List<ComplexLookup> complexLookup = db.ComplexLookups.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
+            ViewBag.ComplexLookup = complexLookup;
+
             return View(structure);
         }
 
@@ -118,7 +125,6 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
-            //var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
             ViewBag.ConfigName = structure.ConfigName;
             ViewBag.ConfigData = structure.ConfigData;
             var sequenceNum = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList().Max(x => Convert.ToInt32(x.Sequence));
@@ -232,6 +238,7 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
+
             // Creates the drop down list for ConfigName in the view
             var ddlConfigNames = db.ConfiguratorNames.Select(x => x.ConfigName).Distinct();
             List<SelectListItem> configNames = new List<SelectListItem>();
@@ -240,6 +247,7 @@ namespace Time.Configurator.Controllers
                 configNames.Add(new SelectListItem { Text = item, Value = item });
             }
             ViewBag.ConfigNamesTo = configNames;
+
             // Storing the Lookup data for the sequence in ViewBag
             var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
             ViewBag.Lookup = lookup;
@@ -289,6 +297,7 @@ namespace Time.Configurator.Controllers
                 };
                 db.StructureSeqs.Add(structureSeqNew);
                 db.SaveChanges();
+
                 // Call to Copy Lookup that copies each Lookup Data into new existing Configurator
                 CopyLookups(structureSeq, ConfigNamesTo, structureNew);
 
@@ -307,6 +316,7 @@ namespace Time.Configurator.Controllers
                 configNames.Add(new SelectListItem { Text = item, Value = item });
             }
             ViewBag.ConfigNamesTo = configNames;
+
             // Storing the Lookup data for the sequence in ViewBag
             var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
             ViewBag.Lookup = lookup;
@@ -328,7 +338,6 @@ namespace Time.Configurator.Controllers
                 var ConfigLkp = db.Lookups.FirstOrDefault(z => z.ConfigName == structureNew.ConfigName && z.ConfigData == item.ConfigData && z.Sequence == item.Sequence
                     && z.Data == item.Data);
 
-                //if (ConfigLkp != null) ModelState.AddModelError("", item.ConfigName + " and/or " + item.ConfigData + " and/or Sequence " + item.Sequence + " and/or " + item.Data + " already exists in Lookup Table.");
                 if (ConfigLkp != null)
                 {
                 }
@@ -348,8 +357,69 @@ namespace Time.Configurator.Controllers
             }
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////Add_CS///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //GET: /Structure/Add_CS
+        //used to add in a new ComplexStructure
+        public ActionResult Add_CS(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Structure structure = db.Structures.Find(id);
+            if (structure == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.ConfigName = structure.ConfigName;
+            ViewBag.ConfigData = structure.ConfigData;
+
+            //makes the sequence number 1 if there were no previous sequences
+            //without this it will not let you create a sequence if there were not any before, while also incrementing ones that had a sequenc
+            var sequenceNum = db.ComplexStructures.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).Max(x => (int?)x.Sequence);
+            if (sequenceNum != null)
+            {
+                ViewBag.Sequence = sequenceNum + 1;
+            }
+            else
+            {
+                ViewBag.Sequence = 1;
+            }
+
+            GenerateComplexDropDowns(structure);
+            return View();
+        }
+
+        // POST: /Structure/Add_CS
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_CS([Bind(Exclude = "Id")] ComplexStructure complexStructure, StructureSeq structureSeq)
+        {
+            //prevents duplicate code when adding a sequence
+            var Configs = db.ComplexStructures.FirstOrDefault(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData
+                && x.Sequence == complexStructure.Sequence && x.LookupData == complexStructure.LookupData && x.LookupSeq == complexStructure.LookupSeq
+                && x.Id != complexStructure.Id);
+
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Complex Structure Created---Please Check Data");
+
+            if (ModelState.IsValid)
+            {
+                db.ComplexStructures.Add(complexStructure);
+                db.SaveChanges();
+                var structure = db.Structures.First(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+                return RedirectToAction("Details", new { id = structure.Id });
+            }
+            GenerateComplexDropDowns(structureSeq);
+            return View(complexStructure);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         // GET: /Structure/Create
         public ActionResult Create()
         {
@@ -414,7 +484,7 @@ namespace Time.Configurator.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-                GenerateDropDowns(structure);
+            GenerateDropDowns(structure);
             return View(structure);
         }
 
@@ -457,24 +527,43 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            var ConfigNameList = from firstList in db.Structures
-                                 group firstList by firstList.ConfigName into newList1
-                                 let x = newList1.FirstOrDefault()
-                                 select x;
-
             var ConfigDataList = from secondList in db.Structures
                                  group secondList by secondList.ConfigData into newList2
                                  let x = newList2.FirstOrDefault()
                                  select x;
 
-            ViewBag.ConfigName = new SelectList(ConfigNameList.ToList(), "ConfigName", "ConfigName");
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             ViewBag.ConfigData = new SelectList(ConfigDataList.ToList(), "ConfigData", "ConfigData");
         }
 
         private void GenerateDropDowns(Structure structure)
         {
-            ViewBag.ConfigName = new SelectList(db.Structures.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
             ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structure.ConfigData);
+        }
+
+
+
+
+
+        private void GenerateComplexDropDowns(Structure structure)
+        {
+            var ConfigDataCSList = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName).ToList();
+
+
+            var SequenceCSList = from secondCSList in db.StructureSeqs
+                                 group secondCSList by secondCSList.Sequence into newCSList2
+                                 let x = newCSList2.FirstOrDefault()
+                                 select x;
+
+            ViewBag.LookupData = new SelectList(ConfigDataCSList.ToList(), "ConfigData", "ConfigData");
+            ViewBag.LookupSeq = new SelectList(SequenceCSList.ToList(), "Sequence", "Sequence");
+        }
+
+        private void GenerateComplexDropDowns(StructureSeq structureSeq)
+        {
+            ViewBag.LookupData = new SelectList(db.StructureSeqs.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureSeq.ConfigData);
+            ViewBag.LookupSeq = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence", structureSeq.Sequence);
         }
     }
 }

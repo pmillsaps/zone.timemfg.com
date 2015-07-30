@@ -185,8 +185,8 @@ namespace Time.Configurator.Controllers
                                select x;
 
             ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
-            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());
+            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");                                          //shows all values
+            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());                                                              //shows distinct values
             ViewBag.Sequence = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence");
             ViewBag.Lookup = new SelectList(db.StructureSeqs.OrderBy(x => x.Lookup), "Lookup", "Lookup");
             ViewBag.LookupSequence = new SelectList(db.StructureSeqs.OrderBy(x => x.LookupSequence), "LookupSequence", "LookupSequence");
@@ -195,8 +195,8 @@ namespace Time.Configurator.Controllers
         private void GenerateDropDowns(StructureSeq structureseq)
         {
             ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structureseq.ConfigName);
-            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureseq.ConfigData);
-            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct(), structureseq.ConfigData);
+            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureseq.ConfigData);                 //shows all values
+            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct(), structureseq.ConfigData);                                     //shows distinct values
             ViewBag.Sequence = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence", structureseq.Sequence);
             ViewBag.Lookup = new SelectList(db.StructureSeqs.OrderBy(x => x.Lookup), "Lookup", "Lookup", structureseq.Lookup);
             ViewBag.LookupSequence = new SelectList(db.StructureSeqs.OrderBy(x => x.LookupSequence), "LookupSequence", "LookupSequence", structureseq.LookupSequence);
