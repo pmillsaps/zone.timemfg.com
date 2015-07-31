@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class LookupController : Controller
@@ -112,10 +113,12 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] Lookup lookup)
         {
+            //prevents a duplicate from being created
             //duplicate checking
             var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence
             && x.Data == lookup.Data);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Data");
 
             //error checking for the model
@@ -154,9 +157,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Lookup lookup)
         {
+            //prevents a duplicate from being saved when editing
             var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence
                 && x.Data == lookup.Data && x.Id != lookup.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Lookup Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -208,14 +213,6 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            //var ConfigNameList = from firstList in db.StructureSeqs
-            //                     group firstList by firstList.ConfigName into newList1
-            //                     let x = newList1.FirstOrDefault()
-            //                     select x;
-            //var ConfigDataList = from secondList in db.StructureSeqs
-            //                     group secondList by secondList.ConfigData into newList2
-            //                     let x = newList2.FirstOrDefault()
-            //                     select x;
             var SequenceList = from thirdList in db.Lookups
                                group thirdList by thirdList.Sequence into newList3
                                let x = newList3.FirstOrDefault()
@@ -232,6 +229,7 @@ namespace Time.Configurator.Controllers
             ViewBag.Lookup = new SelectList(db.Lookups.OrderBy(x => x.Data), "Data", "Data");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(Lookup lookup)
         {
             ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", lookup.ConfigName);

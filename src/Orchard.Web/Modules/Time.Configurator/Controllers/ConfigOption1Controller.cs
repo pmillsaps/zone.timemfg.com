@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class ConfigOption1Controller : Controller
@@ -69,9 +70,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] ConfigOption1 configoption1)
         {
+            //prevents a duplicate from being created
             var Configs = db.ConfigOption1.FirstOrDefault(x => x.ConfigName == configoption1.ConfigName && x.ConfigData == configoption1.ConfigData && x.Key1 == configoption1.Key1
             && x.ConfigOption == configoption1.ConfigOption);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -107,10 +110,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigOption1 configoption1)
         {
-
+            //prevents a duplicate from being saved when editing
             var Configs = db.ConfigOption1.FirstOrDefault(x => x.ConfigName == configoption1.ConfigName && x.ConfigData == configoption1.ConfigData && x.Key1 == configoption1.Key1
             && x.ConfigOption == configoption1.ConfigOption && x.Id != configoption1.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -188,6 +192,7 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigOption = new SelectList(ConfigOptionList.ToList(), "ConfigOption", "ConfigOption");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(ConfigOption1 configoptions1)
         {
             ViewBag.ConfigName = new SelectList(db.ConfigOption1.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", configoptions1.ConfigName);
