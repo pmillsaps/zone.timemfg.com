@@ -1,0 +1,36 @@
+﻿@model Time.Drawings.ViewModels.SearchDrawingsViewModel
+@*@using System.Collections*@
+
+@{
+    ViewBag.Title = "Search Drawings";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Enter Part Number:</legend>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Search)
+            @Html.ValidationMessageFor(model => model.Search)
+        </div>
+        <div class="editor-button">
+            <input type="submit" value="Search" />
+        </div>
+    </fieldset>
+    <strong>@ViewBag.SearchNote</strong><br />
+    <strong>@ViewBag.Count</strong><br /><br />
+}
+
+@if (Model != null)
+{
+    if (Model.DrawingsList.Count > 0)
+    {
+        @Html.Partial("_DrawingsList", Model.DrawingsList)
+    }
+
+}

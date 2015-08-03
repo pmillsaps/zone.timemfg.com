@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Time.Data.EntityModels.OrderLog.Dealer>
+
+@{
+    ViewBag.Title = "Dealers";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as  Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+@Html.ActionLink("Add a Dealer", "Create", "Dealer", null, new { @class = "btn btn-primary" })
+    
+
+    
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th width="300">
+                @Html.DisplayNameFor(model => model.DealerName)
+            </th>
+            <th width="300">
+                @Html.DisplayNameFor(model => model.Territory.TerritoryName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DealerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Territory.TerritoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DealerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DealerId })
+                </td>
+            </tr>
+        }
+
+    </table>
