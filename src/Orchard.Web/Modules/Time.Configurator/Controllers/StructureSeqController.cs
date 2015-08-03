@@ -14,6 +14,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class StructureSeqController : Controller
@@ -70,9 +71,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] StructureSeq structureseq)
         {
+            //prevents a duplicate from being created
             var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData
             && x.Sequence == structureseq.Sequence);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Sequence Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -108,10 +111,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(StructureSeq structureseq)
         {
-
+            //prevents a duplicate from being saved when editing
             var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData 
                 && x.Sequence == structureseq.Sequence && x.Lookup == structureseq.Lookup && x.LookupSequence == structureseq.LookupSequence && x.Id != structureseq.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Sequence Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -163,14 +167,6 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            //var ConfigNameList = from firstList in db.StructureSeqs
-            //                     group firstList by firstList.ConfigName into newList1
-            //                     let x = newList1.FirstOrDefault()
-            //                     select x;
-            //var ConfigDataList = from secondList in db.StructureSeqs
-            //                     group secondList by secondList.ConfigData into newList2
-            //                     let x = newList2.FirstOrDefault()
-            //                     select x;
             var SequenceList = from thirdList in db.StructureSeqs
                                group thirdList by thirdList.Sequence into newList3
                                let x = newList3.FirstOrDefault()
@@ -185,18 +181,19 @@ namespace Time.Configurator.Controllers
                                select x;
 
             ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
-            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());
+            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");                                          //shows all values
+            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());                                                              //shows distinct values
             ViewBag.Sequence = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence");
             ViewBag.Lookup = new SelectList(db.StructureSeqs.OrderBy(x => x.Lookup), "Lookup", "Lookup");
             ViewBag.LookupSequence = new SelectList(db.StructureSeqs.OrderBy(x => x.LookupSequence), "LookupSequence", "LookupSequence");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(StructureSeq structureseq)
         {
             ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structureseq.ConfigName);
-            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureseq.ConfigData);
-            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct(), structureseq.ConfigData);
+            //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureseq.ConfigData);                 //shows all values
+            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct(), structureseq.ConfigData);                                     //shows distinct values
             ViewBag.Sequence = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence", structureseq.Sequence);
             ViewBag.Lookup = new SelectList(db.StructureSeqs.OrderBy(x => x.Lookup), "Lookup", "Lookup", structureseq.Lookup);
             ViewBag.LookupSequence = new SelectList(db.StructureSeqs.OrderBy(x => x.LookupSequence), "LookupSequence", "LookupSequence", structureseq.LookupSequence);

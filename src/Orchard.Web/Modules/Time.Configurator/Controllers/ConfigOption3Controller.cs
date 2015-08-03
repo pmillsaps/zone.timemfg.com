@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class ConfigOption3Controller : Controller
@@ -69,9 +70,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] ConfigOption3 configoption3)
         {
+            //prevents a duplicate from being created
             var Configs = db.ConfigOption3.FirstOrDefault(x => x.ConfigName == configoption3.ConfigName && x.ConfigData == configoption3.ConfigData && x.Key1 == configoption3.Key1
             && x.Key2 == configoption3.Key2 && x.Key3 == configoption3.Key3 && x.ConfigOption == configoption3.ConfigOption);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -107,9 +110,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigOption3 configoption3)
         {
+            //prevents a duplicate from being saved when editing
             var Configs = db.ConfigOption3.FirstOrDefault(x => x.ConfigName == configoption3.ConfigName && x.ConfigData == configoption3.ConfigData && x.Key1 == configoption3.Key1
             && x.Key2 == configoption3.Key2 && x.Key3 == configoption3.Key3 && x.ConfigOption == configoption3.ConfigOption && x.Id != configoption3.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -199,6 +204,7 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigOption = new SelectList(ConfigOptionList.ToList(), "ConfigOption", "ConfigOption");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(ConfigOption3 configoption3)
         {
             ViewBag.ConfigName = new SelectList(db.ConfigOption3.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", configoption3.ConfigName);

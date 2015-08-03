@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class ConfiguratorNameController : Controller
@@ -82,6 +83,7 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Copy(ConfiguratorName configuratorname)
         {
+            //prevents a duplicate from being created when copying
             var Configs = db.ConfiguratorNames.FirstOrDefault(x => x.ConfigName == configuratorname.ConfigName);
 
             if (Configs != null) ModelState.AddModelError("ConfigName", "Configurator Name Already Exists");
@@ -93,6 +95,7 @@ namespace Time.Configurator.Controllers
                 db.ConfiguratorNames.Add(configuratorNameNew);
                 db.SaveChanges();
 
+                //inputs copied data into structures table
                 var cN = db.ConfiguratorNames.Find(configuratorname.Id);
                 var st = db.Structures.Where(x => x.ConfigName == cN.ConfigName).ToList();
                 foreach (var item in st)
@@ -102,6 +105,7 @@ namespace Time.Configurator.Controllers
                 }
                 db.SaveChanges();
 
+                //inputs copied data into structure sequence table
                 var stSq = db.StructureSeqs.Where(x => x.ConfigName == cN.ConfigName).ToList();
                 foreach (var item in stSq)
                 {
@@ -118,6 +122,7 @@ namespace Time.Configurator.Controllers
                 }
                 db.SaveChanges();
 
+                //inputs copied data into lookups table
                 var lkp = db.Lookups.Where(x => x.ConfigName == cN.ConfigName).ToList();
                 foreach (var item in lkp)
                 {
@@ -137,6 +142,7 @@ namespace Time.Configurator.Controllers
                 return RedirectToAction("Index");
             }
 
+            //pulling information from each table
             var configName = db.ConfiguratorNames.Where(x => x.Id == configuratorname.Id).Select(x => new { cName = x.ConfigName }).Single();
             string conName = configName.cName;
             ViewBag.ConfiguratorName = conName;
@@ -166,8 +172,10 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] ConfiguratorName configuratorname)
         {
+            //prevents a duplicate from being created
             var Configs = db.ConfiguratorNames.FirstOrDefault(x => x.ConfigName == configuratorname.ConfigName);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("ConfigName", "Configurator Name Already Exists");
 
             if (ModelState.IsValid)
@@ -202,8 +210,10 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfiguratorName configuratorname)
         {
+            //prevents a duplicate from being saved when editing
             var Configs = db.ConfiguratorNames.FirstOrDefault(x => x.ConfigName == configuratorname.ConfigName && x.Id != configuratorname.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("ConfigName", "Duplicate Configurator Name");
 
             if (ModelState.IsValid)

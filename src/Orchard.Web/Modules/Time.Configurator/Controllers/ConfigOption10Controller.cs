@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class ConfigOption10Controller : Controller
@@ -69,11 +70,13 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] ConfigOption10 configoption10)
         {
+            //prevents a duplicate from being created
             var Configs = db.ConfigOption10.FirstOrDefault(x => x.ConfigName == configoption10.ConfigName && x.ConfigData == configoption10.ConfigData && x.Key1 == configoption10.Key1
             && x.Key2 == configoption10.Key2 && x.Key3 == configoption10.Key3 && x.Key4 == configoption10.Key4 && x.Key5 == configoption10.Key5 && x.Key6 == configoption10.Key6
             && x.Key7 == configoption10.Key7 && x.Key8 == configoption10.Key8 && x.Key9 == configoption10.Key9 && x.Key10 == configoption10.Key10
             && x.ConfigOption == configoption10.ConfigOption);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -109,11 +112,13 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigOption10 configoption10)
         {
+            //prevents a duplicate from being saved when editing
             var Configs = db.ConfigOption10.FirstOrDefault(x => x.ConfigName == configoption10.ConfigName && x.ConfigData == configoption10.ConfigData && x.Key1 == configoption10.Key1
                 && x.Key2 == configoption10.Key2 && x.Key3 == configoption10.Key3 && x.Key4 == configoption10.Key4 && x.Key5 == configoption10.Key5 && x.Key6 == configoption10.Key6
                 && x.Key7 == configoption10.Key7 && x.Key8 == configoption10.Key8 && x.Key9 == configoption10.Key9 && x.Key10 == configoption10.Key10 
                 && x.ConfigOption == configoption10.ConfigOption && x.Id != configoption10.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -245,6 +250,7 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigOption = new SelectList(ConfigOptionList.ToList(), "ConfigOption", "ConfigOption");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(ConfigOption10 configoption10)
         {
             ViewBag.ConfigName = new SelectList(db.ConfigOption10.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", configoption10.ConfigName);

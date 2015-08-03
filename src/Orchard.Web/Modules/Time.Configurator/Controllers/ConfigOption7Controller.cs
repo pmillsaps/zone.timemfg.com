@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class ConfigOption7Controller : Controller
@@ -69,10 +70,12 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude="Id")] ConfigOption7 configoption7)
         {
+            //prevents a duplicate from being created
             var Configs = db.ConfigOption7.FirstOrDefault(x => x.ConfigName == configoption7.ConfigName && x.ConfigData == configoption7.ConfigData && x.Key1 == configoption7.Key1
             && x.Key2 == configoption7.Key2 && x.Key3 == configoption7.Key3 && x.Key4 == configoption7.Key4 && x.Key5 == configoption7.Key5 && x.Key6 == configoption7.Key6
             && x.Key7 == configoption7.Key7 && x.ConfigOption == configoption7.ConfigOption);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -108,10 +111,12 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigOption7 configoption7)
         {
+            //prevents a duplicate from being saved when editing
             var Configs = db.ConfigOption7.FirstOrDefault(x => x.ConfigName == configoption7.ConfigName && x.ConfigData == configoption7.ConfigData && x.Key1 == configoption7.Key1
             && x.Key2 == configoption7.Key2 && x.Key3 == configoption7.Key3 && x.Key4 == configoption7.Key4 && x.Key5 == configoption7.Key5 && x.Key6 == configoption7.Key6
             && x.Key7 == configoption7.Key7 && x.ConfigOption == configoption7.ConfigOption && x.Id != configoption7.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Option Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -225,6 +230,7 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigOption = new SelectList(ConfigOptionList.ToList(), "ConfigOption", "ConfigOption");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(ConfigOption7 configoption7)
         {
             ViewBag.ConfigName = new SelectList(db.ConfigOption7.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", configoption7.ConfigName);

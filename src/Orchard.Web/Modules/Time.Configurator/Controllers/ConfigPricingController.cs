@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class ConfigPricingController : Controller
@@ -70,9 +71,11 @@ namespace Time.Configurator.Controllers
         //public ActionResult Create([Bind(Exclude="ConfigID,ConfigOption")] ConfigPricing configpricing)
             public ActionResult Create(ConfigPricing configpricing)
         {
+            //prevents a duplicate from being created
             var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price
                 && x.AltPrice == configpricing.AltPrice);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -108,9 +111,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigPricing configpricing)
         {
+            //prevents a duplicate from being saved when editing
             var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price 
                 && x.AltPrice == configpricing.AltPrice);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Data");
 
             if (ModelState.IsValid)
@@ -160,12 +165,9 @@ namespace Time.Configurator.Controllers
 
         private void GenerateDropDowns()
         {
+            //This and above ViewBags pull in the data to put into the drop down lists
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            //var ConfigIDList = from firstList in db.ConfiguratorNames
-            //                     group firstList by firstList.ConfigName into newList1
-            //                     let x = newList1.FirstOrDefault()
-            //                     select x;
 
             //var ConfigOptionList = from secondList in db.ConfigPricings
             //                     group secondList by secondList.ConfigOption into newList2
@@ -175,7 +177,8 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "Id", "ConfigName");
             ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
         }
-        
+
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(ConfigPricing configpricing)
         {
             ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "Id", "ConfigName", configpricing.ConfigID);

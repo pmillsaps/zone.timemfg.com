@@ -1,4 +1,6 @@
 ﻿@model Time.Data.EntityModels.Configurator.Structure
+@using Time.Data.EntityModels.Configurator;
+
 
 @{
     ViewBag.Title = "Structure Details";
@@ -10,6 +12,9 @@
 
 <div>
     <h4>Structure</h4>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -31,6 +36,15 @@
     </dl>
 </div>
 
+<hr />
+
+@*Displays structure sequences associated with the structure details you click on*@
+<h4>Structure Sequence Details</h4>
+
+<p>
+    @Html.ActionLink("Add Sequence", "Add_Seq", new { id = Model.Id })
+</p>
+
 <table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>
@@ -40,7 +54,7 @@
             Lookup
         </th>
         <th>
-            LookupSequence
+            Lookup Sequence
         </th>
         <th>
             Global
@@ -68,17 +82,60 @@
             </td>
             <td>
                 @Html.ActionLink("Import To Lookup", "Import_Seq", new { id = @item.Id }) |
-                @Html.ActionLink("Copy To Existing Configurator", "Copy_Seq", new { id = @item.Id})
+                @Html.ActionLink("Copy To Existing Configurator", "Copy_Seq", new { id = @item.Id })
             </td>
         </tr>
     }
 </table>
+
+<hr />
+
+@*Displays complex structures associated with the structure details you click on*@
+<h4>Complex Structure Details</h4>
+
 <p>
-    @Html.ActionLink("Add Sequence", "Add_Seq",new { id = Model.Id})
-</p>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Add Complex Structure", "Add_CS", new { id = Model.Id })
 </p>
 
-<br />
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            Sequence
+        </th>
+        <th>
+            Lookup Data
+        </th>
+        <th>
+            Lookup Sequence
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.ComplexStructure as IEnumerable<Time.Data.EntityModels.Configurator.ComplexStructure>)
+    {
+        @Html.Partial("_ComplexStructure", item)
+    }
+</table>
+
+<hr />
+
+@*Displays complex lookups associated with the complex structures*@
+<h4>Complex Lookup Details</h4>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            Lookup Data
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.ComplexLookup as IEnumerable<Time.Data.EntityModels.Configurator.ComplexLookup>)
+    {
+        @Html.Partial("_ComplexLookup", item)
+    }
+</table>
+
+
+
+<hr />
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -11,6 +11,7 @@ using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
 {
+    //sets theme and requires you to log in to go to the page
     [Themed]
     [Authorize]
     public class StructureController : Controller
@@ -62,8 +63,19 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
+
+            //pulls in data for the structure sequence information in the structure details of each structure
             var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
             ViewBag.StructureSeq = structureSeq;
+
+            //pulls in data for the complex structure partial view information in the structure details of each structure
+            List<ComplexStructure> complexStructure = db.ComplexStructures.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
+            ViewBag.ComplexStructure = complexStructure;
+
+            //pulls in data for the complex lookup partial view information in the structure details of each structure
+            List<ComplexLookup> complexLookup = db.ComplexLookups.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
+            ViewBag.ComplexLookup = complexLookup;
+
             return View(structure);
         }
 
@@ -91,6 +103,7 @@ namespace Time.Configurator.Controllers
                 && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
                 && x.Id != structureSeq.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Sequence Created---Please Check Data");
 
             if (ModelState.IsValid)
@@ -118,7 +131,6 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
-            //var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
             ViewBag.ConfigName = structure.ConfigName;
             ViewBag.ConfigData = structure.ConfigData;
             var sequenceNum = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList().Max(x => Convert.ToInt32(x.Sequence));
@@ -138,6 +150,7 @@ namespace Time.Configurator.Controllers
                 && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
                 && x.Id != structureSeq.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Sequence Created---Please Check Data");
 
             if (ModelState.IsValid)
@@ -183,15 +196,18 @@ namespace Time.Configurator.Controllers
         {
             string[] tokens = SplitLookupData(lookup.Data);
 
+            //for loop that checks each entry in the import data box to see if it is a duplicate
             foreach (var item in tokens)
             {
                 var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence && x.Data == item.Trim());
 
+                //displays if previous code found a duplicate
                 if (Configs != null) ModelState.AddModelError("", " Item '" + item + "' is a Duplicate---Remove Duplicate (No data imported)");
             }
 
             if (ModelState.IsValid)
             {
+                //for loop that loops through and inputs each piece of data
                 foreach (var item in tokens)
                 {
                     Lookup lookupNew = new Lookup
@@ -232,6 +248,7 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
+
             // Creates the drop down list for ConfigName in the view
             var ddlConfigNames = db.ConfiguratorNames.Select(x => x.ConfigName).Distinct();
             List<SelectListItem> configNames = new List<SelectListItem>();
@@ -240,6 +257,7 @@ namespace Time.Configurator.Controllers
                 configNames.Add(new SelectListItem { Text = item, Value = item });
             }
             ViewBag.ConfigNamesTo = configNames;
+
             // Storing the Lookup data for the sequence in ViewBag
             var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
             ViewBag.Lookup = lookup;
@@ -259,6 +277,7 @@ namespace Time.Configurator.Controllers
             //validation for structure data
             var ConfigStrct = db.Structures.FirstOrDefault(x => x.ConfigName == ConfigNamesTo && x.ConfigData == structureSeq.ConfigData);
 
+            //displays if previous code found a duplicate
             if (ConfigStrct != null)
             {
                 ModelState.AddModelError("", structureSeq.ConfigName + " and/or " + structureSeq.ConfigData + " already exists in Structure Table.");
@@ -268,6 +287,7 @@ namespace Time.Configurator.Controllers
                 //validation for structure sequence data
                 var ConfigSeq = db.StructureSeqs.FirstOrDefault(y => y.ConfigName == ConfigNamesTo && y.ConfigData == structureSeq.ConfigData && y.Sequence == structureSeq.Sequence);
 
+                //displays if previous code found a duplicate
                 if (ConfigSeq != null)
                 {
                     ModelState.AddModelError("", structureSeq.ConfigName + " and/or " + structureSeq.ConfigData + " and/or Sequence " + structureSeq.Sequence + " already exists in StructureSeq Table.");
@@ -289,6 +309,7 @@ namespace Time.Configurator.Controllers
                 };
                 db.StructureSeqs.Add(structureSeqNew);
                 db.SaveChanges();
+
                 // Call to Copy Lookup that copies each Lookup Data into new existing Configurator
                 CopyLookups(structureSeq, ConfigNamesTo, structureNew);
 
@@ -307,6 +328,7 @@ namespace Time.Configurator.Controllers
                 configNames.Add(new SelectListItem { Text = item, Value = item });
             }
             ViewBag.ConfigNamesTo = configNames;
+
             // Storing the Lookup data for the sequence in ViewBag
             var lookup = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData).ToList();
             ViewBag.Lookup = lookup;
@@ -322,13 +344,13 @@ namespace Time.Configurator.Controllers
         /// <param name="structureNew"></param>
         private void CopyLookups(StructureSeq structureSeq, string ConfigNamesTo, Structure structureNew)
         {
+            //prevents a duplicate from being created when making a copy
             var lookupRows = db.Lookups.Where(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData && x.Sequence == structureSeq.Sequence).ToList();
             foreach (var item in lookupRows)
             {
                 var ConfigLkp = db.Lookups.FirstOrDefault(z => z.ConfigName == structureNew.ConfigName && z.ConfigData == item.ConfigData && z.Sequence == item.Sequence
                     && z.Data == item.Data);
 
-                //if (ConfigLkp != null) ModelState.AddModelError("", item.ConfigName + " and/or " + item.ConfigData + " and/or Sequence " + item.Sequence + " and/or " + item.Data + " already exists in Lookup Table.");
                 if (ConfigLkp != null)
                 {
                 }
@@ -348,8 +370,70 @@ namespace Time.Configurator.Controllers
             }
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////Add_CS///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //GET: /Structure/Add_CS
+        //used to add in a new ComplexStructure
+        public ActionResult Add_CS(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Structure structure = db.Structures.Find(id);
+            if (structure == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.ConfigName = structure.ConfigName;
+            ViewBag.ConfigData = structure.ConfigData;
+
+            //makes the sequence number 1 if there were no previous sequences
+            //without this it will not let you create a sequence if there were not any before, while also incrementing ones that had a sequenc
+            var sequenceNum = db.ComplexStructures.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).Max(x => (int?)x.Sequence);
+            if (sequenceNum != null)
+            {
+                ViewBag.Sequence = sequenceNum + 1;
+            }
+            else
+            {
+                ViewBag.Sequence = 1;
+            }
+
+            GenerateComplexDropDowns(structure);
+            return View();
+        }
+
+        // POST: /Structure/Add_CS
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_CS([Bind(Exclude = "Id")] ComplexStructure complexStructure, StructureSeq structureSeq)
+        {
+            //prevents duplicate code when adding a sequence
+            var Configs = db.ComplexStructures.FirstOrDefault(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData
+                && x.Sequence == complexStructure.Sequence && x.LookupData == complexStructure.LookupData && x.LookupSeq == complexStructure.LookupSeq
+                && x.Id != complexStructure.Id);
+
+            //displays if previous code found a duplicate
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Complex Structure Created---Please Check Data");
+
+            if (ModelState.IsValid)
+            {
+                db.ComplexStructures.Add(complexStructure);
+                db.SaveChanges();
+                var structure = db.Structures.First(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+                return RedirectToAction("Details", new { id = structure.Id });
+            }
+            GenerateComplexDropDowns(structureSeq);
+            return View(complexStructure);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         // GET: /Structure/Create
         public ActionResult Create()
         {
@@ -367,6 +451,7 @@ namespace Time.Configurator.Controllers
             //prevents duplicate structures when creating a new structure
             var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
 
             if (ModelState.IsValid)
@@ -406,6 +491,7 @@ namespace Time.Configurator.Controllers
             //prevents data from being duplicated when editing a structure
             var Configs = db.Structures.FirstOrDefault(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData && x.Id != structure.Id);
 
+            //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Created---Please Check Data");
 
             if (ModelState.IsValid)
@@ -414,7 +500,7 @@ namespace Time.Configurator.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-                GenerateDropDowns(structure);
+            GenerateDropDowns(structure);
             return View(structure);
         }
 
@@ -457,24 +543,44 @@ namespace Time.Configurator.Controllers
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            var ConfigNameList = from firstList in db.Structures
-                                 group firstList by firstList.ConfigName into newList1
-                                 let x = newList1.FirstOrDefault()
-                                 select x;
-
             var ConfigDataList = from secondList in db.Structures
                                  group secondList by secondList.ConfigData into newList2
                                  let x = newList2.FirstOrDefault()
                                  select x;
 
-            ViewBag.ConfigName = new SelectList(ConfigNameList.ToList(), "ConfigName", "ConfigName");
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             ViewBag.ConfigData = new SelectList(ConfigDataList.ToList(), "ConfigData", "ConfigData");
         }
 
+        //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(Structure structure)
         {
-            ViewBag.ConfigName = new SelectList(db.Structures.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName", structure.ConfigName);
             ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structure.ConfigData);
+        }
+
+
+        private void GenerateComplexDropDowns(Structure structure)
+        {
+            //prevent duplicates from showing up in drop down
+            //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
+            var ConfigDataCSList = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName).ToList();
+
+
+            var SequenceCSList = from secondCSList in db.StructureSeqs
+                                 group secondCSList by secondCSList.Sequence into newCSList2
+                                 let x = newCSList2.FirstOrDefault()
+                                 select x;
+
+            ViewBag.LookupData = new SelectList(ConfigDataCSList.ToList(), "ConfigData", "ConfigData");
+            ViewBag.LookupSeq = new SelectList(SequenceCSList.ToList(), "Sequence", "Sequence");
+        }
+
+        //This and above ViewBags pull in the data to put into the drop down lists
+        private void GenerateComplexDropDowns(StructureSeq structureSeq)
+        {
+            ViewBag.LookupData = new SelectList(db.StructureSeqs.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureSeq.ConfigData);
+            ViewBag.LookupSeq = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence", structureSeq.Sequence);
         }
     }
 }
