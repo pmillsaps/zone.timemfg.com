@@ -1,0 +1,189 @@
+2014-07-18 15:00:54,936 [6] Orchard.Environment.DefaultAssemblyLoader - Default - Error loading assembly 'EntityFramework'
+ http://localhost:30321/OrchardLocal/
+System.IO.FileNotFoundException: Could not load file or assembly 'EntityFramework' or one of its dependencies. The system cannot find the file specified.
+File name: 'EntityFramework'
+   at System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at Orchard.Environment.DefaultAssemblyLoader.LoadWorker(String shortName, String fullName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IAssemblyLoader.cs:line 56
+   at Orchard.Environment.DefaultAssemblyLoader.<>c__DisplayClass4.<Load>b__2(String shortName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IAssemblyLoader.cs:line 26
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Orchard.Environment.DefaultAssemblyLoader.Load(String assemblyName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IAssemblyLoader.cs:line 26
+
+=== Pre-bind state information ===
+LOG: DisplayName = EntityFramework
+ (Partial)
+WRN: Partial binding information was supplied for an assembly:
+WRN: Assembly Name: EntityFramework | Domain ID: 2
+WRN: A partial bind occurs when only part of the assembly display name is provided.
+WRN: This might result in the binder loading an incorrect assembly.
+WRN: It is recommended to provide a fully specified textual identity for the assembly,
+WRN: that consists of the simple name, version, culture, and public key token.
+WRN: See whitepaper http://go.microsoft.com/fwlink/?LinkId=109270 for more information and common solutions to this issue.
+LOG: Appbase = file:///C:/Users/PaulM/Desktop/Projects/zone.timemfg.com/src/Orchard.Web/
+LOG: Initial PrivatePath = C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\bin
+Calling assembly : Orchard.Framework, Version=1.8.1.0, Culture=neutral, PublicKeyToken=null.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\web.config
+LOG: Using host configuration file: C:\Users\PaulM\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Policy not being applied to reference at this time (private, custom, partial, or location-based assembly bind).
+LOG: The same bind was seen before, and was failed with hr = 0x80070002.
+
+2014-07-18 15:00:54,960 [6] Orchard.Environment.Extensions.Compilers.DefaultExtensionCompiler - Default - Assembly reference 'EntityFramework' for project '/OrchardLocal/Modules/Time.Legacy/Time.Legacy.csproj' cannot be loaded
+ http://localhost:30321/OrchardLocal/
+2014-07-18 15:01:16,123 [6] Orchard.Environment.DefaultAssemblyLoader - Default - Error loading assembly 'EntityFramework'
+ http://localhost:30321/OrchardLocal/
+System.IO.FileNotFoundException: Could not load file or assembly 'EntityFramework' or one of its dependencies. The system cannot find the file specified.
+File name: 'EntityFramework'
+   at System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at Orchard.Environment.DefaultAssemblyLoader.LoadWorker(String shortName, String fullName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IAssemblyLoader.cs:line 56
+   at Orchard.Environment.DefaultAssemblyLoader.<>c__DisplayClass4.<Load>b__2(String shortName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IAssemblyLoader.cs:line 26
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Orchard.Environment.DefaultAssemblyLoader.Load(String assemblyName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard\Environment\IAssemblyLoader.cs:line 26
+
+=== Pre-bind state information ===
+LOG: DisplayName = EntityFramework
+ (Partial)
+WRN: Partial binding information was supplied for an assembly:
+WRN: Assembly Name: EntityFramework | Domain ID: 2
+WRN: A partial bind occurs when only part of the assembly display name is provided.
+WRN: This might result in the binder loading an incorrect assembly.
+WRN: It is recommended to provide a fully specified textual identity for the assembly,
+WRN: that consists of the simple name, version, culture, and public key token.
+WRN: See whitepaper http://go.microsoft.com/fwlink/?LinkId=109270 for more information and common solutions to this issue.
+LOG: Appbase = file:///C:/Users/PaulM/Desktop/Projects/zone.timemfg.com/src/Orchard.Web/
+LOG: Initial PrivatePath = C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\bin
+Calling assembly : Orchard.Framework, Version=1.8.1.0, Culture=neutral, PublicKeyToken=null.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\web.config
+LOG: Using host configuration file: C:\Users\PaulM\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Policy not being applied to reference at this time (private, custom, partial, or location-based assembly bind).
+LOG: The same bind was seen before, and was failed with hr = 0x80070002.
+
+2014-07-18 15:01:16,126 [6] Orchard.Environment.Extensions.Compilers.DefaultExtensionCompiler - Default - Assembly reference 'EntityFramework' for project '/OrchardLocal/Modules/Time.Legacy/Time.Legacy.csproj' cannot be loaded
+ http://localhost:30321/OrchardLocal/
+2014-07-18 15:08:49,938 [38] Orchard.Exceptions.DefaultExceptionPolicy - Default - An unexpected exception was caught
+ http://localhost:30321/OrchardLocal/Time.Legacy/Legacy
+System.InvalidOperationException: No connection string named 'LegacyEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Time.Legacy.Controllers.LegacyController.Index()
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+2014-07-18 15:08:58,417 [10] Orchard.Exceptions.DefaultExceptionPolicy - Default - An unexpected exception was caught
+ http://localhost:30321/OrchardLocal/Time.Legacy/Legacy
+System.InvalidOperationException: No connection string named 'LegacyEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Time.Legacy.Controllers.LegacyController.Index()
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+2014-07-18 15:26:24,208 [11] Orchard.Exceptions.DefaultExceptionPolicy - Default - An unexpected exception was caught
+ http://localhost:30321/OrchardLocal/HelloWorld
+System.InvalidOperationException: The view 'HelloWorld' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Themes/PJS.Bootstrap/Views/HelloWorld/Home/HelloWorld.cshtml
+~/Themes/PJS.Bootstrap/Views/HelloWorld.cshtml
+~/Core/HelloWorld/Views/Home/HelloWorld.cshtml
+~/Modules/HelloWorld/Views/Home/HelloWorld.cshtml
+~/Themes/HelloWorld/Views/Home/HelloWorld.cshtml
+~/Core/Reports/Views/HelloWorld.cshtml
+~/Core/Dashboard/Views/HelloWorld.cshtml
+~/Modules/Ventajou.ActiveDirectory/Views/HelloWorld.cshtml
+~/Modules/TinyMce/Views/HelloWorld.cshtml
+~/Modules/Time.OrderLog/Views/HelloWorld.cshtml
+~/Modules/Time.Legacy/Views/HelloWorld.cshtml
+~/Modules/Time.Epicor/Views/HelloWorld.cshtml
+~/Modules/Orchard.Taxonomies/Views/HelloWorld.cshtml
+~/Modules/Orchard.Tags/Views/HelloWorld.cshtml
+~/Modules/Orchard.Scripting/Views/HelloWorld.cshtml
+~/Modules/Orchard.Recipes/Views/HelloWorld.cshtml
+~/Modules/Orchard.Projections/Views/HelloWorld.cshtml
+~/Modules/Orchard.Pages/Views/HelloWorld.cshtml
+~/Modules/Orchard.Packaging/Views/HelloWorld.cshtml
+~/Modules/Orchard.Modules/Views/HelloWorld.cshtml
+~/Core/Containers/Views/HelloWorld.cshtml
+~/Modules/Orchard.Fields/Views/HelloWorld.cshtml
+~/Modules/Orchard.ContentTypes/Views/HelloWorld.cshtml
+~/Modules/Orchard.Roles/Views/HelloWorld.cshtml
+~/Modules/Orchard.Users/Views/HelloWorld.cshtml
+~/Modules/Orchard.Workflows/Views/HelloWorld.cshtml
+~/Modules/Orchard.Comments/Views/HelloWorld.cshtml
+~/Modules/Orchard.CodeGeneration/Views/HelloWorld.cshtml
+~/Modules/Orchard.ContentPicker/Views/HelloWorld.cshtml
+~/Core/Contents/Views/HelloWorld.cshtml
+~/Modules/Orchard.Blogs/Views/HelloWorld.cshtml
+~/Core/Shapes/Views/HelloWorld.cshtml
+~/Core/Navigation/Views/HelloWorld.cshtml
+~/Core/Feeds/Views/HelloWorld.cshtml
+~/Modules/Orchard.Widgets/Views/HelloWorld.cshtml
+~/Modules/Orchard.Themes/Views/HelloWorld.cshtml
+~/Modules/Orchard.PublishLater/Views/HelloWorld.cshtml
+~/Modules/Orchard.MediaLibrary/Views/HelloWorld.cshtml
+~/Core/Title/Views/HelloWorld.cshtml
+~/Modules/Orchard.MediaProcessing/Views/HelloWorld.cshtml
+~/Modules/Orchard.Forms/Views/HelloWorld.cshtml
+~/Modules/Orchard.OutputCache/Views/HelloWorld.cshtml
+~/Modules/Orchard.Autoroute/Views/HelloWorld.cshtml
+~/Core/Scheduling/Views/HelloWorld.cshtml
+~/Modules/Orchard.Tokens/Views/HelloWorld.cshtml
+~/Modules/Orchard.jQuery/Views/HelloWorld.cshtml
+~/Modules/Orchard.Alias/Views/HelloWorld.cshtml
+~/Core/Common/Views/HelloWorld.cshtml
+~/Core/Settings/Views/HelloWorld.cshtml
+~/Modules/HelloWorld/Views/HelloWorld.cshtml
+   at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
