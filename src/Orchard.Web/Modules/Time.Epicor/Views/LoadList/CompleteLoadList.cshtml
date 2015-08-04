@@ -1,0 +1,81 @@
+﻿@model Time.Data.EntityModels.TimeMFG.LoadList
+
+@{
+    ViewBag.Title = "Mark Load List as SHIPPED";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+</ul>
+<br />
+
+
+<h3>Are you sure you want to mark this Load List as SHIPPED?</h3>
+<fieldset>
+    <legend>LoadList</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateIssued)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateIssued)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateRevised)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateRevised)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateSchedShip)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateSchedShip)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TruckingCompany)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TruckingCompany)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Complete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Complete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Distributors)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Distributors)
+    </div>
+
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="CompleteLoadList" />
+    </p>
+}

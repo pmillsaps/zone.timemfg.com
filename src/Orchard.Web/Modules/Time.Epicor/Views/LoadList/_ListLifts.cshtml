@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJob>
+
+<h2>Jobs for this Load List</h2>
+
+<a id="jobStatusToggle" href="javascript:toggleJobStatus();">Toggle Job Statuses Visibility</a>
+<br /><br />
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistributorPO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateATS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="rowJob">
+            <td>
+                @if (ViewBag.LoadListEditor)
+                {
+                    @Html.ActionLink(item.JobNumber, "EditJob", "LoadList", new { id = item.Id }, null)
+
+                    @Html.ActionLink(item.JobNumber, "JobDetails", "LoadList", new { id = item.Id }, null)
+                }
+
+                @*@Html.DisplayFor(modelItem => item.JobNumber)*@
+            </td>
+            <td class="nowrap">
+                @Html.DisplayFor(modelItem => item.LiftModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistributorPO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateATS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayWithBreaksFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @if (ViewBag.LoadListEditor)
+                {
+                    @Html.ActionLink("Delete", "DeleteJob", "LoadList", new { id = item.Id }, new { @class = "delete16image" })
+                }
+            </td>
+        </tr>
+        if (item.LoadListJobStatus != null)
+        {
+            <tr>
+                @Html.Partial("_JobStatus", item.LoadListJobStatus)
+            </tr>
+        }
+    }
+
+</table>
