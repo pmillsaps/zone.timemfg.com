@@ -107,6 +107,7 @@ namespace Time.OrderLog.Controllers
                 rptH.SetParameterValue("Stock", model.Stock);
                 rptH.SetParameterValue("Demo", model.Demo);
                 rptH.SetParameterValue("RTG", model.RTG);
+                rptH.SetParameterValue("TruGuard", model.TruGuard);
             }
 
             Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
@@ -205,12 +206,14 @@ namespace Time.OrderLog.Controllers
             return View(model);
         }
 
+        // Checking that no multiple flags are selected
         private bool CheckMultipleFlags(ReportViewModel model)
         {
-            if (model.Demo) return (model.RTG || model.Stock || model.Special);
-            if (model.RTG) return (model.Demo || model.Stock || model.Special);
-            if (model.Stock) return (model.Demo || model.RTG || model.Special);
-            if (model.Special) return (model.Demo || model.RTG || model.Stock);
+            if (model.Demo) return (model.RTG || model.Stock || model.Special || model.TruGuard);
+            if (model.RTG) return (model.Demo || model.Stock || model.Special || model.TruGuard);
+            if (model.Stock) return (model.Demo || model.RTG || model.Special || model.TruGuard);
+            if (model.Special) return (model.Demo || model.RTG || model.Stock || model.TruGuard);
+            if (model.TruGuard) return (model.Demo || model.RTG || model.Stock || model.Special);
 
             return false;
         }

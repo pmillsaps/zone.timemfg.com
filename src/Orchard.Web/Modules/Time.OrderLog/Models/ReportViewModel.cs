@@ -17,5 +17,6 @@ namespace Time.OrderLog.Models
         public bool Stock { get; set; }
         public bool Demo { get; set; }
         public bool RTG { get; set; }
+        public bool TruGuard { get; set; }
     }
 }
