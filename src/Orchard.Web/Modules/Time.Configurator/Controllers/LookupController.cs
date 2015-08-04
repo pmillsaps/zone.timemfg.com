@@ -63,18 +63,18 @@ namespace Time.Configurator.Controllers
             {
                 if (!String.IsNullOrEmpty(ConfigData))
                 {
-                    lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
+                    lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
 
                     return View(lookups);
                 }
 
-                lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
+                lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
 
                 return View(lookups);
             }
             else if (!String.IsNullOrEmpty(ConfigData))
             {
-                lookups = db.Lookups.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
+                lookups = db.Lookups.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
 
                 return View(lookups);
             }
