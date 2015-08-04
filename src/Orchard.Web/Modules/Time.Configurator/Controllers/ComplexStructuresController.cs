@@ -78,7 +78,7 @@ namespace Time.Configurator.Controllers
         {
             //var lookups = new List<Lookup>();
             var complexStructure = db.ComplexStructures.Find(id);
-            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).OrderBy(x => x.Id);
             //foreach (var item in cxLookups)
             //{
             //    foreach (var link in item.ComplexLinks)
@@ -101,7 +101,7 @@ namespace Time.Configurator.Controllers
 
             var cbArray = BuildCheckBoxArray(complexStructure);
 
-            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).OrderBy(x => x.Id);
             ComplexLinkMatrixViewModel vm = new ComplexLinkMatrixViewModel
             {
                 ComplexLinks = cbArray,
@@ -139,7 +139,8 @@ namespace Time.Configurator.Controllers
 
             var cbArray = BuildCheckBoxArray(complexStructure);
 
-            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData)
+                .OrderBy(x => x.Id);
             ComplexLinkMatrixViewModel vm = new ComplexLinkMatrixViewModel
             {
                 ComplexLinks = cbArray,
