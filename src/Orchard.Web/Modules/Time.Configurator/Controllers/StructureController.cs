@@ -48,7 +48,6 @@ namespace Time.Configurator.Controllers
                 ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
                 return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
             }
-            //return View(db.Structures.OrderBy(x => x.ConfigName).Distinct().ToList());
         }
 
         // GET: /Structure/Details/5
