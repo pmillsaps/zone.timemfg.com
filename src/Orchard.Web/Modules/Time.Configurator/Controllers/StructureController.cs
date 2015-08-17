@@ -36,18 +36,11 @@ namespace Time.Configurator.Controllers
         // GET: Structures
         public ActionResult Index(string ConfigDropDown)
         {
-            if (!String.IsNullOrEmpty(ConfigDropDown))
-            {
-                //adds data to drop down menus that filter data on the index page
-                //return view sorts the table by configname then config data
-                ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-                return View(db.Structures.Where(x => x.ConfigName == ConfigDropDown).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            }
-            else
-            {
-                ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-                return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            }
+            var structures = db.Structures.AsQueryable();
+            if (!String.IsNullOrEmpty(ConfigDropDown)) structures = structures.Where(x => x.ConfigName == ConfigDropDown);
+            ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
+            ViewBag.ConfigDropDown = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
+            return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
             //return View(db.Structures.OrderBy(x => x.ConfigName).Distinct().ToList());
         }
 
@@ -437,7 +430,7 @@ namespace Time.Configurator.Controllers
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+
         // GET: /Structure/Create
         public ActionResult Create()
         {
@@ -563,13 +556,11 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structure.ConfigData);
         }
 
-
         private void GenerateComplexDropDowns(Structure structure)
         {
             //prevent duplicates from showing up in drop down
             //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
             var ConfigDataCSList = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName).ToList();
-
 
             var SequenceCSList = from secondCSList in db.StructureSeqs
                                  group secondCSList by secondCSList.Sequence into newCSList2

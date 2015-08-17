@@ -1,4 +1,5 @@
-﻿using Orchard;
+﻿using MoreLinq;
+using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using MoreLinq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -39,7 +39,11 @@ namespace Time.Configurator.Controllers
         // GET: /StructureSeq/
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            var structureSeq = db.StructureSeqs.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.ConfigData).ToList();
+            //CODEREVIEW: Use Iqueryable to build the return data, this will avoid some roundtrips to the database
+            //var structureSeq = db.StructureSeqs.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.ConfigData).ToList();
+            var structureSeq = db.StructureSeqs.AsQueryable();
+            if (!String.IsNullOrEmpty(ConfigNames)) structureSeq = structureSeq.Where(x => x.ConfigName == ConfigNames);
+            if (!String.IsNullOrEmpty(ConfigData)) structureSeq = structureSeq.Where(x => x.ConfigData == ConfigData);
 
             // Creates the drop down list for ConfigName in the view
             var ddlConfigNames = db.StructureSeqs.Select(x => x.ConfigName).Distinct();
@@ -59,30 +63,7 @@ namespace Time.Configurator.Controllers
             }
             ViewBag.ConfigData = configData;
 
-            // Returning the data based on the search filter
-            if (!String.IsNullOrEmpty(ConfigNames))
-            {
-                if (!String.IsNullOrEmpty(ConfigData))
-                {
-                    structureSeq = db.StructureSeqs.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
-
-                    return View(structureSeq);
-                }
-
-                structureSeq = db.StructureSeqs.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
-
-                return View(structureSeq);
-            }
-            else if (!String.IsNullOrEmpty(ConfigData))
-            {
-                structureSeq = db.StructureSeqs.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
-
-                return View(structureSeq);
-            }
-            else
-            {
-                return View(structureSeq);
-            }
+            return View(structureSeq.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
         }
 
         // GET: /StructureSeq/Details/5
@@ -108,11 +89,11 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /StructureSeq/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude="Id")] StructureSeq structureseq)
+        public ActionResult Create([Bind(Exclude = "Id")] StructureSeq structureseq)
         {
             //prevents a duplicate from being created
             var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData
@@ -148,14 +129,14 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /StructureSeq/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(StructureSeq structureseq)
         {
             //prevents a duplicate from being saved when editing
-            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData 
+            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData
                 && x.Sequence == structureseq.Sequence && x.Lookup == structureseq.Lookup && x.LookupSequence == structureseq.LookupSequence && x.Id != structureseq.Id);
 
             //displays if previous code found a duplicate
@@ -215,13 +196,13 @@ namespace Time.Configurator.Controllers
                                let x = newList3.FirstOrDefault()
                                select x;
             var LookupList = from fourthList in db.StructureSeqs
-                               group fourthList by fourthList.Lookup into newList4
-                               let x = newList4.FirstOrDefault()
-                               select x;
+                             group fourthList by fourthList.Lookup into newList4
+                             let x = newList4.FirstOrDefault()
+                             select x;
             var LookupSequenceList = from fifthList in db.StructureSeqs
-                               group fifthList by fifthList.LookupSequence into newList5
-                               let x = newList5.FirstOrDefault()
-                               select x;
+                                     group fifthList by fifthList.LookupSequence into newList5
+                                     let x = newList5.FirstOrDefault()
+                                     select x;
 
             ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             //ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");                                          //shows all values
