@@ -38,50 +38,14 @@ namespace Time.Configurator.Controllers
         // GET: ComplexStructures
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            var complexStructures = db.ComplexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Sequence).ToList();
+            var complexStructures = db.ComplexStructures.AsQueryable();
+            if (!String.IsNullOrEmpty(ConfigNames)) complexStructures = complexStructures.Where(x => x.ConfigName == ConfigNames);
+            if (!String.IsNullOrEmpty(ConfigData)) complexStructures = complexStructures.Where(x => x.ConfigData == ConfigData);
 
-            // Creates the drop down list for ConfigName in the view
-            var ddlConfigNames = db.ComplexStructures.Select(x => x.ConfigName).Distinct();
-            List<SelectListItem> configNames = new List<SelectListItem>();
-            foreach (var item in ddlConfigNames)
-            {
-                configNames.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigNames = configNames;
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigData = new SelectList(db.ComplexStructures.Select(x => x.ConfigData).Distinct());
 
-            // Creates the drop down list for ConfigData in the view
-            var ddlConfigD = db.ComplexStructures.Select(x => x.ConfigData).Distinct();
-            List<SelectListItem> configData = new List<SelectListItem>();
-            foreach (var item in ddlConfigD)
-            {
-                configData.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigData = configData;
-
-            // Returning the data based on the search filter
-            if (!String.IsNullOrEmpty(ConfigNames))
-            {
-                if (!String.IsNullOrEmpty(ConfigData))
-                {
-                    complexStructures = db.ComplexStructures.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Sequence).ToList();
-
-                    return View(complexStructures);
-                }
-
-                complexStructures = db.ComplexStructures.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Sequence).ToList();
-
-                return View(complexStructures);
-            }
-            else if (!String.IsNullOrEmpty(ConfigData))
-            {
-                complexStructures = db.ComplexStructures.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Sequence).ToList();
-
-                return View(complexStructures);
-            }
-            else
-            {
-                return View(complexStructures);
-            }
+            return View(complexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
         }
 
         // GET: ComplexStructures/Details/5

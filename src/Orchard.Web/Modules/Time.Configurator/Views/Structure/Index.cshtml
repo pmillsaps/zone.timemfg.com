@@ -18,11 +18,9 @@
 
 @using (Html.BeginForm("Index", "Structure", FormMethod.Get))
 {
-    <div class="form-group">
-        @Html.DropDownList("ConfigDropDown", new SelectList((System.Collections.IEnumerable)ViewData["ConfigDropDown"], "ConfigName", "ConfigName"), htmlAttributes: new { @class = "col-md-2" }, optionLabel: "-- Select --")
-        <div class="col-md-2">
-            <input type="submit" value="Search" class="btn btn-default" />
-        </div>
+    <div class="row">
+        <div class="col-md-3">@Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName --")</div>
+        <div><input type="submit" value="Search" class="btn btn-default" /></div>
     </div>
 }
 

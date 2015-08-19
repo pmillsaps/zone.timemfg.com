@@ -100,7 +100,6 @@
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\ConfigPricing\Create.cshtml" />
     <Content Include="Views\ConfigPricing\Delete.cshtml" />
     <Content Include="Views\ConfigPricing\Details.cshtml" />
     <Content Include="Views\ConfigPricing\Edit.cshtml" />
@@ -202,6 +201,9 @@
     <Content Include="Views\Structure\_ComplexLookup.cshtml" />
     <Content Include="Views\Structure\Add_CS.cshtml" />
     <Content Include="Views\Structure\_Lookup.cshtml" />
+    <Content Include="Views\ConfigPricing\Create.cshtml" />
+    <Content Include="Views\ConfigPricing\ImportPricing.cshtml" />
+    <Content Include="Views\ConfigPricing\ConfigPricingExport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -235,8 +237,13 @@
     <Compile Include="Controllers\ConfiguratorController.cs" />
     <Compile Include="Controllers\StructureController.cs" />
     <Compile Include="Controllers\StructureSeqController.cs" />
+    <Compile Include="Helpers\ExporttoExcelResult.cs" />
     <Compile Include="Models\ComplexLinkMatrixViewModel.cs" />
+    <Compile Include="Services\ConfigPricingExportExcelHelper.cs" />
+    <Compile Include="Services\IConfigPricingExportExcelHelper.cs" />
+    <Compile Include="Models\ConfigPricingViewModel.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="ViewModels\ConfigPriceImportVM.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
