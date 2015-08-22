@@ -38,50 +38,14 @@ namespace Time.Configurator.Controllers
         // GET: /Lookup/
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            var lookups = db.Lookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
+            var lookups = db.Lookups.AsQueryable();
+            if (!String.IsNullOrEmpty(ConfigNames)) lookups = lookups.Where(x => x.ConfigName == ConfigNames);
+            if (!String.IsNullOrEmpty(ConfigData)) lookups = lookups.Where(x => x.ConfigData == ConfigData);
 
-            // Creates the drop down list for ConfigName in the view
-            var ddlConfigNames = db.Lookups.Select(x => x.ConfigName).Distinct();
-            List<SelectListItem> configNames = new List<SelectListItem>();
-            foreach (var item in ddlConfigNames)
-            {
-                configNames.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigNames = configNames;
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigData = new SelectList(db.Lookups.Select(x => x.ConfigData).Distinct());
 
-            // Creates the drop down list for ConfigData in the view
-            var ddlConfigD = db.Lookups.Select(x => x.ConfigData).Distinct();
-            List<SelectListItem> configData = new List<SelectListItem>();
-            foreach (var item in ddlConfigD)
-            {
-                configData.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigData = configData;
-
-            // Returning the data based on the search filter
-            if (!String.IsNullOrEmpty(ConfigNames))
-            {
-                if (!String.IsNullOrEmpty(ConfigData))
-                {
-                    lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
-
-                    return View(lookups);
-                }
-
-                lookups = db.Lookups.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
-
-                return View(lookups);
-            }
-            else if (!String.IsNullOrEmpty(ConfigData))
-            {
-                lookups = db.Lookups.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.Data).ToList();
-
-                return View(lookups);
-            }
-            else
-            {
-                return View(lookups);
-            }
+            return View(lookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
         }
 
         // GET: /Lookup/Details/5

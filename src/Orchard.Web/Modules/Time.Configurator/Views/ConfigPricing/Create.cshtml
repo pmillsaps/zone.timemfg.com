@@ -1,64 +1,49 @@
 ﻿@model Time.Data.EntityModels.Configurator.ConfigPricing
 
 @{
-    ViewBag.Title = "Create Config Pricing";
+    ViewBag.Title = "Create";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Create</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Config Pricing</h4>
+        <h4>ConfigPricing</h4>
         <hr />
-        @Html.ValidationSummary(true)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ConfigID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ConfigID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ConfigID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @Html.ValidationMessageFor(model => model.ConfigID, "", new { @class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.ConfigID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ConfigOption, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ConfigOption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ConfigOption", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "--Select--")
-                @Html.ValidationMessageFor(model => model.ConfigOption)
-            </div>
-        </div>
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.ConfigID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfigID)
-                @Html.ValidationMessageFor(model => model.ConfigID)
+                @Html.EditorFor(model => model.ConfigOption, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfigOption, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ConfigOption, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfigOption)
-                @Html.ValidationMessageFor(model => model.ConfigOption)
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price)
-                @Html.ValidationMessageFor(model => model.Price)
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AltPrice, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AltPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AltPrice)
-                @Html.ValidationMessageFor(model => model.AltPrice)
+                @Html.EditorFor(model => model.AltPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AltPrice, "", new { @class = "text-danger" })
             </div>
         </div>
 

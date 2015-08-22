@@ -37,69 +37,20 @@ namespace Time.Configurator.Controllers
         // GET: ComplexLookups
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            //if (!String.IsNullOrEmpty(ConfigNames))
-            //{
-            //    if (!String.IsNullOrEmpty(ConfigData))
-            //    {
-            //        ViewData["ConfigNames"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-            //        return View(db.ComplexStructures.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            //    }
-            //    ViewData["ConfigNames"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-            //    return View(db.ComplexStructures.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            //}
-            //else if (!String.IsNullOrEmpty(ConfigData))
-            //{
-            //    ViewData["ConfigData"] = db.Structures.OrderBy(x => x.ConfigData).ToList();
-            //    return View(db.ComplexStructures.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            //}
-            //else
-            //{
-            //    ViewData["ConfigNames"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-            //    return View(db.ComplexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            //}
-            var complexLookups = db.ComplexLookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigData = new SelectList(db.ComplexLookups.Select(x => x.ConfigData).Distinct());
 
-            // Creates the drop down list for ConfigName in the view
-            var ddlConfigNames = db.ConfiguratorNames.OrderBy(x => x.ConfigName).Select(x => x.ConfigName).Distinct();
-            List<SelectListItem> configNames = new List<SelectListItem>();
-            foreach (var item in ddlConfigNames)
+            if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
             {
-                configNames.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigNames = configNames;
-
-            // Creates the drop down list for ConfigData in the view
-            var ddlConfigD = db.Structures.Select(x => x.ConfigData).Distinct();
-            List<SelectListItem> configData = new List<SelectListItem>();
-            foreach (var item in ddlConfigD)
-            {
-                configData.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigData = configData;
-            //Returning the data based on the search filter
-            if (!String.IsNullOrEmpty(ConfigNames))
-            {
-                if (!String.IsNullOrEmpty(ConfigData))
-                {
-                    complexLookups = db.ComplexLookups.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
-
-                    return View(complexLookups);
-                }
-
-                complexLookups = db.ComplexLookups.Where(x => x.ConfigName == ConfigNames).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
-
-                return View(complexLookups);
-            }
-            else if (!String.IsNullOrEmpty(ConfigData))
-            {
-                complexLookups = db.ComplexLookups.Where(x => x.ConfigData == ConfigData).OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList();
-
-                return View(complexLookups);
+                return View();
             }
             else
             {
-                return View(complexLookups);
+                var complexLookups = db.ComplexLookups.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) complexLookups = complexLookups.Where(x => x.ConfigName == ConfigNames);
+                if (!String.IsNullOrEmpty(ConfigData)) complexLookups = complexLookups.Where(x => x.ConfigData == ConfigData);
 
+                return View(complexLookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
             }
         }
 

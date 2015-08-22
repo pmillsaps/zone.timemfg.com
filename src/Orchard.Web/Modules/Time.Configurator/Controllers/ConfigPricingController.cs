@@ -9,6 +9,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Time.Configurator.Helpers;
+using Time.Configurator.Models;
+using Time.Configurator.Services;
+using Time.Configurator.ViewModels;
 using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
@@ -23,6 +27,15 @@ namespace Time.Configurator.Controllers
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
 
+        private IConfigPricingExportExcelHelper _cfgPrExEcHp = new ConfigPricingExportExcelHelper();
+
+        // These lists will hold the values for the ImportPricing method. They are also used by the SplitConfigOption() method.
+        public List<decimal> price = new List<decimal>();
+        public List<decimal> altPrice = new List<decimal>();
+        public List<string> option = new List<string>();
+        public bool altPriceEmpty = false; // To insert the Price in AltPrice if no AltPrice provided
+        public bool changeAltPrice = false; // To update AltPrice if it is provided
+
         public ConfigPricingController(IOrchardServices services)
         {
             Services = services;
@@ -36,8 +49,52 @@ namespace Time.Configurator.Controllers
         }
 
         // GET: /ConfigPricing/
-        public ActionResult Index()
+        public ActionResult Index(string ConfigNames, string ConfigOptions)
         {
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigOptions = new SelectList(db.ConfigPricings.Select(x => x.ConfigOption).Distinct());
+
+            if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigOptions))
+            {
+                return View();
+            }
+            else
+            {
+                var configP = db.ConfigPricings.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) configP = configP.Where(x => x.ConfigID == ConfigNames);
+                if (!String.IsNullOrEmpty(ConfigOptions)) configP = configP.Where(x => x.ConfigOption == ConfigOptions);
+
+                return View(configP.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
+            }
+        }
+
+        // This method allows user to export ConfigPricings for a specific configurator to Excel
+        public ActionResult ConfigPricingExport()
+        {
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
+        }
+
+        // This method respond to ConfigPricingExport when a list is exported to Excel
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfigPricingExport(string ConfigNames)
+        {
+            if(String.IsNullOrEmpty(ConfigNames))ModelState.AddModelError("", "Please select a Configurator for the list.");
+ 
+            if(ModelState.IsValid)
+            {
+                var configs = _cfgPrExEcHp.GetConfigPricingForCfgName(ConfigNames).Select(x => new ConfigPricingViewModel
+                {
+                    option = x.ConfigOption,
+                    price = x.Price,
+                    altPrice = x.AltPrice,
+                }).ToList();
+
+                return new ExporttoExcelResult(ConfigNames + "_Price_List", configs);
+            }
+
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
         }
 
@@ -59,7 +116,7 @@ namespace Time.Configurator.Controllers
         // GET: /ConfigPricing/Create
         public ActionResult Create()
         {
-            GenerateDropDowns();
+            ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             return View();
         }
 
@@ -68,24 +125,115 @@ namespace Time.Configurator.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Exclude="ConfigID,ConfigOption")] ConfigPricing configpricing)
-            public ActionResult Create(ConfigPricing configpricing)
-        {
+        public ActionResult Create([Bind(Exclude = "Id")] ConfigPricing configpricing)
+        {          
             //prevents a duplicate from being created
-            var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price
-                && x.AltPrice == configpricing.AltPrice);
+            var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption);
 
             //displays if previous code found a duplicate
-            if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Created---Please Recheck Data");
-
+            if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Option Created---Please Recheck Data");
+            
             if (ModelState.IsValid)
             {
                 db.ConfigPricings.Add(configpricing);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            GenerateDropDowns(configpricing);
+            ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             return View(configpricing);
+        }
+
+        // GET: /ImportPricing
+        // Whit this method the user can paste a list of Options, Prices, and Alternate Prices and import them to the db
+        public ActionResult ImportPricing()
+        {
+            ConfigPriceImportVM coPrImVM = new ConfigPriceImportVM();
+
+            ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            return View(coPrImVM );
+        }
+
+        // POST: /ImportPricing
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ImportPricing(ConfigPriceImportVM coPrImVM)
+        {
+            if (ModelState.IsValid)
+            {
+                SplitConfigOption(coPrImVM.OptionAndPrice); // Calling the method to split the string from the view
+
+                //for loop that loops through and inputs each piece of data
+                for (int i = 0; i < option.Count(); i++)
+                {
+                    ConfigPricing newConfigPricing = new ConfigPricing
+                    {
+                        ConfigID = coPrImVM.ConfigId,
+                        ConfigOption = option[i],
+                        Price = price[i],
+                        AltPrice = (altPriceEmpty) ? price[i] : altPrice[i]
+                    };
+                    var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == newConfigPricing.ConfigID && x.ConfigOption == newConfigPricing.ConfigOption);
+                    if (Configs == null)
+                    {
+                        db.ConfigPricings.Add(newConfigPricing);
+                    }
+                    else
+                    {
+                        Configs.Price = price[i];
+                        if (changeAltPrice) Configs.AltPrice = altPrice[i];
+                        db.ConfigPricings.Attach(Configs);
+                        var entry = db.Entry(Configs);
+                        entry.Property(e => e.Price).IsModified = true;
+                        if (changeAltPrice) entry.Property(e => e.AltPrice).IsModified = true;
+                    }
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            return View(coPrImVM);
+        }
+
+        // This method is called from the ImportPricing method to parse the input in the ConfigOption textbox
+        private void SplitConfigOption(string rawString)
+        {
+            string[] newString = rawString.Split(new String[] {"\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] testUpperBound = newString[0].Split(new String[] { "\t", "," }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parseString = rawString.Split(new String[] { "\t", ",", "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (testUpperBound.Length == 2)
+            {
+                // Looping through the parseString and assigning the values to the option and price 
+                for (int i = 0; i < parseString.Count(); i++)
+                {
+                    if (i == 0 || i % 2 == 0)
+                    {
+                        option.Add(parseString[i]);
+                    }
+                    else
+                    {
+                        price.Add(Convert.ToDecimal(parseString[i]));
+                        altPriceEmpty = true;
+                    }
+                }   
+            }
+            else if (testUpperBound.Length == 3)
+            {
+                // Looping through the parseString and assigning the values to the option, price, and altPrice lists
+                for (int i = 0; i < parseString.Count(); i += 3)
+                {
+                    option.Add(parseString[i]);
+                }
+                for (int i = 1; i < parseString.Count(); i += 3)
+                {
+                    price.Add(Convert.ToDecimal(parseString[i]));
+                }
+                for (int i = 2; i < parseString.Count(); i += 3)
+                {
+                    altPrice.Add(Convert.ToDecimal(parseString[i]));
+                }
+                changeAltPrice = true;
+            }
         }
 
         // GET: /ConfigPricing/Edit/5
@@ -146,9 +294,9 @@ namespace Time.Configurator.Controllers
         // POST: /ConfigPricing/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id, string opt)
         {
-            ConfigPricing configpricing = db.ConfigPricings.Find(id);
+            ConfigPricing configpricing = db.ConfigPricings.Find(id, opt);
             db.ConfigPricings.Remove(configpricing);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -175,14 +323,14 @@ namespace Time.Configurator.Controllers
             //                     select x;
 
             ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "Id", "ConfigName");
-            ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
+            //ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
         }
 
         //This and above ViewBags pull in the data to put into the drop down lists
         private void GenerateDropDowns(ConfigPricing configpricing)
         {
             ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "Id", "ConfigName", configpricing.ConfigID);
-            ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption", configpricing.ConfigOption);
+            //ViewBag.ConfigOption = new SelectList(db.ConfigPricings.OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption", configpricing.ConfigOption);
         }
     }
 }

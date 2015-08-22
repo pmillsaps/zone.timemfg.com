@@ -40,28 +40,12 @@ namespace Time.Configurator.Controllers
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
             //CODEREVIEW: Use Iqueryable to build the return data, this will avoid some roundtrips to the database
-            //var structureSeq = db.StructureSeqs.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ThenBy(x => x.ConfigData).ToList();
             var structureSeq = db.StructureSeqs.AsQueryable();
             if (!String.IsNullOrEmpty(ConfigNames)) structureSeq = structureSeq.Where(x => x.ConfigName == ConfigNames);
             if (!String.IsNullOrEmpty(ConfigData)) structureSeq = structureSeq.Where(x => x.ConfigData == ConfigData);
 
-            // Creates the drop down list for ConfigName in the view
-            var ddlConfigNames = db.StructureSeqs.Select(x => x.ConfigName).Distinct();
-            List<SelectListItem> configNames = new List<SelectListItem>();
-            foreach (var item in ddlConfigNames)
-            {
-                configNames.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigNames = configNames;
-
-            // Creates the drop down list for ConfigData in the view
-            var ddlConfigD = db.StructureSeqs.Select(x => x.ConfigData).Distinct();
-            List<SelectListItem> configData = new List<SelectListItem>();
-            foreach (var item in ddlConfigD)
-            {
-                configData.Add(new SelectListItem { Text = item, Value = item });
-            }
-            ViewBag.ConfigData = configData;
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigData = new SelectList(db.StructureSeqs.Select(x => x.ConfigData).Distinct());
 
             return View(structureSeq.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
         }

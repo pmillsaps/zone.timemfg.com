@@ -21,6 +21,8 @@ namespace Time.Configurator.Controllers
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
 
+        private string[] tokens;
+
         public StructureController(IOrchardServices services)
         {
             Services = services;
@@ -34,14 +36,14 @@ namespace Time.Configurator.Controllers
         }
 
         // GET: Structures
-        public ActionResult Index(string ConfigDropDown)
+        public ActionResult Index(string ConfigNames)
         {
             var structures = db.Structures.AsQueryable();
-            if (!String.IsNullOrEmpty(ConfigDropDown)) structures = structures.Where(x => x.ConfigName == ConfigDropDown);
-            ViewData["ConfigDropDown"] = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-            ViewBag.ConfigDropDown = db.ConfiguratorNames.OrderBy(x => x.ConfigName).ToList();
-            return View(db.Structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            //return View(db.Structures.OrderBy(x => x.ConfigName).Distinct().ToList());
+            if (!String.IsNullOrEmpty(ConfigNames)) structures = structures.Where(x => x.ConfigName == ConfigNames);
+
+            ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+
+            return View(structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
         }
 
         // GET: /Structure/Details/5
@@ -77,7 +79,7 @@ namespace Time.Configurator.Controllers
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////Edit_Seq/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //GET: /Strucute/Edit_Seq --- this method is being called from the Details view
+        //GET: /Structure/Edit_Seq --- this method is being called from the Details view
         public ActionResult Edit_Seq(int? id)
         {
             StructureSeq structureSeq = db.StructureSeqs.Find(id);
@@ -191,17 +193,22 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Import_Seq(Lookup lookup)
         {
-            string[] tokens = SplitLookupData(lookup.Data);
+            //if (String.IsNullOrEmpty(lookup.Data)) ModelState.AddModelError("Data", "Data field is required");
 
-            //for loop that checks each entry in the import data box to see if it is a duplicate
-            foreach (var item in tokens)
+            if (ModelState.IsValid)
             {
-                var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence && x.Data == item.Trim());
+                tokens = SplitLookupData(lookup.Data);
 
-                //displays if previous code found a duplicate
-                if (Configs != null) ModelState.AddModelError("", " Item '" + item + "' is a Duplicate---Remove Duplicate (No data imported)");
+                //for loop that checks each entry in the import data box to see if it is a duplicate
+                foreach (var item in tokens)
+                {
+                    var Configs = db.Lookups.FirstOrDefault(x => x.ConfigName == lookup.ConfigName && x.ConfigData == lookup.ConfigData && x.Sequence == lookup.Sequence && x.Data == item.Trim());
+
+                    //displays if previous code found a duplicate
+                    if (Configs != null) ModelState.AddModelError("", " Item '" + item + "' is a Duplicate---Remove Duplicate (No data imported)");
+                }
             }
-
+                
             if (ModelState.IsValid)
             {
                 //for loop that loops through and inputs each piece of data

@@ -480,6 +480,8 @@
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Configurator\ConfigID.cs" />
+    <Compile Include="Models\Configurator\ConfigPricing.cs" />
+    <Compile Include="Models\Configurator\Lookup.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
     <Compile Include="Models\ITInventory\Ref_Location.cs" />
