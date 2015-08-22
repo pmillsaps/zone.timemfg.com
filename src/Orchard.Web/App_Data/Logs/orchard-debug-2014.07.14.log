@@ -1,0 +1,35 @@
+2014-07-14 10:51:03,817 [119] Orchard.Exceptions.DefaultExceptionPolicy - Default - An unexpected exception was caught
+System.ArgumentException: Unknown domain
+   at Ventajou.ActiveDirectory.Services.MembershipService.ParseDomainUser(String userName) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard.Web\Modules\Ventajou.ActiveDirectory\Services\MembershipService.cs:line 171
+   at Ventajou.ActiveDirectory.Services.MembershipService.ValidateUser(String userNameOrEmail, String password) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard.Web\Modules\Ventajou.ActiveDirectory\Services\MembershipService.cs:line 106
+   at Orchard.Users.Controllers.AccountController.ValidateLogOn(String userNameOrEmail, String password)
+   at Orchard.Users.Controllers.AccountController.LogOn(String userNameOrEmail, String password, String returnUrl, Boolean rememberMe)
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+2014-07-14 11:38:11,616 [84] Orchard.Exceptions.DefaultExceptionPolicy - Default - An unexpected exception was caught
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Ventajou.ActiveDirectory.Services.MembershipService.ValidateUser(String userNameOrEmail, String password) in c:\Users\PaulM\Desktop\Projects\Orchard1.8.1\src\Orchard.Web\Modules\Ventajou.ActiveDirectory\Services\MembershipService.cs:line 156
+   at Orchard.Users.Controllers.AccountController.ValidateLogOn(String userNameOrEmail, String password)
+   at Orchard.Users.Controllers.AccountController.LogOn(String userNameOrEmail, String password, String returnUrl, Boolean rememberMe)
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass48.<InvokeActionMethodFilterAsynchronouslyRecursive>b__41()

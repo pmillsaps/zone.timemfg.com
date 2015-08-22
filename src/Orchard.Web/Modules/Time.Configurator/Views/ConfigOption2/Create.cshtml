@@ -1,0 +1,76 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfigOption2
+
+@{
+    ViewBag.Title = "Create Config Option 2";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Config Option 2</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.ConfigName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.ConfigData)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key1, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key1", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Key2, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Key2", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.Key2)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigOption, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigOption", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.ConfigOption)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inactive)
+                @Html.ValidationMessageFor(model => model.Inactive)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

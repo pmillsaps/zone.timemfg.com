@@ -1,0 +1,21 @@
+﻿@model Time.Data.EntityModels.TimeMFG.TicketTask
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.ActionLink(Model.TicketProject.Title, "Info", new { id = Model.TicketID })
+        @*@Html.DisplayFor(m => Model.TicketEmployee.FullName)*@
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink(Model.Task, "EditTask", new { id = Model.ID })
+        @*@Html.DisplayFor(m => item.Task)*@
+    </div>
+    <div class="col-md-4">
+        @Html.DisplayWithBreaksFor(model => model.Notes)
+    </div>
+
+    <div class="col-md-1">
+        @Html.DisplayFor(m => Model.Completed)
+        @*@Html.CheckBox("Completed", item.Completed == true, new { @Enabled = false })*@
+    </div>
+</div>
+<div class="row">&nbsp;</div>

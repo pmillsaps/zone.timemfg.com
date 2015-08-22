@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJob>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadList.DateSchedShip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadList.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claimed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tested)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Posted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Green)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LShip)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadList.DateSchedShip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadList.Name)
+            </td>
+            <td>
+                @if (item.Claimed)
+                {
+                    <img src='/Content/images/CheckboxFull.png' />
+                }
+                else
+                {
+                    <img src='/Content/images/CheckboxEmpty.png' />
+                }
+                @*@Html.DisplayFor(modelItem => item.Claimed)*@
+            </td>
+            <td>
+                @if (item.Tested)
+                {
+                    <img src='/Content/images/CheckboxFull.png' />
+                }
+                else
+                {
+                    <img src='/Content/images/CheckboxEmpty.png' />
+                }
+                @*@Html.DisplayFor(modelItem => item.Tested)*@
+            </td>
+            <td>
+                @if (item.Posted)
+                {
+                    <img src='/Content/images/CheckboxFull.png' />
+                }
+                else
+                {
+                    <img src='/Content/images/CheckboxEmpty.png' />
+                }
+                @*@Html.DisplayFor(modelItem => item.Posted)*@
+            </td>
+            <td>
+                @if (item.Green)
+                {
+                    <img src='/Content/images/CheckboxFull.png' />
+                }
+                else
+                {
+                    <img src='/Content/images/CheckboxEmpty.png' />
+                }
+                @*@Html.DisplayFor(modelItem => item.Green)*@
+            </td>
+            <td>
+                @if (item.LShip)
+                {
+                    <img src='/Content/images/CheckboxFull.png' />
+                }
+                else
+                {
+                    <img src='/Content/images/CheckboxEmpty.png' />
+                }
+                @*@Html.DisplayFor(modelItem => item.LShip)*@
+            </td>
+        </tr>
+    }
+
+</table>

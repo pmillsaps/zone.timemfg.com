@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadList>
+
+@{
+    ViewBag.Title = "Load List Index";
+}
+
+<link href="@Url.Content("/Content/webgrid.css")" rel="stylesheet" type="text/css" />
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    @if (ViewBag.LoadListEditor == true)
+    {
+        <li>@Html.ActionLink("Add New LoadList", "Create", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    }
+    @if (ViewBag.Complete == 1)
+    {
+        <li>@Html.ActionLink("View Open Load Lists", "Index", "LoadList", new { id = 0 }, new { @class = "btn btn-primary" })</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("View Completed Load Lists", "Index", "LoadList", new { id = 1 }, new { @class = "btn btn-primary" })</li>
+    }
+    
+    <li>@Html.ActionLink("Print Load Lists", "PrintLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("Search for Jobs on Load Lists", "SearchLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    @*<li>@Html.SecurityTrimmedActionLink("Email Load Lists", "EmailLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>*@
+    @if (ViewBag.LoadListEditor == true)
+    {
+        <li>@Html.ActionLink("Maintain Emails", "EmailIndex", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    }
+</ul>
+
+
+
+<br /><br />
+
+@Html.Partial("_List")
