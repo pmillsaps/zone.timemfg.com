@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadList>
+
+@{
+    ViewBag.Title = "Print Load Lists...";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+@if (ViewBag.View == "Open")
+{
+    <li>@Html.ActionLink("Show Only Completed LoadLists", "PrintLoadListsCompleted", null, new { @class = "btn btn-primary" })</li>
+}
+else
+{
+    <li>@Html.ActionLink("Show Only Open LoadLists", "PrintLoadLists", null, new { @class = "btn btn-primary" })</li>
+}
+</ul>
+<br /><br />
+
+@using (Html.BeginForm("PrintLoadLists", "LoadList"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                <input type="checkbox" name="checkAllSelected" id="checkAllSelected" />
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateIssued)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRevised)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateSchedShip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TruckingCompany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MakeReady)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distributors)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="selectedLines" value="@item.Id" />
+                    @*<input type="checkbox" checked="yes" name="selectedLines" value="@item.jobnum" />*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateIssued)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRevised)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateSchedShip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TruckingCompany)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complete)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MakeReady)
+                </td>
+                <td>
+                    @String.Join(",", item.LoadListDistributors.Select(x => x.Name).ToArray())
+                    @*@Html.DisplayFor(modelItem => item.Distributors)*@
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="editor-label">Email Address :</div>
+    <div class="editor-field">
+        @Html.TextBox("EmailAddress")
+    </div>
+
+    <div class="editor-button" id="buttons">
+        <input type="submit" name="command" value="Print Load List(s)..." />&nbsp;&nbsp;
+        <input type="submit" name="command" value="Print Load List(s) With Statuses..." />&nbsp;&nbsp;
+    </div>  
+    <div class="clear"></div>
+    <br />
+}

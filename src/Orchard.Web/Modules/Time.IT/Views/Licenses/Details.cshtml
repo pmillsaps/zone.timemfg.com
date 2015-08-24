@@ -1,0 +1,94 @@
+﻿@model Time.Data.EntityModels.ITInventory.License
+
+@{
+    ViewBag.Title = "License Details";
+}
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>License</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LicenseKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LicenseKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityAssigned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityAssigned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ComputerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComputerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_LicenseType.LicenseType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_LicenseType.LicenseType)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<h3>Linked Computers</h3>
+@Html.Partial("_Computers", Model.Computers)
+<h3>Linked Users</h3>
+@Html.Partial("_Users", Model.Users)

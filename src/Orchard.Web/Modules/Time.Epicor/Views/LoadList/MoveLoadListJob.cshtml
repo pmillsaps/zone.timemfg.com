@@ -1,0 +1,19 @@
+﻿@model Time.Epicor.ViewModels.MoveLoadListJobVM
+
+@{
+    ViewBag.Title = "Move Load List Job";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.LoadListJobId)
+    <div class="editor-label"></div>
+    <div class="editor-field">
+        @Html.DropDownList("LoadList", (IEnumerable<SelectListItem>)Model.LoadLists, "-- Select Load List --")
+    </div>
+    <div class="editor-button2">
+        <input type="submit" value="Move Job" />
+    </div>
+}

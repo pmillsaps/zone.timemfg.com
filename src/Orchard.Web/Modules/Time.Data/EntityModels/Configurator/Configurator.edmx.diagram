@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="727fd6fa49084ece822cad852c747d33" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption1" Width="1.5" PointX="0.625" PointY="3.625" IsExpanded="true" FillColor="0, 122, 204" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption10" Width="1.5" PointX="0.625" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption2" Width="1.5" PointX="2.5" PointY="3.625" IsExpanded="true" FillColor="0, 122, 204" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption3" Width="1.5" PointX="4.375" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption4" Width="1.5" PointX="6.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption5" Width="1.5" PointX="7.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption6" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption7" Width="1.5" PointX="6.125" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption8" Width="1.5" PointX="4.375" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption9" Width="1.5" PointX="2.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigPricing" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfiguratorName" Width="1.75" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.Structure" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.StructureSeq" Width="1.5" PointX="4.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.Lookup" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ComplexStructure" Width="1.875" PointX="10" PointY="3.125" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ComplexLink" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ComplexLookup" Width="1.5" PointX="10.5" PointY="0.5" />
+        <AssociationConnector Association="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" />
+        <AssociationConnector Association="ConfiguratorModel.FK_ComplexLinks_Lookup" />
+        <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption" Width="1.5" PointX="13.5" PointY="7.25" />
+        <EntityTypeShape EntityType="ConfiguratorModel.GlobalLift" Width="1.5" PointX="3.5" PointY="10.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

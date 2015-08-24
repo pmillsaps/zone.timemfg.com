@@ -1,0 +1,96 @@
+﻿@model Time.Data.EntityModels.TimeMFG.LoadListJob
+
+@{
+    ViewBag.Title = "Delete Load List Job";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this job?</h3>
+<fieldset>
+    <legend>LoadListJob</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LoadListId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoadListId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.JobNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JobNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LiftModel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LiftModel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SerialNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SerialNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DistributorPO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DistributorPO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateATS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateATS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Destination)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Destination)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CustomerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShipTo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShipTo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SalesOrder)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SalesOrder)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to Load List", "Details", new { id = Model.LoadListId })
+    </p>
+}

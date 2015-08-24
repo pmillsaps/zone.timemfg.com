@@ -1,0 +1,11 @@
+﻿Name: Time.Data
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: TIME Data EF6 Modules
+Features:
+    Time.Data:
+        Description: TIME Data EF6 Modules
+		Category: .Time

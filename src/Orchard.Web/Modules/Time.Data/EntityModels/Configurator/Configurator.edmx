@@ -1,0 +1,1014 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ConfiguratorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ComplexLinks">
+          <Key>
+            <PropertyRef Name="ComplexDataId" />
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="ComplexDataId" Type="int" Nullable="false" />
+          <Property Name="LookupId" Type="int" Nullable="false" />
+          <Property Name="Available" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComplexLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LookupData" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComplexStructure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="LookupData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LookupSeq" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key01" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key02" Type="varchar" MaxLength="50" />
+          <Property Name="Key03" Type="varchar" MaxLength="50" />
+          <Property Name="Key04" Type="varchar" MaxLength="50" />
+          <Property Name="Key05" Type="varchar" MaxLength="50" />
+          <Property Name="Key06" Type="varchar" MaxLength="50" />
+          <Property Name="Key07" Type="varchar" MaxLength="50" />
+          <Property Name="Key08" Type="varchar" MaxLength="50" />
+          <Property Name="Key09" Type="varchar" MaxLength="50" />
+          <Property Name="Key10" Type="varchar" MaxLength="50" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption10">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key6" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key7" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key8" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key9" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key10" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption3">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption4">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption5">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption6">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key6" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption7">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key6" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key7" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption8">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key6" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key7" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key8" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption9">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Key1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Key3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key4" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key5" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key6" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key7" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key8" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key9" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigPricing">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+            <PropertyRef Name="ConfigOption" />
+          </Key>
+          <Property Name="ConfigID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigOption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="AltPrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfiguratorName">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GlobalLift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lift" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Part" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Price" Type="money" />
+          <Property Name="UCOM" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="PCOM" Type="nvarchar" MaxLength="5" />
+          <Property Name="Inactive" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="Data" Type="varchar" MaxLength="50" />
+          <Property Name="PickDefault" Type="bit" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Structure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StructureSeq">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="Lookup" Type="nvarchar" MaxLength="20" />
+          <Property Name="LookupSequence" Type="int" />
+          <Property Name="Global" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ComplexLinks_ComplexLookup">
+          <End Role="ComplexLookup" Type="Self.ComplexLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ComplexLinks" Type="Self.ComplexLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplexLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComplexLinks">
+              <PropertyRef Name="ComplexDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComplexLinks_Lookup">
+          <End Role="Lookup" Type="Self.Lookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ComplexLinks" Type="Self.ComplexLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComplexLinks">
+              <PropertyRef Name="LookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ComplexStructure_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ComplexStructure_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption1_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption1_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption10_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption10_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption2_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption2_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption3_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption3_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption4_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption4_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption5_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption5_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption6_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption6_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption7_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption7_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption8_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption8_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_ConfigOption9_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_ConfigOption9_Structure" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Lookup_StructureSeq' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Lookup_StructureSeq" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Structure_ConfiguratorName' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Structure_ConfiguratorName" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_StructureSeq_Structure" />-->
+        <EntityContainer Name="ConfiguratorModelStoreContainer">
+          <EntitySet Name="ComplexLinks" EntityType="Self.ComplexLinks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComplexLookup" EntityType="Self.ComplexLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComplexStructure" EntityType="Self.ComplexStructure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption" EntityType="Self.ConfigOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption1" EntityType="Self.ConfigOption1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption10" EntityType="Self.ConfigOption10" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption2" EntityType="Self.ConfigOption2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption3" EntityType="Self.ConfigOption3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption4" EntityType="Self.ConfigOption4" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption5" EntityType="Self.ConfigOption5" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption6" EntityType="Self.ConfigOption6" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption7" EntityType="Self.ConfigOption7" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption8" EntityType="Self.ConfigOption8" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigOption9" EntityType="Self.ConfigOption9" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigPricing" EntityType="Self.ConfigPricing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfiguratorName" EntityType="Self.ConfiguratorName" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GlobalLift" EntityType="Self.GlobalLift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Structure" EntityType="Self.Structure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StructureSeq" EntityType="Self.StructureSeq" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ComplexLinks_ComplexLookup" Association="Self.FK_ComplexLinks_ComplexLookup">
+            <End Role="ComplexLookup" EntitySet="ComplexLookup" />
+            <End Role="ComplexLinks" EntitySet="ComplexLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComplexLinks_Lookup" Association="Self.FK_ComplexLinks_Lookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="ComplexLinks" EntitySet="ComplexLinks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConfiguratorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ConfigOption1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption10">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption3">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption4">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption5">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption6">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption7">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption8">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigOption9">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Key9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigPricing">
+          <Key>
+            <PropertyRef Name="ConfigID" />
+            <PropertyRef Name="ConfigOption" />
+          </Key>
+          <Property Name="ConfigID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigOption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AltPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfiguratorName">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Structure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StructureSeq">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="Lookup" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LookupSequence" Type="Int32" />
+          <Property Name="Global" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ConfiguratorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ConfigOption1" EntityType="Self.ConfigOption1" />
+          <EntitySet Name="ConfigOption10" EntityType="Self.ConfigOption10" />
+          <EntitySet Name="ConfigOption2" EntityType="Self.ConfigOption2" />
+          <EntitySet Name="ConfigOption3" EntityType="Self.ConfigOption3" />
+          <EntitySet Name="ConfigOption4" EntityType="Self.ConfigOption4" />
+          <EntitySet Name="ConfigOption5" EntityType="Self.ConfigOption5" />
+          <EntitySet Name="ConfigOption6" EntityType="Self.ConfigOption6" />
+          <EntitySet Name="ConfigOption7" EntityType="Self.ConfigOption7" />
+          <EntitySet Name="ConfigOption8" EntityType="Self.ConfigOption8" />
+          <EntitySet Name="ConfigOption9" EntityType="Self.ConfigOption9" />
+          <EntitySet Name="ConfigPricings" EntityType="Self.ConfigPricing" />
+          <EntitySet Name="ConfiguratorNames" EntityType="Self.ConfiguratorName" />
+          <EntitySet Name="Structures" EntityType="Self.Structure" />
+          <EntitySet Name="StructureSeqs" EntityType="Self.StructureSeq" />
+          <EntitySet Name="Lookups" EntityType="ConfiguratorModel.Lookup" />
+          <EntitySet Name="ComplexStructures" EntityType="ConfiguratorModel.ComplexStructure" />
+          <EntitySet Name="ComplexLinks" EntityType="ConfiguratorModel.ComplexLink" />
+          <EntitySet Name="ComplexLookups" EntityType="ConfiguratorModel.ComplexLookup" />
+          <AssociationSet Name="FK_ComplexLinks_ComplexLookup" Association="ConfiguratorModel.FK_ComplexLinks_ComplexLookup">
+            <End Role="ComplexLookup" EntitySet="ComplexLookups" />
+            <End Role="ComplexLink" EntitySet="ComplexLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComplexLinks_Lookup" Association="ConfiguratorModel.FK_ComplexLinks_Lookup">
+            <End Role="Lookup" EntitySet="Lookups" />
+            <End Role="ComplexLink" EntitySet="ComplexLinks" />
+          </AssociationSet>
+          <EntitySet Name="ConfigOptions" EntityType="ConfiguratorModel.ConfigOption" />
+          <EntitySet Name="GlobalLifts" EntityType="ConfiguratorModel.GlobalLift" />
+        </EntityContainer>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PickDefault" Type="Boolean" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ComplexLinks" Relationship="ConfiguratorModel.FK_ComplexLinks_Lookup" FromRole="Lookup" ToRole="ComplexLink" />
+        </EntityType>
+        <EntityType Name="ComplexStructure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="LookupData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LookupSeq" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComplexLink">
+          <Key>
+            <PropertyRef Name="ComplexDataId" />
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="ComplexDataId" Type="Int32" Nullable="false" />
+          <Property Name="LookupId" Type="Int32" Nullable="false" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ComplexLookup" Relationship="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" FromRole="ComplexLink" ToRole="ComplexLookup" />
+          <NavigationProperty Name="Lookup" Relationship="ConfiguratorModel.FK_ComplexLinks_Lookup" FromRole="ComplexLink" ToRole="Lookup" />
+        </EntityType>
+        <EntityType Name="ComplexLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LookupData" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ComplexLinks" Relationship="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" FromRole="ComplexLookup" ToRole="ComplexLink" />
+        </EntityType>
+        <Association Name="FK_ComplexLinks_ComplexLookup">
+          <End Type="ConfiguratorModel.ComplexLookup" Role="ComplexLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ConfiguratorModel.ComplexLink" Role="ComplexLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComplexLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComplexLink">
+              <PropertyRef Name="ComplexDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComplexLinks_Lookup">
+          <End Type="ConfiguratorModel.Lookup" Role="Lookup" Multiplicity="1" />
+          <End Type="ConfiguratorModel.ComplexLink" Role="ComplexLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComplexLink">
+              <PropertyRef Name="LookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ConfigOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Key01" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key04" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key05" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key06" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key07" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key08" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key09" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Key10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GlobalLift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lift" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Part" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UCOM" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PCOM" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Inactive" Type="Byte" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConfiguratorModelStoreContainer" CdmEntityContainer="ConfiguratorEntities">
+          <EntitySetMapping Name="ConfigOption1">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption1">
+              <MappingFragment StoreEntitySet="ConfigOption1">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption10">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption10">
+              <MappingFragment StoreEntitySet="ConfigOption10">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="Key5" ColumnName="Key5" />
+                <ScalarProperty Name="Key6" ColumnName="Key6" />
+                <ScalarProperty Name="Key7" ColumnName="Key7" />
+                <ScalarProperty Name="Key8" ColumnName="Key8" />
+                <ScalarProperty Name="Key9" ColumnName="Key9" />
+                <ScalarProperty Name="Key10" ColumnName="Key10" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption2">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption2">
+              <MappingFragment StoreEntitySet="ConfigOption2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption3">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption3">
+              <MappingFragment StoreEntitySet="ConfigOption3">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption4">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption4">
+              <MappingFragment StoreEntitySet="ConfigOption4">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption5">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption5">
+              <MappingFragment StoreEntitySet="ConfigOption5">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="Key5" ColumnName="Key5" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption6">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption6">
+              <MappingFragment StoreEntitySet="ConfigOption6">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="Key5" ColumnName="Key5" />
+                <ScalarProperty Name="Key6" ColumnName="Key6" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption7">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption7">
+              <MappingFragment StoreEntitySet="ConfigOption7">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="Key5" ColumnName="Key5" />
+                <ScalarProperty Name="Key6" ColumnName="Key6" />
+                <ScalarProperty Name="Key7" ColumnName="Key7" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption8">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption8">
+              <MappingFragment StoreEntitySet="ConfigOption8">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="Key5" ColumnName="Key5" />
+                <ScalarProperty Name="Key6" ColumnName="Key6" />
+                <ScalarProperty Name="Key7" ColumnName="Key7" />
+                <ScalarProperty Name="Key8" ColumnName="Key8" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOption9">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption9">
+              <MappingFragment StoreEntitySet="ConfigOption9">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Key1" ColumnName="Key1" />
+                <ScalarProperty Name="Key2" ColumnName="Key2" />
+                <ScalarProperty Name="Key3" ColumnName="Key3" />
+                <ScalarProperty Name="Key4" ColumnName="Key4" />
+                <ScalarProperty Name="Key5" ColumnName="Key5" />
+                <ScalarProperty Name="Key6" ColumnName="Key6" />
+                <ScalarProperty Name="Key7" ColumnName="Key7" />
+                <ScalarProperty Name="Key8" ColumnName="Key8" />
+                <ScalarProperty Name="Key9" ColumnName="Key9" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigPricings">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigPricing">
+              <MappingFragment StoreEntitySet="ConfigPricing">
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+                <ScalarProperty Name="ConfigOption" ColumnName="ConfigOption" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AltPrice" ColumnName="AltPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfiguratorNames">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfiguratorName">
+              <MappingFragment StoreEntitySet="ConfiguratorName">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Structures">
+            <EntityTypeMapping TypeName="ConfiguratorModel.Structure">
+              <MappingFragment StoreEntitySet="Structure">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StructureSeqs">
+            <EntityTypeMapping TypeName="ConfiguratorModel.StructureSeq">
+              <MappingFragment StoreEntitySet="StructureSeq">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Lookup" ColumnName="Lookup" />
+                <ScalarProperty Name="LookupSequence" ColumnName="LookupSequence" />
+                <ScalarProperty Name="Global" ColumnName="Global" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="ConfiguratorModel.Lookup">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="PickDefault" ColumnName="PickDefault" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplexStructures">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ComplexStructure">
+              <MappingFragment StoreEntitySet="ComplexStructure">
+                <ScalarProperty Name="LookupSeq" ColumnName="LookupSeq" />
+                <ScalarProperty Name="LookupData" ColumnName="LookupData" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplexLinks">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ComplexLink">
+              <MappingFragment StoreEntitySet="ComplexLinks">
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <ScalarProperty Name="ComplexDataId" ColumnName="ComplexDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComplexLookups">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ComplexLookup">
+              <MappingFragment StoreEntitySet="ComplexLookup">
+                <ScalarProperty Name="LookupData" ColumnName="LookupData" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigOptions">
+            <EntityTypeMapping TypeName="ConfiguratorModel.ConfigOption">
+              <MappingFragment StoreEntitySet="ConfigOption">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="Key10" ColumnName="Key10" />
+                <ScalarProperty Name="Key09" ColumnName="Key09" />
+                <ScalarProperty Name="Key08" ColumnName="Key08" />
+                <ScalarProperty Name="Key07" ColumnName="Key07" />
+                <ScalarProperty Name="Key06" ColumnName="Key06" />
+                <ScalarProperty Name="Key05" ColumnName="Key05" />
+                <ScalarProperty Name="Key04" ColumnName="Key04" />
+                <ScalarProperty Name="Key03" ColumnName="Key03" />
+                <ScalarProperty Name="Key02" ColumnName="Key02" />
+                <ScalarProperty Name="Key01" ColumnName="Key01" />
+                <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
+                <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GlobalLifts">
+            <EntityTypeMapping TypeName="ConfiguratorModel.GlobalLift">
+              <MappingFragment StoreEntitySet="GlobalLift">
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="PCOM" ColumnName="PCOM" />
+                <ScalarProperty Name="UCOM" ColumnName="UCOM" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Lift" ColumnName="Lift" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
