@@ -499,6 +499,7 @@
     <Compile Include="Models\ITInventory\Ref_Memory.cs" />
     <Compile Include="Models\MessageQueue\EmailMessage.cs" />
     <Compile Include="Models\MessageQueue\EmptyMessage.cs" />
+    <Compile Include="Models\MessageQueue\MessageType.cs" />
     <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
     <Compile Include="Models\MessageQueue\MSMQ.cs" />
     <Compile Include="Models\MessageQueue\WOLMessage.cs" />

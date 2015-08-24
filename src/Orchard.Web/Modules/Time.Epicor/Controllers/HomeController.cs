@@ -43,7 +43,7 @@ namespace Time.Epicor.Controllers
         public ActionResult RTI(FormCollection col)
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.SendRTIMessage);
+            var success = MSMQ.SendQueueMessage(command, MessageType.SendRTIMessage.Value);
             if (!string.IsNullOrEmpty(ErrorMessage)) ViewBag.ErrorMessage = ErrorMessage;
 
             ViewBag.Title = "Send RTI Email";
@@ -69,7 +69,7 @@ namespace Time.Epicor.Controllers
         public ActionResult ProblemJobs(FormCollection col)
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.EmailProblemJobs);
+            var success = MSMQ.SendQueueMessage(command, MessageType.EmailProblemJobs.Value);
             if (!string.IsNullOrEmpty(ErrorMessage)) ViewBag.Message = ErrorMessage;
             ViewBag.Title = "Send Problem Job Email";
             if (success)

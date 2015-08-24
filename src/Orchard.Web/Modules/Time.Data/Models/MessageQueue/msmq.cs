@@ -14,23 +14,23 @@ namespace Time.Data.Models.MessageQueue
         public static string ErrorMessage { get; set; }
         private static string queueAddress = @"Aruba-Connect\time.messagequeue";
 
-        public enum MessageType
-        {
-            BuildComplexLookups,
-            CheckWaterReports,
-            CustomManualCheckProblemJobs,
-            CustomManualJobQueue,
-            EmailMessage,
-            EmailProblemJobs,
-            MoveFile,
-            Refresh_Drawings_DB,
-            SendRTIMessage,
-            WOL
-        }
+        //public enum MessageType
+        //{
+        //    BuildComplexLookups,
+        //    CheckWaterReports,
+        //    CustomManualCheckProblemJobs,
+        //    CustomManualJobQueue,
+        //    EmailMessage,
+        //    EmailProblemJobs,
+        //    MoveFile,
+        //    Refresh_Drawings_DB,
+        //    SendRTIMessage,
+        //    WOL
+        //}
 
         public static bool SendQueueMessage(object command, MessageType messageType)
         {
-            string messageLabel = messageType.ToString();
+            string messageLabel = messageType.Value;
             return SendQueueMessage(command, messageLabel);
         }
 
