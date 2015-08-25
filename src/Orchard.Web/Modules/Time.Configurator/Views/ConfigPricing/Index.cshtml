@@ -72,9 +72,9 @@
                     @Html.DisplayFor(modelItem => item.AltPrice)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ConfigID, opt = item.ConfigOption }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ConfigID, opt = item.ConfigOption }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ConfigID, opt = item.ConfigOption })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ConfigID.Trim(), opt = item.ConfigOption }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ConfigID.Trim(), opt = item.ConfigOption }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ConfigID.Trim(), opt = item.ConfigOption })
                 </td>
             </tr>
         }
