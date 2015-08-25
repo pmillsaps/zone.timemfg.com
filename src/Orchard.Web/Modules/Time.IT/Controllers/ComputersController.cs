@@ -96,7 +96,7 @@ namespace Time.IT.Controllers
                 IP = nic.IP,
                 MAC = nic.MAC
             };
-            success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.WOL);
+            success = MSMQ.SendQueueMessage(command, MessageType.WOL);
 
             if (success)
                 ViewBag.StatusMessage = "WOL Packet Sent";

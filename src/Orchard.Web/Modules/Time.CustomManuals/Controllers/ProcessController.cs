@@ -45,7 +45,7 @@ namespace Time.CustomManuals.Controllers
         public ActionResult CheckManuals()
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.CustomManualCheckProblemJobs);
+            var success = MSMQ.SendQueueMessage(command, MessageType.CustomManualCheckProblemJobs.Value);
 
             ViewBag.Title = "Send Custom Manual Status Email";
             if (success)
@@ -64,7 +64,7 @@ namespace Time.CustomManuals.Controllers
         public ActionResult QueueJobsForManuals()
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.CustomManualJobQueue);
+            var success = MSMQ.SendQueueMessage(command, MessageType.CustomManualJobQueue.Value);
 
             ViewBag.Title = "Queue New Jobs for Custom Manuals";
             if (success)

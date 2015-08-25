@@ -22,7 +22,7 @@ namespace Time.Configurator.Controllers
         public ActionResult BuildComplexlookups()
         {
             var command = new EmptyMessage();
-            var success = MSMQ.SendQueueMessage(command, MSMQ.MessageType.BuildComplexLookups);
+            var success = MSMQ.SendQueueMessage(command, MessageType.BuildComplexLookups);
             if (!string.IsNullOrEmpty(ErrorMessage)) ViewBag.ErrorMessage = ErrorMessage;
 
             ViewBag.Title = "Build Complex Lookup";
@@ -33,6 +33,25 @@ namespace Time.Configurator.Controllers
             else
             {
                 ViewBag.Message = "Error queuing/sending the Build Complex Lookup Message. Please try later, or get with IT support to troubleshoot the issue.";
+            }
+
+            return View("MessageResult");
+        }
+
+        public ActionResult BuildConfigOptions()
+        {
+            var command = new EmptyMessage();
+            var success = MSMQ.SendQueueMessage(command, MessageType.BuildConfigOptions);
+            if (!string.IsNullOrEmpty(ErrorMessage)) ViewBag.ErrorMessage = ErrorMessage;
+
+            ViewBag.Title = "Build Config Options";
+            if (success)
+            {
+                ViewBag.Message = "Build Config Options Message Queued.  It should be sent within the next few moments.";
+            }
+            else
+            {
+                ViewBag.Message = "Error queuing/sending the Build Config Options Message. Please try later, or get with IT support to troubleshoot the issue.";
             }
 
             return View("MessageResult");
