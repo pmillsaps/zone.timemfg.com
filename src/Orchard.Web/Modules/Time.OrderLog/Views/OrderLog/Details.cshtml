@@ -1,0 +1,186 @@
+﻿@model Time.Data.EntityModels.OrderLog.Order
+
+@{
+    ViewBag.Title = "Order Details";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+@*<div>
+    <table>
+        <tr>
+            <td align="right"><strong>@Html.DisplayNameFor(model => model.PO): </strong></td>
+            <td>@Html.DisplayFor(model => model.PO)</td>
+        </tr>
+        <tr>
+            <td align="right"><strong>@Html.DisplayNameFor(model => model.Date): </strong></td>
+            <td>@Html.DisplayFor(model => model.Date)</td>
+        </tr>
+        <tr>
+            <td align="right"><strong>@Html.DisplayNameFor(model => model.Dealer.DealerName): </strong></td>
+            <td>@Html.DisplayFor(model => model.Dealer.DealerName)</td>
+        </tr>
+    </table>
+
+</div>*@
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Model.Date.ToShortDateString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dealer.DealerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dealer.DealerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Install.InstallName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Install.InstallName)
+            <br />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Installer.InstallerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Installer.InstallerName)
+            <br />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Territory.TerritoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Territory.TerritoryName)
+            <br />
+        </dd>
+        
+        <dt>
+            Order Qty
+        </dt>
+
+        <dd>
+            @ViewBag.OrderQty
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Special)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Special)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Demo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Demo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RTG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RTG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TruGuard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TruGuard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer)
+            <br />
+        </dd>
+
+        <dt>
+            City/State/Zip
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityStateZip)
+            <br />
+        </dd>
+    </dl>
+</div>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("Delete", "Delete", new { id = Model.OrderId }, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("Back to List", "Index", "", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("Add Order Transaction", "Create", "OrderTran", new { id = Model.OrderId }, new { @class = "btn btn-primary" })</li>
+</ul>
+
+@*<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dealer.DealerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dealer.DealerName)
+        </dd>
+
+    </dl>
+</div>*@
+@*<br />*@
+<div>
+    @{Html.RenderAction("_OrderTrans", "OrderLog", new { id = Model.OrderId }); }
+</div>
+
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e576481b5614f6891e5a77a0bd9638a" Name="Diagram1">
+        <EntityTypeShape EntityType="PCInvoiceModel.CALookup" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.Category" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.Chassis" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.ChassisMake" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.ChassisModel" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.Country" Width="1.5" PointX="2.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.Customer" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.FobLookup" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.GVWLookup" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.InvoiceHistory" Width="1.5" PointX="7.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.InvoiceNumberTemplate" Width="1.5" PointX="3" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.MiscChargeType" Width="1.5" PointX="8.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.MiscInstall" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.ModelYearLookup" Width="1.5" PointX="0.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.NLog_Error" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.OrderDetail" Width="1.5" PointX="13.5" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.OrderDetailsOrderOptionsLink" Width="1.5" PointX="15.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.OrderHeader" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.OrderOption" Width="1.5" PointX="10.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.ShipTo" Width="1.5" PointX="3" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.State" Width="1.5" PointX="4.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.TaskQueue" Width="1.5" PointX="6.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.TermsLookup" Width="1.5" PointX="3" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.Transmission" Width="1.5" PointX="0.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCInvoiceModel.Upfitter" Width="1.5" PointX="3" PointY="34.375" IsExpanded="true" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_Chassis_dbo_CALookups_CALookupId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_Categories_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_Chassis_dbo_Transmissions_TransmissionId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderDetails_dbo_Chassis_ChassisId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_Chassis_ChassisId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_Customers_CustomerId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_ShipToes_dbo_Customers_CustomerId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_InvoiceHistory_OrderDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_InvoiceHistory_OrderHeaders" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_OrderOptions_MiscChargeType" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_MiscInstall_OrderDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_MiscInstall_OrderHeaders" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderDetails_dbo_ShipToes_ShipToId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_OrderDetailsOrderOptionsLinks_OrderDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_OrderDetailsOrderOptionsLinks_OrderHeaders" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_OrderDetailsOrderOptionsLinks_OrderOptions" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId" ManuallyRouted="false" />
+        <AssociationConnector Association="PCInvoiceModel.FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
