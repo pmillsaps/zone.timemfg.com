@@ -38,14 +38,21 @@ namespace Time.Configurator.Controllers
         // GET: /Lookup/
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            var lookups = db.Lookups.AsQueryable();
-            if (!String.IsNullOrEmpty(ConfigNames)) lookups = lookups.Where(x => x.ConfigName == ConfigNames);
-            if (!String.IsNullOrEmpty(ConfigData)) lookups = lookups.Where(x => x.ConfigData == ConfigData);
-
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            ViewBag.ConfigData = new SelectList(db.Lookups.Select(x => x.ConfigData).Distinct());
+            ViewBag.ConfigData = new SelectList(db.Lookups.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
 
-            return View(lookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
+            {
+                return View();
+            }
+            else
+            {
+                var lookups = db.Lookups.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) lookups = lookups.Where(x => x.ConfigName == ConfigNames);
+                if (!String.IsNullOrEmpty(ConfigData)) lookups = lookups.Where(x => x.ConfigData == ConfigData);
+
+                return View(lookups.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }
         }
 
         // GET: /Lookup/Details/5

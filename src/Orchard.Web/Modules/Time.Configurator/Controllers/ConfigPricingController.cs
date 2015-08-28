@@ -52,7 +52,7 @@ namespace Time.Configurator.Controllers
         public ActionResult Index(string ConfigNames, string ConfigOptions)
         {
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            ViewBag.ConfigOptions = new SelectList(db.ConfigPricings.Select(x => x.ConfigOption).Distinct());
+            ViewBag.ConfigOptions = new SelectList(db.ConfigPricings.Select(x => new { x.ConfigOption }).Distinct().OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
 
             if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigOptions))
             {
@@ -62,7 +62,12 @@ namespace Time.Configurator.Controllers
             {
                 var configP = db.ConfigPricings.AsQueryable();
                 if (!String.IsNullOrEmpty(ConfigNames)) configP = configP.Where(x => x.ConfigID == ConfigNames);
-                if (!String.IsNullOrEmpty(ConfigOptions)) configP = configP.Where(x => x.ConfigOption == ConfigOptions);
+                if (!String.IsNullOrEmpty(ConfigOptions))
+                {
+                    string[] option = ConfigOptions.Split('-');
+                    string opt = option[0] + "-";
+                    configP = configP.Where(x => x.ConfigOption.Contains(opt));
+                }
 
                 return View(configP.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
             }
