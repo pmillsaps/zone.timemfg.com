@@ -418,6 +418,9 @@
     <Compile Include="EntityModels\TimeMFG\LoadListJobStatu.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\Message_Type.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\Setting.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>

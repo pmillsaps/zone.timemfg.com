@@ -30,7 +30,7 @@ namespace Time.IT.Controllers
         // GET: Tasks
         public ActionResult Index()
         {
-            var sysTasks = db.SysTasks.Include(s => s.SysTaskSchedule);
+            var sysTasks = db.SysTasks.Include(s => s.SysTaskSchedule).OrderBy(x => x.SysTaskSchedule.Description);
             return View(sysTasks.ToList());
         }
 
@@ -52,8 +52,20 @@ namespace Time.IT.Controllers
         // GET: Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules, "Id", "Description");
-            return View();
+            GetDropDowns();
+            return View(new SysTask { Enabled = true, Recurring = true, SubmitUser = HttpContext.User.Identity.Name });
+        }
+
+        private void GetDropDowns()
+        {
+            ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules.OrderBy(x => x.Description), "Id", "Description");
+            ViewBag.TaskType = new SelectList(db.Message_Type, "MessageType", "MessageType");
+        }
+
+        private void GetDropDowns(SysTask task)
+        {
+            ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules.OrderBy(x => x.Description), "Id", "Description", task.SysTaskSchedNum);
+            ViewBag.TaskType = new SelectList(db.Message_Type, "MessageType", "MessageType", task.TaskMessage);
         }
 
         // POST: Tasks/Create
@@ -70,7 +82,7 @@ namespace Time.IT.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules, "Id", "Description", sysTask.SysTaskSchedNum);
+            GetDropDowns(sysTask);
             return View(sysTask);
         }
 
@@ -86,7 +98,7 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules, "Id", "Description", sysTask.SysTaskSchedNum);
+            GetDropDowns(sysTask);
             return View(sysTask);
         }
 
@@ -103,7 +115,7 @@ namespace Time.IT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules, "Id", "Description", sysTask.SysTaskSchedNum);
+            GetDropDowns(sysTask);
             return View(sysTask);
         }
 

@@ -26,6 +26,7 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType MoveFile { get { return new MessageType("MoveFile"); } }
         public static MessageType Refresh_Drawings_DB { get { return new MessageType("Refresh_Drawings_DB"); } }
         public static MessageType SendRTIMessage { get { return new MessageType("SendRTIMessage"); } }
+        public static MessageType SendTicketReminders { get { return new MessageType("SendTicketReminders"); } }
         public static MessageType TicketsNotApprovedTimer { get { return new MessageType("TicketsNotApprovedTimer"); } }
         public static MessageType WOL { get { return new MessageType("WOL"); } }
     }
