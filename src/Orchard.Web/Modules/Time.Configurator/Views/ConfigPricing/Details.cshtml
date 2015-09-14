@@ -1,0 +1,50 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfigPricing
+
+@{
+    ViewBag.Title = "Config Pricing Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Config Pricing</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigOption)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AltPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AltPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ConfigID, opt = Model.ConfigOption }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

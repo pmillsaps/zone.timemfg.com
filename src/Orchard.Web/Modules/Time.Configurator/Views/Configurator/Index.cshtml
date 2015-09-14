@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Configurator Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>
+        @Html.ActionLink("Configurator Name", "Index", "ConfiguratorName")
+    </li>
+    <li>
+        @Html.ActionLink("Structure", "Index", "Structure")
+    </li>
+    <li>
+        @Html.ActionLink("Structure Sequence", "Index", "StructureSeq")
+    </li>
+    <li>
+        @Html.ActionLink("Lookup", "Index", "Lookup")
+    </li>
+    <li>
+        @Html.ActionLink("Configurator Pricing", "Index", "ConfigPricing")
+    </li>
+    <li>
+        @Html.ActionLink("Build Complex Lookups", "BuildComplexlookups")
+    </li>
+    <li>
+        @Html.ActionLink("Build Config Options", "BuildConfigOptions")
+    </li>
+</ul>
+
+<h2>Config Options</h2>
+<ul>
+    <li>
+        @Html.ActionLink("Configurator Option", "Index", "ConfigOptions")
+    </li>
+
+    <li>
+        @Html.ActionLink("Part Override", "Index", "PartOverrides")
+    </li>
+</ul>
+
+<h2>Complex</h2>
+<ul>
+    <li>
+        @Html.ActionLink("Complex Structures", "Index", "ComplexStructures")
+    </li>
+    <li>
+        @Html.ActionLink("Complex Lookups", "Index", "ComplexLookups")
+    </li>
+</ul>
