@@ -199,6 +199,42 @@ namespace Time.Support.Controllers
             return File(stream, "application/pdf");
         }
 
+        [HttpGet]
+        public ActionResult ITMeetingReport()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ITMeetingReport(string StartDate)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+            }
+            DateTime startDate = DateTime.Parse(StartDate);
+
+            ReportClass rptH = new ReportClass();
+            rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITMeeting.rpt");
+            rptH.Load();
+            rptH.SetDatabaseLogon(_db_logon, _db_password);
+            rptH.SetParameterValue("StartDate", startDate);
+            rptH.SetParameterValue("UserId", HttpContext.User.Identity.Name);
+
+            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/pdf");
+        }
+
         public ActionResult TicketsByResourcePriority()
         {
             if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
@@ -229,6 +265,5 @@ namespace Time.Support.Controllers
                 table.ApplyLogOnInfo(tableLogonInfo);
             }
         }
-        
     }
 }

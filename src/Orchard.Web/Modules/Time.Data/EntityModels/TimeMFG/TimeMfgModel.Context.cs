@@ -50,5 +50,6 @@ namespace Time.Data.EntityModels.TimeMFG
         public virtual DbSet<SysTask> SysTasks { get; set; }
         public virtual DbSet<SysTaskSchedule> SysTaskSchedules { get; set; }
         public virtual DbSet<TicketStatus> TicketStatuses { get; set; }
+        public virtual DbSet<Message_Type> Message_Type { get; set; }
     }
 }

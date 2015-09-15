@@ -104,7 +104,7 @@
   <!-- Building -->
 
   <Target Name="Clean">
-    <MSBuild Projects="$(SrcFolder)\Orchard.sln" Targets="Clean" />
+    <MSBuild Projects="$(SrcFolder)\zone.timemfg.com.sln" Targets="Clean" />
     <RemoveDir Directories="$(BuildFolder)" ContinueOnError="true"/>
     <RemoveDir Directories="$(ArtifactsFolder)" />
   </Target>
@@ -112,12 +112,12 @@
   <Target Name ="Compile">
     <!-- Compile to "OutputFolder" -->
     <MSBuild
-      Projects="$(SrcFolder)\Orchard.sln"
+      Projects="$(SrcFolder)\zone.timemfg.com.sln"
       Targets="Build"
       Properties="Configuration=Release;OutputPath=$(CompileFolder)" />
     <!-- Compile to "regular" output folder for devs using VS locally -->
     <MSBuild
-      Projects="$(SrcFolder)\Orchard.sln"
+      Projects="$(SrcFolder)\zone.timemfg.com.sln"
       Targets="Build"/>
   </Target>
 
