@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListEmail>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            <input type="checkbox" name="checkAllSelected" id="checkAllSelected" />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <input type="checkbox" name="selectedLines" value="@item.Email" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+    }
+</table>

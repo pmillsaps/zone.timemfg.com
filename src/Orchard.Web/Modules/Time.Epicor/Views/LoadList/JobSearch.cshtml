@@ -1,0 +1,84 @@
+﻿@model Time.Epicor.ViewModels.AddLiftViewModel
+
+@{
+    ViewBag.Title = "Search For Jobs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Back to Load List", "Details", new { id = Model.LoadListId })
+</div>
+
+
+@using (Html.BeginForm("JobSearch", "LoadList", FormMethod.Post, new { id = "JobSearch", onsubmit = "showDiv()" })) { 
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.LoadListId)
+    
+
+    
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+        <div>
+                <div class="editor-field" id="customerlist">
+                    @{Html.RenderAction("_CustomerList");}
+                </div>
+
+                <br />
+                <br />
+                <div class="editor-field">
+                    @Html.TextBox("Search")
+                </div>
+                <div class="editor-button2">
+                    <input type="submit" value="Search for Jobs" />
+                </div>
+        </div>
+
+        <span id="hiddenStatus" style='display: none'>
+            <img src='/Content/images/transparent.gif' id='myAnimatedImage' align="middle">
+        </span>
+
+
+                @*<div class="editor-field">
+                @Html.DropDownList("Customer", Model.Customers, "-- Select Customer --")
+                @Html.ValidationMessageFor(model => model.Customers)
+</div>*@
+
+        @*<div class="editor-button2">
+            <input type="submit" value="Add Job" />
+        </div>*@
+    </fieldset>
+}
+
+    @using (Html.BeginForm("AddLift", "LoadList", new { id = Model.LoadListId }))
+    {
+        <div id="data">
+            @{Html.RenderAction("_JobList");}
+        </div>
+        <div class="editor-button2">
+            <input type="submit" value="Add Selected Jobs to Load List" />
+        </div>
+    }
+
+@section Scripts {
+    <script language="javascript">
+        $(function () {
+            $('.companyselect').change(function () {
+                $('#JobSearch').submit();
+            });
+        });
+    </script>
+    <script language='javascript'>
+        function showDiv() {
+            document.getElementById('data').style.display = "none";
+            setTimeout('document.images["myAnimatedImage"].src="/Content/images/loadingAnimation.gif"', 200);
+            document.getElementById('hiddenStatus').style.display = "";
+        }
+        function success(result) {
+            $('data').html(result);
+        }
+    </script>
+}

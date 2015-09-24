@@ -1,0 +1,5 @@
+﻿.dl-horizontal > dd:after {
+  display: table;
+  content: "";
+  clear: both;
+}
