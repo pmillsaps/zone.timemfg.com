@@ -106,6 +106,13 @@
           <Property Name="OpComplete" Type="tinyint" Nullable="false" />
           <Property Name="IgnoreFlag" Type="tinyint" />
         </EntityType>
+        <EntityType Name="Message_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Id" />
@@ -623,6 +630,7 @@
           <EntitySet Name="LoadListJobComment" EntityType="Self.LoadListJobComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadListJobStatus" EntityType="Self.LoadListJobStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message_Type" EntityType="Self.Message_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysTask" EntityType="Self.SysTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysTaskSchedule" EntityType="Self.SysTaskSchedule" Schema="dbo" store:Type="Tables" />
@@ -1346,6 +1354,7 @@
             <End Role="TicketStatus" EntitySet="TicketStatuses" />
             <End Role="TicketStatusHistory" EntitySet="TicketStatusHistories" />
           </AssociationSet>
+          <EntitySet Name="Message_Type" EntityType="TimeMFGModel.Message_Type" />
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -1476,6 +1485,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Message_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MessageType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1830,6 +1846,14 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message_Type">
+            <EntityTypeMapping TypeName="TimeMFGModel.Message_Type">
+              <MappingFragment StoreEntitySet="Message_Type">
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -150,6 +150,7 @@
     <Content Include="Views\Ticket\MyTasks.cshtml" />
     <Content Include="Views\Ticket\_TicketTask.cshtml" />
     <Content Include="Views\Ticket\EditTask.cshtml" />
+    <Content Include="Views\Report\ITMeetingReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -223,8 +224,14 @@
       <DesignTime>True</DesignTime>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited.cs">
-      <DependentUpon>ITRequests_ByResource_CompDate_Closed_Limited.rpt</DependentUpon>
+    <Compile Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited - Copy.cs">
+      <DependentUpon>ITRequests_ByResource_CompDate_Closed_Limited - Copy.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Report\ITMeeting.cs">
+      <DependentUpon>ITMeeting.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <SubType>Component</SubType>
@@ -261,9 +268,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ITRequests_ByResource_CompDate_Closed.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited.rpt">
+    <Content Include="Views\Report\ITMeeting.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ITRequests_ByResource_CompDate_Closed_Limited.cs</LastGenOutput>
+      <LastGenOutput>ITMeeting.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Report\ITRequests_ByResource_Priority.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -292,7 +299,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited - Copy.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_CompDate_Closed_Limited - Copy.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
