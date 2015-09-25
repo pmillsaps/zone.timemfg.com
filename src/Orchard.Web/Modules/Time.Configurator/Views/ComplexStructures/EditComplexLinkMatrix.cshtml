@@ -8,7 +8,7 @@
 
 @Html.Partial("_LookupMatrix", Model.Lookups)
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { Search = ViewBag.Search }))
 {
     @Html.AntiForgeryToken()
     @*@Html.HiddenFor(x => x)*@

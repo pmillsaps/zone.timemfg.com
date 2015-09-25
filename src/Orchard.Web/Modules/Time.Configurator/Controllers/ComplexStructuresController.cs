@@ -49,7 +49,7 @@ namespace Time.Configurator.Controllers
         }
 
         // GET: ComplexStructures/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string Search)
         {
             if (id == null)
             {
@@ -60,6 +60,8 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Search = Search;
             return View(complexStructure);
         }
 
@@ -96,7 +98,7 @@ namespace Time.Configurator.Controllers
             return PartialView(lookups);
         }
 
-        public ActionResult _ComplexLinkMatrix(int id)
+        public ActionResult _ComplexLinkMatrix(int id, string Search)
         {
             // id = ComplexStructure.Id
             //if (id == null)
@@ -106,7 +108,7 @@ namespace Time.Configurator.Controllers
 
             var complexStructure = db.ComplexStructures.Find(id);
 
-            var cbArray = BuildCheckBoxArray(complexStructure);
+            var cbArray = BuildCheckBoxArray(complexStructure, Search);
 
             var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).OrderBy(x => x.Id);
             ComplexLinkMatrixViewModel vm = new ComplexLinkMatrixViewModel
@@ -119,12 +121,19 @@ namespace Time.Configurator.Controllers
             return PartialView(vm);
         }
 
-        private List<List<ComplexLink>> BuildCheckBoxArray(ComplexStructure complexStructure)
+        private List<List<ComplexLink>> BuildCheckBoxArray(ComplexStructure complexStructure, string Search)
         {
             var list = new List<List<ComplexLink>>();
             var details = db.ComplexLookups
                 .Include(x => x.ComplexLinks)
                 .Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
+            if (!string.IsNullOrEmpty(Search))
+            {
+                foreach (var item in Search.Split(' '))
+                {
+                    details = details.Where(x => x.LookupData.Contains(item));
+                }
+            }
 
             foreach (var detail in details.OrderBy(x => x.Id))
             {
@@ -140,11 +149,11 @@ namespace Time.Configurator.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditComplexLinkMatrix(int id)
+        public ActionResult EditComplexLinkMatrix(int id, string Search)
         {
             var complexStructure = db.ComplexStructures.Find(id);
 
-            var cbArray = BuildCheckBoxArray(complexStructure);
+            var cbArray = BuildCheckBoxArray(complexStructure, Search);
 
             var lookups = db.Lookups.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData)
                 .OrderBy(x => x.Id);
@@ -154,26 +163,35 @@ namespace Time.Configurator.Controllers
                 complexStructure = complexStructure,
                 Lookups = lookups
             };
+            ViewBag.Search = Search;
 
             return View(vm);
         }
 
         [HttpPost]
-        public ActionResult EditComplexLinkMatrix(List<string> Matrix, int id)
+        public ActionResult EditComplexLinkMatrix(List<string> Matrix, int id, string Search)
         {
             //if (Matrix != null)
             //{
             // removed null check, as I need to remove them all if I want to delete the linkages
-            SaveComplexLinkMatrix(id, Matrix);
+            SaveComplexLinkMatrix(id, Matrix, Search);
             //}
 
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id = id, Search = Search });
         }
 
-        private void SaveComplexLinkMatrix(int id, List<string> matrix)
+        private void SaveComplexLinkMatrix(int id, List<string> matrix, string Search)
         {
             var cxStructure = db.ComplexStructures.Find(id);
             var cxLookups = db.ComplexLookups.Where(x => x.ConfigName == cxStructure.ConfigName && x.ConfigData == cxStructure.ConfigData);
+
+            if (!string.IsNullOrEmpty(Search))
+            {
+                foreach (var item in Search.Split(' '))
+                {
+                    cxLookups = cxLookups.Where(x => x.LookupData.Contains(item));
+                }
+            }
 
             foreach (var lookup in cxLookups.OrderBy(x => x.Id))
             {
