@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ConfiguratorModel.ConfigPricing" Width="1.5" PointX="8.125" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="ConfiguratorModel.ConfiguratorName" Width="1.75" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ConfiguratorModel.Structure" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConfiguratorModel.StructureSeq" Width="1.5" PointX="4.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConfiguratorModel.StructureSeq" Width="1.5" PointX="4.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ConfiguratorModel.Lookup" Width="1.5" PointX="6" PointY="0.5" />
         <EntityTypeShape EntityType="ConfiguratorModel.ComplexStructure" Width="1.875" PointX="10" PointY="3.125" />
         <EntityTypeShape EntityType="ConfiguratorModel.ComplexLink" Width="1.5" PointX="8.25" PointY="0.75" />

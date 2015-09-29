@@ -38,7 +38,7 @@ namespace Time.Configurator.Controllers
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            ViewBag.ConfigData = new SelectList(db.ComplexLookups.Select(x => x.ConfigData).Distinct());
+            ViewBag.ConfigData = new SelectList(db.ComplexLookups.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
 
             if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
             {

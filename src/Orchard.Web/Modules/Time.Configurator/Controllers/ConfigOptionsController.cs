@@ -52,6 +52,10 @@ namespace Time.Configurator.Controllers
                 if (!String.IsNullOrEmpty(ConfigData)) configOptions = configOptions.Where(x => x.ConfigData == ConfigData);
                 if (display == "New") configOptions = configOptions.Where(x => x.PartNum.Contains("-NEW"));
                 if (display == "Eng") configOptions = configOptions.Where(x => x.PartNum.Contains("-ENG"));
+                if (display == "NoPick") configOptions = configOptions.Where(x => x.PartNum.Contains("-PICK"));
+                if (display == "NoPart") configOptions = configOptions.Where(x => x.PartNum == "");
+
+                ViewBag.Notes = db.StructureSeqs.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).ToList();
 
                 return View(configOptions.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
             }

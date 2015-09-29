@@ -483,6 +483,7 @@
     <Compile Include="Models\OrderLog\Installer.cs" />
     <Compile Include="Models\OrderLog\Install.cs" />
     <Compile Include="Models\OrderLog\LiftModel.cs" />
+    <Compile Include="Models\StructureSeq.cs" />
     <Compile Include="Models\TimeMFG\LoadList.cs" />
     <Compile Include="Models\TimeMFG\LoadListEmail.cs" />
     <Compile Include="Models\TimeMFG\LoadListJob.cs" />

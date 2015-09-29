@@ -62,7 +62,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="row">
-        <div class="col-md-1">@Html.Label("Search :")</div>
+        <div class="col-md-1">@Html.Label("Search :", htmlAttributes: new { @class = "lead" })</div>
         <div class="col-md-5">
             @Html.TextBox("Search")
         </div>

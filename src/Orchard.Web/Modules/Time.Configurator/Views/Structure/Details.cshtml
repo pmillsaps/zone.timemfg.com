@@ -57,6 +57,9 @@
             Lookup Sequence
         </th>
         <th>
+            Description
+        </th>
+        <th>
             Global
         </th>
         <th></th>
@@ -73,6 +76,9 @@
             </td>
             <td>
                 @item.LookupSequence
+            </td>
+            <td>
+                @item.Notes
             </td>
             <td>
                 @Html.CheckBox("StructureSeq", @item.Global, new { @disabled = "disabled" })

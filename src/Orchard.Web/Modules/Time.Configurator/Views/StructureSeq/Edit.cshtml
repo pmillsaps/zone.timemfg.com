@@ -9,14 +9,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Structure Sequence</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
-@*******************************************************************Makes Only Inactive Checkbox Editable*********************************************************************************************@
+        @*******************************************************************Makes Only Inactive Checkbox Editable*********************************************************************************************@
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.ConfigName)
@@ -46,129 +46,148 @@
             </dd>
 
             @*<dt>
-                @Html.DisplayNameFor(model => model.Lookup)
-            </dt>
+                    @Html.DisplayNameFor(model => model.Lookup)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Lookup)
-                @Html.HiddenFor(model => model.Lookup)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Lookup)
+                    @Html.HiddenFor(model => model.Lookup)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.LookupSequence)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LookupSequence)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LookupSequence)
-                @Html.HiddenFor(model => model.LookupSequence)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.LookupSequence)
+                    @Html.HiddenFor(model => model.LookupSequence)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Global)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Global)
+                </dt>
 
-            <dd>
+                <dd>
+                    @Html.EditorFor(model => model.Global)
+                    @Html.ValidationMessageFor(model => model.Global)
+                </dd>*@
+        </dl>
+        @*****************************************************************Makes Edits Enabled With Drop Down Menus********************************************************************************************@
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                    @Html.ValidationMessageFor(model => model.ConfigName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                    @Html.ValidationMessageFor(model => model.ConfigData)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Sequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                    @Html.ValidationMessageFor(model => model.Sequence)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Lookup", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                    @Html.ValidationMessageFor(model => model.Lookup)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LookupSequence, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("LookupSequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                    @Html.ValidationMessageFor(model => model.LookupSequence)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Global, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Global)
+                    @Html.ValidationMessageFor(model => model.Global)
+                </div>
+            </div>*@
+        @**********************************************************************Makes you able to type edits in************************************************************************************************@
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ConfigName)
+                    @Html.ValidationMessageFor(model => model.ConfigName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ConfigData)
+                    @Html.ValidationMessageFor(model => model.ConfigData)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Sequence)
+                    @Html.ValidationMessageFor(model => model.Sequence)
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Lookup)
+                    @Html.ValidationMessageFor(model => model.Lookup)
+                </div>
+            </div>*@
+
+        @*This variable sets the current Lookup selection in Drop Down List*@
+        @{string selected = ViewBag.Selected;}
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Lookup", null, optionLabel: selected)
+                @Html.ValidationMessageFor(model => model.Lookup)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes)
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LookupSequence, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LookupSequence)
+                @Html.ValidationMessageFor(model => model.LookupSequence)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Global, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
                 @Html.EditorFor(model => model.Global)
                 @Html.ValidationMessageFor(model => model.Global)
-            </dd>*@
-        </dl>
-@*****************************************************************Makes Edits Enabled With Drop Down Menus********************************************************************************************@
-@*<div class="form-group">
-        @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-            @Html.ValidationMessageFor(model => model.ConfigName)
+            </div>
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-            @Html.ValidationMessageFor(model => model.ConfigData)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Sequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-            @Html.ValidationMessageFor(model => model.Sequence)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Lookup", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-            @Html.ValidationMessageFor(model => model.Lookup)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LookupSequence, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("LookupSequence", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-            @Html.ValidationMessageFor(model => model.LookupSequence)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Global, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Global)
-            @Html.ValidationMessageFor(model => model.Global)
-        </div>
-    </div>*@
-@**********************************************************************Makes you able to type edits in************************************************************************************************@
-@*<div class="form-group">
-        @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ConfigName)
-            @Html.ValidationMessageFor(model => model.ConfigName)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ConfigData)
-            @Html.ValidationMessageFor(model => model.ConfigData)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Sequence)
-            @Html.ValidationMessageFor(model => model.Sequence)
-        </div>
-    </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Lookup)
-            @Html.ValidationMessageFor(model => model.Lookup)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LookupSequence, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LookupSequence)
-            @Html.ValidationMessageFor(model => model.LookupSequence)
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Global, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Global)
-            @Html.ValidationMessageFor(model => model.Global)
-        </div>
-    </div>
-@*****************************************************************************************************************************************************************************************************@
+        @*****************************************************************************************************************************************************************************************************@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

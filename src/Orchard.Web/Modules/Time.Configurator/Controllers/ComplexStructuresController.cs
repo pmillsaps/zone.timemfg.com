@@ -38,14 +38,21 @@ namespace Time.Configurator.Controllers
         // GET: ComplexStructures
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            var complexStructures = db.ComplexStructures.AsQueryable();
-            if (!String.IsNullOrEmpty(ConfigNames)) complexStructures = complexStructures.Where(x => x.ConfigName == ConfigNames);
-            if (!String.IsNullOrEmpty(ConfigData)) complexStructures = complexStructures.Where(x => x.ConfigData == ConfigData);
-
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             ViewBag.ConfigData = new SelectList(db.ComplexStructures.Select(x => x.ConfigData).Distinct());
 
-            return View(complexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
+            {
+                return View();
+            }
+            else
+            {
+                var complexStructures = db.ComplexStructures.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) complexStructures = complexStructures.Where(x => x.ConfigName == ConfigNames);
+                if (!String.IsNullOrEmpty(ConfigData)) complexStructures = complexStructures.Where(x => x.ConfigData == ConfigData);
+
+                return View(complexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }
         }
 
         // GET: ComplexStructures/Details/5

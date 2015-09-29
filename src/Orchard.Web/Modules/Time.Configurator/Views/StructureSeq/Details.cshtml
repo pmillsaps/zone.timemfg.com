@@ -42,10 +42,15 @@
         </dt>
 
         <dd>
-            @if(Model.Lookup == null)
-            {<br />}
-            else
-            {@Html.DisplayFor(model => model.Lookup)}    
+            @Html.DisplayFor(model => model.Lookup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
         </dd>
 
         <dt>
@@ -53,10 +58,7 @@
         </dt>
 
         <dd>
-            @if(Model.LookupSequence == null)
-            {<br />}
-            else
-            {@Html.DisplayFor(model => model.LookupSequence)}
+            @Html.DisplayFor(model => model.LookupSequence)
         </dd>
 
         <dt>

@@ -39,15 +39,22 @@ namespace Time.Configurator.Controllers
         // GET: /StructureSeq/
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            //CODEREVIEW: Use Iqueryable to build the return data, this will avoid some roundtrips to the database
-            var structureSeq = db.StructureSeqs.AsQueryable();
-            if (!String.IsNullOrEmpty(ConfigNames)) structureSeq = structureSeq.Where(x => x.ConfigName == ConfigNames);
-            if (!String.IsNullOrEmpty(ConfigData)) structureSeq = structureSeq.Where(x => x.ConfigData == ConfigData);
-
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            ViewBag.ConfigData = new SelectList(db.StructureSeqs.Select(x => x.ConfigData).Distinct());
+            ViewBag.ConfigData = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
 
-            return View(structureSeq.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
+            {
+                return View();
+            }
+            else
+            {
+                //CODEREVIEW: Use Iqueryable to build the return data, this will avoid some roundtrips to the database
+                var structureSeq = db.StructureSeqs.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) structureSeq = structureSeq.Where(x => x.ConfigName == ConfigNames);
+                if (!String.IsNullOrEmpty(ConfigData)) structureSeq = structureSeq.Where(x => x.ConfigData == ConfigData);
+
+                return View(structureSeq.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }
         }
 
         // GET: /StructureSeq/Details/5
@@ -103,13 +110,17 @@ namespace Time.Configurator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StructureSeq structureseq = db.StructureSeqs.Find(id);
-            if (structureseq == null)
+            string selected = "";// This variable sets the current Lookup selection in Drop Down List
+            StructureSeq structureSeq = db.StructureSeqs.Find(id);
+            if (structureSeq == null)
             {
                 return HttpNotFound();
             }
-            GenerateDropDowns();
-            return View(structureseq);
+            if (structureSeq.Lookup == null) selected = "-- Select --";
+            else selected = structureSeq.Lookup.ToString();
+            ViewBag.Selected = selected;
+            ViewBag.Lookup = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", selected);
+            return View(structureSeq);
         }
 
         // POST: /StructureSeq/Edit/5
@@ -117,23 +128,27 @@ namespace Time.Configurator.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(StructureSeq structureseq)
+        public ActionResult Edit(StructureSeq structureSeq)
         {
+            string selected = "";// This variable sets the current Lookup selection in Drop Down List
             //prevents a duplicate from being saved when editing
-            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureseq.ConfigName && x.ConfigData == structureseq.ConfigData
-                && x.Sequence == structureseq.Sequence && x.Lookup == structureseq.Lookup && x.LookupSequence == structureseq.LookupSequence && x.Id != structureseq.Id);
+            var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
+                && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence && x.Id != structureSeq.Id);
 
             //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Structure Sequence Created---Please Recheck Data");
 
             if (ModelState.IsValid)
             {
-                db.Entry(structureseq).State = EntityState.Modified;
+                db.Entry(structureSeq).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            GenerateDropDowns(structureseq);
-            return View(structureseq);
+            if (structureSeq.Lookup == null) selected = "-- Select --";
+            else selected = structureSeq.Lookup.ToString();
+            ViewBag.Selected = selected;
+            ViewBag.Lookup = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", selected);
+            return View(structureSeq);
         }
 
         // GET: /StructureSeq/Delete/5

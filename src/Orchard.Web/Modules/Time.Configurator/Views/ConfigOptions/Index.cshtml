@@ -19,11 +19,13 @@
 @using (Html.BeginForm("Index", "ConfigOptions", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-8">
             <b>PartNum Display:&nbsp;</b>           
             @Html.RadioButton("display", "All", true) <text>All&nbsp;</text>
             @Html.RadioButton("display", "New") <text>New Only&nbsp;</text>
             @Html.RadioButton("display", "Eng") <text>Engineered Only&nbsp;</text>
+            @Html.RadioButton("display", "NoPick") <text>No-Pick Only&nbsp;</text>
+            @Html.RadioButton("display", "NoPart") <text>No-Part Only&nbsp;</text>
         </div>
     </div>
     <br />
@@ -32,6 +34,32 @@
         <div class="col-md-3">@Html.DropDownList("ConfigData", optionLabel: "-- Select ConfigData --")</div>
         <div><input type="submit" value="Search" class="btn btn-default" /></div>
     </div>
+}
+
+<br />
+<div>
+    <h4 class="text-info">Key Descriptions:</h4>
+</div>
+@{ int count = 1; }
+@if (ViewBag.Notes != null)
+{
+    foreach (var item in ViewBag.Notes as IEnumerable<Time.Data.EntityModels.Configurator.StructureSeq>)
+    {
+        if (count < 10)
+        {
+            <div>
+                <b>Key 0@(count) :</b>&nbsp;&nbsp;&nbsp;@item.Notes
+            </div>
+        }
+        else
+        {
+            <div>
+                <b>Key @(count) :</b>&nbsp;&nbsp;&nbsp;@item.Notes
+            </div>
+        }
+
+        count++;
+    }
 }
 
 <br />

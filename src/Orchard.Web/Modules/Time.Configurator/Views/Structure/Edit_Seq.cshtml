@@ -52,11 +52,30 @@
             </div>
         </div>*@
 
+        @*This variable sets the current Lookup selection in Drop Down List*@
+        @{string selected = ViewBag.Selected;}
+
         <div class="form-group">
+            @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Lookup")
+                @Html.ValidationMessageFor(model => model.Lookup)
+            </div>
+        </div>
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Lookup", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
                 @Html.ValidationMessageFor(model => model.Lookup)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
             </div>
         </div>
 
