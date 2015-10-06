@@ -254,7 +254,7 @@ namespace Time.Configurator.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "Lookup");
+                return RedirectToAction("Index", "Lookup", new { ConfigNames = lookup.ConfigName, ConfigData = lookup.ConfigData});
             }
             return View(lookup);
         }
@@ -489,7 +489,7 @@ namespace Time.Configurator.Controllers
                 db.Structures.Add(structure);
                 db.StructureSeqs.Add(new StructureSeq { ConfigName = structure.ConfigName, ConfigData = structure.ConfigData, Sequence = 1, Global = false });
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = structure.ConfigName });
             }
             GenerateDropDowns(structure);
             return View(structure);
@@ -528,7 +528,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(structure).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = structure.ConfigName });
             }
             GenerateDropDowns(structure);
             return View(structure);
@@ -557,7 +557,7 @@ namespace Time.Configurator.Controllers
             Structure structure = db.Structures.Find(id);
             db.Structures.Remove(structure);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = structure.ConfigName });
         }
 
         protected override void Dispose(bool disposing)
