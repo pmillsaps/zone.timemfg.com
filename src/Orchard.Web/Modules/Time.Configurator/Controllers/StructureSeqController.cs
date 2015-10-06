@@ -142,7 +142,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(structureSeq).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = structureSeq.ConfigName, ConfigData = structureSeq.ConfigData });
             }
             if (structureSeq.Lookup == null) selected = "-- Select --";
             else selected = structureSeq.Lookup.ToString();
@@ -174,7 +174,7 @@ namespace Time.Configurator.Controllers
             StructureSeq structureseq = db.StructureSeqs.Find(id);
             db.StructureSeqs.Remove(structureseq);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = structureseq.ConfigName, ConfigData = structureseq.ConfigData });
         }
 
         protected override void Dispose(bool disposing)

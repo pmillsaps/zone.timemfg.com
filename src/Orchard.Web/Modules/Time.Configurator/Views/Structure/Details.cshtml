@@ -13,7 +13,7 @@
 <div>
     <h4>Structure</h4>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName })
     </p>
     <hr />
     <dl class="dl-horizontal">
@@ -135,6 +135,9 @@
             Lookup Data
         </th>
         <th>
+            Description
+        </th>
+        <th>
             Lookup Sequence
         </th>
     </tr>
@@ -166,5 +169,5 @@
 <hr />
 
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName })
 </p>

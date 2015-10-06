@@ -275,7 +275,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(configpricing).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = configpricing.ConfigID, ConfigOptions = configpricing.ConfigOption });
             }
             GenerateDropDowns(configpricing);
             return View(configpricing);
@@ -304,7 +304,7 @@ namespace Time.Configurator.Controllers
             ConfigPricing configpricing = db.ConfigPricings.Find(id, opt);
             db.ConfigPricings.Remove(configpricing);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = configpricing.ConfigID, ConfigOptions = configpricing.ConfigOption });
         }
 
         protected override void Dispose(bool disposing)

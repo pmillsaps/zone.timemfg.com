@@ -124,5 +124,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigID, ConfigOptions = Model.ConfigOption })
 </div>

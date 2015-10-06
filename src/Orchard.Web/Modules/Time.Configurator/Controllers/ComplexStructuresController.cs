@@ -68,6 +68,7 @@ namespace Time.Configurator.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Notes = db.ComplexStructures.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).ToList();
             ViewBag.Search = Search;
             return View(complexStructure);
         }
@@ -268,7 +269,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(complexStructure).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = complexStructure.ConfigName, ConfigData = complexStructure.ConfigData});
             }
             return View(complexStructure);
         }
@@ -296,7 +297,7 @@ namespace Time.Configurator.Controllers
             ComplexStructure complexStructure = db.ComplexStructures.Find(id);
             db.ComplexStructures.Remove(complexStructure);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = complexStructure.ConfigName, ConfigData = complexStructure.ConfigData });
         }
 
         protected override void Dispose(bool disposing)

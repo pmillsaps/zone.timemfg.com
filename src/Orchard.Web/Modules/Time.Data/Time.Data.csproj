@@ -461,6 +461,7 @@
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\Configurator\ComplexStructure.cs" />
     <Compile Include="Models\Configurator\ConfigID.cs" />
     <Compile Include="Models\Configurator\ConfigOption.cs" />
     <Compile Include="Models\Configurator\ConfigPricing.cs" />
@@ -483,7 +484,7 @@
     <Compile Include="Models\OrderLog\Installer.cs" />
     <Compile Include="Models\OrderLog\Install.cs" />
     <Compile Include="Models\OrderLog\LiftModel.cs" />
-    <Compile Include="Models\StructureSeq.cs" />
+    <Compile Include="Models\Configurator\StructureSeq.cs" />
     <Compile Include="Models\TimeMFG\LoadList.cs" />
     <Compile Include="Models\TimeMFG\LoadListEmail.cs" />
     <Compile Include="Models\TimeMFG\LoadListJob.cs" />

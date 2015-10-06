@@ -35,6 +35,7 @@
           <Property Name="Sequence" Type="int" Nullable="false" />
           <Property Name="LookupData" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LookupSeq" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="ConfigOption">
           <Key>
@@ -273,6 +274,7 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           <Property Name="Sequence" Type="Int32" Nullable="false" />
           <Property Name="LookupData" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LookupSeq" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ComplexLink">
           <Key>
@@ -426,6 +428,7 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           <EntitySetMapping Name="ComplexStructures">
             <EntityTypeMapping TypeName="ConfiguratorModel.ComplexStructure">
               <MappingFragment StoreEntitySet="ComplexStructure">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="LookupSeq" ColumnName="LookupSeq" />
                 <ScalarProperty Name="LookupData" ColumnName="LookupData" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />

@@ -167,7 +167,7 @@ namespace Time.Configurator.Controllers
             ConfigOption configOption = db.ConfigOptions.Find(id);
             db.ConfigOptions.Remove(configOption);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = configOption.ConfigName, ConfigData = configOption.ConfigData });
         }
 
         protected override void Dispose(bool disposing)
