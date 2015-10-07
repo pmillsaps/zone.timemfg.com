@@ -164,6 +164,7 @@
     <Content Include="Views\PartOverrides\Details.cshtml" />
     <Content Include="Views\PartOverrides\Edit.cshtml" />
     <Content Include="Views\PartOverrides\Index.cshtml" />
+    <Content Include="Views\ComplexStructures\_CriteriaDescriptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

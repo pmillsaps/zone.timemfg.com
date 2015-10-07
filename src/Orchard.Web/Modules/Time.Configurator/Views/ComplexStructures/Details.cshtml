@@ -72,7 +72,9 @@
 
 @Html.Action("_LookupMatrix", new { id = Model.Id })
 
-<div>
+@Html.Partial("_CriteriaDescriptions")
+
+@*<div>
     <h4 class="text-info">Criteria Descriptions:</h4>
 </div>
 @{ int count = 1; }
@@ -87,6 +89,6 @@
 
         count++;
     }
-}
+}*@
 
 @Html.Action("_ComplexLinkMatrix", new { id = Model.Id, Search = ViewBag.Search })
