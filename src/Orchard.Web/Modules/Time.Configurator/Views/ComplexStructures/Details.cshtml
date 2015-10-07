@@ -74,21 +74,4 @@
 
 @Html.Partial("_CriteriaDescriptions")
 
-@*<div>
-    <h4 class="text-info">Criteria Descriptions:</h4>
-</div>
-@{ int count = 1; }
-@if (ViewBag.Notes != null)
-{
-    foreach (var item in ViewBag.Notes as IEnumerable<Time.Data.EntityModels.Configurator.ComplexStructure>)
-    {
-
-        <div>
-            <b>Criteria @(count) :</b>&nbsp;&nbsp;&nbsp;@item.Notes
-        </div>
-
-        count++;
-    }
-}*@
-
 @Html.Action("_ComplexLinkMatrix", new { id = Model.Id, Search = ViewBag.Search })
