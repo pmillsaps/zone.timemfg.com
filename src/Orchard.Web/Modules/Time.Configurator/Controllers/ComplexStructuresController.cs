@@ -171,6 +171,7 @@ namespace Time.Configurator.Controllers
                 complexStructure = complexStructure,
                 Lookups = lookups
             };
+            ViewBag.Notes = db.ComplexStructures.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).ToList();
             ViewBag.Search = Search;
 
             return View(vm);

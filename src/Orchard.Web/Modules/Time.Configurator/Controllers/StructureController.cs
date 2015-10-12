@@ -98,7 +98,7 @@ namespace Time.Configurator.Controllers
                 return HttpNotFound();
             }
 
-            if (structureSeq.Lookup == null) selected = "-- Select --";
+            if (String.IsNullOrEmpty(structureSeq.Lookup)) selected = "-- Select --";
             else selected = structureSeq.Lookup.ToString();
             
             ViewBag.Selected = selected;

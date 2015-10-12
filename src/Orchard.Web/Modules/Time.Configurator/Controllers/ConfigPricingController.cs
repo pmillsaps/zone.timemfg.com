@@ -193,7 +193,7 @@ namespace Time.Configurator.Controllers
                     }
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = coPrImVM.ConfigId, ConfigOptions = option[0] });
             }
             ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             return View(coPrImVM);

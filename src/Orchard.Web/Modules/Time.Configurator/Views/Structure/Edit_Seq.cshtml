@@ -52,13 +52,10 @@
             </div>
         </div>*@
 
-        @*This variable sets the current Lookup selection in Drop Down List*@
-        @{string selected = ViewBag.Selected;}
-
         <div class="form-group">
             @Html.LabelFor(model => model.Lookup, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Lookup")
+                @Html.DropDownList("Lookup", optionLabel: "-- Select --")
                 @Html.ValidationMessageFor(model => model.Lookup)
             </div>
         </div>
