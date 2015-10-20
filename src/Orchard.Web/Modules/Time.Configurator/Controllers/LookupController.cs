@@ -73,7 +73,8 @@ namespace Time.Configurator.Controllers
         // GET: /Lookup/Create
         public ActionResult Create()
         {
-            GenerateDropDowns();
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
             return View();
         }
 
@@ -101,7 +102,8 @@ namespace Time.Configurator.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            GenerateDropDowns(lookup);
+            ViewBag.ConfigName = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
+            ViewBag.ConfigData = new SelectList(db.Structures.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
             return View();
         }
 
@@ -139,7 +141,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(lookup).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = lookup.ConfigName, ConfigData = lookup.ConfigData });
             }
             GenerateDropDowns(lookup);
             return View(lookup);
@@ -168,7 +170,7 @@ namespace Time.Configurator.Controllers
             Lookup lookup = db.Lookups.Find(id);
             db.Lookups.Remove(lookup);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = lookup.ConfigName, ConfigData = lookup.ConfigData });
         }
 
         protected override void Dispose(bool disposing)

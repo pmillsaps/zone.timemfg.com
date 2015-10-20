@@ -43,6 +43,9 @@
             @Html.DisplayNameFor(model => model.Lookup)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LookupSequence)
         </th>
         <th>
@@ -51,7 +54,7 @@
         <th></th>
     </tr>
 
-    @if (Model.Count() == 0)
+    @if (Model == null || Model.Count() == 0)
     {
         <tr>
             <td colspan="7">
@@ -75,6 +78,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Lookup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LookupSequence)

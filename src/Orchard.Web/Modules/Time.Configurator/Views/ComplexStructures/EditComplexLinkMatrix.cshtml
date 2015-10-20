@@ -13,7 +13,11 @@
     @Html.AntiForgeryToken()
     @*@Html.HiddenFor(x => x)*@
     @*@Html.HiddenFor(x => x.OrderHeader.Id)*@
-    <div class="clear"></div>
+    
+    @Html.Partial("_CriteriaDescriptions")
+    <br />
+    
+    <div class="clear"></div>    
     <div class="editor-button2">
         <input type="submit" value="Save" />
     </div>

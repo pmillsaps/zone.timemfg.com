@@ -13,7 +13,7 @@
 <div>
     <h4>Structure</h4>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName })
     </p>
     <hr />
     <dl class="dl-horizontal">
@@ -57,6 +57,9 @@
             Lookup Sequence
         </th>
         <th>
+            Description
+        </th>
+        <th>
             Global
         </th>
         <th></th>
@@ -73,6 +76,9 @@
             </td>
             <td>
                 @item.LookupSequence
+            </td>
+            <td>
+                @item.Notes
             </td>
             <td>
                 @Html.CheckBox("StructureSeq", @item.Global, new { @disabled = "disabled" })
@@ -129,6 +135,9 @@
             Lookup Data
         </th>
         <th>
+            Description
+        </th>
+        <th>
             Lookup Sequence
         </th>
     </tr>
@@ -160,5 +169,5 @@
 <hr />
 
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName })
 </p>

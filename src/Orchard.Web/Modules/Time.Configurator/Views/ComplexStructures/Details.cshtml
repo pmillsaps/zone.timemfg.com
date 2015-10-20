@@ -52,8 +52,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id}) |
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName, ConfigData = Model.ConfigData })
 </p>
 
 @using (Html.BeginForm(new { Search = ViewBag.Search }))
@@ -62,7 +62,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="row">
-        <div class="col-md-1">@Html.Label("Search :")</div>
+        <div class="col-md-1">@Html.Label("Search :", htmlAttributes: new { @class = "lead" })</div>
         <div class="col-md-5">
             @Html.TextBox("Search")
         </div>
@@ -71,5 +71,7 @@
 }
 
 @Html.Action("_LookupMatrix", new { id = Model.Id })
+
+@Html.Partial("_CriteriaDescriptions")
 
 @Html.Action("_ComplexLinkMatrix", new { id = Model.Id, Search = ViewBag.Search })

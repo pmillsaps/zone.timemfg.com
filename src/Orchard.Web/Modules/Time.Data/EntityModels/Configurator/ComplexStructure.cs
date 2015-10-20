@@ -20,5 +20,6 @@ namespace Time.Data.EntityModels.Configurator
         public int Sequence { get; set; }
         public string LookupData { get; set; }
         public int LookupSeq { get; set; }
+        public string Notes { get; set; }
     }
 }

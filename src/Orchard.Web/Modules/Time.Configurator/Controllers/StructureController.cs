@@ -38,12 +38,19 @@ namespace Time.Configurator.Controllers
         // GET: Structures
         public ActionResult Index(string ConfigNames)
         {
-            var structures = db.Structures.AsQueryable();
-            if (!String.IsNullOrEmpty(ConfigNames)) structures = structures.Where(x => x.ConfigName == ConfigNames);
-
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
 
-            return View(structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            if (String.IsNullOrEmpty(ConfigNames))
+            {
+                return View();
+            }
+            else
+            {
+                var structures = db.Structures.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) structures = structures.Where(x => x.ConfigName == ConfigNames);
+
+                return View(structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }          
         }
 
         // GET: /Structure/Details/5
@@ -62,6 +69,8 @@ namespace Time.Configurator.Controllers
             //pulls in data for the structure sequence information in the structure details of each structure
             var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
             ViewBag.StructureSeq = structureSeq;
+            //var structureSeq = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
+            //ViewBag.StructureSeq = new SelectList();
 
             //pulls in data for the complex lookup partial view information in the structure details of each structure
             List<Lookup> lookup = db.Lookups.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList();
@@ -82,12 +91,19 @@ namespace Time.Configurator.Controllers
         //GET: /Structure/Edit_Seq --- this method is being called from the Details view
         public ActionResult Edit_Seq(int? id)
         {
+            string selected = "";// This variable sets the current Lookup selection in Drop Down List
             StructureSeq structureSeq = db.StructureSeqs.Find(id);
             if (structureSeq == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Lookup = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());
+
+            if (String.IsNullOrEmpty(structureSeq.Lookup)) selected = "-- Select --";
+            else selected = structureSeq.Lookup.ToString();
+            
+            ViewBag.Selected = selected;
+            ViewBag.Lookup = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", selected);
+   
             return View(structureSeq);
         }
 
@@ -98,6 +114,7 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit_Seq(StructureSeq structureSeq)
         {
+            string selected = ""; // This variable sets the current Lookup selection in Drop Down List
             //prevents duplicate data from being saved while editing
             var Configs = db.StructureSeqs.FirstOrDefault(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData
                 && x.Sequence == structureSeq.Sequence && x.Lookup == structureSeq.Lookup && x.LookupSequence == structureSeq.LookupSequence
@@ -113,7 +130,13 @@ namespace Time.Configurator.Controllers
                 var structure = db.Structures.First(x => x.ConfigName == structureSeq.ConfigName && x.ConfigData == structureSeq.ConfigData);
                 return RedirectToAction("Details", new { id = structure.Id });
             }
-            ViewBag.Lookup = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());
+
+            if (structureSeq.Lookup == null) selected = "-- Select --";
+            else selected = structureSeq.Lookup.ToString();
+            
+            ViewBag.Selected = selected;
+            ViewBag.Lookup = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", selected);
+
             return View(structureSeq);
         }
 
@@ -231,7 +254,7 @@ namespace Time.Configurator.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "Lookup");
+                return RedirectToAction("Index", "Lookup", new { ConfigNames = lookup.ConfigName, ConfigData = lookup.ConfigData});
             }
             return View(lookup);
         }
@@ -408,8 +431,9 @@ namespace Time.Configurator.Controllers
             {
                 ViewBag.Sequence = 1;
             }
-
-            GenerateComplexDropDowns(structure);
+            ViewBag.LookupData = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
+            ViewBag.LookupSeq = new SelectList(db.StructureSeqs.Select(x => new { x.Sequence }).Distinct().OrderBy(x => x.Sequence), "Sequence", "Sequence");
+            //GenerateComplexDropDowns(structure);
             return View();
         }
 
@@ -435,7 +459,9 @@ namespace Time.Configurator.Controllers
                 var structure = db.Structures.First(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData);
                 return RedirectToAction("Details", new { id = structure.Id });
             }
-            GenerateComplexDropDowns(structureSeq);
+            ViewBag.LookupData = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
+            ViewBag.LookupSeq = new SelectList(db.StructureSeqs.Select(x => new { x.Sequence }).Distinct().OrderBy(x => x.Sequence), "Sequence", "Sequence");
+            //GenerateComplexDropDowns(structureSeq);
             return View(complexStructure);
         }
 
@@ -466,7 +492,7 @@ namespace Time.Configurator.Controllers
                 db.Structures.Add(structure);
                 db.StructureSeqs.Add(new StructureSeq { ConfigName = structure.ConfigName, ConfigData = structure.ConfigData, Sequence = 1, Global = false });
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = structure.ConfigName });
             }
             GenerateDropDowns(structure);
             return View(structure);
@@ -505,7 +531,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(structure).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = structure.ConfigName });
             }
             GenerateDropDowns(structure);
             return View(structure);
@@ -534,7 +560,7 @@ namespace Time.Configurator.Controllers
             Structure structure = db.Structures.Find(id);
             db.Structures.Remove(structure);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = structure.ConfigName });
         }
 
         protected override void Dispose(bool disposing)
@@ -566,26 +592,26 @@ namespace Time.Configurator.Controllers
             ViewBag.ConfigData = new SelectList(db.Structures.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structure.ConfigData);
         }
 
-        private void GenerateComplexDropDowns(Structure structure)
-        {
-            //prevent duplicates from showing up in drop down
-            //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
-            var ConfigDataCSList = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName).ToList();
+        //private void GenerateComplexDropDowns(Structure structure)
+        //{
+        //    //prevent duplicates from showing up in drop down
+        //    //without var list codes, every CFG and Global shows up in drop down and whatever else for the other drop downs
+        //    var ConfigDataCSList = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName).ToList();
 
-            var SequenceCSList = from secondCSList in db.StructureSeqs
-                                 group secondCSList by secondCSList.Sequence into newCSList2
-                                 let x = newCSList2.FirstOrDefault()
-                                 select x;
+        //    var SequenceCSList = from secondCSList in db.StructureSeqs
+        //                         group secondCSList by secondCSList.Sequence into newCSList2
+        //                         let x = newCSList2.FirstOrDefault()
+        //                         select x;
 
-            ViewBag.LookupData = new SelectList(ConfigDataCSList.ToList(), "ConfigData", "ConfigData");
-            ViewBag.LookupSeq = new SelectList(SequenceCSList.ToList(), "Sequence", "Sequence");
-        }
+        //    ViewBag.LookupData = new SelectList(ConfigDataCSList.ToList(), "ConfigData", "ConfigData");
+        //    ViewBag.LookupSeq = new SelectList(SequenceCSList.ToList(), "Sequence", "Sequence");
+        //}
 
         //This and above ViewBags pull in the data to put into the drop down lists
-        private void GenerateComplexDropDowns(StructureSeq structureSeq)
-        {
-            ViewBag.LookupData = new SelectList(db.StructureSeqs.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureSeq.ConfigData);
-            ViewBag.LookupSeq = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence", structureSeq.Sequence);
-        }
+        //private void GenerateComplexDropDowns(StructureSeq structureSeq)
+        //{
+        //    ViewBag.LookupData = new SelectList(db.StructureSeqs.OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", structureSeq.ConfigData);
+        //    ViewBag.LookupSeq = new SelectList(db.StructureSeqs.OrderBy(x => x.Sequence), "Sequence", "Sequence", structureSeq.Sequence);
+        //}
     }
 }

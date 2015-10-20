@@ -38,14 +38,21 @@ namespace Time.Configurator.Controllers
         // GET: ComplexStructures
         public ActionResult Index(string ConfigNames, string ConfigData)
         {
-            var complexStructures = db.ComplexStructures.AsQueryable();
-            if (!String.IsNullOrEmpty(ConfigNames)) complexStructures = complexStructures.Where(x => x.ConfigName == ConfigNames);
-            if (!String.IsNullOrEmpty(ConfigData)) complexStructures = complexStructures.Where(x => x.ConfigData == ConfigData);
-
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             ViewBag.ConfigData = new SelectList(db.ComplexStructures.Select(x => x.ConfigData).Distinct());
 
-            return View(complexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
+            {
+                return View();
+            }
+            else
+            {
+                var complexStructures = db.ComplexStructures.AsQueryable();
+                if (!String.IsNullOrEmpty(ConfigNames)) complexStructures = complexStructures.Where(x => x.ConfigName == ConfigNames);
+                if (!String.IsNullOrEmpty(ConfigData)) complexStructures = complexStructures.Where(x => x.ConfigData == ConfigData);
+
+                return View(complexStructures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+            }
         }
 
         // GET: ComplexStructures/Details/5
@@ -61,6 +68,7 @@ namespace Time.Configurator.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Notes = db.ComplexStructures.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).ToList();
             ViewBag.Search = Search;
             return View(complexStructure);
         }
@@ -163,6 +171,7 @@ namespace Time.Configurator.Controllers
                 complexStructure = complexStructure,
                 Lookups = lookups
             };
+            ViewBag.Notes = db.ComplexStructures.Where(x => x.ConfigName == complexStructure.ConfigName && x.ConfigData == complexStructure.ConfigData).ToList();
             ViewBag.Search = Search;
 
             return View(vm);
@@ -261,7 +270,7 @@ namespace Time.Configurator.Controllers
             {
                 db.Entry(complexStructure).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { ConfigNames = complexStructure.ConfigName, ConfigData = complexStructure.ConfigData});
             }
             return View(complexStructure);
         }
@@ -289,7 +298,7 @@ namespace Time.Configurator.Controllers
             ComplexStructure complexStructure = db.ComplexStructures.Find(id);
             db.ComplexStructures.Remove(complexStructure);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { ConfigNames = complexStructure.ConfigName, ConfigData = complexStructure.ConfigData });
         }
 
         protected override void Dispose(bool disposing)
