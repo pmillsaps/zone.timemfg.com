@@ -95,13 +95,16 @@ namespace Time.IT.Controllers
             return View(ref_NIC);
         }
 
-        private void GenerateDropDowns(Ref_NIC ref_NIC)
+        private void GenerateDropDowns(Ref_NIC nic)
         {
-            var usedCables = db.Ref_NIC.Where(x => x.CableId != null).Select(x => x.CableId);
-            var usedPorts = db.Ref_SwitchPort.Where(x => x.Ref_NIC != null).Select(x => x.Id);
-            ViewBag.CableId = new SelectList(db.Ref_CableNo.OrderBy(x => x.Name).Where(x => !usedCables.Contains(x.Id) || x.Id == ref_NIC.CableId), "Id", "Name", ref_NIC.CableId);
-            ViewBag.SpeedId = new SelectList(db.Ref_NICSpeed.OrderBy(x => x.NIC_Speed), "Id", "NIC_Speed", ref_NIC.SpeedId);
-            ViewBag.SwitchPortId = new SelectList(db.Ref_SwitchPort.OrderBy(x => x.SwitchPort).Where(x => !usedPorts.Contains(x.Id) || x.Id == ref_NIC.SwitchPortId), "Id", "SwitchPort", ref_NIC.SwitchPortId);
+            //var usedCables = db.Ref_NIC.Select(x => x.CableId);
+            //var usedPorts = db.Ref_SwitchPort.Select(x => x.Id);
+            var usedCables = db.Ref_NIC.Where(x => x.CableId != null).Select(x => x.CableId).ToList();
+            var usedPorts = db.Ref_NIC.Where(x => x.Ref_SwitchPort != null).Select(x => x.SwitchPortId).ToList();
+            ViewBag.CableId = new SelectList(db.Ref_CableNo.Where(x => !usedCables.Contains(x.Id)).OrderBy(x => x.Name), "Id", "Name", nic.CableId);
+            ViewBag.SpeedId = new SelectList(db.Ref_NICSpeed.OrderBy(x => x.NIC_Speed), "Id", "NIC_Speed", nic.SpeedId);
+            ViewBag.SwitchPortId = new SelectList(db.Ref_SwitchPort.Where(x => !usedPorts.Contains(x.Id)).OrderBy(x => x.SwitchPort), "Id", "SwitchPort", nic.SwitchPortId);
+            ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", nic.ComputerId);
         }
 
         // POST: Ref_NIC/Edit/5
