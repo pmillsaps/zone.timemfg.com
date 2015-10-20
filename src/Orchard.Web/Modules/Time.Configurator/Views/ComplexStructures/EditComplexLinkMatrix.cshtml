@@ -1,0 +1,27 @@
+﻿@model Time.Configurator.Models.ComplexLinkMatrixViewModel
+
+@{
+    ViewBag.Title = "Edit Complex Link -> Lookup Data Matrix";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("_LookupMatrix", Model.Lookups)
+
+@using (Html.BeginForm(new { Search = ViewBag.Search }))
+{
+    @Html.AntiForgeryToken()
+    @*@Html.HiddenFor(x => x)*@
+    @*@Html.HiddenFor(x => x.OrderHeader.Id)*@
+    <div class="clear"></div>
+    <div class="editor-button2">
+        <input type="submit" value="Save" />
+    </div>
+
+    @Html.Partial("_EditComplexLinkMatrix", Model)
+
+    <div class="clear"></div>
+    <div class="editor-button2">
+        <input type="submit" value="Save" />
+    </div>
+}

@@ -1,0 +1,145 @@
+﻿@model Time.Data.EntityModels.TimeMFG.LoadList
+
+@{
+    ViewBag.Title = String.Format("'{0}' Details", Model.Name);
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+    @if (ViewBag.LoadListEditor)
+    {
+        <li >@Html.ActionLink("Add Lifts to this LoadList", "JobSearch", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Upload Pictures for this LoadList", "UploadPictures", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Mark LoadList as SHIPPED", "CompleteLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        @*<li>@Html.ActionLink("Move Jobs to Another Load List", "MoveLoadListJobs", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>*@
+        <li>@Html.ActionLink("Email Load List", "EmailLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+    }
+</ul>
+<br /><br />
+<fieldset>
+    <legend>LoadList</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateIssued)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateIssued)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateRevised)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateRevised)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateSchedShip)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateSchedShip)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TruckingCompany)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TruckingCompany)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayWithBreaksFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.MakeReady)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MakeReady)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Complete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Complete)
+    </div>
+</fieldset>
+<p>
+    @if (ViewBag.LoadListEditor)
+    {
+        @Html.ActionLink("Edit", "Edit", "LoadList", new { id = Model.Id }, null) @:|
+    }
+
+</p>
+
+@using (Html.BeginForm("PrintLoadLists", "LoadList"))
+{
+    <div class="hidden">
+        <input type="checkbox" name="selectedLines" value="@Model.Id" checked="checked" />
+    </div>
+    <div class="editor-field">
+        <input type="submit" name="command" value="Print Load List(s)..." />&nbsp;&nbsp;
+        <input type="submit" name="command" value="Print Load List(s) With Statuses..." />&nbsp;&nbsp;
+    </div>
+}
+<div class="clear"></div>
+<br />
+
+@{Html.RenderAction("_ListLifts", "LoadList", new { id = Model.Id });}
+
+@*@Html.Partial("_ListLifts", Model.LoadListJobs)*@
+
+<br />
+
+<a id="commentToggle" href="javascript:toggle();">Show Special Instructions History</a>
+
+<div id="Comments" class="hidden">
+    @{Html.RenderAction("_ListLoadComments", "LoadList", new { id = Model.Id });}
+</div>
+
+<div id="images">
+    @{Html.RenderAction("_DisplayThumbNails", "LoadList", new { id = Model.Id });}
+</div>
+
+@section Scripts {
+    <script language='javascript'>
+        function toggle() {
+            var ele = document.getElementById("Comments");
+            var text = document.getElementById("commentToggle");
+            if (ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show Special Instructions History";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Special Instructions History";
+            }
+        }
+        function toggleJobStatus() {
+            $('.JobStatus').toggle();
+            //$('#jobStatusToggle').text('Hide All Job Statuses');
+            //var text = document.getElementById("jobStatusToggle");
+            //if (ele.style.display == "block") {
+            //    ele.style.display = "none";
+            //    text.innerHTML = "Show All Job Statuses";
+            //}
+            //else {
+            //    ele.style.display = "block";
+            //    text.innerHTML = "Hide All Job Statuses";
+            //}
+        }
+    </script>
+}

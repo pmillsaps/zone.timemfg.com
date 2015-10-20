@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListImage>
+
+<link href="~/Content/css/image_gallery.css" rel="stylesheet" />
+
+<h2>Load List Images</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("Edit / Delete Images", "EditImages", new{ id = ViewBag.Id }, new { @class = "btn btn-primary" })</li>
+</ul>
+<br />
+
+
+<div class="imagediv">
+    <ul class="thumbnails">
+        @foreach (var image in Model)
+        {
+            var imagePath = Path.Combine(image.FilePath, image.FileName);
+            var imgurl = Url.Action("ThumbImage", "LoadList", new { id = image.Id, width = 300, height = 300 });
+            <li class="item">
+                <a href="@imagePath">
+                    <img alt="@image.FileName" src="@imagePath" class="thumbnail-border" width="180" />
+                </a>
+                <span class="image-overlay">@image.FileName</span>
+            </li>
+        }
+    </ul>
+</div>

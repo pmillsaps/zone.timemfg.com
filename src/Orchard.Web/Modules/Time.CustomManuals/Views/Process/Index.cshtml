@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Custom Manual Processing";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_CustomManualSideBar")
+
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="row">
+                <div class="col-md-5"><h4>@ViewBag.Title</h4></div>
+                @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <h4 class="alert alert-danger">@ViewBag.ErrorMessage</h4>
+                }
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+            <div class="row">
+                @using (Html.BeginForm("QueueJobsForManuals", "Process"))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Add New Problem Jobs For Custom Manuals" />
+                }
+            </div>
+            <div class="row">
+                @using (Html.BeginForm("CheckManuals", "Process"))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Send Custom Manual Status Email" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
