@@ -99,8 +99,10 @@ namespace Time.IT.Controllers
         {
             //var usedCables = db.Ref_NIC.Select(x => x.CableId);
             //var usedPorts = db.Ref_SwitchPort.Select(x => x.Id);
-            var usedCables = db.Ref_NIC.Where(x => x.CableId != null).Select(x => x.CableId).ToList();
-            var usedPorts = db.Ref_NIC.Where(x => x.Ref_SwitchPort != null).Select(x => x.SwitchPortId).ToList();
+            var usedCables = db.Ref_NIC.Where(x => x.CableId != null && x.CableId != nic.CableId).Select(x => x.CableId).ToList();
+            // if (usedCables.Contains(nic.CableId)) usedCables.Remove(nic.CableId);
+            var usedPorts = db.Ref_NIC.Where(x => x.Ref_SwitchPort != null && x.SwitchPortId != nic.SwitchPortId).Select(x => x.SwitchPortId).ToList();
+            //if (usedPorts.Contains(nic.SwitchPortId)) usedPorts.Remove(nic.SwitchPortId);
             ViewBag.CableId = new SelectList(db.Ref_CableNo.Where(x => !usedCables.Contains(x.Id)).OrderBy(x => x.Name), "Id", "Name", nic.CableId);
             ViewBag.SpeedId = new SelectList(db.Ref_NICSpeed.OrderBy(x => x.NIC_Speed), "Id", "NIC_Speed", nic.SpeedId);
             ViewBag.SwitchPortId = new SelectList(db.Ref_SwitchPort.Where(x => !usedPorts.Contains(x.Id)).OrderBy(x => x.SwitchPort), "Id", "SwitchPort", nic.SwitchPortId);
