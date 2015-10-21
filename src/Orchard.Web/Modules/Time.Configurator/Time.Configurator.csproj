@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -192,6 +193,7 @@
     <Compile Include="Controllers\StructureSeqController.cs" />
     <Compile Include="Helpers\ExporttoExcelResult.cs" />
     <Compile Include="Models\ComplexLinkMatrixViewModel.cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Services\ConfigPricingExportExcelHelper.cs" />
     <Compile Include="Services\IConfigPricingExportExcelHelper.cs" />
     <Compile Include="Models\ConfigPricingViewModel.cs" />

@@ -31,6 +31,7 @@ namespace Time.Configurator.Controllers
 
         // These lists will hold the values for the ImportPricing method. They are also used by the SplitConfigOption() method.
         public List<decimal> price = new List<decimal>();
+
         public List<decimal> altPrice = new List<decimal>();
         public List<string> option = new List<string>();
         public bool altPriceEmpty = false; // To insert the Price in AltPrice if no AltPrice provided
@@ -51,6 +52,8 @@ namespace Time.Configurator.Controllers
         // GET: /ConfigPricing/
         public ActionResult Index(string ConfigNames, string ConfigOptions)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             ViewBag.ConfigOptions = new SelectList(db.ConfigPricings.Select(x => new { x.ConfigOption }).Distinct().OrderBy(x => x.ConfigOption), "ConfigOption", "ConfigOption");
 
@@ -76,6 +79,8 @@ namespace Time.Configurator.Controllers
         // This method allows user to export ConfigPricings for a specific configurator to Excel
         public ActionResult ConfigPricingExport()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Export")))
+                return new HttpUnauthorizedResult();
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
             return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
         }
@@ -85,9 +90,11 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ConfigPricingExport(string ConfigNames)
         {
-            if(String.IsNullOrEmpty(ConfigNames))ModelState.AddModelError("", "Please select a Configurator for the list.");
- 
-            if(ModelState.IsValid)
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Export")))
+                return new HttpUnauthorizedResult();
+            if (String.IsNullOrEmpty(ConfigNames)) ModelState.AddModelError("", "Please select a Configurator for the list.");
+
+            if (ModelState.IsValid)
             {
                 var configs = _cfgPrExEcHp.GetConfigPricingForCfgName(ConfigNames).Select(x => new ConfigPricingViewModel
                 {
@@ -106,6 +113,8 @@ namespace Time.Configurator.Controllers
         // GET: /ConfigPricing/Details/5
         public ActionResult Details(string id, string opt)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View the Details")))
+                return new HttpUnauthorizedResult();
             if (id == null && opt == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,18 +135,20 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /ConfigPricing/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] ConfigPricing configpricing)
-        {          
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             //prevents a duplicate from being created
             var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption);
 
             //displays if previous code found a duplicate
             if (Configs != null) ModelState.AddModelError("", "Duplicate Pricing Option Created---Please Recheck Data");
-            
+
             if (ModelState.IsValid)
             {
                 db.ConfigPricings.Add(configpricing);
@@ -152,10 +163,12 @@ namespace Time.Configurator.Controllers
         // Whit this method the user can paste a list of Options, Prices, and Alternate Prices and import them to the db
         public ActionResult ImportPricing()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             ConfigPriceImportVM coPrImVM = new ConfigPriceImportVM();
 
             ViewBag.ConfigID = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            return View(coPrImVM );
+            return View(coPrImVM);
         }
 
         // POST: /ImportPricing
@@ -163,6 +176,8 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ImportPricing(ConfigPriceImportVM coPrImVM)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             if (ModelState.IsValid)
             {
                 SplitConfigOption(coPrImVM.OptionAndPrice); // Calling the method to split the string from the view
@@ -202,13 +217,13 @@ namespace Time.Configurator.Controllers
         // This method is called from the ImportPricing method to parse the input in the ConfigOption textbox
         private void SplitConfigOption(string rawString)
         {
-            string[] newString = rawString.Split(new String[] {"\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] newString = rawString.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             string[] testUpperBound = newString[0].Split(new String[] { "\t", "," }, StringSplitOptions.RemoveEmptyEntries);
             string[] parseString = rawString.Split(new String[] { "\t", ",", "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             if (testUpperBound.Length == 2)
             {
-                // Looping through the parseString and assigning the values to the option and price 
+                // Looping through the parseString and assigning the values to the option and price
                 for (int i = 0; i < parseString.Count(); i++)
                 {
                     if (i == 0 || i % 2 == 0)
@@ -220,7 +235,7 @@ namespace Time.Configurator.Controllers
                         price.Add(Convert.ToDecimal(parseString[i]));
                         altPriceEmpty = true;
                     }
-                }   
+                }
             }
             else if (testUpperBound.Length == 3)
             {
@@ -244,6 +259,8 @@ namespace Time.Configurator.Controllers
         // GET: /ConfigPricing/Edit/5
         public ActionResult Edit(string id, string opt)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             if (id == null && opt == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -258,14 +275,16 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: /ConfigPricing/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ConfigPricing configpricing)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             //prevents a duplicate from being saved when editing
-            var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price 
+            var Configs = db.ConfigPricings.FirstOrDefault(x => x.ConfigID == configpricing.ConfigID && x.ConfigOption == configpricing.ConfigOption && x.Price == configpricing.Price
                 && x.AltPrice == configpricing.AltPrice);
 
             //displays if previous code found a duplicate
@@ -284,6 +303,8 @@ namespace Time.Configurator.Controllers
         // GET: /ConfigPricing/Delete/5
         public ActionResult Delete(string id, string opt)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             if (id == null && opt == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -301,6 +322,8 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id, string opt)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Edit")))
+                return new HttpUnauthorizedResult();
             ConfigPricing configpricing = db.ConfigPricings.Find(id, opt);
             db.ConfigPricings.Remove(configpricing);
             db.SaveChanges();

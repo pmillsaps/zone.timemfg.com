@@ -1,4 +1,6 @@
-﻿using Orchard.Themes;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,19 @@ namespace Time.Configurator.Controllers
     public class ConfiguratorController : Controller
     {
         private string ErrorMessage { get; set; }
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public ConfiguratorController(IOrchardServices services)
+        {
+            Services = services;
+        }
 
         // GET: Configurator
         public ActionResult Index()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorAdmin, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
             return View();
         }
 
