@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -178,6 +179,7 @@
     <Content Include="Views\Home\MessageResult.cshtml" />
     <Content Include="Views\Home\ProblemJobs.cshtml" />
     <Content Include="Views\Index2.cshtml" />
+    <Content Include="Views\ValuedInventory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -201,6 +203,7 @@
     <Compile Include="Controllers\OldLoadListController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\ValuedInventoryController.cs" />
     <Compile Include="Helpers\EmailNotifier.cs" />
     <Compile Include="Helpers\ErrorTools.cs" />
     <Compile Include="Helpers\FileUploadHelpers.cs" />
