@@ -12,14 +12,18 @@ namespace Time.Data.EntityModels.TimeMFG
     using System;
     using System.Collections.Generic;
     
-    public partial class Setting
+    public partial class ValuedInventory
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string PartNum { get; set; }
         public string Description { get; set; }
-        public string Value { get; set; }
-        public bool String { get; set; }
-        public bool Int { get; set; }
-        public string UsedFor { get; set; }
+        public decimal BOH { get; set; }
+        public System.DateTime CalculationDate { get; set; }
+        public System.DateTime TransactionDate { get; set; }
+        public decimal TransactionCost { get; set; }
+        public decimal CurrentCost { get; set; }
+        public System.DateTime ComparisonDate { get; set; }
+        public int PeriodYear { get; set; }
+        public string ClassId { get; set; }
     }
 }

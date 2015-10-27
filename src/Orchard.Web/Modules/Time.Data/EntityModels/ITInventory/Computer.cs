@@ -17,8 +17,8 @@ namespace Time.Data.EntityModels.ITInventory
         public Computer()
         {
             this.Ref_NIC = new HashSet<Ref_NIC>();
-            this.Licenses = new HashSet<License>();
             this.ScheduledTasks = new HashSet<ScheduledTask>();
+            this.Licenses = new HashSet<License>();
         }
     
         public int Id { get; set; }
@@ -39,12 +39,12 @@ namespace Time.Data.EntityModels.ITInventory
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string AssetTag { get; set; }
         public string BIOS_Version { get; set; }
+        public Nullable<System.DateTime> WarrantyExpirationDate { get; set; }
         public string Notes { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<System.DateTime> LastBuildDate { get; set; }
         public string PhoneNumber { get; set; }
         public string SerialNumber { get; set; }
-        public Nullable<System.DateTime> WarrantyExpirationDate { get; set; }
         public string AdditionalHW { get; set; }
     
         public virtual Ref_Memory Ref_Memory { get; set; }
@@ -57,7 +57,7 @@ namespace Time.Data.EntityModels.ITInventory
         public virtual Ref_Sound Ref_Sound { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Ref_NIC> Ref_NIC { get; set; }
-        public virtual ICollection<License> Licenses { get; set; }
         public virtual ICollection<ScheduledTask> ScheduledTasks { get; set; }
+        public virtual ICollection<License> Licenses { get; set; }
     }
 }

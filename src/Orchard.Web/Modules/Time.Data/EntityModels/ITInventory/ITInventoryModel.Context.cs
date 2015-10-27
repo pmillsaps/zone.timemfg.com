@@ -25,27 +25,28 @@ namespace Time.Data.EntityModels.ITInventory
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Computer> Computers { get; set; }
+        public virtual DbSet<License> Licenses { get; set; }
+        public virtual DbSet<Monitor> Monitors { get; set; }
         public virtual DbSet<Ref_Building> Ref_Building { get; set; }
+        public virtual DbSet<Ref_BuildYear> Ref_BuildYear { get; set; }
+        public virtual DbSet<Ref_CableNo> Ref_CableNo { get; set; }
         public virtual DbSet<Ref_DeviceType> Ref_DeviceType { get; set; }
         public virtual DbSet<Ref_LicenseType> Ref_LicenseType { get; set; }
         public virtual DbSet<Ref_Location> Ref_Location { get; set; }
+        public virtual DbSet<Ref_Manufacturer> Ref_Manufacturer { get; set; }
         public virtual DbSet<Ref_Memory> Ref_Memory { get; set; }
         public virtual DbSet<Ref_Model> Ref_Model { get; set; }
+        public virtual DbSet<Ref_MonitorSizes> Ref_MonitorSizes { get; set; }
+        public virtual DbSet<Ref_NIC> Ref_NIC { get; set; }
+        public virtual DbSet<Ref_NICSpeed> Ref_NICSpeed { get; set; }
+        public virtual DbSet<Ref_OS> Ref_OS { get; set; }
         public virtual DbSet<Ref_Processor> Ref_Processor { get; set; }
         public virtual DbSet<Ref_Sound> Ref_Sound { get; set; }
         public virtual DbSet<Ref_Status> Ref_Status { get; set; }
-        public virtual DbSet<Ref_VideoCard> Ref_VideoCard { get; set; }
-        public virtual DbSet<Ref_OS> Ref_OS { get; set; }
-        public virtual DbSet<Ref_MonitorSizes> Ref_MonitorSizes { get; set; }
-        public virtual DbSet<Ref_Manufacturer> Ref_Manufacturer { get; set; }
-        public virtual DbSet<Monitor> Monitors { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Ref_CableNo> Ref_CableNo { get; set; }
-        public virtual DbSet<Ref_NIC> Ref_NIC { get; set; }
-        public virtual DbSet<Ref_NICSpeed> Ref_NICSpeed { get; set; }
         public virtual DbSet<Ref_SwitchPort> Ref_SwitchPort { get; set; }
-        public virtual DbSet<Computer> Computers { get; set; }
-        public virtual DbSet<License> Licenses { get; set; }
+        public virtual DbSet<Ref_VideoCard> Ref_VideoCard { get; set; }
         public virtual DbSet<ScheduledTask> ScheduledTasks { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

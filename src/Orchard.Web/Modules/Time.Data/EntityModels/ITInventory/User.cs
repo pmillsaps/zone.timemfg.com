@@ -16,8 +16,8 @@ namespace Time.Data.EntityModels.ITInventory
     {
         public User()
         {
-            this.Monitors = new HashSet<Monitor>();
             this.Computers = new HashSet<Computer>();
+            this.Monitors = new HashSet<Monitor>();
             this.Licenses = new HashSet<License>();
         }
     
@@ -29,10 +29,10 @@ namespace Time.Data.EntityModels.ITInventory
         public Nullable<System.DateTime> LastDateEdited { get; set; }
         public string LastEditedBy { get; set; }
     
+        public virtual ICollection<Computer> Computers { get; set; }
         public virtual ICollection<Monitor> Monitors { get; set; }
         public virtual Ref_Building Ref_Building { get; set; }
         public virtual Ref_Location Ref_Location { get; set; }
-        public virtual ICollection<Computer> Computers { get; set; }
         public virtual ICollection<License> Licenses { get; set; }
     }
 }

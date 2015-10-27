@@ -275,6 +275,9 @@
     <Compile Include="EntityModels\ITInventory\Ref_Building.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_BuildYear.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\ITInventory\Ref_CableNo.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
@@ -395,6 +398,12 @@
     <Compile Include="EntityModels\TimeMFG\Message_Type.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\MSMQ_Status.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\NLog_Entries.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\Setting.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
@@ -457,6 +466,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeMfgModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\ValuedInventory.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\TimeMFG\WaterTest.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>

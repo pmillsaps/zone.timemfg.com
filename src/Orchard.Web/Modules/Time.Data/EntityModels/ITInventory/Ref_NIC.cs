@@ -23,9 +23,9 @@ namespace Time.Data.EntityModels.ITInventory
         public Nullable<int> CableId { get; set; }
         public Nullable<int> ComputerId { get; set; }
     
+        public virtual Computer Computer { get; set; }
         public virtual Ref_CableNo Ref_CableNo { get; set; }
         public virtual Ref_NICSpeed Ref_NICSpeed { get; set; }
         public virtual Ref_SwitchPort Ref_SwitchPort { get; set; }
-        public virtual Computer Computer { get; set; }
     }
 }

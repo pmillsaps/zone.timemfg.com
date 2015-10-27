@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Data.EntityModels.ITInventory
+namespace Time.Data.EntityModels.TimeMFG
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Ref_Manufacturer
+    public partial class NLog_Entries
     {
-        public Ref_Manufacturer()
-        {
-            this.Monitors = new HashSet<Monitor>();
-            this.Ref_Model = new HashSet<Ref_Model>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<Monitor> Monitors { get; set; }
-        public virtual ICollection<Ref_Model> Ref_Model { get; set; }
+        public System.DateTime time_stamp { get; set; }
+        public string host { get; set; }
+        public string type { get; set; }
+        public string source { get; set; }
+        public string message { get; set; }
+        public string level { get; set; }
+        public string logger { get; set; }
+        public string stacktrace { get; set; }
+        public string allxml { get; set; }
     }
 }

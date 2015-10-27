@@ -386,7 +386,7 @@ namespace Time.IT.Controllers
         // GET: ScheduledTasks/Create
         public ActionResult AddScheduledTask(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

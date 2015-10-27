@@ -50,7 +50,7 @@ namespace Time.Configurator.Controllers
                 if (!String.IsNullOrEmpty(ConfigNames)) structures = structures.Where(x => x.ConfigName == ConfigNames);
 
                 return View(structures.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
-            }          
+            }
         }
 
         // GET: /Structure/Details/5
@@ -100,10 +100,10 @@ namespace Time.Configurator.Controllers
 
             if (String.IsNullOrEmpty(structureSeq.Lookup)) selected = "-- Select --";
             else selected = structureSeq.Lookup.ToString();
-            
+
             ViewBag.Selected = selected;
             ViewBag.Lookup = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", selected);
-   
+
             return View(structureSeq);
         }
 
@@ -133,7 +133,7 @@ namespace Time.Configurator.Controllers
 
             if (structureSeq.Lookup == null) selected = "-- Select --";
             else selected = structureSeq.Lookup.ToString();
-            
+
             ViewBag.Selected = selected;
             ViewBag.Lookup = new SelectList(db.StructureSeqs.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData", selected);
 
@@ -146,7 +146,7 @@ namespace Time.Configurator.Controllers
         //GET: /Structure/Add_Seq
         public ActionResult Add_Seq(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -194,7 +194,7 @@ namespace Time.Configurator.Controllers
         //GET: /Structure/Import_Seq
         public ActionResult Import_Seq(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -234,7 +234,7 @@ namespace Time.Configurator.Controllers
                     if (Configs != null) ModelState.AddModelError("", " Item '" + item + "' is a Duplicate---Remove Duplicate (No data imported)");
                 }
             }
-                
+
             if (ModelState.IsValid)
             {
                 //for loop that loops through and inputs each piece of data
@@ -254,7 +254,7 @@ namespace Time.Configurator.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "Lookup", new { ConfigNames = lookup.ConfigName, ConfigData = lookup.ConfigData});
+                return RedirectToAction("Index", "Lookup", new { ConfigNames = lookup.ConfigName, ConfigData = lookup.ConfigData });
             }
             return View(lookup);
         }
@@ -407,7 +407,7 @@ namespace Time.Configurator.Controllers
         //used to add in a new ComplexStructure
         public ActionResult Add_CS(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

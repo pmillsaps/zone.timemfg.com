@@ -12,18 +12,9 @@ namespace Time.Data.EntityModels.ITInventory
     using System;
     using System.Collections.Generic;
     
-    public partial class Ref_Model
+    public partial class Ref_BuildYear
     {
-        public Ref_Model()
-        {
-            this.Computers = new HashSet<Computer>();
-        }
-    
-        public int ID { get; set; }
-        public string Model { get; set; }
-        public Nullable<int> ManufacturerId { get; set; }
-    
-        public virtual ICollection<Computer> Computers { get; set; }
-        public virtual Ref_Manufacturer Ref_Manufacturer { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

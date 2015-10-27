@@ -113,6 +113,29 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MessageType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="MSMQ_Status">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+          </Key>
+          <Property Name="ProcessID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NLog_Entries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="time_stamp" Type="datetime" Nullable="false" />
+          <Property Name="host" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="source" Type="nvarchar" MaxLength="50" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="level" Type="nvarchar" MaxLength="50" />
+          <Property Name="logger" Type="nvarchar" MaxLength="50" />
+          <Property Name="stacktrace" Type="nvarchar(max)" />
+          <Property Name="allxml" Type="ntext" />
+        </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Id" />
@@ -123,6 +146,7 @@
           <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="String" Type="bit" Nullable="false" />
           <Property Name="Int" Type="bit" Nullable="false" />
+          <Property Name="UsedFor" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SysTask">
           <Key>
@@ -323,6 +347,22 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ValuedInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="BOH" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="CalculationDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="CurrentCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
+          <Property Name="PeriodYear" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="WaterTests">
           <Key>
@@ -631,6 +671,8 @@
           <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadListJobStatus" EntityType="Self.LoadListJobStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Message_Type" EntityType="Self.Message_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MSMQ_Status" EntityType="Self.MSMQ_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NLog_Entries" EntityType="Self.NLog_Entries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysTask" EntityType="Self.SysTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysTaskSchedule" EntityType="Self.SysTaskSchedule" Schema="dbo" store:Type="Tables" />
@@ -647,6 +689,7 @@
           <EntitySet Name="TicketStatusHistory" EntityType="Self.TicketStatusHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketTasks" EntityType="Self.TicketTasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketVisibility" EntityType="Self.TicketVisibility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValuedInventory" EntityType="Self.ValuedInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WaterTests" EntityType="Self.WaterTests" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_LoadList_Distributor_LoadList" Association="Self.FK_LoadList_Distributor_LoadList">
             <End Role="LoadList" EntitySet="LoadList" />
@@ -1355,6 +1398,9 @@
             <End Role="TicketStatusHistory" EntitySet="TicketStatusHistories" />
           </AssociationSet>
           <EntitySet Name="Message_Type" EntityType="TimeMFGModel.Message_Type" />
+          <EntitySet Name="MSMQ_Status" EntityType="TimeMFGModel.MSMQ_Status" />
+          <EntitySet Name="NLog_Entries" EntityType="TimeMFGModel.NLog_Entries" />
+          <EntitySet Name="ValuedInventories" EntityType="TimeMFGModel.ValuedInventory" />
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -1366,6 +1412,7 @@
           <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="String" Type="Boolean" Nullable="false" />
           <Property Name="Int" Type="Boolean" Nullable="false" />
+          <Property Name="UsedFor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TicketVisibility">
           <Key>
@@ -1491,6 +1538,45 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="MessageType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MSMQ_Status">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+          </Key>
+          <Property Name="ProcessID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NLog_Entries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="time_stamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="host" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stacktrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="allxml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ValuedInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BOH" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="CalculationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="CurrentCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PeriodYear" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1757,6 +1843,7 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="TimeMFGModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="UsedFor" ColumnName="UsedFor" />
                 <ScalarProperty Name="Int" ColumnName="Int" />
                 <ScalarProperty Name="String" ColumnName="String" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -1853,6 +1940,48 @@
             <EntityTypeMapping TypeName="TimeMFGModel.Message_Type">
               <MappingFragment StoreEntitySet="Message_Type">
                 <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MSMQ_Status">
+            <EntityTypeMapping TypeName="TimeMFGModel.MSMQ_Status">
+              <MappingFragment StoreEntitySet="MSMQ_Status">
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NLog_Entries">
+            <EntityTypeMapping TypeName="TimeMFGModel.NLog_Entries">
+              <MappingFragment StoreEntitySet="NLog_Entries">
+                <ScalarProperty Name="allxml" ColumnName="allxml" />
+                <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+                <ScalarProperty Name="logger" ColumnName="logger" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValuedInventories">
+            <EntityTypeMapping TypeName="TimeMFGModel.ValuedInventory">
+              <MappingFragment StoreEntitySet="ValuedInventory">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="PeriodYear" ColumnName="PeriodYear" />
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
+                <ScalarProperty Name="CurrentCost" ColumnName="CurrentCost" />
+                <ScalarProperty Name="TransactionCost" ColumnName="TransactionCost" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="CalculationDate" ColumnName="CalculationDate" />
+                <ScalarProperty Name="BOH" ColumnName="BOH" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

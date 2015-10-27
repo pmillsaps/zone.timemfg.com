@@ -53,6 +53,9 @@
         <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketStatuses" />
         <AssociationConnector Association="TimeMFGModel.FK_TicketStatusHistory_TicketStatuses" />
         <EntityTypeShape EntityType="TimeMFGModel.Message_Type" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.MSMQ_Status" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.NLog_Entries" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.ValuedInventory" Width="1.5" PointX="14.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

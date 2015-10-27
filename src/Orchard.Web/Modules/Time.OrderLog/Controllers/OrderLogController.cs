@@ -88,7 +88,7 @@ namespace Time.OrderLog.Controllers
         // GET: /OrderLog/Details/5
         public ActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -127,7 +127,7 @@ namespace Time.OrderLog.Controllers
             if (ModelState.IsValid)
             {
                 var dealer = db.Dealers.FirstOrDefault(x => x.DealerId == order.DealerId);
-                if ((order.TerritoryId == null || order.TerritoryId == 0) && dealer != null) order.TerritoryId = dealer.TerritoryId;
+                if ((order.TerritoryId == 0) && dealer != null) order.TerritoryId = dealer.TerritoryId;
                 order.Date = DateTime.Now;
                 db.Orders.Add(order);
                 db.SaveChanges();
@@ -169,7 +169,7 @@ namespace Time.OrderLog.Controllers
             if (ModelState.IsValid)
             {
                 var dealer = db.Dealers.FirstOrDefault(x => x.DealerId == order.DealerId);
-                if (order.TerritoryId == null && dealer != null) order.TerritoryId = dealer.TerritoryId;
+                if (order.TerritoryId == 0 && dealer != null) order.TerritoryId = dealer.TerritoryId;
                 var foo = ViewBag.returnUrl;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();

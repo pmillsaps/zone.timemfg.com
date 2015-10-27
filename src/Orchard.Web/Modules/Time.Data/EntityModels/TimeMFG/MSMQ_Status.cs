@@ -7,23 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Data.EntityModels.ITInventory
+namespace Time.Data.EntityModels.TimeMFG
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Ref_Model
+    public partial class MSMQ_Status
     {
-        public Ref_Model()
-        {
-            this.Computers = new HashSet<Computer>();
-        }
-    
-        public int ID { get; set; }
-        public string Model { get; set; }
-        public Nullable<int> ManufacturerId { get; set; }
-    
-        public virtual ICollection<Computer> Computers { get; set; }
-        public virtual Ref_Manufacturer Ref_Manufacturer { get; set; }
+        public string ProcessID { get; set; }
+        public string Status { get; set; }
+        public int PID { get; set; }
     }
 }
