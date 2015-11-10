@@ -36,5 +36,10 @@ namespace Time.Data.EntityModels.Configurator
         public virtual DbSet<GlobalLift> GlobalLifts { get; set; }
         public virtual DbSet<PartOverride> PartOverrides { get; set; }
         public virtual DbSet<ConfigOption> ConfigOptions { get; set; }
+        public virtual DbSet<SpecialConfig> SpecialConfigs { get; set; }
+        public virtual DbSet<SpecialCustomer> SpecialCustomers { get; set; }
+        public virtual DbSet<SpecialData> SpecialDatas { get; set; }
+        public virtual DbSet<SpecialDataType> SpecialDataTypes { get; set; }
+        public virtual DbSet<SpecialRelatedOp> SpecialRelatedOps { get; set; }
     }
 }

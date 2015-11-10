@@ -152,6 +152,21 @@
     <Compile Include="EntityModels\Configurator\PartOverride.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialConfig.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialCustomer.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialData.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialDataType.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialRelatedOp.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Configurator\Structure.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>

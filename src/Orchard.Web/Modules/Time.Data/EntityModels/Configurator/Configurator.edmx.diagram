@@ -18,6 +18,15 @@
         <EntityTypeShape EntityType="ConfiguratorModel.GlobalLift" Width="1.5" PointX="0.5" PointY="2.125" />
         <EntityTypeShape EntityType="ConfiguratorModel.PartOverride" Width="1.5" PointX="2.375" PointY="2.375" />
         <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption" Width="1.5" PointX="13" PointY="0.875" />
+        <EntityTypeShape EntityType="ConfiguratorModel.SpecialConfig" Width="1.5" PointX="3.25" PointY="4.875" />
+        <EntityTypeShape EntityType="ConfiguratorModel.SpecialCustomer" Width="1.5" PointX="1" PointY="5.125" />
+        <EntityTypeShape EntityType="ConfiguratorModel.SpecialData" Width="1.5" PointX="5.625" PointY="3.75" />
+        <EntityTypeShape EntityType="ConfiguratorModel.SpecialDataType" Width="1.5" PointX="7.875" PointY="5.125" />
+        <EntityTypeShape EntityType="ConfiguratorModel.SpecialRelatedOp" Width="1.5" PointX="10.125" PointY="5.875" />
+        <AssociationConnector Association="ConfiguratorModel.FK_SpecialConfig_SpecialCustomer" />
+        <AssociationConnector Association="ConfiguratorModel.FK_SpecialData_SpecialConfig" />
+        <AssociationConnector Association="ConfiguratorModel.FK_SpecialData_SpecialDataType" />
+        <AssociationConnector Association="ConfiguratorModel.FK_SpecialData_SpecialRelatedOp" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

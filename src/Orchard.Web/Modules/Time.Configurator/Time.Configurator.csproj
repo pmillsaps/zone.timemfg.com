@@ -166,6 +166,21 @@
     <Content Include="Views\PartOverrides\Edit.cshtml" />
     <Content Include="Views\PartOverrides\Index.cshtml" />
     <Content Include="Views\ComplexStructures\_CriteriaDescriptions.cshtml" />
+    <Content Include="Views\SpecialCustomers\Create.cshtml" />
+    <Content Include="Views\SpecialCustomers\Delete.cshtml" />
+    <Content Include="Views\SpecialCustomers\Details.cshtml" />
+    <Content Include="Views\SpecialCustomers\Edit.cshtml" />
+    <Content Include="Views\SpecialCustomers\Index.cshtml" />
+    <Content Include="Views\SpecialConfigs\Create.cshtml" />
+    <Content Include="Views\SpecialConfigs\Delete.cshtml" />
+    <Content Include="Views\SpecialConfigs\Details.cshtml" />
+    <Content Include="Views\SpecialConfigs\Edit.cshtml" />
+    <Content Include="Views\SpecialConfigs\Index.cshtml" />
+    <Content Include="Views\SpecialDatas\Create.cshtml" />
+    <Content Include="Views\SpecialDatas\Delete.cshtml" />
+    <Content Include="Views\SpecialDatas\Details.cshtml" />
+    <Content Include="Views\SpecialDatas\Edit.cshtml" />
+    <Content Include="Views\SpecialDatas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -189,6 +204,9 @@
     <Compile Include="Controllers\ConfigPricingController.cs" />
     <Compile Include="Controllers\ConfiguratorController.cs" />
     <Compile Include="Controllers\PartOverridesController.cs" />
+    <Compile Include="Controllers\SpecialConfigsController.cs" />
+    <Compile Include="Controllers\SpecialCustomersController.cs" />
+    <Compile Include="Controllers\SpecialDatasController.cs" />
     <Compile Include="Controllers\StructureController.cs" />
     <Compile Include="Controllers\StructureSeqController.cs" />
     <Compile Include="Helpers\ExporttoExcelResult.cs" />

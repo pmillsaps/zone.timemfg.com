@@ -26,6 +26,7 @@ namespace Time.Data.EntityModels.Configurator
         public string Data { get; set; }
         public bool PickDefault { get; set; }
         public bool Inactive { get; set; }
+        public string Description { get; set; }
     
         public virtual ICollection<ComplexLink> ComplexLinks { get; set; }
     }
