@@ -83,6 +83,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EntityModels\Production\ProductionModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+      <LastGenOutput>ProductionModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Production\ProductionModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+      <LastGenOutput>ProductionModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -386,6 +396,27 @@
     <Compile Include="EntityModels\OrderLog\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\Part.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\ProductionModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\ProductionModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\ProductionModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\LoadList.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
@@ -637,6 +668,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Configurator.edmx</DependentUpon>
       <LastGenOutput>Configurator.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Production\ProductionModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductionModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Production\ProductionModel.edmx.diagram">
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
     <Content Include="Views\_ViewStart.cshtml" />

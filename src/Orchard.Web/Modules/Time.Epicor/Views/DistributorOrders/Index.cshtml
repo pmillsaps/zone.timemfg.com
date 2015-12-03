@@ -1,7 +1,35 @@
-﻿@{
-    ViewBag.Title = "Distributor Orders";
+﻿@model Time.Epicor.ViewModels.DistributorOrderListVM
+
+@{
+    ViewBag.Title = "Distributor Order List";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title (@Model.Orders.Count() records)</h2>
 
-<h4>Not Yet Implemented</h4>
+@using (Html.BeginForm("Index", "DistributorOrders", FormMethod.Post, new { id = "DistributorSearch" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-8">
+        @{Html.RenderAction("_DistributorList", new { id = Model.Distributor });
+        }
+    </div>
+
+    <div class="col-md-2">
+        <input type="submit" value="Search" />
+    </div>
+
+}
+
+<br />
+
+@Html.Partial("_DistributorOrderList", Model.Orders)
+
+@section Scripts {
+    <script language="javascript">
+        $(function () {
+            $('#Distributor').change(function () {
+                $('#DistributorSearch').submit();
+            });
+        });
+    </script>
+}

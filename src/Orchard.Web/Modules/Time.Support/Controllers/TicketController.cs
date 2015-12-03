@@ -495,6 +495,51 @@ namespace Time.Support.Controllers
             return RedirectToAction("Info", new { id });
         }
 
+        [HttpPost]
+        public ActionResult AddNote(int TicketId, string TicketNote, int TicketVisibility, FormCollection collection)
+        {
+            if (String.IsNullOrEmpty(TicketNote))
+            {
+                ModelState.AddModelError("Note", "something here maybe?");
+                TempData["tempMessage"] = "The Note can not be empty";
+                return RedirectToAction("Info", new { id = TicketId });
+            }
+            else
+            {
+                try
+                {
+                    // TODO: Add insert logic here
+
+                    var note = new TicketNote();
+                    note.CreatedDate = DateTime.Now;
+                    // note.Visibility = vm.TicketVisibility;
+                    note.Note = collection["Note"];
+                    note.CreatedBy = User.Identity.Name;
+                    if (String.IsNullOrEmpty(note.Note))
+                    {
+                        ModelState.AddModelError("Note", "something here maybe?");
+                        throw new Exception("The Note can not be empty");
+                    }
+                    var ticket = _db.TicketProjects.Single(c => c.TicketID == TicketId);
+
+                    ticket.TicketNotes.Add(note);
+                    _db.SaveChanges();
+
+                    //note.SendUpdateNotification();
+
+                    return RedirectToAction("Info", new { id = TicketId });
+                }
+                catch (Exception err)
+                {
+                    TempData["error"] = "Opps...We had a problem";
+                    ErrorTools.SendEmail(Request.Url, err, User.Identity.Name);
+                    return RedirectToAction("Info", new { id = TicketId });
+                }
+            }
+
+            return RedirectToAction("Info", new { id = TicketId });
+        }
+
         #region TicketTasks
 
         // GET: TicketTasks

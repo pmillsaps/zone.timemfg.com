@@ -180,6 +180,9 @@
     <Content Include="Views\Home\ProblemJobs.cshtml" />
     <Content Include="Views\Index2.cshtml" />
     <Content Include="Views\ValuedInventory\Index.cshtml" />
+    <Content Include="Views\DistributorOrders\_DistributorOrderList.cshtml" />
+    <Content Include="Views\DistributorOrders\_DistributorList.cshtml" />
+    <Content Include="Views\DisplayTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -215,6 +218,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="ViewModels\AddLiftViewModel.cs" />
     <Compile Include="ViewModels\AsmInspectViewModel.cs" />
+    <Compile Include="ViewModels\DistributorOrderListVM.cs" />
     <Compile Include="ViewModels\EmailLoadListVM.cs" />
     <Compile Include="ViewModels\EpicorStatusViewModel.cs" />
     <Compile Include="ViewModels\IMViewModel.cs" />
