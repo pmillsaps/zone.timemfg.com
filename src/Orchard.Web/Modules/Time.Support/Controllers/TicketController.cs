@@ -117,10 +117,10 @@ namespace Time.Support.Controllers
 
         public ActionResult Info(int id)
         {
-            var qry = _db.TicketProjects.Where(c => c.TicketID == id).FirstOrDefault();
+            var qry = _db.TicketProjects.FirstOrDefault(c => c.TicketID == id);
             if (qry == null) return RedirectToAction("Index");
 
-            var vm = new TicketViewModel() { Ticket = qry, Tasks = qry.TicketTasks };
+            var vm = new TicketViewModel() { Ticket = qry, Tasks = qry.TicketTasks, TicketId = id };
             if (Services.Authorizer.Authorize(Permissions.SupportAdmin))
             {
                 vm.Admin = true;
@@ -408,8 +408,8 @@ namespace Time.Support.Controllers
         {
             ViewBag.CategoryID = new SelectList(_db.TicketCategories.OrderBy(x => x.Name), "CategoryID", "Name");
             ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name");
-            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "LastName");
-            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "LastName");
+            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "FullName");
+            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "FullName");
             ViewBag.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name");
             ViewBag.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name");
         }
@@ -418,8 +418,8 @@ namespace Time.Support.Controllers
         {
             ViewBag.CategoryID = new SelectList(_db.TicketCategories, "CategoryID", "Name", ticketProject.CategoryID);
             ViewBag.DepartmentID = new SelectList(_db.TicketDepartments, "DepartmentID", "Name", ticketProject.DepartmentID);
-            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName", ticketProject.AssignedEmployeeID);
-            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName", ticketProject.ResourceEmployeeID);
+            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
+            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
             ViewBag.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name", ticketProject.PriorityID);
             ViewBag.Status = new SelectList(_db.TicketStatuses, "StatusID", "Name", ticketProject.Status);
         }
@@ -428,8 +428,8 @@ namespace Time.Support.Controllers
         {
             vm.CategoryID = new SelectList(_db.TicketCategories, "CategoryID", "Name");
             vm.DepartmentID = new SelectList(_db.TicketDepartments, "DepartmentID", "Name");
-            vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName");
-            vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "LastName");
+            vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName");
+            vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName");
             vm.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name");
             vm.Status = new SelectList(_db.TicketStatuses, "StatusID", "Name");
         }
@@ -444,6 +444,8 @@ namespace Time.Support.Controllers
             vm.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name", ticketProject.Status);
 
             vm.TicketVisibility = new SelectList(_db.TicketVisibilities.OrderByDescending(x => x.Id), "Id", "Name");
+
+            GenerateDropDowns(ticketProject);
         }
 
         [HttpGet]
@@ -510,20 +512,26 @@ namespace Time.Support.Controllers
                 {
                     // TODO: Add insert logic here
 
-                    var note = new TicketNote();
-                    note.CreatedDate = DateTime.Now;
-                    // note.Visibility = vm.TicketVisibility;
-                    note.Note = collection["Note"];
-                    note.CreatedBy = User.Identity.Name;
+                    var note = new Time.Data.EntityModels.TimeMFG.TicketNote()
+                    {
+                        CreatedDate = DateTime.Now,
+                        Visibility = TicketVisibility,
+                        Note = TicketNote,
+                        CreatedBy = User.Identity.Name
+                    };
                     if (String.IsNullOrEmpty(note.Note))
                     {
                         ModelState.AddModelError("Note", "something here maybe?");
                         throw new Exception("The Note can not be empty");
                     }
-                    var ticket = _db.TicketProjects.Single(c => c.TicketID == TicketId);
 
-                    ticket.TicketNotes.Add(note);
-                    _db.SaveChanges();
+                    var ticket = _db.TicketProjects.FirstOrDefault(c => c.TicketID == TicketId);
+                    if (ticket != null)
+                    {
+                        ticket.TicketNotes.Add(note);
+                        _db.SaveChanges();
+                        note.SendUpdateNotification();
+                    }
 
                     //note.SendUpdateNotification();
 
@@ -536,8 +544,6 @@ namespace Time.Support.Controllers
                     return RedirectToAction("Info", new { id = TicketId });
                 }
             }
-
-            return RedirectToAction("Info", new { id = TicketId });
         }
 
         #region TicketTasks

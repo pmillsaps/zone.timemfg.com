@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="ConfiguratorModel.ComplexLookup" Width="1.5" PointX="10.5" PointY="0.5" />
         <AssociationConnector Association="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" />
         <AssociationConnector Association="ConfiguratorModel.FK_ComplexLinks_Lookup" />
-        <EntityTypeShape EntityType="ConfiguratorModel.GlobalLift" Width="1.5" PointX="0.5" PointY="2.125" />
         <EntityTypeShape EntityType="ConfiguratorModel.PartOverride" Width="1.5" PointX="2.375" PointY="2.375" />
         <EntityTypeShape EntityType="ConfiguratorModel.ConfigOption" Width="1.5" PointX="13" PointY="0.875" />
         <EntityTypeShape EntityType="ConfiguratorModel.SpecialConfig" Width="1.5" PointX="3.25" PointY="4.875" />

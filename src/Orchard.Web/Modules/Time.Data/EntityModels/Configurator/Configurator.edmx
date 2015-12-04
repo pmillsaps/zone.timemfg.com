@@ -22,6 +22,7 @@
           <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ConfigData" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LookupData" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Verified" Type="bit" />
           <Property Name="Hold" Type="bit" />
           <Property Name="LookupDataHold" Type="nvarchar" MaxLength="300" />
         </EntityType>
@@ -75,18 +76,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ConfigName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="GlobalLift">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Lift" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Part" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="Price" Type="money" />
-          <Property Name="UCOM" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="PCOM" Type="nvarchar" MaxLength="5" />
-          <Property Name="Inactive" Type="tinyint" />
-        </EntityType>
         <EntityType Name="Lookup">
           <Key>
             <PropertyRef Name="Id" />
@@ -113,7 +102,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SpecialCustomerId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SpecialCustomer">
           <Key>
@@ -265,7 +255,6 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           <EntitySet Name="ConfigOption" EntityType="Self.ConfigOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigPricing" EntityType="Self.ConfigPricing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfiguratorName" EntityType="Self.ConfiguratorName" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GlobalLift" EntityType="Self.GlobalLift" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartOverride" EntityType="Self.PartOverride" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialConfig" EntityType="Self.SpecialConfig" Schema="dbo" store:Type="Tables" />
@@ -359,7 +348,6 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
             <End Role="Lookup" EntitySet="Lookups" />
             <End Role="ComplexLink" EntitySet="ComplexLinks" />
           </AssociationSet>
-          <EntitySet Name="GlobalLifts" EntityType="ConfiguratorModel.GlobalLift" />
           <EntitySet Name="PartOverrides" EntityType="ConfiguratorModel.PartOverride" />
           <EntitySet Name="ConfigOptions" EntityType="ConfiguratorModel.ConfigOption" />
           <EntitySet Name="SpecialConfigs" EntityType="ConfiguratorModel.SpecialConfig" />
@@ -432,6 +420,7 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           <NavigationProperty Name="ComplexLinks" Relationship="ConfiguratorModel.FK_ComplexLinks_ComplexLookup" FromRole="ComplexLookup" ToRole="ComplexLink" />
           <Property Name="Hold" Type="Boolean" />
           <Property Name="LookupDataHold" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Verified" Type="Boolean" />
         </EntityType>
         <Association Name="FK_ComplexLinks_ComplexLookup">
           <End Type="ConfiguratorModel.ComplexLookup" Role="ComplexLookup" Multiplicity="1">
@@ -459,18 +448,6 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="GlobalLift">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Lift" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Part" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="UCOM" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="PCOM" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="Inactive" Type="Byte" />
-        </EntityType>
         <EntityType Name="PartOverride">
           <Key>
             <PropertyRef Name="PartNum" />
@@ -505,9 +482,10 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SpecialCustomerId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SpecialCustomer" Relationship="ConfiguratorModel.FK_SpecialConfig_SpecialCustomer" FromRole="SpecialConfig" ToRole="SpecialCustomer" />
           <NavigationProperty Name="SpecialDatas" Relationship="ConfiguratorModel.FK_SpecialData_SpecialConfig" FromRole="SpecialConfig" ToRole="SpecialData" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SpecialCustomer">
           <Key>
@@ -683,24 +661,12 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           <EntitySetMapping Name="ComplexLookups">
             <EntityTypeMapping TypeName="ConfiguratorModel.ComplexLookup">
               <MappingFragment StoreEntitySet="ComplexLookup">
+                <ScalarProperty Name="Verified" ColumnName="Verified" />
                 <ScalarProperty Name="LookupDataHold" ColumnName="LookupDataHold" />
                 <ScalarProperty Name="Hold" ColumnName="Hold" />
                 <ScalarProperty Name="LookupData" ColumnName="LookupData" />
                 <ScalarProperty Name="ConfigData" ColumnName="ConfigData" />
                 <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GlobalLifts">
-            <EntityTypeMapping TypeName="ConfiguratorModel.GlobalLift">
-              <MappingFragment StoreEntitySet="GlobalLift">
-                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
-                <ScalarProperty Name="PCOM" ColumnName="PCOM" />
-                <ScalarProperty Name="UCOM" ColumnName="UCOM" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Part" ColumnName="Part" />
-                <ScalarProperty Name="Lift" ColumnName="Lift" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -738,6 +704,7 @@ warning 6035: The relationship 'FK_StructureSeq_Structure' has columns that are 
           <EntitySetMapping Name="SpecialConfigs">
             <EntityTypeMapping TypeName="ConfiguratorModel.SpecialConfig">
               <MappingFragment StoreEntitySet="SpecialConfig">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SpecialCustomerId" ColumnName="SpecialCustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

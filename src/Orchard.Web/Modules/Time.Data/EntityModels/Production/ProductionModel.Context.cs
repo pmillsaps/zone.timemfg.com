@@ -27,5 +27,10 @@ namespace Time.Data.EntityModels.Production
     
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<V_DistributorOrderList> V_DistributorOrderList { get; set; }
+        public virtual DbSet<SysTask> SysTasks { get; set; }
+        public virtual DbSet<SysAgentTask> SysAgentTasks { get; set; }
+        public virtual DbSet<IMJobOper> IMJobOpers { get; set; }
+        public virtual DbSet<IMPartBin> IMPartBins { get; set; }
+        public virtual DbSet<SysAgentSched> SysAgentScheds { get; set; }
     }
 }

@@ -115,5 +115,60 @@ namespace Time.Support.Helpers
                 }
             }
         }
+
+        public static void SendUpdateNotification(this TicketProject ticket, string statusMessage = "")
+        {
+            if (ticket.RequestedBy.Contains("TIME\\") || ticket.RequestedBy.Contains("TIMEMFG\\") || ticket.RequestedBy.Contains("VERSALIFTSOUTHW\\"))
+            {
+                try
+                {
+                    var msg = new UpdateNotification(ticket, ticket.RequestedBy, statusMessage);
+                    msg.SendEmail();
+                }
+                catch (Exception err)
+                {
+                    ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                               System.Web.HttpContext.Current.User.Identity.Name);
+                    Debug.Print(err.Message);
+                }
+            }
+        }
+
+        public static void SendUpdateNotificationToAssigned(this TicketProject ticket, string statusMessage = "")
+        {
+            if (ticket.TicketEmployee != null)
+            {
+                if (ticket.TicketEmployee.NTLogin.Contains("TIME\\") || ticket.TicketEmployee.NTLogin.Contains("TIMEMFG\\") || ticket.TicketEmployee.NTLogin.Contains("VERSALIFTSOUTHW\\"))
+                {
+                    try
+                    {
+                        var msg = new UpdateNotification(ticket, ticket.TicketEmployee.NTLogin, statusMessage, ticket.TicketEmployee.EmailName);
+                        msg.SendEmail();
+                    }
+                    catch (Exception err)
+                    {
+                        ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                                   System.Web.HttpContext.Current.User.Identity.Name);
+                        Debug.Print(err.Message);
+                    }
+                }
+            }
+        }
+
+        #region TicketNotes
+
+        public static void SendUpdateNotification(this TicketNote note)
+        {
+            //if (!note.TicketProjectsReference.IsLoaded)
+            //    note.TicketProjectsReference.Load();
+            //if (!note.TicketProject.TicketEmployeesReference.IsLoaded)
+            //    note.TicketProject.TicketEmployeesReference.Load();
+            if (note.Visibility > 3 && note.CreatedBy != note.TicketProject.RequestedBy)
+                SendUpdateNotification(note.TicketProject, note.Note);
+            if (note.TicketProject.TicketEmployee != null && note.Visibility > 3 && note.CreatedBy != note.TicketProject.TicketEmployee.NTLogin)
+                SendUpdateNotificationToAssigned(note.TicketProject, note.Note);
+        }
+
+        #endregion TicketNotes
     }
 }

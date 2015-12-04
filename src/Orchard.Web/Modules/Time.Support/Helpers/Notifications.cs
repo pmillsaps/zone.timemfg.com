@@ -427,6 +427,16 @@ namespace Time.Support.Helpers
             if (!String.IsNullOrEmpty(statusMessage)) Additionalbody = statusMessage;
         }
 
+        public UpdateNotification(TicketProject ticket, string userName, string statusMessage = "", string defaultEmail = "")
+           : base(ticket, statusMessage)
+        {
+            var e = GetEmailforNTUser(userName);
+            SendTo.Add(e);
+            if (!String.IsNullOrEmpty(defaultEmail)) SendTo.Add(defaultEmail);
+            // Additionalbody = note.Note;
+            if (!String.IsNullOrEmpty(statusMessage)) Additionalbody = statusMessage;
+        }
+
         public override void SetupEmail()
         {
             TemplatePath = HttpContext.Current.Server.MapPath(@"~/Modules/Time.Support/Content/EmailTemplates/UpdateNotification.htm");

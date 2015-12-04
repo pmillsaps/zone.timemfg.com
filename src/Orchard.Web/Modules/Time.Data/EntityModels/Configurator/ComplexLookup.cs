@@ -25,6 +25,7 @@ namespace Time.Data.EntityModels.Configurator
         public string LookupData { get; set; }
         public Nullable<bool> Hold { get; set; }
         public string LookupDataHold { get; set; }
+        public Nullable<bool> Verified { get; set; }
     
         public virtual ICollection<ComplexLink> ComplexLinks { get; set; }
     }

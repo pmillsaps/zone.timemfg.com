@@ -5,8 +5,308 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ProductionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SysAgentSched">
+          <Key>
+            <PropertyRef Name="AgentID" />
+            <PropertyRef Name="AgentSchedNum" />
+          </Key>
+          <Property Name="AgentID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AgentSchedNum" Type="int" Nullable="false" />
+          <Property Name="SchedDesc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchedType" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="NextRunOn" Type="datetime" />
+          <Property Name="Recurrences" Type="int" Nullable="false" />
+          <Property Name="EffectiveDate" Type="date" />
+          <Property Name="MonthlyOption" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="DayOfMonth" Type="int" Nullable="false" />
+          <Property Name="WeekOfMonth" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="DayOfWeek" Type="int" Nullable="false" />
+          <Property Name="EveryNWeeks" Type="int" Nullable="false" />
+          <Property Name="LastRunOn" Type="datetime" />
+          <Property Name="Mondays" Type="bit" Nullable="false" />
+          <Property Name="Tuesdays" Type="bit" Nullable="false" />
+          <Property Name="Wednesdays" Type="bit" Nullable="false" />
+          <Property Name="Thursdays" Type="bit" Nullable="false" />
+          <Property Name="Fridays" Type="bit" Nullable="false" />
+          <Property Name="Saturdays" Type="bit" Nullable="false" />
+          <Property Name="Sundays" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="AppSrvConnectionID" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IntervalTime" Type="int" Nullable="false" />
+          <Property Name="SecCode" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysAgentTask">
+          <Key>
+            <PropertyRef Name="AgentID" />
+            <PropertyRef Name="AgentSchedNum" />
+            <PropertyRef Name="AgentTaskNum" />
+          </Key>
+          <Property Name="AgentID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AgentSchedNum" Type="int" Nullable="false" />
+          <Property Name="AgentTaskNum" Type="int" Nullable="false" />
+          <Property Name="TaskDesc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="RunProcedure" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RunMethod" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SubmittedOn" Type="datetime" />
+          <Property Name="SubmitUser" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="ParamMaintProgram" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="TaskNote" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="ProcessSetSystemCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ProcessID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProcessTaskNum" Type="int" Nullable="false" />
+          <Property Name="IsSystemTask" Type="bit" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysTask">
+          <Key>
+            <PropertyRef Name="SysTaskNum" />
+          </Key>
+          <Property Name="SysTaskNum" Type="int" Nullable="false" />
+          <Property Name="TaskDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="StartedOn" Type="datetime" />
+          <Property Name="EndedOn" Type="datetime" />
+          <Property Name="SubmitUser" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="TaskStatus" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="AgentID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AgentSchedNum" Type="int" Nullable="false" />
+          <Property Name="AgentTaskNum" Type="int" Nullable="false" />
+          <Property Name="RunProcedure" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="InitiatorSource" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ActivityMsg" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="History" Type="bit" Nullable="false" />
+          <Property Name="TaskNote" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="LastActivityOn" Type="datetime" />
+          <Property Name="UserPIDInfo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProcessID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsSystemTask" Type="bit" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IMJobOper">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="IntQueID" Type="int" Nullable="false" />
+          <Property Name="IncomingOutgoing" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IntStatus" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IntError" Type="bit" Nullable="false" />
+          <Property Name="IntComplete" Type="bit" Nullable="false" />
+          <Property Name="IntSysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IntLastUpdated" Type="datetime" />
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="JobComplete" Type="bit" Nullable="false" />
+          <Property Name="OpComplete" Type="bit" Nullable="false" />
+          <Property Name="JobNum" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="AssemblySeq" Type="int" Nullable="false" />
+          <Property Name="OprSeq" Type="int" Nullable="false" />
+          <Property Name="OpCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="OpStdID" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="EstSetHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="EstProdHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ProdStandard" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="StdFormat" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="StdBasis" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="OpsPerPart" Type="int" Nullable="false" />
+          <Property Name="QtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="QueStartDate" Type="date" />
+          <Property Name="QueStartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="StartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="DueDate" Type="date" />
+          <Property Name="DueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="MoveDueDate" Type="date" />
+          <Property Name="MoveDueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ProdLabRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="SetupLabRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="ProdBurRate" Type="decimal" Precision="17" Scale="6" Nullable="false" />
+          <Property Name="SetupBurRate" Type="decimal" Precision="17" Scale="6" Nullable="false" />
+          <Property Name="AddedOper" Type="bit" Nullable="false" />
+          <Property Name="Machines" Type="int" Nullable="false" />
+          <Property Name="SetUpCrewSize" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ProdCrewSize" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ProdComplete" Type="bit" Nullable="false" />
+          <Property Name="SetupComplete" Type="bit" Nullable="false" />
+          <Property Name="ActProdHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ActProdRwkHours" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="ActSetupHours" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="ActSetupRwkHours" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="QtyCompleted" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SetupPctComplete" Type="int" Nullable="false" />
+          <Property Name="EstScrap" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="EstScrapType" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="SubContract" Type="bit" Nullable="false" />
+          <Property Name="IUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="EstUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DaysOut" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VendorNum" Type="int" Nullable="false" />
+          <Property Name="PurPoint" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CommentText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SchedRelation" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="RunQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="WIName" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="WIMachines" Type="int" Nullable="false" />
+          <Property Name="WIQueStartDate" Type="date" />
+          <Property Name="WIQueStartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIStartDate" Type="date" />
+          <Property Name="WIStartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIDueDate" Type="date" />
+          <Property Name="WIDueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIMoveDueDate" Type="date" />
+          <Property Name="WIMoveDueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIHoursPerMachine" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WILoadDate" Type="date" />
+          <Property Name="WILoadHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ActBurCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="ActLabCost" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ReworkBurCost" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="ReworkLabCost" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="MiscAmt" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="HoursPerMachine" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="LoadDate" Type="date" />
+          <Property Name="LoadHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ReloadNum" Type="int" Nullable="false" />
+          <Property Name="SndAlrtCmpl" Type="bit" Nullable="false" />
+          <Property Name="RcvInspectionReq" Type="bit" Nullable="false" />
+          <Property Name="JobEngineered" Type="bit" Nullable="false" />
+          <Property Name="EstSetHoursPerMch" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="AutoReceiptDate" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="LastLaborDate" Type="date" />
+          <Property Name="CallNum" Type="int" Nullable="false" />
+          <Property Name="CallLine" Type="int" Nullable="false" />
+          <Property Name="LaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="BillableLaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="DocLaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="DocBillableLaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Billable" Type="bit" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocBillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="LaborEntryMethod" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="PricePerCode" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="FAQty" Type="decimal" Precision="14" Scale="8" Nullable="false" />
+          <Property Name="QtyStagedToDate" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="RFQNeeded" Type="bit" Nullable="false" />
+          <Property Name="RFQVendQuotes" Type="int" Nullable="false" />
+          <Property Name="RFQNum" Type="int" Nullable="false" />
+          <Property Name="RFQLine" Type="int" Nullable="false" />
+          <Property Name="RFQStat" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="SetupGroup" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="RestoreFlag" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="AnalysisCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PrimarySetupOpDtl" Type="int" Nullable="false" />
+          <Property Name="PrimaryProdOpDtl" Type="int" Nullable="false" />
+          <Property Name="OpDesc" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="KitDate" Type="date" />
+          <Property Name="GlbRFQ" Type="bit" Nullable="false" />
+          <Property Name="BookedUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="RecalcExpProdYld" Type="bit" Nullable="false" />
+          <Property Name="UserMapData" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoughCutSched" Type="bit" Nullable="false" />
+          <Property Name="SchedComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rpt1BillableLaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Rpt2BillableLaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Rpt3BillableLaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Rpt1BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1LaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Rpt2LaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Rpt3LaborRate" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="Rpt1UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="SNRequiredOpr" Type="bit" Nullable="false" />
+          <Property Name="SNRequiredSubConShip" Type="bit" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="WeightUOM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="SendAheadType" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="SendAheadOffset" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PrjRoleList" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TearDwnEndDate" Type="date" />
+          <Property Name="TearDwnEndHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WITearDwnEndDate" Type="date" />
+          <Property Name="WITearDwnEndHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="UseAllRoles" Type="bit" Nullable="false" />
+          <Property Name="AssetPartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="ActualStartDate" Type="date" />
+          <Property Name="ActualStartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="ActualEndDate" Type="date" />
+          <Property Name="ActualEndHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="FSJobStatus" Type="int" Nullable="false" />
+          <Property Name="Instructions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProdUOM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="GeneralPlanInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EstStdDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JDFOpCompleted" Type="bit" Nullable="false" />
+          <Property Name="RemovedfromPlan" Type="bit" Nullable="false" />
+          <Property Name="EstStdType" Type="int" Nullable="false" />
+          <Property Name="ExternalMES" Type="bit" Nullable="false" />
+          <Property Name="PctReg" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="SetupMaterial" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="MaterialColorRating" Type="int" Nullable="false" />
+          <Property Name="MiscInfo1" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MiscInfo2" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SetupURL" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ExpPctUp" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="ExpCycTm" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="ExpGood" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="NonProdLimit" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="AutoSpcEnable" Type="bit" Nullable="false" />
+          <Property Name="AutoSpcPeriod" Type="int" Nullable="false" />
+          <Property Name="PartQualEnable" Type="bit" Nullable="false" />
+          <Property Name="AutoSpcSubgroup" Type="int" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MobileOperation" Type="bit" Nullable="false" />
+          <Property Name="ReWork" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IMPartBin">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="IntQueID" Type="int" Nullable="false" />
+          <Property Name="IncomingOutgoing" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IntStatus" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IntError" Type="bit" Nullable="false" />
+          <Property Name="IntComplete" Type="bit" Nullable="false" />
+          <Property Name="IntSysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IntLastUpdated" Type="datetime" />
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="BinNum" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OnhandQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="LotNum" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DimCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="AllocatedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SalesAllocatedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SalesPickingQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SalesPickedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="JobAllocatedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="JobPickingQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="JobPickedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="TFOrdAllocatedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="TFOrdPickingQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="TFOrdPickedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="ShippingQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="PackedQty" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Production.dbo.Part' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Test.dbo.Part' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Part">
           <Key>
             <PropertyRef Name="Company" />
@@ -325,7 +625,7 @@ warning 6002: The table/view 'Production.dbo.Part' does not have a primary key d
           <Property Name="PartsPDF_c" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Production.dbo.V_DistributorOrderList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Test.dbo.V_DistributorOrderList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DistributorOrderList">
           <Key>
             <PropertyRef Name="OrderNum" />
@@ -354,6 +654,11 @@ warning 6002: The table/view 'Production.dbo.V_DistributorOrderList' does not ha
           <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ProductionModelStoreContainer">
+          <EntitySet Name="SysAgentSched" EntityType="Self.SysAgentSched" Schema="Ice" store:Type="Tables" />
+          <EntitySet Name="SysAgentTask" EntityType="Self.SysAgentTask" Schema="Ice" store:Type="Tables" />
+          <EntitySet Name="SysTask" EntityType="Self.SysTask" Schema="Ice" store:Type="Tables" />
+          <EntitySet Name="IMJobOper" EntityType="Self.IMJobOper" Schema="IM" store:Type="Tables" />
+          <EntitySet Name="IMPartBin" EntityType="Self.IMPartBin" Schema="IM" store:Type="Tables" />
           <EntitySet Name="Part" EntityType="Self.Part" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Part].[Company] AS [Company], 
@@ -861,6 +1166,11 @@ warning 6002: The table/view 'Production.dbo.V_DistributorOrderList' does not ha
         <EntityContainer Name="ProductionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Parts" EntityType="Self.Part" />
           <EntitySet Name="V_DistributorOrderList" EntityType="ProductionModel.V_DistributorOrderList" />
+          <EntitySet Name="SysTasks" EntityType="ProductionModel.SysTask" />
+          <EntitySet Name="SysAgentTasks" EntityType="ProductionModel.SysAgentTask" />
+          <EntitySet Name="IMJobOpers" EntityType="ProductionModel.IMJobOper" />
+          <EntitySet Name="IMPartBins" EntityType="ProductionModel.IMPartBin" />
+          <EntitySet Name="SysAgentScheds" EntityType="ProductionModel.SysAgentSched" />
         </EntityContainer>
         <EntityType Name="V_DistributorOrderList">
           <Key>
@@ -887,6 +1197,306 @@ warning 6002: The table/view 'Production.dbo.V_DistributorOrderList' does not ha
           <Property Name="OrderQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
           <Property Name="OpenLine" Type="Boolean" Nullable="false" />
           <Property Name="ProdCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysTask">
+          <Key>
+            <PropertyRef Name="SysTaskNum" />
+          </Key>
+          <Property Name="SysTaskNum" Type="Int32" Nullable="false" />
+          <Property Name="TaskDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StartedOn" Type="DateTime" Precision="3" />
+          <Property Name="EndedOn" Type="DateTime" Precision="3" />
+          <Property Name="SubmitUser" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="TaskStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="AgentID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AgentSchedNum" Type="Int32" Nullable="false" />
+          <Property Name="AgentTaskNum" Type="Int32" Nullable="false" />
+          <Property Name="RunProcedure" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InitiatorSource" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityMsg" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="History" Type="Boolean" Nullable="false" />
+          <Property Name="TaskNote" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="LastActivityOn" Type="DateTime" Precision="3" />
+          <Property Name="UserPIDInfo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSystemTask" Type="Boolean" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysAgentTask">
+          <Key>
+            <PropertyRef Name="AgentID" />
+            <PropertyRef Name="AgentSchedNum" />
+            <PropertyRef Name="AgentTaskNum" />
+          </Key>
+          <Property Name="AgentID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AgentSchedNum" Type="Int32" Nullable="false" />
+          <Property Name="AgentTaskNum" Type="Int32" Nullable="false" />
+          <Property Name="TaskDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskType" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="RunProcedure" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RunMethod" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SubmittedOn" Type="DateTime" Precision="3" />
+          <Property Name="SubmitUser" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ParamMaintProgram" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="TaskNote" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessSetSystemCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessTaskNum" Type="Int32" Nullable="false" />
+          <Property Name="IsSystemTask" Type="Boolean" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IMJobOper">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="IntQueID" Type="Int32" Nullable="false" />
+          <Property Name="IncomingOutgoing" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IntStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IntError" Type="Boolean" Nullable="false" />
+          <Property Name="IntComplete" Type="Boolean" Nullable="false" />
+          <Property Name="IntSysRowID" Type="Guid" Nullable="false" />
+          <Property Name="IntLastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="JobComplete" Type="Boolean" Nullable="false" />
+          <Property Name="OpComplete" Type="Boolean" Nullable="false" />
+          <Property Name="JobNum" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="OprSeq" Type="Int32" Nullable="false" />
+          <Property Name="OpCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="OpStdID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="EstSetHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="EstProdHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ProdStandard" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="StdFormat" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="StdBasis" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="OpsPerPart" Type="Int32" Nullable="false" />
+          <Property Name="QtyPer" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="QueStartDate" Type="DateTime" Precision="0" />
+          <Property Name="QueStartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="StartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="DueDate" Type="DateTime" Precision="0" />
+          <Property Name="DueHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="MoveDueDate" Type="DateTime" Precision="0" />
+          <Property Name="MoveDueHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="ProdLabRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="SetupLabRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="ProdBurRate" Type="Decimal" Nullable="false" Precision="17" Scale="6" />
+          <Property Name="SetupBurRate" Type="Decimal" Nullable="false" Precision="17" Scale="6" />
+          <Property Name="AddedOper" Type="Boolean" Nullable="false" />
+          <Property Name="Machines" Type="Int32" Nullable="false" />
+          <Property Name="SetUpCrewSize" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="ProdCrewSize" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="ProdComplete" Type="Boolean" Nullable="false" />
+          <Property Name="SetupComplete" Type="Boolean" Nullable="false" />
+          <Property Name="ActProdHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ActProdRwkHours" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="ActSetupHours" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="ActSetupRwkHours" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="QtyCompleted" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="SetupPctComplete" Type="Int32" Nullable="false" />
+          <Property Name="EstScrap" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="EstScrapType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SubContract" Type="Boolean" Nullable="false" />
+          <Property Name="IUM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="EstUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="DaysOut" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VendorNum" Type="Int32" Nullable="false" />
+          <Property Name="PurPoint" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="CommentText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchedRelation" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="RunQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="WIName" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="WIMachines" Type="Int32" Nullable="false" />
+          <Property Name="WIQueStartDate" Type="DateTime" Precision="0" />
+          <Property Name="WIQueStartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WIStartDate" Type="DateTime" Precision="0" />
+          <Property Name="WIStartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WIDueDate" Type="DateTime" Precision="0" />
+          <Property Name="WIDueHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WIMoveDueDate" Type="DateTime" Precision="0" />
+          <Property Name="WIMoveDueHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WIHoursPerMachine" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WILoadDate" Type="DateTime" Precision="0" />
+          <Property Name="WILoadHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="ActBurCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="ActLabCost" Type="Decimal" Nullable="false" Precision="16" Scale="3" />
+          <Property Name="ReworkBurCost" Type="Decimal" Nullable="false" Precision="16" Scale="3" />
+          <Property Name="ReworkLabCost" Type="Decimal" Nullable="false" Precision="16" Scale="3" />
+          <Property Name="MiscAmt" Type="Decimal" Nullable="false" Precision="13" Scale="3" />
+          <Property Name="HoursPerMachine" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="LoadDate" Type="DateTime" Precision="0" />
+          <Property Name="LoadHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="ReloadNum" Type="Int32" Nullable="false" />
+          <Property Name="SndAlrtCmpl" Type="Boolean" Nullable="false" />
+          <Property Name="RcvInspectionReq" Type="Boolean" Nullable="false" />
+          <Property Name="JobEngineered" Type="Boolean" Nullable="false" />
+          <Property Name="EstSetHoursPerMch" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="RevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="AutoReceiptDate" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="LastLaborDate" Type="DateTime" Precision="0" />
+          <Property Name="CallNum" Type="Int32" Nullable="false" />
+          <Property Name="CallLine" Type="Int32" Nullable="false" />
+          <Property Name="LaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="BillableLaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="DocLaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="DocBillableLaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Billable" Type="Boolean" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="DocBillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="DocUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="LaborEntryMethod" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PricePerCode" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="FAQty" Type="Decimal" Nullable="false" Precision="14" Scale="8" />
+          <Property Name="QtyStagedToDate" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="RFQNeeded" Type="Boolean" Nullable="false" />
+          <Property Name="RFQVendQuotes" Type="Int32" Nullable="false" />
+          <Property Name="RFQNum" Type="Int32" Nullable="false" />
+          <Property Name="RFQLine" Type="Int32" Nullable="false" />
+          <Property Name="RFQStat" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SetupGroup" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="RestoreFlag" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="AnalysisCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PrimarySetupOpDtl" Type="Int32" Nullable="false" />
+          <Property Name="PrimaryProdOpDtl" Type="Int32" Nullable="false" />
+          <Property Name="OpDesc" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="KitDate" Type="DateTime" Precision="0" />
+          <Property Name="GlbRFQ" Type="Boolean" Nullable="false" />
+          <Property Name="BookedUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="RecalcExpProdYld" Type="Boolean" Nullable="false" />
+          <Property Name="UserMapData" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoughCutSched" Type="Boolean" Nullable="false" />
+          <Property Name="SchedComment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rpt1BillableLaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Rpt2BillableLaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Rpt3BillableLaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Rpt1BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt2BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt3BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt1LaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Rpt2LaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Rpt3LaborRate" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="Rpt1UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt2UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt3UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="SNRequiredOpr" Type="Boolean" Nullable="false" />
+          <Property Name="SNRequiredSubConShip" Type="Boolean" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="WeightUOM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="SendAheadType" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SendAheadOffset" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PrjRoleList" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TearDwnEndDate" Type="DateTime" Precision="0" />
+          <Property Name="TearDwnEndHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WITearDwnEndDate" Type="DateTime" Precision="0" />
+          <Property Name="WITearDwnEndHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="UseAllRoles" Type="Boolean" Nullable="false" />
+          <Property Name="AssetPartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ActualStartDate" Type="DateTime" Precision="0" />
+          <Property Name="ActualStartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="ActualEndDate" Type="DateTime" Precision="0" />
+          <Property Name="ActualEndHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="FSJobStatus" Type="Int32" Nullable="false" />
+          <Property Name="Instructions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProdUOM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="GeneralPlanInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EstStdDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JDFOpCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="RemovedfromPlan" Type="Boolean" Nullable="false" />
+          <Property Name="EstStdType" Type="Int32" Nullable="false" />
+          <Property Name="ExternalMES" Type="Boolean" Nullable="false" />
+          <Property Name="PctReg" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="SetupMaterial" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="MaterialColorRating" Type="Int32" Nullable="false" />
+          <Property Name="MiscInfo1" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MiscInfo2" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SetupURL" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ExpPctUp" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="ExpCycTm" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="ExpGood" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="NonProdLimit" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="AutoSpcEnable" Type="Boolean" Nullable="false" />
+          <Property Name="AutoSpcPeriod" Type="Int32" Nullable="false" />
+          <Property Name="PartQualEnable" Type="Boolean" Nullable="false" />
+          <Property Name="AutoSpcSubgroup" Type="Int32" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+          <Property Name="MobileOperation" Type="Boolean" Nullable="false" />
+          <Property Name="ReWork" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IMPartBin">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="IntQueID" Type="Int32" Nullable="false" />
+          <Property Name="IncomingOutgoing" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IntStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IntError" Type="Boolean" Nullable="false" />
+          <Property Name="IntComplete" Type="Boolean" Nullable="false" />
+          <Property Name="IntSysRowID" Type="Guid" Nullable="false" />
+          <Property Name="IntLastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WarehouseCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="BinNum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OnhandQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="LotNum" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DimCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="AllocatedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="SalesAllocatedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="SalesPickingQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="SalesPickedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="JobAllocatedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="JobPickingQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="JobPickedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="TFOrdAllocatedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="TFOrdPickingQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="TFOrdPickedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="ShippingQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="PackedQty" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysAgentSched">
+          <Key>
+            <PropertyRef Name="AgentID" />
+            <PropertyRef Name="AgentSchedNum" />
+          </Key>
+          <Property Name="AgentID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AgentSchedNum" Type="Int32" Nullable="false" />
+          <Property Name="SchedDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SchedType" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="NextRunOn" Type="DateTime" Precision="3" />
+          <Property Name="Recurrences" Type="Int32" Nullable="false" />
+          <Property Name="EffectiveDate" Type="DateTime" Precision="0" />
+          <Property Name="MonthlyOption" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="DayOfMonth" Type="Int32" Nullable="false" />
+          <Property Name="WeekOfMonth" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="DayOfWeek" Type="Int32" Nullable="false" />
+          <Property Name="EveryNWeeks" Type="Int32" Nullable="false" />
+          <Property Name="LastRunOn" Type="DateTime" Precision="3" />
+          <Property Name="Mondays" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesdays" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesdays" Type="Boolean" Nullable="false" />
+          <Property Name="Thursdays" Type="Boolean" Nullable="false" />
+          <Property Name="Fridays" Type="Boolean" Nullable="false" />
+          <Property Name="Saturdays" Type="Boolean" Nullable="false" />
+          <Property Name="Sundays" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="AppSrvConnectionID" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IntervalTime" Type="Int32" Nullable="false" />
+          <Property Name="SecCode" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="SysRowID" Type="Guid" Nullable="false" />
         </EntityType>
       </Schema>
@@ -1078,6 +1688,308 @@ warning 6002: The table/view 'Production.dbo.V_DistributorOrderList' does not ha
                 <ScalarProperty Name="CustNum" ColumnName="CustNum" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysTasks">
+            <EntityTypeMapping TypeName="ProductionModel.SysTask">
+              <MappingFragment StoreEntitySet="SysTask">
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="IsSystemTask" ColumnName="IsSystemTask" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="UserPIDInfo" ColumnName="UserPIDInfo" />
+                <ScalarProperty Name="LastActivityOn" ColumnName="LastActivityOn" />
+                <ScalarProperty Name="TaskNote" ColumnName="TaskNote" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="ActivityMsg" ColumnName="ActivityMsg" />
+                <ScalarProperty Name="InitiatorSource" ColumnName="InitiatorSource" />
+                <ScalarProperty Name="RunProcedure" ColumnName="RunProcedure" />
+                <ScalarProperty Name="AgentTaskNum" ColumnName="AgentTaskNum" />
+                <ScalarProperty Name="AgentSchedNum" ColumnName="AgentSchedNum" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+                <ScalarProperty Name="SubmitUser" ColumnName="SubmitUser" />
+                <ScalarProperty Name="EndedOn" ColumnName="EndedOn" />
+                <ScalarProperty Name="StartedOn" ColumnName="StartedOn" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="SysTaskNum" ColumnName="SysTaskNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysAgentTasks">
+            <EntityTypeMapping TypeName="ProductionModel.SysAgentTask">
+              <MappingFragment StoreEntitySet="SysAgentTask">
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="IsSystemTask" ColumnName="IsSystemTask" />
+                <ScalarProperty Name="ProcessTaskNum" ColumnName="ProcessTaskNum" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="ProcessSetSystemCode" ColumnName="ProcessSetSystemCode" />
+                <ScalarProperty Name="TaskNote" ColumnName="TaskNote" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="ParamMaintProgram" ColumnName="ParamMaintProgram" />
+                <ScalarProperty Name="SubmitUser" ColumnName="SubmitUser" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="RunMethod" ColumnName="RunMethod" />
+                <ScalarProperty Name="RunProcedure" ColumnName="RunProcedure" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="TaskDesc" ColumnName="TaskDesc" />
+                <ScalarProperty Name="AgentTaskNum" ColumnName="AgentTaskNum" />
+                <ScalarProperty Name="AgentSchedNum" ColumnName="AgentSchedNum" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMJobOpers">
+            <EntityTypeMapping TypeName="ProductionModel.IMJobOper">
+              <MappingFragment StoreEntitySet="IMJobOper">
+                <ScalarProperty Name="ReWork" ColumnName="ReWork" />
+                <ScalarProperty Name="MobileOperation" ColumnName="MobileOperation" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="AutoSpcSubgroup" ColumnName="AutoSpcSubgroup" />
+                <ScalarProperty Name="PartQualEnable" ColumnName="PartQualEnable" />
+                <ScalarProperty Name="AutoSpcPeriod" ColumnName="AutoSpcPeriod" />
+                <ScalarProperty Name="AutoSpcEnable" ColumnName="AutoSpcEnable" />
+                <ScalarProperty Name="NonProdLimit" ColumnName="NonProdLimit" />
+                <ScalarProperty Name="ExpGood" ColumnName="ExpGood" />
+                <ScalarProperty Name="ExpCycTm" ColumnName="ExpCycTm" />
+                <ScalarProperty Name="ExpPctUp" ColumnName="ExpPctUp" />
+                <ScalarProperty Name="SetupURL" ColumnName="SetupURL" />
+                <ScalarProperty Name="MiscInfo2" ColumnName="MiscInfo2" />
+                <ScalarProperty Name="MiscInfo1" ColumnName="MiscInfo1" />
+                <ScalarProperty Name="MaterialColorRating" ColumnName="MaterialColorRating" />
+                <ScalarProperty Name="SetupMaterial" ColumnName="SetupMaterial" />
+                <ScalarProperty Name="PctReg" ColumnName="PctReg" />
+                <ScalarProperty Name="ExternalMES" ColumnName="ExternalMES" />
+                <ScalarProperty Name="EstStdType" ColumnName="EstStdType" />
+                <ScalarProperty Name="RemovedfromPlan" ColumnName="RemovedfromPlan" />
+                <ScalarProperty Name="JDFOpCompleted" ColumnName="JDFOpCompleted" />
+                <ScalarProperty Name="EstStdDescription" ColumnName="EstStdDescription" />
+                <ScalarProperty Name="GeneralPlanInfo" ColumnName="GeneralPlanInfo" />
+                <ScalarProperty Name="ProdUOM" ColumnName="ProdUOM" />
+                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+                <ScalarProperty Name="FSJobStatus" ColumnName="FSJobStatus" />
+                <ScalarProperty Name="ActualEndHour" ColumnName="ActualEndHour" />
+                <ScalarProperty Name="ActualEndDate" ColumnName="ActualEndDate" />
+                <ScalarProperty Name="ActualStartHour" ColumnName="ActualStartHour" />
+                <ScalarProperty Name="ActualStartDate" ColumnName="ActualStartDate" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="AssetPartNum" ColumnName="AssetPartNum" />
+                <ScalarProperty Name="UseAllRoles" ColumnName="UseAllRoles" />
+                <ScalarProperty Name="WITearDwnEndHour" ColumnName="WITearDwnEndHour" />
+                <ScalarProperty Name="WITearDwnEndDate" ColumnName="WITearDwnEndDate" />
+                <ScalarProperty Name="TearDwnEndHour" ColumnName="TearDwnEndHour" />
+                <ScalarProperty Name="TearDwnEndDate" ColumnName="TearDwnEndDate" />
+                <ScalarProperty Name="PrjRoleList" ColumnName="PrjRoleList" />
+                <ScalarProperty Name="SendAheadOffset" ColumnName="SendAheadOffset" />
+                <ScalarProperty Name="SendAheadType" ColumnName="SendAheadType" />
+                <ScalarProperty Name="WeightUOM" ColumnName="WeightUOM" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="SNRequiredSubConShip" ColumnName="SNRequiredSubConShip" />
+                <ScalarProperty Name="SNRequiredOpr" ColumnName="SNRequiredOpr" />
+                <ScalarProperty Name="Rpt3UnitPrice" ColumnName="Rpt3UnitPrice" />
+                <ScalarProperty Name="Rpt2UnitPrice" ColumnName="Rpt2UnitPrice" />
+                <ScalarProperty Name="Rpt1UnitPrice" ColumnName="Rpt1UnitPrice" />
+                <ScalarProperty Name="Rpt3LaborRate" ColumnName="Rpt3LaborRate" />
+                <ScalarProperty Name="Rpt2LaborRate" ColumnName="Rpt2LaborRate" />
+                <ScalarProperty Name="Rpt1LaborRate" ColumnName="Rpt1LaborRate" />
+                <ScalarProperty Name="Rpt3BillableUnitPrice" ColumnName="Rpt3BillableUnitPrice" />
+                <ScalarProperty Name="Rpt2BillableUnitPrice" ColumnName="Rpt2BillableUnitPrice" />
+                <ScalarProperty Name="Rpt1BillableUnitPrice" ColumnName="Rpt1BillableUnitPrice" />
+                <ScalarProperty Name="Rpt3BillableLaborRate" ColumnName="Rpt3BillableLaborRate" />
+                <ScalarProperty Name="Rpt2BillableLaborRate" ColumnName="Rpt2BillableLaborRate" />
+                <ScalarProperty Name="Rpt1BillableLaborRate" ColumnName="Rpt1BillableLaborRate" />
+                <ScalarProperty Name="SchedComment" ColumnName="SchedComment" />
+                <ScalarProperty Name="RoughCutSched" ColumnName="RoughCutSched" />
+                <ScalarProperty Name="UserMapData" ColumnName="UserMapData" />
+                <ScalarProperty Name="RecalcExpProdYld" ColumnName="RecalcExpProdYld" />
+                <ScalarProperty Name="BookedUnitCost" ColumnName="BookedUnitCost" />
+                <ScalarProperty Name="GlbRFQ" ColumnName="GlbRFQ" />
+                <ScalarProperty Name="KitDate" ColumnName="KitDate" />
+                <ScalarProperty Name="OpDesc" ColumnName="OpDesc" />
+                <ScalarProperty Name="PrimaryProdOpDtl" ColumnName="PrimaryProdOpDtl" />
+                <ScalarProperty Name="PrimarySetupOpDtl" ColumnName="PrimarySetupOpDtl" />
+                <ScalarProperty Name="AnalysisCode" ColumnName="AnalysisCode" />
+                <ScalarProperty Name="RestoreFlag" ColumnName="RestoreFlag" />
+                <ScalarProperty Name="SetupGroup" ColumnName="SetupGroup" />
+                <ScalarProperty Name="RFQStat" ColumnName="RFQStat" />
+                <ScalarProperty Name="RFQLine" ColumnName="RFQLine" />
+                <ScalarProperty Name="RFQNum" ColumnName="RFQNum" />
+                <ScalarProperty Name="RFQVendQuotes" ColumnName="RFQVendQuotes" />
+                <ScalarProperty Name="RFQNeeded" ColumnName="RFQNeeded" />
+                <ScalarProperty Name="QtyStagedToDate" ColumnName="QtyStagedToDate" />
+                <ScalarProperty Name="FAQty" ColumnName="FAQty" />
+                <ScalarProperty Name="PricePerCode" ColumnName="PricePerCode" />
+                <ScalarProperty Name="LaborEntryMethod" ColumnName="LaborEntryMethod" />
+                <ScalarProperty Name="DocUnitPrice" ColumnName="DocUnitPrice" />
+                <ScalarProperty Name="DocBillableUnitPrice" ColumnName="DocBillableUnitPrice" />
+                <ScalarProperty Name="BillableUnitPrice" ColumnName="BillableUnitPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Billable" ColumnName="Billable" />
+                <ScalarProperty Name="DocBillableLaborRate" ColumnName="DocBillableLaborRate" />
+                <ScalarProperty Name="DocLaborRate" ColumnName="DocLaborRate" />
+                <ScalarProperty Name="BillableLaborRate" ColumnName="BillableLaborRate" />
+                <ScalarProperty Name="LaborRate" ColumnName="LaborRate" />
+                <ScalarProperty Name="CallLine" ColumnName="CallLine" />
+                <ScalarProperty Name="CallNum" ColumnName="CallNum" />
+                <ScalarProperty Name="LastLaborDate" ColumnName="LastLaborDate" />
+                <ScalarProperty Name="AutoReceiptDate" ColumnName="AutoReceiptDate" />
+                <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+                <ScalarProperty Name="EstSetHoursPerMch" ColumnName="EstSetHoursPerMch" />
+                <ScalarProperty Name="JobEngineered" ColumnName="JobEngineered" />
+                <ScalarProperty Name="RcvInspectionReq" ColumnName="RcvInspectionReq" />
+                <ScalarProperty Name="SndAlrtCmpl" ColumnName="SndAlrtCmpl" />
+                <ScalarProperty Name="ReloadNum" ColumnName="ReloadNum" />
+                <ScalarProperty Name="LoadHour" ColumnName="LoadHour" />
+                <ScalarProperty Name="LoadDate" ColumnName="LoadDate" />
+                <ScalarProperty Name="HoursPerMachine" ColumnName="HoursPerMachine" />
+                <ScalarProperty Name="MiscAmt" ColumnName="MiscAmt" />
+                <ScalarProperty Name="ReworkLabCost" ColumnName="ReworkLabCost" />
+                <ScalarProperty Name="ReworkBurCost" ColumnName="ReworkBurCost" />
+                <ScalarProperty Name="ActLabCost" ColumnName="ActLabCost" />
+                <ScalarProperty Name="ActBurCost" ColumnName="ActBurCost" />
+                <ScalarProperty Name="WILoadHour" ColumnName="WILoadHour" />
+                <ScalarProperty Name="WILoadDate" ColumnName="WILoadDate" />
+                <ScalarProperty Name="WIHoursPerMachine" ColumnName="WIHoursPerMachine" />
+                <ScalarProperty Name="WIMoveDueHour" ColumnName="WIMoveDueHour" />
+                <ScalarProperty Name="WIMoveDueDate" ColumnName="WIMoveDueDate" />
+                <ScalarProperty Name="WIDueHour" ColumnName="WIDueHour" />
+                <ScalarProperty Name="WIDueDate" ColumnName="WIDueDate" />
+                <ScalarProperty Name="WIStartHour" ColumnName="WIStartHour" />
+                <ScalarProperty Name="WIStartDate" ColumnName="WIStartDate" />
+                <ScalarProperty Name="WIQueStartHour" ColumnName="WIQueStartHour" />
+                <ScalarProperty Name="WIQueStartDate" ColumnName="WIQueStartDate" />
+                <ScalarProperty Name="WIMachines" ColumnName="WIMachines" />
+                <ScalarProperty Name="WIName" ColumnName="WIName" />
+                <ScalarProperty Name="RunQty" ColumnName="RunQty" />
+                <ScalarProperty Name="SchedRelation" ColumnName="SchedRelation" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="PurPoint" ColumnName="PurPoint" />
+                <ScalarProperty Name="VendorNum" ColumnName="VendorNum" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="DaysOut" ColumnName="DaysOut" />
+                <ScalarProperty Name="EstUnitCost" ColumnName="EstUnitCost" />
+                <ScalarProperty Name="IUM" ColumnName="IUM" />
+                <ScalarProperty Name="SubContract" ColumnName="SubContract" />
+                <ScalarProperty Name="EstScrapType" ColumnName="EstScrapType" />
+                <ScalarProperty Name="EstScrap" ColumnName="EstScrap" />
+                <ScalarProperty Name="SetupPctComplete" ColumnName="SetupPctComplete" />
+                <ScalarProperty Name="QtyCompleted" ColumnName="QtyCompleted" />
+                <ScalarProperty Name="ActSetupRwkHours" ColumnName="ActSetupRwkHours" />
+                <ScalarProperty Name="ActSetupHours" ColumnName="ActSetupHours" />
+                <ScalarProperty Name="ActProdRwkHours" ColumnName="ActProdRwkHours" />
+                <ScalarProperty Name="ActProdHours" ColumnName="ActProdHours" />
+                <ScalarProperty Name="SetupComplete" ColumnName="SetupComplete" />
+                <ScalarProperty Name="ProdComplete" ColumnName="ProdComplete" />
+                <ScalarProperty Name="ProdCrewSize" ColumnName="ProdCrewSize" />
+                <ScalarProperty Name="SetUpCrewSize" ColumnName="SetUpCrewSize" />
+                <ScalarProperty Name="Machines" ColumnName="Machines" />
+                <ScalarProperty Name="AddedOper" ColumnName="AddedOper" />
+                <ScalarProperty Name="SetupBurRate" ColumnName="SetupBurRate" />
+                <ScalarProperty Name="ProdBurRate" ColumnName="ProdBurRate" />
+                <ScalarProperty Name="SetupLabRate" ColumnName="SetupLabRate" />
+                <ScalarProperty Name="ProdLabRate" ColumnName="ProdLabRate" />
+                <ScalarProperty Name="MoveDueHour" ColumnName="MoveDueHour" />
+                <ScalarProperty Name="MoveDueDate" ColumnName="MoveDueDate" />
+                <ScalarProperty Name="DueHour" ColumnName="DueHour" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="QueStartHour" ColumnName="QueStartHour" />
+                <ScalarProperty Name="QueStartDate" ColumnName="QueStartDate" />
+                <ScalarProperty Name="QtyPer" ColumnName="QtyPer" />
+                <ScalarProperty Name="OpsPerPart" ColumnName="OpsPerPart" />
+                <ScalarProperty Name="StdBasis" ColumnName="StdBasis" />
+                <ScalarProperty Name="StdFormat" ColumnName="StdFormat" />
+                <ScalarProperty Name="ProdStandard" ColumnName="ProdStandard" />
+                <ScalarProperty Name="EstProdHours" ColumnName="EstProdHours" />
+                <ScalarProperty Name="EstSetHours" ColumnName="EstSetHours" />
+                <ScalarProperty Name="OpStdID" ColumnName="OpStdID" />
+                <ScalarProperty Name="OpCode" ColumnName="OpCode" />
+                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+                <ScalarProperty Name="OpComplete" ColumnName="OpComplete" />
+                <ScalarProperty Name="JobComplete" ColumnName="JobComplete" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="IntLastUpdated" ColumnName="IntLastUpdated" />
+                <ScalarProperty Name="IntSysRowID" ColumnName="IntSysRowID" />
+                <ScalarProperty Name="IntComplete" ColumnName="IntComplete" />
+                <ScalarProperty Name="IntError" ColumnName="IntError" />
+                <ScalarProperty Name="IntStatus" ColumnName="IntStatus" />
+                <ScalarProperty Name="IncomingOutgoing" ColumnName="IncomingOutgoing" />
+                <ScalarProperty Name="IntQueID" ColumnName="IntQueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMPartBins">
+            <EntityTypeMapping TypeName="ProductionModel.IMPartBin">
+              <MappingFragment StoreEntitySet="IMPartBin">
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="PackedQty" ColumnName="PackedQty" />
+                <ScalarProperty Name="ShippingQty" ColumnName="ShippingQty" />
+                <ScalarProperty Name="TFOrdPickedQty" ColumnName="TFOrdPickedQty" />
+                <ScalarProperty Name="TFOrdPickingQty" ColumnName="TFOrdPickingQty" />
+                <ScalarProperty Name="TFOrdAllocatedQty" ColumnName="TFOrdAllocatedQty" />
+                <ScalarProperty Name="JobPickedQty" ColumnName="JobPickedQty" />
+                <ScalarProperty Name="JobPickingQty" ColumnName="JobPickingQty" />
+                <ScalarProperty Name="JobAllocatedQty" ColumnName="JobAllocatedQty" />
+                <ScalarProperty Name="SalesPickedQty" ColumnName="SalesPickedQty" />
+                <ScalarProperty Name="SalesPickingQty" ColumnName="SalesPickingQty" />
+                <ScalarProperty Name="SalesAllocatedQty" ColumnName="SalesAllocatedQty" />
+                <ScalarProperty Name="AllocatedQty" ColumnName="AllocatedQty" />
+                <ScalarProperty Name="DimCode" ColumnName="DimCode" />
+                <ScalarProperty Name="LotNum" ColumnName="LotNum" />
+                <ScalarProperty Name="OnhandQty" ColumnName="OnhandQty" />
+                <ScalarProperty Name="BinNum" ColumnName="BinNum" />
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="IntLastUpdated" ColumnName="IntLastUpdated" />
+                <ScalarProperty Name="IntSysRowID" ColumnName="IntSysRowID" />
+                <ScalarProperty Name="IntComplete" ColumnName="IntComplete" />
+                <ScalarProperty Name="IntError" ColumnName="IntError" />
+                <ScalarProperty Name="IntStatus" ColumnName="IntStatus" />
+                <ScalarProperty Name="IncomingOutgoing" ColumnName="IncomingOutgoing" />
+                <ScalarProperty Name="IntQueID" ColumnName="IntQueID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysAgentScheds">
+            <EntityTypeMapping TypeName="ProductionModel.SysAgentSched">
+              <MappingFragment StoreEntitySet="SysAgentSched">
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="SecCode" ColumnName="SecCode" />
+                <ScalarProperty Name="IntervalTime" ColumnName="IntervalTime" />
+                <ScalarProperty Name="AppSrvConnectionID" ColumnName="AppSrvConnectionID" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Sundays" ColumnName="Sundays" />
+                <ScalarProperty Name="Saturdays" ColumnName="Saturdays" />
+                <ScalarProperty Name="Fridays" ColumnName="Fridays" />
+                <ScalarProperty Name="Thursdays" ColumnName="Thursdays" />
+                <ScalarProperty Name="Wednesdays" ColumnName="Wednesdays" />
+                <ScalarProperty Name="Tuesdays" ColumnName="Tuesdays" />
+                <ScalarProperty Name="Mondays" ColumnName="Mondays" />
+                <ScalarProperty Name="LastRunOn" ColumnName="LastRunOn" />
+                <ScalarProperty Name="EveryNWeeks" ColumnName="EveryNWeeks" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+                <ScalarProperty Name="MonthlyOption" ColumnName="MonthlyOption" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="Recurrences" ColumnName="Recurrences" />
+                <ScalarProperty Name="NextRunOn" ColumnName="NextRunOn" />
+                <ScalarProperty Name="SchedType" ColumnName="SchedType" />
+                <ScalarProperty Name="SchedDesc" ColumnName="SchedDesc" />
+                <ScalarProperty Name="AgentSchedNum" ColumnName="AgentSchedNum" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

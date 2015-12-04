@@ -57,9 +57,9 @@
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -151,9 +151,6 @@
       <DependentUpon>Configurator.edmx</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Configurator\ConfiguratorName.cs">
-      <DependentUpon>Configurator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Configurator\GlobalLift.cs">
       <DependentUpon>Configurator.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Configurator\Lookup.cs">
@@ -396,6 +393,12 @@
     <Compile Include="EntityModels\OrderLog\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\IMJobOper.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\IMPartBin.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\Part.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
@@ -413,6 +416,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductionModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysAgentSched.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysAgentTask.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysTask.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>

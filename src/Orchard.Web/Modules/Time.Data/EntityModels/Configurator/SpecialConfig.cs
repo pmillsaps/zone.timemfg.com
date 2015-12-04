@@ -22,6 +22,7 @@ namespace Time.Data.EntityModels.Configurator
         public int Id { get; set; }
         public int SpecialCustomerId { get; set; }
         public string Name { get; set; }
+        public string Comments { get; set; }
     
         public virtual SpecialCustomer SpecialCustomer { get; set; }
         public virtual ICollection<SpecialData> SpecialDatas { get; set; }

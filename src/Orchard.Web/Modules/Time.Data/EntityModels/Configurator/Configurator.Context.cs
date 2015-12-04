@@ -33,7 +33,6 @@ namespace Time.Data.EntityModels.Configurator
         public virtual DbSet<ComplexStructure> ComplexStructures { get; set; }
         public virtual DbSet<ComplexLink> ComplexLinks { get; set; }
         public virtual DbSet<ComplexLookup> ComplexLookups { get; set; }
-        public virtual DbSet<GlobalLift> GlobalLifts { get; set; }
         public virtual DbSet<PartOverride> PartOverrides { get; set; }
         public virtual DbSet<ConfigOption> ConfigOptions { get; set; }
         public virtual DbSet<SpecialConfig> SpecialConfigs { get; set; }
