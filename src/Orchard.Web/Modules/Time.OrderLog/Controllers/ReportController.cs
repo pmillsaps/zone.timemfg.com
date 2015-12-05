@@ -17,7 +17,7 @@ namespace Time.OrderLog.Controllers
     [Themed]
     public class ReportController : Controller
     {
-        public IOrchardServices Services { get; set; }    
+        public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
         private OrderLogEntities db;
         private const string _db_logon = "TimeMFGApp";
@@ -113,7 +113,6 @@ namespace Time.OrderLog.Controllers
             Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return stream;
         }
-
 
         [HttpGet]
         public ActionResult DealerSummary()
@@ -232,9 +231,10 @@ namespace Time.OrderLog.Controllers
             var qry = db.OrderTrans.AsQueryable();
 
             if (model.StartDate != null) qry = qry.Where(x => x.AsOfDate >= model.StartDate);
-            if (model.EndDate != null) {
+            if (model.EndDate != null)
+            {
                 model.EndDate = model.EndDate.Value.Date.AddDays(1).AddSeconds(-1);
-                qry = qry.Where(x => x.AsOfDate < model.EndDate); 
+                qry = qry.Where(x => x.AsOfDate < model.EndDate);
             }
             if (model.DealerId != null) qry = qry.Where(x => x.Order.DealerId == model.DealerId);
             if (model.RegionId != null) qry = qry.Where(x => x.Order.Territory.RegionId == model.RegionId);
@@ -249,8 +249,8 @@ namespace Time.OrderLog.Controllers
             }
 
             return qry.Count() > 0;
-
         }
+
         private void getDropDowns()
         {
             ViewBag.DealerId = new SelectList(db.Dealers.OrderBy(x => x.DealerName), "DealerId", "DealerName");
@@ -264,7 +264,7 @@ namespace Time.OrderLog.Controllers
         {
             ConnectionInfo info = new ConnectionInfo()
             {
-                //ServerName = "Aruba-Sql1",
+                //ServerName = "Aruba-Sql",
                 //DatabaseName = "TimeMFG",
                 UserID = _db_logon,
                 Password = _db_password

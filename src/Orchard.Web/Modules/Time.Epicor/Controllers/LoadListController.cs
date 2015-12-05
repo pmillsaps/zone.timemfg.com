@@ -1,11 +1,17 @@
 ﻿//using CrystalDecisions.CrystalReports.Engine;
 //using CrystalDecisions.Shared;
-using Orchard.Logging;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+
 //using EpicWeb.Helpers;
 //using EpicWeb.Logging;
 //using EpicWeb.Models;
 //using EpicWeb.ViewModels;
 using MoreLinq;
+using Orchard;
+using Orchard.Localization;
+using Orchard.Logging;
+using Orchard.Themes;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,15 +22,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Time.Support.Helpers;
-using Time.Epicor.ViewModels;
-using Orchard.Themes;
-using Orchard;
-using Orchard.Localization;
-using Time.Data.EntityModels.TimeMFG;
 using Time.Data.EntityModels.Epicor;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
+using Time.Data.EntityModels.TimeMFG;
+using Time.Epicor.ViewModels;
+using Time.Support.Helpers;
+
 //using VersaliftDataServices.EntityModels.Epicor;
 //using VersaliftDataServices.EntityModels.TimeMfg;
 //using VersaliftDataServices.Models;
@@ -42,11 +44,12 @@ namespace Time.Epicor.Controllers
 
         //private readonly ILogger _logger;
         public ILogger Logger { get; set; }
+
         private DateTime DefaultDate = DateTime.Parse("1900,01,01");
 
         private const string DbLogon = "TimeMFGApp";
         private const string DbPassword = "Tm@Time$!";
-        private const string DbServer = "Aruba-Sql1";
+        private const string DbServer = "Aruba-Sql";
 
         public LoadListController(IOrchardServices services)
         {
@@ -93,8 +96,6 @@ namespace Time.Epicor.Controllers
             else
                 ViewBag.LoadListEditor = false;
         }
-
-        
 
         public ActionResult AsmInspect(AsmInspectViewModel vm = null)
         {
@@ -586,10 +587,10 @@ namespace Time.Epicor.Controllers
         private void AddNewDistributor(v_JobInformation jobinfo)
         {
             _db.LoadListDistributors.Add(new LoadListDistributor
-                            {
-                                CustomerId = jobinfo.custnum ?? 0,
-                                Name = jobinfo.CustName
-                            });
+            {
+                CustomerId = jobinfo.custnum ?? 0,
+                Name = jobinfo.CustName
+            });
             _db.SaveChanges();
         }
 

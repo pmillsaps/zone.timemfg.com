@@ -50,14 +50,14 @@ namespace Time.Support.Helpers
                     ms.Write(buffer, 0, read);
                 }
                 return ms.ToArray();
-            }     
+            }
         }
 
         private void SetDBLogonForReport(ReportDocument reportDocument)
         {
             ConnectionInfo info = new ConnectionInfo()
             {
-                ServerName = "Aruba-Sql1",
+                ServerName = "Aruba-Sql",
                 DatabaseName = "TimeMFG",
                 UserID = _db_logon,
                 Password = _db_password
