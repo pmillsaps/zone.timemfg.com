@@ -197,6 +197,7 @@
     <Content Include="Views\E10Status\_SchedTasks.cshtml" />
     <Content Include="Views\E10Status\_Tasks.cshtml" />
     <Content Include="Views\E10Status\Index.cshtml" />
+    <Content Include="Views\NOWReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -247,7 +248,6 @@
   <ItemGroup>
     <Folder Include="Content\Reports\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\NOWReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
