@@ -653,6 +653,133 @@ warning 6002: The table/view 'Test.dbo.V_DistributorOrderList' does not have a p
           <Property Name="ProdCode" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Test.dbo.V_NOWReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_NOWReport">
+          <Key>
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="JobNumber" />
+            <PropertyRef Name="Part" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="RequiredQty" />
+            <PropertyRef Name="IssuedQty" />
+            <PropertyRef Name="IssuedCompleted" />
+            <PropertyRef Name="RelatedOperation" />
+            <PropertyRef Name="BackFlush" />
+            <PropertyRef Name="AssemblySeq" />
+            <PropertyRef Name="MtlSeq" />
+            <PropertyRef Name="Firm" />
+            <PropertyRef Name="Released" />
+            <PropertyRef Name="Completed" />
+            <PropertyRef Name="Closed" />
+            <PropertyRef Name="PartType" />
+            <PropertyRef Name="PartClass" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobNumber" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="LastPrinted" Type="date" />
+          <Property Name="ULPart" Type="nvarchar" MaxLength="50" />
+          <Property Name="Part" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QtyShortage" Type="decimal" Precision="23" Scale="8" />
+          <Property Name="QtyOnHand" Type="decimal" Precision="22" Scale="8" />
+          <Property Name="QtyAvailable" Type="decimal" Precision="24" Scale="8" />
+          <Property Name="Bin" Type="nvarchar" MaxLength="10" />
+          <Property Name="BuyerID" Type="nvarchar" MaxLength="8" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="SupplierId" Type="nvarchar" MaxLength="8" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RequiredQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="IssuedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="IssuedCompleted" Type="bit" Nullable="false" />
+          <Property Name="OperationStartDate" Type="date" />
+          <Property Name="RelatedOperation" Type="int" Nullable="false" />
+          <Property Name="RelOpDescription" Type="nvarchar" MaxLength="30" />
+          <Property Name="BackFlush" Type="bit" Nullable="false" />
+          <Property Name="AssemblySeq" Type="int" Nullable="false" />
+          <Property Name="JobStartDate" Type="date" />
+          <Property Name="MtlSeq" Type="int" Nullable="false" />
+          <Property Name="Firm" Type="bit" Nullable="false" />
+          <Property Name="Released" Type="bit" Nullable="false" />
+          <Property Name="Completed" Type="bit" Nullable="false" />
+          <Property Name="Closed" Type="bit" Nullable="false" />
+          <Property Name="CompletedDate" Type="date" />
+          <Property Name="JobAsmblStartDate" Type="date" />
+          <Property Name="PartType" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="PartClass" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="OnHand" Type="decimal" Precision="22" Scale="8" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="40" />
+          <Property Name="DrawStepDate" Type="date" />
+          <Property Name="PrimBin" Type="nvarchar" MaxLength="10" />
+          <Property Name="JobNum" Type="nvarchar" MaxLength="14" />
+          <Property Name="LaborDtl_AssySeq" Type="int" />
+          <Property Name="OprSeq" Type="int" />
+          <Property Name="SysRowID" Type="uniqueidentifier" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Test.dbo.V_NowReportClaim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_NowReportClaim">
+          <Key>
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="JobNumber" />
+            <PropertyRef Name="Part" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="RequiredQty" />
+            <PropertyRef Name="IssuedQty" />
+            <PropertyRef Name="IssuedCompleted" />
+            <PropertyRef Name="RelatedOperation" />
+            <PropertyRef Name="BackFlush" />
+            <PropertyRef Name="AssemblySeq" />
+            <PropertyRef Name="MtlSeq" />
+            <PropertyRef Name="Firm" />
+            <PropertyRef Name="Released" />
+            <PropertyRef Name="Completed" />
+            <PropertyRef Name="Closed" />
+            <PropertyRef Name="PartType" />
+            <PropertyRef Name="PartClass" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobNumber" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="LastPrinted" Type="date" />
+          <Property Name="ULPart" Type="nvarchar" MaxLength="50" />
+          <Property Name="Part" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QtyShortage" Type="decimal" Precision="23" Scale="8" />
+          <Property Name="QtyOnHand" Type="decimal" Precision="22" Scale="8" />
+          <Property Name="QtyAvailable" Type="decimal" Precision="24" Scale="8" />
+          <Property Name="Bin" Type="nvarchar" MaxLength="10" />
+          <Property Name="BuyerID" Type="nvarchar" MaxLength="8" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="SupplierId" Type="nvarchar" MaxLength="8" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RequiredQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="IssuedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="IssuedCompleted" Type="bit" Nullable="false" />
+          <Property Name="OperationStartDate" Type="date" />
+          <Property Name="RelatedOperation" Type="int" Nullable="false" />
+          <Property Name="RelOpDescription" Type="nvarchar" MaxLength="30" />
+          <Property Name="BackFlush" Type="bit" Nullable="false" />
+          <Property Name="AssemblySeq" Type="int" Nullable="false" />
+          <Property Name="JobStartDate" Type="date" />
+          <Property Name="MtlSeq" Type="int" Nullable="false" />
+          <Property Name="Firm" Type="bit" Nullable="false" />
+          <Property Name="Released" Type="bit" Nullable="false" />
+          <Property Name="Completed" Type="bit" Nullable="false" />
+          <Property Name="Closed" Type="bit" Nullable="false" />
+          <Property Name="CompletedDate" Type="date" />
+          <Property Name="JobAsmblStartDate" Type="date" />
+          <Property Name="PartType" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="PartClass" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="OnHand" Type="decimal" Precision="22" Scale="8" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="40" />
+          <Property Name="DrawStepDate" Type="date" />
+          <Property Name="PrimBin" Type="nvarchar" MaxLength="10" />
+          <Property Name="BinID" Type="uniqueidentifier" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="ProductionModelStoreContainer">
           <EntitySet Name="SysAgentSched" EntityType="Self.SysAgentSched" Schema="Ice" store:Type="Tables" />
           <EntitySet Name="SysAgentTask" EntityType="Self.SysAgentTask" Schema="Ice" store:Type="Tables" />
@@ -840,6 +967,93 @@ warning 6002: The table/view 'Test.dbo.V_DistributorOrderList' does not have a p
     [V_DistributorOrderList].[ProdCode] AS [ProdCode], 
     [V_DistributorOrderList].[SysRowID] AS [SysRowID]
     FROM [dbo].[V_DistributorOrderList] AS [V_DistributorOrderList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_NOWReport" EntityType="Self.V_NOWReport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_NOWReport].[Model] AS [Model], 
+    [V_NOWReport].[JobNumber] AS [JobNumber], 
+    [V_NOWReport].[LastPrinted] AS [LastPrinted], 
+    [V_NOWReport].[ULPart] AS [ULPart], 
+    [V_NOWReport].[Part] AS [Part], 
+    [V_NOWReport].[Description] AS [Description], 
+    [V_NOWReport].[QtyShortage] AS [QtyShortage], 
+    [V_NOWReport].[QtyOnHand] AS [QtyOnHand], 
+    [V_NOWReport].[QtyAvailable] AS [QtyAvailable], 
+    [V_NOWReport].[Bin] AS [Bin], 
+    [V_NOWReport].[BuyerID] AS [BuyerID], 
+    [V_NOWReport].[Name] AS [Name], 
+    [V_NOWReport].[SupplierId] AS [SupplierId], 
+    [V_NOWReport].[VendorName] AS [VendorName], 
+    [V_NOWReport].[RequiredQty] AS [RequiredQty], 
+    [V_NOWReport].[IssuedQty] AS [IssuedQty], 
+    [V_NOWReport].[IssuedCompleted] AS [IssuedCompleted], 
+    [V_NOWReport].[OperationStartDate] AS [OperationStartDate], 
+    [V_NOWReport].[RelatedOperation] AS [RelatedOperation], 
+    [V_NOWReport].[RelOpDescription] AS [RelOpDescription], 
+    [V_NOWReport].[BackFlush] AS [BackFlush], 
+    [V_NOWReport].[AssemblySeq] AS [AssemblySeq], 
+    [V_NOWReport].[JobStartDate] AS [JobStartDate], 
+    [V_NOWReport].[MtlSeq] AS [MtlSeq], 
+    [V_NOWReport].[Firm] AS [Firm], 
+    [V_NOWReport].[Released] AS [Released], 
+    [V_NOWReport].[Completed] AS [Completed], 
+    [V_NOWReport].[Closed] AS [Closed], 
+    [V_NOWReport].[CompletedDate] AS [CompletedDate], 
+    [V_NOWReport].[JobAsmblStartDate] AS [JobAsmblStartDate], 
+    [V_NOWReport].[PartType] AS [PartType], 
+    [V_NOWReport].[PartClass] AS [PartClass], 
+    [V_NOWReport].[OnHand] AS [OnHand], 
+    [V_NOWReport].[SerialNumber] AS [SerialNumber], 
+    [V_NOWReport].[DrawStepDate] AS [DrawStepDate], 
+    [V_NOWReport].[PrimBin] AS [PrimBin], 
+    [V_NOWReport].[JobNum] AS [JobNum], 
+    [V_NOWReport].[LaborDtl_AssySeq] AS [LaborDtl_AssySeq], 
+    [V_NOWReport].[OprSeq] AS [OprSeq], 
+    [V_NOWReport].[SysRowID] AS [SysRowID], 
+    [V_NOWReport].[Id] AS [Id]
+    FROM [dbo].[V_NOWReport] AS [V_NOWReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_NowReportClaim" EntityType="Self.V_NowReportClaim" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_NowReportClaim].[Model] AS [Model], 
+    [V_NowReportClaim].[JobNumber] AS [JobNumber], 
+    [V_NowReportClaim].[LastPrinted] AS [LastPrinted], 
+    [V_NowReportClaim].[ULPart] AS [ULPart], 
+    [V_NowReportClaim].[Part] AS [Part], 
+    [V_NowReportClaim].[Description] AS [Description], 
+    [V_NowReportClaim].[QtyShortage] AS [QtyShortage], 
+    [V_NowReportClaim].[QtyOnHand] AS [QtyOnHand], 
+    [V_NowReportClaim].[QtyAvailable] AS [QtyAvailable], 
+    [V_NowReportClaim].[Bin] AS [Bin], 
+    [V_NowReportClaim].[BuyerID] AS [BuyerID], 
+    [V_NowReportClaim].[Name] AS [Name], 
+    [V_NowReportClaim].[SupplierId] AS [SupplierId], 
+    [V_NowReportClaim].[VendorName] AS [VendorName], 
+    [V_NowReportClaim].[RequiredQty] AS [RequiredQty], 
+    [V_NowReportClaim].[IssuedQty] AS [IssuedQty], 
+    [V_NowReportClaim].[IssuedCompleted] AS [IssuedCompleted], 
+    [V_NowReportClaim].[OperationStartDate] AS [OperationStartDate], 
+    [V_NowReportClaim].[RelatedOperation] AS [RelatedOperation], 
+    [V_NowReportClaim].[RelOpDescription] AS [RelOpDescription], 
+    [V_NowReportClaim].[BackFlush] AS [BackFlush], 
+    [V_NowReportClaim].[AssemblySeq] AS [AssemblySeq], 
+    [V_NowReportClaim].[JobStartDate] AS [JobStartDate], 
+    [V_NowReportClaim].[MtlSeq] AS [MtlSeq], 
+    [V_NowReportClaim].[Firm] AS [Firm], 
+    [V_NowReportClaim].[Released] AS [Released], 
+    [V_NowReportClaim].[Completed] AS [Completed], 
+    [V_NowReportClaim].[Closed] AS [Closed], 
+    [V_NowReportClaim].[CompletedDate] AS [CompletedDate], 
+    [V_NowReportClaim].[JobAsmblStartDate] AS [JobAsmblStartDate], 
+    [V_NowReportClaim].[PartType] AS [PartType], 
+    [V_NowReportClaim].[PartClass] AS [PartClass], 
+    [V_NowReportClaim].[OnHand] AS [OnHand], 
+    [V_NowReportClaim].[SerialNumber] AS [SerialNumber], 
+    [V_NowReportClaim].[DrawStepDate] AS [DrawStepDate], 
+    [V_NowReportClaim].[PrimBin] AS [PrimBin], 
+    [V_NowReportClaim].[BinID] AS [BinID], 
+    [V_NowReportClaim].[Id] AS [Id]
+    FROM [dbo].[V_NowReportClaim] AS [V_NowReportClaim]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1171,6 +1385,8 @@ warning 6002: The table/view 'Test.dbo.V_DistributorOrderList' does not have a p
           <EntitySet Name="IMJobOpers" EntityType="ProductionModel.IMJobOper" />
           <EntitySet Name="IMPartBins" EntityType="ProductionModel.IMPartBin" />
           <EntitySet Name="SysAgentScheds" EntityType="ProductionModel.SysAgentSched" />
+          <EntitySet Name="V_NOWReport" EntityType="ProductionModel.V_NOWReport" />
+          <EntitySet Name="V_NowReportClaim" EntityType="ProductionModel.V_NowReportClaim" />
         </EntityContainer>
         <EntityType Name="V_DistributorOrderList">
           <Key>
@@ -1498,6 +1714,129 @@ warning 6002: The table/view 'Test.dbo.V_DistributorOrderList' does not have a p
           <Property Name="SecCode" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="SysRowID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_NOWReport">
+          <Key>
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="JobNumber" />
+            <PropertyRef Name="Part" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="RequiredQty" />
+            <PropertyRef Name="IssuedQty" />
+            <PropertyRef Name="IssuedCompleted" />
+            <PropertyRef Name="RelatedOperation" />
+            <PropertyRef Name="BackFlush" />
+            <PropertyRef Name="AssemblySeq" />
+            <PropertyRef Name="MtlSeq" />
+            <PropertyRef Name="Firm" />
+            <PropertyRef Name="Released" />
+            <PropertyRef Name="Completed" />
+            <PropertyRef Name="Closed" />
+            <PropertyRef Name="PartType" />
+            <PropertyRef Name="PartClass" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LastPrinted" Type="DateTime" Precision="0" />
+          <Property Name="ULPart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Part" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QtyShortage" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="QtyOnHand" Type="Decimal" Precision="22" Scale="8" />
+          <Property Name="QtyAvailable" Type="Decimal" Precision="24" Scale="8" />
+          <Property Name="Bin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IssuedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IssuedCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="OperationStartDate" Type="DateTime" Precision="0" />
+          <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
+          <Property Name="RelOpDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BackFlush" Type="Boolean" Nullable="false" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="JobStartDate" Type="DateTime" Precision="0" />
+          <Property Name="MtlSeq" Type="Int32" Nullable="false" />
+          <Property Name="Firm" Type="Boolean" Nullable="false" />
+          <Property Name="Released" Type="Boolean" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="Closed" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="0" />
+          <Property Name="JobAsmblStartDate" Type="DateTime" Precision="0" />
+          <Property Name="PartType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PartClass" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="OnHand" Type="Decimal" Precision="22" Scale="8" />
+          <Property Name="SerialNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DrawStepDate" Type="DateTime" Precision="0" />
+          <Property Name="PrimBin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="JobNum" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LaborDtl_AssySeq" Type="Int32" />
+          <Property Name="OprSeq" Type="Int32" />
+          <Property Name="SysRowID" Type="Guid" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_NowReportClaim">
+          <Key>
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="JobNumber" />
+            <PropertyRef Name="Part" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="RequiredQty" />
+            <PropertyRef Name="IssuedQty" />
+            <PropertyRef Name="IssuedCompleted" />
+            <PropertyRef Name="RelatedOperation" />
+            <PropertyRef Name="BackFlush" />
+            <PropertyRef Name="AssemblySeq" />
+            <PropertyRef Name="MtlSeq" />
+            <PropertyRef Name="Firm" />
+            <PropertyRef Name="Released" />
+            <PropertyRef Name="Completed" />
+            <PropertyRef Name="Closed" />
+            <PropertyRef Name="PartType" />
+            <PropertyRef Name="PartClass" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LastPrinted" Type="DateTime" Precision="0" />
+          <Property Name="ULPart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Part" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QtyShortage" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="QtyOnHand" Type="Decimal" Precision="22" Scale="8" />
+          <Property Name="QtyAvailable" Type="Decimal" Precision="24" Scale="8" />
+          <Property Name="Bin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IssuedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IssuedCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="OperationStartDate" Type="DateTime" Precision="0" />
+          <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
+          <Property Name="RelOpDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BackFlush" Type="Boolean" Nullable="false" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="JobStartDate" Type="DateTime" Precision="0" />
+          <Property Name="MtlSeq" Type="Int32" Nullable="false" />
+          <Property Name="Firm" Type="Boolean" Nullable="false" />
+          <Property Name="Released" Type="Boolean" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="Closed" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="0" />
+          <Property Name="JobAsmblStartDate" Type="DateTime" Precision="0" />
+          <Property Name="PartType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PartClass" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="OnHand" Type="Decimal" Precision="22" Scale="8" />
+          <Property Name="SerialNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DrawStepDate" Type="DateTime" Precision="0" />
+          <Property Name="PrimBin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BinID" Type="Guid" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1990,6 +2329,97 @@ warning 6002: The table/view 'Test.dbo.V_DistributorOrderList' does not have a p
                 <ScalarProperty Name="SchedDesc" ColumnName="SchedDesc" />
                 <ScalarProperty Name="AgentSchedNum" ColumnName="AgentSchedNum" />
                 <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_NOWReport">
+            <EntityTypeMapping TypeName="ProductionModel.V_NOWReport">
+              <MappingFragment StoreEntitySet="V_NOWReport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
+                <ScalarProperty Name="LaborDtl_AssySeq" ColumnName="LaborDtl_AssySeq" />
+                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+                <ScalarProperty Name="PrimBin" ColumnName="PrimBin" />
+                <ScalarProperty Name="DrawStepDate" ColumnName="DrawStepDate" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="OnHand" ColumnName="OnHand" />
+                <ScalarProperty Name="PartClass" ColumnName="PartClass" />
+                <ScalarProperty Name="PartType" ColumnName="PartType" />
+                <ScalarProperty Name="JobAsmblStartDate" ColumnName="JobAsmblStartDate" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Firm" ColumnName="Firm" />
+                <ScalarProperty Name="MtlSeq" ColumnName="MtlSeq" />
+                <ScalarProperty Name="JobStartDate" ColumnName="JobStartDate" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="BackFlush" ColumnName="BackFlush" />
+                <ScalarProperty Name="RelOpDescription" ColumnName="RelOpDescription" />
+                <ScalarProperty Name="RelatedOperation" ColumnName="RelatedOperation" />
+                <ScalarProperty Name="OperationStartDate" ColumnName="OperationStartDate" />
+                <ScalarProperty Name="IssuedCompleted" ColumnName="IssuedCompleted" />
+                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
+                <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="Bin" ColumnName="Bin" />
+                <ScalarProperty Name="QtyAvailable" ColumnName="QtyAvailable" />
+                <ScalarProperty Name="QtyOnHand" ColumnName="QtyOnHand" />
+                <ScalarProperty Name="QtyShortage" ColumnName="QtyShortage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="ULPart" ColumnName="ULPart" />
+                <ScalarProperty Name="LastPrinted" ColumnName="LastPrinted" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_NowReportClaim">
+            <EntityTypeMapping TypeName="ProductionModel.V_NowReportClaim">
+              <MappingFragment StoreEntitySet="V_NowReportClaim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BinID" ColumnName="BinID" />
+                <ScalarProperty Name="PrimBin" ColumnName="PrimBin" />
+                <ScalarProperty Name="DrawStepDate" ColumnName="DrawStepDate" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="OnHand" ColumnName="OnHand" />
+                <ScalarProperty Name="PartClass" ColumnName="PartClass" />
+                <ScalarProperty Name="PartType" ColumnName="PartType" />
+                <ScalarProperty Name="JobAsmblStartDate" ColumnName="JobAsmblStartDate" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Firm" ColumnName="Firm" />
+                <ScalarProperty Name="MtlSeq" ColumnName="MtlSeq" />
+                <ScalarProperty Name="JobStartDate" ColumnName="JobStartDate" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="BackFlush" ColumnName="BackFlush" />
+                <ScalarProperty Name="RelOpDescription" ColumnName="RelOpDescription" />
+                <ScalarProperty Name="RelatedOperation" ColumnName="RelatedOperation" />
+                <ScalarProperty Name="OperationStartDate" ColumnName="OperationStartDate" />
+                <ScalarProperty Name="IssuedCompleted" ColumnName="IssuedCompleted" />
+                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
+                <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="Bin" ColumnName="Bin" />
+                <ScalarProperty Name="QtyAvailable" ColumnName="QtyAvailable" />
+                <ScalarProperty Name="QtyOnHand" ColumnName="QtyOnHand" />
+                <ScalarProperty Name="QtyShortage" ColumnName="QtyShortage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="ULPart" ColumnName="ULPart" />
+                <ScalarProperty Name="LastPrinted" ColumnName="LastPrinted" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -118,13 +118,11 @@ namespace Time.Epicor.Controllers
         public ActionResult _SchedTasks()
         {
             var qry = db.sysagenttasks;
-
             var vm = new List<TaskVM>();
-            Parallel.ForEach(qry, item =>
+            foreach (var item in qry)
             {
                 vm.Add(new TaskVM { task = item, tasksched = db.sysagentscheds.FirstOrDefault(x => x.agentschednum == item.agentschednum) });
-            });
-
+            }
             return PartialView(vm);
         }
     }

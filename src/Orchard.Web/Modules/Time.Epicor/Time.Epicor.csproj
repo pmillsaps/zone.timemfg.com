@@ -218,6 +218,7 @@
     <Compile Include="Controllers\E10StatusController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoadListController.cs" />
+    <Compile Include="Controllers\NOWReportController.cs" />
     <Compile Include="Controllers\OldLoadListController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
@@ -246,6 +247,7 @@
   <ItemGroup>
     <Folder Include="Content\Reports\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\NOWReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

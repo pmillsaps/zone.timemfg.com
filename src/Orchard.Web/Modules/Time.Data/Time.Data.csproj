@@ -429,6 +429,12 @@
     <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\V_NOWReport.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_NowReportClaim.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\LoadList.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
