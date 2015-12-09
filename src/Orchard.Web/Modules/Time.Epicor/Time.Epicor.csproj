@@ -198,6 +198,7 @@
     <Content Include="Views\E10Status\_Tasks.cshtml" />
     <Content Include="Views\E10Status\Index.cshtml" />
     <Content Include="Views\NOWReport\Index.cshtml" />
+    <Content Include="Views\E10Status\_CompletedTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

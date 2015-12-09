@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.TaskNote)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastActivityOn)
+                @Html.DisplayNameFor(model => model.EndedOn)
             </th>
         </tr>
 
@@ -47,8 +47,7 @@
                 @Html.DisplayFor(modelItem => item.TaskNote)
             </td>
             <td>
-                @if (item.LastActivityOn != null)
-                { <span>@item.LastActivityOn.Value.ToLocalTime().ToShortDateString() @item.LastActivityOn.Value.ToLocalTime().ToShortTimeString()</span> }
+                @item.EndedOn.Value.ToLocalTime().ToShortDateString() @item.EndedOn.Value.ToLocalTime().ToShortTimeString()
             </td>
         </tr>
         }

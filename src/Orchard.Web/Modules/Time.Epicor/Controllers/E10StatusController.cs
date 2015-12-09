@@ -115,6 +115,16 @@ namespace Time.Epicor.Controllers
             return PartialView(qry);
         }
 
+        public ActionResult _CompletedTasks()
+        {
+            var compareDate = DateTime.Now.AddDays(-1);
+            var qry = db.SysTasks
+               .Where(x => x.TaskStatus.ToUpper() != "ACTIVE" && x.EndedOn >= compareDate && !x.TaskDescription.ToUpper().Contains("ECC"))
+               .OrderByDescending(x => x.EndedOn);
+
+            return PartialView(qry);
+        }
+
         public ActionResult _SchedTasks()
         {
             var qry = db.SysAgentTasks;
