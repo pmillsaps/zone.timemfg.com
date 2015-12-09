@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.MSMQ_Status>
+
+    <div class="col-md-12">
+        <h2>Active Messaging Process</h2>
+
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcessID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MachineName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </th>
+            </tr>
+
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcessID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MachineName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
