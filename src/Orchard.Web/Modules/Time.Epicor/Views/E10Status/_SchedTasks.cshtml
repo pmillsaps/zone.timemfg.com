@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<Time.Epicor.ViewModels.E10_TaskVM>
 
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.task.TaskDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.task.SubmittedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.task.SubmitUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.task.TaskNote)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tasksched.SchedDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tasksched.NextRunOn)
-        </th>
-    </tr>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.task.TaskDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.task.SubmittedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.task.SubmitUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.task.TaskNote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tasksched.SchedDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tasksched.NextRunOn)
+            </th>
+        </tr>
 
-    @foreach (var item in Model.OrderBy(x => x.tasksched.NextRunOn))
-    {
+        @foreach (var item in Model.OrderBy(x => x.tasksched.NextRunOn))
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.task.TaskDesc)
@@ -44,9 +44,11 @@
             <td>
                 @if (@item.tasksched.NextRunOn != null)
                 {
-                    <span>@item.tasksched.NextRunOn.Value.ToShortDateString()</span>
+                <span>
+                    @item.tasksched.NextRunOn.Value.ToLocalTime().ToShortDateString() @item.tasksched.NextRunOn.Value.ToLocalTime().ToShortTimeString()
+                </span>
                 }
             </td>
         </tr>
-    }
-</table>
+        }
+    </table>
