@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DataPlateModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CA_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Cap_LBS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cap_KG" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NonPlatformCap" Type="bit" />
+        </EntityType>
+        <EntityType Name="EP_SS_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Voltage" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HR_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="HRUpperControls" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="LB_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InsulatedBoom" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiftData">
+          <Key>
+            <PropertyRef Name="Lift" />
+          </Key>
+          <Property Name="Lift" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HydOilPSI" Type="int" />
+          <Property Name="HydOilKG" Type="int" />
+          <Property Name="Insulated" Type="bit" />
+          <Property Name="DesignVoltage" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PS_Option">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="PlatformQty" Type="smallint" Nullable="false" />
+          <Property Name="HRUpperControls" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="FullFileName" />
+          </Key>
+          <Property Name="FullFileName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateData">
+          <Key>
+            <PropertyRef Name="FieldName" />
+            <PropertyRef Name="TemplateFullFileName" />
+          </Key>
+          <Property Name="FieldName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldData" Type="nvarchar" MaxLength="20" />
+          <Property Name="TemplateFullFileName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DataPlateModelStoreContainer">
+          <EntitySet Name="CA_Options" EntityType="Self.CA_Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EP_SS_Options" EntityType="Self.EP_SS_Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Options" EntityType="Self.HR_Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LB_Options" EntityType="Self.LB_Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiftData" EntityType="Self.LiftData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PS_Option" EntityType="Self.PS_Option" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateData" EntityType="Self.TemplateData" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataPlateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CA_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cap_LBS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cap_KG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NonPlatformCap" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="EP_SS_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Voltage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HR_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HRUpperControls" Type="Byte" />
+        </EntityType>
+        <EntityType Name="LB_Options">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InsulatedBoom" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiftData">
+          <Key>
+            <PropertyRef Name="Lift" />
+          </Key>
+          <Property Name="Lift" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HydOilPSI" Type="Int32" />
+          <Property Name="HydOilKG" Type="Int32" />
+          <Property Name="Insulated" Type="Boolean" />
+          <Property Name="DesignVoltage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PS_Option">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PlatformQty" Type="Int16" Nullable="false" />
+          <Property Name="HRUpperControls" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="FullFileName" />
+          </Key>
+          <Property Name="FullFileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateData">
+          <Key>
+            <PropertyRef Name="FieldName" />
+            <PropertyRef Name="TemplateFullFileName" />
+          </Key>
+          <Property Name="FieldName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FieldData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateFullFileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DataPlateEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CA_Options" EntityType="Self.CA_Options" />
+          <EntitySet Name="EP_SS_Options" EntityType="Self.EP_SS_Options" />
+          <EntitySet Name="HR_Options" EntityType="Self.HR_Options" />
+          <EntitySet Name="LB_Options" EntityType="Self.LB_Options" />
+          <EntitySet Name="LiftDatas" EntityType="Self.LiftData" />
+          <EntitySet Name="PS_Option" EntityType="Self.PS_Option" />
+          <EntitySet Name="Templates" EntityType="Self.Template" />
+          <EntitySet Name="TemplateDatas" EntityType="Self.TemplateData" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataPlateModelStoreContainer" CdmEntityContainer="DataPlateEntities">
+          <EntitySetMapping Name="CA_Options">
+            <EntityTypeMapping TypeName="DataPlateModel.CA_Options">
+              <MappingFragment StoreEntitySet="CA_Options">
+                <ScalarProperty Name="Option" ColumnName="Option" />
+                <ScalarProperty Name="Cap_LBS" ColumnName="Cap_LBS" />
+                <ScalarProperty Name="Cap_KG" ColumnName="Cap_KG" />
+                <ScalarProperty Name="NonPlatformCap" ColumnName="NonPlatformCap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EP_SS_Options">
+            <EntityTypeMapping TypeName="DataPlateModel.EP_SS_Options">
+              <MappingFragment StoreEntitySet="EP_SS_Options">
+                <ScalarProperty Name="Option" ColumnName="Option" />
+                <ScalarProperty Name="Voltage" ColumnName="Voltage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Options">
+            <EntityTypeMapping TypeName="DataPlateModel.HR_Options">
+              <MappingFragment StoreEntitySet="HR_Options">
+                <ScalarProperty Name="Option" ColumnName="Option" />
+                <ScalarProperty Name="HRUpperControls" ColumnName="HRUpperControls" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LB_Options">
+            <EntityTypeMapping TypeName="DataPlateModel.LB_Options">
+              <MappingFragment StoreEntitySet="LB_Options">
+                <ScalarProperty Name="Option" ColumnName="Option" />
+                <ScalarProperty Name="InsulatedBoom" ColumnName="InsulatedBoom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiftDatas">
+            <EntityTypeMapping TypeName="DataPlateModel.LiftData">
+              <MappingFragment StoreEntitySet="LiftData">
+                <ScalarProperty Name="Lift" ColumnName="Lift" />
+                <ScalarProperty Name="HydOilPSI" ColumnName="HydOilPSI" />
+                <ScalarProperty Name="HydOilKG" ColumnName="HydOilKG" />
+                <ScalarProperty Name="Insulated" ColumnName="Insulated" />
+                <ScalarProperty Name="DesignVoltage" ColumnName="DesignVoltage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PS_Option">
+            <EntityTypeMapping TypeName="DataPlateModel.PS_Option">
+              <MappingFragment StoreEntitySet="PS_Option">
+                <ScalarProperty Name="Option" ColumnName="Option" />
+                <ScalarProperty Name="PlatformQty" ColumnName="PlatformQty" />
+                <ScalarProperty Name="HRUpperControls" ColumnName="HRUpperControls" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="DataPlateModel.Template">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateDatas">
+            <EntityTypeMapping TypeName="DataPlateModel.TemplateData">
+              <MappingFragment StoreEntitySet="TemplateData">
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="FieldData" ColumnName="FieldData" />
+                <ScalarProperty Name="TemplateFullFileName" ColumnName="TemplateFullFileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

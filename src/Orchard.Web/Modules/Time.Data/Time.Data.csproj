@@ -83,6 +83,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+      <LastGenOutput>DataPlatesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+      <LastGenOutput>DataPlatesModel.cs</LastGenOutput>
+    </Content>
     <Content Include="EntityModels\Production\ProductionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProductionModel.edmx</DependentUpon>
@@ -224,6 +234,45 @@
     </Compile>
     <Compile Include="EntityModels\CustomManuals\Setting.cs">
       <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\CA_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\EP_SS_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\HR_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\LB_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\LiftData.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\PS_Option.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\Template.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\TemplateData.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Epicor\C_TMC_Status.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
@@ -694,6 +743,13 @@
     </EntityDeploy>
     <Content Include="EntityModels\Production\ProductionModel.edmx.diagram">
       <DependentUpon>ProductionModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\DataPlates\DataPlatesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataPlatesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.edmx.diagram">
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
     <Content Include="Views\_ViewStart.cshtml" />

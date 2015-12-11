@@ -1,11 +1,11 @@
-﻿Name: Time.Maps
+﻿Name: Time.DataPlate
 AntiForgery: enabled
 Author: The Orchard Team
 Website: http://orchardproject.net
 Version: 1.0
 OrchardVersion: 1.0
-Description: Description for the module
+Description: Description for renamed feature for Time.DataPlate.
 Features:
-    Time.Maps:
-        Description: Description for feature Time.Maps.
+    Time.DataPlate:
+        Description: Description for renamed feature Time.DataPlate.
 		Category: .Time

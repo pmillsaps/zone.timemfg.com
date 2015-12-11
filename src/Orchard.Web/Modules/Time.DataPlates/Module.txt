@@ -1,0 +1,11 @@
+﻿Name: Time.DataPlates
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module - Time .DataPlates
+Features:
+    Time.DataPlates:
+        Description: Description for feature Time.DataPlates.
+		Category: .Time
