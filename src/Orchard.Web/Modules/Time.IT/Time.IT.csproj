@@ -66,6 +66,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -249,6 +250,7 @@
     <Content Include="Views\Schedules\_SysTasks.cshtml" />
     <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Queue\_ActiveQueue.cshtml" />
+    <Content Include="Views\Queue\_Processes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -291,6 +293,7 @@
     <Compile Include="ViewModel\LinkLicenseViewModel.cs" />
     <Compile Include="ViewModel\LinkComputerViewModel.cs" />
     <Compile Include="ViewModel\LinkMonitorViewModel.cs" />
+    <Compile Include="ViewModel\ProcessViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />

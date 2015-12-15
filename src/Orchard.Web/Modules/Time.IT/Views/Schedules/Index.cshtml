@@ -102,7 +102,7 @@
                 @Html.DisplayFor(modelItem => item.SchedType)
             </td>
             <td>
-                @item.NextRunOn.Value.ToLocalTime().ToShortDateString() @item.NextRunOn.Value.ToLocalTime().ToShortTimeString()
+                @item.NextRunOn.Value.ToShortDateString() @item.NextRunOn.Value.ToShortTimeString()
             </td>
             @*
             <td>
@@ -127,7 +127,7 @@
                 @Html.DisplayFor(modelItem => item.EveryNWeeks)
             </td>
             <td>
-                @item.LastRunOn.Value.ToLocalTime().ToShortDateString() @item.LastRunOn.Value.ToLocalTime().ToShortTimeString()
+                @item.LastRunOn.Value.ToShortDateString() @item.LastRunOn.Value.ToShortTimeString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Mondays)

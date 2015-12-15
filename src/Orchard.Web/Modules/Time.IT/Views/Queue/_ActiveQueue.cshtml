@@ -37,7 +37,8 @@
                     @Html.DisplayFor(modelItem => item.MachineName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EntryDate)
+                    @item.EntryDate.Value.ToShortDateString() @item.EntryDate.Value.ToShortTimeString()
+                    @*@Html.DisplayFor(modelItem => item.EntryDate)*@
                 </td>
             </tr>
             }

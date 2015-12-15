@@ -158,7 +158,9 @@
     <Content Include="Config\Host.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\Sites.config" />
+    <Content Include="Config\Sites.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Bahama - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Bahama - Web Deploy.pubxml" />
