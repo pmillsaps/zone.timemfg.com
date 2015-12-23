@@ -407,7 +407,9 @@ namespace Time.Support.Controllers
         private void GenerateDropDowns()
         {
             ViewBag.CategoryID = new SelectList(_db.TicketCategories.OrderBy(x => x.Name), "CategoryID", "Name");
-            ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name");
+            ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name), "DepartmentID", "Name");
+            if (Services.Authorizer.Authorize(Permissions.SupportAdmin) || Services.Authorizer.Authorize(Permissions.SupportIT))
+                ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name");
             ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "FullName");
             ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FullName), "EmployeeID", "FullName");
             ViewBag.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name");
@@ -416,28 +418,32 @@ namespace Time.Support.Controllers
 
         private void GenerateDropDowns(TicketProject ticketProject)
         {
-            ViewBag.CategoryID = new SelectList(_db.TicketCategories, "CategoryID", "Name", ticketProject.CategoryID);
-            ViewBag.DepartmentID = new SelectList(_db.TicketDepartments, "DepartmentID", "Name", ticketProject.DepartmentID);
-            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
-            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
+            ViewBag.CategoryID = new SelectList(_db.TicketCategories.OrderBy(x => x.Name), "CategoryID", "Name", ticketProject.CategoryID);
+            ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
+            if (Services.Authorizer.Authorize(Permissions.SupportAdmin) || Services.Authorizer.Authorize(Permissions.SupportIT))
+                ViewBag.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
+            ViewBag.AssignedEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
+            ViewBag.ResourceEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
             ViewBag.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name", ticketProject.PriorityID);
-            ViewBag.Status = new SelectList(_db.TicketStatuses, "StatusID", "Name", ticketProject.Status);
+            ViewBag.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name", ticketProject.Status);
         }
 
         private void GenerateDropDowns(TicketViewModel vm)
         {
-            vm.CategoryID = new SelectList(_db.TicketCategories, "CategoryID", "Name");
-            vm.DepartmentID = new SelectList(_db.TicketDepartments, "DepartmentID", "Name");
-            vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName");
-            vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees, "EmployeeID", "FullName");
+            vm.CategoryID = new SelectList(_db.TicketCategories.OrderBy(x => x.Name), "CategoryID", "Name");
+            vm.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name), "DepartmentID", "Name");
+            if (vm.IT || vm.Admin) vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name");
+            vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FirstName), "EmployeeID", "FullName");
+            vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees.OrderBy(x => x.FirstName), "EmployeeID", "FullName");
             vm.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name");
-            vm.Status = new SelectList(_db.TicketStatuses, "StatusID", "Name");
+            vm.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name");
         }
 
         private void GenerateDropDowns(TicketViewModel vm, TicketProject ticketProject)
         {
             vm.CategoryID = new SelectList(_db.TicketCategories.Where(x => x.isActive == true).OrderBy(x => x.Name), "CategoryID", "Name", ticketProject.CategoryID);
-            vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
+            vm.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
+            if (vm.IT || vm.Admin) vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
             vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
             vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
             vm.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name", ticketProject.PriorityID);

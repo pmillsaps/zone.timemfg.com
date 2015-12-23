@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DataPlateModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataPlateModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CA_Options">
           <Key>
             <PropertyRef Name="Option" />
@@ -13,6 +13,16 @@
           <Property Name="Cap_LBS" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cap_KG" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NonPlatformCap" Type="bit" />
+        </EntityType>
+        <EntityType Name="DielectricRating">
+          <Key>
+            <PropertyRef Name="SearchOrder" />
+          </Key>
+          <Property Name="SearchOrder" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SearchString" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Rating" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LineVoltage" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="EP_SS_Options">
           <Key>
@@ -70,6 +80,7 @@
         </EntityType>
         <EntityContainer Name="DataPlateModelStoreContainer">
           <EntitySet Name="CA_Options" EntityType="Self.CA_Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DielectricRating" EntityType="Self.DielectricRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EP_SS_Options" EntityType="Self.EP_SS_Options" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HR_Options" EntityType="Self.HR_Options" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LB_Options" EntityType="Self.LB_Options" Schema="dbo" store:Type="Tables" />
@@ -78,8 +89,7 @@
           <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TemplateData" EntityType="Self.TemplateData" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataPlateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -155,7 +165,18 @@
           <EntitySet Name="PS_Option" EntityType="Self.PS_Option" />
           <EntitySet Name="Templates" EntityType="Self.Template" />
           <EntitySet Name="TemplateDatas" EntityType="Self.TemplateData" />
+          <EntitySet Name="DielectricRatings" EntityType="DataPlateModel.DielectricRating" />
         </EntityContainer>
+        <EntityType Name="DielectricRating">
+          <Key>
+            <PropertyRef Name="SearchOrder" />
+          </Key>
+          <Property Name="SearchOrder" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SearchString" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LineVoltage" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -229,6 +250,17 @@
                 <ScalarProperty Name="FieldName" ColumnName="FieldName" />
                 <ScalarProperty Name="FieldData" ColumnName="FieldData" />
                 <ScalarProperty Name="TemplateFullFileName" ColumnName="TemplateFullFileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DielectricRatings">
+            <EntityTypeMapping TypeName="DataPlateModel.DielectricRating">
+              <MappingFragment StoreEntitySet="DielectricRating">
+                <ScalarProperty Name="LineVoltage" ColumnName="LineVoltage" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="SearchString" ColumnName="SearchString" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SearchOrder" ColumnName="SearchOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

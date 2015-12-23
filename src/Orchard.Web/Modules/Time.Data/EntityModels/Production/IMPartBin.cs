@@ -42,5 +42,6 @@ namespace Time.Data.EntityModels.Production
         public decimal PackedQty { get; set; }
         public byte[] SysRevID { get; set; }
         public System.Guid SysRowID { get; set; }
+        public string PCID { get; set; }
     }
 }

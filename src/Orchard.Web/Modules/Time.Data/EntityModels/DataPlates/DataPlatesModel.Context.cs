@@ -33,5 +33,6 @@ namespace Time.Data.EntityModels.DataPlates
         public virtual DbSet<PS_Option> PS_Option { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
         public virtual DbSet<TemplateData> TemplateDatas { get; set; }
+        public virtual DbSet<DielectricRating> DielectricRatings { get; set; }
     }
 }

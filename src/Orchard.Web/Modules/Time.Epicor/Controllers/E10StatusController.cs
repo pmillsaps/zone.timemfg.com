@@ -13,6 +13,7 @@ using Time.Epicor.ViewModels;
 namespace Time.Epicor.Controllers
 {
     [Themed]
+    [Authorize]
     public class E10StatusController : Controller
     {
         public IOrchardServices Services { get; set; }

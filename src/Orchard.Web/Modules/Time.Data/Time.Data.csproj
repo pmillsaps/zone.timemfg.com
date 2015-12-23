@@ -253,6 +253,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataPlatesModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\DataPlates\DielectricRating.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\DataPlates\EP_SS_Options.cs">
       <DependentUpon>DataPlatesModel.tt</DependentUpon>
     </Compile>
@@ -475,13 +478,22 @@
     <Compile Include="EntityModels\Production\SysTask.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\V_BillOfMaterials.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Production\V_NOWReport.cs">
+    <Compile Include="EntityModels\Production\V_NowReport1.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Production\V_NowReportClaim.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_PartCostStd.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_PartDetails.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\TimeMFG\LoadList.cs">

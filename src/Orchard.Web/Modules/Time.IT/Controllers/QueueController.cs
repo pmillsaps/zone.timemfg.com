@@ -15,9 +15,11 @@ using Time.IT.ViewModel;
 namespace Time.IT.Controllers
 {
     [Themed]
+    [Authorize]
     public class QueueController : Controller
     {
         // GET: Queue
+
         public ActionResult Index()
         {
             var msgviews = MSMQ.ListMessagesInQueue();

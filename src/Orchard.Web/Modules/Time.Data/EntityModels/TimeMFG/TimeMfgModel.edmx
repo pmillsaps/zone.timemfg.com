@@ -226,6 +226,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="SupervisorID" Type="int" />
+          <Property Name="ITOnly" Type="bit" />
         </EntityType>
         <EntityType Name="TicketEmployees">
           <Key>
@@ -931,6 +932,7 @@
           <Property Name="SupervisorID" Type="Int32" />
           <NavigationProperty Name="TicketEmployee" Relationship="Self.FK_TicketDepartment_TicketEmployees" FromRole="TicketDepartment" ToRole="TicketEmployees" />
           <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketDepartment" FromRole="TicketDepartment" ToRole="TicketProjects" />
+          <Property Name="ITOnly" Type="Boolean" />
         </EntityType>
         <EntityType Name="TicketEmployee">
           <Key>
@@ -1719,6 +1721,7 @@
           <EntitySetMapping Name="TicketDepartments">
             <EntityTypeMapping TypeName="TimeMFGModel.TicketDepartment">
               <MappingFragment StoreEntitySet="TicketDepartment">
+                <ScalarProperty Name="ITOnly" ColumnName="ITOnly" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="Prefix" ColumnName="Prefix" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

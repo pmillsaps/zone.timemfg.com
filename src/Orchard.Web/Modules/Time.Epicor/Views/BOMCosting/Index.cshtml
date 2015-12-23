@@ -1,8 +1,45 @@
-﻿
+﻿@model Time.Epicor.ViewModels.BOMSearchVM
+
 @{
-    ViewBag.Title = "Bill of Material Costing";
+    ViewBag.Title = "E10 Bill of Material Costing";
 }
 
 <h2>@ViewBag.Title</h2>
 
 <h4>Not Yet Implemented</h4>
+
+<div id="TicketSearch">
+    @using (Html.BeginForm("Index", "BOMCosting", FormMethod.Post, new { onsubmit = "showDiv()" }))
+    {
+    @Html.AntiForgeryToken()
+    <label for="txtSearch">
+        Search:
+    </label>@Html.EditorFor(x => x.SearchText)<input type="submit" value="Load BOM" />
+    <br />
+    @Html.CheckBoxFor(x => x.DrillIntoPurchaseItems)
+    @Html.LabelFor(x => x.DrillIntoPurchaseItems)
+    @Html.CheckBoxFor(x => x.FilterRawMaterial)
+    @Html.LabelFor(x => x.FilterRawMaterial)
+    @Html.CheckBoxFor(x => x.ExportToExcel)
+    @Html.LabelFor(x => x.ExportToExcel)
+    @Html.CheckBoxFor(x => x.UseTestData)
+    @Html.LabelFor(x => x.UseTestData)
+    @Html.CheckBoxFor(x => x.PurchaseItemsOnly)
+    @Html.LabelFor(x => x.PurchaseItemsOnly)
+    }
+</div>
+
+<script language='javascript'>
+    function showDiv() {
+        document.getElementById('data').style.display = "none";
+        document.getElementById('exportHidden').style.display = "none";
+        var chkBox = document.getElementById('ExportToExcel');
+        if (!chkBox.checked) {
+            setTimeout('document.images["myAnimatedImage"].src="/Content/images/loadingAnimation.gif"', 200);
+            document.getElementById('hiddenStatus').style.display = "";
+        }
+        if (chkBox.checked) {
+            document.getElementById('exportHidden').style.display = "";
+        }
+    }
+</script>

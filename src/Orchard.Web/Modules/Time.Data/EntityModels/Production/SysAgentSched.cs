@@ -40,5 +40,6 @@ namespace Time.Data.EntityModels.Production
         public string SecCode { get; set; }
         public byte[] SysRevID { get; set; }
         public System.Guid SysRowID { get; set; }
+        public Nullable<System.DateTime> ProcessingStartedOn { get; set; }
     }
 }

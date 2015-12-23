@@ -175,5 +175,49 @@ namespace Time.Data.EntityModels.Production
         public byte[] UD_SysRevID { get; set; }
         public string HoseBuild_c { get; set; }
         public string PartsPDF_c { get; set; }
+        public string ISRegion { get; set; }
+        public string INChapterID { get; set; }
+        public string PESUNATType { get; set; }
+        public string PESUNATUOM { get; set; }
+        public bool DEIsServices { get; set; }
+        public bool DEIsSecurityFinancialDerivative { get; set; }
+        public string DEInternationalSecuritiesID { get; set; }
+        public bool LinkToContract { get; set; }
+        public bool DEIsInvestment { get; set; }
+        public string DEPayStatCode { get; set; }
+        public string DEDenomination { get; set; }
+        public string PartLengthWidthHeightUM { get; set; }
+        public string DiameterUM { get; set; }
+        public decimal DiameterInside { get; set; }
+        public decimal DiameterOutside { get; set; }
+        public string ThicknessUM { get; set; }
+        public decimal Thickness { get; set; }
+        public decimal ThicknessMax { get; set; }
+        public string Durometer { get; set; }
+        public string Specification { get; set; }
+        public string EngineeringAlert { get; set; }
+        public string Condition { get; set; }
+        public bool IsCompliant { get; set; }
+        public bool IsRestricted { get; set; }
+        public bool IsSafetyItem { get; set; }
+        public string CommercialBrand { get; set; }
+        public string CommercialSubBrand { get; set; }
+        public string CommercialCategory { get; set; }
+        public string CommercialSubCategory { get; set; }
+        public string CommercialStyle { get; set; }
+        public string CommercialSize1 { get; set; }
+        public string CommercialSize2 { get; set; }
+        public string CommercialColor { get; set; }
+        public bool IsGiftCard { get; set; }
+        public string PhotoFile { get; set; }
+        public bool PartPhotoExists { get; set; }
+        public string CommentText { get; set; }
+        public bool PartSpecificPackingUOM { get; set; }
+        public string ImageID { get; set; }
+        public string CNSpecification { get; set; }
+        public bool SyncToExternalCRM { get; set; }
+        public string ExternalCRMPartID { get; set; }
+        public Nullable<System.DateTime> ExternalCRMLastSync { get; set; }
+        public bool ExternalCRMSyncRequired { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Time.Data.EntityModels.Production
     using System;
     using System.Collections.Generic;
     
-    public partial class V_NOWReport
+    public partial class V_NowReport1
     {
         public string Model { get; set; }
         public string JobNumber { get; set; }
@@ -50,10 +50,10 @@ namespace Time.Data.EntityModels.Production
         public string SerialNumber { get; set; }
         public Nullable<System.DateTime> DrawStepDate { get; set; }
         public string PrimBin { get; set; }
+        public Nullable<System.Guid> BinID { get; set; }
         public string JobNum { get; set; }
-        public Nullable<int> LaborDtl_AssySeq { get; set; }
+        public Nullable<int> LaborAssySeq { get; set; }
         public Nullable<int> OprSeq { get; set; }
-        public Nullable<System.Guid> SysRowID { get; set; }
         public System.Guid Id { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="67d2b52b15ff4c7ab895bbb009bede8f" Name="Diagram1">
+      <Diagram DiagramId="67d2b52b15ff4c7ab895bbb009bede8f" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="DataPlateModel.CA_Options" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataPlateModel.EP_SS_Options" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataPlateModel.HR_Options" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -12,7 +12,8 @@
         <EntityTypeShape EntityType="DataPlateModel.LiftData" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataPlateModel.PS_Option" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataPlateModel.Template" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataPlateModel.TemplateData" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataPlateModel.TemplateData" Width="1.5" PointX="8.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataPlateModel.DielectricRating" Width="1.5" PointX="10.5" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
