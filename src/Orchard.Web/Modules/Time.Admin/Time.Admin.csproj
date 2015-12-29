@@ -83,23 +83,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="EntityModels\Versalift\VersaliftModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VersaliftModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="EntityModels\Versalift\VersaliftModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-      <LastGenOutput>VersaliftModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityModels\Versalift\VersaliftModel.edmx.diagram">
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="EntityModels\Versalift\VersaliftModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-      <LastGenOutput>VersaliftModel.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -152,45 +135,20 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EquipmentController.cs" />
-    <Compile Include="EntityModels\Versalift\VersaliftBaseModel.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftCategory.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftModel.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftModelAttribute.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftModelAttributeType.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersaliftModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\CategoryAddVM.cs" />
     <Compile Include="Models\CategoryDeleteVM.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

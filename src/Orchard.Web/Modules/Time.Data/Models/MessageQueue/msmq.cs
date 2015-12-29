@@ -101,10 +101,11 @@ namespace Time.Data.Models.MessageQueue
             {
                 using (var queue = new msmq.MessageQueue(queueAddress))
                 {
+                    queue.MessageReadPropertyFilter.ArrivedTime = true;
                     var messages = queue.GetAllMessages().ToList();
                     foreach (var item in messages)
                     {
-                        msgviews.Add(new MessageView { Label = item.Label, Id = item.Id });
+                        msgviews.Add(new MessageView { Label = item.Label, Id = item.Id, ArrivedTime = item.ArrivedTime });
                     }
                 }
             }

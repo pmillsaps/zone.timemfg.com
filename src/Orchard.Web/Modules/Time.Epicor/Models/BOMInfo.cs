@@ -27,7 +27,6 @@ namespace Time.Epicor.Models
         public string BuyerId { get; set; }
         public string Part_Line { get; set; }
         public string Part { get; set; }
-        public ICollection<BOMInfo> bomInfo { get; set; }
         public string ClassID { get; set; }
         public string AltMethod { get; set; }
         public int LeadTime { get; set; }
@@ -51,5 +50,6 @@ namespace Time.Epicor.Models
         public decimal ExtBurCost { get; set; }
         public decimal ExtMtlBurCost { get; set; }
         public decimal TotalExtendedCost { get; set; }
+        public List<BOMInfo> bomInfo { get; set; }
     }
 }

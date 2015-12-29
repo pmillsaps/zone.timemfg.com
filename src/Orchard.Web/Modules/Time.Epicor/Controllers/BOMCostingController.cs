@@ -24,6 +24,7 @@ namespace Time.Epicor.Controllers
         {
             Services = services;
             T = NullLocalizer.Instance;
+            db = new ProductionEntities();
         }
 
         public Localizer T { get; set; }
@@ -180,26 +181,6 @@ namespace Time.Epicor.Controllers
             }
         }
 
-        private IQueryable<PartCost> GetPartCost(string partNumber)
-        {
-            return db.V_PartCostStd.Select(x => new PartCost
-            {
-                PartNum = x.PartNum,
-                CostinglotSize = x.CostingLotSize,
-                EstSetHrs = x.EstSetHours,
-                ProdStandard = x.ProdStandard,
-                EstProdHrs = x.EstProdHours,
-                ProdBurRate = x.ProdBurRate,
-                ProdLbrRate = x.ProdLabRate,
-                SetupBurRate = x.SetupBurRate,
-                SetupLbrRate = x.SetupLabRate,
-                LaborCost = x.LaborCost ?? 0,
-                BurdenCost = x.BurdenCost ?? 0,
-                SubContract = x.SubContract,
-                EstUnitCost = x.EstUnitCost,
-            });
-        }
-
         private IQueryable<PartInfo> GetParts()
         {
             return db.V_PartDetails.Select(x => new PartInfo
@@ -215,7 +196,7 @@ namespace Time.Epicor.Controllers
                 VendorID = x.VendorID,
                 VendorPartNumber = x.VenPartNum,
                 Type = x.TypeCode,
-                Active = x.InActive,
+                InActive = x.InActive,
                 isPhantom = x.PhantomBOM,
                 Revision = x.RevisionNum,
                 ClassID = x.ClassID,
@@ -228,22 +209,111 @@ namespace Time.Epicor.Controllers
 
         private List<BOMInfo> flattenBOM(List<BOMInfo> list)
         {
-            throw new NotImplementedException();
+            List<BOMInfo> bom = new List<BOMInfo>();
+            foreach (var item in list)
+            {
+                List<BOMInfo> childBom = new List<BOMInfo>();
+                if (item.bomInfo.Count() > 0)
+                    childBom = flattenBOM(item.bomInfo);
+                item.bomInfo.Clear();
+                item.Part_Indented = "";
+                for (int i = 0; i < item.Level; i++)
+                {
+                    item.Part_Indented += ". ";
+                }
+                item.Part_Indented += item.MtlPartNum;
+                bom.Add(item);
+                if (childBom.Count() > 0)
+                    bom = bom.Concat(childBom).ToList();
+            }
+
+            return bom;
         }
 
-        private List<BOMInfo> CalculateCosts(List<BOMInfo> bomInfo, BOMSearchVM searchVM)
+        private List<BOMInfo> CalculateCosts(List<BOMInfo> list, BOMSearchVM searchVM)
         {
-            throw new NotImplementedException();
+            //IPartRepository sr = new SqlPartRepository();
+            //if (searchVM.UseTestData == true) sr = new SqlTestPartRepository();
+            foreach (BOMInfo item in list)
+            {
+                if (item.bomInfo.Count() > 0)
+                {
+                    item.bomInfo = CalculateCosts(item.bomInfo, searchVM);
+                    item.LLMaterialCost = item.bomInfo.Sum(x => x.ExtMaterialCost);
+                }
+                else
+                    item.ExtMaterialCost = Math.Round(item.LastMaterialCost * item.Factor, 5);
+                var partCost = GetPartCost(item.MtlPartNum).ToList();
+                if (item.PartType != "P")
+                {
+                    item.LaborTime = partCost.Sum(x => x.EstProdHrs);
+                    item.SetupTime = partCost.Sum(x => x.EstSetHrs);
+                    item.LastLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5);
+                    item.LastBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost), 5);
+
+                    // Calculate Extended Costs
+                    item.ExtBurCost = Math.Round(item.LastBurdenCost * item.Factor, 5);
+                    item.ExtLaborCost = Math.Round(item.LastLaborCost * item.Factor, 5);
+                }
+                item.LastSubCost = Math.Round(partCost.Where(x => x.SubContract == true).Sum(x => x.EstUnitCost), 5);
+                item.ExtSubCost = Math.Round(item.LastSubCost * item.Factor, 5);
+            }
+
+            return list.ToList();
         }
 
         private List<BOMInfo> ClearCosts(List<BOMInfo> bomInfo)
         {
-            throw new NotImplementedException();
+            foreach (BOMInfo item in bomInfo)
+            {
+                if (item.PartType != "P")
+                {
+                    if (item.bomInfo.Count() > 0)
+                        item.bomInfo = ClearCosts(item.bomInfo);
+                    item.LLMaterialCost = 0;
+                    item.LastMaterialCost = 0;
+                    item.LastLaborCost = 0;
+                    item.LastBurdenCost = 0;
+                    item.LastSubCost = 0;
+                    item.ExtMtlBurCost = 0;
+                    item.ExtSubCost = 0;
+                }
+            }
+
+            return bomInfo.ToList();
         }
 
-        private List<BOMInfo> BuildBomInMemory(string option, BOMSearchVM searchVM, int factorQty, int level)
+        private List<BOMInfo> BuildBomInMemory(string option, BOMSearchVM searchVM, decimal factorQty, int level)
         {
-            throw new NotImplementedException();
+            //IPartRepository sr = new SqlPartRepository();
+            //if (searchVM.UseTestData == true) sr = new SqlTestPartRepository();
+            List<BOMInfo> source = new List<BOMInfo>();
+
+            var qry = GetBom(option);
+            if (searchVM.FilterRawMaterial)
+                qry = qry.Where(x => x.ClassID != "STL");
+
+            //if (!searchVM.ViewAltMethods)
+            //    qry = qry.Where(x => x.AltMethod == "");
+            var qry2 = qry.OrderBy(x => x.MtlSeq).ToList();
+
+            foreach (var item in qry2)
+            {
+                if (item.PartType != "P" || (item.PartType == "P" && searchVM.DrillIntoPurchaseItems))
+                    item.bomInfo = BuildBomInMemory(item.MtlPartNum, searchVM, factorQty: item.QtyPer * factorQty, level: level + 1);
+                else
+                    item.bomInfo = new List<BOMInfo>();
+                item.Level = level;
+                item.Factor = item.QtyPer * factorQty;
+                source.Add(item);
+            }
+
+            return source;
+        }
+
+        private IQueryable<BOMInfo> GetBom(string option)
+        {
+            return GetBom().Where(x => x.Part == option);
         }
 
         public IQueryable<BOMInfo> GetBom()
@@ -275,6 +345,31 @@ namespace Time.Epicor.Controllers
                 LastMtlBurCost = x.LastMtlBurCost ?? 0,
                 LastSubCost = x.LastSubContCost ?? 0,
             });
+        }
+
+        public IQueryable<PartCost> GetPartCost()
+        {
+            return db.V_PartCostStd.Select(x => new PartCost
+            {
+                PartNum = x.PartNum,
+                CostinglotSize = x.CostingLotSize,
+                EstSetHrs = x.EstSetHours,
+                ProdStandard = x.ProdStandard,
+                EstProdHrs = x.EstProdHours,
+                ProdBurRate = x.ProdBurRate,
+                ProdLbrRate = x.ProdLabRate,
+                SetupBurRate = x.SetupBurRate,
+                SetupLbrRate = x.SetupLabRate,
+                LaborCost = x.LaborCost ?? 0,
+                BurdenCost = x.BurdenCost ?? 0,
+                SubContract = x.SubContract,
+                EstUnitCost = x.EstUnitCost,
+            });
+        }
+
+        public IQueryable<PartCost> GetPartCost(string part)
+        {
+            return GetPartCost().Where(x => x.PartNum == part);
         }
     }
 }

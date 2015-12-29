@@ -23,10 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.NextRunOn)
             </th>
-            @*
             <th>
                 @Html.DisplayNameFor(model => model.Recurrences)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.EffectiveDate)
             </th>
@@ -102,12 +101,13 @@
                 @Html.DisplayFor(modelItem => item.SchedType)
             </td>
             <td>
-                @item.NextRunOn.Value.ToShortDateString() @item.NextRunOn.Value.ToShortTimeString()
+                @if(item.NextRunOn != null) {
+                @String.Format("{0} {1}",item.NextRunOn.Value.ToShortDateString(),item.NextRunOn.Value.ToShortTimeString())
+                }
             </td>
-            @*
             <td>
                 @Html.DisplayFor(modelItem => item.Recurrences)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EffectiveDate)
             </td>
@@ -127,7 +127,9 @@
                 @Html.DisplayFor(modelItem => item.EveryNWeeks)
             </td>
             <td>
-                @item.LastRunOn.Value.ToShortDateString() @item.LastRunOn.Value.ToShortTimeString()
+                @if(item.LastRunOn != null) {
+                @String.Format("{0} {1}",item.LastRunOn.Value.ToShortDateString(),item.LastRunOn.Value.ToShortTimeString())
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Mondays)

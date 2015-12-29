@@ -9,7 +9,8 @@ namespace Time.Data.Models.MessageQueue
     {
         public String Id { get; set; }
 
-        //public DateTime ArrivedTime { get; set; }
+        public DateTime ArrivedTime { get; set; }
+
         //public System.Messaging.MessageType Type { get; set; }
         public string Label { get; set; }
     }

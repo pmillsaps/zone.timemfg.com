@@ -21,7 +21,7 @@ namespace Time.Epicor.Models
 
         public string VendorID { get; set; }
 
-        public bool Active { get; set; }
+        public bool InActive { get; set; }
 
         public bool isPhantom { get; set; }
 
