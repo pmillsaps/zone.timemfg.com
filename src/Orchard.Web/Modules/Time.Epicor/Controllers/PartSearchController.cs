@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Time.Epicor.Helpers;
 using Time.Epicor.ViewModels;
 
 namespace Time.Epicor.Controllers
@@ -19,15 +20,19 @@ namespace Time.Epicor.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(PartSearchVM vm)
+        public ActionResult Index(PartSearchVM vm, string submitButton)
         {
             if (UserIsVSW()) vm.RestrictData = true;
 
             if (!String.IsNullOrEmpty(vm.Query) && (vm.Query.Length >= 3 ||
                 (vm.Query.Length > 0 && vm.Type == PartSearchVM.SearchType.VendorNumber)))
                 vm.refreshData();
-
-            return View(vm);
+            if (vm.ExportToExcel)
+            {
+                return new ExporttoExcelResult("PartSearch", vm.PartData.Cast<object>().ToList());
+            }
+            else
+                return View(vm);
         }
 
         private bool UserIsVSW()

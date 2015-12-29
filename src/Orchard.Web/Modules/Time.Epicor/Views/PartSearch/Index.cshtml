@@ -15,7 +15,7 @@
         <div class="col-md-12">
 
             <div class="col-md-1">
-                <input type="submit" value="Search" />
+                <input type="submit" name="submitButton" value="Search" />
             </div>
 
             @*<div class="col-md-1">
@@ -88,6 +88,15 @@
         <div class="col-md-1">
             @Html.EditorFor(model => model.ShowSpecial)
         </div>
+        @if(Model.PartData != null){
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ExportToExcel)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ExportToExcel)
+        </div>
+        }
     </div>
 
     }

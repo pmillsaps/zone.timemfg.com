@@ -66,6 +66,9 @@ namespace Time.Epicor.ViewModels
 
         public bool RestrictData { get; set; }
 
+        [DisplayName("Export")]
+        public bool ExportToExcel { get; set; }
+
         public int TotalPages
         {
             get { return _TotalPages; }

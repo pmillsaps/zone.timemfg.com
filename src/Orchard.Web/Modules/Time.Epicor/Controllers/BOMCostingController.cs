@@ -168,7 +168,7 @@ namespace Time.Epicor.Controllers
             {
                 string fileName = searchVM.SearchText;
                 if (fileName.Length > 20) fileName = fileName.Substring(0, 16) + ",";
-                return new ExporttoExcelResult("BOMCost_" + fileName, allOptions);
+                return new ExporttoExcelResult("BOMCost_" + fileName, allOptions.Cast<object>().ToList());
             }
 
             if (Request.IsAjaxRequest())
