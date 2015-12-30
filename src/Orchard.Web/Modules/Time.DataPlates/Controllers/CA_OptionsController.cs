@@ -42,7 +42,7 @@ namespace Time.DataPlates.Controllers
             }
             else
             {
-                return View(db.CA_Options.Where(x => x.Option.StartsWith(search)).ToList());
+                return View(db.CA_Options.Where(x => x.Option.Contains(search)).ToList());
             }            
         }
 
