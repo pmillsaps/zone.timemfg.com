@@ -26,6 +26,7 @@ namespace Time.Data.EntityModels.DataPlates
         }
     
         public virtual DbSet<CA_Options> CA_Options { get; set; }
+        public virtual DbSet<DielectricRating> DielectricRatings { get; set; }
         public virtual DbSet<EP_SS_Options> EP_SS_Options { get; set; }
         public virtual DbSet<HR_Options> HR_Options { get; set; }
         public virtual DbSet<LB_Options> LB_Options { get; set; }
@@ -33,6 +34,5 @@ namespace Time.Data.EntityModels.DataPlates
         public virtual DbSet<PS_Option> PS_Option { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
         public virtual DbSet<TemplateData> TemplateDatas { get; set; }
-        public virtual DbSet<DielectricRating> DielectricRatings { get; set; }
     }
 }

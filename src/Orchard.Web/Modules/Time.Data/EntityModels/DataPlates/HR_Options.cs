@@ -15,6 +15,6 @@ namespace Time.Data.EntityModels.DataPlates
     public partial class HR_Options
     {
         public string Option { get; set; }
-        public Nullable<byte> HRUpperControls { get; set; }
+        public bool HRUpperControls { get; set; }
     }
 }

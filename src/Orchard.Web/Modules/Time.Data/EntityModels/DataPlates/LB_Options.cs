@@ -15,6 +15,6 @@ namespace Time.Data.EntityModels.DataPlates
     public partial class LB_Options
     {
         public string Option { get; set; }
-        public byte InsulatedBoom { get; set; }
+        public bool InsulatedBoom { get; set; }
     }
 }

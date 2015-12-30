@@ -632,6 +632,12 @@
     <Compile Include="Models\Configurator\ConfigOption.cs" />
     <Compile Include="Models\Configurator\ConfigPricing.cs" />
     <Compile Include="Models\Configurator\Lookup.cs" />
+    <Compile Include="Models\DataPlates\CA_Options.cs" />
+    <Compile Include="Models\DataPlates\EP_SS_Options.cs" />
+    <Compile Include="Models\DataPlates\HR_Options.cs" />
+    <Compile Include="Models\DataPlates\LB_Options.cs" />
+    <Compile Include="Models\DataPlates\LiftData.cs" />
+    <Compile Include="Models\DataPlates\PS_Option.cs" />
     <Compile Include="Models\GetSetting.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />

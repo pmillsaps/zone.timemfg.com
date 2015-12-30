@@ -17,5 +17,7 @@ namespace Time.Data.EntityModels.DataPlates
         public string FieldName { get; set; }
         public string FieldData { get; set; }
         public string TemplateFullFileName { get; set; }
+    
+        public virtual Template Template { get; set; }
     }
 }

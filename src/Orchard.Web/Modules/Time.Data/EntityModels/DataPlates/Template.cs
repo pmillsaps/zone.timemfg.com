@@ -14,6 +14,15 @@ namespace Time.Data.EntityModels.DataPlates
     
     public partial class Template
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Template()
+        {
+            this.TemplateDatas = new HashSet<TemplateData>();
+        }
+    
         public string FullFileName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TemplateData> TemplateDatas { get; set; }
     }
 }

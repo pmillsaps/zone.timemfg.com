@@ -17,7 +17,7 @@ namespace Time.Data.EntityModels.DataPlates
         public string Lift { get; set; }
         public Nullable<int> HydOilPSI { get; set; }
         public Nullable<int> HydOilKG { get; set; }
-        public Nullable<bool> Insulated { get; set; }
+        public bool Insulated { get; set; }
         public string DesignVoltage { get; set; }
     }
 }

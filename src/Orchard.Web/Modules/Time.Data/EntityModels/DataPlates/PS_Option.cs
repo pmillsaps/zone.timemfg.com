@@ -16,6 +16,6 @@ namespace Time.Data.EntityModels.DataPlates
     {
         public string Option { get; set; }
         public short PlatformQty { get; set; }
-        public byte HRUpperControls { get; set; }
+        public bool HRUpperControls { get; set; }
     }
 }

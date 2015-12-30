@@ -17,6 +17,6 @@ namespace Time.Data.EntityModels.DataPlates
         public string Option { get; set; }
         public string Cap_LBS { get; set; }
         public string Cap_KG { get; set; }
-        public Nullable<bool> NonPlatformCap { get; set; }
+        public bool NonPlatformCap { get; set; }
     }
 }
