@@ -605,6 +605,12 @@
     <Compile Include="EntityModels\TimeMFG\ValuedInventory.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\V_ClassIdSummary.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\V_ValuedInventoryByPeriod.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\WaterTest.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>

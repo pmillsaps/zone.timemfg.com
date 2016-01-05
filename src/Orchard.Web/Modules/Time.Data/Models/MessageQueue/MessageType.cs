@@ -18,13 +18,20 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType BuildComplexLinksFull { get { return new MessageType("BuildComplexLinksFull"); } }
         public static MessageType BuildComplexLookups { get { return new MessageType("BuildComplexLookups"); } }
         public static MessageType BuildConfigOptions { get { return new MessageType("BuildConfigOptions"); } }
+        public static MessageType BuildDLS { get { return new MessageType("BuildDLS"); } }
         public static MessageType CheckWaterReports { get { return new MessageType("CheckWaterReports"); } }
         public static MessageType CustomManualCheckProblemJobs { get { return new MessageType("CustomManualCheckProblemJobs"); } }
         public static MessageType CustomManualJobQueue { get { return new MessageType("CustomManualJobQueue"); } }
+        public static MessageType E10EmailSOAckPdf { get { return new MessageType("E10EmailSOAckPdf"); } }
+        public static MessageType E10EmailInvoices { get { return new MessageType("E10EmailInvoices"); } }
         public static MessageType EmailMessage { get { return new MessageType("EmailMessage"); } }
         public static MessageType EmailProblemJobs { get { return new MessageType("EmailProblemJobs"); } }
         public static MessageType MoveFile { get { return new MessageType("MoveFile"); } }
+        public static MessageType MoveQueuedDataPlates { get { return new MessageType("MoveQueuedDataPlates"); } }
+        public static MessageType MoveQueuedManuals { get { return new MessageType("MoveQueuedManuals"); } }
         public static MessageType Refresh_Drawings_DB { get { return new MessageType("Refresh_Drawings_DB"); } }
+        public static MessageType SendAssignedTickets { get { return new MessageType("SendAssignedTickets"); } }
+        public static MessageType SendMonthlyPDFAttachments { get { return new MessageType("SendMonthlyPDFAttachments"); } }
         public static MessageType SendRTIMessage { get { return new MessageType("SendRTIMessage"); } }
         public static MessageType SendTicketReminders { get { return new MessageType("SendTicketReminders"); } }
         public static MessageType TicketsNotApprovedTimer { get { return new MessageType("TicketsNotApprovedTimer"); } }

@@ -54,5 +54,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public virtual DbSet<MSMQ_Status> MSMQ_Status { get; set; }
         public virtual DbSet<NLog_Entries> NLog_Entries { get; set; }
         public virtual DbSet<ValuedInventory> ValuedInventories { get; set; }
+        public virtual DbSet<V_ValuedInventoryByPeriod> V_ValuedInventoryByPeriod { get; set; }
+        public virtual DbSet<V_ClassIdSummary> V_ClassIdSummary { get; set; }
     }
 }

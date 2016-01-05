@@ -48,6 +48,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -100,7 +104,10 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
@@ -234,6 +241,7 @@
     <Content Include="Views\DLS\Index.cshtml" />
     <Content Include="Views\PartSearch\Index.cshtml" />
     <Content Include="Views\PartSearch\_PartDetails.cshtml" />
+    <Content Include="Views\ValuedInventory\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -269,9 +277,11 @@
     <Compile Include="Helpers\HelperClass.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\ImageResult.cs" />
+    <Compile Include="Helpers\ValuedInventoryExcelResult.cs" />
     <Compile Include="Models\BOMInfo.cs" />
     <Compile Include="Models\PartCost.cs" />
     <Compile Include="Models\PartInfo.cs" />
+    <Compile Include="Models\ValuedInventoryExt.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -288,6 +298,7 @@
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
     <Compile Include="ViewModels\PartSearchVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
+    <Compile Include="ViewModels\ValuedInventoryVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Reports\" />
