@@ -1,0 +1,55 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfigPricing
+
+@{
+    ViewBag.Title = "Delete Config Pricing";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Config Pricing</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigOption)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AltPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AltPrice)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigID, ConfigOptions = Model.ConfigOption })
+        </div>
+    }
+</div>
