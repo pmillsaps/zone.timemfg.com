@@ -659,6 +659,7 @@
     <Compile Include="Models\MessageQueue\MessageView.cs" />
     <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
     <Compile Include="Models\MessageQueue\MSMQ.cs" />
+    <Compile Include="Models\MessageQueue\PCInvoiceMessage.cs" />
     <Compile Include="Models\MessageQueue\WOLMessage.cs" />
     <Compile Include="Models\OrderLog\Dealer.cs" />
     <Compile Include="Models\OrderLog\Installer.cs" />

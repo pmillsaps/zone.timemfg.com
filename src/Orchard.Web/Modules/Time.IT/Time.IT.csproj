@@ -251,6 +251,9 @@
     <Content Include="Views\Queue\Index.cshtml" />
     <Content Include="Views\Queue\_ActiveQueue.cshtml" />
     <Content Include="Views\Queue\_Processes.cshtml" />
+    <Content Include="Views\Computers\EditScheduledTask.cshtml" />
+    <Content Include="Views\Computers\DetailsScheduledTask.cshtml" />
+    <Content Include="Views\Computers\DeleteScheduledTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

@@ -29,6 +29,8 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType MoveFile { get { return new MessageType("MoveFile"); } }
         public static MessageType MoveQueuedDataPlates { get { return new MessageType("MoveQueuedDataPlates"); } }
         public static MessageType MoveQueuedManuals { get { return new MessageType("MoveQueuedManuals"); } }
+        public static MessageType PCInvoiceMessage { get { return new MessageType("PCInvoiceMessage"); } }
+        public static MessageType ProcessPCInvoices { get { return new MessageType("ProcessPCInvoices"); } }
         public static MessageType Refresh_Drawings_DB { get { return new MessageType("Refresh_Drawings_DB"); } }
         public static MessageType SendAssignedTickets { get { return new MessageType("SendAssignedTickets"); } }
         public static MessageType SendMonthlyPDFAttachments { get { return new MessageType("SendMonthlyPDFAttachments"); } }
