@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Versalift.E10_DLS>
+
+    @{
+    ViewBag.Title = "E10 Distributor Lift Schedule";
+    }
+
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustPO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lift)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sales)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Serial)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ATS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ATSCurr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastChangedDate)
+                </th>
+                @*
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>*@
+            </tr>
+
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustPO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lift)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sales)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ATS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ATSCurr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastChangedDate)
+                </td>
+                @*
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>*@
+            </tr>
+            }
+        </table>
+    </div>

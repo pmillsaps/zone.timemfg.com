@@ -1,0 +1,147 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.TicketProject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrivateNotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedByFriendly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectBeginDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketSequence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketCategory.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketDepartment.Prefix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketEmployee.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketEmployee1.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketPriority.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketStatus.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrivateNotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestedByFriendly)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectBeginDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketSequence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketCategory.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketDepartment.Prefix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketEmployee.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketEmployee1.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TicketID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TicketID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TicketID })
+        </td>
+    </tr>
+}
+
+</table>

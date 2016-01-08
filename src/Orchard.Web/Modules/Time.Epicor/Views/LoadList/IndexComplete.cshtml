@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadList>
+
+@{
+    ViewBag.Title = "Load List Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    <li>@Html.SecurityTrimmedActionLink("Add New LoadList", "Create", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.SecurityTrimmedActionLink("View Open Load Lists", "Index", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.SecurityTrimmedActionLink("Print Load Lists", "PrintLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.SecurityTrimmedActionLink("Email Load Lists", "EmailLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
+</ul>
+
+<br /><br />
+
+@Html.Partial("_List")
