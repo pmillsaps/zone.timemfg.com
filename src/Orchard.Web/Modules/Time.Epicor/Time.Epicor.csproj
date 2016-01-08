@@ -268,8 +268,11 @@
     <Compile Include="Controllers\OldLoadListController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
     <Compile Include="Controllers\PartSearchController.cs" />
+    <Compile Include="Controllers\QuoteOrderSearchController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\ValuedInventoryController.cs" />
+    <Compile Include="Controllers\WhereUsedBomController.cs" />
+    <Compile Include="Controllers\YardReportController.cs" />
     <Compile Include="Helpers\EmailNotifier.cs" />
     <Compile Include="Helpers\ErrorTools.cs" />
     <Compile Include="Helpers\ExporttoExcelResult.cs" />
@@ -302,6 +305,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Reports\" />
+    <Folder Include="Views\QuoteOrderSearch\" />
+    <Folder Include="Views\WhereUsedBom\" />
+    <Folder Include="Views\YardReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

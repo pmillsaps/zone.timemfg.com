@@ -55,5 +55,7 @@ namespace Time.Data.EntityModels.Production
         public Nullable<int> LaborAssySeq { get; set; }
         public Nullable<int> OprSeq { get; set; }
         public System.Guid Id { get; set; }
+        public int jo_AssemblySeq { get; set; }
+        public int jo_OprSeq { get; set; }
     }
 }
