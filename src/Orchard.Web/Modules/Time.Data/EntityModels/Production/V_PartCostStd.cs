@@ -32,10 +32,10 @@ namespace Time.Data.EntityModels.Production
         public decimal SetupLabRate { get; set; }
         public Nullable<decimal> LaborCost { get; set; }
         public Nullable<decimal> BurdenCost { get; set; }
+        public System.Guid ID { get; set; }
         public bool SubContract { get; set; }
         public decimal EstUnitCost { get; set; }
         public int OprSeq { get; set; }
         public string AltMethod { get; set; }
-        public System.Guid Id { get; set; }
     }
 }

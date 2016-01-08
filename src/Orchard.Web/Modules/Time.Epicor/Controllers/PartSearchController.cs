@@ -1,4 +1,6 @@
-﻿using Orchard.Themes;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,15 @@ namespace Time.Epicor.Controllers
     [Themed]
     public class PartSearchController : Controller
     {
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public PartSearchController(IOrchardServices services)
+        {
+            Services = services;
+            T = NullLocalizer.Instance;
+        }
+
         // GET: PartSearch
         public ActionResult Index()
         {

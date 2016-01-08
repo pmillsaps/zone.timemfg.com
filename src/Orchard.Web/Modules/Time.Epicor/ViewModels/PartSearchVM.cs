@@ -49,10 +49,10 @@ namespace Time.Epicor.ViewModels
         [DisplayName("Service?")]
         public bool ShowService { get; set; }
 
-        [DisplayName("Reedrill?")]
+        [DisplayName("Reedrill Parts?")]
         public bool ShowReedrill { get; set; }
 
-        [DisplayName("Export?")]
+        [DisplayName("Export Parts?")]
         public bool ShowExportVT { get; set; }
 
         [DisplayName("Prototypes?")]
@@ -66,7 +66,7 @@ namespace Time.Epicor.ViewModels
 
         public bool RestrictData { get; set; }
 
-        [DisplayName("Export")]
+        [DisplayName("Export To Excel")]
         public bool ExportToExcel { get; set; }
 
         public int TotalPages

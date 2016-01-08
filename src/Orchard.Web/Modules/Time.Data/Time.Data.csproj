@@ -506,6 +506,15 @@
     <Compile Include="EntityModels\Production\V_PartDetails.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\V_QuoteOrderInformation.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_WhereUsed.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_YardReport.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\LoadList.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
