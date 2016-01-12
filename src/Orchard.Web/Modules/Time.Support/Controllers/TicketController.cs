@@ -129,6 +129,12 @@ namespace Time.Support.Controllers
             {
                 vm.IT = true;
             }
+
+            if (Services.Authorizer.Authorize(Permissions.SupportApprover))
+            {
+                vm.Approver = true;
+            }
+
             GenerateDropDowns(vm, qry);
 
             //qry = SortandPage(qry);
@@ -248,19 +254,26 @@ namespace Time.Support.Controllers
             {
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.AssignedEmployeeID);
 
-                if (ticket.TicketEmployee != null)
+                if (ticket.AssignedEmployeeID != null && ticket.AssignedEmployeeID != 0)
                 {
-                    msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
+                    msg += string.Format("Assigned Employee was changed: {0} -> {1}<br />", ticket.TicketEmployee.FullName, emp.FullName);
                 }
                 else
                 {
-                    msg += string.Format("Assigned ticket to {0}", emp.FullName);
-                    ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
-                    msg += string.Format("{1}Assigned Ticket Resource to {0}", emp.FullName, Environment.NewLine);
+                    msg += string.Format("Assigned ticket to {0}<br />", emp.FullName);
                 }
 
+                if (ticketProject.Status < 3) { ticketProject.Status = 3; }   // Assigned = 3
                 ticket.AssignedEmployeeID = ticketProject.AssignedEmployeeID;
                 ticket.TicketEmployee = emp;
+
+                if (ticket.ResourceEmployeeID == null)
+                {
+                    ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
+                    ticketProject.ResourceEmployeeID = ticket.AssignedEmployeeID;
+                    msg += string.Format("{1}Assigned Ticket Resource to {0}<br />", emp.FullName, Environment.NewLine);
+                }
+
                 ticket.SendAssignmentNotification();
                 ticket.TicketNotes.Add(new TicketNote
                 {
@@ -270,6 +283,13 @@ namespace Time.Support.Controllers
                     Visibility = 1, // Private Note
                     Note = msg
                 });
+                _db.SaveChanges();
+            }
+
+            if (ticket.ResourceEmployeeID == null && ticket.AssignedEmployeeID != null)
+            {
+                ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
+                _db.SaveChanges();
             }
 
             if (ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
@@ -303,34 +323,62 @@ namespace Time.Support.Controllers
             if (ticket.PriorityID != ticketProject.PriorityID)
             {
                 var priority = _db.TicketPriorities.Single(x => x.PriorityID == ticketProject.PriorityID);
-                msg += string.Format("Priority was changed: {0} -> {1}", ticket.TicketPriority.Name, priority.Name);
+                ticket.PriorityID = ticketProject.PriorityID;
+                string updateNote = string.Format("Priority was changed: {0} -> {1}<br />", ticket.TicketPriority.Name, priority.Name);
+                msg += updateNote;
+                ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+
+                if (ticket.AssignedEmployeeID != null)
+                {
+                    // Send update notification
+                    ticket.SendUpdateNotificationToAssigned(statusMessage: updateNote);
+                }
             }
 
             if (ticket.DepartmentID != ticketProject.DepartmentID)
             {
                 var dept = _db.TicketDepartments.Single(x => x.DepartmentID == ticketProject.DepartmentID);
-                msg += string.Format("Department was changed: {0} -> {1}", ticket.TicketDepartment.Name, dept.Name);
+                ticket.DepartmentID = ticketProject.DepartmentID;
+                string updateNote = string.Format("Department was changed: {0} -> {1}<br />", ticket.TicketDepartment.Name, dept.Name);
+                msg += updateNote;
+                ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
             }
 
             if (ticket.CategoryID != ticketProject.CategoryID)
             {
                 var cat = _db.TicketCategories.Single(x => x.CategoryID == ticketProject.CategoryID);
-                msg += string.Format("Category was changed: {0} -> {1}", ticket.TicketCategory.Name, cat.Name);
+                ticket.CategoryID = ticketProject.CategoryID;
+                string updateNote = string.Format("Category was changed: {0} -> {1}<br />", ticket.TicketCategory.Name, cat.Name);
+                msg += updateNote;
+                ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
             }
 
             if (ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
             {
+                string updateNote = "";
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
                 if (ticket.TicketEmployee1 != null)
-                    msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee1.FullName, emp.FullName);
+                    updateNote = string.Format("Resource Employee was changed: {0} -> {1}<br />", ticket.TicketEmployee1.FullName, emp.FullName);
                 else
-                    msg += string.Format("Set Resource Employee to {0}", emp.FullName);
+                    updateNote = string.Format("Set Resource Employee to {0}<br />", emp.FullName);
+                msg += updateNote;
+                ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
             }
 
             if (ticket.Status != ticketProject.Status)
             {
+                var oldstatus = ticket.TicketStatus;
                 var stat = _db.TicketStatuses.Single(x => x.StatusID == ticketProject.Status);
-                msg += string.Format("Status was changed: {0} -> {1}", ticket.TicketStatus.Name, stat.Name);
+                ticket.Status = ticketProject.Status;
+                string updateNote = string.Format("Status was changed: {0} -> {1}<br />", ticket.TicketStatus.Name, stat.Name);
+                msg += updateNote;
+                ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                _db.SaveChanges();
+
+                if (ticket.TicketStatus.isReadyToComplete)
+                    ticket.SendCompletionPendingNotification();
+                if (ticket.TicketStatus.isOpen == false && oldstatus.isOpen == true)
+                    ticket.CompletionDate = DateTime.Now;
             }
 
             // Save all database changes
@@ -457,6 +505,8 @@ namespace Time.Support.Controllers
         [HttpGet]
         public ActionResult ChangeUser(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")))
+                return new HttpUnauthorizedResult();
             TicketProject ticketProject = _db.TicketProjects.Find(id);
 
             var requestors = new SelectList(_db.TicketProjects.DistinctBy(x => x.RequestedBy).ToList(), "RequestedBy", "RequestedBy", ticketProject.RequestedBy);
@@ -476,6 +526,8 @@ namespace Time.Support.Controllers
         [HttpPost]
         public ActionResult ChangeUser(int id, string requestor)
         {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")))
+                return new HttpUnauthorizedResult();
             TicketProject ticketProject = _db.TicketProjects.Find(id);
             //var tr = new TicketRepository();
             ////var id = Convert.ToInt32(formValues.GetValue("id"));
@@ -550,6 +602,150 @@ namespace Time.Support.Controllers
                     return RedirectToAction("Info", new { id = TicketId });
                 }
             }
+        }
+
+        public ActionResult Approval(bool approved, int ticketId)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Change Users")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Change Users")))
+                return new HttpUnauthorizedResult();
+
+            string msg = "";
+            try
+            {
+                var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+                //if (!ticket.TicketStatusesReference.IsLoaded)
+                //    ticket.TicketStatusesReference.Load();
+
+                var oldstatus = ticket.TicketStatus.Name;
+                ticket.TicketStatus = approved ? _db.TicketStatuses.First(c => c.StatusID == 2) : _db.TicketStatuses.First(c => c.StatusID == 7);
+
+                ticket.ApprovalDate = DateTime.Now;
+                ticket.ApprovedBy = User.Identity.Name;
+                ticket.TicketNotes.Add(new TicketNote { Note = String.Format("Status was changed: {0} -> {1}", oldstatus, ticket.TicketStatus.Name), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                ticket.TicketStatusHistories.Add(new TicketStatusHistory() { TicketStatus = ticket.TicketStatus, CreateDate = DateTime.Now });
+
+                _db.SaveChanges();
+                ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+
+                ticket.SendApprovedNotification();                // Added the Approved notification to let Ticket Admins know it is ready to be assigned.
+                if (approved) msg = "Ticket has been Approved"; else msg = "Ticket has been Rejected";
+            }
+            catch (Exception err)
+            {
+                ErrorTools.SendEmail(Request.Url, err);
+                msg = "Error while approving ticketId";
+            }
+
+            TempData["message"] = msg;
+            return RedirectToAction("Info", new { id = ticketId });
+        }
+
+        public ActionResult Complete(bool completed, int ticketId)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Complete Tickets")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Complete Tickets")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Complete Tickets")))
+                return new HttpUnauthorizedResult();
+            string msg = "";
+            try
+            {
+                var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+                //if (!ticket.TicketStatusesReference.IsLoaded)
+                //    ticket.TicketStatusesReference.Load();
+                //if (!ticket.TicketEmployeesReference.IsLoaded)
+                //    ticket.TicketEmployeesReference.Load();
+
+                var oldstatus = ticket.TicketStatus.Name;
+                var origTicket = ticket;
+                ticket.TicketStatus = completed ? _db.TicketStatuses.First(c => c.StatusID == 5) : _db.TicketStatuses.First(c => c.StatusID == 11);
+
+                ticket.CompletionDate = DateTime.Now;
+                ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Status was changed: {0} -> {1}", oldstatus, ticket.TicketStatus.Name), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                ticket.TicketStatusHistories.Add(new TicketStatusHistory() { TicketStatus = ticket.TicketStatus, CreateDate = DateTime.Now });
+                if (ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
+                {
+                    string oldEmp = String.Format("{0} {1}", ticket.TicketEmployee.FirstName, ticket.TicketEmployee.LastName);
+                    string newEmp = String.Format("{0} {1}", ticket.TicketEmployee1.FirstName, ticket.TicketEmployee1.LastName);
+                    ticket.AssignedEmployeeID = ticket.ResourceEmployeeID;
+                    ticket.TicketEmployee = ticket.TicketEmployee1;
+                    ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Reset Assigned To from {0} to {1}", oldEmp, newEmp), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                }
+                _db.SaveChanges();
+
+                ticket.SendUpdateNotificationToAssigned();                // Added the completion notification to let the assigned person know it is complete.
+                if (completed) msg = "Ticket has been completed"; else msg = "Ticket has been denied completion";
+            }
+            catch (Exception err)
+            {
+                ErrorTools.SendEmail(Request.Url, err);
+            }
+
+            TempData["message"] = msg;
+            return RedirectToAction("Info", new { id = ticketId });
+        }
+
+        public ActionResult CancelTicket(bool cancelled, int ticketId)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Cancel Tickets")) &&
+                   !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Cancel Tickets")) &&
+                   !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Cancel Tickets")))
+
+                return new HttpUnauthorizedResult();
+            string msg = "";
+            var result = "";
+            string statusMessage = "";
+
+            try
+            {
+                var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+                //if (!ticket.TicketStatusesReference.IsLoaded)
+                //    ticket.TicketStatusesReference.Load();
+                //if (!ticket.TicketEmployeesReference.IsLoaded)
+                //    ticket.TicketEmployeesReference.Load();
+
+                var oldstatus = ticket.TicketStatus.Name;
+                if (cancelled)
+                {
+                    ticket.TicketStatus = _db.TicketStatuses.Where(c => c.StatusID == 13).First();   // Status = Cancelled Request
+                    statusMessage = "This ticket has been cancelled, and will not be worked on or completed.  If you feel this is an error, please contact your Supervisor, or IT to discuss the issue";
+                    ticket.CompletionDate = DateTime.Now;
+                }
+                else
+                {
+                    ticket.TicketStatus = _db.TicketStatuses.Where(c => c.StatusID == 14).First(); // Status = Cancellation Rejected
+                    statusMessage += "The ticket cancellation has been rejected.  Please look at the ticket, and continue working on it, or get with the requestor, and discuss how it should be handled.";
+                    statusMessage += "<br />If you feel this is an error, please contact your Supervisor, or IT to discuss the issue";
+                }
+
+                ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Status was changed: {0} -> {1}", oldstatus, ticket.TicketStatus.Name), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                ticket.TicketStatusHistories.Add(new TicketStatusHistory { TicketStatus = ticket.TicketStatus, CreateDate = DateTime.Now });
+
+                _db.SaveChanges();
+
+                // send notifications to the submitter
+                ticket.SendUpdateNotification(statusMessage);
+
+                // send notification to the person assigned to the ticket
+                if (ticket.TicketEmployee != null)
+                {
+                    if (ticket.TicketEmployee.NTLogin != ticket.RequestedBy)
+                        ticket.SendUpdateNotificationToAssigned(statusMessage);                // Added the completion notification to let the assigned person know it is complete.
+                }
+
+                result = (String.Format("Ticket has been updated to '{0}'.", ticket.TicketStatus.Name));
+                result += String.Format(" <a href='/support/info/{0}'>Refresh</a> page to view changes", ticket.TicketID);
+                if (cancelled) msg = "Ticket has been cancelled"; else msg = "Ticket has been denied cancellation";
+            }
+            catch (Exception err)
+            {
+                //result = "Could not process your request at this time";
+                ErrorTools.SendEmail(Request.Url, err);
+            }
+
+            TempData["message"] = msg;
+            return RedirectToAction("Info", new { id = ticketId });
         }
 
         #region TicketTasks

@@ -21,7 +21,7 @@
             @if (!string.IsNullOrEmpty(ViewBag.Message))
             {
                 <div class="row text-info">
-                    @ViewBag.Message
+                    @Html.Raw(ViewBag.Message)
                 </div>
             }
 
@@ -81,6 +81,54 @@
 
             @Html.Partial("_TicketUpdate", Model.Ticket)
 
+            @*Ticket Approval*@
+            @if ((Model.Ticket.Status == 1) && (Model.Approver || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Approve Ticket", "Approval", new { approved = true, ticketId = Model.Ticket.TicketID }, new { title = "Approve", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Reject Ticket", "Approval", new { approved = false, ticketId = Model.Ticket.TicketID }, new { title = "Deny", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @*Ticket Completion*@
+            @if ((Model.Ticket.TicketStatus.isReadyToComplete == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Complete Ticket", "Complete", new { completed = true, ticketId = Model.Ticket.TicketID }, new { title = "Complete", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Deny Completion", "Complete", new { completed = false, ticketId = Model.Ticket.TicketID }, new { title = "Deny", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @*Ticket Cancellation*@
+            @if ((Model.Ticket.TicketStatus.isReadyToCancel == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { title = "Cancel Ticket", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Deny Cancellation", "CancelTicket", new { cancelled = false, ticketId = Model.Ticket.TicketID }, new { title = "Deny Cancellation", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                &nbsp;
+            </div>
             @* Add Ticket Note Section *@
             @*@using (Html.BeginForm("AddNote"))*@
 

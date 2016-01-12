@@ -235,13 +235,19 @@
     <Content Include="Views\E10Status\_SchedTasks.cshtml" />
     <Content Include="Views\E10Status\_Tasks.cshtml" />
     <Content Include="Views\E10Status\Index.cshtml" />
+    <Content Include="Views\NOWReport\Index.cshtml" />
     <Content Include="Views\E10Status\_CompletedTasks.cshtml" />
     <Content Include="Views\BOMCosting\_BOMListing.cshtml" />
     <Content Include="Views\DLS\Index.cshtml" />
     <Content Include="Views\PartSearch\Index.cshtml" />
     <Content Include="Views\PartSearch\_PartDetails.cshtml" />
     <Content Include="Views\ValuedInventory\_Details.cshtml" />
-    <Content Include="Views\NOWReport\Index.cshtml" />
+    <Content Include="Views\YardReport\Index.cshtml" />
+    <Content Include="Views\QuoteOrderSearch\Index.cshtml" />
+    <Content Include="Views\WhereUsedBom\Index.cshtml" />
+    <Content Include="Views\WhereUsedBom\_BOM.cshtml" />
+    <Content Include="Views\WhereUsedBom\_WhereUsed.cshtml" />
+    <Content Include="Views\QuoteOrderSearch\_QuoteOrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -278,7 +284,6 @@
     <Compile Include="Helpers\ExporttoExcelResult.cs" />
     <Compile Include="Helpers\FileUploadHelpers.cs" />
     <Compile Include="Helpers\HelperClass.cs" />
-    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\ImageResult.cs" />
     <Compile Include="Helpers\ValuedInventoryExcelResult.cs" />
     <Compile Include="Models\BOMInfo.cs" />
@@ -299,16 +304,14 @@
     <Compile Include="ViewModels\IMViewModel.cs" />
     <Compile Include="ViewModels\LoadListView.cs" />
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
-    <Compile Include="ViewModels\NowReportVM.cs" />
     <Compile Include="ViewModels\PartSearchVM.cs" />
+    <Compile Include="ViewModels\QuoteOrderSearchVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
     <Compile Include="ViewModels\ValuedInventoryVM.cs" />
+    <Compile Include="ViewModels\WhereUsedBomVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Reports\" />
-    <Folder Include="Views\QuoteOrderSearch\" />
-    <Folder Include="Views\WhereUsedBom\" />
-    <Folder Include="Views\YardReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
