@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Time.Data.EntityModels.Production;
 
 namespace Time.Epicor.Controllers
 {
@@ -14,17 +15,20 @@ namespace Time.Epicor.Controllers
     {
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
+        private ProductionEntities db;
 
         public NOWReportController(IOrchardServices services)
         {
             Services = services;
             T = NullLocalizer.Instance;
+            db = new ProductionEntities();
         }
 
         // GET: NOWReport
         public ActionResult Index()
         {
-            return View();
+            var nowReport = db.V_NowReport1.Where(x => x.AssemblySeq > 100).ToList();
+            return View(nowReport);
         }
     }
 }

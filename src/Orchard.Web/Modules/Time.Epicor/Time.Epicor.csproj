@@ -235,13 +235,13 @@
     <Content Include="Views\E10Status\_SchedTasks.cshtml" />
     <Content Include="Views\E10Status\_Tasks.cshtml" />
     <Content Include="Views\E10Status\Index.cshtml" />
-    <Content Include="Views\NOWReport\Index.cshtml" />
     <Content Include="Views\E10Status\_CompletedTasks.cshtml" />
     <Content Include="Views\BOMCosting\_BOMListing.cshtml" />
     <Content Include="Views\DLS\Index.cshtml" />
     <Content Include="Views\PartSearch\Index.cshtml" />
     <Content Include="Views\PartSearch\_PartDetails.cshtml" />
     <Content Include="Views\ValuedInventory\_Details.cshtml" />
+    <Content Include="Views\NOWReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -299,6 +299,7 @@
     <Compile Include="ViewModels\IMViewModel.cs" />
     <Compile Include="ViewModels\LoadListView.cs" />
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
+    <Compile Include="ViewModels\NowReportVM.cs" />
     <Compile Include="ViewModels\PartSearchVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
     <Compile Include="ViewModels\ValuedInventoryVM.cs" />
