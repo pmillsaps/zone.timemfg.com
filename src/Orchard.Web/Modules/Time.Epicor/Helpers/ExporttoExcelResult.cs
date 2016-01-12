@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Time.Data.EntityModels.Production;
 
 namespace Time.Epicor.Helpers
 {
@@ -66,15 +67,17 @@ namespace Time.Epicor.Helpers
         //    }
         //}
 
-        private List<T> ListToExcel<T>(List<T> query)
-        {
-            var t = typeof(T);
-            return query;
-        }
+        //private List<T> ListToExcel<T>(List<T> query)
+        //{
+        //    var t = typeof(T);
+        //    return query;
+        //}
 
         public override void ExecuteResult(ControllerContext context)
         {
             var grid = new GridView();
+            var _type = _data.GetType().GetGenericArguments()[0];
+
             List<object> _dataList = (_data as IEnumerable<object>).Cast<object>().ToList();
             grid.DataSource = _data;
             grid.DataBind();

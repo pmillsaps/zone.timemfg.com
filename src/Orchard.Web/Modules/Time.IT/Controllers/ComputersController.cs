@@ -29,7 +29,9 @@ namespace Time.IT.Controllers
             var computers = db.Computers.OrderBy(x => x.Name).Include(c => c.Ref_Memory).Include(c => c.Ref_Model).Include(c => c.Ref_Status).Include(c => c.Ref_VideoCard).Include(c => c.Ref_DeviceType).Include(c => c.Ref_Processor).Include(c => c.Ref_Sound).Include(c => c.Ref_OS);
             if (!String.IsNullOrEmpty(search))
                 computers = computers.Where(x => x.User.Name.Contains(search) || x.Name.Contains(search)
-                    || x.Ref_Model.Model.Contains(search) || x.Ref_OS.OS.Contains(search) || x.Ref_DeviceType.DeviceType.Contains(search));
+                    || x.Ref_Model.Model.Contains(search) || x.Ref_OS.OS.Contains(search) || x.Ref_DeviceType.DeviceType.Contains(search) || x.SerialNumber.Contains(search));
+
+            ViewBag.SearchIncludes = "Search Includes: User Name, Computer Name, Model, OS, Device Type, Serial Number";
             return View(computers.ToList());
         }
 

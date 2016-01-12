@@ -37,6 +37,7 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType SendRTIMessage { get { return new MessageType("SendRTIMessage"); } }
         public static MessageType SendTicketReminders { get { return new MessageType("SendTicketReminders"); } }
         public static MessageType TicketsNotApprovedTimer { get { return new MessageType("TicketsNotApprovedTimer"); } }
+        public static MessageType TicketNotification { get { return new MessageType("TicketNotification"); } }
         public static MessageType WOL { get { return new MessageType("WOL"); } }
     }
 }

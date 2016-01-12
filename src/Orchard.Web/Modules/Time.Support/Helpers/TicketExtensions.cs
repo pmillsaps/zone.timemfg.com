@@ -76,6 +76,65 @@ namespace Time.Support.Helpers
             }
         }
 
+        public static void SendUpdateNotification(this TicketProject ticket, string statusMessage = "")
+        {
+            if (ticket.RequestedBy.Contains("TIME\\") || ticket.RequestedBy.Contains("TIMEMFG\\") || ticket.RequestedBy.Contains("VERSALIFTSOUTHW\\"))
+            {
+                try
+                {
+                    var msg = new UpdateNotification(ticket, ticket.RequestedBy, statusMessage);
+                    msg.SendEmail();
+                }
+                catch (Exception err)
+                {
+                    ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                               System.Web.HttpContext.Current.User.Identity.Name);
+                    Debug.Print(err.Message);
+                }
+            }
+        }
+
+        public static void SendUpdateNotificationToAssigned(this TicketProject ticket, string statusMessage = "")
+        {
+            if (ticket.TicketEmployee != null)
+            {
+                if (ticket.TicketEmployee.NTLogin.Contains("TIME\\") || ticket.TicketEmployee.NTLogin.Contains("TIMEMFG\\") || ticket.TicketEmployee.NTLogin.Contains("VERSALIFTSOUTHW\\"))
+                {
+                    try
+                    {
+                        var msg = new UpdateNotification(ticket, ticket.TicketEmployee.NTLogin, statusMessage, ticket.TicketEmployee.EmailName);
+                        msg.SendEmail();
+                    }
+                    catch (Exception err)
+                    {
+                        ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                                   System.Web.HttpContext.Current.User.Identity.Name);
+                        Debug.Print(err.Message);
+                    }
+                }
+            }
+        }
+
+        public static void SendCompletionPendingNotification(this TicketProject ticket)
+        {
+            if (ticket.RequestedBy.Contains("TIME\\") || ticket.RequestedBy.Contains("TIMEMFG\\") || ticket.RequestedBy.Contains("VERSALIFTSOUTHW\\"))
+            {
+                try
+                {
+                    var msg = new CompletionPendingNotification(ticket);
+                    msg.SendEmail();
+                }
+                catch (Exception err)
+                {
+                    ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                               System.Web.HttpContext.Current.User.Identity.Name);
+                    Debug.Print(err.Message);
+                }
+            }
+        }
+
+        #region TicketTask
+
         public static void SendTaskAssignmentNotification(this TicketProject ticket, TicketTask task)
         {
             if (!String.IsNullOrEmpty(task.TicketEmployee.NTLogin))
@@ -116,44 +175,7 @@ namespace Time.Support.Helpers
             }
         }
 
-        public static void SendUpdateNotification(this TicketProject ticket, string statusMessage = "")
-        {
-            if (ticket.RequestedBy.Contains("TIME\\") || ticket.RequestedBy.Contains("TIMEMFG\\") || ticket.RequestedBy.Contains("VERSALIFTSOUTHW\\"))
-            {
-                try
-                {
-                    var msg = new UpdateNotification(ticket, ticket.RequestedBy, statusMessage);
-                    msg.SendEmail();
-                }
-                catch (Exception err)
-                {
-                    ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
-                                                               System.Web.HttpContext.Current.User.Identity.Name);
-                    Debug.Print(err.Message);
-                }
-            }
-        }
-
-        public static void SendUpdateNotificationToAssigned(this TicketProject ticket, string statusMessage = "")
-        {
-            if (ticket.TicketEmployee != null)
-            {
-                if (ticket.TicketEmployee.NTLogin.Contains("TIME\\") || ticket.TicketEmployee.NTLogin.Contains("TIMEMFG\\") || ticket.TicketEmployee.NTLogin.Contains("VERSALIFTSOUTHW\\"))
-                {
-                    try
-                    {
-                        var msg = new UpdateNotification(ticket, ticket.TicketEmployee.NTLogin, statusMessage, ticket.TicketEmployee.EmailName);
-                        msg.SendEmail();
-                    }
-                    catch (Exception err)
-                    {
-                        ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
-                                                                   System.Web.HttpContext.Current.User.Identity.Name);
-                        Debug.Print(err.Message);
-                    }
-                }
-            }
-        }
+        #endregion TicketTask
 
         #region TicketNotes
 
