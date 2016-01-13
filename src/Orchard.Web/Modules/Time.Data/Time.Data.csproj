@@ -646,10 +646,7 @@
     <Compile Include="Models\Configurator\ConfigID.cs" />
     <Compile Include="Models\Configurator\ConfigOption.cs" />
     <Compile Include="Models\Configurator\ConfigPricing.cs" />
-    <Compile Include="Models\Configurator\ConfiguratorName.cs" />
     <Compile Include="Models\Configurator\Lookup.cs" />
-    <Compile Include="Models\Configurator\PartOverride.cs" />
-    <Compile Include="Models\Configurator\Structure.cs" />
     <Compile Include="Models\DataPlates\CA_Options.cs" />
     <Compile Include="Models\DataPlates\EP_SS_Options.cs" />
     <Compile Include="Models\DataPlates\HR_Options.cs" />
@@ -672,6 +669,7 @@
     <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
     <Compile Include="Models\MessageQueue\MSMQ.cs" />
     <Compile Include="Models\MessageQueue\PCInvoiceMessage.cs" />
+    <Compile Include="Models\MessageQueue\TicketNotificationMessage.cs" />
     <Compile Include="Models\MessageQueue\WOLMessage.cs" />
     <Compile Include="Models\OrderLog\Dealer.cs" />
     <Compile Include="Models\OrderLog\Installer.cs" />

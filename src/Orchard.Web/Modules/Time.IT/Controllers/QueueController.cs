@@ -1,4 +1,6 @@
-﻿using Orchard.Themes;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,8 +20,16 @@ namespace Time.IT.Controllers
     [Authorize]
     public class QueueController : Controller
     {
-        // GET: Queue
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
 
+        public QueueController(IOrchardServices services)
+        {
+            Services = services;
+            T = NullLocalizer.Instance;
+        }
+
+        // GET: Queue
         public ActionResult Index()
         {
             var msgviews = MSMQ.ListMessagesInQueue();
@@ -93,6 +103,20 @@ namespace Time.IT.Controllers
             }
 
             return ReturnItems;
+        }
+
+        public ActionResult ClearActiveQueue()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ITAdmin, T("You Do Not Have Permission to Clear the Queue")))
+                return new HttpUnauthorizedResult();
+            using (var db = new TimeMFGEntities())
+            {
+                var active = db.MSMQ_Status.ToList();
+                db.MSMQ_Status.RemoveRange(active);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

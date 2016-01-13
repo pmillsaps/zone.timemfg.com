@@ -26,5 +26,6 @@ namespace Time.Data.Models.MessageQueue
         public string Sender { get; set; }
         public int TicketId { get; set; }
         public int NoteId { get; set; }
+        public int TaskId { get; set; }
     }
 }

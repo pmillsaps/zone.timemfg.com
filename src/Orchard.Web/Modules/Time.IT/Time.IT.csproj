@@ -292,6 +292,7 @@
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModel\LinkLicenseViewModel.cs" />
     <Compile Include="ViewModel\LinkComputerViewModel.cs" />
