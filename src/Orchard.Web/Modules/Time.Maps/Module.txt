@@ -1,0 +1,11 @@
+﻿Name: Time.DataPlate
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for renamed feature for Time.DataPlate.
+Features:
+    Time.DataPlate:
+        Description: Description for renamed feature Time.DataPlate.
+		Category: .Time

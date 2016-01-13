@@ -1,0 +1,12 @@
+﻿Name: Time.IT
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: IT Inventory modules, and other utilities
+Features:
+	Time.IT:
+		Description: IT Inventory modules, and other utilities.
+		Dependencies: Time.Data
+		Category: .Time
