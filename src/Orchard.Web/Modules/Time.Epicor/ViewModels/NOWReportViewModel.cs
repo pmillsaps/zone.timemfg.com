@@ -71,7 +71,7 @@ namespace Time.Epicor.ViewModels
             BasedOp = BasedOperation.Draw_9015;
         }
 
-        // Method called in the view to fetch and filter the data for the NowReport and the NowReportClaim
+        // Method called in the Controller to fetch and filter the data for the NowReport and the NowReportClaim
         public void GetData()
         {
             using(var db = new ProductionEntities())
@@ -141,7 +141,7 @@ namespace Time.Epicor.ViewModels
                             item.RowColor = "Green"; //Green (Covered)
                     }
                     else
-                        item.RowColor = "Blue";   
+                        item.RowColor = "Blue";  // Not covered 
                 }                
 
                 // Sending the report back to the view
