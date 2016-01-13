@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Time.Data.EntityModels.TimeMFG;
+using Time.Data.Models.MessageQueue;
 using Time.Support.Helpers;
 using Time.Support.Models;
 
@@ -226,6 +227,13 @@ namespace Time.Support.Controllers
                 _db.TicketProjects.Add(ticketProject);
                 _db.SaveChanges();
                 ticketProject.SendNewTicketNotification();
+                var command = new TicketNotificationMessage
+                {
+                    TicketId = ticketProject.TicketID,
+                    Notification = TicketNotificationMessage.NotificationType.NewTicket,
+                    Sender = HttpContext.User.Identity.Name
+                };
+                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
                 if (Services.Authorizer.Authorize(Permissions.SupportApprover))
                 {
                     ticketProject.SendApprovedNotification();
