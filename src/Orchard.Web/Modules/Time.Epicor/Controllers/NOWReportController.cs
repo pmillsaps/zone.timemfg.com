@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Production;
+using Time.Epicor.Helpers;
+using Time.Epicor.ViewModels;
 
 namespace Time.Epicor.Controllers
 {
@@ -27,8 +29,23 @@ namespace Time.Epicor.Controllers
         // GET: NOWReport
         public ActionResult Index()
         {
-            var nowReport = db.V_NowReport1.Where(x => x.AssemblySeq > 100).ToList();
-            return View(nowReport);
+            NOWReportViewModel vm = new NOWReportViewModel(""); 
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Index(NOWReportViewModel vm, string Search)
+        {
+            vm.GetData();
+
+            // If the Export to Excel box is checked
+            if (vm.ExportToExcel)
+            {
+                return new ExporttoExcelResult("NowReport", vm.Report.Cast<object>().ToList());
+            }
+
+            // Else return the view
+            return View(vm);
         }
     }
 }

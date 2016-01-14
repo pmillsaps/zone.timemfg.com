@@ -22,14 +22,14 @@ namespace Time.Data.EntityModels.Configurator
         [Required(ErrorMessage = "Sequence is required")]
         public int Sequence { get; set; }
 
-        [Required(ErrorMessage = "Lookup is required")]
-        public string Lookup { get; set; }
+        //[Required(ErrorMessage = "Lookup is required")]
+        //public string Lookup { get; set; }
 
-        [Required(ErrorMessage = "LookupSequence is required")]
-        public Nullable<int> LookupSequence { get; set; }
+        //[Required(ErrorMessage = "LookupSequence is required")]
+        //public Nullable<int> LookupSequence { get; set; }
         
-        [Display(Name = "Description")]
-        [Required(ErrorMessage = "Description is required")]
-        public string Notes { get; set; }
+        //[Display(Name = "Description")]
+        //[Required(ErrorMessage = "Description is required")]
+        //public string Notes { get; set; }
     }
 }

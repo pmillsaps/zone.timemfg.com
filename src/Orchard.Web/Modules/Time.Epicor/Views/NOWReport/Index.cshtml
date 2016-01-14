@@ -1,165 +1,49 @@
-﻿@model IEnumerable<Time.Data.EntityModels.Production.V_NowReport1>
+﻿@model Time.Epicor.ViewModels.NOWReportViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Now Report";
 }
 
-<h2>Index</h2>
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    <hr />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-bordered table-condensed table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LastPrinted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ULPart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QtyShortage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QtyOnHand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QtyAvailable)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuyerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SupplierId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationStartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RelOpDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobStartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobAsmblStartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OnHand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SerialNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DrawStepDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrimBin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BinID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobNum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LaborAssySeq)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OprSeq)
-        </th>
-        <th></th>
-    </tr>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastPrinted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ULPart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QtyShortage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QtyOnHand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QtyAvailable)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuyerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupplierId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationStartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RelOpDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobStartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompletedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobAsmblStartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OnHand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SerialNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DrawStepDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimBin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BinID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LaborAssySeq)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OprSeq)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        <div class="row">
+            <div class="col-md-3">@Html.EditorFor(model => model.Query)</div>
+            <div class="col-md-2">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+            <div class="col-md-1 text-primary">@Html.DisplayNameFor(model => model.ExportToExcel)</div>
+            <div class="col-md-1">@Html.EditorFor(model => model.ExportToExcel)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3 text-primary">Search By:</div>
+            <div class="col-md-3 text-primary">Related Ops:</div>
+            <div class="col-md-3 text-primary">Based on Operation:</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">@Html.EnumDropDownListFor(model => model.Filter, new { @class = "form-control" })</div>
+            <div class="col-md-3">@Html.EnumDropDownListFor(model => model.Ops, new { @class = "form-control" })</div>
+            <div class="col-md-3">@Html.EnumDropDownListFor(model => model.BasedOp, new { @class = "form-control" })</div>
+        </div>
+        <br />
+    }
 
-</table>
+    <div>
+        <div class="col-md-2 bg-info">Blue: Not covered</div>
+        <div class="col-md-2 bg-primary">Orange: Partial</div>
+        <div class="col-md-2 bg-success">Green: Covered</div>
+    </div>
+    <br />
+    <br />
+
+    @if (Model.Report != null)
+    {
+        @Html.Partial("_NOWReportDetails", Model.Report)
+    }
+</div>

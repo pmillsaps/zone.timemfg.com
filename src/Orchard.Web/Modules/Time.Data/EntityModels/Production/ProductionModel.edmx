@@ -830,8 +830,6 @@ warning 6002: The table/view 'Test.dbo.V_NowReport' does not have a primary key 
             <PropertyRef Name="PartType" />
             <PropertyRef Name="PartClass" />
             <PropertyRef Name="Id" />
-            <PropertyRef Name="jo_AssemblySeq" />
-            <PropertyRef Name="jo_OprSeq" />
           </Key>
           <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="JobNumber" Type="nvarchar" MaxLength="14" Nullable="false" />
@@ -874,8 +872,6 @@ warning 6002: The table/view 'Test.dbo.V_NowReport' does not have a primary key 
           <Property Name="LaborAssySeq" Type="int" />
           <Property Name="OprSeq" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="jo_AssemblySeq" Type="int" Nullable="false" />
-          <Property Name="jo_OprSeq" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Test.dbo.V_NowReportClaim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1433,9 +1429,7 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
     [V_NowReport].[JobNum] AS [JobNum], 
     [V_NowReport].[LaborAssySeq] AS [LaborAssySeq], 
     [V_NowReport].[OprSeq] AS [OprSeq], 
-    [V_NowReport].[Id] AS [Id], 
-    [V_NowReport].[jo_AssemblySeq] AS [jo_AssemblySeq], 
-    [V_NowReport].[jo_OprSeq] AS [jo_OprSeq]
+    [V_NowReport].[Id] AS [Id]
     FROM [dbo].[V_NowReport] AS [V_NowReport]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_NowReportClaim" EntityType="Self.V_NowReportClaim" store:Type="Views" store:Schema="dbo">
@@ -2018,7 +2012,6 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
           <EntitySet Name="IMPartBins" EntityType="ProductionModel.IMPartBin" />
           <EntitySet Name="SysAgentScheds" EntityType="ProductionModel.SysAgentSched" />
           <EntitySet Name="V_DistributorOrderList" EntityType="ProductionModel.V_DistributorOrderList" />
-          <EntitySet Name="V_NowReport1" EntityType="ProductionModel.V_NowReport1" />
           <EntitySet Name="V_NowReportClaim" EntityType="ProductionModel.V_NowReportClaim" />
           <EntitySet Name="V_QuoteOrderInformation" EntityType="ProductionModel.V_QuoteOrderInformation" />
           <EntitySet Name="V_WhereUsed" EntityType="ProductionModel.V_WhereUsed" />
@@ -2026,6 +2019,7 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
           <EntitySet Name="V_BillOfMaterials" EntityType="ProductionModel.V_BillOfMaterials" />
           <EntitySet Name="V_PartCostStd" EntityType="ProductionModel.V_PartCostStd" />
           <EntitySet Name="V_PartDetails" EntityType="ProductionModel.V_PartDetails" />
+          <EntitySet Name="V_NowReport" EntityType="ProductionModel.V_NowReport" />
         </EntityContainer>
         <EntityType Name="SysTask">
           <Key>
@@ -2363,73 +2357,6 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
           <Property Name="ProdCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="V_NowReport1">
-          <Key>
-            <PropertyRef Name="Model" />
-            <PropertyRef Name="JobNumber" />
-            <PropertyRef Name="Part" />
-            <PropertyRef Name="Description" />
-            <PropertyRef Name="RequiredQty" />
-            <PropertyRef Name="IssuedQty" />
-            <PropertyRef Name="IssuedCompleted" />
-            <PropertyRef Name="RelatedOperation" />
-            <PropertyRef Name="BackFlush" />
-            <PropertyRef Name="AssemblySeq" />
-            <PropertyRef Name="MtlSeq" />
-            <PropertyRef Name="Firm" />
-            <PropertyRef Name="Released" />
-            <PropertyRef Name="Completed" />
-            <PropertyRef Name="Closed" />
-            <PropertyRef Name="PartType" />
-            <PropertyRef Name="PartClass" />
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="jo_AssemblySeq" />
-            <PropertyRef Name="jo_OprSeq" />
-          </Key>
-          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="LastPrinted" Type="DateTime" Precision="0" />
-          <Property Name="ULPart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Part" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="QtyShortage" Type="Decimal" Precision="23" Scale="8" />
-          <Property Name="QtyOnHand" Type="Decimal" Precision="22" Scale="8" />
-          <Property Name="QtyAvailable" Type="Decimal" Precision="24" Scale="8" />
-          <Property Name="Bin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="BuyerID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierId" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
-          <Property Name="IssuedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
-          <Property Name="IssuedCompleted" Type="Boolean" Nullable="false" />
-          <Property Name="OperationStartDate" Type="DateTime" Precision="0" />
-          <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
-          <Property Name="RelOpDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BackFlush" Type="Boolean" Nullable="false" />
-          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
-          <Property Name="JobStartDate" Type="DateTime" Precision="0" />
-          <Property Name="MtlSeq" Type="Int32" Nullable="false" />
-          <Property Name="Firm" Type="Boolean" Nullable="false" />
-          <Property Name="Released" Type="Boolean" Nullable="false" />
-          <Property Name="Completed" Type="Boolean" Nullable="false" />
-          <Property Name="Closed" Type="Boolean" Nullable="false" />
-          <Property Name="CompletedDate" Type="DateTime" Precision="0" />
-          <Property Name="JobAsmblStartDate" Type="DateTime" Precision="0" />
-          <Property Name="PartType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="PartClass" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="OnHand" Type="Decimal" Precision="22" Scale="8" />
-          <Property Name="SerialNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="DrawStepDate" Type="DateTime" Precision="0" />
-          <Property Name="PrimBin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="BinID" Type="Guid" />
-          <Property Name="JobNum" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="LaborAssySeq" Type="Int32" />
-          <Property Name="OprSeq" Type="Int32" />
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="jo_AssemblySeq" Type="Int32" Nullable="false" />
-          <Property Name="jo_OprSeq" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="V_NowReportClaim">
           <Key>
             <PropertyRef Name="Model" />
@@ -2713,6 +2640,69 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
           <Property Name="buyername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="binqtyonhand" Type="Decimal" Precision="38" Scale="8" />
           <Property Name="OpenJobCount" Type="Int32" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_NowReport">
+          <Key>
+            <PropertyRef Name="Model" />
+            <PropertyRef Name="JobNumber" />
+            <PropertyRef Name="Part" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="RequiredQty" />
+            <PropertyRef Name="IssuedQty" />
+            <PropertyRef Name="IssuedCompleted" />
+            <PropertyRef Name="RelatedOperation" />
+            <PropertyRef Name="BackFlush" />
+            <PropertyRef Name="AssemblySeq" />
+            <PropertyRef Name="MtlSeq" />
+            <PropertyRef Name="Firm" />
+            <PropertyRef Name="Released" />
+            <PropertyRef Name="Completed" />
+            <PropertyRef Name="Closed" />
+            <PropertyRef Name="PartType" />
+            <PropertyRef Name="PartClass" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LastPrinted" Type="DateTime" Precision="0" />
+          <Property Name="ULPart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Part" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QtyShortage" Type="Decimal" Precision="23" Scale="8" />
+          <Property Name="QtyOnHand" Type="Decimal" Precision="22" Scale="8" />
+          <Property Name="QtyAvailable" Type="Decimal" Precision="24" Scale="8" />
+          <Property Name="Bin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IssuedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IssuedCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="OperationStartDate" Type="DateTime" Precision="0" />
+          <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
+          <Property Name="RelOpDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BackFlush" Type="Boolean" Nullable="false" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="JobStartDate" Type="DateTime" Precision="0" />
+          <Property Name="MtlSeq" Type="Int32" Nullable="false" />
+          <Property Name="Firm" Type="Boolean" Nullable="false" />
+          <Property Name="Released" Type="Boolean" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="Closed" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="0" />
+          <Property Name="JobAsmblStartDate" Type="DateTime" Precision="0" />
+          <Property Name="PartType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PartClass" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="OnHand" Type="Decimal" Precision="22" Scale="8" />
+          <Property Name="SerialNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DrawStepDate" Type="DateTime" Precision="0" />
+          <Property Name="PrimBin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BinID" Type="Guid" />
+          <Property Name="JobNum" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="LaborAssySeq" Type="Int32" />
+          <Property Name="OprSeq" Type="Int32" />
           <Property Name="Id" Type="Guid" Nullable="false" />
         </EntityType>
       </Schema>
@@ -3262,55 +3252,6 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_NowReport1">
-            <EntityTypeMapping TypeName="ProductionModel.V_NowReport1">
-              <MappingFragment StoreEntitySet="V_NowReport">
-                <ScalarProperty Name="jo_OprSeq" ColumnName="jo_OprSeq" />
-                <ScalarProperty Name="jo_AssemblySeq" ColumnName="jo_AssemblySeq" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
-                <ScalarProperty Name="LaborAssySeq" ColumnName="LaborAssySeq" />
-                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
-                <ScalarProperty Name="BinID" ColumnName="BinID" />
-                <ScalarProperty Name="PrimBin" ColumnName="PrimBin" />
-                <ScalarProperty Name="DrawStepDate" ColumnName="DrawStepDate" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="OnHand" ColumnName="OnHand" />
-                <ScalarProperty Name="PartClass" ColumnName="PartClass" />
-                <ScalarProperty Name="PartType" ColumnName="PartType" />
-                <ScalarProperty Name="JobAsmblStartDate" ColumnName="JobAsmblStartDate" />
-                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
-                <ScalarProperty Name="Closed" ColumnName="Closed" />
-                <ScalarProperty Name="Completed" ColumnName="Completed" />
-                <ScalarProperty Name="Released" ColumnName="Released" />
-                <ScalarProperty Name="Firm" ColumnName="Firm" />
-                <ScalarProperty Name="MtlSeq" ColumnName="MtlSeq" />
-                <ScalarProperty Name="JobStartDate" ColumnName="JobStartDate" />
-                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
-                <ScalarProperty Name="BackFlush" ColumnName="BackFlush" />
-                <ScalarProperty Name="RelOpDescription" ColumnName="RelOpDescription" />
-                <ScalarProperty Name="RelatedOperation" ColumnName="RelatedOperation" />
-                <ScalarProperty Name="OperationStartDate" ColumnName="OperationStartDate" />
-                <ScalarProperty Name="IssuedCompleted" ColumnName="IssuedCompleted" />
-                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
-                <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
-                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
-                <ScalarProperty Name="Bin" ColumnName="Bin" />
-                <ScalarProperty Name="QtyAvailable" ColumnName="QtyAvailable" />
-                <ScalarProperty Name="QtyOnHand" ColumnName="QtyOnHand" />
-                <ScalarProperty Name="QtyShortage" ColumnName="QtyShortage" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Part" ColumnName="Part" />
-                <ScalarProperty Name="ULPart" ColumnName="ULPart" />
-                <ScalarProperty Name="LastPrinted" ColumnName="LastPrinted" />
-                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_NowReportClaim">
             <EntityTypeMapping TypeName="ProductionModel.V_NowReportClaim">
               <MappingFragment StoreEntitySet="V_NowReportClaim">
@@ -3527,6 +3468,53 @@ warning 6002: The table/view 'Test.dbo.V_YardReport' does not have a primary key
                 <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
                 <ScalarProperty Name="PartDescription" ColumnName="PartDescription" />
                 <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_NowReport">
+            <EntityTypeMapping TypeName="ProductionModel.V_NowReport">
+              <MappingFragment StoreEntitySet="V_NowReport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
+                <ScalarProperty Name="LaborAssySeq" ColumnName="LaborAssySeq" />
+                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+                <ScalarProperty Name="BinID" ColumnName="BinID" />
+                <ScalarProperty Name="PrimBin" ColumnName="PrimBin" />
+                <ScalarProperty Name="DrawStepDate" ColumnName="DrawStepDate" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="OnHand" ColumnName="OnHand" />
+                <ScalarProperty Name="PartClass" ColumnName="PartClass" />
+                <ScalarProperty Name="PartType" ColumnName="PartType" />
+                <ScalarProperty Name="JobAsmblStartDate" ColumnName="JobAsmblStartDate" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Firm" ColumnName="Firm" />
+                <ScalarProperty Name="MtlSeq" ColumnName="MtlSeq" />
+                <ScalarProperty Name="JobStartDate" ColumnName="JobStartDate" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="BackFlush" ColumnName="BackFlush" />
+                <ScalarProperty Name="RelOpDescription" ColumnName="RelOpDescription" />
+                <ScalarProperty Name="RelatedOperation" ColumnName="RelatedOperation" />
+                <ScalarProperty Name="OperationStartDate" ColumnName="OperationStartDate" />
+                <ScalarProperty Name="IssuedCompleted" ColumnName="IssuedCompleted" />
+                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
+                <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="Bin" ColumnName="Bin" />
+                <ScalarProperty Name="QtyAvailable" ColumnName="QtyAvailable" />
+                <ScalarProperty Name="QtyOnHand" ColumnName="QtyOnHand" />
+                <ScalarProperty Name="QtyShortage" ColumnName="QtyShortage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="ULPart" ColumnName="ULPart" />
+                <ScalarProperty Name="LastPrinted" ColumnName="LastPrinted" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

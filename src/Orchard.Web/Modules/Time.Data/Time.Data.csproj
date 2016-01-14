@@ -494,7 +494,7 @@
     <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Production\V_NowReport1.cs">
+    <Compile Include="EntityModels\Production\V_NowReport.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Production\V_NowReportClaim.cs">

@@ -12,7 +12,7 @@ namespace Time.Data.EntityModels.Production
     using System;
     using System.Collections.Generic;
     
-    public partial class V_NowReport1
+    public partial class V_NowReport
     {
         public string Model { get; set; }
         public string JobNumber { get; set; }
@@ -55,7 +55,5 @@ namespace Time.Data.EntityModels.Production
         public Nullable<int> LaborAssySeq { get; set; }
         public Nullable<int> OprSeq { get; set; }
         public System.Guid Id { get; set; }
-        public int jo_AssemblySeq { get; set; }
-        public int jo_OprSeq { get; set; }
     }
 }
