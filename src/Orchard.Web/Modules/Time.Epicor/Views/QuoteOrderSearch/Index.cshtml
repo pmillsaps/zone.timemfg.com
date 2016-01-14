@@ -1,0 +1,32 @@
+﻿@model Time.Epicor.ViewModels.QuoteOrderSearchVM
+
+@{
+    ViewBag.Title = "Quote / Order Search";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        <div>
+            <hr />
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Search)
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" name="submitButton" value="Search" />
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (Model.Details != null)
+    {
+
+        @Html.Partial("_QuoteOrderList", Model.Details)
+    }
+</div>
