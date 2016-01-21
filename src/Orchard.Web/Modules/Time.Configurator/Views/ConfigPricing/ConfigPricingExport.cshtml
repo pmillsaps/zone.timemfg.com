@@ -11,11 +11,10 @@
         @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
     </p>
 </div>
-
-<h4>Select the Configurator to export pricing to Excel</h4>
 <p>
     @Html.ActionLink("Back to ConfigPricing Index", "Index")
 </p>
+<h4>Select the Configurator to export pricing to Excel</h4>
 <hr />
 
 @using (Html.BeginForm("ConfigPricingExport", "ConfigPricing", FormMethod.Post))
