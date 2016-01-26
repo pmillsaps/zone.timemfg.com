@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Reset Domain Password";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Not Yet Implemented</h4>
+
+<p>
+    Are you sure you want to reset your domain password?<br />
+    This utility will send you an email to your domain email, with a link you will need to click on.<br />
+    If you do nothing, it will expire after 24 hours.<br />
+    If you click the link, you will be taken to a page where you can enter what you would like your new password to be.<br />
+</p>
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <fieldset>
+        <legend>@T("Account Information")</legend>
+        <div>
+            <label for="User">@T("Account Name:")</label>
+            @Html.TextBox("User")
+            @Html.ValidationMessage("User")
+        </div>
+        <div>
+            <button class="primaryAction" type="submit">@T("Reset Password")</button>
+        </div>
+    </fieldset>
+} 

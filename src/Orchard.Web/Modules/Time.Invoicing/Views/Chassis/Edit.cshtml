@@ -1,0 +1,26 @@
+﻿@model Time.Invoicing.EntityModels.PcInvoice.Chassis
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>
+    Edit</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    @Model.FullName
+
+    <fieldset>
+        <legend>Chassis</legend>
+        @Html.HiddenFor(model => model.Id)
+        @Html.Partial("_CreateOrEdit")
+        <div class="editor-button">
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </div>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

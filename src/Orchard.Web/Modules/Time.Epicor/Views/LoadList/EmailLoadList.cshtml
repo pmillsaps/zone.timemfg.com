@@ -1,0 +1,93 @@
+﻿@model Time.Epicor.ViewModels.EmailLoadListVM
+
+@{
+    ViewBag.Title = "Email Load List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("Back to the LoadList", "Details", "LoadList", new { id = Model.LoadListId }, new { @class = "btn btn-primary" })</li>
+</ul>
+<br /><br />
+
+@using (Html.BeginForm("EmailLoadList", "LoadList", new { id = Model.LoadListId }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.LoadListId)
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Comments)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Comments)
+    </div>
+    <div id="data">
+        @{Html.RenderAction("_EmailList");}
+    </div>
+    <div class="editor-button2">
+        <input type="submit" value="Email this Load List to selected Emails" />
+    </div>
+
+    <br /><br /><br /><br />
+    <div>
+        <h4>@Html.DisplayFor(model => model.LoadList.Name)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.DateSchedShip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.TruckingCompany)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.TruckingCompany)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Comments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Complete)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Complete)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Distributors)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Distributors)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.MakeReady)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.MakeReady)
+            </dd>
+        </dl>
+    </div>
+}
+@Html.Partial("_ViewLifts", Model.LoadList.LoadListJobs)
