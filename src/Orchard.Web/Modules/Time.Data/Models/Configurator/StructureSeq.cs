@@ -27,9 +27,8 @@ namespace Time.Data.EntityModels.Configurator
 
         //[Required(ErrorMessage = "LookupSequence is required")]
         //public Nullable<int> LookupSequence { get; set; }
-        
-        //[Display(Name = "Description")]
-        //[Required(ErrorMessage = "Description is required")]
-        //public string Notes { get; set; }
+
+        [Display(Name = "Description")]
+        public string Notes { get; set; }
     }
 }
