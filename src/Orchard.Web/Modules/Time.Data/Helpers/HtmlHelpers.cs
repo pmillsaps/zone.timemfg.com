@@ -54,12 +54,12 @@ namespace System.Web.Mvc
         {
             var model = helper.Encode(input).Replace(Environment.NewLine, "<br />");
             //model = model.Replace(Environment.NewLine, "<br />");
-            int start = 0;
+            //int start = 0;
             int ending = 0;
             for (int i = 0; i < lines; i++)
             {
                 if (ending < model.Length)
-                    ending = model.IndexOf("<br />", ending+1);
+                    ending = model.IndexOf("<br />", ending + 1);
             }
 
             if (ending < model.Length) model = model.Substring(0, ending);

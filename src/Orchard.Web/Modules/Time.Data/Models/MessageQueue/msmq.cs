@@ -111,6 +111,7 @@ namespace Time.Data.Models.MessageQueue
             }
             catch (Exception ex)
             {
+                string msg = ex.Message;
             }
             return msgviews;
         }

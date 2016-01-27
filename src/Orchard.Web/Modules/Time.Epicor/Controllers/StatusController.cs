@@ -36,64 +36,64 @@ namespace Time.Epicor.Controllers
             db.Database.CommandTimeout = 600;
         }
 
-        private async Task<string> GetMrpStatus()
-        {
-            string returnMessage = "Idle";
-            var qry = db.systasks
-                .Where(x => x.taskstatus.ToUpper() == "ACTIVE" && x.enddate == null && x.endtime == 0)
-                .OrderByDescending(x => x.systasknum);
+        //private async Task<string> GetMrpStatus()
+        //{
+        //    string returnMessage = "Idle";
+        //    var qry = db.systasks
+        //        .Where(x => x.taskstatus.ToUpper() == "ACTIVE" && x.enddate == null && x.endtime == 0)
+        //        .OrderByDescending(x => x.systasknum);
 
-            if (qry.Where(x => x.taskdescription == "Process MRP").Count() > 0)
-            {
-                var record = qry.Where(x => x.taskdescription == "Process MRP").First();
-                TimeSpan t = TimeSpan.FromSeconds((int)record.starttime);
-                string starttime = string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
-                returnMessage = String.Format("Running! - MRP started: {0:d} @ {1} by {2}: Status-{3}", record.startdate, starttime, record.submituser, record.activitymsg);
-            }
+        //    if (qry.Where(x => x.taskdescription == "Process MRP").Count() > 0)
+        //    {
+        //        var record = qry.Where(x => x.taskdescription == "Process MRP").First();
+        //        TimeSpan t = TimeSpan.FromSeconds((int)record.starttime);
+        //        string starttime = string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
+        //        returnMessage = String.Format("Running! - MRP started: {0:d} @ {1} by {2}: Status-{3}", record.startdate, starttime, record.submituser, record.activitymsg);
+        //    }
 
-            var status = db.C_TMC_Status.FirstOrDefault(x => x.Name == "MRP");
-            if (status != null)
-            {
-                returnMessage += String.Format("{0}Latest MRP Status : {1}{0}{2}", Environment.NewLine, status.Complete, status.Status);
-                returnMessage = returnMessage.Replace(Environment.NewLine, "<br />").Replace("<br /><br />", "<br />");
-            }
+        //    var status = db.C_TMC_Status.FirstOrDefault(x => x.Name == "MRP");
+        //    if (status != null)
+        //    {
+        //        returnMessage += String.Format("{0}Latest MRP Status : {1}{0}{2}", Environment.NewLine, status.Complete, status.Status);
+        //        returnMessage = returnMessage.Replace(Environment.NewLine, "<br />").Replace("<br /><br />", "<br />");
+        //    }
 
-            return returnMessage;
-        }
+        //    return returnMessage;
+        //}
 
         [HttpGet]
-        public async Task<ActionResult> Index2()
-        {
-            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
-                return new HttpUnauthorizedResult();
+        //public async Task<ActionResult> Index2()
+        //{
+        //    if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
+        //        return new HttpUnauthorizedResult();
 
-            return this.View();
-        }
+        //    return this.View();
+        //}
 
         // GET: Interim
-        [HttpGet]
-        public async Task<ActionResult> Index()
-        {
-            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
-                return new HttpUnauthorizedResult();
+        //[HttpGet]
+        //public async Task<ActionResult> Index()
+        //{
+        //    if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
+        //        return new HttpUnauthorizedResult();
 
-            //var vm = new EpicorStatusViewModel();
+        //    //var vm = new EpicorStatusViewModel();
 
-            //var tasks = db.sysagenttasks
-            //    .Join(db.sysagentscheds,
-            //        c => c.agentschednum,
-            //        t => t.agentschednum,
-            //        (c, t) => new myTask
-            //        {
-            //            sysagenttask = c,
-            //            tasksched = t
-            //        }
-            //    );
-            //vm.ScheduledTasks = tasks;
-            ViewBag.MRPStatus = await GetMrpStatus();
+        //    //var tasks = db.sysagenttasks
+        //    //    .Join(db.sysagentscheds,
+        //    //        c => c.agentschednum,
+        //    //        t => t.agentschednum,
+        //    //        (c, t) => new myTask
+        //    //        {
+        //    //            sysagenttask = c,
+        //    //            tasksched = t
+        //    //        }
+        //    //    );
+        //    //vm.ScheduledTasks = tasks;
+        //    ViewBag.MRPStatus = await GetMrpStatus();
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public ActionResult _Interim()
         {
