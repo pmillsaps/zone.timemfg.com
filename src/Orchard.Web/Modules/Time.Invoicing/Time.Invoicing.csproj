@@ -131,11 +131,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\Time.Invoicing.pubxml" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -150,7 +147,6 @@
     <Content Include="Views\Chassis\Details.cshtml" />
     <Content Include="Views\Chassis\Edit.cshtml" />
     <Content Include="Views\Chassis\_CreateOrEdit.cshtml" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Home\MessageResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
