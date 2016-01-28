@@ -303,11 +303,11 @@ namespace Time.Support.Controllers
 
                 if (ticket.AssignedEmployeeID != null && ticket.AssignedEmployeeID != 0)
                 {
-                    msg += string.Format("Assigned Employee was changed: {0} -> {1}<br />", ticket.TicketEmployee.FullName, emp.FullName);
+                    msg += string.Format("Zone: Assigned Employee was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketEmployee.FullName, emp.FullName);
                 }
                 else
                 {
-                    msg += string.Format("Assigned ticket to {0}<br />", emp.FullName);
+                    msg += string.Format("Zone: Assigned ticket to {0}" + Environment.NewLine, emp.FullName);
                 }
 
                 if (ticketProject.Status < 3) { ticketProject.Status = 3; }   // Assigned = 3
@@ -318,8 +318,9 @@ namespace Time.Support.Controllers
                 {
                     ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
                     ticketProject.ResourceEmployeeID = ticket.AssignedEmployeeID;
-                    msg += string.Format("{1}Assigned Ticket Resource to {0}<br />", emp.FullName, Environment.NewLine);
+                    msg += string.Format("Zone: {1}Assigned Ticket Resource to {0}" + Environment.NewLine, emp.FullName, Environment.NewLine);
                 }
+                _db.SaveChanges();
 
                 //ticket.SendAssignmentNotification();
                 var command = new TicketNotificationMessage
@@ -378,14 +379,14 @@ namespace Time.Support.Controllers
             {
                 var priority = _db.TicketPriorities.Single(x => x.PriorityID == ticketProject.PriorityID);
                 ticket.PriorityID = ticketProject.PriorityID;
-                string updateNote = string.Format("Priority was changed: {0} -> {1}<br />", ticket.TicketPriority.Name, priority.Name);
+                string updateNote = string.Format("Zone: Priority was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketPriority.Name, priority.Name);
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
                 if (ticket.AssignedEmployeeID != null)
                 {
                     // Send update notification
-                    ticket.SendUpdateNotificationToAssigned(statusMessage: updateNote);
+                    // ticket.SendUpdateNotificationToAssigned(statusMessage: updateNote);
                     var command = new TicketNotificationMessage
                     {
                         TicketId = ticketProject.TicketID,
@@ -401,18 +402,20 @@ namespace Time.Support.Controllers
             {
                 var dept = _db.TicketDepartments.Single(x => x.DepartmentID == ticketProject.DepartmentID);
                 ticket.DepartmentID = ticketProject.DepartmentID;
-                string updateNote = string.Format("Department was changed: {0} -> {1}<br />", ticket.TicketDepartment.Name, dept.Name);
+                string updateNote = string.Format("Zone: Department was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketDepartment.Name, dept.Name);
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                _db.SaveChanges();
             }
 
             if (ticket.CategoryID != ticketProject.CategoryID)
             {
                 var cat = _db.TicketCategories.Find(ticketProject.CategoryID);
-                string updateNote = string.Format("Category was changed: {0} -> {1}<br />", ticket.TicketCategory.Name, cat.Name);
+                string updateNote = string.Format("Zone: Category was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketCategory.Name, cat.Name);
                 ticket.CategoryID = ticketProject.CategoryID;
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                _db.SaveChanges();
             }
 
             if (ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
@@ -420,11 +423,12 @@ namespace Time.Support.Controllers
                 string updateNote = "";
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
                 if (ticket.TicketEmployee1 != null)
-                    updateNote = string.Format("Resource Employee was changed: {0} -> {1}<br />", ticket.TicketEmployee1.FullName, emp.FullName);
+                    updateNote = string.Format("Zone: Resource Employee was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketEmployee1.FullName, emp.FullName);
                 else
-                    updateNote = string.Format("Set Resource Employee to {0}<br />", emp.FullName);
+                    updateNote = string.Format("Zone: Set Resource Employee to {0}" + Environment.NewLine, emp.FullName);
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                _db.SaveChanges();
             }
 
             if (ticket.Status != ticketProject.Status)
@@ -432,7 +436,7 @@ namespace Time.Support.Controllers
                 var oldstatus = ticket.TicketStatus;
                 var stat = _db.TicketStatuses.Single(x => x.StatusID == ticketProject.Status);
                 ticket.Status = ticketProject.Status;
-                string updateNote = string.Format("Status was changed: {0} -> {1}<br />", ticket.TicketStatus.Name, stat.Name);
+                string updateNote = string.Format("Zone: Status was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketStatus.Name, stat.Name);
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 ticket.TicketStatusHistories.Add(new TicketStatusHistory { CreateDate = DateTime.Now, TicketID = ticket.TicketID, StatusID = ticketProject.Status });
