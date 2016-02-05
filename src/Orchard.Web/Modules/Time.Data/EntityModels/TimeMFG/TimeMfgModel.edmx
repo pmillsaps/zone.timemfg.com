@@ -389,11 +389,11 @@
 warning 6002: The table/view 'TimeMFG.dbo.V_ClassIdSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ClassIdSummary">
           <Key>
+            <PropertyRef Name="ExtCost" />
             <PropertyRef Name="ComparisonDate" />
-            <PropertyRef Name="ClassId" />
           </Key>
-          <Property Name="ClassId" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" />
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
+          <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" Nullable="false" />
           <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -402,10 +402,9 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Key>
             <PropertyRef Name="PeriodYear" />
             <PropertyRef Name="ComparisonDate" />
-            <PropertyRef Name="ClassId" />
           </Key>
           <Property Name="PeriodYear" Type="int" Nullable="false" />
-          <Property Name="ClassId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
           <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
           <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" />
         </EntityType>
@@ -1637,20 +1636,19 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Key>
             <PropertyRef Name="PeriodYear" />
             <PropertyRef Name="ComparisonDate" />
-            <PropertyRef Name="ClassId" />
           </Key>
           <Property Name="PeriodYear" Type="Int32" Nullable="false" />
-          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ExtCost" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExtCost" Type="Decimal" Precision="38" Scale="10" />
         </EntityType>
         <EntityType Name="V_ClassIdSummary">
           <Key>
+            <PropertyRef Name="ExtCost" />
             <PropertyRef Name="ComparisonDate" />
-            <PropertyRef Name="ClassId" />
           </Key>
-          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ExtCost" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ExtCost" Type="Decimal" Nullable="false" Precision="38" Scale="10" />
           <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
@@ -2070,8 +2068,8 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <EntitySetMapping Name="V_ValuedInventoryByPeriod">
             <EntityTypeMapping TypeName="TimeMFGModel.V_ValuedInventoryByPeriod">
               <MappingFragment StoreEntitySet="V_ValuedInventoryByPeriod">
-                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
                 <ScalarProperty Name="ExtCost" ColumnName="ExtCost" />
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="PeriodYear" ColumnName="PeriodYear" />
               </MappingFragment>

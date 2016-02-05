@@ -15,7 +15,7 @@ namespace Time.Data.EntityModels.TimeMFG
     public partial class V_ClassIdSummary
     {
         public string ClassId { get; set; }
-        public Nullable<decimal> ExtCost { get; set; }
+        public decimal ExtCost { get; set; }
         public System.DateTime ComparisonDate { get; set; }
     }
 }

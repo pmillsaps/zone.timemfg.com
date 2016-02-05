@@ -16,7 +16,7 @@ namespace Time.Data.EntityModels.TimeMFG
     {
         public int PeriodYear { get; set; }
         public string ClassId { get; set; }
-        public Nullable<decimal> ExtCost { get; set; }
         public System.DateTime ComparisonDate { get; set; }
+        public Nullable<decimal> ExtCost { get; set; }
     }
 }

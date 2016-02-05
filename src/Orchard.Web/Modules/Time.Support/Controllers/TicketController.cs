@@ -239,11 +239,19 @@ namespace Time.Support.Controllers
             {
                 if (ticketProject.PriorityID > 4) ticketProject.PriorityID = 4; // highest a new ticket can be set is 4=High
                 ticketProject.Status = 1;   // Set Ticket Status to 1=Waiting Supervisor Approval
-                if (Services.Authorizer.Authorize(Permissions.SupportApprover)) ticketProject.Status = 2;
+
+                var user = HttpContext.User.Identity.Name;
+
+                //if (Services.Authorizer.Authorize(Permissions.SupportApprover)) ticketProject.Status = 2;
                 ticketProject.TicketStatus = _db.TicketStatuses.Find(ticketProject.Status);
                 ticketProject.RequestedDate = DateTime.Now;
-                ticketProject.RequestedBy = HttpContext.User.Identity.Name;
+                ticketProject.RequestedBy = user;
                 ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
+
+                if (ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
+                {
+                    ticketProject.Status = 2;
+                }
 
                 _db.TicketStatusHistories.Add(new TicketStatusHistory { TicketStatus = ticketProject.TicketStatus, CreateDate = DateTime.Now });
                 var codegen = new CreateRandomCode();
@@ -258,7 +266,7 @@ namespace Time.Support.Controllers
                     Sender = HttpContext.User.Identity.Name
                 };
                 var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
-                if (Services.Authorizer.Authorize(Permissions.SupportApprover))
+                if (ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
                 {
                     var cmd = new TicketNotificationMessage
                     {
@@ -753,14 +761,19 @@ namespace Time.Support.Controllers
 
         public ActionResult Complete(bool completed, int ticketId)
         {
-            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Complete Tickets")) &&
+            var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+            var user = HttpContext.User.Identity.Name;
+            if (user.ToLower() != ticket.RequestedBy.ToLower())
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Complete Tickets")) &&
                 !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Complete Tickets")) &&
                 !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Complete Tickets")))
-                return new HttpUnauthorizedResult();
+                    return new HttpUnauthorizedResult();
+            }
             string msg = "";
             try
             {
-                var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+                //var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
                 //if (!ticket.TicketStatusesReference.IsLoaded)
                 //    ticket.TicketStatusesReference.Load();
                 //if (!ticket.TicketEmployeesReference.IsLoaded)

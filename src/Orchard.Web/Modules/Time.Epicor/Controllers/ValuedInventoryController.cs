@@ -16,10 +16,17 @@ namespace Time.Epicor.Controllers
     public class ValuedInventoryController : Controller
     {
         private TimeMFGEntities db;
+        private IMapper mapper;
 
         public ValuedInventoryController()
         {
             db = new TimeMFGEntities();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ValuedInventory, ValuedInventoryExt>();
+            });
+
+            mapper = config.CreateMapper();
         }
 
         // GET: ValuedInventory
@@ -44,9 +51,8 @@ namespace Time.Epicor.Controllers
             if (vm.ComparisonDate != null)
             {
                 string filename = String.Format("ValuedInventory_{0}", vm.ComparisonDate.ToString("yyyyMMdd"));
-                Mapper.CreateMap<ValuedInventory, ValuedInventoryExt>();
                 var data = db.ValuedInventories.Where(x => x.ComparisonDate == vm.ComparisonDate).OrderBy(x => x.PartNum).ToArray();
-                List<ValuedInventoryExt> _data = Mapper.Map<ValuedInventory[], List<ValuedInventoryExt>>(data);
+                List<ValuedInventoryExt> _data = mapper.Map<ValuedInventory[], List<ValuedInventoryExt>>(data);
                 var data2 = db.V_ValuedInventoryByPeriod.Where(x => x.ComparisonDate == vm.ComparisonDate).OrderBy(x => x.PeriodYear).ThenBy(x => x.ClassId).ToList();
                 var data3 = db.V_ClassIdSummary.Where(x => x.ComparisonDate == vm.ComparisonDate).OrderBy(x => x.ClassId).ToList();
 

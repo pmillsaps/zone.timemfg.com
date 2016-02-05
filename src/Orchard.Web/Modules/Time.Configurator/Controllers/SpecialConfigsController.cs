@@ -23,7 +23,7 @@ namespace Time.Configurator.Controllers
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
 
-        private string[] tokens;
+        //private string[] tokens;
 
         public SpecialConfigsController(IOrchardServices services)
         {
@@ -66,7 +66,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: SpecialConfigs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -106,7 +106,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: SpecialConfigs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

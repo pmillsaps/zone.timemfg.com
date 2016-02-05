@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using FastMember;
+using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Time.Epicor.Helpers
         private string filename;
         private List<ValuedInventoryExt> _data;
         private readonly string _filename;
-        private readonly Type _type;
+        //private readonly Type _type;
 
         public ValuedInventoryExcelResult(string filename, List<ValuedInventoryExt> _data, List<IGrouping<object, ValuedInventoryExt>> data21, List<V_ClassIdSummary> data3)
         {
@@ -45,20 +46,33 @@ namespace Time.Epicor.Helpers
 
         public override void ExecuteResult(ControllerContext context)
         {
-            var grid = new GridView();
-            //List<object> _dataList = (_data as IEnumerable<object>).Cast<object>().ToList();
-            grid.DataSource = data;
-            grid.DataBind();
-
             ExcelPackage excel = new ExcelPackage();
-            GetWorkSheet(grid, excel, filename);
-            grid.DataSource = data2;
-            grid.DataBind();
-            GetWorkSheet(grid, excel, "Summary");
+            using (DataTable dt = new DataTable())
+            {
+                using (var reader = ObjectReader.Create(data))
+                {
+                    dt.Load(reader);
+                }
+                GetWorkSheet(dt, excel, "Data");
+            }
 
-            grid.DataSource = data3;
-            grid.DataBind();
-            GetWorkSheet(grid, excel, "Summary2");
+            using (DataTable dt = new DataTable())
+            {
+                using (var reader = ObjectReader.Create(data2))
+                {
+                    dt.Load(reader);
+                }
+                GetWorkSheet(dt, excel, "Summary");
+            }
+
+            using (DataTable dt = new DataTable())
+            {
+                using (var reader = ObjectReader.Create(data3))
+                {
+                    dt.Load(reader);
+                }
+                GetWorkSheet(dt, excel, "Summary2");
+            }
 
             using (var memoryStream = new MemoryStream())
             {
@@ -78,9 +92,24 @@ namespace Time.Epicor.Helpers
             //workSheet.Cells.AutoFitColumns();
 
             DataTable dt = new DataTable("GridView_Data");
+            //foreach (var item in grid.Columns)
+            //{
+            //    var type = item.GetType();
+            //    var name = item.ToString();
+            //    dt.Columns.Add(name, type);
+            //}
+
+            //DataView dv = (DataView)grid.DataSource;
+            //DataTable dta = dv.Table;
+
+            int counter = 0;
             foreach (TableCell cell in grid.HeaderRow.Cells)
             {
-                dt.Columns.Add(cell.Text);
+                //var type = grid.Columns[counter++].GetType();
+                var type = grid.Rows[1].Cells[counter].GetType();
+                counter++;
+
+                dt.Columns.Add(cell.Text, type);
             }
             foreach (GridViewRow row in grid.Rows)
             {
@@ -110,6 +139,21 @@ namespace Time.Epicor.Helpers
             //}
             //workSheet.Cells.AutoFitColumns();
             //Format the header
+            using (ExcelRange rng = workSheet.Cells["A1:BZ1"])
+            {
+                rng.Style.Font.Bold = true;
+                rng.Style.Fill.PatternType = ExcelFillStyle.Solid;                      //Set Pattern for the background to Solid
+                rng.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(79, 129, 189));  //Set color to dark blue
+                rng.Style.Font.Color.SetColor(Color.White);
+            }
+        }
+
+        private void GetWorkSheet(DataTable dt, ExcelPackage excel, string sheetName)
+        {
+            var workSheet = excel.Workbook.Worksheets.Add(sheetName);
+            workSheet.Cells["A1"].LoadFromDataTable(dt, true);
+            workSheet.Cells.AutoFitColumns();
+
             using (ExcelRange rng = workSheet.Cells["A1:BZ1"])
             {
                 rng.Style.Font.Bold = true;
