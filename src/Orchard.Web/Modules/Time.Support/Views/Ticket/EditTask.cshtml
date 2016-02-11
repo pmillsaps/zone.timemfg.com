@@ -16,18 +16,18 @@
         @Html.HiddenFor(model => model.TicketID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AssignedTo, "AssignedTo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("AssignedTo", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AssignedTo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Task, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Task, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Task, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AssignedTo, "AssignedTo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AssignedTo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AssignedTo, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -42,9 +42,10 @@
         </div>
 
         <div class="form-group">
+            @Html.HiddenFor(model => model.CompletionDate)
             @Html.LabelFor(model => model.CompletionDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CompletionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.CompletionDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CompletionDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,23 +53,25 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control", @rows = 10 } })
                 @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.HiddenFor(model => model.Requestor)
             @Html.LabelFor(model => model.Requestor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Requestor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.Requestor, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Requestor, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.HiddenFor(model => model.RequestDate)
             @Html.LabelFor(model => model.RequestDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RequestDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.RequestDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RequestDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -82,5 +85,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Ticket", "Info", new { id = Model.TicketID })
 </div>

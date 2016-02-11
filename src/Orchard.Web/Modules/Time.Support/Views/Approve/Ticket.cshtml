@@ -8,6 +8,8 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="editor-button">
         <input type="submit" value="Approve Ticket" />
     </div>

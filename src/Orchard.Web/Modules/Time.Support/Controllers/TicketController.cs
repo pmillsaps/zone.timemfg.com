@@ -122,6 +122,7 @@ namespace Time.Support.Controllers
         {
             var qry = _db.TicketProjects.FirstOrDefault(c => c.TicketID == id);
             if (qry == null) return RedirectToAction("Index");
+            var user = HttpContext.User.Identity.Name;
 
             var vm = new TicketViewModel() { Ticket = qry, Tasks = qry.TicketTasks, TicketId = id };
             if (Services.Authorizer.Authorize(Permissions.SupportAdmin))
@@ -133,15 +134,15 @@ namespace Time.Support.Controllers
                 vm.IT = true;
             }
 
-            if (Services.Authorizer.Authorize(Permissions.SupportApprover))
+            if (Services.Authorizer.Authorize(Permissions.SupportApprover) || ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
             {
                 vm.Approver = true;
             }
 
             GenerateDropDowns(vm, qry);
 
+            // Obsolete code section ?
             //qry = SortandPage(qry);
-
             //ViewData["OpenCount"] = _db.TicketProjects.Count(c => c.TicketStatus.isOpen);
             //if (!String.IsNullOrEmpty(Request.QueryString["sort"]))
             //{
@@ -151,8 +152,9 @@ namespace Time.Support.Controllers
             //{
             //    ViewData["SortBy"] = "";
             //}
-            if ((string)TempData["message"] != "") ViewBag.Message = TempData["message"];
+            //if ((string)TempData["message"] != "") ViewBag.Message = TempData["message"];
 
+            ViewBag.Title = "View 5";
             return View(vm);
         }
 
@@ -209,6 +211,7 @@ namespace Time.Support.Controllers
                     || x.Notes.Contains(item)
                     || x.PrivateNotes.Contains(item)
                     || x.TicketNotes.Any(n => n.Visibility >= searchVisibility && n.Note.Contains(item))
+                    || x.TicketTasks.Any(t => t.Task.Contains(item) || t.Notes.Contains(item))
                 );
 
                 var tmp = qry.ToList();
@@ -255,7 +258,13 @@ namespace Time.Support.Controllers
 
                 _db.TicketStatusHistories.Add(new TicketStatusHistory { TicketStatus = ticketProject.TicketStatus, CreateDate = DateTime.Now });
                 var codegen = new CreateRandomCode();
-                ticketProject.ApprovalCode = codegen.GenerateCode(12);
+                var code = codegen.GenerateCode(12);
+                while (_db.TicketProjects.Any(x => x.ApprovalCode == code))
+                {
+                    // regenerate a new code if it already exists
+                    code = codegen.GenerateCode(12);
+                }
+                ticketProject.ApprovalCode = code;
                 _db.TicketProjects.Add(ticketProject);
                 _db.SaveChanges();
                 // ticketProject.SendNewTicketNotification();
@@ -274,7 +283,7 @@ namespace Time.Support.Controllers
                         Notification = TicketNotificationMessage.NotificationType.Approved,
                         Sender = HttpContext.User.Identity.Name
                     };
-                    success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+                    success = MSMQ.SendQueueMessage(cmd, MessageType.TicketNotification.Value);
                     // ticketProject.SendApprovedNotification();
                 }
                 else
@@ -285,7 +294,7 @@ namespace Time.Support.Controllers
                         Notification = TicketNotificationMessage.NotificationType.SupervisorNewTicket,
                         Sender = HttpContext.User.Identity.Name
                     };
-                    success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+                    success = MSMQ.SendQueueMessage(cmd, MessageType.TicketNotification.Value);
                     //ticketProject.SendSupervisorNewTicketNotification();
                 }
 
@@ -587,15 +596,20 @@ namespace Time.Support.Controllers
 
         private void GenerateDropDowns(TicketViewModel vm, TicketProject ticketProject)
         {
-            vm.CategoryID = new SelectList(_db.TicketCategories.Where(x => x.isActive == true).OrderBy(x => x.Name), "CategoryID", "Name", ticketProject.CategoryID);
-            vm.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
-            if (vm.IT || vm.Admin) vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name), "DepartmentID", "Name", ticketProject.DepartmentID);
-            vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
-            vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName), "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
-            vm.PriorityID = new SelectList(_db.TicketPriorities, "PriorityID", "Name", ticketProject.PriorityID);
-            vm.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name), "StatusID", "Name", ticketProject.Status);
-            if (!vm.IT && !vm.Admin && HttpContext.User.Identity.Name == ticketProject.TicketEmployee.NTLogin)
-                vm.Status = new SelectList(_db.TicketStatuses.Where(x => x.isAssignedVisible).OrderBy(x => x.Name), "StatusID", "Name", ticketProject.Status);
+            vm.CategoryID = new SelectList(_db.TicketCategories.Where(x => x.isActive == true).OrderBy(x => x.Name).ToList(), "CategoryID", "Name", ticketProject.CategoryID);
+            vm.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name).ToList(), "DepartmentID", "Name", ticketProject.DepartmentID);
+            if (vm.IT || vm.Admin) vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name).ToList(), "DepartmentID", "Name", ticketProject.DepartmentID);
+            vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName).ToList(), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
+            vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName).ToList(), "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
+            vm.PriorityID = new SelectList(_db.TicketPriorities.ToList(), "PriorityID", "Name", ticketProject.PriorityID);
+            vm.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name).ToList(), "StatusID", "Name", ticketProject.Status);
+            if (!vm.IT && !vm.Admin)
+            {
+                if ((ticketProject.TicketEmployee != null && HttpContext.User.Identity.Name == ticketProject.TicketEmployee.NTLogin) || HttpContext.User.Identity.Name == ticketProject.RequestedBy)
+                {
+                    vm.Status = new SelectList(_db.TicketStatuses.Where(x => x.isAssignedVisible).OrderBy(x => x.Name).ToList(), "StatusID", "Name", ticketProject.Status);
+                }
+            }
 
             vm.TicketVisibility = new SelectList(_db.TicketVisibilities.OrderByDescending(x => x.Id), "Id", "Name");
 
@@ -714,10 +728,20 @@ namespace Time.Support.Controllers
 
         public ActionResult Approval(bool approved, int ticketId)
         {
-            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")) &&
-                !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Change Users")) &&
-                !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Change Users")))
-                return new HttpUnauthorizedResult();
+            var user = HttpContext.User.Identity.Name;
+            if (!ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
+            {
+                // This will throw an error in all cases except if SupportAdmin
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Approve Tickets"))
+                    //|| Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Approve Tickets"))
+                    )
+                    return new HttpUnauthorizedResult();
+            }
+
+            //if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Approve Tickets")) &&
+            //    !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Approve Tickets")) &&
+            //    !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Approve Tickets")))
+            //    return new HttpUnauthorizedResult();
 
             string msg = "";
             try
@@ -823,18 +847,22 @@ namespace Time.Support.Controllers
 
         public ActionResult CancelTicket(bool cancelled, int ticketId)
         {
-            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Cancel Tickets")) &&
-                   !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Cancel Tickets")) &&
-                   !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Cancel Tickets")))
+            var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+            var user = HttpContext.User.Identity.Name;
+            if (user.ToLower() != ticket.RequestedBy.ToLower())
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Cancel Tickets")) &&
+                //!Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Cancel Tickets")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Cancel Tickets")))
+                { return new HttpUnauthorizedResult(); }
+            }
 
-                return new HttpUnauthorizedResult();
             string msg = "";
             var result = "";
             string statusMessage = "";
 
             try
             {
-                var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
                 //if (!ticket.TicketStatusesReference.IsLoaded)
                 //    ticket.TicketStatusesReference.Load();
                 //if (!ticket.TicketEmployeesReference.IsLoaded)
@@ -1004,6 +1032,7 @@ namespace Time.Support.Controllers
             if (ModelState.IsValid)
             {
                 _db.Entry(ticketTask).State = EntityState.Modified;
+                if (ticketTask.Completed && ticketTask.CompletionDate == null) ticketTask.CompletionDate = DateTime.Now;
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Info", new { id = ticketTask.TicketID });
             }

@@ -123,7 +123,6 @@
     <Content Include="Module.txt" />
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Ticket\_Ticket.cshtml" />
-    <Content Include="Views\Ticket\Info.cshtml" />
     <Content Include="Views\TicketProjects\Create.cshtml" />
     <Content Include="Views\TicketProjects\Delete.cshtml" />
     <Content Include="Views\TicketProjects\Details.cshtml" />
@@ -164,6 +163,8 @@
     <Content Include="Views\Approve\TicketNotFound.cshtml" />
     <Content Include="Views\Approve\Ticket.cshtml" />
     <Content Include="Views\Ticket\_TicketUpdate.cshtml" />
+    <Content Include="Views\Ticket\Info.cshtml" />
+    <Content Include="Views\Ticket\_TaskView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -207,6 +208,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CPTIReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITMeeting.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITMeeting.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests-ByDept.cs">
@@ -349,6 +356,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Report\ITMeeting.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITMeeting.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

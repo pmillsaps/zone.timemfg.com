@@ -104,14 +104,14 @@
         </div>
     </div>
 
-    if ((bool)ViewBag.IT || (bool)ViewBag.Admin || HttpContext.Current.User.Identity.Name == Model.TicketEmployee.NTLogin)
+    if ((bool)ViewBag.IT || (bool)ViewBag.Admin || (Model.TicketEmployee != null && HttpContext.Current.User.Identity.Name == Model.TicketEmployee.NTLogin))
     {
         <br />
-        <div class="row form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Update Ticket" class="btn btn-default" />
+            <div class="row form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Update Ticket" class="btn btn-default" />
+                </div>
             </div>
-        </div>
     }
 
 }
