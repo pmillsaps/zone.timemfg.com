@@ -368,28 +368,31 @@ namespace Time.Support.Controllers
             {
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
 
-                //if (ticket.TicketEmployee != null)
-                //{
-                //    msg += string.Format("Assigned Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
-                //}
-                //else
-                //{
-                //    msg += string.Format("Assigned ticket to {0}", emp.FullName);
-                //    ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
-                //    msg += string.Format("{1}Assigned Ticket Resource to {0}", emp.FullName, Environment.NewLine);
-                //}
+                if (emp != null)
+                {
+                    msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
+                    ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
+                    ticket.TicketEmployee1 = emp;
+                }
+                else
+                {
+                    msg += string.Format("Assigned ticket resource to {0}", emp.FullName);
+                    ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
+                    msg += string.Format("{1}Assigned Ticket Resource to {0}", emp.FullName, Environment.NewLine);
+                }
 
                 //ticket.AssignedEmployeeID = ticketProject.AssignedEmployeeID;
                 //ticket.TicketEmployee = emp;
                 //ticket.SendAssignmentNotification();
-                //ticket.TicketNotes.Add(new TicketNote
-                //{
-                //    CreatedBy = currentUser,
-                //    CreatedDate = DateTime.Now,
-                //    TicketID = ticket.TicketID,
-                //    Visibility = 1, // Private Note
-                //    Note = msg
-                //});
+                ticket.TicketNotes.Add(new TicketNote
+                {
+                    CreatedBy = currentUser,
+                    CreatedDate = DateTime.Now,
+                    TicketID = ticket.TicketID,
+                    Visibility = 1, // Private Note
+                    Note = msg
+                });
+                _db.SaveChanges();
             }
 
             if (ticket.PriorityID != ticketProject.PriorityID)
