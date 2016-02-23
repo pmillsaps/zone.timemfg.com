@@ -15,7 +15,7 @@ namespace Time.Data.EntityModels.DataPlates
     public class PS_OptionMetadata
     {
         [Required(ErrorMessage = "Option is Required")]
-        [RegularExpression(@"^PS-.*(?<![Ee][Nn][Gg])$", ErrorMessage = "The Option must start with PS- and not be an ENG")]
+        [RegularExpression(@"^PS-.*(?<![Ee][Nn][Gg]|[\s]|[\.])$", ErrorMessage = "The Option must start with PS- and not end with ENG, a dot, or a blank space.")]
         public string Option { get; set; }
         [Required(ErrorMessage = "Enter Platform quantity")]
         [RegularExpression("([0-2])", ErrorMessage = "Enter a number for quantity (0, 1, or 2)")]  

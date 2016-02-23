@@ -14,7 +14,7 @@ namespace Time.Data.EntityModels.DataPlates
     public class CA_OptionsMetadata
     {
         [Required(ErrorMessage = "Option is Required")]
-        [RegularExpression(@"^CA-.*(?<![Ee][Nn][Gg])$", ErrorMessage = "The Option must start with CA- and not be an ENG")]
+        [RegularExpression(@"^CA-.*(?<![Ee][Nn][Gg]|[\s]|[\.])$", ErrorMessage = "The Option must start with CA- and not end with ENG, a dot, or a blank space.")]
         public string Option { get; set; }
         //[Required(ErrorMessage = "Enter Capacity in Pounds")]
         //[RegularExpression("(^[0-9]+$)", ErrorMessage = "Enter a number for Capacity")]

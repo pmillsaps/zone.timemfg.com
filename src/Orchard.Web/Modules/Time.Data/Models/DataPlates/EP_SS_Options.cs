@@ -14,7 +14,7 @@ namespace Time.Data.EntityModels.DataPlates
     public class EP_SS_OptionsMetadata
     {
         [Required(ErrorMessage = "Option is Required")]
-        [RegularExpression(@"^[ES]+[PS]+[-].*(?<![Ee][Nn][Gg])$", ErrorMessage = "The Option must start with EP- or SS- and not be an ENG")]
+        [RegularExpression(@"^[ES]+[PS]+[-].*(?<![Ee][Nn][Gg]|[\s]|[\.])$", ErrorMessage = "The Option must start with EP- or SS- and not end with ENG, a dot, or a blank space.")]
         public string Option { get; set; }
         [Required(ErrorMessage = "Enter Voltage")]
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Enter a number for Voltage")]
