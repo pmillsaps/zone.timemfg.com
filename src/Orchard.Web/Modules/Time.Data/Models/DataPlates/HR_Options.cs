@@ -14,7 +14,7 @@ namespace Time.Data.EntityModels.DataPlates
 
     public class HR_OptionsMetadata
     {
-        [RegularExpression(@"^SC-.*(?<![Ee][Nn][Gg])$", ErrorMessage = "The Option must start with SC- and not be an ENG")]
+        [RegularExpression(@"^SC-.*(?<![Ee][Nn][Gg]|[\s]|[\.])$", ErrorMessage = "The Option must start with SC- and not end with ENG, a dot, or a blank space.")]
         [Required(ErrorMessage = "Option is Required")]
         public string Option { get; set; }
         [DisplayName("TruGuard/HRUpperControls")]
