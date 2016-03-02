@@ -6,26 +6,26 @@
 
 <h2>@ViewBag.Title</h2>
 
-<h4>Not Yet Implemented</h4>
-
 <div id="TicketSearch">
     @using (Html.BeginForm("Index", "BOMCosting", FormMethod.Post, new { onsubmit = "showDiv()" }))
     {
-    @Html.AntiForgeryToken()
-    <label for="txtSearch">
-        Search:
-    </label>@Html.EditorFor(x => x.SearchText)<input type="submit" value="Load BOM" />
-    <br />
-    @Html.CheckBoxFor(x => x.DrillIntoPurchaseItems)
-    @Html.LabelFor(x => x.DrillIntoPurchaseItems)
-    @Html.CheckBoxFor(x => x.FilterRawMaterial)
-    @Html.LabelFor(x => x.FilterRawMaterial)
-    @Html.CheckBoxFor(x => x.ExportToExcel)
-    @Html.LabelFor(x => x.ExportToExcel)
-    @Html.CheckBoxFor(x => x.UseTestData)
-    @Html.LabelFor(x => x.UseTestData)
-    @Html.CheckBoxFor(x => x.PurchaseItemsOnly)
-    @Html.LabelFor(x => x.PurchaseItemsOnly)
+        @Html.AntiForgeryToken()
+        <label for="txtSearch" class="label">
+            Search:
+        </label>
+        @Html.EditorFor(x => x.SearchText)
+        <input type="submit" value="Load BOM" />
+        <br />
+        @Html.CheckBoxFor(x => x.DrillIntoPurchaseItems)
+        @Html.LabelFor(x => x.DrillIntoPurchaseItems)
+        @Html.CheckBoxFor(x => x.FilterRawMaterial)
+        @Html.LabelFor(x => x.FilterRawMaterial)
+        @Html.CheckBoxFor(x => x.ExportToExcel)
+        @Html.LabelFor(x => x.ExportToExcel)
+        @Html.CheckBoxFor(x => x.UseTestData)
+        @Html.LabelFor(x => x.UseTestData)
+        @Html.CheckBoxFor(x => x.PurchaseItemsOnly)
+        @Html.LabelFor(x => x.PurchaseItemsOnly)
     }
 </div>
 
@@ -54,11 +54,11 @@
 <span id="data">
     @if (Model != null)
     {
-    @Html.Partial("_BOMListing", Model.bomInfo);
+        @Html.Partial("_BOMListing", Model.bomInfo);
     }
     @if (ViewBag._ElapsedTime != null)
     {
-    <p>@String.Format("Query Time: {0:0.00} Seconds", (ViewBag._ElapsedTime / 1000.0))</p>
+        <p>@String.Format("Query Time: {0:0.00} Seconds", (ViewBag._ElapsedTime / 1000.0))</p>
     }
 </span>
 

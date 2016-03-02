@@ -13,6 +13,14 @@
     @if (enableLostPassword)
     { <text> </text> @Html.ActionLink(T("Lost your Password?").Text, "RequestLostPassword") }
 </p>
+<p>
+    To log in, please use your WINDOWS username and password:<br />
+    For TIME users, use either 'TIME\JoeB' or just 'JoeB' (DO NOT USE YOUR EMAIL)<br />
+    For VSW users, you HAVE to use the domain name, ie, 'VERSALIFTSOUTHW\JoeB'<br />
+    The password is your normal windows password you use to log in every morning.<br />
+    When you change your windows password, this password will also change.<br />
+</p>
+
 @Html.ValidationSummary(T("Login was unsuccessful. Please correct the errors and try again.").ToString())
 
 @using (Html.BeginFormAntiForgeryPost(Url.Action("LogOn", new { ReturnUrl = Request.QueryString["ReturnUrl"] })))
