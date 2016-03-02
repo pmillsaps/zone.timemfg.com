@@ -1,0 +1,66 @@
+﻿@model Time.OrderLog.Models.DatePickerVM
+
+@{
+    Script.Require("ShapesBase");
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    Layout.Title = T("Add Draw Date").ToString();
+    ViewBag.Title = "Export Order Log to Excel";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+@using (Html.BeginForm("ExportOrderLog", "OrderLog", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-8 lead text-info">Select the date range of the Order Details report</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">From:</div>
+        <div class="col-md-3">@Html.TextBoxFor(Model => Model.StartDate, new { @class = "form-control datepicker", placeholder = "Enter Start Date..." })</div>
+        <div class="col-md-1">To:</div>
+        <div class="col-md-3">@Html.TextBoxFor(Model => Model.EndDate, new { @class = "form-control datepicker", placeholder = "Enter End Date..." })</div>
+        <div class="col-md-3"><input type="submit" value="Export Order Details Report" class="btn btn-primary" /></div>
+    </div>
+}
+
+<br />
+<hr />
+<br />
+
+@using (Html.BeginForm("OrderTransactionReport", "OrderLog", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12 lead text-info">The date range of the Order Transactions report will be the same as Order Details and will be filled out automatically.</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">From:</div>
+        <div class="col-md-3">@Html.TextBox("TStartDate", String.Empty, new { @readonly = "readonly", @class = "form-control datepicker", placeholder = "Start Date..." })</div>
+        <div class="col-md-1">To:</div>
+        <div class="col-md-3">@Html.TextBox("TEndDate", String.Empty, new { @readonly = "readonly", @class = "form-control datepicker", placeholder = "End Date..." })</div>
+        <div class="col-md-2"><input type="submit" value="Export Order Transactions Report" class="btn btn-primary" /></div>
+    </div>
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        $("#StartDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altField: "#TStartDate"
+        });
+        $("#EndDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altField: "#TEndDate"
+        });
+
+    </script>
+}

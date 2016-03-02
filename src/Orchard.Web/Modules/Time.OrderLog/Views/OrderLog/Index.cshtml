@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Time.Data.EntityModels.OrderLog.Order>
+
+@{
+    ViewBag.Title = "Order Log";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+<hr />
+@Html.ActionLink("Add New Order", "Create")
+@using (Html.BeginForm("Search", "OrderLog"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.TextBox("search")
+        </div>
+        <div class="col-md-1">
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-2">
+        YTD: @ViewBag.YTD
+    </div>
+    <div class="col-md-2">
+        Prev YTD: @ViewBag.PYTD
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Export Order Log To Excel", "ExportOrderLog", "OrderLog")
+    </div>
+
+</div>
+<br />
+
+
+@{
+    var grid = new WebGrid(
+        source: Model,
+        canPage: true,
+        rowsPerPage: 20,
+        canSort: true
+        );
+}
+
+@grid.GetHtml(
+        tableStyle: "table table-striped table-bordered table-condensed col-md-12",
+        columns: grid.Columns(
+        grid.Column("PO", "PO#", format: item => Html.ActionLink((string)item.PO, "Details", new { id = (int)item.OrderId })),
+        grid.Column("Date", "Date", format: (item) => item.Date.ToString("MM/dd/yyyy")),
+        grid.Column("Dealer.DealerName", "Dealer Name"),
+        //grid.Column("Territory.TerritoryName", "Territory Name"),
+        grid.Column("Customer", "Customer")
+        // ,grid.Column("Territory.TerritoryName", "Territory Name")
+    )
+)
