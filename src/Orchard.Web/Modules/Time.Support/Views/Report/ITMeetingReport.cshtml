@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "IT Meeting Report";
+}
+<div class="container">
+    <div class="row">
+        @Html.Action("SideBar", "Ticket")
+
+        <div class="form-horizontal col-md-9 col-sm-9 col-xs-9">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @:Starting Date For The Completed Items :
+                @Html.TextBox("StartDate", null, new { @class = ".datepicker" })
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js">
+    $('.datepicker').datepicker()
+</script>

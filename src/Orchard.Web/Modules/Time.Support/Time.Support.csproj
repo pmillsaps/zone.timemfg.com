@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{64520F90-1707-47A6-9880-7524B1B60DAA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Time.Support</RootNamespace>
+    <AssemblyName>Time.Support</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\EmailTemplates\ApprovedNotification.htm" />
+    <Content Include="Content\EmailTemplates\TaskCompletedNotification.htm" />
+    <Content Include="Content\EmailTemplates\TaskAssignmentNotification.htm" />
+    <Content Include="Content\EmailTemplates\AssignmentNotification.htm" />
+    <Content Include="Content\EmailTemplates\AssignmentNotificationUser.htm" />
+    <Content Include="Content\EmailTemplates\CompletionPendingNotification.htm" />
+    <Content Include="Content\EmailTemplates\NewTicketNotification.htm" />
+    <Content Include="Content\EmailTemplates\NotificationFooter.htm" />
+    <Content Include="Content\EmailTemplates\NotificationHeader.htm" />
+    <Content Include="Content\EmailTemplates\SupervisorNewTicketNotification.htm" />
+    <Content Include="Content\EmailTemplates\UpdateNotification.htm" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\Time.Support.pubxml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Module.txt" />
+    <Content Include="Views\Ticket\Index.cshtml" />
+    <Content Include="Views\Ticket\_Ticket.cshtml" />
+    <Content Include="Views\TicketProjects\Create.cshtml" />
+    <Content Include="Views\TicketProjects\Delete.cshtml" />
+    <Content Include="Views\TicketProjects\Details.cshtml" />
+    <Content Include="Views\TicketProjects\Edit.cshtml" />
+    <Content Include="Views\TicketProjects\Index.cshtml" />
+    <Content Include="Views\Ticket\SideBar.cshtml" />
+    <Content Include="Views\Ticket\Create.cshtml" />
+    <Content Include="Views\Ticket\AddTask.cshtml" />
+    <Content Include="Views\Ticket\DeleteTask.cshtml" />
+    <Content Include="Views\TicketTasks\Details.cshtml" />
+    <Content Include="Views\TicketTasks\Edit.cshtml" />
+    <Content Include="Views\TicketTasks\Index.cshtml" />
+    <Content Include="Views\Ticket\EditTask_Old.cshtml" />
+    <Content Include="Views\EditorTemplates\SupportSettingsPart.cshtml" />
+    <Content Include="Views\AdminSupport\Create.cshtml" />
+    <Content Include="Views\AdminSupport\Delete.cshtml" />
+    <Content Include="Views\AdminSupport\Details.cshtml" />
+    <Content Include="Views\AdminSupport\Edit.cshtml" />
+    <Content Include="Views\AdminSupport\Index.cshtml" />
+    <Content Include="Views\Ticket\ChangeUser.cshtml" />
+    <Content Include="Views\_TicketNotes\Create.cshtml" />
+    <Content Include="Views\_TicketNotes\Delete.cshtml" />
+    <Content Include="Views\_TicketNotes\Details.cshtml" />
+    <Content Include="Views\_TicketNotes\Edit.cshtml" />
+    <Content Include="Views\_TicketNotes\Index.cshtml" />
+    <Content Include="Views\Water\Create.cshtml" />
+    <Content Include="Views\Water\Delete.cshtml" />
+    <Content Include="Views\Water\Details.cshtml" />
+    <Content Include="Views\Water\Edit.cshtml" />
+    <Content Include="Views\Water\Index.cshtml" />
+    <Content Include="Views\TicketTasks\MyTasks.cshtml" />
+    <Content Include="Views\Ticket\MyTasks.cshtml" />
+    <Content Include="Views\Ticket\_TicketTask.cshtml" />
+    <Content Include="Views\Ticket\EditTask.cshtml" />
+    <Content Include="Views\Report\ITMeetingReport.cshtml" />
+    <Content Include="Views\Approve\Index.cshtml" />
+    <Content Include="Views\Approve\ApproveTicketConfirm.cshtml" />
+    <Content Include="Views\Approve\TicketNotFound.cshtml" />
+    <Content Include="Views\Approve\Ticket.cshtml" />
+    <Content Include="Views\Ticket\_TicketUpdate.cshtml" />
+    <Content Include="Views\Ticket\Info.cshtml" />
+    <Content Include="Views\Ticket\_TaskView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\AdminSupportController.cs" />
+    <Compile Include="Controllers\ApproveController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
+    <Compile Include="Controllers\TicketProjectsController.cs" />
+    <Compile Include="Controllers\TicketTasksController.cs" />
+    <Compile Include="Controllers\WaterController.cs" />
+    <Compile Include="Controllers\_TicketNotesController.cs" />
+    <Compile Include="Handlers\SupportSettingsPartHandler.cs" />
+    <Compile Include="Helpers\ADHelper.cs" />
+    <Compile Include="Helpers\CreateRandomCode.cs" />
+    <Compile Include="Helpers\CrystalReportPdfResult.cs" />
+    <Compile Include="Helpers\ErrorTools.cs" />
+    <Compile Include="Helpers\Notifications.cs" />
+    <Compile Include="Helpers\TicketExtensions.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
+    <Compile Include="Models\SupportSettingsPart.cs" />
+    <Compile Include="Models\SupportSettingsPartRecord.cs" />
+    <Compile Include="Models\TicketProjectUpdate.cs" />
+    <Compile Include="Models\TicketViewModel.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Views\Report\CPTIReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPTIReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITMeeting.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITMeeting.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests-ByDept.cs">
+      <DependentUpon>ITRequests-ByDept.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByCategory.cs">
+      <DependentUpon>ITRequests_ByCategory.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByRequestor.cs">
+      <DependentUpon>ITRequests_ByRequestor.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ZoneRequests_ByResource_Personal.cs">
+      <DependentUpon>ZoneRequests_ByResource_Personal.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource_Personal.cs">
+      <DependentUpon>ITRequests_ByResource_Personal.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource.cs">
+      <DependentUpon>ITRequests_ByResource.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource_Closed.cs">
+      <DependentUpon>ITRequests_ByResource_Closed.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource_CompDate_Closed.cs">
+      <DependentUpon>ITRequests_ByResource_CompDate_Closed.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited.cs">
+      <DependentUpon>ITRequests_ByResource_CompDate_Closed_Limited.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\EditorTemplates\ITMeeting.cs">
+      <DependentUpon>ITMeeting.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource_Priority.cs">
+      <DependentUpon>ITRequests_ByResource_Priority.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\CPTIReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CPTIReport.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Report\ITRequests-ByDept.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests-ByDept.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Report\ITRequests_ByRequestor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByRequestor.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Report\ITRequests_ByResource.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Report\ITRequests_ByResource_Closed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_Closed.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Report\ITRequests_ByResource_CompDate_Closed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_CompDate_Closed.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\EditorTemplates\ITMeeting.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITMeeting.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Report\ITRequests_ByResource_Priority.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_Priority.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_CompDate_Closed_Limited.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ITRequests_ByCategory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByCategory.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ITRequests_ByResource_Personal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_Personal.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ZoneRequests_ByResource_Personal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ZoneRequests_ByResource_Personal.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Report\ITMeeting.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITMeeting.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
