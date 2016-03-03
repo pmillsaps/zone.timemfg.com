@@ -56,6 +56,8 @@
         <EntityTypeShape EntityType="TimeMFGModel.MSMQ_Status" Width="1.5" PointX="0.75" PointY="14.75" />
         <EntityTypeShape EntityType="TimeMFGModel.NLog_Entries" Width="1.5" PointX="6.75" PointY="14.75" />
         <EntityTypeShape EntityType="TimeMFGModel.ValuedInventory" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.V_ValuedInventoryByPeriod" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.V_ClassIdSummary" Width="1.5" PointX="14.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

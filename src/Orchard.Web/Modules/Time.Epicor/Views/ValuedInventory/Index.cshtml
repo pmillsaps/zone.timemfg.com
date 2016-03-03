@@ -1,7 +1,37 @@
-﻿
+﻿@model Time.Epicor.ViewModels.ValuedInventoryVM
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Valued Inventory Index";
 }
 
-<h2>Index</h2>
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
 
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    @*@Html.HiddenFor(model => model.LoadListJobId)*@
+    <div class="editor-label"></div>
+
+    <div class="col-md-3">
+        @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
+    </div>
+
+    <div class="col-md-2">
+        <input type="submit" value="Export Data" />
+    </div>
+    }
+
+    @*@if(Model.ValuedInventoryItems != null){
+    @Html.Partial("_Details", Model.ValuedInventoryItems)
+    }*@
+
+    <div class="row">
+        <div class="col-md-4">
+            <p>
+                Each Comparison Date period is the BOH on that date based on tranactions rolled back to the Comparison Date.
+                The costs are based on the Current Cost at the time the data was generated (CalculationDate) so there may be a cost discrepancy.
+            </p>
+        </div>
+    </div>
+</div>

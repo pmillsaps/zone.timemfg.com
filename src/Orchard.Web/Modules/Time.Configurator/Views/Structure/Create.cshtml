@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-                @Html.ValidationMessageFor(model => model.ConfigName)
+                @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ConfigData)
-                @Html.ValidationMessageFor(model => model.ConfigData)
+                @Html.ValidationMessageFor(model => model.ConfigData, "", new { @class = "text-danger" })
             </div>
         </div>
         @*************************************************************************Makes you able to create by typing******************************************************************************************@

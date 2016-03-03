@@ -49,5 +49,25 @@ namespace System.Web.Mvc
 
             return MvcHtmlString.Create(model);
         }
+
+        public static MvcHtmlString DisplayWithBreaksTruncated(this HtmlHelper helper, string input, int lines)
+        {
+            var model = helper.Encode(input).Replace(Environment.NewLine, "<br />");
+            //model = model.Replace(Environment.NewLine, "<br />");
+            //int start = 0;
+            int ending = 0;
+            for (int i = 0; i < lines; i++)
+            {
+                if (ending < model.Length)
+                    ending = model.IndexOf("<br />", ending + 1);
+            }
+
+            if (ending < model.Length) model = model.Substring(0, ending);
+
+            if (String.IsNullOrEmpty(input))
+                return MvcHtmlString.Empty;
+
+            return MvcHtmlString.Create(model);
+        }
     }
 }

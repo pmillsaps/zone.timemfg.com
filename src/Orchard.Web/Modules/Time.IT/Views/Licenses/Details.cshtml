@@ -89,6 +89,6 @@
 </p>
 
 <h3>Linked Computers</h3>
-@Html.Partial("_Computers", Model.Computers)
+@Html.Partial("_Computers", Model.Computers.OrderBy(x => x.Name))
 <h3>Linked Users</h3>
-@Html.Partial("_Users", Model.Users)
+@Html.Partial("_Users", Model.Users.OrderBy(x => x.Name))

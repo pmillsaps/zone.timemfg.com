@@ -18,9 +18,12 @@ namespace Time.IT.Controllers
         private ITInventoryEntities db = new ITInventoryEntities();
 
         // GET: Licenses
-        public ActionResult Index()
+        public ActionResult Index(string search = "")
         {
             var licenses = db.Licenses.OrderBy(x => x.Name).ThenBy(x => x.LicenseKey).ThenBy(x => x.Quantity).Include(l => l.Ref_LicenseType);
+            if (!String.IsNullOrEmpty(search))
+                licenses = licenses.Where(x => x.Name.Contains(search) || x.Note.Contains(search) ||
+                x.LicenseKey.Contains(search) || x.PO.Contains(search));
             return View(licenses.ToList());
         }
 

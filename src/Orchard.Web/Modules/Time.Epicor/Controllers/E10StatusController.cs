@@ -13,6 +13,7 @@ using Time.Epicor.ViewModels;
 namespace Time.Epicor.Controllers
 {
     [Themed]
+    [Authorize]
     public class E10StatusController : Controller
     {
         public IOrchardServices Services { get; set; }
@@ -35,7 +36,7 @@ namespace Time.Epicor.Controllers
             db.Database.CommandTimeout = 600;
         }
 
-        private async Task<string> GetMrpStatus()
+        private string GetMrpStatus()
         {
             string returnMessage = "Idle";
             var qry = db.SysTasks
@@ -61,18 +62,18 @@ namespace Time.Epicor.Controllers
             return returnMessage;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Index2()
-        {
-            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
-                return new HttpUnauthorizedResult();
+        //[HttpGet]
+        //public async Task<ActionResult> Index2()
+        //{
+        //    if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
+        //        return new HttpUnauthorizedResult();
 
-            return this.View();
-        }
+        //    return this.View();
+        //}
 
         // GET: Interim
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
                 return new HttpUnauthorizedResult();
@@ -90,7 +91,7 @@ namespace Time.Epicor.Controllers
             //        }
             //    );
             //vm.ScheduledTasks = tasks;
-            ViewBag.MRPStatus = await GetMrpStatus();
+            ViewBag.MRPStatus = GetMrpStatus();
 
             return View();
         }
@@ -111,6 +112,16 @@ namespace Time.Epicor.Controllers
             var qry = db.SysTasks
                .Where(x => x.TaskStatus.ToUpper() == "ACTIVE" && x.EndedOn == null)
                .OrderByDescending(x => x.SysTaskNum);
+
+            return PartialView(qry);
+        }
+
+        public ActionResult _CompletedTasks()
+        {
+            var compareDate = DateTime.Now.AddDays(-1);
+            var qry = db.SysTasks
+               .Where(x => x.TaskStatus.ToUpper() != "ACTIVE" && x.EndedOn >= compareDate && !x.TaskDescription.ToUpper().Contains("ECC"))
+               .OrderByDescending(x => x.EndedOn);
 
             return PartialView(qry);
         }

@@ -1,93 +1,94 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.SysTaskSchedule>
 
-@{
+    @{
     ViewBag.Title = "Index";
-}
+    }
 
-<h2>Index</h2>
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Enabled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SchedType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NextRunOn)
-        </th>
-        @*<th>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Enabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchedType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextRunOn)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Recurrences)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.EffectiveDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MonthlyOption)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayOfMonth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WeekOfMonth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayOfWeek)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EveryNWeeks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastRunOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mondays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tuesdays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wednesdays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Thursdays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fridays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Saturdays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sundays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartHour)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartMinute)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WindowStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WindowEnd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WindowMinutes)
-        </th>
-        @*<th></th>*@
-    </tr>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EffectiveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonthlyOption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayOfMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekOfMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayOfWeek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EveryNWeeks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastRunOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mondays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tuesdays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wednesdays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thursdays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fridays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Saturdays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sundays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartHour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartMinute)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WindowStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WindowEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WindowMinutes)
+            </th>
+            @*
+            <th></th>*@
+        </tr>
 
-    @foreach (var item in Model.OrderBy(x => x.NextRunOn))
-    {
+        @foreach (var item in Model.OrderBy(x => x.NextRunOn))
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Enabled)
@@ -100,11 +101,13 @@
                 @Html.DisplayFor(modelItem => item.SchedType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NextRunOn)
+                @if(item.NextRunOn != null) {
+                @String.Format("{0} {1}",item.NextRunOn.Value.ToShortDateString(),item.NextRunOn.Value.ToShortTimeString())
+                }
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Recurrences)
-                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Recurrences)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EffectiveDate)
             </td>
@@ -124,7 +127,9 @@
                 @Html.DisplayFor(modelItem => item.EveryNWeeks)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastRunOn)
+                @if(item.LastRunOn != null) {
+                @String.Format("{0} {1}",item.LastRunOn.Value.ToShortDateString(),item.LastRunOn.Value.ToShortTimeString())
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Mondays)
@@ -162,11 +167,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.WindowMinutes)
             </td>
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>*@
+            @*
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>*@
         </tr>
-    }
-</table>
+        }
+    </table>

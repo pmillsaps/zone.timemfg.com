@@ -41,34 +41,28 @@ namespace Time.Support.Controllers
             //Setup();
         }
 
-        //public ActionResult CPTITickets(string format)
-        //{
-        //    //if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
-        //    //{
-        //    //    if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
-        //    //        return new HttpUnauthorizedResult();
-        //    //    if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
-        //    //        return new HttpUnauthorizedResult();
-        //    //}
-        //    //ReportClass rptH = new ReportClass();
-        //    //rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/CPTIReport.rpt");
-        //    //rptH.Load();
-        //    //rptH.SetDatabaseLogon(_db_logon, _db_password);
-        //    ////rptH.SetDataSource([datatable]);
-        //    //Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //    //return File(stream, "application/pdf");
-
-        //    ReportDocument doc = new ReportDocument();
-        //    doc.Load(Server.MapPath("~/Modules/Time.Support/Views/Report/CPTIReport.rpt"));
-        //    doc.SetDatabaseLogon(_db_logon, _db_password);
-        //    Stream stream = doc.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //    return File(stream, "application/pdf");
-        //}
-
         public CrystalReportPdfResult CPTITickets()
         {
             string reportPath = Server.MapPath("~/Modules/Time.Support/Views/Report/CPTIReport.rpt");
             return new CrystalReportPdfResult(reportPath);
+        }
+
+        public ActionResult TicketsByCategory()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+            }
+            ReportClass rptH = new ReportClass();
+            rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByCategory.rpt");
+            rptH.Load();
+            rptH.SetDatabaseLogon(_db_logon, _db_password);
+            SetDBLogonForReport(rptH);
+            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/pdf");
         }
 
         public ActionResult TicketsByDepartment()
@@ -119,10 +113,44 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            //Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            //return File(stream, "application/pdf");
+            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/pdf");
+        }
 
-            return View("Index");
+        public ActionResult MyTickets()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+            }
+            ReportClass rptH = new ReportClass();
+            rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource_Personal.rpt");
+            rptH.Load();
+            rptH.SetDatabaseLogon(_db_logon, _db_password);
+            rptH.SetParameterValue("UserId", HttpContext.User.Identity.Name);
+            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/pdf");
+        }
+
+        public ActionResult MyTicketsITZone()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+            }
+            ReportClass rptH = new ReportClass();
+            rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ZoneRequests_ByResource_Personal.rpt");
+            rptH.Load();
+            rptH.SetDatabaseLogon(_db_logon, _db_password);
+            rptH.SetParameterValue("UserId", HttpContext.User.Identity.Name);
+            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(stream, "application/pdf");
         }
 
         public ActionResult TicketsByRequestor()

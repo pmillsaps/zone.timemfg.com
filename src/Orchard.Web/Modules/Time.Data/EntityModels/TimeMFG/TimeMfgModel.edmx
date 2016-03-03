@@ -112,14 +112,18 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MessageType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SimpleMessage" Type="bit" />
         </EntityType>
         <EntityType Name="MSMQ_Status">
           <Key>
             <PropertyRef Name="ProcessID" />
+            <PropertyRef Name="MachineName" />
           </Key>
           <Property Name="ProcessID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="MachineName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="PID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" />
         </EntityType>
         <EntityType Name="NLog_Entries">
           <Key>
@@ -141,11 +145,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="70" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="String" Type="bit" Nullable="false" />
           <Property Name="Int" Type="bit" Nullable="false" />
+          <Property Name="Password" Type="bit" Nullable="false" />
           <Property Name="UsedFor" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SysTask">
@@ -222,6 +227,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="SupervisorID" Type="int" />
+          <Property Name="ITOnly" Type="bit" />
         </EntityType>
         <EntityType Name="TicketEmployees">
           <Key>
@@ -318,6 +324,7 @@
           <Property Name="isSupRequest" Type="bit" Nullable="false" />
           <Property Name="isReadyToComplete" Type="bit" Nullable="false" />
           <Property Name="isReadyToCancel" Type="bit" Nullable="false" />
+          <Property Name="isAssignedVisible" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketStatusHistory">
           <Key>
@@ -377,6 +384,29 @@
           <Property Name="SysDateTime" Type="datetime" Nullable="false" />
           <Property Name="SysUser" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="SysComputer" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TimeMFG.dbo.V_ClassIdSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ClassIdSummary">
+          <Key>
+            <PropertyRef Name="ExtCost" />
+            <PropertyRef Name="ComparisonDate" />
+          </Key>
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
+          <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" Nullable="false" />
+          <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ValuedInventoryByPeriod">
+          <Key>
+            <PropertyRef Name="PeriodYear" />
+            <PropertyRef Name="ComparisonDate" />
+          </Key>
+          <Property Name="PeriodYear" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
+          <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
+          <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" />
         </EntityType>
         <Association Name="FK_LoadList_Distributor_LoadList">
           <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
@@ -691,6 +721,21 @@
           <EntitySet Name="TicketVisibility" EntityType="Self.TicketVisibility" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValuedInventory" EntityType="Self.ValuedInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WaterTests" EntityType="Self.WaterTests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_ClassIdSummary" EntityType="Self.V_ClassIdSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ClassIdSummary].[ClassId] AS [ClassId], 
+    [V_ClassIdSummary].[ExtCost] AS [ExtCost], 
+    [V_ClassIdSummary].[ComparisonDate] AS [ComparisonDate]
+    FROM [dbo].[V_ClassIdSummary] AS [V_ClassIdSummary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ValuedInventoryByPeriod" EntityType="Self.V_ValuedInventoryByPeriod" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ValuedInventoryByPeriod].[PeriodYear] AS [PeriodYear], 
+    [V_ValuedInventoryByPeriod].[ClassId] AS [ClassId], 
+    [V_ValuedInventoryByPeriod].[ComparisonDate] AS [ComparisonDate], 
+    [V_ValuedInventoryByPeriod].[ExtCost] AS [ExtCost]
+    FROM [dbo].[V_ValuedInventoryByPeriod] AS [V_ValuedInventoryByPeriod]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_LoadList_Distributor_LoadList" Association="Self.FK_LoadList_Distributor_LoadList">
             <End Role="LoadList" EntitySet="LoadList" />
             <End Role="LoadList_Distributor" EntitySet="LoadList_Distributor" />
@@ -927,6 +972,7 @@
           <Property Name="SupervisorID" Type="Int32" />
           <NavigationProperty Name="TicketEmployee" Relationship="Self.FK_TicketDepartment_TicketEmployees" FromRole="TicketDepartment" ToRole="TicketEmployees" />
           <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketDepartment" FromRole="TicketDepartment" ToRole="TicketProjects" />
+          <Property Name="ITOnly" Type="Boolean" />
         </EntityType>
         <EntityType Name="TicketEmployee">
           <Key>
@@ -1401,18 +1447,21 @@
           <EntitySet Name="MSMQ_Status" EntityType="TimeMFGModel.MSMQ_Status" />
           <EntitySet Name="NLog_Entries" EntityType="TimeMFGModel.NLog_Entries" />
           <EntitySet Name="ValuedInventories" EntityType="TimeMFGModel.ValuedInventory" />
+          <EntitySet Name="V_ValuedInventoryByPeriod" EntityType="TimeMFGModel.V_ValuedInventoryByPeriod" />
+          <EntitySet Name="V_ClassIdSummary" EntityType="TimeMFGModel.V_ClassIdSummary" />
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="String" Type="Boolean" Nullable="false" />
           <Property Name="Int" Type="Boolean" Nullable="false" />
           <Property Name="UsedFor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketVisibility">
           <Key>
@@ -1507,6 +1556,7 @@
           <Property Name="isReadyToCancel" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TicketProjects" Relationship="TimeMFGModel.FK_TicketProjects_TicketStatuses" FromRole="TicketStatus" ToRole="TicketProject" />
           <NavigationProperty Name="TicketStatusHistories" Relationship="TimeMFGModel.FK_TicketStatusHistory_TicketStatuses" FromRole="TicketStatus" ToRole="TicketStatusHistory" />
+          <Property Name="isAssignedVisible" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_TicketProjects_TicketStatuses">
           <End Type="TimeMFGModel.TicketStatus" Role="TicketStatus" Multiplicity="1" />
@@ -1538,14 +1588,18 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="MessageType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SimpleMessage" Type="Boolean" />
         </EntityType>
         <EntityType Name="MSMQ_Status">
           <Key>
             <PropertyRef Name="ProcessID" />
+            <PropertyRef Name="MachineName" />
           </Key>
           <Property Name="ProcessID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PID" Type="Int32" Nullable="false" />
+          <Property Name="MachineName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="NLog_Entries">
           <Key>
@@ -1577,6 +1631,25 @@
           <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PeriodYear" Type="Int32" Nullable="false" />
           <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_ValuedInventoryByPeriod">
+          <Key>
+            <PropertyRef Name="PeriodYear" />
+            <PropertyRef Name="ComparisonDate" />
+          </Key>
+          <Property Name="PeriodYear" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExtCost" Type="Decimal" Precision="38" Scale="10" />
+        </EntityType>
+        <EntityType Name="V_ClassIdSummary">
+          <Key>
+            <PropertyRef Name="ExtCost" />
+            <PropertyRef Name="ComparisonDate" />
+          </Key>
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ExtCost" Type="Decimal" Nullable="false" Precision="38" Scale="10" />
+          <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1711,6 +1784,7 @@
           <EntitySetMapping Name="TicketDepartments">
             <EntityTypeMapping TypeName="TimeMFGModel.TicketDepartment">
               <MappingFragment StoreEntitySet="TicketDepartment">
+                <ScalarProperty Name="ITOnly" ColumnName="ITOnly" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="Prefix" ColumnName="Prefix" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1843,6 +1917,7 @@
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="TimeMFGModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UsedFor" ColumnName="UsedFor" />
                 <ScalarProperty Name="Int" ColumnName="Int" />
                 <ScalarProperty Name="String" ColumnName="String" />
@@ -1925,6 +2000,7 @@
           <EntitySetMapping Name="TicketStatuses">
             <EntityTypeMapping TypeName="TimeMFGModel.TicketStatus">
               <MappingFragment StoreEntitySet="TicketStatuses">
+                <ScalarProperty Name="isAssignedVisible" ColumnName="isAssignedVisible" />
                 <ScalarProperty Name="isReadyToCancel" ColumnName="isReadyToCancel" />
                 <ScalarProperty Name="isReadyToComplete" ColumnName="isReadyToComplete" />
                 <ScalarProperty Name="isSupRequest" ColumnName="isSupRequest" />
@@ -1939,6 +2015,7 @@
           <EntitySetMapping Name="Message_Type">
             <EntityTypeMapping TypeName="TimeMFGModel.Message_Type">
               <MappingFragment StoreEntitySet="Message_Type">
+                <ScalarProperty Name="SimpleMessage" ColumnName="SimpleMessage" />
                 <ScalarProperty Name="MessageType" ColumnName="MessageType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1947,6 +2024,8 @@
           <EntitySetMapping Name="MSMQ_Status">
             <EntityTypeMapping TypeName="TimeMFGModel.MSMQ_Status">
               <MappingFragment StoreEntitySet="MSMQ_Status">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
                 <ScalarProperty Name="PID" ColumnName="PID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
@@ -1983,6 +2062,25 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PartNum" ColumnName="PartNum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ValuedInventoryByPeriod">
+            <EntityTypeMapping TypeName="TimeMFGModel.V_ValuedInventoryByPeriod">
+              <MappingFragment StoreEntitySet="V_ValuedInventoryByPeriod">
+                <ScalarProperty Name="ExtCost" ColumnName="ExtCost" />
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="PeriodYear" ColumnName="PeriodYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ClassIdSummary">
+            <EntityTypeMapping TypeName="TimeMFGModel.V_ClassIdSummary">
+              <MappingFragment StoreEntitySet="V_ClassIdSummary">
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
+                <ScalarProperty Name="ExtCost" ColumnName="ExtCost" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

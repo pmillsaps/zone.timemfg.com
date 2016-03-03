@@ -56,20 +56,29 @@ namespace Time.Support.Controllers
             {
                 var changeticket = _db.TicketProjects
                     .Include("TicketStatus")
-                    .First(x => x.TicketID == ticket.TicketID);
+                    .FirstOrDefault(x => x.TicketID == ticket.TicketID);
+                if (changeticket == null) return RedirectToAction("TicketNotFound");
+                if (changeticket.Status != 1)
+                {
+                    // Ticket is already approved
+                    return RedirectToAction("ApproveTicketConfirm");
+                }
 
                 var department = _db.TicketDepartments.First(x => x.DepartmentID == changeticket.DepartmentID);
                 var supervisor = _db.TicketEmployees.First(x => x.EmployeeID == department.SupervisorID);
 
+                var user = User.Identity.Name;
+                if (user == null || String.IsNullOrEmpty(user)) user = supervisor.NTLogin;
+
                 changeticket.Status = 2;
                 changeticket.ApprovalDate = DateTime.Now;
-                changeticket.ApprovedBy = User.Identity.Name;
-                changeticket.ApprovalCode = "";
+                changeticket.ApprovedBy = user;
+                //changeticket.ApprovalCode = "";
                 var note = new TicketNote
                 {
                     TicketID = changeticket.TicketID,
-                    Note = "Ticket was approved over email.",
-                    CreatedBy = supervisor.NTLogin,
+                    Note = "[Zone] Ticket was approved over email.",
+                    CreatedBy = user,
                     CreatedDate = DateTime.Now,
                     Visibility = 1
                 };
@@ -85,7 +94,16 @@ namespace Time.Support.Controllers
                 _db.TicketNotes.Add(note);
                 _db.SaveChanges();
 
-                SendTicketNotification(note, changeticket);
+                var command = new TicketNotificationMessage
+                {
+                    TicketId = ticket.TicketID,
+                    Notification = TicketNotificationMessage.NotificationType.Approved,
+                    Sender = user,
+                    NoteId = changeticket.TicketNotes.OrderByDescending(x => x.CreatedDate).First().NoteID
+                };
+                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+
+                //SendTicketNotification(note, changeticket);
 
                 return RedirectToAction("ApproveTicketConfirm");
             }

@@ -1,6 +1,10 @@
 ﻿@model Time.OrderLog.Models.ReportViewModel
 
 @{
+    Script.Require("ShapesBase");
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    Layout.Title = T("Add Draw Date").ToString();
     ViewBag.Title = "Executive Summary Report";
 }
 
@@ -68,3 +72,19 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        $("#StartDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+        $("#EndDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+
+    </script>
+}

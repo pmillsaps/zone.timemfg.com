@@ -16,5 +16,6 @@ namespace Time.Data.EntityModels.TimeMFG
     {
         public int Id { get; set; }
         public string MessageType { get; set; }
+        public Nullable<bool> SimpleMessage { get; set; }
     }
 }

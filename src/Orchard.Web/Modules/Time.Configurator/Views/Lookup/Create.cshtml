@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ConfigName", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-                @Html.ValidationMessageFor(model => model.ConfigName)
+                @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.ConfigData, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ConfigData", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-                @Html.ValidationMessageFor(model => model.ConfigData)
+                @Html.ValidationMessageFor(model => model.ConfigData, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 @Html.LabelFor(model => model.Sequence, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(Model => Model.Sequence)
-                    @Html.ValidationMessageFor(model => model.Sequence)
+                    @Html.ValidationMessageFor(model => model.Sequence, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                 @Html.LabelFor(model => model.Data, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Data)
-                    @Html.ValidationMessageFor(model => model.Data)
+                    @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
                 @Html.LabelFor(model => model.PickDefault, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PickDefault)
-                    @Html.ValidationMessageFor(model => model.PickDefault)
+                    @Html.ValidationMessageFor(model => model.PickDefault, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                 @Html.LabelFor(model => model.Inactive, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Inactive)
-                    @Html.ValidationMessageFor(model => model.Inactive)
+                    @Html.ValidationMessageFor(model => model.Inactive, "", new { @class = "text-danger" })
                 </div>
             </div>
         @*************************************************************************Makes you able to create by typing******************************************************************************************@

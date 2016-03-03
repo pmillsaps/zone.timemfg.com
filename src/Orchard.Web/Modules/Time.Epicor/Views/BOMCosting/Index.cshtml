@@ -1,8 +1,78 @@
-﻿
+﻿@model Time.Epicor.ViewModels.BOMSearchVM
+
 @{
-    ViewBag.Title = "Bill of Material Costing";
+    ViewBag.Title = "E10 Bill of Material Costing";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<h4>Not Yet Implemented</h4>
+<div id="TicketSearch">
+    @using (Html.BeginForm("Index", "BOMCosting", FormMethod.Post, new { onsubmit = "showDiv()" }))
+    {
+        @Html.AntiForgeryToken()
+        <label for="txtSearch" class="label">
+            Search:
+        </label>
+        @Html.EditorFor(x => x.SearchText)
+        <input type="submit" value="Load BOM" />
+        <br />
+        @Html.CheckBoxFor(x => x.DrillIntoPurchaseItems)
+        @Html.LabelFor(x => x.DrillIntoPurchaseItems)
+        @Html.CheckBoxFor(x => x.FilterRawMaterial)
+        @Html.LabelFor(x => x.FilterRawMaterial)
+        @Html.CheckBoxFor(x => x.ExportToExcel)
+        @Html.LabelFor(x => x.ExportToExcel)
+        @Html.CheckBoxFor(x => x.UseTestData)
+        @Html.LabelFor(x => x.UseTestData)
+        @Html.CheckBoxFor(x => x.PurchaseItemsOnly)
+        @Html.LabelFor(x => x.PurchaseItemsOnly)
+    }
+</div>
+
+<p>
+    If you filter raw material, or drill into purchase items, the costs will be wrong
+    in the list.<br />
+    If you export to Excel, these choices will be ignored.<br />
+    By selecting 'Purchase Items Only', total costs should be correct, but you will
+    be missing all of the 'M' items.<br />
+    You can run the report for multiple items by separating them with commas (i.e.,
+    'OR-1400-2,MH-802').
+</p>
+<span id="hiddenStatus" style='display: none'>
+    <img src='~/Modules/Time.Epicor/Content/Images/transparent.gif' id='myAnimatedImage' align="middle">
+    <p>
+        Loading Data ...
+    </p>
+</span>
+
+<span id="exportHidden" style='display: none'>
+    <p>
+        Please wait for the Exported XLS document to finish ...
+    </p>
+</span>
+
+<span id="data">
+    @if (Model != null)
+    {
+        @Html.Partial("_BOMListing", Model.bomInfo);
+    }
+    @if (ViewBag._ElapsedTime != null)
+    {
+        <p>@String.Format("Query Time: {0:0.00} Seconds", (ViewBag._ElapsedTime / 1000.0))</p>
+    }
+</span>
+
+<script language='javascript'>
+    function showDiv() {
+        document.getElementById('data').style.display = "none";
+        document.getElementById('exportHidden').style.display = "none";
+        var chkBox = document.getElementById('ExportToExcel');
+        if (!chkBox.checked) {
+            setTimeout('document.images["myAnimatedImage"].src="~/Modules/Time.Epicor/Content/Images/loadingAnimation.gif"', 200);
+            document.getElementById('hiddenStatus').style.display = "";
+        }
+        if (chkBox.checked) {
+            document.getElementById('exportHidden').style.display = "";
+        }
+    }
+</script>

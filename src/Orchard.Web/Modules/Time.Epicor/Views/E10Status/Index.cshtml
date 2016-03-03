@@ -1,20 +1,25 @@
 ﻿@*@model Time.Epicor.ViewModels.EpicorStatusViewModel*@
 
 @{
-    ViewBag.Title = "Epicor Status";
+    ViewBag.Title = "E10 Epicor Status : " + DateTime.Now;
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
 
-<h5>MRP Status: <strong>@Html.Raw(ViewBag.MRPStatus)</strong><br /></h5>
+    <h5>MRP Status: <strong>@Html.Raw(ViewBag.MRPStatus)</strong><br /></h5>
     <hr />
     <h3>Active Tasks</h3>
-
     @Html.Action("_Tasks")
-
-    <hr />
-    @Html.Action("_Interim")
 
     <hr />
     <h3>Scheduled Tasks</h3>
     @Html.Action("_SchedTasks")
+
+    <hr />
+    <h3>Completed Tasks (Last Day)</h3>
+    @Html.Action("_CompletedTasks")
+
+    <hr />
+    @*@Html.Action("_Interim")*@
+</div>

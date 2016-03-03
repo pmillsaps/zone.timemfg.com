@@ -18,8 +18,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfigName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfigName)
-                @Html.ValidationMessageFor(model => model.ConfigName)
+                @Html.EditorFor(model => model.ConfigName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
             </div>
         </div>
 

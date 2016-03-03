@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Time.Admin</RootNamespace>
     <AssemblyName>Time.Admin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -49,12 +49,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -62,15 +62,18 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -83,23 +86,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="EntityModels\Versalift\VersaliftModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VersaliftModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="EntityModels\Versalift\VersaliftModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-      <LastGenOutput>VersaliftModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityModels\Versalift\VersaliftModel.edmx.diagram">
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="EntityModels\Versalift\VersaliftModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-      <LastGenOutput>VersaliftModel.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -110,11 +96,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\Time.Admin.pubxml" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -141,7 +124,6 @@
     <Content Include="Views\Equipment\VLC_Details.cshtml" />
     <Content Include="Views\Equipment\VLC_Edit.cshtml" />
     <Content Include="Views\Equipment\VLC_Index.cshtml" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -152,45 +134,20 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EquipmentController.cs" />
-    <Compile Include="EntityModels\Versalift\VersaliftBaseModel.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftCategory.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftModel.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftModelAttribute.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftLiftModelAttributeType.cs">
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersaliftModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersaliftModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Versalift\VersaliftModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VersaliftModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\CategoryAddVM.cs" />
     <Compile Include="Models\CategoryDeleteVM.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

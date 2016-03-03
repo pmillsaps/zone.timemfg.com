@@ -24,6 +24,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> SupervisorID { get; set; }
+        public Nullable<bool> ITOnly { get; set; }
     
         public virtual TicketEmployee TicketEmployee { get; set; }
         public virtual ICollection<TicketProject> TicketProjects { get; set; }

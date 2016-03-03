@@ -116,7 +116,8 @@ namespace Time.Configurator.Controllers
                         Sequence = item.Sequence,
                         Lookup = item.Lookup,
                         LookupSequence = item.LookupSequence,
-                        Global = item.Global
+                        Global = item.Global,
+                        Notes = item.Notes
                     };
                     db.StructureSeqs.Add(structureSeqNew);
                 }

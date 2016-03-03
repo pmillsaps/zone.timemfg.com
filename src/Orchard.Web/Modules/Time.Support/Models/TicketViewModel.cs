@@ -26,9 +26,12 @@ namespace Time.Support.Models
         // Ticket Note Elements
         [DisplayName("Visibility")]
         public SelectList TicketVisibility { get; set; }
+
         [DisplayName("Note")]
         //[UIHint("MultiLineText")]
         [DataType(DataType.MultilineText)]
         public string TicketNote { get; set; }
+
+        public bool Approver { get; set; }
     }
 }

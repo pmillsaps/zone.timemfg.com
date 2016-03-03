@@ -17,5 +17,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public string ProcessID { get; set; }
         public string Status { get; set; }
         public int PID { get; set; }
+        public string MachineName { get; set; }
+        public Nullable<System.DateTime> EntryDate { get; set; }
     }
 }

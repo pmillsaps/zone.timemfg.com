@@ -23,7 +23,7 @@ namespace Time.Configurator.Controllers
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
 
-        private string[] tokens;
+        //private string[] tokens;
 
         public SpecialCustomersController(IOrchardServices services)
         {
@@ -36,6 +36,7 @@ namespace Time.Configurator.Controllers
             Services = services;
             db = _db;
         }
+
         // GET: SpecialCustomers
         public ActionResult Index()
         {
@@ -64,7 +65,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: SpecialCustomers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,7 +75,7 @@ namespace Time.Configurator.Controllers
             var Cust = db.SpecialCustomers.FirstOrDefault(x => x.Name == specialCustomer.Name);
 
             //displays if previous code found a duplicate
-            if (Cust != null) ModelState.AddModelError("","Duplicate Customer Created---Please Check Data");
+            if (Cust != null) ModelState.AddModelError("", "Duplicate Customer Created---Please Check Data");
 
             if (ModelState.IsValid)
             {
@@ -102,7 +103,7 @@ namespace Time.Configurator.Controllers
         }
 
         // POST: SpecialCustomers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

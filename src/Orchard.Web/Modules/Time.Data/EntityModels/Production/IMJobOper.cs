@@ -192,5 +192,11 @@ namespace Time.Data.EntityModels.Production
         public System.Guid SysRowID { get; set; }
         public bool MobileOperation { get; set; }
         public bool ReWork { get; set; }
+        public bool RequestMove { get; set; }
+        public string ContractID { get; set; }
+        public string PrinterID { get; set; }
+        public Nullable<System.DateTime> LastPrintedDate { get; set; }
+        public string LastPCIDPrinted { get; set; }
+        public string CurrentPkgCode { get; set; }
     }
 }

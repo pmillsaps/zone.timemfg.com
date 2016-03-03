@@ -155,7 +155,7 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Lookup = new SelectList(db.Structures.Select(x => x.ConfigData).Distinct());
+            ViewBag.Lookup = new SelectList(db.Structures.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
             ViewBag.ConfigName = structure.ConfigName;
             ViewBag.ConfigData = structure.ConfigData;
             var sequenceNum = db.StructureSeqs.Where(x => x.ConfigName == structure.ConfigName && x.ConfigData == structure.ConfigData).ToList().Max(x => Convert.ToInt32(x.Sequence));

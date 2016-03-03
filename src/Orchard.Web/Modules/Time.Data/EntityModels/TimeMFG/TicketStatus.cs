@@ -28,6 +28,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public bool isSupRequest { get; set; }
         public bool isReadyToComplete { get; set; }
         public bool isReadyToCancel { get; set; }
+        public bool isAssignedVisible { get; set; }
     
         public virtual ICollection<TicketProject> TicketProjects { get; set; }
         public virtual ICollection<TicketStatusHistory> TicketStatusHistories { get; set; }

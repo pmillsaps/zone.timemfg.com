@@ -13,6 +13,15 @@ namespace Time.Data.EntityModels.Configurator
 
     public class LookupMetadata
     {
+        [Required(ErrorMessage = "ConfigName is required")]
+        public string ConfigName { get; set; }
+
+        [Required(ErrorMessage = "ConfigData is required")]
+        public string ConfigData { get; set; }
+
+        [Required(ErrorMessage = "Sequence is required")]
+        public int Sequence { get; set; }
+
         [Required(ErrorMessage = "Data is required")]
         public string Data { get; set; }
     }

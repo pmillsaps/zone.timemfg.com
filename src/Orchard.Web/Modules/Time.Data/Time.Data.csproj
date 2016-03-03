@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -49,16 +49,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -66,16 +66,19 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -83,6 +86,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+      <LastGenOutput>DataPlatesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+      <LastGenOutput>DataPlatesModel.cs</LastGenOutput>
+    </Content>
     <Content Include="EntityModels\Production\ProductionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProductionModel.edmx</DependentUpon>
@@ -92,6 +105,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProductionModel.edmx</DependentUpon>
       <LastGenOutput>ProductionModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Versalift\VersaliftModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
+      <LastGenOutput>VersaliftModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Versalift\VersaliftModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
+      <LastGenOutput>VersaliftModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -224,6 +247,48 @@
     </Compile>
     <Compile Include="EntityModels\CustomManuals\Setting.cs">
       <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\CA_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DielectricRating.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\EP_SS_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\HR_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\LB_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\LiftData.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\PS_Option.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\Template.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\TemplateData.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Epicor\C_TMC_Status.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
@@ -426,13 +491,31 @@
     <Compile Include="EntityModels\Production\SysTask.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\V_BillOfMaterials.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\Production\V_NOWReport.cs">
+    <Compile Include="EntityModels\Production\V_NowReport.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Production\V_NowReportClaim.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_PartCostStd.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_PartDetails.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_QuoteOrderInformation.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_WhereUsed.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_YardReport.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\TimeMFG\LoadList.cs">
@@ -534,8 +617,32 @@
     <Compile Include="EntityModels\TimeMFG\ValuedInventory.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\TimeMFG\V_ClassIdSummary.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\V_ValuedInventoryByPeriod.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\TimeMFG\WaterTest.cs">
       <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\E10_DLS.cs">
+      <DependentUpon>VersaliftModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\VersaliftModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersaliftModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\VersaliftModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersaliftModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\VersaliftModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Configurator\ComplexStructure.cs" />
@@ -543,6 +650,12 @@
     <Compile Include="Models\Configurator\ConfigOption.cs" />
     <Compile Include="Models\Configurator\ConfigPricing.cs" />
     <Compile Include="Models\Configurator\Lookup.cs" />
+    <Compile Include="Models\DataPlates\CA_Options.cs" />
+    <Compile Include="Models\DataPlates\EP_SS_Options.cs" />
+    <Compile Include="Models\DataPlates\HR_Options.cs" />
+    <Compile Include="Models\DataPlates\LB_Options.cs" />
+    <Compile Include="Models\DataPlates\LiftData.cs" />
+    <Compile Include="Models\DataPlates\PS_Option.cs" />
     <Compile Include="Models\GetSetting.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
@@ -555,8 +668,11 @@
     <Compile Include="Models\MessageQueue\EmailMessage.cs" />
     <Compile Include="Models\MessageQueue\EmptyMessage.cs" />
     <Compile Include="Models\MessageQueue\MessageType.cs" />
+    <Compile Include="Models\MessageQueue\MessageView.cs" />
     <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
     <Compile Include="Models\MessageQueue\MSMQ.cs" />
+    <Compile Include="Models\MessageQueue\PCInvoiceMessage.cs" />
+    <Compile Include="Models\MessageQueue\TicketNotificationMessage.cs" />
     <Compile Include="Models\MessageQueue\WOLMessage.cs" />
     <Compile Include="Models\OrderLog\Dealer.cs" />
     <Compile Include="Models\OrderLog\Installer.cs" />
@@ -693,6 +809,20 @@
     </EntityDeploy>
     <Content Include="EntityModels\Production\ProductionModel.edmx.diagram">
       <DependentUpon>ProductionModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\DataPlates\DataPlatesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataPlatesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.edmx.diagram">
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\Versalift\VersaliftModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VersaliftModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Versalift\VersaliftModel.edmx.diagram">
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
     <Content Include="Views\_ViewStart.cshtml" />

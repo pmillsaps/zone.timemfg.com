@@ -28,8 +28,16 @@ namespace Time.IT.Controllers
         {
             var computers = db.Computers.OrderBy(x => x.Name).Include(c => c.Ref_Memory).Include(c => c.Ref_Model).Include(c => c.Ref_Status).Include(c => c.Ref_VideoCard).Include(c => c.Ref_DeviceType).Include(c => c.Ref_Processor).Include(c => c.Ref_Sound).Include(c => c.Ref_OS);
             if (!String.IsNullOrEmpty(search))
-                computers = computers.Where(x => x.User.Name.Contains(search) || x.Name.Contains(search)
-                    || x.Ref_Model.Model.Contains(search) || x.Ref_OS.OS.Contains(search) || x.Ref_DeviceType.DeviceType.Contains(search));
+            {
+                foreach (var item in search.Split(' '))
+                {
+                    computers = computers.Where(x => x.User.Name.Contains(item) || x.Name.Contains(item)
+                    || x.Ref_Model.Model.Contains(item) || x.Ref_OS.OS.Contains(item) || x.Ref_DeviceType.DeviceType.Contains(item)
+                    || x.Ref_Status.Status.Contains(item) || x.SerialNumber.Contains(item));
+                }
+            }
+
+            ViewBag.SearchIncludes = "Search Includes: User Name, Computer Name, Model, OS, Device Type, Serial Number, Status";
             return View(computers.ToList());
         }
 
@@ -383,6 +391,21 @@ namespace Time.IT.Controllers
             return RedirectToAction("Details", new { id = comp.Id });
         }
 
+        // GET: ScheduledTasks/Details/5
+        public ActionResult DetailsScheduledTask(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ScheduledTask scheduledTask = db.ScheduledTasks.Find(id);
+            if (scheduledTask == null)
+            {
+                return HttpNotFound();
+            }
+            return View(scheduledTask);
+        }
+
         // GET: ScheduledTasks/Create
         public ActionResult AddScheduledTask(int id)
         {
@@ -420,6 +443,66 @@ namespace Time.IT.Controllers
 
             ViewBag.ComputerId = new SelectList(db.Computers, "Id", "Name", scheduledTask.ComputerId);
             return View(scheduledTask);
+        }
+
+        // GET: ScheduledTasks/Edit/5
+        public ActionResult EditScheduledTask(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ScheduledTask scheduledTask = db.ScheduledTasks.Find(id);
+            if (scheduledTask == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ComputerId = new SelectList(db.Computers, "Id", "Name", scheduledTask.ComputerId);
+            return View(scheduledTask);
+        }
+
+        // POST: ScheduledTasks/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditScheduledTask(ScheduledTask scheduledTask)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(scheduledTask).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = scheduledTask.ComputerId });
+            }
+            ViewBag.ComputerId = new SelectList(db.Computers, "Id", "Name", scheduledTask.ComputerId);
+            return View(scheduledTask);
+        }
+
+        // GET: ScheduledTasks/Delete/5
+        public ActionResult DeleteScheduledTask(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ScheduledTask scheduledTask = db.ScheduledTasks.Find(id);
+            if (scheduledTask == null)
+            {
+                return HttpNotFound();
+            }
+            return View(scheduledTask);
+        }
+
+        // POST: ScheduledTasks/Delete/5
+        [HttpPost, ActionName("DeleteScheduledTask")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteScheduledTaskConfirmed(int id)
+        {
+            ScheduledTask scheduledTask = db.ScheduledTasks.Find(id);
+            var computerId = scheduledTask.ComputerId;
+            db.ScheduledTasks.Remove(scheduledTask);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = computerId });
         }
 
         protected override void Dispose(bool disposing)

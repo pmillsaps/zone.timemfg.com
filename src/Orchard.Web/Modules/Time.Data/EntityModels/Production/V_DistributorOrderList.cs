@@ -26,6 +26,6 @@ namespace Time.Data.EntityModels.Production
         public decimal OrderQty { get; set; }
         public bool OpenLine { get; set; }
         public string ProdCode { get; set; }
-        public System.Guid SysRowID { get; set; }
+        public System.Guid Id { get; set; }
     }
 }

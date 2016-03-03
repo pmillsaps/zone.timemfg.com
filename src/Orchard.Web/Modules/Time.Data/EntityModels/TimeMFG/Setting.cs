@@ -21,5 +21,6 @@ namespace Time.Data.EntityModels.TimeMFG
         public bool String { get; set; }
         public bool Int { get; set; }
         public string UsedFor { get; set; }
+        public bool Password { get; set; }
     }
 }

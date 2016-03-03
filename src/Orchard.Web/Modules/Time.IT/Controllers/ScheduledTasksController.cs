@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,14 +13,24 @@ using Time.Data.EntityModels.ITInventory;
 
 namespace Time.IT.Controllers
 {
+    [Themed]
     public class ScheduledTasksController : Controller
     {
         private ITInventoryEntities db = new ITInventoryEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public ScheduledTasksController(IOrchardServices services)
+        {
+            Services = services;
+            T = NullLocalizer.Instance;
+        }
+
         // GET: ScheduledTasks
         public ActionResult Index()
         {
-            var scheduledTasks = db.ScheduledTasks.Include(s => s.Computer);
+            var scheduledTasks = db.ScheduledTasks.Include(s => s.Computer).OrderBy(x => x.Computer.Name).ThenBy(x => x.Name);
             return View(scheduledTasks.ToList());
         }
 

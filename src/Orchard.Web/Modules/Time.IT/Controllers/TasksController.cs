@@ -30,7 +30,7 @@ namespace Time.IT.Controllers
         // GET: Tasks
         public ActionResult Index()
         {
-            var sysTasks = db.SysTasks.Include(s => s.SysTaskSchedule).OrderBy(x => x.SysTaskSchedule.Description);
+            var sysTasks = db.SysTasks.Include(s => s.SysTaskSchedule).OrderBy(x => x.Description);
             return View(sysTasks.ToList());
         }
 
@@ -59,13 +59,13 @@ namespace Time.IT.Controllers
         private void GetDropDowns()
         {
             ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules.OrderBy(x => x.Description), "Id", "Description");
-            ViewBag.TaskType = new SelectList(db.Message_Type, "MessageType", "MessageType");
+            ViewBag.TaskType = new SelectList(db.Message_Type.OrderBy(x => x.MessageType), "MessageType", "MessageType");
         }
 
         private void GetDropDowns(SysTask task)
         {
             ViewBag.SysTaskSchedNum = new SelectList(db.SysTaskSchedules.OrderBy(x => x.Description), "Id", "Description", task.SysTaskSchedNum);
-            ViewBag.TaskType = new SelectList(db.Message_Type, "MessageType", "MessageType", task.TaskMessage);
+            ViewBag.TaskType = new SelectList(db.Message_Type.OrderBy(x => x.MessageType), "MessageType", "MessageType", task.TaskType);
         }
 
         // POST: Tasks/Create

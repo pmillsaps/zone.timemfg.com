@@ -36,7 +36,18 @@ namespace Time.Epicor.Controllers
             db.Database.CommandTimeout = 600;
         }
 
-        private async Task<string> GetMrpStatus()
+        [HttpGet]
+        public ActionResult Index()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
+                return new HttpUnauthorizedResult();
+
+            ViewBag.MRPStatus = GetMrpStatus();
+
+            return View();
+        }
+
+        private string GetMrpStatus()
         {
             string returnMessage = "Idle";
             var qry = db.systasks
@@ -62,38 +73,13 @@ namespace Time.Epicor.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index2()
-        {
-            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
-                return new HttpUnauthorizedResult();
+        //public async Task<ActionResult> Index2()
+        //{
+        //    if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
+        //        return new HttpUnauthorizedResult();
 
-            return this.View();
-        }
-
-        // GET: Interim
-        [HttpGet]
-        public async Task<ActionResult> Index()
-        {
-            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
-                return new HttpUnauthorizedResult();
-
-            //var vm = new EpicorStatusViewModel();
-
-            //var tasks = db.sysagenttasks
-            //    .Join(db.sysagentscheds,
-            //        c => c.agentschednum,
-            //        t => t.agentschednum,
-            //        (c, t) => new myTask
-            //        {
-            //            sysagenttask = c,
-            //            tasksched = t
-            //        }
-            //    );
-            //vm.ScheduledTasks = tasks;
-            ViewBag.MRPStatus = await GetMrpStatus();
-
-            return View();
-        }
+        //    return this.View();
+        //}
 
         public ActionResult _Interim()
         {

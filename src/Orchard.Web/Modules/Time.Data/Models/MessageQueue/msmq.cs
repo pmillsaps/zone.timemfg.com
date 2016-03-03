@@ -93,5 +93,27 @@ namespace Time.Data.Models.MessageQueue
             }
             return success;
         }
+
+        public static List<MessageView> ListMessagesInQueue()
+        {
+            var msgviews = new List<MessageView>();
+            try
+            {
+                using (var queue = new msmq.MessageQueue(queueAddress))
+                {
+                    queue.MessageReadPropertyFilter.ArrivedTime = true;
+                    var messages = queue.GetAllMessages().ToList();
+                    foreach (var item in messages)
+                    {
+                        msgviews.Add(new MessageView { Label = item.Label, Id = item.Id, ArrivedTime = item.ArrivedTime });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+            return msgviews;
+        }
     }
 }

@@ -21,7 +21,7 @@
             @if (!string.IsNullOrEmpty(ViewBag.Message))
             {
                 <div class="row text-info">
-                    @ViewBag.Message
+                    @Html.Raw(ViewBag.Message)
                 </div>
             }
 
@@ -63,7 +63,7 @@
                 @if (Model.Admin)
                 {
                     <div class="col-md-2">
-                        @Html.ActionLink("Change User", "ChangeUser", new { id = Model.Ticket.TicketID })
+                        @Html.ActionLink("Change User", "ChangeUser", new { id = Model.Ticket.TicketID }, new { @class = "btn btn-default" })
                     </div>
                 }
             </div>
@@ -81,6 +81,54 @@
 
             @Html.Partial("_TicketUpdate", Model.Ticket)
 
+            @*Ticket Approval*@
+            @if ((Model.Ticket.Status == 1) && (Model.Approver || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Approve Ticket", "Approval", new { approved = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Approve", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Reject Ticket", "Approval", new { approved = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @*Ticket Completion*@
+            @if ((Model.Ticket.TicketStatus.isReadyToComplete == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Complete Ticket", "Complete", new { completed = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Complete", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Deny Completion", "Complete", new { completed = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @*Ticket Cancellation*@
+            @if ((Model.Ticket.TicketStatus.isReadyToCancel == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Cancel Ticket", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Deny Cancellation", "CancelTicket", new { cancelled = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny Cancellation", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                &nbsp;
+            </div>
             @* Add Ticket Note Section *@
             @*@using (Html.BeginForm("AddNote"))*@
 
@@ -120,6 +168,33 @@
                 </div>
             }
 
+            @if (Model.Ticket.TicketAttachments.Count() > 0)
+            {
+                <br />
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-2">
+                        <h5><strong>Ticket Attachments</strong></h5>
+                    </div>
+                </div>
+                foreach (var item in Model.Ticket.TicketAttachments)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.ActionLink(item.FileName, "GetAttachment", new { id = item.AttachmentID })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.DisplayWithBreaksFor(m => item.Description)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.DisplayFor(m => item.UploadedDate)
+                        </div>
+                    </div>
+                }
+            }
             <br />
             <div class="row">
                 <div class="col-md-offset-2 col-md-2">
@@ -138,6 +213,7 @@
                         <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
                     </div>
                 </div>
+                <hr class="col-md-offset-2" />
             }
 
             <br />
@@ -170,29 +246,13 @@
                 <div class="col-md-1">
                     <h5><strong>Tasks</strong></h5>
                 </div>
-                <div class="col-md-offset-2 col-md-2">
+                <div class="col-md-offset-1 col-md-2">
                     <h5>@Html.ActionLink("Add Task", "AddTask", new { id = Model.Ticket.TicketID })</h5>
                 </div>
             </div>
             @foreach (var item in Model.Tasks.OrderBy(x => x.Completed).ThenBy(x => x.ID))
             {
-                <div class="row">
-                    <div class="col-md-1">
-                        @Html.DisplayFor(m => item.Completed)
-                        @*@Html.CheckBox("Completed", item.Completed == true, new { @Enabled = false })*@
-                    </div>
-                    <div class="col-md-4">
-                        @Html.ActionLink(item.Task, "EditTask", new { id = item.ID })
-                        @*@Html.DisplayFor(m => item.Task)*@
-                    </div>
-                    <div class="col-md-4">
-                        @Html.DisplayFor(m => item.Notes)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(m => item.TicketEmployee.FullName)
-                    </div>
-                </div>
-                <div class="row">&nbsp;</div>
+                @Html.Partial("_TaskView", item)
             }
         </div>
     </div>
