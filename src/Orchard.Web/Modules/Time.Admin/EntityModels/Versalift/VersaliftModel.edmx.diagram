@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="82e05d7e89c44450af48c4d9fbdb6ad3" Name="Diagram1">
+        <EntityTypeShape EntityType="VersaliftModel.VersaliftLiftCategory" Width="1.5" PointX="6.125" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VersaliftModel.VersaliftLiftModelAttribute" Width="2" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VersaliftModel.VersaliftLiftModelAttributeType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VersaliftModel.VersaliftLiftModel" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VersaliftModel.VersaliftBaseModel" Width="2.25" PointX="8.125" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="VersaliftModel.FK_VersaliftLiftModelAttributes_VersaliftLiftModelAttributeTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="VersaliftModel.FK_VersaliftLiftModelAttributes_VersaliftLiftModels" ManuallyRouted="false" />
+        <AssociationConnector Association="VersaliftModel.VersaliftrCategorytoBaseModels" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

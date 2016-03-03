@@ -1,0 +1,13 @@
+﻿@model Time.Data.EntityModels.Configurator.Lookup
+
+<tr>
+    <td>
+        @Model.Data
+    </td>
+    <td>
+        @Html.CheckBox("Lookup", @Model.PickDefault, new { @disabled = "disabled" })
+    </td>
+    <td>
+        @Html.CheckBox("Lookup", @Model.Inactive, new { @disabled = "disabled" })
+    </td>
+</tr>
