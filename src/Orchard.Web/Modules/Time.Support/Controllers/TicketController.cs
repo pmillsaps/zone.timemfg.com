@@ -50,7 +50,7 @@ namespace Time.Support.Controllers
 
             MenuViewModel vm = new MenuViewModel();
 
-            var myTickets = tickets.Where(x => x.TicketEmployee.NTLogin == HttpContext.User.Identity.Name);
+            var myTickets = tickets.Where(x => x.TicketEmployee.NTLogin == HttpContext.User.Identity.Name || x.TicketEmployee1.NTLogin == HttpContext.User.Identity.Name);
 
             vm.MyOpenTicketsbyStatus = myTickets.DistinctBy(x => x.TicketStatus)
                 .Select(data => new Status { TicketStatus = data.TicketStatus, Count = myTickets.Count(x => x.TicketStatus.StatusID == data.TicketStatus.StatusID) })
@@ -511,7 +511,7 @@ namespace Time.Support.Controllers
         public ActionResult MyStatus(int id)
         {
             var login = HttpContext.User.Identity.Name;
-            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketStatus.StatusID == id && x.TicketEmployee.NTLogin == login);
+            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketStatus.StatusID == id && (x.TicketEmployee.NTLogin == login || x.TicketEmployee1.NTLogin == login));
             ViewBag.Title = string.Format("[{0}] My Tickets", _db.TicketStatuses.Single(x => x.StatusID == id).Name);
             return View("Index", tickets);
         }
@@ -525,7 +525,7 @@ namespace Time.Support.Controllers
 
         public ActionResult Employee(int id)
         {
-            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketEmployee.EmployeeID == id);
+            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && (x.TicketEmployee.EmployeeID == id || x.TicketEmployee1.EmployeeID == id));
             var employee = _db.TicketEmployees.Single(x => x.EmployeeID == id);
             ViewBag.Title = string.Format("[{0} {1}] Employee", employee.FirstName, employee.LastName);
             return View("Index", tickets);
