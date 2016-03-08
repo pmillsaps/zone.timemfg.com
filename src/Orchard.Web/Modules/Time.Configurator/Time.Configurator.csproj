@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Time.Configurator</RootNamespace>
     <AssemblyName>Time.Configurator</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -64,13 +64,16 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -195,6 +198,8 @@
     <Content Include="Views\SpecialConfigs\Edit_Data.cshtml" />
     <Content Include="Views\SpecialConfigs\Add_Data.cshtml" />
     <Content Include="Views\SpecialConfigs\Copy_Data.cshtml" />
+    <Content Include="Views\SpecialDatas\Import.cshtml" />
+    <Content Include="Views\SpecialDatas\Export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -226,12 +231,16 @@
     <Compile Include="Helpers\ExporttoExcelResult.cs" />
     <Compile Include="Models\ComplexLinkMatrixViewModel.cs" />
     <Compile Include="Models\SpecialConfigViewModel.cs" />
+    <Compile Include="Models\SpecialDataViewModel.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Services\ConfigPricingExportExcelHelper.cs" />
     <Compile Include="Services\IConfigPricingExportExcelHelper.cs" />
     <Compile Include="Models\ConfigPricingViewModel.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="Services\ISpecialDataExportExcelHelper.cs" />
+    <Compile Include="Services\SpecialDataExportExcelHelper.cs" />
     <Compile Include="ViewModels\ConfigPriceImportVM.cs" />
+    <Compile Include="ViewModels\SpecialDataImportViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

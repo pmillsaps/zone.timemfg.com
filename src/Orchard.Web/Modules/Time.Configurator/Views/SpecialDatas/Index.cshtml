@@ -6,6 +6,8 @@
 
 <div align="right">
     <p>
+        @Html.ActionLink("To Special Customers", "Index", "SpecialCustomers")|||
+        @Html.ActionLink("To Special Configs", "Index", "SpecialConfigs")|||
         @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
     </p>
 </div>
@@ -13,7 +15,9 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New Blank Special Data", "Create")
+    @Html.ActionLink("Create New Blank Special Data", "Create") |||
+    @Html.ActionLink("Export to Excel", "Export") |||
+    @Html.ActionLink("Import Special Data", "Import")
 </p>
 
 <br />

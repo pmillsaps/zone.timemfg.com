@@ -24,3 +24,30 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<hr />
+
+<h4>Special Configurations</h4>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            Special Configuration
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.SpecialConfig as IEnumerable<Time.Data.EntityModels.Configurator.SpecialConfig>)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -8,6 +8,7 @@
 
 <div>
     <h4>Special Config</h4>
+    @Html.ActionLink("Back to List", "Index")
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -25,6 +26,9 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    </p>
 </div>
 
 <hr />
@@ -47,7 +51,7 @@
             Price
         </th>
         <th>
-            1. Assembly/2. Material
+            Special Data Type
         </th>
         <th>
             Operation
@@ -67,7 +71,7 @@
                 @item.Price
             </td>
             <td>
-                @item.SpecialDataTypeId
+                @item.SpecialDataType.Name
             </td>
             <td>
                 @item.RelatedOpId

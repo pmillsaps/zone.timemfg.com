@@ -58,7 +58,7 @@ namespace Time.Configurator.Controllers
             }
 
             //pulls in data for the Special Data information in the Special Config details of each special config
-            var specialData = db.SpecialDatas.Where(x => x.SpecialConfigId == specialConfig.Id).ToList();
+            var specialData = db.SpecialDatas.Where(x => x.SpecialConfigId == specialConfig.Id).OrderBy(x => x.SpecialDataTypeId).ThenBy(x => x.Part).ToList();
             ViewBag.SpecialData = specialData;
 
             return View(specialConfig);
@@ -179,7 +179,7 @@ namespace Time.Configurator.Controllers
             ViewBag.SConfigNamesTo = new SelectList(db.SpecialConfigs.OrderBy(x => x.Name), "Id", "Name");
 
             //Storing the Special Data in ViewBag
-            var specialData = db.SpecialDatas.Where(x => x.SpecialConfigId == specialConfig.Id).ToList();
+            var specialData = db.SpecialDatas.Where(x => x.SpecialConfigId == specialConfig.Id).OrderBy(x => x.SpecialDataTypeId).ThenBy(x => x.Part).ToList();
             ViewBag.SpecialData = specialData;
 
             return View(specialConfig);
@@ -254,7 +254,7 @@ namespace Time.Configurator.Controllers
         // GET: SpecialConfigs/Create
         public ActionResult Create()
         {
-            ViewBag.SpecialCustomerId = new SelectList(db.SpecialCustomers, "Id", "Name");
+            ViewBag.SpecialCustomerId = new SelectList(db.SpecialCustomers.OrderBy(x => x.Name), "Id", "Name");
             return View();
         }
 
