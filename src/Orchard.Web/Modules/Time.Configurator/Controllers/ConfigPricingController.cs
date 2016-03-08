@@ -82,7 +82,8 @@ namespace Time.Configurator.Controllers
             if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to Export")))
                 return new HttpUnauthorizedResult();
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
+            //return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
+            return View();
         }
 
         // This method respond to ConfigPricingExport when a list is exported to Excel
@@ -107,7 +108,8 @@ namespace Time.Configurator.Controllers
             }
 
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
+            //return View(db.ConfigPricings.OrderBy(x => x.ConfigID).ThenBy(x => x.ConfigOption).ToList());
+            return View();
         }
 
         // GET: /ConfigPricing/Details/5

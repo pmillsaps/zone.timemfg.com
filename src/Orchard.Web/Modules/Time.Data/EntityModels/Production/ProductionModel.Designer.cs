@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Data\EntityModels\Production\ProductionModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\JuanS\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Data\EntityModels\Production\ProductionModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

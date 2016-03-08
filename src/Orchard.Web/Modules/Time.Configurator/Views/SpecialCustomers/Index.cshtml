@@ -4,13 +4,15 @@
     ViewBag.Title = "Special Customers Index";
 }
 
-<h2>@ViewBag.Title</h2>
-
 <div align="right">
     <p>
+        @Html.ActionLink("To Special Configs", "Index", "SpecialConfigs")|||
+        @Html.ActionLink("To Special Data", "Index", "SpecialDatas")|||
         @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
     </p>
 </div>
+
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New Special Customer", "Create")

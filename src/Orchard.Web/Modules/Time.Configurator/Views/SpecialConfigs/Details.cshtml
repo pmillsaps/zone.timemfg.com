@@ -8,26 +8,82 @@
 
 <div>
     <h4>Special Config</h4>
+    @Html.ActionLink("Back to List", "Index")
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SpecialCustomer.Name)
+            Customer:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SpecialCustomer.Name)
         </dd>
+        <dt>
+            Configuration:
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
     </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    </p>
 </div>
+
+<hr />
+
+<h4>Special Data</h4>
+
+<p>
+    @Html.ActionLink("Add Special Data", "Add_Data", new { id = Model.Id }) ||| @Html.ActionLink("Copy All Special Data", "Copy_Data", new { id = Model.Id })
+</p>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            Part
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Special Data Type
+        </th>
+        <th>
+            Operation
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.SpecialData as IEnumerable<Time.Data.EntityModels.Configurator.SpecialData>)
+    {
+        <tr>
+            <td>
+                @item.Part
+            </td>
+            <td>
+                @item.Quantity
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.SpecialDataType.Name
+            </td>
+            <td>
+                @item.RelatedOpId
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit_Data", new { id = @item.Id }) | 
+                @Html.ActionLink("Delete", "Delete", "SpecialDatas", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+</table>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

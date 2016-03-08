@@ -40,7 +40,7 @@ namespace Time.Configurator.Controllers
         // GET: SpecialCustomers
         public ActionResult Index()
         {
-            return View(db.SpecialCustomers.ToList());
+            return View(db.SpecialCustomers.OrderBy(x => x.Name).ToList());
         }
 
         // GET: SpecialCustomers/Details/5
@@ -55,6 +55,10 @@ namespace Time.Configurator.Controllers
             {
                 return HttpNotFound();
             }
+
+            var specialConfig = db.SpecialConfigs.Where(x => x.SpecialCustomerId == specialCustomer.Id).OrderBy(x => x.Name).ToList();
+            ViewBag.SpecialConfig = specialConfig;
+
             return View(specialCustomer);
         }
 
