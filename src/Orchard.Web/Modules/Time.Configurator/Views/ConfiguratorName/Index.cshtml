@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Configurator.ConfiguratorName>
+
+@{
+    ViewBag.Title = "Configurator Index";
+}
+
+<h2>Configurator Names</h2>
+
+<div align="right">
+    <p>
+        @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
+    </p>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ConfigName)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ConfigName)*@
+                @Html.ActionLink(item.ConfigName, "Edit", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Copy to New Configurator", "Copy", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div align="right">
+    <p>
+        @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
+    </p>
+</div>

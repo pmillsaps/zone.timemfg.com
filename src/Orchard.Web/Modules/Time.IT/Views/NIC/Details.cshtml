@@ -1,0 +1,66 @@
+﻿@model Time.Data.EntityModels.ITInventory.Ref_NIC
+
+@{
+    ViewBag.Title = "NIC Details";
+}
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Ref_NIC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MAC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_CableNo.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_CableNo.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_NICSpeed.NIC_Speed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_NICSpeed.NIC_Speed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_SwitchPort.SwitchPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_SwitchPort.SwitchPort)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

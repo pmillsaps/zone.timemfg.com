@@ -1,0 +1,187 @@
+﻿@model Time.Data.EntityModels.CustomManuals.ProblemJob
+
+@{
+    ViewBag.Title = "Problem Job Details";
+}
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_CustomManualSideBar")
+
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="row">
+                <div class="col-md-5"><h4>@ViewBag.Title</h4></div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.JobNumber)
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.JobNumber)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.SerialNumber)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.SerialNumber)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.EnteredDate)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.EnteredDate)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.EntryPerson)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.EntryPerson)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Problem)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Problem)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Language)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Language)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Language_Code)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Language_Code)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.RequiredDate)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.RequiredDate)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.LastCheckedDate)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.LastCheckedDate)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.LastCheckedPerson)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.LastCheckedPerson)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.LastCheckedMessage)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.LastCheckedMessage)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.JobCleared)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.JobCleared)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.JobClearedDate)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.JobClearedDate)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.JobClearedBy)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.JobClearedBy)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.ManuallyCleared)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.ManuallyCleared)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.ManuallyClearedBy)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.ManuallyClearedBy)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.ManuallyClearedNote)
+                </div>
+
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.ManuallyClearedNote)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.AutomaticEntryReason)
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.AutomaticEntryReason)
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>
