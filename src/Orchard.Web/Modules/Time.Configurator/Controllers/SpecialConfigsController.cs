@@ -41,12 +41,18 @@ namespace Time.Configurator.Controllers
         // GET: SpecialConfigs
         public ActionResult Index()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             return View(db.SpecialConfigs.OrderBy(x => x.Name).ToList());
         }
 
         // GET: SpecialConfigs/Details/5
         public ActionResult Details(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -68,6 +74,9 @@ namespace Time.Configurator.Controllers
         //GET: /SpecialConfig/Edit_Data --- this method is being called from the Details view
         public ActionResult Edit_Data(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialData specialData = db.SpecialDatas.Find(id);
             if (specialData == null)
             {
@@ -86,6 +95,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit_Data(SpecialData specialData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevents duplicate data from being saved while editing
             var Datas = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == specialData.SpecialConfigId && x.SpecialDataTypeId == specialData.SpecialDataTypeId && x.Part == specialData.Part && x.Quantity == specialData.Quantity
                 && x.Price == specialData.Price && x.Id != specialData.Id);
@@ -110,6 +122,9 @@ namespace Time.Configurator.Controllers
         //GET: /SpecialConfig/Add_Data --- this method is being called from the Details view
         public ActionResult Add_Data(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialData specialData = db.SpecialDatas.Find(id);
             if (id == 0)
             {
@@ -136,6 +151,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add_Data([Bind(Exclude = "Id")] SpecialConfigViewModel specialConfigVM)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevents duplicate code when adding special data
             var Datas = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == specialConfigVM.SpecialConfigId && x.SpecialDataTypeId == specialConfigVM.SpecialDataTypeId && x.Part == specialConfigVM.Part && x.Quantity == (decimal)specialConfigVM.Quantity
                 && x.Price == specialConfigVM.Price);
@@ -169,6 +187,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialConfigs/Copy_Data
         public ActionResult Copy_Data(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialConfig specialConfig = db.SpecialConfigs.Find(id);
 
             if (specialConfig == null)
@@ -192,18 +213,20 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Copy_Data(SpecialData specialData, int SConfigNamesTo, SpecialConfig specialConfig)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             var SConfigCheck = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == specialConfig.Id);
-            
+            var CopyCheck = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == SConfigNamesTo);
+
             // Alerting user if no item was selected in the drop down list
             if (SConfigNamesTo == 0 || SConfigNamesTo == null) ModelState.AddModelError("", "Select a Special Configuration from the list above.");
 
             if (SConfigNamesTo == SConfigCheck.SpecialConfigId) ModelState.AddModelError("", "Attempting to Duplicate to the Same Configuration. Please Make a Different Selection.");
-            
+
+            if (CopyCheck != null) ModelState.AddModelError("", "Attempting to Copy Data to a Configuration that already has Data.  Copy to an Empty Configuration.");
+
             var SConfigStrct = db.SpecialDatas.Where(x => x.SpecialConfigId == specialConfig.Id).ToList();
-            ////displays if previous code found a duplicate
-            //if (SConfigStrct != null)
-            //{
-            //}
 
             if (ModelState.IsValid)
             {
@@ -254,6 +277,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialConfigs/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             ViewBag.SpecialCustomerId = new SelectList(db.SpecialCustomers.OrderBy(x => x.Name), "Id", "Name");
             return View();
         }
@@ -265,6 +291,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] SpecialConfig specialConfig)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevent duplicates when creating
             var Configs = db.SpecialConfigs.FirstOrDefault(x => x.Name == specialConfig.Name);
 
@@ -285,6 +314,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialConfigs/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -305,6 +337,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SpecialConfig specialConfig)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevents data from being duplicated when editing
             var sConfigs = db.SpecialConfigs.FirstOrDefault(x => x.Name == specialConfig.Name && x.SpecialCustomerId == specialConfig.SpecialCustomerId && x.Id != specialConfig.Id);
 
@@ -324,6 +359,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialConfigs/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -341,7 +379,19 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialConfig specialConfig = db.SpecialConfigs.Find(id);
+            int? ConfigId = id;
+            var specialConfigId = db.SpecialDatas.Where(x => x.SpecialConfigId == ConfigId).ToList();
+
+            foreach (var item in specialConfigId)
+            {
+                var spDelete = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == specialConfig.Id);
+                db.SpecialDatas.Remove(spDelete);
+                db.SaveChanges();
+            }
             db.SpecialConfigs.Remove(specialConfig);
             db.SaveChanges();
             return RedirectToAction("Index");

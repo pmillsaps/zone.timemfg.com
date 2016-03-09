@@ -25,6 +25,15 @@
     First, make sure you have a value for each field: Part, Quantity, Price, Special Data Type Id, and Related Op Id(only on Materials).<br />
     Second, make sure that there are no spaces between values.  Tabs and commas are fine.<br />
     Third, check the list for duplicates.
+    <hr />
+    <h4>Example Data:</h4>
+    If Assembly<br />
+    Part,Quantity,Price,ASM<br />
+    AL-1210-2,1,0,ASM<br />
+    <br />
+    If Material<br />
+    Part,Quantity,Price,MTL,Operation<br />
+    22085-00,1,0,MTL,BOX<br />
 </div>
 
 @using (Html.BeginForm())
