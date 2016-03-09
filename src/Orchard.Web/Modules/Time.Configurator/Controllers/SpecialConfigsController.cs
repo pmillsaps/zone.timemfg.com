@@ -139,7 +139,7 @@ namespace Time.Configurator.Controllers
 
             ViewBag.SpecialConfigId = new SelectList(db.SpecialConfigs, "Id", "Name", specialConfig.Id);
             ViewBag.SpecialDataTypeId = new SelectList(db.SpecialDataTypes, "Id", "Name", specialData.SpecialDataTypeId);
-            ViewBag.RelatedOpId = new SelectList(db.SpecialRelatedOps, "Id", "Operation", specialData.RelatedOpId);
+            ViewBag.RelatedOpId = new SelectList(db.SpecialRelatedOps, "Id", "Operation");
 
             return View(specialConfigVM);
         }
@@ -172,12 +172,15 @@ namespace Time.Configurator.Controllers
                     Price = specialConfigVM.Price,
                     RelatedOpId = specialConfigVM.RelatedOpId
                 };
-
                 db.SpecialDatas.Add(specialDataNew);
                 db.SaveChanges();
                 var specialConfig = db.SpecialConfigs.First(x => x.Id == specialConfigVM.SpecialConfigId);
                 return RedirectToAction("Details", new { id = specialConfig.Id });
             }
+
+            ViewBag.SpecialConfigId = new SelectList(db.SpecialConfigs, "Id", "Name");
+            ViewBag.SpecialDataTypeId = new SelectList(db.SpecialDataTypes, "Id", "Name");
+            ViewBag.RelatedOpId = new SelectList(db.SpecialRelatedOps, "Id", "Operation");
             return View(specialConfigVM);
         }
 
@@ -389,8 +392,11 @@ namespace Time.Configurator.Controllers
             foreach (var item in specialConfigId)
             {
                 var spDelete = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == specialConfig.Id);
-                db.SpecialDatas.Remove(spDelete);
-                db.SaveChanges();
+                if (spDelete != null)
+                {
+                    db.SpecialDatas.Remove(spDelete);
+                    db.SaveChanges();
+                }
             }
             db.SpecialConfigs.Remove(specialConfig);
             db.SaveChanges();
