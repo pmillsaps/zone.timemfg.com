@@ -9,11 +9,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Time.Configurator.Helpers;
+//using Time.Configurator.Helpers;
 using Time.Configurator.Models;
 using Time.Configurator.Services;
 using Time.Configurator.ViewModels;
 using Time.Data.EntityModels.Configurator;
+using Time.Epicor.Helpers;
 
 namespace Time.Configurator.Controllers
 {
@@ -104,7 +105,7 @@ namespace Time.Configurator.Controllers
                     altPrice = x.AltPrice,
                 }).ToList();
 
-                return new ExporttoExcelResult(ConfigNames + "_Price_List", configs);
+                return new ExporttoExcelResult(ConfigNames + "_Price_List", configs.Cast<object>().ToList());
             }
 
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
