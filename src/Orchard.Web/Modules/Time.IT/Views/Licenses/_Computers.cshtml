@@ -5,13 +5,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.User.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note)
-            </th>*@
-
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.LastBuildDate)
         </th>
@@ -45,9 +41,9 @@
             <td>
                 <a href="@Url.Action("Details", "Computers", new { id = item.Id })">@item.Name</a>
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Note)
-                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastBuildDate)
             </td>
