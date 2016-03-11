@@ -42,7 +42,7 @@
                 <a href="@Url.Action("Details", "Computers", new { id = item.Id })">@item.Name</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Name)
+                <a href="@Url.Action("Details", "Users", new { id = item.UserId})">@item.User.Name</a> @*@Html.DisplayFor(modelItem => item.User.Name)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastBuildDate)
