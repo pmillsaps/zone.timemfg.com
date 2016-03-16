@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="OrderLogModel.Territory" Width="1.5" PointX="3" PointY="3.625" />
         <AssociationConnector Association="OrderLogModel.FK_Dealer_Territory" />
         <AssociationConnector Association="OrderLogModel.FK_Territory_Region" />
-        <EntityTypeShape EntityType="OrderLogModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="OrderLogModel.Order" Width="1.5" PointX="7.5" PointY="1.5" />
         <EntityTypeShape EntityType="OrderLogModel.OrderLineUnit" Width="1.5" PointX="9.75" PointY="7.125" />
         <EntityTypeShape EntityType="OrderLogModel.OrderTran" Width="1.5" PointX="14.5" PointY="2.125" />
