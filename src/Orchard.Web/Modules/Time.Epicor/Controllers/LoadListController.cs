@@ -86,8 +86,8 @@ namespace Time.Epicor.Controllers
             }
             else
             {
-                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == 1 && x.DateIssued.Year == DateTime.Now.Year).OrderBy(x => x.Name);
-                else loadlists = loadlists.Where(x => x.Complete == 1 && x.DateIssued.Year == LoadListYear).OrderBy(x => x.Name);
+                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == DateTime.Now.Year || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+                else loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == LoadListYear || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
             }
 
             ViewBag.Complete = id;

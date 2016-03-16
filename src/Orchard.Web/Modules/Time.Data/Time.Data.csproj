@@ -458,9 +458,6 @@
     <Compile Include="EntityModels\OrderLog\Region.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\OrderLog\sysdiagram.cs">
-      <DependentUpon>OrderLogModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityModels\OrderLog\Territory.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>

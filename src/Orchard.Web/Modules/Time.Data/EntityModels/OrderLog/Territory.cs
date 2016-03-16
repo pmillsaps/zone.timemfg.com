@@ -25,7 +25,7 @@ namespace Time.Data.EntityModels.OrderLog
         public string TerritoryName { get; set; }
     
         public virtual ICollection<Dealer> Dealers { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
         public virtual Region Region { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

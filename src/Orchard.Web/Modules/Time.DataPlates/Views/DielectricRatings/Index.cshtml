@@ -33,6 +33,9 @@
         <th>
             @Html.DisplayNameFor(model => model.LineVoltage)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RubberGloving)
+        </th>
         @*<th></th>*@
     </tr>
 
@@ -54,11 +57,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LineVoltage)
             </td>
+            @if (item.RubberGloving == null)
+            {
+                <td>
+                    @Html.CheckBox("RubberGloving", new { @disabled = "disabled" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.RubberGloving.Value)
+                </td>
+            }
             @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SearchOrder }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SearchOrder }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SearchOrder })
-            </td>*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SearchOrder }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SearchOrder }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SearchOrder })
+                </td>*@
         </tr>
     }
 

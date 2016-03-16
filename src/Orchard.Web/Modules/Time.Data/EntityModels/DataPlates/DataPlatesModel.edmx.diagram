@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="67d2b52b15ff4c7ab895bbb009bede8f" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="DataPlateModel.CA_Options" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DataPlateModel.DielectricRating" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DataPlateModel.EP_SS_Options" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DataPlateModel.HR_Options" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DataPlateModel.LB_Options" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DataPlateModel.LiftData" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DataPlateModel.PS_Option" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DataPlateModel.Template" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DataPlateModel.TemplateData" Width="1.5" PointX="3" PointY="6.5" />
+        <EntityTypeShape EntityType="DataPlateModel.CA_Options" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DataPlateModel.EP_SS_Options" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DataPlateModel.HR_Options" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DataPlateModel.LB_Options" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataPlateModel.LiftData" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DataPlateModel.PS_Option" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DataPlateModel.Template" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="DataPlateModel.TemplateData" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="DataPlateModel.FK_TemplateData_Template" />
+        <EntityTypeShape EntityType="DataPlateModel.DielectricRating" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

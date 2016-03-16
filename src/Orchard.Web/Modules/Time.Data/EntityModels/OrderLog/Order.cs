@@ -16,8 +16,8 @@ namespace Time.Data.EntityModels.OrderLog
     {
         public Order()
         {
-            this.OrderTrans = new HashSet<OrderTran>();
             this.OrderLineUnits = new HashSet<OrderLineUnit>();
+            this.OrderTrans = new HashSet<OrderTran>();
         }
     
         public int OrderId { get; set; }
@@ -42,7 +42,7 @@ namespace Time.Data.EntityModels.OrderLog
         public virtual Install Install { get; set; }
         public virtual Installer Installer { get; set; }
         public virtual Territory Territory { get; set; }
-        public virtual ICollection<OrderTran> OrderTrans { get; set; }
         public virtual ICollection<OrderLineUnit> OrderLineUnits { get; set; }
+        public virtual ICollection<OrderTran> OrderTrans { get; set; }
     }
 }
