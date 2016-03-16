@@ -1,12 +1,18 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJob>
 
-<h2>Jobs for this Load List</h2>
+@*<h2>Jobs for this Load List</h2>*@
+
+@{
+    Script.Require("jQuery");
+}
 
 <a id="jobStatusToggle" href="javascript:toggleJobStatus();">Toggle Job Statuses Visibility</a>
+
 <br /><br />
 
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <caption class="lead"><b>Jobs for this Load List</b></caption>
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.JobNumber)
         </th>
@@ -90,3 +96,13 @@
     }
 
 </table>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () { $('.JobStatus').hide(); })
+        function toggleJobStatus() {
+            $('.JobStatus').toggle();
+        }
+    </script>
+}

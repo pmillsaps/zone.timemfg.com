@@ -74,11 +74,22 @@ namespace Time.Epicor.Controllers
 
         //
         // GET: /LoadList/
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int? LoadListYear, int id = 0)
         {
+            ViewBag.LoadListYear = new SelectList(_db.LoadLists.Select(x => new { x.DateIssued.Year }).Distinct().OrderByDescending(x => x.Year), "Year", "Year");
             var loadlists = _db.LoadLists.AsQueryable();
-            loadlists = loadlists.Where(x => x.Complete == id);
-            loadlists = loadlists.OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
+
+            if (id == 0)
+            {
+                loadlists = loadlists.Where(x => x.Complete == id);
+                loadlists = loadlists.OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
+            }
+            else
+            {
+                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == 1 && x.DateIssued.Year == DateTime.Now.Year).OrderBy(x => x.Name);
+                else loadlists = loadlists.Where(x => x.Complete == 1 && x.DateIssued.Year == LoadListYear).OrderBy(x => x.Name);
+            }
+
             ViewBag.Complete = id;
             return View(loadlists);
         }

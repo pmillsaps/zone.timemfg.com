@@ -12,24 +12,22 @@ namespace Time.Data.EntityModels.OrderLog
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderTran
+    public partial class OrderLineUnit
     {
-        public int OrderTranId { get; set; }
+        public int OrderLineUnitId { get; set; }
         public int OrderId { get; set; }
-        public int LiftModelId { get; set; }
-        public int NewQty { get; set; }
-        public int CancelQty { get; set; }
-        public string Comment { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<System.DateTime> AsOfDate { get; set; }
-        public bool Special { get; set; }
-        public bool Stock { get; set; }
-        public bool Demo { get; set; }
-        public bool RTG { get; set; }
-        public bool TruGuard { get; set; }
+        public Nullable<System.DateTime> ATSDate { get; set; }
+        public string SalesOrderNum { get; set; }
+        public Nullable<System.DateTime> InvoiceDate { get; set; }
+        public Nullable<decimal> InvoiceAmt { get; set; }
+        public string UnitComment { get; set; }
+        public bool Cancel { get; set; }
+        public Nullable<bool> Special { get; set; }
+        public Nullable<bool> Stock { get; set; }
+        public Nullable<bool> Demo { get; set; }
+        public Nullable<bool> RTG { get; set; }
         public Nullable<bool> GSA { get; set; }
     
-        public virtual LiftModel LiftModel { get; set; }
         public virtual Order Order { get; set; }
     }
 }

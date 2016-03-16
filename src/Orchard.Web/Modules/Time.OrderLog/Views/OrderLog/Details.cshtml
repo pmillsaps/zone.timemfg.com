@@ -129,6 +129,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.GSA)
+        </dt>
+        @if (Model.GSA == null)
+        {
+            <dd>
+                @Html.CheckBox("GSA", new { @disabled = "disabled" })
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.GSA)
+            </dd>
+        }
+
+        <dt>
             @Html.DisplayNameFor(model => model.Customer)
         </dt>
 
