@@ -40,12 +40,18 @@ namespace Time.Configurator.Controllers
         // GET: SpecialCustomers
         public ActionResult Index()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             return View(db.SpecialCustomers.OrderBy(x => x.Name).ToList());
         }
 
         // GET: SpecialCustomers/Details/5
         public ActionResult Details(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -65,6 +71,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialCustomers/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             return View();
         }
 
@@ -75,6 +84,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] SpecialCustomer specialCustomer)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevents duplicates when creating a new customer
             var Cust = db.SpecialCustomers.FirstOrDefault(x => x.Name == specialCustomer.Name);
 
@@ -94,6 +106,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialCustomers/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -113,6 +128,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] SpecialCustomer specialCustomer)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.Entry(specialCustomer).State = EntityState.Modified;
@@ -125,6 +143,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialCustomers/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -142,6 +163,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialCustomer specialCustomer = db.SpecialCustomers.Find(id);
             db.SpecialCustomers.Remove(specialCustomer);
             db.SaveChanges();

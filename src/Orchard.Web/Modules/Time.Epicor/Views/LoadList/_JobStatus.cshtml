@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJobStatu>
 @{var count = 0;}
-<tr class="JobStatus">
+<tr class="JobStatus info lead">
     <td></td>
     <td colspan="9">
         @foreach (var item in Model.Where(x => x.IgnoreFlag != 1))
@@ -19,7 +19,7 @@
             @:&nbsp;&nbsp;&nbsp;
             if (count >= 8)
             {
-                @:</td></tr><tr class="JobStatus"><td></td><td colspan="9">
+                @:</td></tr><tr class="JobStatus info lead"><td></td><td colspan="9">
                 count = 0;
             }
         }

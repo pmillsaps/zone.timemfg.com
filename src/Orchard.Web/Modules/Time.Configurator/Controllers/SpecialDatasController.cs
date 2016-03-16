@@ -9,11 +9,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Time.Configurator.Helpers;
+//using Time.Configurator.Helpers;
 using Time.Configurator.Models;
 using Time.Configurator.Services;
 using Time.Configurator.ViewModels;
 using Time.Data.EntityModels.Configurator;
+using Time.Epicor.Helpers;
 
 namespace Time.Configurator.Controllers
 {
@@ -53,7 +54,10 @@ namespace Time.Configurator.Controllers
         // GET: SpecialDatas
         public ActionResult Index(int? SpecialConfigId)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
 
+            //needed to populate the drop down list before everything in order to have it return the first page as a blank value
             GenerateDropDowns();
 
             if (SpecialConfigId == 0)
@@ -74,6 +78,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialDatas/Details/5
         public ActionResult Details(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +96,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialDatas/Create
         public ActionResult Create(int? SpecialConfigId)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialData specialData = db.SpecialDatas.Find(SpecialConfigId);
             GenerateDropDowns();
             return View(specialData);
@@ -101,6 +111,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] SpecialData specialData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevents duplicates when creating a new customer
             var datas = db.SpecialDatas.FirstOrDefault(x => x.Part == specialData.Part);
 
@@ -122,6 +135,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialDatas/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -143,6 +159,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,SpecialConfigId,SpecialDataTypeId,Part,Quantity,Price,RelatedOpId")] SpecialData specialData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             //prevents a duplicate from being saved when editing
             var Datas = db.SpecialDatas.FirstOrDefault(x => x.SpecialConfigId == specialData.SpecialConfigId && x.SpecialDataTypeId == specialData.SpecialDataTypeId && x.Part == specialData.Part
                 && x.Quantity == specialData.Quantity && x.Price == specialData.Price && x.Id != specialData.Id);
@@ -166,6 +185,9 @@ namespace Time.Configurator.Controllers
         // With this method the user can paste a list of Special Data and import it in
         public ActionResult Import()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialDataImportViewModel spDataImVM = new SpecialDataImportViewModel();
             GenerateDropDowns();
             return View(spDataImVM);
@@ -178,6 +200,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Import(SpecialDataImportViewModel spDataImVM)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
            // noOp used to insert a null into the Related Op Id for Assemblies
            int? noOp = null;
 
@@ -233,7 +258,7 @@ namespace Time.Configurator.Controllers
             var relatedOpId = db.SpecialRelatedOps.Select(x => x.Id).ToArray();
             var relatedOpName = db.SpecialRelatedOps.Select(x => x.Operation).ToArray();
 
-            //this section if for if your part is an ASM(Assembly)
+            //this section of the if is for if your part is an ASM(Assembly)
             // Looping through the parseString and assigning the values to the part, quantity, price, and datatypeid lists
             if (testUpperBound.Length == 4)
             {
@@ -264,7 +289,7 @@ namespace Time.Configurator.Controllers
             }
             else if (testUpperBound.Length == 5)
             {
-                //this section if for if your part is an MTL(Material)
+                //this section of the if is for if your part is an MTL(Material)
                 // Looping through the parseString and assigning the values to the part, quantity, price, datatypeid and relatedopid lists
                 for (int i = 0; i < parseString.Count(); i += 5)
                 {
@@ -309,6 +334,9 @@ namespace Time.Configurator.Controllers
         // This method exports a list of Special Data to an Excel sheet
         public ActionResult Export()
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             GenerateDropDowns();
             return View();
         }
@@ -320,6 +348,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Export(int SpecialConfigId)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (SpecialConfigId == 0) ModelState.AddModelError("", "Please select a Special Configuration for the list.");
 
             if (ModelState.IsValid)
@@ -333,7 +364,7 @@ namespace Time.Configurator.Controllers
                     relatedOpId = x.RelatedOpId,
                 }).ToList();
 
-                return new ExporttoExcelResult(SpecialConfigId + "_Data_List", sconfigs);
+                return new ExporttoExcelResult(SpecialConfigId + "_Data_List", sconfigs.Cast<object>().ToList());
             }
 
             GenerateDropDowns();
@@ -345,6 +376,9 @@ namespace Time.Configurator.Controllers
         // GET: SpecialDatas/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -362,6 +396,9 @@ namespace Time.Configurator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.ConfiguratorSales, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             SpecialData specialData = db.SpecialDatas.Find(id);
             db.SpecialDatas.Remove(specialData);
             db.SaveChanges();
@@ -377,6 +414,8 @@ namespace Time.Configurator.Controllers
             base.Dispose(disposing);
         }
 
+        //these two voids contain ViewBags to populate the drop down lists needed on multiple pages of the site
+        //saves a lot of space instead of having to call all three for any page with them on it
         private void GenerateDropDowns()
         {
             ViewBag.SpecialConfigId = new SelectList(db.SpecialConfigs.OrderBy(x => x.Name), "Id", "Name");

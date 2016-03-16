@@ -12,6 +12,6 @@ namespace Time.Configurator.Models
         public string Part { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
-        public int RelatedOpId { get; set; }
+        public int? RelatedOpId { get; set; }
     }
 }

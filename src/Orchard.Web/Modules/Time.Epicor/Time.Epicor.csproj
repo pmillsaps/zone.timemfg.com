@@ -152,6 +152,7 @@
     <Content Include="Content\Images\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\WebGrid.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

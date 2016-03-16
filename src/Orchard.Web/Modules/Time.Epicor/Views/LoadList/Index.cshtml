@@ -21,7 +21,7 @@
     {
         <li>@Html.ActionLink("View Completed Load Lists", "Index", "LoadList", new { id = 1 }, new { @class = "btn btn-primary" })</li>
     }
-    
+
     <li>@Html.ActionLink("Print Load Lists", "PrintLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
     <li>@Html.ActionLink("Search for Jobs on Load Lists", "SearchLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
     @*<li>@Html.SecurityTrimmedActionLink("Email Load Lists", "EmailLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>*@
@@ -31,8 +31,27 @@
     }
 </ul>
 
+<hr />
 
-
-<br /><br />
+@if (ViewBag.Complete == 1)
+{
+    using (Html.BeginForm("Index", "LoadList", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <b>Issued Date Year:</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 lead">
+                @Html.DropDownList("LoadListYear")
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Display Load Lists" class="btn btn-default" />
+            </div>
+        </div>
+        <hr />
+    }
+}
 
 @Html.Partial("_List")
