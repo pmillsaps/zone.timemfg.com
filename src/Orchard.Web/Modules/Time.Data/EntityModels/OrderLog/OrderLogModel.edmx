@@ -283,14 +283,20 @@
           <EntitySet Name="Installs" EntityType="OrderLogModel.Install" />
           <EntitySet Name="Installers" EntityType="OrderLogModel.Installer" />
           <EntitySet Name="LiftModels" EntityType="OrderLogModel.LiftModel" />
-          <EntitySet Name="Orders" EntityType="OrderLogModel.Order" />
-          <EntitySet Name="OrderTrans" EntityType="OrderLogModel.OrderTran" />
           <EntitySet Name="Regions" EntityType="OrderLogModel.Region" />
           <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
           <AssociationSet Name="FK_Dealer_Territory" Association="OrderLogModel.FK_Dealer_Territory">
             <End Role="Territory" EntitySet="Territories" />
             <End Role="Dealer" EntitySet="Dealers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Territory_Region" Association="OrderLogModel.FK_Territory_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Territory" EntitySet="Territories" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="OrderLogModel.sysdiagram" />
+          <EntitySet Name="Orders" EntityType="OrderLogModel.Order" />
+          <EntitySet Name="OrderLineUnits" EntityType="OrderLogModel.OrderLineUnit" />
+          <EntitySet Name="OrderTrans" EntityType="OrderLogModel.OrderTran" />
           <AssociationSet Name="FK_Order_Dealer" Association="OrderLogModel.FK_Order_Dealer">
             <End Role="Dealer" EntitySet="Dealers" />
             <End Role="Order" EntitySet="Orders" />
@@ -311,19 +317,13 @@
             <End Role="Territory" EntitySet="Territories" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderTran_Order" Association="OrderLogModel.FK_OrderTran_Order">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderTran" EntitySet="OrderTrans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Territory_Region" Association="OrderLogModel.FK_Territory_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="Territory" EntitySet="Territories" />
-          </AssociationSet>
-          <EntitySet Name="OrderLineUnits" EntityType="OrderLogModel.OrderLineUnit" />
-          <EntitySet Name="sysdiagrams" EntityType="OrderLogModel.sysdiagram" />
           <AssociationSet Name="FK_OrderLineUnit_Order" Association="OrderLogModel.FK_OrderLineUnit_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderLineUnit" EntitySet="OrderLineUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTran_Order" Association="OrderLogModel.FK_OrderTran_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderTran" EntitySet="OrderTrans" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Dealer">
@@ -360,6 +360,59 @@
           <Property Name="LiftModelName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderTrans" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="LiftModel" ToRole="OrderTran" />
         </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Territories" Relationship="OrderLogModel.FK_Territory_Region" FromRole="Region" ToRole="Territory" />
+        </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="TerritoryId" />
+          </Key>
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dealers" Relationship="OrderLogModel.FK_Dealer_Territory" FromRole="Territory" ToRole="Dealer" />
+          <NavigationProperty Name="Region" Relationship="OrderLogModel.FK_Territory_Region" FromRole="Territory" ToRole="Region" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Dealer_Territory">
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="1" />
+          <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Dealer">
+              <PropertyRef Name="TerritoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Territory_Region">
+          <End Type="OrderLogModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Territory">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -379,14 +432,33 @@
           <Property Name="Stock" Type="Boolean" Nullable="false" />
           <Property Name="Demo" Type="Boolean" Nullable="false" />
           <Property Name="RTG" Type="Boolean" Nullable="false" />
+          <Property Name="TruGuard" Type="Boolean" Nullable="false" />
+          <Property Name="GSA" Type="Boolean" />
           <NavigationProperty Name="Dealer" Relationship="OrderLogModel.FK_Order_Dealer" FromRole="Order" ToRole="Dealer" />
           <NavigationProperty Name="Install" Relationship="OrderLogModel.FK_Order_Install" FromRole="Order" ToRole="Install" />
           <NavigationProperty Name="Installer" Relationship="OrderLogModel.FK_Order_Installer" FromRole="Order" ToRole="Installer" />
           <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
-          <NavigationProperty Name="OrderTrans" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="Order" ToRole="OrderTran" />
-          <Property Name="TruGuard" Type="Boolean" Nullable="false" />
-          <Property Name="GSA" Type="Boolean" />
           <NavigationProperty Name="OrderLineUnits" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="Order" ToRole="OrderLineUnit" />
+          <NavigationProperty Name="OrderTrans" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="Order" ToRole="OrderTran" />
+        </EntityType>
+        <EntityType Name="OrderLineUnit">
+          <Key>
+            <PropertyRef Name="OrderLineUnitId" />
+          </Key>
+          <Property Name="OrderLineUnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ATSDate" Type="DateTime" Precision="3" />
+          <Property Name="SalesOrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UnitComment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Cancel" Type="Boolean" Nullable="false" />
+          <Property Name="Special" Type="Boolean" />
+          <Property Name="Stock" Type="Boolean" />
+          <Property Name="Demo" Type="Boolean" />
+          <Property Name="RTG" Type="Boolean" />
+          <Property Name="GSA" Type="Boolean" />
+          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="OrderLineUnit" ToRole="Order" />
         </EntityType>
         <EntityType Name="OrderTran">
           <Key>
@@ -400,46 +472,15 @@
           <Property Name="Comment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="AsOfDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LiftModel" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="OrderTran" ToRole="LiftModel" />
-          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="OrderTran" ToRole="Order" />
           <Property Name="Special" Type="Boolean" Nullable="false" />
           <Property Name="Stock" Type="Boolean" Nullable="false" />
           <Property Name="Demo" Type="Boolean" Nullable="false" />
           <Property Name="RTG" Type="Boolean" Nullable="false" />
           <Property Name="TruGuard" Type="Boolean" Nullable="false" />
           <Property Name="GSA" Type="Boolean" />
+          <NavigationProperty Name="LiftModel" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="OrderTran" ToRole="LiftModel" />
+          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="OrderTran" ToRole="Order" />
         </EntityType>
-        <EntityType Name="Region">
-          <Key>
-            <PropertyRef Name="RegionId" />
-          </Key>
-          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Territories" Relationship="OrderLogModel.FK_Territory_Region" FromRole="Region" ToRole="Territory" />
-        </EntityType>
-        <EntityType Name="Territory">
-          <Key>
-            <PropertyRef Name="TerritoryId" />
-          </Key>
-          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegionId" Type="Int32" Nullable="false" />
-          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Dealers" Relationship="OrderLogModel.FK_Dealer_Territory" FromRole="Territory" ToRole="Dealer" />
-          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
-          <NavigationProperty Name="Region" Relationship="OrderLogModel.FK_Territory_Region" FromRole="Territory" ToRole="Region" />
-        </EntityType>
-        <Association Name="FK_Dealer_Territory">
-          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="1" />
-          <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Territory">
-              <PropertyRef Name="TerritoryId" />
-            </Principal>
-            <Dependent Role="Dealer">
-              <PropertyRef Name="TerritoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Dealer">
           <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="1" />
           <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
@@ -500,59 +541,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderTran_Order">
-          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="OrderLogModel.OrderTran" Role="OrderTran" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
-            </Principal>
-            <Dependent Role="OrderTran">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Territory_Region">
-          <End Type="OrderLogModel.Region" Role="Region" Multiplicity="1" />
-          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="RegionId" />
-            </Principal>
-            <Dependent Role="Territory">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="OrderLineUnit">
-          <Key>
-            <PropertyRef Name="OrderLineUnitId" />
-          </Key>
-          <Property Name="OrderLineUnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="ATSDate" Type="DateTime" Precision="3" />
-          <Property Name="SalesOrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
-          <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="UnitComment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Cancel" Type="Boolean" Nullable="false" />
-          <Property Name="Special" Type="Boolean" />
-          <Property Name="Stock" Type="Boolean" />
-          <Property Name="Demo" Type="Boolean" />
-          <Property Name="RTG" Type="Boolean" />
-          <Property Name="GSA" Type="Boolean" />
-          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="OrderLineUnit" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <Association Name="FK_OrderLineUnit_Order">
           <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
           <End Type="OrderLogModel.OrderLineUnit" Role="OrderLineUnit" Multiplicity="*" />
@@ -561,6 +549,18 @@
               <PropertyRef Name="OrderId" />
             </Principal>
             <Dependent Role="OrderLineUnit">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTran_Order">
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="OrderLogModel.OrderTran" Role="OrderTran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderTran">
               <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
@@ -604,6 +604,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="OrderLogModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Territories">
+            <EntityTypeMapping TypeName="OrderLogModel.Territory">
+              <MappingFragment StoreEntitySet="Territory">
+                <ScalarProperty Name="TerritoryName" ColumnName="TerritoryName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="TerritoryId" ColumnName="TerritoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OrderLogModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="OrderLogModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -627,43 +655,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrderTrans">
-            <EntityTypeMapping TypeName="OrderLogModel.OrderTran">
-              <MappingFragment StoreEntitySet="OrderTran">
-                <ScalarProperty Name="GSA" ColumnName="GSA" />
-                <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
-                <ScalarProperty Name="RTG" ColumnName="RTG" />
-                <ScalarProperty Name="Demo" ColumnName="Demo" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Special" ColumnName="Special" />
-                <ScalarProperty Name="AsOfDate" ColumnName="AsOfDate" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="CancelQty" ColumnName="CancelQty" />
-                <ScalarProperty Name="NewQty" ColumnName="NewQty" />
-                <ScalarProperty Name="LiftModelId" ColumnName="LiftModelId" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="OrderTranId" ColumnName="OrderTranId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Regions">
-            <EntityTypeMapping TypeName="OrderLogModel.Region">
-              <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Territories">
-            <EntityTypeMapping TypeName="OrderLogModel.Territory">
-              <MappingFragment StoreEntitySet="Territory">
-                <ScalarProperty Name="TerritoryName" ColumnName="TerritoryName" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="TerritoryId" ColumnName="TerritoryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderLineUnits">
             <EntityTypeMapping TypeName="OrderLogModel.OrderLineUnit">
               <MappingFragment StoreEntitySet="OrderLineUnit">
@@ -683,14 +674,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="OrderLogModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="OrderTrans">
+            <EntityTypeMapping TypeName="OrderLogModel.OrderTran">
+              <MappingFragment StoreEntitySet="OrderTran">
+                <ScalarProperty Name="GSA" ColumnName="GSA" />
+                <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
+                <ScalarProperty Name="RTG" ColumnName="RTG" />
+                <ScalarProperty Name="Demo" ColumnName="Demo" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
+                <ScalarProperty Name="AsOfDate" ColumnName="AsOfDate" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CancelQty" ColumnName="CancelQty" />
+                <ScalarProperty Name="NewQty" ColumnName="NewQty" />
+                <ScalarProperty Name="LiftModelId" ColumnName="LiftModelId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderTranId" ColumnName="OrderTranId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

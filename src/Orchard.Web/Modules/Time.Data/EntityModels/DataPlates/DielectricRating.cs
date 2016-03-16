@@ -19,5 +19,6 @@ namespace Time.Data.EntityModels.DataPlates
         public string SearchString { get; set; }
         public string Rating { get; set; }
         public string LineVoltage { get; set; }
+        public Nullable<bool> RubberGloving { get; set; }
     }
 }

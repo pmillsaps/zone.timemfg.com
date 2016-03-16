@@ -23,6 +23,7 @@
           <Property Name="SearchString" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Rating" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="LineVoltage" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RubberGloving" Type="bit" />
         </EntityType>
         <EntityType Name="EP_SS_Options">
           <Key>
@@ -113,7 +114,6 @@
       <Schema Namespace="DataPlateModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DataPlateEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CA_Options" EntityType="DataPlateModel.CA_Options" />
-          <EntitySet Name="DielectricRatings" EntityType="DataPlateModel.DielectricRating" />
           <EntitySet Name="EP_SS_Options" EntityType="DataPlateModel.EP_SS_Options" />
           <EntitySet Name="HR_Options" EntityType="DataPlateModel.HR_Options" />
           <EntitySet Name="LB_Options" EntityType="DataPlateModel.LB_Options" />
@@ -125,6 +125,7 @@
             <End Role="Template" EntitySet="Templates" />
             <End Role="TemplateData" EntitySet="TemplateDatas" />
           </AssociationSet>
+          <EntitySet Name="DielectricRatings" EntityType="DataPlateModel.DielectricRating" />
         </EntityContainer>
         <EntityType Name="CA_Options">
           <Key>
@@ -134,16 +135,6 @@
           <Property Name="Cap_LBS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cap_KG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NonPlatformCap" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DielectricRating">
-          <Key>
-            <PropertyRef Name="SearchOrder" />
-          </Key>
-          <Property Name="SearchOrder" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SearchString" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Rating" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="LineVoltage" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EP_SS_Options">
           <Key>
@@ -215,6 +206,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DielectricRating">
+          <Key>
+            <PropertyRef Name="SearchOrder" />
+          </Key>
+          <Property Name="SearchOrder" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SearchString" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LineVoltage" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RubberGloving" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -228,17 +230,6 @@
                 <ScalarProperty Name="Cap_KG" ColumnName="Cap_KG" />
                 <ScalarProperty Name="Cap_LBS" ColumnName="Cap_LBS" />
                 <ScalarProperty Name="Option" ColumnName="Option" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DielectricRatings">
-            <EntityTypeMapping TypeName="DataPlateModel.DielectricRating">
-              <MappingFragment StoreEntitySet="DielectricRating">
-                <ScalarProperty Name="LineVoltage" ColumnName="LineVoltage" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="SearchString" ColumnName="SearchString" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SearchOrder" ColumnName="SearchOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -299,6 +290,18 @@
                 <ScalarProperty Name="TemplateFullFileName" ColumnName="TemplateFullFileName" />
                 <ScalarProperty Name="FieldData" ColumnName="FieldData" />
                 <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DielectricRatings">
+            <EntityTypeMapping TypeName="DataPlateModel.DielectricRating">
+              <MappingFragment StoreEntitySet="DielectricRating">
+                <ScalarProperty Name="RubberGloving" ColumnName="RubberGloving" />
+                <ScalarProperty Name="LineVoltage" ColumnName="LineVoltage" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="SearchString" ColumnName="SearchString" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SearchOrder" ColumnName="SearchOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
