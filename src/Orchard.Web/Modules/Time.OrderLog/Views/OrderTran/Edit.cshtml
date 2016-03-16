@@ -105,6 +105,21 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.GSA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.GSA == null)
+                {
+                    @Html.CheckBox("GSA")
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.GSA)
+                }
+                @Html.ValidationMessageFor(model => model.GSA)
+            </div>
+        </div>
+
         @*<div class="form-group">
                 @Html.LabelFor(model => model.Install, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">

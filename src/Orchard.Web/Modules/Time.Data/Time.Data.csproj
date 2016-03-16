@@ -434,6 +434,9 @@
     <Compile Include="EntityModels\OrderLog\Order.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderLineUnit.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\OrderLog\OrderLogModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -453,6 +456,9 @@
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\Region.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\sysdiagram.cs">
       <DependentUpon>OrderLogModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\OrderLog\Territory.cs">
