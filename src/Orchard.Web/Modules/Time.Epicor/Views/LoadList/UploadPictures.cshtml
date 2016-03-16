@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Upload Pictures : " + ViewBag.Name;
+}
+
+<link href="~/Scripts/dropzone/css/dropzone.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewBag.Notice != null)
+{
+    <div class="notice">@ViewBag.Notice</div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="error">@ViewBag.Error</div>
+}
+
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+</ul>
+<br />
+
+<h3>
+    For drag and drop functionality, you must be running one of the following browsers:<br />
+    Chrome 7+<br />
+    Firefox 4+<br />
+    IE 10+<br />
+    Opera 12+ (Version 12 for MacOS is disabled because their API is buggy)<br />
+    Safari 6+<br />
+</h3>
+
+<div>
+    @using (Html.BeginForm("UploadPictures", "LoadList", FormMethod.Post, new
+    {
+        enctype = "multipart/form-data",
+        id = "uploadPictures",
+        @class = "dropzone"
+    }))
+    {
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            @Html.Hidden("id", (int)ViewBag.Id)
+            <input type="submit" value="Upload" />
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/dropzone/dropzone.js"></script>
+<script type="text/javascript">
+    // "uploadDemo" is the camelized version of the HTML form's ID
+    Dropzone.options.uploadPictures = {
+        paramName: "file", // Must match the name of the HttpPostedFileBase argument that the Upload action expects.
+        parallelUploads: 1,
+        maxFilesize: 2,  // MB
+        acceptedFiles: "image/*"
+    };
+</script>
