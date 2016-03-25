@@ -26,7 +26,6 @@ namespace Time.Data.EntityModels.Production
         }
     
         public virtual DbSet<Part> Parts { get; set; }
-        public virtual DbSet<SysTask> SysTasks { get; set; }
         public virtual DbSet<SysAgentTask> SysAgentTasks { get; set; }
         public virtual DbSet<IMJobOper> IMJobOpers { get; set; }
         public virtual DbSet<IMPartBin> IMPartBins { get; set; }
@@ -40,5 +39,11 @@ namespace Time.Data.EntityModels.Production
         public virtual DbSet<V_PartCostStd> V_PartCostStd { get; set; }
         public virtual DbSet<V_PartDetails> V_PartDetails { get; set; }
         public virtual DbSet<V_NowReport> V_NowReport { get; set; }
+        public virtual DbSet<JobOper> JobOpers { get; set; }
+        public virtual DbSet<V_CustomersWithOpenOrderPartLines> V_CustomersWithOpenOrderPartLines { get; set; }
+        public virtual DbSet<V_JobInformation> V_JobInformation { get; set; }
+        public virtual DbSet<V_JobInformation_NotClosed> V_JobInformation_NotClosed { get; set; }
+        public virtual DbSet<SysTaskLog> SysTaskLogs { get; set; }
+        public virtual DbSet<SysTask> SysTasks { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿@model Time.Data.EntityModels.OrderLog.OrderTran
 
 @{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
     ViewBag.Title = "Edit Order Transaction";
 }
 
@@ -35,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Date)
+                @Html.TextBoxFor(model => model.Date, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.Date)
             </div>
         </div>
@@ -44,7 +46,7 @@
             @Html.LabelFor(model => model.LiftModelId, "LiftModelId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("LiftModelId", String.Empty)*@
-                @Html.DisplayFor(model => model.LiftModel.LiftModelName)
+                @Html.TextBoxFor(model => model.LiftModel.LiftModelName, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.LiftModelId)
             </div>
         </div>
@@ -52,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NewQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.NewQty)
+                @Html.TextBoxFor(model => model.NewQty, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.NewQty)
             </div>
         </div>
@@ -60,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CancelQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.CancelQty)
+                @Html.TextBoxFor(model => model.CancelQty, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.CancelQty)
             </div>
         </div>
@@ -114,7 +116,7 @@
                 }
                 else
                 {
-                    @Html.EditorFor(model => model.GSA)
+                    @Html.EditorFor(model => model.GSA.Value)
                 }
                 @Html.ValidationMessageFor(model => model.GSA)
             </div>
@@ -131,7 +133,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AsOfDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AsOfDate, new { @class = "datepicker" })
+                @Html.TextBoxFor(model => model.AsOfDate, new { @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.AsOfDate)
             </div>
         </div>
@@ -155,3 +157,13 @@
 <div>
     @Html.ActionLink("Back to List", "Details", "OrderLog", new { id = Model.OrderId }, null)
 </div>
+
+@using(Script.Foot())
+{
+    <script type="text/javascript">
+        $("#AsOfDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        })
+    </script>
+}

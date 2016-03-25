@@ -467,6 +467,9 @@
     <Compile Include="EntityModels\Production\IMPartBin.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\JobOper.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\Part.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
@@ -494,10 +497,22 @@
     <Compile Include="EntityModels\Production\SysTask.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\SysTaskLog.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\V_BillOfMaterials.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\V_CustomersWithOpenOrderPartLines.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_JobInformation.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_JobInformation_NotClosed.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Production\V_NowReport.cs">

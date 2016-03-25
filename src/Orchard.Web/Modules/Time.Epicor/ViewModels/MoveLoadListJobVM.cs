@@ -13,5 +13,7 @@ namespace Time.Epicor.ViewModels
         // public LoadListJob Job { get; set; }
         public SelectList LoadLists { get; set; }
         public int LoadList { get; set; }
+        public string JobNumber { get; set; }
+        public int OriginalLLId { get; set; }
     }
 }

@@ -17,11 +17,13 @@
     <div class="error">@ViewBag.Error</div>
 }
 
+<hr />
 
 <ul class="list-inline">
     <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
 </ul>
-<br />
+
+<hr />
 
 <h3>
     For drag and drop functionality, you must be running one of the following browsers:<br />
@@ -32,6 +34,8 @@
     Safari 6+<br />
 </h3>
 
+<hr />
+
 <div>
     @using (Html.BeginForm("UploadPictures", "LoadList", FormMethod.Post, new
     {
@@ -40,10 +44,10 @@
         @class = "dropzone"
     }))
     {
-        <div class="fallback">
-            <input name="file" type="file" multiple />
-            @Html.Hidden("id", (int)ViewBag.Id)
-            <input type="submit" value="Upload" />
+        <div class="fallback row">
+                <input name="file" type="file" multiple class="btn btn-default" />
+                @Html.Hidden("id", (int)ViewBag.Id)
+                <input type="submit" value="Upload" class="btn btn-primary" />
         </div>
     }
 </div>

@@ -120,8 +120,10 @@ namespace Time.Epicor.Controllers
         {
             var compareDate = DateTime.Now.AddDays(-1);
             var qry = db.SysTasks
-               .Where(x => x.TaskStatus.ToUpper() != "ACTIVE" && x.EndedOn >= compareDate && !x.TaskDescription.ToUpper().Contains("ECC"))
+               .Where(x => x.TaskStatus.ToUpper() != "ACTIVE" && x.EndedOn >= compareDate)
                .OrderByDescending(x => x.EndedOn);
+
+                //.Where(x => x.TaskStatus.ToUpper() != "ACTIVE" && x.EndedOn >= compareDate && !x.TaskDescription.ToUpper().Contains("ECC"))
 
             return PartialView(qry);
         }

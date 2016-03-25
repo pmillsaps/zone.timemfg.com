@@ -2,7 +2,6 @@
 //using CrystalDecisions.Shared;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
-
 //using EpicWeb.Helpers;
 //using EpicWeb.Logging;
 //using EpicWeb.Models;
@@ -22,7 +21,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Time.Data.EntityModels.Epicor;
+//using Time.Data.EntityModels.Epicor;
+using Time.Data.EntityModels.Production;
 using Time.Data.EntityModels.TimeMFG;
 using Time.Epicor.ViewModels;
 using Time.Support.Helpers;
@@ -38,7 +38,8 @@ namespace Time.Epicor.Controllers
     public class LoadListController : Controller
     {
         private readonly TimeMFGEntities _db;
-        private readonly EpicorEntities _epicor;
+        //private readonly EpicorEntities _epicor;
+        private readonly ProductionEntities production;
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
 
@@ -54,18 +55,18 @@ namespace Time.Epicor.Controllers
         public LoadListController(IOrchardServices services)
         {
             _db = new TimeMFGEntities();
-            _epicor = new EpicorEntities();
+            production = new ProductionEntities();
             Logger = NullLogger.Instance;
-            _epicor.Database.CommandTimeout = 600;
+            production.Database.CommandTimeout = 600;
             Services = services;
             T = NullLocalizer.Instance;
             GetPermissions();
         }
 
-        public LoadListController(TimeMFGEntities db, EpicorEntities epicor, IOrchardServices services)
+        public LoadListController(TimeMFGEntities db, ProductionEntities _production, IOrchardServices services)
         {
             _db = db;
-            _epicor = epicor;
+            production = _production;
             Services = services;
             Logger = NullLogger.Instance;
             T = NullLocalizer.Instance;
@@ -74,7 +75,7 @@ namespace Time.Epicor.Controllers
 
         //
         // GET: /LoadList/
-        public ActionResult Index(int? LoadListYear, int id = 0)
+        public ActionResult Index(int? LoadListYear, int? id = 0)
         {
             ViewBag.LoadListYear = new SelectList(_db.LoadLists.Select(x => new { x.DateIssued.Year }).Distinct().OrderByDescending(x => x.Year), "Year", "Year");
             var loadlists = _db.LoadLists.AsQueryable();
@@ -158,7 +159,7 @@ namespace Time.Epicor.Controllers
             var loadLists = new SelectList(_db.LoadLists.Where(x => x.Complete != 1 && x.Id != loadListJob.LoadListId).OrderBy(x => x.Name),
                 "id", "name");
 
-            var vm = new MoveLoadListJobVM() { LoadListJobId = id, LoadLists = loadLists };
+            var vm = new MoveLoadListJobVM() { LoadListJobId = id, LoadLists = loadLists, JobNumber = loadListJob.JobNumber, OriginalLLId = loadListJob.LoadListId };
 
             return View(vm);
         }
@@ -168,6 +169,7 @@ namespace Time.Epicor.Controllers
         //[Authorize(Roles = "LoadListEditor")]
         [HttpPost]
         //[Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
         public ActionResult MoveLoadListJob(MoveLoadListJobVM vm)
         {
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
@@ -186,6 +188,9 @@ namespace Time.Epicor.Controllers
                         // Log the Load List Change
                         Logger.Information("");
                         //Logger.Info("");
+                        // These lines adds or removes the distributor in the Load List
+                        CheckDistributorLoadList(llj.LoadListId);
+                        CheckDistributorLoadList(vm.OriginalLLId);
                         return RedirectToAction("Details", new { id = origLL });
                     }
                 }
@@ -504,19 +509,19 @@ namespace Time.Epicor.Controllers
         public ActionResult _JobList(AddLiftViewModel vm)
         {
             var jobsEntered = _db.LoadListJobs.Select(x => x.JobNumber).ToList();
-            var jobQuery = _epicor.v_JobInformation.Where(x => !jobsEntered.Contains(x.jobnum) && !String.IsNullOrEmpty(x.serialnumber)).AsQueryable();
+            var jobQuery = production.V_JobInformation.Where(x => !jobsEntered.Contains(x.JobNum) && !String.IsNullOrEmpty(x.SerialNumber)).AsQueryable();
             if (!String.IsNullOrEmpty(vm.Customer))
             {
                 var custnum = int.Parse(vm.Customer);
-                jobQuery = jobQuery.Where(x => x.custnum == custnum && x.jobclosed != 1);
+                jobQuery = jobQuery.Where(x => x.CustNum == custnum && x.JobClosed != true);
             }
 
-            if (!String.IsNullOrEmpty(vm.Search)) jobQuery = jobQuery.Where(x => x.jobnum.Contains(vm.Search));
+            if (!String.IsNullOrEmpty(vm.Search)) jobQuery = jobQuery.Where(x => x.JobNum.Contains(vm.Search));
 
-            List<v_JobInformation> jobs = new List<v_JobInformation>();
+            List<V_JobInformation> jobs = new List<V_JobInformation>();
             if (!String.IsNullOrEmpty(vm.Customer) || !String.IsNullOrEmpty(vm.Search))
             {
-                jobs = jobQuery.OrderBy(x => x.reqduedate).ToList();
+                jobs = jobQuery.OrderBy(x => x.ReqDueDate).ToList();
             }
 
             return PartialView(jobs);
@@ -525,8 +530,8 @@ namespace Time.Epicor.Controllers
         [OutputCache(Duration = 10)]
         public ActionResult _CustomerList(string customer)
         {
-            var cust = new SelectList(_epicor.v_CustomersWithOpenOrderPartLines.Where(x => x.openorder == 1 && x.voidorder != 1 && x.prodcode.Contains("lift")).DistinctBy(x => x.custnum)
-                .OrderBy(x => x.name),
+            var cust = new SelectList(production.V_CustomersWithOpenOrderPartLines.Where(x => x.OpenOrder == true && x.VoidOrder != true && x.ProdCode.Contains("lift")).DistinctBy(x => x.CustNum)
+                .OrderBy(x => x.Name),
                 "custnum", "name", customer);
 
             ViewBag.Customers = cust;
@@ -536,6 +541,7 @@ namespace Time.Epicor.Controllers
 
         [HttpPost]
         //[Authorize(Roles = "LoadListEditor")]
+        [ValidateAntiForgeryToken]
         public ActionResult AddLift(int id, List<string> selectedLines)
         {
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
@@ -552,35 +558,35 @@ namespace Time.Epicor.Controllers
         {
             //var jobProd = _epicor.v_JobProd.FirstOrDefault(x => x.jobnum == job);
             //var salesOrder = _epicor..FirstOrDefault(x => x.)
-            var jobinfo = _epicor.v_JobInformation.FirstOrDefault(x => x.jobnum == job);
+            var jobinfo = production.V_JobInformation.FirstOrDefault(x => x.JobNum == job);
 
             var loadListJob = new LoadListJob
             {
                 LoadListId = id,
                 JobNumber = job.ToUpper(),
-                LiftModel = jobinfo.partnum,
-                SerialNo = jobinfo.serialnumber,
-                DateATS = jobinfo.reqduedate ?? DefaultDate,
-                Destination = String.Format("{0} | {1} | {2}", jobinfo.city, jobinfo.state, jobinfo.country),
+                LiftModel = jobinfo.PartNum,
+                SerialNo = jobinfo.SerialNumber,
+                DateATS = jobinfo.ReqDueDate ?? DefaultDate,
+                Destination = String.Format("{0} | {1} | {2}", jobinfo.City, jobinfo.State, jobinfo.Country),
                 CustomerName = jobinfo.CustName,
-                CustomerId = jobinfo.custnum ?? 0,
+                CustomerId = jobinfo.CustNum ?? 0,
                 Comments = "",
-                DistributorPO = jobinfo.ponum,
-                ShipTo = String.Format(@"{0}/{1}", jobinfo.custid, jobinfo.shiptonum),
-                SalesOrder = String.Format("{0}-{1}-{2}", jobinfo.ordernum, jobinfo.orderline, jobinfo.orderrelnum),
+                DistributorPO = jobinfo.PONum,
+                ShipTo = String.Format(@"{0}/{1}", jobinfo.CustID, jobinfo.ShipToNum),
+                SalesOrder = String.Format("{0}-{1}-{2}", jobinfo.OrderNum, jobinfo.OrderLine, jobinfo.OrderRelNum),
             };
 
-            var loadlist = _db.LoadLists.First(x => x.Id == id);
-            var distributor = _db.LoadListDistributors.FirstOrDefault(x => x.CustomerId == jobinfo.custnum);
-            if (distributor == null && jobinfo.custnum != null) AddNewDistributor(jobinfo);
+            //var loadlist = _db.LoadLists.First(x => x.Id == id);
+            //var distributor = _db.LoadListDistributors.FirstOrDefault(x => x.CustomerId == jobinfo.custnum);
+            //if (distributor == null && jobinfo.custnum != null) AddNewDistributor(jobinfo);
 
-            distributor = _db.LoadListDistributors.First(x => x.CustomerId == jobinfo.custnum);
+            //distributor = _db.LoadListDistributors.First(x => x.CustomerId == jobinfo.custnum);
 
-            if (!loadlist.LoadListDistributors.Contains(distributor))
-            {
-                loadlist.LoadListDistributors.Add(distributor);
-                _db.SaveChanges();
-            }
+            //if (!loadlist.LoadListDistributors.Contains(distributor))
+            //{
+            //    loadlist.LoadListDistributors.Add(distributor);
+            //    _db.SaveChanges();
+            //}
 
             try
             {
@@ -593,14 +599,45 @@ namespace Time.Epicor.Controllers
             }
 
             AddNewJobOperations(loadListJob.JobNumber);
+            // These line adds the distributor to the load list
+            CheckDistributorLoadList(id);
         }
 
-        private void AddNewDistributor(v_JobInformation jobinfo)
+        // This method is called to add or remove the Distributor(s) to(from) the Load List
+        private void CheckDistributorLoadList(int id)
+        {
+            var loadlist = _db.LoadLists.First(x => x.Id == id);
+            var jobs = _db.LoadListJobs.Where(x => x.LoadListId == loadlist.Id).ToList();
+            // Adding the distributor if doesn't exist
+            foreach (var j in jobs)
+            {
+                var distributor = _db.LoadListDistributors.FirstOrDefault(x => x.CustomerId == j.CustomerId);
+                var jobinfo = production.V_JobInformation.FirstOrDefault(x => x.JobNum == j.JobNumber);
+                if (distributor == null && jobinfo.CustNum != null) AddNewDistributor(jobinfo.CustNum, jobinfo.CustName);
+            }
+            // Adding and removing distributors from the Load List distributors
+            var distributors = _db.LoadListDistributors.ToList();
+            foreach (var d in distributors)
+            {
+                if (jobs.Any(x => x.CustomerName == d.Name))
+                {
+                    loadlist.LoadListDistributors.Add(d);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    loadlist.LoadListDistributors.Remove(d);
+                    _db.SaveChanges();
+                }
+            }
+        }
+
+        private void AddNewDistributor(int? id, string Name)
         {
             _db.LoadListDistributors.Add(new LoadListDistributor
             {
-                CustomerId = jobinfo.custnum ?? 0,
-                Name = jobinfo.CustName
+                CustomerId = id ?? 0,
+                Name = Name
             });
             _db.SaveChanges();
         }
@@ -650,10 +687,23 @@ namespace Time.Epicor.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
                 return new HttpUnauthorizedResult();
+            //var job = _db.LoadListJobs.FirstOrDefault(x => x.Id == id);
+            //if (job == null) return HttpNotFound();
+
+            //return View(job);
             var job = _db.LoadListJobs.FirstOrDefault(x => x.Id == id);
             if (job == null) return HttpNotFound();
 
-            return View(job);
+            var closedJob = production.V_JobInformation_NotClosed.FirstOrDefault(x => x.JobNum == job.JobNumber);
+            if (closedJob == null)
+            {
+                ViewBag.ID = job.LoadListId;
+                return View("_DeleteJobNotAllowed");
+            }
+            else
+            {
+                return View(job);
+            }
         }
 
         //[Authorize(Roles = "LoadListEditor")]
@@ -663,16 +713,18 @@ namespace Time.Epicor.Controllers
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
                 return new HttpUnauthorizedResult();
             var job = _db.LoadListJobs.Single(x => x.Id == id);
-            var loadlist = _db.LoadLists.Single(x => x.Id == job.LoadListId);
-            // Added null reference check to filter out bad customers PEM 20140630
-            if (loadlist.LoadListJobs.Where(x => x.CustomerId == job.CustomerId).Count() == 1
-                && loadlist.LoadListDistributors.FirstOrDefault(x => x.CustomerId == job.CustomerId) != null)
-                loadlist.LoadListDistributors
-                    .Remove(loadlist.LoadListDistributors
-                    .First(x => x.CustomerId == job.CustomerId));
+            //var loadlist = _db.LoadLists.Single(x => x.Id == job.LoadListId);
+            //// Added null reference check to filter out bad customers PEM 20140630
+            //if (loadlist.LoadListJobs.Where(x => x.CustomerId == job.CustomerId).Count() == 1
+            //    && loadlist.LoadListDistributors.FirstOrDefault(x => x.CustomerId == job.CustomerId) != null)
+            //    loadlist.LoadListDistributors
+            //        .Remove(loadlist.LoadListDistributors
+            //        .First(x => x.CustomerId == job.CustomerId));
 
             _db.LoadListJobs.Remove(job);
             _db.SaveChanges();
+            // Removing the distributor tide to this job from the Load List distributors
+            CheckDistributorLoadList(job.LoadListId);
             return RedirectToAction("Details", new { id = job.LoadListId });
         }
 
@@ -686,21 +738,37 @@ namespace Time.Epicor.Controllers
         }
 
         [HttpGet]
-        public ActionResult PrintLoadLists()
+        public ActionResult PrintLoadLists(int? LoadListYear, int id = 0)
         {
-            var loadlists = _db.LoadLists.Where(x => x.Complete != 1).OrderBy(x => x.Name);
+            //var loadlists = _db.LoadLists.Where(x => x.Complete == id).OrderBy(x => x.Name);
 
-            ViewBag.View = "Open";
+            //ViewBag.View = "Open";
+            //return View(loadlists);
+            ViewBag.LoadListYear = new SelectList(_db.LoadLists.Select(x => new { x.DateIssued.Year }).Distinct().OrderByDescending(x => x.Year), "Year", "Year");
+            var loadlists = _db.LoadLists.AsQueryable();
+
+            if (id == 0)
+            {
+                loadlists = loadlists.Where(x => x.Complete == id);
+                loadlists = loadlists.OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
+            }
+            else
+            {
+                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == DateTime.Now.Year || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+                else loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == LoadListYear || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+            }
+
+            ViewBag.Complete = id;
             return View(loadlists);
         }
 
-        [HttpGet]
-        public ActionResult PrintLoadListsCompleted()
-        {
-            var loadlists = _db.LoadLists.Where(x => x.Complete == 1).OrderBy(x => x.Name);
-            ViewBag.View = "Complete";
-            return View("PrintLoadLists", loadlists);
-        }
+        //[HttpGet]
+        //public ActionResult PrintLoadListsCompleted()
+        //{
+        //    var loadlists = _db.LoadLists.Where(x => x.Complete == 1).OrderBy(x => x.Name);
+        //    ViewBag.View = "Complete";
+        //    return View("PrintLoadLists", loadlists);
+        //}
 
         //[Authorize(Roles = "LoadListEditor")]
         public ActionResult EmailIndex()
@@ -819,74 +887,75 @@ namespace Time.Epicor.Controllers
             return RedirectToAction("EmailIndex");
         }
 
-        [HttpGet]
-        public ActionResult EmailLoadList(int id)
-        {
-            var loadlist = _db.LoadLists.Single(x => x.Id == id);
-            EmailLoadListVM vm = new EmailLoadListVM() { LoadListId = id, LoadList = loadlist };
+        //[HttpGet]
+        //public ActionResult EmailLoadList(int id)
+        //{
+        //    var loadlist = _db.LoadLists.Single(x => x.Id == id);
+        //    EmailLoadListVM vm = new EmailLoadListVM() { LoadListId = id, LoadList = loadlist };
 
-            return View(vm);
-        }
+        //    return View(vm);
+        //}
 
-        [HttpPost]
-        public ActionResult EmailLoadList(EmailLoadListVM vm)
-        {
-            if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
-                return new HttpUnauthorizedResult();
-            if (vm.selectedLines == null)
-            {
-                ModelState.AddModelError("", "You must select at least one email address...");
-                var loadlist = _db.LoadLists.Single(x => x.Id == vm.LoadListId);
-                return View(loadlist);
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EmailLoadList(EmailLoadListVM vm)
+        //{
+        //    if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
+        //        return new HttpUnauthorizedResult();
+        //    if (vm.selectedLines == null)
+        //    {
+        //        ModelState.AddModelError("", "You must select at least one email address...");
+        //        var loadlist = _db.LoadLists.Single(x => x.Id == vm.LoadListId);
+        //        return View(loadlist);
+        //    }
 
-            // Now generate the PDF then Email it to the selected email addresses The Crystal
-            // Reports version
-            string fileName = String.Format("LoadList_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
-            fileName.Replace(@"/", "").Replace(@"\", "");
-            var OutputDirectory = ConfigurationManager.AppSettings["LoadListEmailDirectory"];
-            var emailPath = Server.MapPath(OutputDirectory);
-            if (!Directory.Exists(emailPath)) Directory.CreateDirectory(emailPath);
-            CleanOutOldAttachments(emailPath);
-            var outputFile = Path.Combine(emailPath, fileName);
-            ReportClass rptH = new ReportClass();
-            rptH.FileName = Server.MapPath("~/Reports/LoadListExternal.rpt");
-            rptH.Load();
-            rptH.SetDatabaseLogon(DbLogon, DbPassword);
-            rptH.SetParameterValue("SelectedItems", vm.LoadListId.ToString());
+        //    // Now generate the PDF then Email it to the selected email addresses The Crystal
+        //    // Reports version
+        //    string fileName = String.Format("LoadList_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
+        //    fileName.Replace(@"/", "").Replace(@"\", "");
+        //    var OutputDirectory = ConfigurationManager.AppSettings["LoadListEmailDirectory"];
+        //    var emailPath = Server.MapPath(OutputDirectory);
+        //    if (!Directory.Exists(emailPath)) Directory.CreateDirectory(emailPath);
+        //    CleanOutOldAttachments(emailPath);
+        //    var outputFile = Path.Combine(emailPath, fileName);
+        //    ReportClass rptH = new ReportClass();
+        //    rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadListExternal.rpt");
+        //    rptH.Load();
+        //    rptH.SetDatabaseLogon(DbLogon, DbPassword);
+        //    rptH.SetParameterValue("SelectedItems", vm.LoadListId.ToString());
 
-            rptH.ExportToDisk(ExportFormatType.PortableDocFormat, outputFile);
-            if (!String.IsNullOrEmpty(vm.Comments)) vm.Comments = vm.Comments.Replace(Environment.NewLine, "<br />");
+        //    rptH.ExportToDisk(ExportFormatType.PortableDocFormat, outputFile);
+        //    if (!String.IsNullOrEmpty(vm.Comments)) vm.Comments = vm.Comments.Replace(Environment.NewLine, "<br />");
 
-            string body = String.Format("Attached File: Load List {0}<br /><br />{1}", vm.LoadList.Name, vm.Comments);
+        //    string body = String.Format("Attached File: Load List {0}<br /><br />{1}", vm.LoadList.Name, vm.Comments);
 
-            EmailNotifier.FromAddress = ConfigurationManager.AppSettings["LoadListFromAddress"];
-            EmailNotifier.FromName = ConfigurationManager.AppSettings["LoadListFromName"];
-            EmailNotifier.SendMail("Load List Attached", body, vm.selectedLines, true, true, outputFile);
+        //    EmailNotifier.FromAddress = ConfigurationManager.AppSettings["LoadListFromAddress"];
+        //    EmailNotifier.FromName = ConfigurationManager.AppSettings["LoadListFromName"];
+        //    EmailNotifier.SendMail("Load List Attached", body, vm.selectedLines, true, true, outputFile);
 
-            //Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
-            //return File(stream, "application/pdf", fileName);
+        //    //Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
+        //    //return File(stream, "application/pdf", fileName);
 
-            return RedirectToAction("Details", new { id = vm.LoadListId });
-        }
+        //    return RedirectToAction("Details", new { id = vm.LoadListId });
+        //}
 
-        private void CleanOutOldAttachments(string emailPath)
-        {
-            DirectoryInfo di = new DirectoryInfo(emailPath);
-            foreach (FileInfo fi in di.GetFiles())
-            {
-                if (fi.CreationTime <= DateTime.Now.AddDays(-1)) fi.Delete();
-            }
-        }
+        //private void CleanOutOldAttachments(string emailPath)
+        //{
+        //    DirectoryInfo di = new DirectoryInfo(emailPath);
+        //    foreach (FileInfo fi in di.GetFiles())
+        //    {
+        //        if (fi.CreationTime <= DateTime.Now.AddDays(-1)) fi.Delete();
+        //    }
+        //}
 
-        [HttpGet]
-        public ActionResult EmailLoadLists()
-        {
-            var loadlists = _db.LoadLists.Where(x => x.Complete != 1).OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
+        //[HttpGet]
+        //public ActionResult EmailLoadLists()
+        //{
+        //    var loadlists = _db.LoadLists.Where(x => x.Complete != 1).OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
 
-            ViewBag.View = "Open";
-            return View(loadlists);
-        }
+        //    ViewBag.View = "Open";
+        //    return View(loadlists);
+        //}
 
         [HttpPost]
         public ActionResult PrintLoadLists(List<int> selectedLines, string command, string EmailAddress)
@@ -923,7 +992,7 @@ namespace Time.Epicor.Controllers
             string fileName = String.Format("LoadLists_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
             fileName.Replace(@"/", "").Replace(@"\", "");
             ReportClass rptH = new ReportClass();
-            rptH.FileName = Server.MapPath("~/Reports/LoadList.rpt");
+            rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadList.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(DbLogon, DbPassword);
 
@@ -939,7 +1008,7 @@ namespace Time.Epicor.Controllers
             string fileName = String.Format("LoadListsStatus_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
             fileName.Replace(@"/", "").Replace(@"\", "");
             ReportClass rptH = new ReportClass();
-            rptH.FileName = Server.MapPath("~/Reports/LoadListStatus.rpt");
+            rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadListStatus.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(DbLogon, DbPassword);
 
@@ -958,33 +1027,33 @@ namespace Time.Epicor.Controllers
         {
             var newLift = _db.LoadListJobs.Single(x => x.JobNumber == jobNumber);
 
-            var jobOpers = _epicor.jobopers.Where(x => x.jobnum == newLift.JobNumber && x.assemblyseq == 1 && x.opcode != "593100" &&
-                !(x.opcode.ToUpper() == "LSHIP" && x.assemblyseq == 0));
+            var jobOpers = production.JobOpers.Where(x => x.JobNum == newLift.JobNumber && x.AssemblySeq == 1 && x.OpCode != "593100" &&
+                !(x.OpCode.ToUpper() == "LSHIP" && x.AssemblySeq == 0));
 
-            foreach (var oper in jobOpers.OrderBy(x => x.assemblyseq).ThenBy(x => x.oprseq))
+            foreach (var oper in jobOpers.OrderBy(x => x.AssemblySeq).ThenBy(x => x.OprSeq))
             {
-                var existing = _db.LoadListJobStatus.SingleOrDefault(x => x.JobNumber == oper.jobnum && x.OpCode == oper.opcode);
+                var existing = _db.LoadListJobStatus.SingleOrDefault(x => x.JobNumber == oper.JobNum && x.OpCode == oper.OpCode);
                 if (existing == null)
                 {
                     var lls = new LoadListJobStatu
                     {
-                        AssemblySeq = oper.assemblyseq ?? 0,
+                        AssemblySeq = oper.AssemblySeq,
                         JobNumber = newLift.JobNumber,
                         LoadListJobId = newLift.Id,
-                        OpCode = oper.opcode,
-                        OpComplete = oper.opcomplete ?? 0,
-                        OprSeq = oper.oprseq ?? 0
+                        OpCode = oper.OpCode,
+                        OpComplete = Convert.ToByte(oper.OpComplete),
+                        OprSeq = oper.OprSeq
                     };
                     _db.LoadListJobStatus.Add(lls);
                     _db.SaveChanges();
                 }
                 else
                 {
-                    if (existing.AssemblySeq == 0 && oper.assemblyseq == 1)
+                    if (existing.AssemblySeq == 0 && oper.AssemblySeq == 1)
                     {
                         existing.AssemblySeq = 1;
-                        existing.OprSeq = oper.oprseq ?? 0;
-                        if (oper.opcomplete == 1) existing.OpComplete = 1;
+                        existing.OprSeq = oper.OprSeq;
+                        if (oper.OpComplete == true) existing.OpComplete = 1;
                         _db.SaveChanges();
                     }
                 }
@@ -1104,7 +1173,7 @@ namespace Time.Epicor.Controllers
         public ActionResult SearchLoadLists(string Search)
         {
             if (!String.IsNullOrEmpty(Search))
-                return View(_db.LoadListJobs.Where(x => x.JobNumber.Contains(Search)));
+                return View(_db.LoadListJobs.Where(x => x.JobNumber.Contains(Search) || x.SerialNo.Contains(Search)).OrderBy(x => x.LoadList.Name));
 
             return View();
         }

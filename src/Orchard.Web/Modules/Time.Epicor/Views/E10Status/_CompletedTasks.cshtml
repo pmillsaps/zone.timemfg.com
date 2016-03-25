@@ -1,32 +1,32 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.Production.SysTask>
 
-    <table class="table table-striped table-bordered table-condensed">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubmitUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskStatus)
-            </th>
-            <th>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmitUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskStatus)
+        </th>
+        @*<th>
                 @Html.DisplayNameFor(model => model.ActivityMsg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskNote)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndedOn)
-            </th>
-        </tr>
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.TaskNote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndedOn)
+        </th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TaskDescription)
@@ -40,9 +40,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TaskStatus)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActivityMsg)
-            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ActivityMsg)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.TaskNote)
             </td>
@@ -50,5 +50,12 @@
                 @item.EndedOn.Value.ToLocalTime().ToShortDateString() @item.EndedOn.Value.ToLocalTime().ToShortTimeString()
             </td>
         </tr>
+        if (item.SysTaskLogs.OrderByDescending(x => x.EnteredOn).FirstOrDefault() != null)
+        {
+            <tr>
+                <td></td>
+                <td colspan="5">@Html.DisplayWithBreaks(item.SysTaskLogs.OrderByDescending(x => x.EnteredOn).FirstOrDefault().MsgText)</td>
+            </tr>
         }
-    </table>
+    }
+</table>

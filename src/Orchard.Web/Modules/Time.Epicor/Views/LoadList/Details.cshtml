@@ -17,7 +17,7 @@
         <li>@Html.ActionLink("Upload Pictures for this LoadList", "UploadPictures", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
         <li>@Html.ActionLink("Mark LoadList as SHIPPED", "CompleteLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
         @*<li>@Html.ActionLink("Move Jobs to Another Load List", "MoveLoadListJobs", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>*@
-        <li>@Html.ActionLink("Email Load List", "EmailLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        @*<li>@Html.ActionLink("Email Load List", "EmailLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>*@
     }
 </ul>
 <br /><br />
@@ -56,22 +56,24 @@
 <p>
     @if (ViewBag.LoadListEditor)
     {
-        @Html.ActionLink("Edit", "Edit", "LoadList", new { id = Model.Id }, null) @:|
+        @Html.ActionLink("Edit Load List", "Edit", "LoadList", new { id = Model.Id }, null) @:|
     }
 
 </p>
 
 @using (Html.BeginForm("PrintLoadLists", "LoadList"))
 {
+    @Html.AntiForgeryToken()
+    
     <div class="hidden">
         <input type="checkbox" name="selectedLines" value="@Model.Id" checked="checked" />
     </div>
     <div class="editor-field">
-        <input type="submit" name="command" value="Print Load List(s)..." />&nbsp;&nbsp;
-        <input type="submit" name="command" value="Print Load List(s) With Statuses..." />&nbsp;&nbsp;
+        <input type="submit" name="command" value="Print Load List(s)..." class="btn btn-primary" />&nbsp;&nbsp;
+        <input type="submit" name="command" value="Print Load List(s) With Statuses..." class="btn btn-primary" />&nbsp;&nbsp;
     </div>
 }
-<div class="clear"></div>
+
 <br />
 
 @{Html.RenderAction("_ListLifts", "LoadList", new { id = Model.Id });}
@@ -80,7 +82,7 @@
 
 <br />
 
-<a id="commentToggle" href="javascript:toggleComments();">Special Instructions History</a>
+<a id="commentToggle" href="javascript:toggleComments();">Toggle Special Instructions History Visibility</a>
 
 <div id="Comments">
     @{Html.RenderAction("_ListLoadComments", "LoadList", new { id = Model.Id });}

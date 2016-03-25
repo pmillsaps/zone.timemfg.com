@@ -14,7 +14,13 @@ namespace Time.Data.EntityModels.Production
     
     public partial class SysTask
     {
-        public int SysTaskNum { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SysTask()
+        {
+            this.SysTaskLogs = new HashSet<SysTaskLog>();
+        }
+    
+        public long SysTaskNum { get; set; }
         public string TaskDescription { get; set; }
         public string TaskType { get; set; }
         public Nullable<System.DateTime> StartedOn { get; set; }
@@ -23,7 +29,7 @@ namespace Time.Data.EntityModels.Production
         public string TaskStatus { get; set; }
         public string Company { get; set; }
         public string AgentID { get; set; }
-        public int AgentSchedNum { get; set; }
+        public long AgentSchedNum { get; set; }
         public int AgentTaskNum { get; set; }
         public string RunProcedure { get; set; }
         public string InitiatorSource { get; set; }
@@ -36,5 +42,8 @@ namespace Time.Data.EntityModels.Production
         public bool IsSystemTask { get; set; }
         public byte[] SysRevID { get; set; }
         public System.Guid SysRowID { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SysTaskLog> SysTaskLogs { get; set; }
     }
 }

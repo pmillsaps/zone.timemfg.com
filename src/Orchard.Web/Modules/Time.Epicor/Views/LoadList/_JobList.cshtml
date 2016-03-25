@@ -1,32 +1,32 @@
-﻿@model IEnumerable<Time.Epicor.EntityModels.Epicor.v_JobInformation>
+﻿@model IEnumerable<Time.Data.EntityModels.Production.V_JobInformation>
 
-    @{var currentDate = DateTime.Now;
-      var defaultDate = DateTime.Parse("1900,1,1");
-      var monthStart = new DateTime(currentDate.Year, currentDate.Month, 1);
-      }
+@{var currentDate = DateTime.Now;
+var defaultDate = DateTime.Parse("1900,1,1");
+var monthStart = new DateTime(currentDate.Year, currentDate.Month, 1);
+}
 
-    <table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="info">
         <th>
             <input type="checkbox" name="checkAllSelected" id="checkAllSelected" />
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ordernum)
+            @Html.DisplayNameFor(model => model.OrderNum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.jobnum)
+            @Html.DisplayNameFor(model => model.JobNum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ponum)
+            @Html.DisplayNameFor(model => model.PONum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.partnum)
+            @Html.DisplayNameFor(model => model.PartNum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.serialnumber)
+            @Html.DisplayNameFor(model => model.SerialNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.reqduedate)
+            @Html.DisplayNameFor(model => model.ReqDueDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CustName)
@@ -36,57 +36,63 @@
         </th>
     </tr>
 
-
-
-    @foreach (var item in Model)
+    @if (Model == null || Model.Count() == 0)
     {
-        var atsDate = item.reqduedate ?? defaultDate;
-        var trclass = "";
-
-        if (atsDate >= monthStart && atsDate <= currentDate.AddMonths(1))
-        {
-            trclass = "current";
-        }
-
-        if (atsDate < monthStart)
-        {
-            trclass = "pastdue";
-        }
-
-        <tr class=@trclass>
-
-            <td>
-                <input type="checkbox" name="selectedLines" value="@item.jobnum" />
-                @*<input type="checkbox" checked="yes" name="selectedLines" value="@item.jobnum" />*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ordernum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.jobnum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ponum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.partnum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.serialnumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.reqduedate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustName)
-            </td>
-            <td>
-                @item.shiptonum/@item.ShipToname<br />
-                @item.city @item.state, @item.country
+        <tr>
+            <td class="lead" colspan="9">
+                No jobs matched the selected Customer
             </td>
         </tr>
     }
+    else
+    {
+        foreach (var item in Model)
+        {
+            var atsDate = item.ReqDueDate ?? defaultDate;
+            var trclass = "";
+
+            if (atsDate >= monthStart && atsDate <= currentDate.AddMonths(1))
+            {
+                trclass = "success";
+            }
+
+            if (atsDate < monthStart)
+            {
+                trclass = "warning";
+            }
+
+            <tr class=@trclass>
+                <td>
+                    <input type="checkbox" name="selectedLines" value="@item.JobNum" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PONum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReqDueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustName)
+                </td>
+                <td>
+                    @item.ShipToNum/@item.ShipToname<br />
+                    @item.City @item.State @item.Country
+                </td>
+            </tr>
+
+        }
+    }
+
 </table>
-
-
-

@@ -4,93 +4,105 @@
     ViewBag.Title = "Delete Load List Job";
 }
 
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
 <h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this job?</h3>
-<fieldset>
-    <legend>LoadListJob</legend>
+<hr />
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.LoadListId)
-    </div>
-    <div class="display-field">
+<div class="alert alert-danger">
+    <h3>Are you sure you want to delete this job?</h3>
+</div>
+
+<hr />
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.LoadListId)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.LoadListId)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.JobNumber)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.JobNumber)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.JobNumber)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.LiftModel)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.LiftModel)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.LiftModel)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SerialNo)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.SerialNo)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.SerialNo)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DistributorPO)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.DistributorPO)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.DistributorPO)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DateATS)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.DateATS)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.DateATS)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Destination)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.Destination)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.Destination)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Comments)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.Comments)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.Comments)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CustomerName)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.CustomerName)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.CustomerName)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ShipTo)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.ShipTo)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.ShipTo)
-    </div>
+    </dd>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SalesOrder)
-    </div>
-    <div class="display-field">
+    <dt>
+        @Html.DisplayNameFor(model => model.SalesOrder)
+    </dt>
+    <dd>
         @Html.DisplayFor(model => model.SalesOrder)
-    </div>
-</fieldset>
+    </dd>
+</dl>
+
+<br />
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to Load List", "Details", new { id = Model.LoadListId })
-    </p>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-3">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to Load List", "Details", new { id = Model.LoadListId })
+        </div>
+    </div>
 }

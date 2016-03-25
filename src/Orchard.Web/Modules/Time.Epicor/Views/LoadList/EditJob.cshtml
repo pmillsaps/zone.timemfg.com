@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Edit Job : " + Model.JobNumber;
+    Script.Require("jQuery");
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,116 +11,107 @@
     @Html.ActionLink("Back to List", "Details", new { id = Model.LoadListId }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Move Job to Other LoadList", "MoveLoadListJob", new { id = Model.Id }, new { @class = "btn btn-primary" })
 </div>
-<br />
+
+<hr />
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>LoadListJob</legend>
-
+    <div class="form-horizontal">
+        <h4>LoadListJob</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.LoadListId)
+        @Html.HiddenFor(model => model.CustomerId)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.JobNumber)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.JobNumber)
-            @Html.HiddenFor(model => model.JobNumber)
-            @Html.ValidationMessageFor(model => model.JobNumber)
-        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.JobNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.JobNumber)
+                @Html.HiddenFor(model => model.JobNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CustomerName)
+                @Html.HiddenFor(model => model.CustomerName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LiftModel)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LiftModel)
+                @Html.HiddenFor(model => model.LiftModel)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SerialNo)
+                @Html.HiddenFor(model => model.SerialNo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DistributorPO)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DistributorPO)
+                @Html.HiddenFor(model => model.DistributorPO)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DateATS)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateATS)
+                @Html.HiddenFor(model => model.DateATS)
+            </dd>
+        </dl>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CustomerName)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.CustomerName)
-            @Html.HiddenFor(model => model.CustomerName)
-            @Html.ValidationMessageFor(model => model.CustomerName)
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Comments, new { @rows = 6, htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LiftModel)
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.LiftModel)
-            @Html.HiddenFor(model => model.LiftModel)
-            @Html.ValidationMessageFor(model => model.LiftModel)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SerialNo)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.SerialNo)
-            @Html.HiddenFor(model => model.SerialNo)
-            @Html.ValidationMessageFor(model => model.SerialNo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DistributorPO)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.DistributorPO)
-            @Html.HiddenFor(model => model.DistributorPO)
-            @Html.ValidationMessageFor(model => model.DistributorPO)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateATS)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.DateATS)
-            @Html.HiddenFor(model => model.DateATS)
-            @Html.ValidationMessageFor(model => model.DateATS)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Comments)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Comments)
-            @Html.ValidationMessageFor(model => model.Comments)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Destination)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Destination)
-            @Html.ValidationMessageFor(model => model.Destination)
-        </div>
-
-        <div class="editor-button2">
-            <input type="submit" value="Save" />
-        </div>
-    </fieldset>
 }
 
-@Html.Partial("_JobStatus", Model.LoadListJobStatus)
+<div>
+    @Html.Partial("_JobStatus", Model.LoadListJobStatus)
+</div>
 
 <br /><br /><br />
-<a id="commentToggle" href="javascript:toggle();">Show Job Comment History</a>
 
-<div id="CommentList" class="hidden">
+<a id="commentToggle" href="javascript:toggleComments();">Toggle Special Instructions History Visibility</a>
+
+<div id="Comments">
     @{Html.RenderAction("_ListJobComments", "LoadList", new { id = Model.Id });}
 </div>
 
-@section Scripts {
-    <script language='javascript'>
-        function toggle() {
-            var ele = document.getElementById("CommentList");
-            var text = document.getElementById("commentToggle");
-            if (ele.style.display == "block") {
-                ele.style.display = "none";
-                text.innerHTML = "Show Job Comment History";
-            }
-            else {
-                ele.style.display = "block";
-                text.innerHTML = "Hide Job Comment History";
-            }
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () { $('.Comments').hide(); })
+        function toggleComments() {
+            $('.Comments').toggle("slow");
         }
     </script>
 }

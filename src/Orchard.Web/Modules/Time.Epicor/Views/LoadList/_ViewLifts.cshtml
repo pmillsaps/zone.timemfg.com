@@ -5,8 +5,8 @@
 @*<a id="jobStatusToggle" href="javascript:toggleJobStatus();">Toggle Job Statuses Visibility</a>*@
 @*<br /><br />*@
 
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.JobNumber)
         </th>
@@ -38,11 +38,11 @@
 
     @foreach (var item in Model)
     {
-        <tr class="rowJob">
+        <tr class="info">
             <td>
                 @Html.DisplayFor(modelItem => item.JobNumber)
             </td>
-            <td class="nowrap">
+            <td>
                 @Html.DisplayFor(modelItem => item.LiftModel)
             </td>
             <td>

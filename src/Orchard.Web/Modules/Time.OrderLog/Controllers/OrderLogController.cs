@@ -89,7 +89,7 @@ namespace Time.OrderLog.Controllers
 
 
         // Export Order Log to Excel
-        public ActionResult ExportOrderLog(DatePickerVM dpVM)
+        public ActionResult ExportOrderLog(DatePickerVM dpVM, string command)
         {
             if (dpVM.StartDate == null || dpVM.EndDate == null)
                 return View(); // Returning an empty view if the dates are empty
@@ -156,83 +156,15 @@ namespace Time.OrderLog.Controllers
                     sum = 0;
                     orderD.Add(o);
                 }
-
-                return new ExporttoExcelResult("OrderLogReport", orderD.Cast<object>().ToList());
-            }
-        }
-
-        // Method to return the Order Transactions related to the Order Details above
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult OrderTransactionReport(DateTime TStartDate, DateTime TEndDate)
-        {
-            if (TStartDate == null || TEndDate == null)
-                return View(); // Returning an empty view if the dates are empty
-            else
-            {
-                // Retrieving the data for the report from the different tables
-                var report = db.Orders.Where(x => x.Date >= TStartDate && x.Date <= TEndDate)
-                                      .Include(d => d.Dealer).Include(i => i.Install)
-                                      .Include(ir => ir.Installer).Include(t => t.Territory)
-                                      .Include(ot => ot.OrderTrans).ToList();
-
-                // Generating the list of Orders
-                OrderDetails o;
-                List<OrderDetails> orderD = new List<OrderDetails>();
-                // Generating the list of Orders Transactions
-                OrderTransactions oT;
-                List<OrderTransactions> orderT = new List<OrderTransactions>();
-                int sum = 0;
-
-                foreach (var item in report)
+                if (command == "Export Order Details Report")
                 {
-                    o = new OrderDetails();
-
-                    o.PONum = item.PO;
-                    o.OrderDate = item.Date;
-                    o.DealerName = item.Dealer.DealerName;
-                    if (item.Install == null) o.InstallType = "";
-                    else o.InstallType = item.Install.InstallName;
-                    if (item.Installer == null) o.InstallerName = "";
-                    else o.InstallerName = item.Installer.InstallerName;
-                    foreach (var trans in item.OrderTrans)
-                    {
-                        oT = new OrderTransactions();
-
-                        oT.PO = o.PONum;
-                        oT.Date = trans.Date;
-                        oT.AsOfDate = trans.AsOfDate;
-                        var lift = db.LiftModels.FirstOrDefault(l => l.LiftModelId == trans.LiftModelId);
-                        oT.LiftModel = lift.LiftModelName.ToString();
-                        oT.NewQty = trans.NewQty;
-                        oT.CancelQty = trans.CancelQty;
-                        oT.Special = trans.Special;
-                        oT.Stock = trans.Stock;
-                        oT.Demo = trans.Demo;
-                        oT.RTG = trans.RTG;
-                        oT.TruGuard = trans.TruGuard;
-                        oT.Comment = trans.Comment;
-
-                        orderT.Add(oT);
-
-                        sum += trans.NewQty - trans.CancelQty;
-                    }
-                    o.OrderQty = sum;
-                    o.Special = item.Special;
-                    o.Stock = item.Stock;
-                    o.Demo = item.Demo;
-                    o.RTG = item.RTG;
-                    o.TruGuard = item.TruGuard;
-                    if (item.Customer == null) o.Customer = "";
-                    else o.Customer = item.Customer;
-                    if (item.CityStateZip == null) o.CityStateZip = "";
-                    else o.CityStateZip = item.CityStateZip;
-
-                    sum = 0;
-                    orderD.Add(o);
+                    return new ExporttoExcelResult("OrderLogReport", orderD.Cast<object>().ToList());
                 }
-
-                return new ExporttoExcelResult("OrderTransactionReport", orderT.Cast<object>().ToList());
+                else
+                {
+                    return new ExporttoExcelResult("OrderTransactionReport", orderT.Cast<object>().ToList());
+                }
+                
             }
         }
 
