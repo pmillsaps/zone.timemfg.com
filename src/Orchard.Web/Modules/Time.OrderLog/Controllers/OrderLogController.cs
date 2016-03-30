@@ -2,14 +2,14 @@
 using Orchard.Localization;
 using Orchard.Themes;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Time.Data.EntityModels.OrderLog;
-using Time.OrderLog.Models;
 using Time.Epicor.Helpers;
-using System.Collections.Generic;
+using Time.OrderLog.Models;
 
 namespace Time.OrderLog.Controllers
 {
@@ -87,7 +87,6 @@ namespace Time.OrderLog.Controllers
             return View("Index", orders);
         }
 
-
         // Export Order Log to Excel
         public ActionResult ExportOrderLog(DatePickerVM dpVM, string command)
         {
@@ -164,7 +163,6 @@ namespace Time.OrderLog.Controllers
                 {
                     return new ExporttoExcelResult("OrderTransactionReport", orderT.Cast<object>().ToList());
                 }
-                
             }
         }
 
@@ -206,11 +204,13 @@ namespace Time.OrderLog.Controllers
                 return new HttpUnauthorizedResult();
             var found = db.Orders.FirstOrDefault(x => x.DealerId == order.DealerId && x.PO == order.PO);
             if (found != null) ModelState.AddModelError("PO", "Duplicate PO Numbers for the same customer are not allowed");
-
+            var dealer = db.Dealers.FirstOrDefault(x => x.DealerId == order.DealerId);
+            if ((order.TerritoryId == 0) && dealer != null) order.TerritoryId = dealer.TerritoryId;
+            order.Date = DateTime.Now;
             if (ModelState.IsValid)
             {
-                var dealer = db.Dealers.FirstOrDefault(x => x.DealerId == order.DealerId);
-                if ((order.TerritoryId == 0) && dealer != null) order.TerritoryId = dealer.TerritoryId;
+                //var dealer = db.Dealers.FirstOrDefault(x => x.DealerId == order.DealerId);
+                //if ((order.TerritoryId == 0) && dealer != null) order.TerritoryId = dealer.TerritoryId;
                 order.Date = DateTime.Now;
                 db.Orders.Add(order);
                 db.SaveChanges();

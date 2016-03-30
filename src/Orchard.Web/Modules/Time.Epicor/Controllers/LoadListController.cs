@@ -1,11 +1,4 @@
-﻿//using CrystalDecisions.CrystalReports.Engine;
-//using CrystalDecisions.Shared;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
-//using EpicWeb.Helpers;
-//using EpicWeb.Logging;
-//using EpicWeb.Models;
-//using EpicWeb.ViewModels;
+﻿using CrystalDecisions.CrystalReports.Engine;
 using MoreLinq;
 using Orchard;
 using Orchard.Localization;
@@ -13,7 +6,6 @@ using Orchard.Logging;
 using Orchard.Themes;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -21,15 +13,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-//using Time.Data.EntityModels.Epicor;
 using Time.Data.EntityModels.Production;
 using Time.Data.EntityModels.TimeMFG;
 using Time.Epicor.ViewModels;
 using Time.Support.Helpers;
-
-//using VersaliftDataServices.EntityModels.Epicor;
-//using VersaliftDataServices.EntityModels.TimeMfg;
-//using VersaliftDataServices.Models;
 
 namespace Time.Epicor.Controllers
 {
@@ -38,14 +25,10 @@ namespace Time.Epicor.Controllers
     public class LoadListController : Controller
     {
         private readonly TimeMFGEntities _db;
-        //private readonly EpicorEntities _epicor;
         private readonly ProductionEntities production;
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
-
-        //private readonly ILogger _logger;
         public ILogger Logger { get; set; }
-
         private DateTime DefaultDate = DateTime.Parse("1900,01,01");
 
         private const string DbLogon = "TimeMFGApp";
@@ -94,12 +77,6 @@ namespace Time.Epicor.Controllers
             ViewBag.Complete = id;
             return View(loadlists);
         }
-
-        //public ActionResult IndexComplete()
-        //{
-        //    var loadlists = _db.LoadLists.Where(x => x.Complete == 1).OrderBy(x => x.Name);
-        //    return View(loadlists);
-        //}
 
         private void GetPermissions()
         {

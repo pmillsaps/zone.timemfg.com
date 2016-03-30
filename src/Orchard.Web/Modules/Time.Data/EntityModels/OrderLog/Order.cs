@@ -36,13 +36,13 @@ namespace Time.Data.EntityModels.OrderLog
         public bool Demo { get; set; }
         public bool RTG { get; set; }
         public bool TruGuard { get; set; }
-        public Nullable<bool> GSA { get; set; }
+        public bool GSA { get; set; }
     
+        public virtual ICollection<OrderLineUnit> OrderLineUnits { get; set; }
+        public virtual ICollection<OrderTran> OrderTrans { get; set; }
         public virtual Dealer Dealer { get; set; }
         public virtual Install Install { get; set; }
         public virtual Installer Installer { get; set; }
         public virtual Territory Territory { get; set; }
-        public virtual ICollection<OrderLineUnit> OrderLineUnits { get; set; }
-        public virtual ICollection<OrderTran> OrderTrans { get; set; }
     }
 }

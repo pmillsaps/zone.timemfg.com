@@ -277,7 +277,6 @@
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoadListController.cs" />
     <Compile Include="Controllers\NOWReportController.cs" />
-    <Compile Include="Controllers\OldLoadListController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
     <Compile Include="Controllers\PartSearchController.cs" />
     <Compile Include="Controllers\QuoteOrderSearchController.cs" />

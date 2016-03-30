@@ -31,8 +31,8 @@ namespace Time.Data.EntityModels.OrderLog
         public virtual DbSet<LiftModel> LiftModels { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderLineUnit> OrderLineUnits { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderTran> OrderTrans { get; set; }
     }
 }
