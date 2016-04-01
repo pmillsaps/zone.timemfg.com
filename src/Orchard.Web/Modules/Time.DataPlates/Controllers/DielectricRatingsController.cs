@@ -57,16 +57,22 @@ namespace Time.DataPlates.Controllers
         // GET: DielectricRatings/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             return View();
         }
 
         // POST: DielectricRatings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SearchOrder,Name,SearchString,Rating,LineVoltage")] DielectricRating dielectricRating)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.DielectricRatings.Add(dielectricRating);
@@ -80,6 +86,9 @@ namespace Time.DataPlates.Controllers
         // GET: DielectricRatings/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,12 +102,15 @@ namespace Time.DataPlates.Controllers
         }
 
         // POST: DielectricRatings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SearchOrder,Name,SearchString,Rating,LineVoltage")] DielectricRating dielectricRating)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.Entry(dielectricRating).State = EntityState.Modified;
@@ -111,6 +123,9 @@ namespace Time.DataPlates.Controllers
         // GET: DielectricRatings/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -128,6 +143,9 @@ namespace Time.DataPlates.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             DielectricRating dielectricRating = db.DielectricRatings.Find(id);
             db.DielectricRatings.Remove(dielectricRating);
             db.SaveChanges();

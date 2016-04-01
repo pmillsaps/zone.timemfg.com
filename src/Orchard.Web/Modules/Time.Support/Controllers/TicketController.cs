@@ -139,6 +139,8 @@ namespace Time.Support.Controllers
                 vm.Approver = true;
             }
 
+            if (user.ToUpper() == qry.TicketEmployee.NTLogin.ToUpper()) vm.AssignedToMe = true;
+
             GenerateDropDowns(vm, qry);
 
             // Obsolete code section ?
@@ -600,23 +602,33 @@ namespace Time.Support.Controllers
         private void GenerateDropDowns(TicketViewModel vm, TicketProject ticketProject)
         {
             vm.CategoryID = new SelectList(_db.TicketCategories.Where(x => x.isActive == true).OrderBy(x => x.Name).ToList(), "CategoryID", "Name", ticketProject.CategoryID);
+            ViewBag.CategoryID = vm.CategoryID;
+
             vm.DepartmentID = new SelectList(_db.TicketDepartments.Where(x => x.ITOnly != true).OrderBy(x => x.Name).ToList(), "DepartmentID", "Name", ticketProject.DepartmentID);
             if (vm.IT || vm.Admin) vm.DepartmentID = new SelectList(_db.TicketDepartments.OrderBy(x => x.Name).ToList(), "DepartmentID", "Name", ticketProject.DepartmentID);
+            ViewBag.DepartmentID = vm.DepartmentID;
+
             vm.AssignedEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName).ToList(), "EmployeeID", "FullName", ticketProject.AssignedEmployeeID);
+            ViewBag.AssignedEmployeeID = vm.AssignedEmployeeID;
+
             vm.ResourceEmployeeID = new SelectList(_db.TicketEmployees.Where(x => x.InActive != true).OrderBy(x => x.FirstName).ToList(), "EmployeeID", "FullName", ticketProject.ResourceEmployeeID);
+            ViewBag.ResourceEmployeeID = vm.ResourceEmployeeID;
+
             vm.PriorityID = new SelectList(_db.TicketPriorities.ToList(), "PriorityID", "Name", ticketProject.PriorityID);
+            ViewBag.PriorityID = vm.PriorityID;
+
             vm.Status = new SelectList(_db.TicketStatuses.OrderBy(x => x.Name).ToList(), "StatusID", "Name", ticketProject.Status);
             if (!vm.IT && !vm.Admin)
             {
-                if ((ticketProject.TicketEmployee != null && HttpContext.User.Identity.Name == ticketProject.TicketEmployee.NTLogin) || HttpContext.User.Identity.Name == ticketProject.RequestedBy)
+                if ((ticketProject.TicketEmployee != null && HttpContext.User.Identity.Name.ToUpper() == ticketProject.TicketEmployee.NTLogin.ToUpper()) || HttpContext.User.Identity.Name.ToUpper() == ticketProject.RequestedBy.ToUpper())
                 {
                     vm.Status = new SelectList(_db.TicketStatuses.Where(x => x.isAssignedVisible).OrderBy(x => x.Name).ToList(), "StatusID", "Name", ticketProject.Status);
                 }
             }
+            ViewBag.Status = vm.Status;
 
             vm.TicketVisibility = new SelectList(_db.TicketVisibilities.OrderByDescending(x => x.Id), "Id", "Name");
-
-            GenerateDropDowns(ticketProject);
+            ViewBag.TicketVisibility = vm.TicketVisibility;
         }
 
         [HttpGet]

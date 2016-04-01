@@ -64,16 +64,22 @@ namespace Time.DataPlates.Controllers
         // GET: LiftDatas/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             return View();
         }
 
         // POST: LiftDatas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lift,HydOilPSI,HydOilKG,Insulated,DesignVoltage")] LiftData liftData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             // Alerting the user about inserting a duplicate
             var option = db.LiftDatas.FirstOrDefault(x => x.Lift == liftData.Lift);
             if (option != null) ModelState.AddModelError("", "Lift Model already exists!");
@@ -91,6 +97,9 @@ namespace Time.DataPlates.Controllers
         // GET: LiftDatas/Edit/5
         public ActionResult Edit(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -104,12 +113,15 @@ namespace Time.DataPlates.Controllers
         }
 
         // POST: LiftDatas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Lift,HydOilPSI,HydOilKG,Insulated,DesignVoltage")] LiftData liftData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.Entry(liftData).State = EntityState.Modified;
@@ -122,6 +134,9 @@ namespace Time.DataPlates.Controllers
         // GET: LiftDatas/Delete/5
         public ActionResult Delete(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -139,6 +154,9 @@ namespace Time.DataPlates.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             LiftData liftData = db.LiftDatas.Find(id);
             db.LiftDatas.Remove(liftData);
             db.SaveChanges();

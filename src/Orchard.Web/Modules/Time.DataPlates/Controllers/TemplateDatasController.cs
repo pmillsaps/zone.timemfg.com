@@ -57,16 +57,22 @@ namespace Time.DataPlates.Controllers
         // GET: TemplateDatas/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             return View();
         }
 
         // POST: TemplateDatas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FieldName,FieldData,TemplateFullFileName")] TemplateData templateData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.TemplateDatas.Add(templateData);
@@ -80,6 +86,9 @@ namespace Time.DataPlates.Controllers
         // GET: TemplateDatas/Edit/5
         public ActionResult Edit(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,12 +102,15 @@ namespace Time.DataPlates.Controllers
         }
 
         // POST: TemplateDatas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "FieldName,FieldData,TemplateFullFileName")] TemplateData templateData)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.Entry(templateData).State = EntityState.Modified;
@@ -111,6 +123,9 @@ namespace Time.DataPlates.Controllers
         // GET: TemplateDatas/Delete/5
         public ActionResult Delete(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -128,6 +143,9 @@ namespace Time.DataPlates.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             TemplateData templateData = db.TemplateDatas.Find(id);
             db.TemplateDatas.Remove(templateData);
             db.SaveChanges();

@@ -64,16 +64,22 @@ namespace Time.DataPlates.Controllers
         // GET: PS_Option/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             return View();
         }
 
         // POST: PS_Option/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Option,PlatformQty,HRUpperControls")] PS_Option pS_Option)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             // Alerting the user about inserting a duplicate
             var option = db.PS_Option.FirstOrDefault(x => x.Option == pS_Option.Option);
             if (option != null) ModelState.AddModelError("", "Option already exists!");
@@ -91,6 +97,9 @@ namespace Time.DataPlates.Controllers
         // GET: PS_Option/Edit/5
         public ActionResult Edit(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -104,12 +113,15 @@ namespace Time.DataPlates.Controllers
         }
 
         // POST: PS_Option/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Option,PlatformQty,HRUpperControls")] PS_Option pS_Option)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.Entry(pS_Option).State = EntityState.Modified;
@@ -122,6 +134,9 @@ namespace Time.DataPlates.Controllers
         // GET: PS_Option/Delete/5
         public ActionResult Delete(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -139,6 +154,9 @@ namespace Time.DataPlates.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
+                return new HttpUnauthorizedResult();
+
             PS_Option pS_Option = db.PS_Option.Find(id);
             db.PS_Option.Remove(pS_Option);
             db.SaveChanges();

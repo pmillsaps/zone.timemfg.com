@@ -19,6 +19,7 @@
             }
             else
             {
+                @Html.HiddenFor(model => model.PriorityID)
                 @Html.DisplayFor(model => model.TicketPriority.Name)
             }
         </div>
@@ -35,6 +36,7 @@
             }
             else
             {
+                @Html.HiddenFor(model => model.DepartmentID)
                 @Html.DisplayFor(model => model.TicketDepartment.Name)
             }
         </div>
@@ -51,6 +53,7 @@
             }
             else
             {
+                @Html.HiddenFor(model => model.CategoryID)
                 @Html.DisplayFor(model => model.TicketCategory.Name)
             }
         </div>
@@ -67,6 +70,7 @@
             }
             else
             {
+                @Html.HiddenFor(model => model.AssignedEmployeeID)
                 @Html.DisplayFor(model => model.TicketEmployee.FullName)
             }
         </div>
@@ -83,6 +87,7 @@
             }
             else
             {
+                @Html.HiddenFor(model => model.ResourceEmployeeID)
                 @Html.DisplayFor(model => model.TicketEmployee1.FullName)
             }
         </div>
@@ -93,12 +98,13 @@
             Status:
         </div>
         <div class="col-md-4">
-            @if ((bool)ViewBag.Admin)
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.AssignedToMe)
             {
                 @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
             }
             else
             {
+                @Html.HiddenFor(model => model.Status)
                 @Html.DisplayFor(model => model.TicketStatus.Name)
             }
         </div>
@@ -107,11 +113,11 @@
     if ((bool)ViewBag.IT || (bool)ViewBag.Admin || (Model.TicketEmployee != null && HttpContext.Current.User.Identity.Name == Model.TicketEmployee.NTLogin))
     {
         <br />
-            <div class="row form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Update Ticket" class="btn btn-default" />
-                </div>
+        <div class="row form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update Ticket" class="btn btn-default" />
             </div>
+        </div>
     }
 
 }

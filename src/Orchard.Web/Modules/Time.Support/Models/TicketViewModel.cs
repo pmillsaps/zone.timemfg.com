@@ -33,5 +33,6 @@ namespace Time.Support.Models
         public string TicketNote { get; set; }
 
         public bool Approver { get; set; }
+        public bool AssignedToMe { get; set; }
     }
 }

@@ -203,6 +203,7 @@
     <Compile Include="Controllers\PS_OptionController.cs" />
     <Compile Include="Controllers\TemplateDatasController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>

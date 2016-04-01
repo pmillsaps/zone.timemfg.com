@@ -124,6 +124,17 @@ namespace Time.IT.Controllers
             return View(license);
         }
 
+        public ActionResult RecountLicenses()
+        {
+            var licenses = db.Licenses.ToList();
+            foreach (var item in licenses)
+            {
+                item.QuantityAssigned = item.Computers.Count + item.Users.Count;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // POST: Licenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
