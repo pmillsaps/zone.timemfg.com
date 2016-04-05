@@ -72,7 +72,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Lift,HydOilPSI,HydOilKG,Insulated,DesignVoltage")] LiftData liftData)
+        public ActionResult Create(LiftData liftData)
         {
             // Alerting the user about inserting a duplicate
             var option = db.LiftDatas.FirstOrDefault(x => x.Lift == liftData.Lift);
@@ -108,7 +108,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Lift,HydOilPSI,HydOilKG,Insulated,DesignVoltage")] LiftData liftData)
+        public ActionResult Edit(LiftData liftData)
         {
             if (ModelState.IsValid)
             {

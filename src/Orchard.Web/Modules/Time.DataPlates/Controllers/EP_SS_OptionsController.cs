@@ -72,7 +72,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Option,Voltage")] EP_SS_Options eP_SS_Options)
+        public ActionResult Create(EP_SS_Options eP_SS_Options)
         {
             // Alerting the user about inserting a duplicate
             var option = db.EP_SS_Options.FirstOrDefault(x => x.Option == eP_SS_Options.Option);
@@ -108,7 +108,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Option,Voltage")] EP_SS_Options eP_SS_Options)
+        public ActionResult Edit(EP_SS_Options eP_SS_Options)
         {
             if (ModelState.IsValid)
             {

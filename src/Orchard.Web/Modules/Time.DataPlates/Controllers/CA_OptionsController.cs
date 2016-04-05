@@ -72,7 +72,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Option,Cap_LBS,Cap_KG,NonPlatformCap")] CA_Options cA_Options)
+        public ActionResult Create(CA_Options cA_Options)
         {
             // Alerting the user about inserting a duplicate
             var option = db.CA_Options.FirstOrDefault(x => x.Option == cA_Options.Option);
@@ -108,7 +108,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Option,Cap_LBS,Cap_KG,NonPlatformCap")] CA_Options cA_Options)
+        public ActionResult Edit(CA_Options cA_Options)
         {
             if (ModelState.IsValid)
             {

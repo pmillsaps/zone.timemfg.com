@@ -65,7 +65,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SearchOrder,Name,SearchString,Rating,LineVoltage")] DielectricRating dielectricRating)
+        public ActionResult Create(DielectricRating dielectricRating)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SearchOrder,Name,SearchString,Rating,LineVoltage")] DielectricRating dielectricRating)
+        public ActionResult Edit(DielectricRating dielectricRating)
         {
             if (ModelState.IsValid)
             {
