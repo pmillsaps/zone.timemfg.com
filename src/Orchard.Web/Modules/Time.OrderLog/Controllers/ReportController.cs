@@ -145,6 +145,36 @@ namespace Time.OrderLog.Controllers
         }
 
         [HttpGet]
+        public ActionResult TerritorySummary()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
+                return new HttpUnauthorizedResult();
+            getDropDowns();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "OrderId,PO,DealerId,TerritoryID,Date")] Order order)
+        public ActionResult TerritorySummary(ReportViewModel model)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
+                return new HttpUnauthorizedResult();
+            model.ReportName = "TerritorySummary";
+            model = SetDates(model);
+            if (!CheckReportData(model)) ModelState.AddModelError("", "This Report has no Data... Please check your parameters");
+            if (ModelState.IsValid)
+            {
+                string reportPath = Server.MapPath("~/Modules/Time.OrderLog/Content/Reports/TerritorySummary.rpt");
+                Stream stream = GetReport(model, reportPath);
+                return File(stream, "application/pdf");
+            }
+            getDropDowns();
+
+            return View(model);
+        }
+
+        [HttpGet]
         public ActionResult ModelSummary()
         {
             if (!Services.Authorizer.Authorize(Permissions.OrderLogReporting, T("You Do Not Have Permission to View Reports")))
