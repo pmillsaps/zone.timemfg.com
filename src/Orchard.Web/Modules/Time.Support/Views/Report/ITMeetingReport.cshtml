@@ -1,4 +1,6 @@
 ﻿@{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
     ViewBag.Title = "IT Meeting Report";
 }
 <div class="container">
@@ -9,18 +11,30 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                @:Starting Date For The Completed Items :
-                @Html.TextBox("StartDate", null, new { @class = ".datepicker" })
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-4">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                <div class="lead text-info">
+                    Starting Date For The Completed Items :
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.TextBox("StartDate")
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Search" class="btn btn-default" />
                     </div>
                 </div>
+                <hr />
             }
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js">
-    $('.datepicker').datepicker()
-</script>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#StartDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+    </script>
+}
