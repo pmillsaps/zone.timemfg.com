@@ -13,7 +13,7 @@
             Priority:
         </div>
         <div class="col-md-4">
-            @if ((bool)ViewBag.Admin)
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
             {
                 @Html.DropDownList("PriorityID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
             }
@@ -47,7 +47,7 @@
             Category:
         </div>
         <div class="col-md-4">
-            @if ((bool)ViewBag.Admin)
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
             {
                 @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
             }
@@ -64,7 +64,7 @@
             Assigned To:
         </div>
         <div class="col-md-4">
-            @if ((bool)ViewBag.Admin)
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
             {
                 @Html.DropDownList("AssignedEmployeeID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
             }
@@ -81,7 +81,7 @@
             Resource:
         </div>
         <div class="col-md-4">
-            @if ((bool)ViewBag.Admin)
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
             {
                 @Html.DropDownList("ResourceEmployeeID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
             }

@@ -182,7 +182,7 @@
                         <div class="col-md-2">
                             <input type="submit" name="operation" value="Upload File" class="btn btn-default" />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-6">
                             <input id="fileBlob" name="fileBlob" type="file" />
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-offset-2 col-md-9">
-                        <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
+                        <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate</i>
                     </div>
                 </div>
                 <hr class="col-md-offset-2" />
@@ -256,7 +256,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-offset-2 col-md-9">
-                            <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate.Value.ToShortDateString()</i>
+                            <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate</i>
                         </div>
                     </div>
                 }
