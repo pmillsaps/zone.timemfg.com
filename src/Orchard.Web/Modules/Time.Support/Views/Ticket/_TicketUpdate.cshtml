@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    if ((bool)ViewBag.IT || (bool)ViewBag.Admin || (Model.TicketEmployee != null && HttpContext.Current.User.Identity.Name == Model.TicketEmployee.NTLogin))
+    if ((bool)ViewBag.IT || (bool)ViewBag.Admin || (Model.TicketEmployee != null && HttpContext.Current.User.Identity.Name.ToUpper() == Model.TicketEmployee.NTLogin.ToUpper()))
     {
         <br />
         <div class="row form-group">
