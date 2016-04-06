@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Time.Data.EntityModels.CustomManuals.Setting>
+
+@{
+    ViewBag.Title = "Custom Manual Settings Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>
+
+<br />
+
+<p>
+    @Html.ActionLink("Create New Setting", "Create")
+</p>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Setting1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Required)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Setting1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Required)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Settings_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Settings_ID })
+            </td>
+        </tr>
+    }
+
+</table>

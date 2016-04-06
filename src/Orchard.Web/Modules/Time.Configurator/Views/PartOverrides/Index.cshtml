@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Configurator.PartOverride>
+
+@{
+    ViewBag.Title = "Part Override";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    <p>
+        @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
+    </p>
+</div>
+
+<p>
+    @Html.ActionLink("Create New Part Override", "Create")
+</p>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PartNum }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PartNum }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PartNum })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div align="right">
+    <p>
+        @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
+    </p>
+</div>
