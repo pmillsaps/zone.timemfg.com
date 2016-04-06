@@ -23,6 +23,18 @@ namespace Time.Data.EntityModels.TimeMFG
             }
         }
 
+        [DisplayName("RT")]
+        public bool ReadyToTest
+        {
+            get
+            {
+                var _rt = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "RT");
+                if (tmp != null) _rt = tmp.OpComplete == 1;
+                return _rt;
+            }
+        }
+
         [DisplayName("Test")]
         public bool Tested
         {
@@ -72,22 +84,26 @@ namespace Time.Data.EntityModels.TimeMFG
         }
     }
 
-
-
     public class LoadListJobMetadata
     {
         [DisplayName("Job Number")]
         public string JobNumber { get; set; }
+
         [DisplayName("Serial No")]
         public string SerialNo { get; set; }
+
         [DisplayName("Distributor PO")]
         public string DistributorPO { get; set; }
+
         [DisplayName("ATS Date")]
         public DateTime DateATS { get; set; }
+
         public string Destination { get; set; }
+
         [UIHint("MultiLineText")]
         [DisplayName("Job Comments")]
         public string Comments { get; set; }
+
         [DisplayName("Customer Name")]
         public string CustomerName { get; set; }
     }
