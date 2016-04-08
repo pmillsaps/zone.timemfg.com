@@ -75,7 +75,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Option,InsulatedBoom")] LB_Options lB_Options)
+        public ActionResult Create(LB_Options lB_Options)
         {
             if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
                 return new HttpUnauthorizedResult();
@@ -117,7 +117,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Option,InsulatedBoom")] LB_Options lB_Options)
+        public ActionResult Edit(LB_Options lB_Options)
         {
             if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
                 return new HttpUnauthorizedResult();
