@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Time.Data.EntityModels.TimeMFG;
@@ -192,5 +193,17 @@ namespace Time.Support.Helpers
         }
 
         #endregion TicketNotes
+
+        public static void StoreAttachmentFile(this HttpPostedFileBase file, int ticketid)
+        {
+            var buf = new byte[file.ContentLength];
+            file.InputStream.Read(buf, 0, file.ContentLength);
+            var fn = file.FileName.Substring(file.FileName.LastIndexOf("\\") + 1).ToLower();
+
+            var _AttachmentPath = HttpContext.Current.Server.MapPath(String.Format(@"~\Modules\Time.Support\Content\AttachmentFiles\{0}\", ticketid));
+            if (!Directory.Exists(_AttachmentPath)) Directory.CreateDirectory(_AttachmentPath);
+            var fullpath = Path.Combine(_AttachmentPath, fn);
+            System.IO.File.WriteAllBytes(fullpath, buf);
+        }
     }
 }

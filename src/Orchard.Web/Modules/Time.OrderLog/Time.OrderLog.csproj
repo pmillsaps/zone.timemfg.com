@@ -138,6 +138,7 @@
     <Content Include="Views\Report\ModelSummary.cshtml" />
     <Content Include="Views\Report\ExecutiveSummary.cshtml" />
     <Content Include="Views\OrderLog\ExportOrderLog.cshtml" />
+    <Content Include="Views\Report\TerritorySummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -186,6 +187,12 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Content\Reports\TerritorySummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TerritorySummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controllers\DealerController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
     <Compile Include="Controllers\InstallerController.cs" />
@@ -231,6 +238,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DailyReports.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Reports\TerritorySummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TerritorySummary.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

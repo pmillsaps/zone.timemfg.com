@@ -139,7 +139,7 @@ namespace Time.Support.Controllers
                 vm.Approver = true;
             }
 
-            if (user.ToUpper() == qry.TicketEmployee.NTLogin.ToUpper()) vm.AssignedToMe = true;
+            if (qry.TicketEmployee != null && user.ToUpper() == qry.TicketEmployee.NTLogin.ToUpper()) vm.AssignedToMe = true;
 
             GenerateDropDowns(vm, qry);
 
@@ -155,8 +155,10 @@ namespace Time.Support.Controllers
             //    ViewData["SortBy"] = "";
             //}
             //if ((string)TempData["message"] != "") ViewBag.Message = TempData["message"];
+            if (!String.IsNullOrEmpty((string)TempData["ErrorMessage"])) ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            if (!String.IsNullOrEmpty((string)TempData["Notice"])) ViewBag.Notice = TempData["Notice"];
 
-            ViewBag.Title = "View 5";
+            ViewBag.Title = "Ticket Info";
             return View(vm);
         }
 
@@ -685,8 +687,14 @@ namespace Time.Support.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNote(int TicketId, string TicketNote, int TicketVisibility, FormCollection collection)
+        public ActionResult AddNote(int TicketId, string TicketNote, int TicketVisibility, string operation, HttpPostedFileBase fileBlob, FormCollection collection)
         {
+            //HttpPostedFileBase file = Request.Files["fileBlob"];
+            if (operation == "Upload File")
+            {
+                return UploadFile(TicketId, TicketNote, TicketVisibility, operation, fileBlob, collection);
+            }
+
             if (String.IsNullOrEmpty(TicketNote))
             {
                 ModelState.AddModelError("Note", "something here maybe?");
@@ -699,7 +707,7 @@ namespace Time.Support.Controllers
                 {
                     // TODO: Add insert logic here
 
-                    var note = new Time.Data.EntityModels.TimeMFG.TicketNote()
+                    var note = new TicketNote()
                     {
                         CreatedDate = DateTime.Now,
                         Visibility = TicketVisibility,
@@ -717,7 +725,7 @@ namespace Time.Support.Controllers
                     {
                         ticket.TicketNotes.Add(note);
                         _db.SaveChanges();
-                        note.SendUpdateNotification();
+                        //note.SendUpdateNotification();
                         var command = new TicketNotificationMessage
                         {
                             TicketId = ticket.TicketID,
@@ -737,6 +745,71 @@ namespace Time.Support.Controllers
                     TempData["error"] = "Opps...We had a problem";
                     ErrorTools.SendEmail(Request.Url, err, User.Identity.Name);
                     return RedirectToAction("Info", new { id = TicketId });
+                }
+            }
+        }
+
+        private ActionResult UploadFile(int ticketId, string ticketNote, int ticketVisibility, string operation, HttpPostedFileBase fileBlob, FormCollection collection)
+        {
+            if (String.IsNullOrEmpty(ticketNote) || fileBlob == null)
+            {
+                if (fileBlob == null) TempData["ErrorMessage"] += "You HAVE to Select A File To Attach<br />";
+                if (String.IsNullOrEmpty(ticketNote)) TempData["ErrorMessage"] += "The Note/File Description can not be empty<br />";
+                return RedirectToAction("Info", new { id = ticketId });
+            }
+            else
+            {
+                try
+                {
+                    // File Logic being added here
+                    var ticket = _db.TicketProjects.FirstOrDefault(c => c.TicketID == ticketId);
+                    if (ticket == null)
+                    {
+                        TempData["ErrorMessage"] += "The Selected Ticket Does Not Exist<br />";
+                        return RedirectToAction("Info", new { id = ticketId });
+                    }
+                    var f = new TicketAttachment();
+
+                    f.FileName = fileBlob.FileName.Substring(fileBlob.FileName.LastIndexOf("\\") + 1).ToLower();
+                    f.FileExt = f.FileName.Substring(f.FileName.LastIndexOf(".") + 1).ToLower();
+                    f.Description = ticketNote;
+                    f.UploadedBy = System.Web.HttpContext.Current.User.Identity.Name;
+                    f.UploadedDate = DateTime.Now;
+                    var attach = ticket.TicketAttachments.FirstOrDefault(x => x.FileName.ToUpper() == f.FileName.ToUpper());
+
+                    try
+                    {
+                        fileBlob.StoreAttachmentFile(ticket.TicketID);
+                        if (attach == null)
+                            ticket.TicketAttachments.Add(f);
+                        else
+                        {
+                            attach.Description = string.Format(@"{0}{3}{1}{3}{2}", attach.Description, f.UploadedDate.ToLocalTime(), f.Description, Environment.NewLine);
+                        }
+                        _db.SaveChanges();
+                        TempData["Notice"] = "File was uploaded successfully!";
+                        var command = new TicketNotificationMessage
+                        {
+                            TicketId = ticket.TicketID,
+                            Notification = TicketNotificationMessage.NotificationType.Update,
+                            Sender = HttpContext.User.Identity.Name,
+                        };
+                        var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+                        return RedirectToAction("Info", new { id = ticket.TicketID });
+                    }
+                    catch (Exception err)
+                    {
+                        TempData["error"] = "Could not save file, Please try again later";
+                        ErrorTools.SendEmail(Request.Url, err, User.Identity.Name);
+                    }
+
+                    return RedirectToAction("Info", new { id = ticketId });
+                }
+                catch (Exception err)
+                {
+                    TempData["ErrorMessage"] = "Opps...We had a problem";
+                    ErrorTools.SendEmail(Request.Url, err, User.Identity.Name);
+                    return RedirectToAction("Info", new { id = ticketId });
                 }
             }
         }
@@ -914,11 +987,11 @@ namespace Time.Support.Controllers
                 var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
 
                 // send notification to the person assigned to the ticket
-                if (ticket.TicketEmployee != null)
-                {
-                    if (ticket.TicketEmployee.NTLogin != ticket.RequestedBy)
-                        ticket.SendUpdateNotificationToAssigned(statusMessage);                // Added the completion notification to let the assigned person know it is complete.
-                }
+                //if (ticket.TicketEmployee != null)
+                //{
+                //    if (ticket.TicketEmployee.NTLogin != ticket.RequestedBy)
+                //        ticket.SendUpdateNotificationToAssigned(statusMessage);                // Added the completion notification to let the assigned person know it is complete.
+                //}
 
                 result = (String.Format("Ticket has been updated to '{0}'.", ticket.TicketStatus.Name));
                 result += String.Format(" <a href='/support/info/{0}'>Refresh</a> page to view changes", ticket.TicketID);

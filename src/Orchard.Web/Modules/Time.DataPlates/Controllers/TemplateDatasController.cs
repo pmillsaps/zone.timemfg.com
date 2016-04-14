@@ -68,7 +68,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FieldName,FieldData,TemplateFullFileName")] TemplateData templateData)
+        public ActionResult Create(TemplateData templateData)
         {
             if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
                 return new HttpUnauthorizedResult();
@@ -106,7 +106,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FieldName,FieldData,TemplateFullFileName")] TemplateData templateData)
+        public ActionResult Edit(TemplateData templateData)
         {
             if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
                 return new HttpUnauthorizedResult();

@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.Claimed)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.ReadyToTest)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Tested)
         </th>
         <th>
@@ -53,61 +56,23 @@
                 @Html.DisplayFor(modelItem => item.LoadList.Name)
             </td>
             <td>
-                @if (item.Claimed)
-                {
-                    <img src='/Content/images/CheckboxFull.png' />
-                }
-                else
-                {
-                    <img src='/Content/images/CheckboxEmpty.png' />
-                }
-                @*@Html.DisplayFor(modelItem => item.Claimed)*@
+                @Html.DisplayFor(modelItem => item.Claimed)
             </td>
             <td>
-                @if (item.Tested)
-                {
-                    <img src='/Content/images/CheckboxFull.png' />
-                }
-                else
-                {
-                    <img src='/Content/images/CheckboxEmpty.png' />
-                }
-                @*@Html.DisplayFor(modelItem => item.Tested)*@
+                @Html.DisplayFor(modelItem => item.ReadyToTest)
             </td>
             <td>
-                @if (item.Posted)
-                {
-                    <img src='/Content/images/CheckboxFull.png' />
-                }
-                else
-                {
-                    <img src='/Content/images/CheckboxEmpty.png' />
-                }
-                @*@Html.DisplayFor(modelItem => item.Posted)*@
+                @Html.DisplayFor(modelItem => item.Tested)
             </td>
             <td>
-                @if (item.Green)
-                {
-                    <img src='/Content/images/CheckboxFull.png' />
-                }
-                else
-                {
-                    <img src='/Content/images/CheckboxEmpty.png' />
-                }
-                @*@Html.DisplayFor(modelItem => item.Green)*@
+                @Html.DisplayFor(modelItem => item.Posted)
             </td>
             <td>
-                @if (item.LShip)
-                {
-                    <img src='/Content/images/CheckboxFull.png' />
-                }
-                else
-                {
-                    <img src='/Content/images/CheckboxEmpty.png' />
-                }
-                @*@Html.DisplayFor(modelItem => item.LShip)*@
+                @Html.DisplayFor(modelItem => item.Green)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LShip)
             </td>
         </tr>
     }
-
 </table>
