@@ -20,6 +20,21 @@ namespace Time.CustomManuals.Controllers
     {
         private CustomManualsEntities db = new CustomManualsEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public FormattingsController(IOrchardServices services)
+        {
+            Services = services;
+            db = new CustomManualsEntities();
+        }
+
+        public FormattingsController(IOrchardServices services, CustomManualsEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
+
         // GET: Formattings
         public ActionResult Index()
         {
@@ -27,7 +42,6 @@ namespace Time.CustomManuals.Controllers
             return View(formattings.OrderBy(x => x.Lift_Group).ToList());
         }
 
-        //Not used
         // GET: Formattings/Details/5
         public ActionResult Details(int? id)
         {
@@ -43,34 +57,38 @@ namespace Time.CustomManuals.Controllers
             return View(formatting);
         }
 
-        // GET: Formattings/Create
-        public ActionResult Create()
-        {
-            ViewBag.Lift_Group = new SelectList(db.LiftGroups, "Lift_Group", "Lift_Group");
-            return View();
-        }
+        //// Not used
+        //// GET: Formattings/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.Lift_Group = new SelectList(db.LiftGroups, "Lift_Group", "Lift_Group");
+        //    return View();
+        //}
 
-        // POST: Formattings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Formatting_ID,Lift_Group,Sequence,Section,PullsFrom,Title,EmptyPageL,EmptyPageR,BlankPage,SectionStarts,PageNumbers,BlankPageMsg,CheckFacings,Active")] Formatting formatting)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Formattings.Add(formatting);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Formattings/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Formatting_ID,Lift_Group,Sequence,Section,PullsFrom,Title,EmptyPageL,EmptyPageR,BlankPage,SectionStarts,PageNumbers,BlankPageMsg,CheckFacings,Active")] Formatting formatting)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Formattings.Add(formatting);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.Lift_Group = new SelectList(db.LiftGroups, "Lift_Group", "Lift_Group", formatting.Lift_Group);
-            return View(formatting);
-        }
+        //    ViewBag.Lift_Group = new SelectList(db.LiftGroups, "Lift_Group", "Lift_Group", formatting.Lift_Group);
+        //    return View(formatting);
+        //}
 
         // GET: Formattings/Edit/5
         public ActionResult Edit(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -91,6 +109,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Formatting_ID,Lift_Group,Sequence,Section,PullsFrom,Title,EmptyPageL,EmptyPageR,BlankPage,SectionStarts,PageNumbers,BlankPageMsg,CheckFacings,Active")] Formatting formatting)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 db.Entry(formatting).State = EntityState.Modified;
@@ -104,6 +125,9 @@ namespace Time.CustomManuals.Controllers
         // GET: Formattings/Delete/5
         public ActionResult Delete(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -121,6 +145,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             Formatting formatting = db.Formattings.Find(id);
             db.Formattings.Remove(formatting);
             db.SaveChanges();

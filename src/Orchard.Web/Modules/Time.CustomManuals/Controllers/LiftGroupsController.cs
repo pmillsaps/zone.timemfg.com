@@ -21,30 +21,49 @@ namespace Time.CustomManuals.Controllers
     {
         private CustomManualsEntities db = new CustomManualsEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public LiftGroupsController(IOrchardServices services)
+        {
+            Services = services;
+            db = new CustomManualsEntities();
+        }
+
+        public LiftGroupsController(IOrchardServices services, CustomManualsEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
+
         // GET: LiftGroups
         public ActionResult Index()
         {
             return View(db.LiftGroups.ToList());
         }
 
-        // GET: LiftGroups/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LiftGroup liftGroup = db.LiftGroups.Find(id);
-            if (liftGroup == null)
-            {
-                return HttpNotFound();
-            }
-            return View(liftGroup);
-        }
+        //// Not used
+        //// GET: LiftGroups/Details/5
+        //public ActionResult Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    LiftGroup liftGroup = db.LiftGroups.Find(id);
+        //    if (liftGroup == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(liftGroup);
+        //}
 
         // GET: LiftGroups/Create
         public ActionResult Create()
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             return View();
         }
 
@@ -55,6 +74,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lift_Group")] LiftGroup liftGroup)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.LiftGroups.FirstOrDefault(x => x.Lift_Group == liftGroup.Lift_Group);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Lift Groups are not Allowed...");
 
@@ -68,9 +90,12 @@ namespace Time.CustomManuals.Controllers
             return View(liftGroup);
         }
 
-        // GET: CustomManual/LiftGroupCreate
+        // GET: CustomManual/FormattingCopy
         public ActionResult FormattingCopy(string id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             ViewBag.Lift_Group = new SelectList(db.Formattings, "Lift_Group", "Lift_Group");
             ViewBag.LiftGroup = id;
             var vm = new FormattingCopyVM();
@@ -79,13 +104,16 @@ namespace Time.CustomManuals.Controllers
             return View(vm);
         }
 
-        // POST: CustomManual/LiftGroupCreate
+        // POST: CustomManual/FormattingCopy
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult FormattingCopy(FormattingCopyVM vm)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.Formattings.Where(x => x.Lift_Group == vm.LiftGroup);
             if (dupeCheck.Count() > 0) ModelState.AddModelError("", "There are already Lift Group Formatting entries...");
             dupeCheck = db.Formattings.Where(x => x.Lift_Group == vm.Lift_Group);
@@ -123,41 +151,44 @@ namespace Time.CustomManuals.Controllers
             return View(vm);
         }
 
-        //Not used
-        // GET: LiftGroups/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LiftGroup liftGroup = db.LiftGroups.Find(id);
-            if (liftGroup == null)
-            {
-                return HttpNotFound();
-            }
-            return View(liftGroup);
-        }
+        ////Not used
+        //// GET: LiftGroups/Edit/5
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    LiftGroup liftGroup = db.LiftGroups.Find(id);
+        //    if (liftGroup == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(liftGroup);
+        //}
 
-        // POST: LiftGroups/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Lift_Group")] LiftGroup liftGroup)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(liftGroup).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(liftGroup);
-        }
+        //// POST: LiftGroups/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Lift_Group")] LiftGroup liftGroup)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(liftGroup).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(liftGroup);
+        //}
 
         // GET: LiftGroups/Delete/5
         public ActionResult Delete(string id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -181,6 +212,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             LiftGroup liftGroup = db.LiftGroups.Find(id);
             db.LiftGroups.Remove(liftGroup);
             db.SaveChanges();

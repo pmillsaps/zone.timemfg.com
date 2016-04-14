@@ -20,6 +20,21 @@ namespace Time.CustomManuals.Controllers
     {
         private CustomManualsEntities db = new CustomManualsEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public LocalMessagesController(IOrchardServices services)
+        {
+            Services = services;
+            db = new CustomManualsEntities();
+        }
+
+        public LocalMessagesController(IOrchardServices services, CustomManualsEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
+
         // GET: LocalMessages
         public ActionResult Index()
         {
@@ -45,6 +60,9 @@ namespace Time.CustomManuals.Controllers
         // GET: LocalMessages/Create
         public ActionResult Create()
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             ViewBag.LanguageID = new SelectList(db.LanguageCodes, "Language_ID", "Language_Code");
             return View();
         }
@@ -56,6 +74,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LanguageID,Name,MessageText")]LocalMessage localMessage)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.LocalMessages.FirstOrDefault(x => x.LanguageID == localMessage.LanguageID && x.Name == localMessage.Name);
             if (dupeCheck != null) ModelState.AddModelError("", "There is aready an entry for this language and Name combination.");
 
@@ -73,6 +94,9 @@ namespace Time.CustomManuals.Controllers
         // GET: LocalMessages/Edit/5
         public ActionResult Edit(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,6 +117,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,LanguageID,Name,MessageText")] LocalMessage localMessage)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.LocalMessages.FirstOrDefault(x => x.LanguageID == localMessage.LanguageID && x.Name == localMessage.Name && x.ID != localMessage.ID);
             if (dupeCheck != null) ModelState.AddModelError("", "There is aready an entry for this language and Name combination.");
 
@@ -109,6 +136,9 @@ namespace Time.CustomManuals.Controllers
         // GET: LocalMessages/Delete/5
         public ActionResult Delete(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,6 +156,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             LocalMessage localMessage = db.LocalMessages.Find(id);
             db.LocalMessages.Remove(localMessage);
             db.SaveChanges();

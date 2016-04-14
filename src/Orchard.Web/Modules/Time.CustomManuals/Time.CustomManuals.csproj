@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Models\FormattingCopyVM .cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>

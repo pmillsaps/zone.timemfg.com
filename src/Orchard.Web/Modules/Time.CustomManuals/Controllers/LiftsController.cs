@@ -20,6 +20,21 @@ namespace Time.CustomManuals.Controllers
     {
         private CustomManualsEntities db = new CustomManualsEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public LiftsController(IOrchardServices services)
+        {
+            Services = services;
+            db = new CustomManualsEntities();
+        }
+
+        public LiftsController(IOrchardServices services, CustomManualsEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
+
         // GET: Lifts
         public ActionResult Index()
         {
@@ -27,25 +42,28 @@ namespace Time.CustomManuals.Controllers
             return View(lifts.ToList());
         }
 
-        //Not used
-        // GET: Lifts/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Lift lift = db.Lifts.Find(id);
-            if (lift == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lift);
-        }
+        ////Not used
+        //// GET: Lifts/Details/5
+        //public ActionResult Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Lift lift = db.Lifts.Find(id);
+        //    if (lift == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(lift);
+        //}
 
         // GET: Lifts/Create
         public ActionResult Create()
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             ViewBag.Lift_Group = new SelectList(db.LiftGroups.OrderBy(x => x.Lift_Group), "Lift_Group", "Lift_Group");
             return View();
         }
@@ -57,6 +75,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lift_ID,Lift_Group")] Lift lift)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.Lifts.FirstOrDefault(x => x.Lift_Group == lift.Lift_Group && x.Lift_ID == lift.Lift_ID);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Lift Groups and Lift IDs are not Allowed...");
 
@@ -74,6 +95,9 @@ namespace Time.CustomManuals.Controllers
         // GET: LiftGroups/CreateGroup
         public ActionResult CreateGroup()
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             return View();
         }
 
@@ -84,6 +108,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateGroup([Bind(Include = "Lift_ID,Lift_Group")] LiftGroup liftGroup)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.LiftGroups.FirstOrDefault(x => x.Lift_Group == liftGroup.Lift_Group);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Lift Groups are not Allowed...");
 
@@ -100,6 +127,9 @@ namespace Time.CustomManuals.Controllers
         // GET: Lifts/Edit/5
         public ActionResult Edit(string id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -120,6 +150,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Lift_ID,Lift_Group")] Lift lift)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.Lifts.FirstOrDefault(x => x.Lift_Group == lift.Lift_Group && x.Lift_ID == lift.Lift_ID);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Lift Groups and Lift IDs are not Allowed...");
 
@@ -136,6 +169,9 @@ namespace Time.CustomManuals.Controllers
         // GET: Lifts/Delete/5
         public ActionResult Delete(string id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -153,6 +189,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             Lift lift = db.Lifts.Find(id);
             db.Lifts.Remove(lift);
             db.SaveChanges();

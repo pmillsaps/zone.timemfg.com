@@ -20,31 +20,49 @@ namespace Time.CustomManuals.Controllers
     {
         private CustomManualsEntities db = new CustomManualsEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public SettingsController(IOrchardServices services)
+        {
+            Services = services;
+            db = new CustomManualsEntities();
+        }
+
+        public SettingsController(IOrchardServices services, CustomManualsEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
+
         // GET: Settings
         public ActionResult Index()
         {
             return View(db.Settings.ToList());
         }
 
-        //Not used
-        // GET: Settings/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Setting setting = db.Settings.Find(id);
-            if (setting == null)
-            {
-                return HttpNotFound();
-            }
-            return View(setting);
-        }
+        ////Not used
+        //// GET: Settings/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Setting setting = db.Settings.Find(id);
+        //    if (setting == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(setting);
+        //}
 
         // GET: Settings/Create
         public ActionResult Create()
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             return View();
         }
 
@@ -55,6 +73,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Settings_ID,Setting1,Value,Description,Required")] Setting setting)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.Settings.FirstOrDefault(x => x.Setting1 == setting.Setting1);
             if (dupeCheck != null) ModelState.AddModelError("", "There is aready an entry for this Setting.");
 
@@ -71,6 +92,9 @@ namespace Time.CustomManuals.Controllers
         // GET: Settings/Edit/5
         public ActionResult Edit(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -90,6 +114,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Settings_ID,Setting1,Value,Description,Required")] Setting setting)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.Settings.FirstOrDefault(x => x.Setting1 == setting.Setting1 && x.Settings_ID != setting.Settings_ID);
             if (dupeCheck != null) ModelState.AddModelError("", "There is aready an entry for this Setting.");
 
@@ -105,6 +132,9 @@ namespace Time.CustomManuals.Controllers
         // GET: Settings/Delete/5
         public ActionResult Delete(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -122,6 +152,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             Setting setting = db.Settings.Find(id);
             db.Settings.Remove(setting);
             db.SaveChanges();

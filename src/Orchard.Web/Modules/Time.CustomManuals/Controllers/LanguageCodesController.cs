@@ -20,31 +20,49 @@ namespace Time.CustomManuals.Controllers
     {
         private CustomManualsEntities db = new CustomManualsEntities();
 
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public LanguageCodesController(IOrchardServices services)
+        {
+            Services = services;
+            db = new CustomManualsEntities();
+        }
+
+        public LanguageCodesController(IOrchardServices services, CustomManualsEntities _db)
+        {
+            Services = services;
+            db = _db;
+        }
+
         // GET: LanguageCodes
         public ActionResult Index()
         {
             return View(db.LanguageCodes.ToList());
         }
 
-        //Not used
-        // GET: LanguageCodes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LanguageCode languageCode = db.LanguageCodes.Find(id);
-            if (languageCode == null)
-            {
-                return HttpNotFound();
-            }
-            return View(languageCode);
-        }
+        ////Not used
+        //// GET: LanguageCodes/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    LanguageCode languageCode = db.LanguageCodes.Find(id);
+        //    if (languageCode == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(languageCode);
+        //}
 
         // GET: LanguageCodes/Create
         public ActionResult Create()
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             return View();
         }
 
@@ -55,6 +73,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Language_ID,Language_Code,Language")] LanguageCode languageCode)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.LanguageCodes.FirstOrDefault(x => x.Language_Code == languageCode.Language_Code);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Language Codes are not Allowed...");
 
@@ -71,6 +92,9 @@ namespace Time.CustomManuals.Controllers
         // GET: LanguageCodes/Edit/5
         public ActionResult Edit(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -90,6 +114,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Language_ID,Language_Code,Language")] LanguageCode languageCode)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             var dupeCheck = db.LanguageCodes.FirstOrDefault(x => x.Language_Code == languageCode.Language_Code && x.Language == languageCode.Language && x.Language_ID != languageCode.Language_ID);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Language Codes are not Allowed...");
 
@@ -105,6 +132,9 @@ namespace Time.CustomManuals.Controllers
         // GET: LanguageCodes/Delete/5
         public ActionResult Delete(int? id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -122,6 +152,9 @@ namespace Time.CustomManuals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
             LanguageCode languageCode = db.LanguageCodes.Find(id);
             db.LanguageCodes.Remove(languageCode);
             db.SaveChanges();
