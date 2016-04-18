@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Time.Epicor.Models.PartInfo>
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PartNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Draw)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnHand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isPhantom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorPartNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubPart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eco)
+            </th>
+        </tr>
+
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Draw)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OnHand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isPhantom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorPartNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Revision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuyerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuyerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubPart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eco)
+            </td>
+        </tr>
+        }
+    </table>
