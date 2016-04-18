@@ -12,7 +12,7 @@ namespace Time.Support.Helpers
         {
             List<string> result = new List<string>();
 
-            if (userName.StartsWith("TIME"))
+            if (userName.ToUpper().StartsWith("TIME"))
             {
                 using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "timemfg.prv"))
                 {

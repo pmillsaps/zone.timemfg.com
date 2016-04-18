@@ -255,7 +255,9 @@ namespace Time.Support.Controllers
                 ticketProject.RequestedBy = user;
                 ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
 
-                if (ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
+                var groups = ADHelper.GetGroupNames(user);
+
+                if (groups != null && groups.Contains("SupportTicketApprover"))
                 {
                     ticketProject.Status = 2;
                 }
