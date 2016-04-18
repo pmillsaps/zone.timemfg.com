@@ -95,6 +95,14 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -110,6 +118,50 @@
     <Content Include="Views\ProblemJobs\Index.cshtml" />
     <Content Include="Views\_CustomManualSideBar.cshtml" />
     <Content Include="Views\ProblemJobs\_ProblemJob.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\NoPrints\Create.cshtml" />
+    <Content Include="Views\NoPrints\Delete.cshtml" />
+    <Content Include="Views\NoPrints\Details.cshtml" />
+    <Content Include="Views\NoPrints\Edit.cshtml" />
+    <Content Include="Views\NoPrints\Index.cshtml" />
+    <Content Include="Views\Lifts\Create.cshtml" />
+    <Content Include="Views\Lifts\Delete.cshtml" />
+    <Content Include="Views\Lifts\Details.cshtml" />
+    <Content Include="Views\Lifts\Edit.cshtml" />
+    <Content Include="Views\Lifts\Index.cshtml" />
+    <Content Include="Views\LiftGroups\Create.cshtml" />
+    <Content Include="Views\LiftGroups\Delete.cshtml" />
+    <Content Include="Views\LiftGroups\Details.cshtml" />
+    <Content Include="Views\LiftGroups\Edit.cshtml" />
+    <Content Include="Views\LiftGroups\Index.cshtml" />
+    <Content Include="Views\Lifts\CreateGroup.cshtml" />
+    <Content Include="Views\Formattings\Create.cshtml" />
+    <Content Include="Views\Formattings\Delete.cshtml" />
+    <Content Include="Views\Formattings\Details.cshtml" />
+    <Content Include="Views\Formattings\Edit.cshtml" />
+    <Content Include="Views\Formattings\Index.cshtml" />
+    <Content Include="Views\LanguageCodes\Create.cshtml" />
+    <Content Include="Views\LanguageCodes\Delete.cshtml" />
+    <Content Include="Views\LanguageCodes\Details.cshtml" />
+    <Content Include="Views\LanguageCodes\Edit.cshtml" />
+    <Content Include="Views\LanguageCodes\Index.cshtml" />
+    <Content Include="Views\LocalMessages\Create.cshtml" />
+    <Content Include="Views\LocalMessages\Delete.cshtml" />
+    <Content Include="Views\LocalMessages\Details.cshtml" />
+    <Content Include="Views\LocalMessages\Edit.cshtml" />
+    <Content Include="Views\LocalMessages\Index.cshtml" />
+    <Content Include="Views\LiftOptions\Create.cshtml" />
+    <Content Include="Views\LiftOptions\Delete.cshtml" />
+    <Content Include="Views\LiftOptions\Details.cshtml" />
+    <Content Include="Views\LiftOptions\Edit.cshtml" />
+    <Content Include="Views\LiftOptions\Index.cshtml" />
+    <Content Include="Views\Settings\Create.cshtml" />
+    <Content Include="Views\Settings\Delete.cshtml" />
+    <Content Include="Views\Settings\Details.cshtml" />
+    <Content Include="Views\Settings\Edit.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\LiftGroups\DeleteNotAllowed.cshtml" />
+    <Content Include="Views\LiftGroups\FormattingCopy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -126,9 +178,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FormattingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageCodesController.cs" />
+    <Compile Include="Controllers\LiftGroupsController.cs" />
+    <Compile Include="Controllers\LiftOptionsController.cs" />
+    <Compile Include="Controllers\LiftsController.cs" />
+    <Compile Include="Controllers\LocalMessagesController.cs" />
+    <Compile Include="Controllers\NoPrintsController.cs" />
     <Compile Include="Controllers\ProblemJobsController.cs" />
     <Compile Include="Controllers\ProcessController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Models\FormattingCopyVM .cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +200,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

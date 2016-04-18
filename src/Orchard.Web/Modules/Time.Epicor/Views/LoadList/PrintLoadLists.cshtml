@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "E10 Print Load Lists...";
+    Script.Require("jQuery");
 }
 
 <h2>@ViewBag.Title</h2>
@@ -162,4 +163,18 @@ else
     </div>  
     
     <br />
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('#checkAllSelected').change(function () {
+            var checkboxes = $(this).closest('form').find(':checkbox');
+            if ($(this).is(':checked')) {
+                checkboxes.prop('checked', true);
+            } else {
+                checkboxes.prop('checked', false);
+            }
+        });
+    </script>
 }

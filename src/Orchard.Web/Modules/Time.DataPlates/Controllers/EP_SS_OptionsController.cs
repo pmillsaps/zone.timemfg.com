@@ -75,7 +75,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Option,Voltage")] EP_SS_Options eP_SS_Options)
+        public ActionResult Create(EP_SS_Options eP_SS_Options)
         {
             if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
                 return new HttpUnauthorizedResult();
@@ -117,7 +117,7 @@ namespace Time.DataPlates.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Option,Voltage")] EP_SS_Options eP_SS_Options)
+        public ActionResult Edit(EP_SS_Options eP_SS_Options)
         {
             if (!Services.Authorizer.Authorize(Permissions.DataPlateEditor, T("You Do Not Have Permission to Edit Data Plates")))
                 return new HttpUnauthorizedResult();
