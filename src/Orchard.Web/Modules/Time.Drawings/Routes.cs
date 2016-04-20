@@ -21,22 +21,20 @@ namespace Time.Drawings
             return new[] {
                 new RouteDescriptor {
                     Priority = 5,
-                     Route = new Route(
-                        "Drawings/{action}/{id}",
+                    Route = new Route(
+                        "Drawings/{controller}/{action}/{id}",
                         new RouteValueDictionary {
-                                                    {"area", "Time.Drawings"},
-                                                    {"controller", "Home"},
-                                                    {"action", "Index"},
-                                                    {"id", null}
-                                                },
+                            {"area", "Time.Drawings"},
+                            {"controller", "Home"},
+                            {"action", "Index"},
+                            {"id", null}
+                        },
+                        new RouteValueDictionary(),
                         new RouteValueDictionary {
-                                                    {"area", "Time.Drawings"},
-                                                    {"controller", "Home"},
-                                                },
-                        new RouteValueDictionary {
-                                                    {"area", "Time.Drawings"}
-                                                },
-                        new MvcRouteHandler())}
+                            {"area", "Time.Drawings"}
+                        },
+                        new MvcRouteHandler())
+                }
             };
         }
     }

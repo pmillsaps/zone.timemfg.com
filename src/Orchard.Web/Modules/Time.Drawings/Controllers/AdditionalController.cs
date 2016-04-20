@@ -18,6 +18,7 @@ using PagedList.Mvc;
 namespace Time.Drawings.Controllers
 {
     [Themed]
+    [Authorize]
     public class AdditionalController : Controller
     {
         private readonly DrawingsEntities db;
@@ -59,6 +60,9 @@ namespace Time.Drawings.Controllers
         // GET: Additional/AddAdditionalDrawing/5
         public ActionResult AddAdditionalDrawing(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,6 +87,9 @@ namespace Time.Drawings.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddAdditionalDrawing(AdditionalDrawingViewModel vm)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page")))
+                return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 var pdf = db.Drawings_PDF.Find(vm.SourceId);

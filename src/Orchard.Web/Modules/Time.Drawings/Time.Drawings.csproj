@@ -163,6 +163,7 @@
     <Compile Include="EntityModels\Drawings_PDF.cs">
       <DependentUpon>DrawingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Permissions.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
