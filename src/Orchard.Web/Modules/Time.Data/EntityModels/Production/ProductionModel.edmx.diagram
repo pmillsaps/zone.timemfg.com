@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="462905cdb942468bac65443207d2bafb" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="ProductionModel.Part" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductionModel.SysAgentTask" Width="1.5" PointX="3.5" PointY="4.875" />
+        <EntityTypeShape EntityType="ProductionModel.IMJobOper" Width="1.5" PointX="11.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductionModel.IMPartBin" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductionModel.SysAgentSched" Width="1.5" PointX="9.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_DistributorOrderList" Width="1.5" PointX="8.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_NowReportClaim" Width="3" PointX="14.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_QuoteOrderInformation" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_WhereUsed" Width="1.5" PointX="16.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_YardReport" Width="1.5" PointX="16.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_BillOfMaterials" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_PartCostStd" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_PartDetails" Width="1.5" PointX="16.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_NowReport" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ProductionModel.JobOper" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_CustomersWithOpenOrderPartLines" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_JobInformation" Width="1.5" PointX="3.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ProductionModel.V_JobInformation_NotClosed" Width="1.5" PointX="20.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ProductionModel.SysTaskLog" Width="1.5" PointX="7.625" PointY="24.25" />
+        <EntityTypeShape EntityType="ProductionModel.SysTask" Width="1.5" PointX="5.375" PointY="28.75" />
+        <AssociationConnector Association="ProductionModel.FK_SysTaskLog_SysTask" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

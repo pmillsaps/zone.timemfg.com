@@ -1,0 +1,138 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfigOption
+
+@{
+    ViewBag.Title = "Delete Config Option";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ConfigOption</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key01)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key01)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key02)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key02)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key03)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key03)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key04)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key04)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key05)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key05)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key06)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key06)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key07)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key07)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key08)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key08)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key09)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key09)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InActive)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName, ConfigData = Model.ConfigData })
+        </div>
+    }
+</div>

@@ -1,0 +1,44 @@
+﻿@model Time.Drawings.ViewModels.SearchDrawingsViewModel
+@*@using System.Collections*@
+
+@{
+    ViewBag.Title = "Search Drawings";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@*<p>
+    @Html.ActionLink("Additional Drawings", "Index", "Additional")
+</p>*@
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p class="lead">Enter Part Number:</p>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.Search)
+            @Html.ValidationMessageFor(model => model.Search)
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Search" class="btn btn-default"/>
+        </div>
+    </div>
+    <hr />
+    <strong>@ViewBag.SearchNote</strong><br />
+    <strong>@ViewBag.Count</strong><br /><br />
+    <hr />
+}
+
+@if (Model != null)
+{
+    if (Model.DrawingsList.Count > 0)
+    {
+        @Html.Partial("_DrawingsList", Model.DrawingsList)
+    }
+
+}

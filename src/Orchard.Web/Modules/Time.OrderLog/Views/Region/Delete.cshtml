@@ -1,0 +1,35 @@
+﻿@model Time.Data.EntityModels.OrderLog.Region
+
+@{
+    ViewBag.Title = "Delete Region";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Region</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegionName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

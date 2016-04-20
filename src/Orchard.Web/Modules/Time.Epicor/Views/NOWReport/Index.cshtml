@@ -1,0 +1,49 @@
+﻿@model Time.Epicor.ViewModels.NOWReportViewModel
+
+@{
+    ViewBag.Title = "Now Report";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-3">@Html.EditorFor(model => model.Query)</div>
+            <div class="col-md-2">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+            <div class="col-md-1 text-primary">@Html.DisplayNameFor(model => model.ExportToExcel)</div>
+            <div class="col-md-1">@Html.EditorFor(model => model.ExportToExcel)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3 text-primary">Search By:</div>
+            <div class="col-md-3 text-primary">Related Ops:</div>
+            <div class="col-md-3 text-primary">Based on Operation:</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">@Html.EnumDropDownListFor(model => model.Filter, new { @class = "form-control" })</div>
+            <div class="col-md-3">@Html.EnumDropDownListFor(model => model.Ops, new { @class = "form-control" })</div>
+            <div class="col-md-3">@Html.EnumDropDownListFor(model => model.BasedOp, new { @class = "form-control" })</div>
+        </div>
+        <br />
+    }
+
+    <div>
+        <div class="col-md-2 bg-info">Blue: Not covered</div>
+        <div class="col-md-2 bg-primary">Orange: Partial</div>
+        <div class="col-md-2 bg-success">Green: Covered</div>
+    </div>
+    <br />
+    <br />
+
+    @if (Model.Report != null)
+    {
+        @Html.Partial("_NOWReportDetails", Model.Report)
+    }
+</div>

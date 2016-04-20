@@ -1,0 +1,123 @@
+﻿@model Time.Data.EntityModels.TimeMFG.TicketProject
+
+@using (Html.BeginForm("Update", "Ticket", FormMethod.Post))
+            {
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("TicketID", Model.TicketID)
+
+    @*@Html.HiddenFor(model => model.Ticket.TicketID)*@
+
+    <div class="form-group">
+        <div class="col-md-2">
+            Priority:
+        </div>
+        <div class="col-md-4">
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
+            {
+                @Html.DropDownList("PriorityID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.PriorityID)
+                @Html.DisplayFor(model => model.TicketPriority.Name)
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            Department:
+        </div>
+        <div class="col-md-4">
+            @if ((bool)ViewBag.Admin)
+            {
+                @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.DepartmentID)
+                @Html.DisplayFor(model => model.TicketDepartment.Name)
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            Category:
+        </div>
+        <div class="col-md-4">
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
+            {
+                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.CategoryID)
+                @Html.DisplayFor(model => model.TicketCategory.Name)
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            Assigned To:
+        </div>
+        <div class="col-md-4">
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
+            {
+                @Html.DropDownList("AssignedEmployeeID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.AssignedEmployeeID)
+                @Html.DisplayFor(model => model.TicketEmployee.FullName)
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            Resource:
+        </div>
+        <div class="col-md-4">
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
+            {
+                @Html.DropDownList("ResourceEmployeeID", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.ResourceEmployeeID)
+                @Html.DisplayFor(model => model.TicketEmployee1.FullName)
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            Status:
+        </div>
+        <div class="col-md-4">
+            @if ((bool)ViewBag.Admin || (bool)ViewBag.AssignedToMe)
+            {
+                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.Status)
+                @Html.DisplayFor(model => model.TicketStatus.Name)
+            }
+        </div>
+    </div>
+
+    if ((bool)ViewBag.IT || (bool)ViewBag.Admin || (Model.TicketEmployee != null && HttpContext.Current.User.Identity.Name.ToUpper() == Model.TicketEmployee.NTLogin.ToUpper()))
+    {
+        <br />
+        <div class="row form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update Ticket" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+}

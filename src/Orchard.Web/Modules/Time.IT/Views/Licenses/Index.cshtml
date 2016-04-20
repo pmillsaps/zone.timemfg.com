@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.License>
+
+@{
+    ViewBag.Title = "License Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.TextBox("search")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-1">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityAssigned)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LicenseKey)
+        </th>
+        <th>
+            Computer
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_LicenseType.LicenseType)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                @*@Html.DisplayFor(modelItem => item.Name)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityAssigned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicenseKey)
+            </td>
+            <td>
+                @if (item.Computers.Count() + item.Users.Count() == 1)
+                {
+                    if (item.Computers.Count() == 1)
+                    {
+                        @item.Computers.FirstOrDefault().Name
+                    }
+                    if (item.Users.Count() == 1)
+                    {
+                        @item.Users.FirstOrDefault().Name
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_LicenseType.LicenseType)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Reset ALL License Counts", "RecountLicenses")
