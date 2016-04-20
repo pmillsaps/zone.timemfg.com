@@ -1,9 +1,11 @@
 ﻿using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
+using PagedList;
+using PagedList.Mvc;
 using System;
-using System.Configuration;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -12,8 +14,6 @@ using System.Web;
 using System.Web.Mvc;
 using Time.Drawings.EntityModels;
 using Time.Drawings.ViewModels;
-using PagedList;
-using PagedList.Mvc;
 
 namespace Time.Drawings.Controllers
 {
@@ -60,8 +60,9 @@ namespace Time.Drawings.Controllers
         // GET: Additional/AddAdditionalDrawing/5
         public ActionResult AddAdditionalDrawing(int? id)
         {
-            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page")))
-                return new HttpUnauthorizedResult();
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
 
             if (id == null)
             {
@@ -72,7 +73,7 @@ namespace Time.Drawings.Controllers
             vm.SourceId = id;
             vm.pdf = drawings_PDF;
             ViewBag.TargetId = new SelectList(db.Drawings_PDF.OrderBy(x => x.Id), "Id", "Drawing");
-            
+
             if (drawings_PDF == null)
             {
                 return HttpNotFound();
@@ -81,14 +82,15 @@ namespace Time.Drawings.Controllers
         }
 
         // POST: Additional/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddAdditionalDrawing(AdditionalDrawingViewModel vm)
         {
-            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page")))
-                return new HttpUnauthorizedResult();
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
 
             if (ModelState.IsValid)
             {
@@ -106,16 +108,22 @@ namespace Time.Drawings.Controllers
         // GET: Additional/Create
         public ActionResult Create()
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
             return View();
         }
 
         // POST: Additional/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Drawings_PDF drawings_PDF)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
             if (ModelState.IsValid)
             {
                 db.Drawings_PDF.Add(drawings_PDF);
@@ -129,6 +137,9 @@ namespace Time.Drawings.Controllers
         // GET: Additional/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -143,18 +154,22 @@ namespace Time.Drawings.Controllers
         }
 
         // POST: Additional/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Drawings_PDF drawings_PDF, int AddDrawing)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 var pdf = db.Drawings_PDF.Find(drawings_PDF.Id);
                 Drawings_PDF additionalD = db.Drawings_PDF.Find(AddDrawing);
                 pdf.AdditionalDrawings.Add(additionalD);
-                
+
                 //drawings_PDF.AdditionalDrawings.Add(additionalD);
                 //drawings_PDF.SourceDrawing.Add(drawings_PDF);
 
@@ -169,6 +184,10 @@ namespace Time.Drawings.Controllers
         // GET: Additional/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -186,6 +205,10 @@ namespace Time.Drawings.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!Services.Authorizer.Authorize(Permissions.DrawingManager, T("You Do Not Have Permission to View this Page"))
+                && !Services.Authorizer.Authorize(Permissions.DrawingAdmin, T("You Do Not Have Permission to View this Page"))
+               ) return new HttpUnauthorizedResult();
+
             Drawings_PDF drawings_PDF = db.Drawings_PDF.Find(id);
             db.Drawings_PDF.Remove(drawings_PDF);
             db.SaveChanges();

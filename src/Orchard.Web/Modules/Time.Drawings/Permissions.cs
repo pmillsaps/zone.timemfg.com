@@ -29,10 +29,10 @@ namespace Time.Drawings
                     Name = "IT",
                     Permissions = new[] {DrawingAdmin, DrawingManager}
                 },
-                  new PermissionStereotype {
-                    Name = "Drawings",
+                new PermissionStereotype {
+                    Name = "DrawingManager",
                     Permissions = new[] {DrawingManager}
-                },
+                }
             };
         }
     }
