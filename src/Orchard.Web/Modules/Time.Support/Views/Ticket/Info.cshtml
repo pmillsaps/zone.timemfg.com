@@ -1,0 +1,281 @@
+﻿@*@model Time.Support.EntityModels.TimeMfg.TicketProject*@
+
+@model Time.Support.Models.TicketViewModel
+
+@{
+    ViewBag.Title = "Support Ticket Info";
+}
+
+<div class="container">
+    <div class="row">
+
+        @Html.Action("SideBar")
+
+        <div class="form-horizontal col-md-9 col-sm-9 col-xs-9">
+            <div class="row">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div class="row alert-danger">
+                    @Html.Raw(ViewBag.ErrorMessage)
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="row text-info">
+                    @Html.Raw(ViewBag.Message)
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewBag.Notice))
+            {
+                <div class="row alert-info">
+                    @Html.Raw(ViewBag.Notice)
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Ticket.Title)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    Ticket #: @Html.DisplayFor(model => model.Ticket.TicketID)
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="col-md-8">
+                    Description
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayWithBreaksFor(model => model.Ticket.Description)
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-2">
+                    Request By:
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Ticket.RequestedBy)
+                </div>
+                @if (Model.Admin)
+                {
+                    <div class="col-md-2">
+                        @Html.ActionLink("Change User", "ChangeUser", new { id = Model.Ticket.TicketID }, new { @class = "btn btn-default" })
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    Requested Date:
+                </div>
+                <div class="col-md-6">
+                    @Model.Ticket.RequestedDate.Value.ToShortDateString()
+                </div>
+            </div>
+
+            @{ ViewBag.Admin = Model.Admin == true; ViewBag.IT = Model.IT == true; ViewBag.AssignedToMe = Model.AssignedToMe == true; }
+
+            @Html.Partial("_TicketUpdate", Model.Ticket)
+
+            @*Ticket Approval*@
+            @if ((Model.Ticket.Status == 1) && (Model.Approver || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Approve Ticket", "Approval", new { approved = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Approve", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Reject Ticket", "Approval", new { approved = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @*Ticket Completion*@
+            @if ((Model.Ticket.TicketStatus.isReadyToComplete == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Complete Ticket", "Complete", new { completed = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Complete", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Deny Completion", "Complete", new { completed = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @*Ticket Cancellation*@
+            @if ((Model.Ticket.TicketStatus.isReadyToCancel == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Cancel Ticket", border = 0, hspace = 2 })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Deny Cancellation", "CancelTicket", new { cancelled = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny Cancellation", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                &nbsp;
+            </div>
+            @* Add Ticket Note Section *@
+            @*@using (Html.BeginForm("AddNote"))*@
+
+            @using (Html.BeginForm("AddNote", "Ticket", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.TicketId)
+
+                @*@Html.Hidden("TicketId", Model.TicketId)*@
+
+                <div class="form-horizontal">
+                    @*<h4>Add Note</h4>
+                        <hr />*@
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TicketVisibility, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("TicketVisibility", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TicketVisibility, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TicketNote, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TicketNote, new { htmlAttributes = new { @class = "form-control", @rows = 7 } })
+                            @Html.ValidationMessageFor(model => model.TicketNote, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-2">
+                            <input type="submit" name="operation" value="Add Note" class="btn btn-default" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" name="operation" value="Upload File" class="btn btn-default" />
+                        </div>
+                        <div class="col-md-6">
+                            <input id="fileBlob" name="fileBlob" type="file" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model.Ticket.TicketAttachments.Count() > 0)
+            {
+                <br />
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-2">
+                        <h5><strong>Ticket Attachments</strong></h5>
+                    </div>
+                </div>
+                foreach (var item in Model.Ticket.TicketAttachments)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            @Html.DisplayFor(m => item.UploadedDate)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.ActionLink(item.FileName, "GetAttachment", new { id = item.AttachmentID })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.DisplayWithBreaksFor(m => item.Description)
+                        </div>
+                    </div>
+
+                    <br />
+                }
+            }
+            <br />
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <h5><strong>Public Notes</strong></h5>
+                </div>
+            </div>
+            @foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility >= 5))
+            {
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-9">
+                        @Html.DisplayWithBreaksFor(m => item.Note)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-9">
+                        <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate</i>
+                    </div>
+                </div>
+                <hr class="col-md-offset-2" />
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <h5><strong>Private Notes</strong></h5>
+                </div>
+            </div>
+
+            @if (Model.IT || Model.Admin)
+            {
+                foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility < 5))
+                {
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.DisplayWithBreaksFor(m => item.Note)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate</i>
+                        </div>
+                    </div>
+                }
+
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-1">
+                    <h5><strong>Tasks</strong></h5>
+                </div>
+                <div class="col-md-offset-1 col-md-2">
+                    <h5>@Html.ActionLink("Add Task", "AddTask", new { id = Model.Ticket.TicketID })</h5>
+                </div>
+            </div>
+            @foreach (var item in Model.Tasks.OrderBy(x => x.Completed).ThenBy(x => x.ID))
+            {
+                @Html.Partial("_TaskView", item)
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9504479-E336-4A3D-AE0A-C0364E7D64EB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Time.Epicor</RootNamespace>
+    <AssemblyName>Time.Epicor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.0.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FastMember, Version=1.0.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\FastMember.1.0.0.11\lib\net40\FastMember.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\CheckboxEmpty.png" />
+    <Content Include="Content\Images\CheckboxFull.png" />
+    <Content Include="Content\Images\loadingAnimation.gif" />
+    <Content Include="Content\Images\transparent.gif" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Images\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\WebGrid.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\Time.Epicor.pubxml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Module.txt" />
+    <Content Include="Views\Interim\_imjoboper.cshtml" />
+    <Content Include="Views\Interim\_impartbin.cshtml" />
+    <Content Include="Views\Home\RTI.cshtml" />
+    <Content Include="Views\BOMCosting\Index.cshtml" />
+    <Content Include="Views\LoadList\Index.cshtml" />
+    <Content Include="Views\LoadList\AsmInspect.cshtml" />
+    <Content Include="Views\Home\ChangePrimBin.cshtml" />
+    <Content Include="Views\Inventory\ReturnTags.cshtml" />
+    <Content Include="Views\DistributorOrders\Index.cshtml" />
+    <Content Include="Views\LoadList\CommentWorkFlow.cshtml" />
+    <Content Include="Views\LoadList\CompleteLoadList.cshtml" />
+    <Content Include="Views\LoadList\Create.cshtml" />
+    <Content Include="Views\LoadList\Delete.cshtml" />
+    <Content Include="Views\LoadList\DeleteJob.cshtml" />
+    <Content Include="Views\LoadList\Details.cshtml" />
+    <Content Include="Views\LoadList\Edit.cshtml" />
+    <Content Include="Views\LoadList\EditJob.cshtml" />
+    <Content Include="Views\LoadList\EmailCreate.cshtml" />
+    <Content Include="Views\LoadList\EmailDelete.cshtml" />
+    <Content Include="Views\LoadList\EmailEdit.cshtml" />
+    <Content Include="Views\LoadList\EmailIndex.cshtml" />
+    <Content Include="Views\LoadList\EmailLoadList.cshtml" />
+    <Content Include="Views\LoadList\EmailLoadLists.cshtml" />
+    <Content Include="Views\LoadList\IndexComplete.cshtml" />
+    <Content Include="Views\LoadList\JobDetails.cshtml" />
+    <Content Include="Views\LoadList\JobSearch.cshtml" />
+    <Content Include="Views\LoadList\MoveLoadListJob.cshtml" />
+    <Content Include="Views\LoadList\PrintLoadLists.cshtml" />
+    <Content Include="Views\LoadList\SearchLoadLists.cshtml" />
+    <Content Include="Views\LoadList\UploadPictures.cshtml" />
+    <Content Include="Views\LoadList\_AsmInspect.cshtml" />
+    <Content Include="Views\LoadList\_CommentWorkFlow.cshtml" />
+    <Content Include="Views\LoadList\_CustomerList.cshtml" />
+    <Content Include="Views\LoadList\_DisplayThumbNails.cshtml" />
+    <Content Include="Views\LoadList\_EmailList.cshtml" />
+    <Content Include="Views\LoadList\_JobList.cshtml" />
+    <Content Include="Views\LoadList\_JobStatus.cshtml" />
+    <Content Include="Views\LoadList\_JobStatusRaw.cshtml" />
+    <Content Include="Views\LoadList\_List.cshtml" />
+    <Content Include="Views\LoadList\_ListJobComments.cshtml" />
+    <Content Include="Views\LoadList\_ListLifts.cshtml" />
+    <Content Include="Views\LoadList\_ListLoadComments.cshtml" />
+    <Content Include="Views\LoadList\_ViewLifts.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Status\_Tasks.cshtml" />
+    <Content Include="Views\Status\_Interim.cshtml" />
+    <Content Include="Views\Status\_imjoboper.cshtml" />
+    <Content Include="Views\Status\_impartbin.cshtml" />
+    <Content Include="Views\Status\_SchedTasks.cshtml" />
+    <Content Include="Views\Home\MessageResult.cshtml" />
+    <Content Include="Views\Home\ProblemJobs.cshtml" />
+    <Content Include="Views\Index2.cshtml" />
+    <Content Include="Views\ValuedInventory\Index.cshtml" />
+    <Content Include="Views\DistributorOrders\_DistributorOrderList.cshtml" />
+    <Content Include="Views\DistributorOrders\_DistributorList.cshtml" />
+    <Content Include="Views\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\E10Status\_imjoboper.cshtml" />
+    <Content Include="Views\E10Status\_impartbin.cshtml" />
+    <Content Include="Views\E10Status\_Interim.cshtml" />
+    <Content Include="Views\E10Status\_SchedTasks.cshtml" />
+    <Content Include="Views\E10Status\_Tasks.cshtml" />
+    <Content Include="Views\E10Status\Index.cshtml" />
+    <Content Include="Views\E10Status\_CompletedTasks.cshtml" />
+    <Content Include="Views\BOMCosting\_BOMListing.cshtml" />
+    <Content Include="Views\DLS\Index.cshtml" />
+    <Content Include="Views\PartSearch\Index.cshtml" />
+    <Content Include="Views\PartSearch\_PartDetails.cshtml" />
+    <Content Include="Views\ValuedInventory\_Details.cshtml" />
+    <Content Include="Views\YardReport\Index.cshtml" />
+    <Content Include="Views\QuoteOrderSearch\Index.cshtml" />
+    <Content Include="Views\WhereUsedBom\Index.cshtml" />
+    <Content Include="Views\WhereUsedBom\_BOM.cshtml" />
+    <Content Include="Views\WhereUsedBom\_WhereUsed.cshtml" />
+    <Content Include="Views\QuoteOrderSearch\_QuoteOrderList.cshtml" />
+    <Content Include="Views\NOWReport\Index.cshtml" />
+    <Content Include="Views\NOWReport\_NOWReportDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BOMCostingController.cs" />
+    <Compile Include="Controllers\DistributorOrdersController.cs" />
+    <Compile Include="Controllers\DLSController.cs" />
+    <Compile Include="Controllers\E10StatusController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\LoadListController.cs" />
+    <Compile Include="Controllers\NOWReportController.cs" />
+    <Compile Include="Controllers\InterimController.cs" />
+    <Compile Include="Controllers\PartSearchController.cs" />
+    <Compile Include="Controllers\QuoteOrderSearchController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\ValuedInventoryController.cs" />
+    <Compile Include="Controllers\WhereUsedBomController.cs" />
+    <Compile Include="Controllers\YardReportController.cs" />
+    <Compile Include="Helpers\EmailNotifier.cs" />
+    <Compile Include="Helpers\ErrorTools.cs" />
+    <Compile Include="Helpers\ExporttoExcelResult.cs" />
+    <Compile Include="Helpers\FileUploadHelpers.cs" />
+    <Compile Include="Helpers\HelperClass.cs" />
+    <Compile Include="Helpers\ImageResult.cs" />
+    <Compile Include="Helpers\ValuedInventoryExcelResult.cs" />
+    <Compile Include="Models\BOMInfo.cs" />
+    <Compile Include="Models\NOWReport.cs" />
+    <Compile Include="Models\PartCost.cs" />
+    <Compile Include="Models\PartInfo.cs" />
+    <Compile Include="Models\ValuedInventoryExt.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ViewModels\AddLiftViewModel.cs" />
+    <Compile Include="ViewModels\AsmInspectViewModel.cs" />
+    <Compile Include="ViewModels\BOMSearchVM.cs" />
+    <Compile Include="ViewModels\DistributorOrderListVM.cs" />
+    <Compile Include="ViewModels\E10_IMViewModel.cs" />
+    <Compile Include="ViewModels\E10_TaskVM.cs" />
+    <Compile Include="ViewModels\EmailLoadListVM.cs" />
+    <Compile Include="ViewModels\EpicorStatusViewModel.cs" />
+    <Compile Include="ViewModels\IMViewModel.cs" />
+    <Compile Include="ViewModels\LoadListView.cs" />
+    <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
+    <Compile Include="ViewModels\NOWReportViewModel.cs" />
+    <Compile Include="ViewModels\PartSearchVM.cs" />
+    <Compile Include="ViewModels\QuoteOrderSearchVM.cs" />
+    <Compile Include="ViewModels\TaskVM.cs" />
+    <Compile Include="ViewModels\ValuedInventoryVM.cs" />
+    <Compile Include="ViewModels\WhereUsedBomVM.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Interim\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Reports\LoadList.rpt" />
+    <Content Include="Content\Reports\LoadListStatus.rpt" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

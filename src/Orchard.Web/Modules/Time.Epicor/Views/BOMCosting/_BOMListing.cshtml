@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Time.Epicor.Models.BOMInfo>
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                Part_Indented
+            </th>
+            <th>
+                Lev
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Qty Per
+            </th>
+            <th>
+                Factor
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Ext Mtl
+            </th>
+            <th>
+                Ext Sub
+            </th>
+            <th>
+                Ext Labor
+            </th>
+            <th>
+                Ext Burden
+            </th>
+            <th>
+                Ext Total
+            </th>
+            @*
+            <th>
+                On<br />
+                Hand
+            </th>
+            <th>
+                Alloc<br />
+                Qty
+            </th>
+            <th>
+                Unfirm<br />
+                AllQty
+            </th>*@
+        </tr>
+
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Part_Indented)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.QtyPer)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.Factor)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.PartType)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.ExtMaterialCost)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.ExtSubCost)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.ExtLaborCost)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.ExtBurCost)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.TotalExtendedCost)
+            </td>
+            @*
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.OnHandQty)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.AllocQty)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.UnfirmAllocQty)
+            </td>*@
+        </tr>
+        }
+    </table>
