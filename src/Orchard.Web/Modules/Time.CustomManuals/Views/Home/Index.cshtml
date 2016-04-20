@@ -1,12 +1,39 @@
-﻿
-@{
-    ViewBag.Title = "Custom Manual Maintenance";
+﻿@{
+    ViewBag.Title = "Custom Manual Index";
 }
 
 @Html.Partial("_CustomManualSideBar")
 
 <h2>@ViewBag.Title</h2>
-
-<h4>Under Construction</h4>
-
-
+<div class="col-lg-10">
+    <ul style="list-style-type:circle">
+        <li>
+            @Html.ActionLink("Edit Non-Print Entries", "Index", "NoPrints")
+        </li>
+        <li>
+            @Html.ActionLink("Edit Lift Entries", "Index", "Lifts")
+        </li>
+        <li>
+            @Html.ActionLink("Edit Lift Group Entries", "Index", "LiftGroups")
+        </li>
+        <li>
+            @Html.ActionLink("Edit Formatting Entries", "Index", "Formattings")
+        </li>
+        <li>
+            @Html.ActionLink("Edit Language Codes", "Index", "LanguageCodes")<br />
+            <h6>When adding in a new language, you MUST add the localized message for replacement parts.</h6>
+        </li>
+        <li>
+            @Html.ActionLink("Edit Local Message Entries", "Index", "LocalMessages")
+        </li>
+        <li>
+            @Html.ActionLink("Edit Option Packages", "Index", "LiftOptions")
+        </li>
+        <li>
+            @Html.ActionLink("Edit Setting Entries", "Index", "Settings")
+        </li>
+        <li>
+            @Html.ActionLink("View Log Entries", "Index")
+        </li>
+    </ul>
+</div>

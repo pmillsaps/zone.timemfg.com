@@ -1,0 +1,57 @@
+﻿@model Time.Data.EntityModels.CustomManuals.LiftOption
+
+@{
+    ViewBag.Title = "Lift Option Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Lift Option</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptionNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DistributorViewable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistributorViewable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

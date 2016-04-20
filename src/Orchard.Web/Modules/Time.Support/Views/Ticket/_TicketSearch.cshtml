@@ -1,0 +1,24 @@
+﻿<div class="form-group">
+    @using (Html.BeginForm("Search", "Ticket"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            Use # in front of a ticket number to find a ticket directly
+        </div>
+
+        <div class="row">
+            @*<div class="col-md-1">Search:</div>*@
+            <div class="col-md-9">@Html.TextBox("Search")</div>
+        </div>
+        <div class="row">
+            @*<div class="col-md-1">&nbsp;</div>*@
+            <div class="col-md-2">
+                <input type="submit" value="Search" />
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBox("IncludeComplete") Include Completed
+            </div>
+        </div>
+
+    }
+</div>

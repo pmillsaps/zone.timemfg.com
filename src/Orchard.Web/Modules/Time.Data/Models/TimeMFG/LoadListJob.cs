@@ -30,6 +30,7 @@ namespace Time.Data.EntityModels.TimeMFG
             {
                 var _rt = false;
                 var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "RT");
+                if (tmp == null) tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "MISC");
                 if (tmp != null) _rt = tmp.OpComplete == 1;
                 return _rt;
             }

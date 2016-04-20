@@ -168,6 +168,7 @@
     <Content Include="Views\Ticket\_TicketUpdate.cshtml" />
     <Content Include="Views\Ticket\Info.cshtml" />
     <Content Include="Views\Ticket\_TaskView.cshtml" />
+    <Content Include="Views\Ticket\_TicketSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -403,7 +404,7 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>

@@ -1,0 +1,26 @@
+﻿@model Time.Data.EntityModels.CustomManuals.Lift
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LiftGroup.Lift_Group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiftGroup.Lift_Group)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Lift_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

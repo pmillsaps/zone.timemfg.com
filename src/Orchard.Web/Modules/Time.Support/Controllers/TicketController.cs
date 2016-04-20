@@ -255,7 +255,9 @@ namespace Time.Support.Controllers
                 ticketProject.RequestedBy = user;
                 ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
 
-                if (ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
+                var groups = ADHelper.GetGroupNames(user);
+
+                if (groups != null && groups.Contains("SupportTicketApprover"))
                 {
                     ticketProject.Status = 2;
                 }
@@ -511,6 +513,14 @@ namespace Time.Support.Controllers
         //{
         //    return RedirectToAction("Info", new { id = ticketProject.Ticket.TicketID });
         //}
+
+        public ActionResult All()
+        {
+            var login = HttpContext.User.Identity.Name.ToUpper();
+            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && (x.TicketEmployee.NTLogin.ToUpper() == login || x.TicketEmployee1.NTLogin.ToUpper() == login));
+            ViewBag.Title = "All My Tickets";
+            return View("Index", tickets);
+        }
 
         public ActionResult MyStatus(int id)
         {
