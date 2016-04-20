@@ -5,9 +5,13 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<div class="row">
+
+<div>
     @Html.ActionLink("Create New", "Create")
 </div>
+
+<hr />
+
 <div class="row">
     @using (Html.BeginForm())
     {
@@ -26,11 +30,15 @@
         </div>
     }
 </div>
-<div class="row">
+
+<div>
     Search includes: User Name, Computer Name, Model, OS, Device Type, Serial Number, Status
 </div>
+
+<hr />
+
 <table class="table table-striped table-bordered table-condensed">
-    <tr>
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -110,7 +118,8 @@
                 @if (item.UserId != null && item.UserId != 0)
                 {
                     @*@Html.DisplayFor(modelItem => item.LastDateEdited.Value.ToShortDateString())*@
-                    @item.User.Name
+                    @*@item.User.Name*@
+                    @Html.ActionLink(item.User.Name, "Details", "Users", new { id = item.UserId }, null)
                 }
             </td>
 
