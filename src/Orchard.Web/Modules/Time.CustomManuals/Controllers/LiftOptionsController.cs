@@ -87,10 +87,13 @@ namespace Time.CustomManuals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,OptionNo,Title,ShortTitle,Active,DistributorViewable")] LiftOption liftOption)
+        public ActionResult Create([Bind(Exclude = "Id")] LiftOption liftOption)
         {
             //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
             //    return new HttpUnauthorizedResult();
+
+            var dupeCheck = db.LiftOptions.FirstOrDefault(x => x.OptionNo == liftOption.OptionNo);
+            if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Lift Options are not Allowed...");
 
             if (ModelState.IsValid)
             {
