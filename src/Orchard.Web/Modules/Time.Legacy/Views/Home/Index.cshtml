@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -107,107 +107,108 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendor2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendor3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorPartNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdditionalDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdditionalDescription2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AggrBuyoutCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AggrLaborCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentMaterialCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateLastOrdered)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateLastRecieved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateLastSold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DrawingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DrawingRevision)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DrawingSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncrBuyoutCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncrLaborCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncrLastPurchaseCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LiftRequired)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LiftRequired2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LiftRequired3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ListPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PartType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PartsExpediteFlag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phantom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice5)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice6)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PartNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PartNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PartNumber })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorPartNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalDescription2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggrBuyoutCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggrLaborCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentMaterialCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateLastOrdered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateLastRecieved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateLastSold)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrawingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrawingRevision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrawingSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncrBuyoutCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncrLaborCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncrLastPurchaseCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftRequired2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftRequired3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartsExpediteFlag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phantom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice5)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice6)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PartNumber }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PartNumber }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PartNumber })
+            </td>
+        </tr>
+    }
 
 </table>
