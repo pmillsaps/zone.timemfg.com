@@ -70,7 +70,130 @@ namespace Time.CustomManuals.Controllers
             {
                 return HttpNotFound();
             }
+
+            //pulls in data for option parts
+            var optionParts = db.OptionParts.Where(x => x.LiftOptionId == liftOption.Id).OrderBy(x => x.Sequence);
+            ViewBag.OptionParts = optionParts;
+            ViewBag.OptionId = id;
             return View(liftOption);
+        }
+
+        // GET: LiftOptions/Create_Part
+        public ActionResult Create_Part(int id)
+        {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
+            int nextSequence = 10;
+            var part = db.OptionParts.OrderByDescending(x => x.Sequence).FirstOrDefault(x => x.LiftOptionId == id);
+            if (part != null)
+            {
+                nextSequence = ++part.Sequence;
+            }
+
+            OptionPart newItem = new OptionPart
+            {
+                LiftOptionId = id,
+                Sequence = nextSequence
+            };
+
+            ViewBag.LiftOptionId = id;
+            return View(newItem);
+        }
+
+        // POST: LiftOptions/Create_Part
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create_Part([Bind(Include = "Id,LiftOptionId,Part,Sequence")] OptionPart optionPart)
+        {
+            //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
+            //    return new HttpUnauthorizedResult();
+
+            if (db.OptionParts.FirstOrDefault(x => x.LiftOptionId == optionPart.LiftOptionId && x.Part == optionPart.Part) != null)
+                ModelState.AddModelError("Part", "Duplicate Parts are not allowed...");
+
+            if (db.OptionParts.FirstOrDefault(x => x.LiftOptionId == optionPart.LiftOptionId && x.Sequence == optionPart.Sequence) != null)
+                ModelState.AddModelError("Sequence", "Duplicate Sequence Numbers are not allowed...");
+
+            if (String.IsNullOrEmpty(optionPart.Part)) ModelState.AddModelError("Part", "Empty Parts are not allowed...");
+
+            if (ModelState.IsValid)
+            {
+                db.OptionParts.Add(optionPart);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = optionPart.LiftOptionId });
+            }
+
+            ViewBag.LiftOptionId = optionPart.LiftOptionId;
+            return View(optionPart);
+        }
+
+        // GET: LiftOptions/Edit_Part
+        public ActionResult Edit_Part(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OptionPart optionPart = db.OptionParts.Find(id);
+            if (optionPart == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.LiftOptionId = optionPart.LiftOptionId;
+            return View(optionPart);
+        }
+
+        // POST: LiftOptions/Edit_Part
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit_PArt([Bind(Include = "Id,LiftOptionId,Part,Sequence")] OptionPart optionPart)
+        {
+            if (db.OptionParts.FirstOrDefault(x => x.LiftOptionId == optionPart.LiftOptionId && x.Part == optionPart.Part && x.Id != optionPart.Id) != null)
+                ModelState.AddModelError("Part", "Duplicate Parts are not allowed...");
+
+            if (db.OptionParts.FirstOrDefault(x => x.LiftOptionId == optionPart.LiftOptionId && x.Sequence == optionPart.Sequence && x.Id != optionPart.Id) != null)
+                ModelState.AddModelError("Sequence", "Duplicate Sequence Numbers are not allowed...");
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(optionPart).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = optionPart.LiftOptionId });
+            }
+            ViewBag.LiftOptionId = optionPart.LiftOptionId;
+            return View(optionPart);
+        }
+
+        // GET: LiftOptions/Delete_Part
+        public ActionResult Delete_Part(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OptionPart optionPart = db.OptionParts.Find(id);
+            if (optionPart == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.LiftOptionId = optionPart.LiftOptionId;
+            return View(optionPart);
+        }
+
+        // POST: TMP_OptionParts/Delete/5
+        [HttpPost, ActionName("Delete_Part")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePartConfirmed(int id)
+        {
+            OptionPart optionPart = db.OptionParts.Find(id);
+            db.OptionParts.Remove(optionPart);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = optionPart.LiftOptionId });
         }
 
         // GET: LiftOptions/Create
