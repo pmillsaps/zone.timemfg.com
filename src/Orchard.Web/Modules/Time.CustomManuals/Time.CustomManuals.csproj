@@ -162,6 +162,9 @@
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\LiftGroups\DeleteNotAllowed.cshtml" />
     <Content Include="Views\LiftGroups\FormattingCopy.cshtml" />
+    <Content Include="Views\LiftOptions\Create_Part.cshtml" />
+    <Content Include="Views\LiftOptions\Edit_Part.cshtml" />
+    <Content Include="Views\LiftOptions\Delete_Part.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
