@@ -1,0 +1,32 @@
+﻿@model Time.Epicor.ViewModels.MoveLoadListJobVM
+
+@{
+    ViewBag.Title = "Move Load List Job";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+</ul>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.HiddenFor(model => model.LoadListJobId)
+    @Html.HiddenFor(model => model.JobNumber)
+    @Html.HiddenFor(model => model.OriginalLLId)
+    <div class="row"    >
+        <div class="col-md-4">
+            @Html.DropDownList("LoadList", (IEnumerable<SelectListItem>)Model.LoadLists, "-- Select Load List --")
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Move Job" class="btn btn-default" />
+        </div>
+    </div>
+}

@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CustomManualsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Formatting">
+          <Key>
+            <PropertyRef Name="Formatting_ID" />
+          </Key>
+          <Property Name="Formatting_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lift_Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="Section" Type="nvarchar" MaxLength="50" />
+          <Property Name="PullsFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmptyPageL" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmptyPageR" Type="nvarchar" MaxLength="255" />
+          <Property Name="BlankPage" Type="nvarchar" MaxLength="255" />
+          <Property Name="SectionStarts" Type="int" />
+          <Property Name="PageNumbers" Type="bit" Nullable="false" />
+          <Property Name="BlankPageMsg" Type="bit" Nullable="false" />
+          <Property Name="CheckFacings" Type="bit" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguageCode">
+          <Key>
+            <PropertyRef Name="Language_ID" />
+          </Key>
+          <Property Name="Language_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Language_Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiftGroup">
+          <Key>
+            <PropertyRef Name="Lift_Group" />
+          </Key>
+          <Property Name="Lift_Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiftOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OptionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="ShortTitle" Type="nvarchar" MaxLength="75" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DistributorViewable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lifts">
+          <Key>
+            <PropertyRef Name="Lift_ID" />
+          </Key>
+          <Property Name="Lift_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lift_Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocalMessages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MessageText" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NoPrint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Part" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OptionPart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftOptionId" Type="int" Nullable="false" />
+          <Property Name="Part" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProblemJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EnteredDate" Type="datetime" Nullable="false" />
+          <Property Name="EntryPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Problem" Type="nvarchar(max)" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Language_Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequiredDate" Type="datetime" Nullable="false" />
+          <Property Name="LastCheckedDate" Type="datetime" />
+          <Property Name="LastCheckedPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastCheckedMessage" Type="nvarchar(max)" />
+          <Property Name="JobCleared" Type="bit" Nullable="false" />
+          <Property Name="JobClearedDate" Type="datetime" />
+          <Property Name="JobClearedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ManuallyCleared" Type="bit" />
+          <Property Name="ManuallyClearedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ManuallyClearedNote" Type="nvarchar(max)" />
+          <Property Name="AutomaticEntryReason" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Settings_ID" />
+          </Key>
+          <Property Name="Settings_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Setting" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Required" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Formatting_LiftGroup">
+          <End Role="LiftGroup" Type="Self.LiftGroup" Multiplicity="1" />
+          <End Role="Formatting" Type="Self.Formatting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftGroup">
+              <PropertyRef Name="Lift_Group" />
+            </Principal>
+            <Dependent Role="Formatting">
+              <PropertyRef Name="Lift_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lifts_LiftGroup">
+          <End Role="LiftGroup" Type="Self.LiftGroup" Multiplicity="1" />
+          <End Role="Lifts" Type="Self.Lifts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftGroup">
+              <PropertyRef Name="Lift_Group" />
+            </Principal>
+            <Dependent Role="Lifts">
+              <PropertyRef Name="Lift_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_LanguageCode">
+          <End Role="LanguageCode" Type="Self.LanguageCode" Multiplicity="1" />
+          <End Role="LocalMessages" Type="Self.LocalMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageCode">
+              <PropertyRef Name="Language_ID" />
+            </Principal>
+            <Dependent Role="LocalMessages">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OptionPart_LiftOption">
+          <End Role="LiftOption" Type="Self.LiftOption" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OptionPart" Type="Self.OptionPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionPart">
+              <PropertyRef Name="LiftOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CustomManualsModelStoreContainer">
+          <EntitySet Name="Formatting" EntityType="Self.Formatting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageCode" EntityType="Self.LanguageCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiftGroup" EntityType="Self.LiftGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiftOption" EntityType="Self.LiftOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lifts" EntityType="Self.Lifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocalMessages" EntityType="Self.LocalMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoPrint" EntityType="Self.NoPrint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionPart" EntityType="Self.OptionPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProblemJob" EntityType="Self.ProblemJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Formatting_LiftGroup" Association="Self.FK_Formatting_LiftGroup">
+            <End Role="LiftGroup" EntitySet="LiftGroup" />
+            <End Role="Formatting" EntitySet="Formatting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lifts_LiftGroup" Association="Self.FK_Lifts_LiftGroup">
+            <End Role="LiftGroup" EntitySet="LiftGroup" />
+            <End Role="Lifts" EntitySet="Lifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_LanguageCode" Association="Self.FK_Messages_LanguageCode">
+            <End Role="LanguageCode" EntitySet="LanguageCode" />
+            <End Role="LocalMessages" EntitySet="LocalMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OptionPart_LiftOption" Association="Self.FK_OptionPart_LiftOption">
+            <End Role="LiftOption" EntitySet="LiftOption" />
+            <End Role="OptionPart" EntitySet="OptionPart" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CustomManualsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Formatting">
+          <Key>
+            <PropertyRef Name="Formatting_ID" />
+          </Key>
+          <Property Name="Formatting_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lift_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PullsFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmptyPageL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmptyPageR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BlankPage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SectionStarts" Type="Int32" />
+          <Property Name="PageNumbers" Type="Boolean" Nullable="false" />
+          <Property Name="BlankPageMsg" Type="Boolean" Nullable="false" />
+          <Property Name="CheckFacings" Type="Boolean" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LiftGroup" Relationship="Self.FK_Formatting_LiftGroup" FromRole="Formatting" ToRole="LiftGroup" />
+        </EntityType>
+        <EntityType Name="LanguageCode">
+          <Key>
+            <PropertyRef Name="Language_ID" />
+          </Key>
+          <Property Name="Language_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LocalMessages" Relationship="Self.FK_Messages_LanguageCode" FromRole="LanguageCode" ToRole="LocalMessages" />
+        </EntityType>
+        <EntityType Name="LiftGroup">
+          <Key>
+            <PropertyRef Name="Lift_Group" />
+          </Key>
+          <Property Name="Lift_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Formattings" Relationship="Self.FK_Formatting_LiftGroup" FromRole="LiftGroup" ToRole="Formatting" />
+          <NavigationProperty Name="Lifts" Relationship="Self.FK_Lifts_LiftGroup" FromRole="LiftGroup" ToRole="Lifts" />
+        </EntityType>
+        <EntityType Name="LiftOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OptionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ShortTitle" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DistributorViewable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OptionParts" Relationship="Self.FK_OptionPart_LiftOption" FromRole="LiftOption" ToRole="OptionPart" />
+        </EntityType>
+        <EntityType Name="Lift">
+          <Key>
+            <PropertyRef Name="Lift_ID" />
+          </Key>
+          <Property Name="Lift_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lift_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LiftGroup" Relationship="Self.FK_Lifts_LiftGroup" FromRole="Lifts" ToRole="LiftGroup" />
+        </EntityType>
+        <EntityType Name="LocalMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LanguageCode" Relationship="Self.FK_Messages_LanguageCode" FromRole="LocalMessages" ToRole="LanguageCode" />
+        </EntityType>
+        <EntityType Name="NoPrint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OptionPart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftOptionId" Type="Int32" Nullable="false" />
+          <Property Name="Part" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LiftOption" Relationship="Self.FK_OptionPart_LiftOption" FromRole="OptionPart" ToRole="LiftOption" />
+        </EntityType>
+        <EntityType Name="ProblemJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EntryPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Problem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Language_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequiredDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastCheckedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastCheckedPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastCheckedMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobCleared" Type="Boolean" Nullable="false" />
+          <Property Name="JobClearedDate" Type="DateTime" Precision="3" />
+          <Property Name="JobClearedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManuallyCleared" Type="Boolean" />
+          <Property Name="ManuallyClearedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManuallyClearedNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AutomaticEntryReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Settings_ID" />
+          </Key>
+          <Property Name="Settings_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Setting1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Required" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Formatting_LiftGroup">
+          <End Role="LiftGroup" Type="Self.LiftGroup" Multiplicity="1" />
+          <End Role="Formatting" Type="Self.Formatting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftGroup">
+              <PropertyRef Name="Lift_Group" />
+            </Principal>
+            <Dependent Role="Formatting">
+              <PropertyRef Name="Lift_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_LanguageCode">
+          <End Role="LanguageCode" Type="Self.LanguageCode" Multiplicity="1" />
+          <End Role="LocalMessages" Type="Self.LocalMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LanguageCode">
+              <PropertyRef Name="Language_ID" />
+            </Principal>
+            <Dependent Role="LocalMessages">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lifts_LiftGroup">
+          <End Role="LiftGroup" Type="Self.LiftGroup" Multiplicity="1" />
+          <End Role="Lifts" Type="Self.Lift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftGroup">
+              <PropertyRef Name="Lift_Group" />
+            </Principal>
+            <Dependent Role="Lifts">
+              <PropertyRef Name="Lift_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OptionPart_LiftOption">
+          <End Role="LiftOption" Type="Self.LiftOption" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OptionPart" Type="Self.OptionPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionPart">
+              <PropertyRef Name="LiftOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CustomManualsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Formattings" EntityType="Self.Formatting" />
+          <EntitySet Name="LanguageCodes" EntityType="Self.LanguageCode" />
+          <EntitySet Name="LiftGroups" EntityType="Self.LiftGroup" />
+          <EntitySet Name="LiftOptions" EntityType="Self.LiftOption" />
+          <EntitySet Name="Lifts" EntityType="Self.Lift" />
+          <EntitySet Name="LocalMessages" EntityType="Self.LocalMessage" />
+          <EntitySet Name="NoPrints" EntityType="Self.NoPrint" />
+          <EntitySet Name="OptionParts" EntityType="Self.OptionPart" />
+          <EntitySet Name="ProblemJobs" EntityType="Self.ProblemJob" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <AssociationSet Name="FK_Formatting_LiftGroup" Association="Self.FK_Formatting_LiftGroup">
+            <End Role="LiftGroup" EntitySet="LiftGroups" />
+            <End Role="Formatting" EntitySet="Formattings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_LanguageCode" Association="Self.FK_Messages_LanguageCode">
+            <End Role="LanguageCode" EntitySet="LanguageCodes" />
+            <End Role="LocalMessages" EntitySet="LocalMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lifts_LiftGroup" Association="Self.FK_Lifts_LiftGroup">
+            <End Role="LiftGroup" EntitySet="LiftGroups" />
+            <End Role="Lifts" EntitySet="Lifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OptionPart_LiftOption" Association="Self.FK_OptionPart_LiftOption">
+            <End Role="LiftOption" EntitySet="LiftOptions" />
+            <End Role="OptionPart" EntitySet="OptionParts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CustomManualsModelStoreContainer" CdmEntityContainer="CustomManualsEntities">
+          <EntitySetMapping Name="Formattings">
+            <EntityTypeMapping TypeName="CustomManualsModel.Formatting">
+              <MappingFragment StoreEntitySet="Formatting">
+                <ScalarProperty Name="Formatting_ID" ColumnName="Formatting_ID" />
+                <ScalarProperty Name="Lift_Group" ColumnName="Lift_Group" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="PullsFrom" ColumnName="PullsFrom" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="EmptyPageL" ColumnName="EmptyPageL" />
+                <ScalarProperty Name="EmptyPageR" ColumnName="EmptyPageR" />
+                <ScalarProperty Name="BlankPage" ColumnName="BlankPage" />
+                <ScalarProperty Name="SectionStarts" ColumnName="SectionStarts" />
+                <ScalarProperty Name="PageNumbers" ColumnName="PageNumbers" />
+                <ScalarProperty Name="BlankPageMsg" ColumnName="BlankPageMsg" />
+                <ScalarProperty Name="CheckFacings" ColumnName="CheckFacings" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageCodes">
+            <EntityTypeMapping TypeName="CustomManualsModel.LanguageCode">
+              <MappingFragment StoreEntitySet="LanguageCode">
+                <ScalarProperty Name="Language_ID" ColumnName="Language_ID" />
+                <ScalarProperty Name="Language_Code" ColumnName="Language_Code" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiftGroups">
+            <EntityTypeMapping TypeName="CustomManualsModel.LiftGroup">
+              <MappingFragment StoreEntitySet="LiftGroup">
+                <ScalarProperty Name="Lift_Group" ColumnName="Lift_Group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiftOptions">
+            <EntityTypeMapping TypeName="CustomManualsModel.LiftOption">
+              <MappingFragment StoreEntitySet="LiftOption">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OptionNo" ColumnName="OptionNo" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DistributorViewable" ColumnName="DistributorViewable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lifts">
+            <EntityTypeMapping TypeName="CustomManualsModel.Lift">
+              <MappingFragment StoreEntitySet="Lifts">
+                <ScalarProperty Name="Lift_ID" ColumnName="Lift_ID" />
+                <ScalarProperty Name="Lift_Group" ColumnName="Lift_Group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocalMessages">
+            <EntityTypeMapping TypeName="CustomManualsModel.LocalMessage">
+              <MappingFragment StoreEntitySet="LocalMessages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoPrints">
+            <EntityTypeMapping TypeName="CustomManualsModel.NoPrint">
+              <MappingFragment StoreEntitySet="NoPrint">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionParts">
+            <EntityTypeMapping TypeName="CustomManualsModel.OptionPart">
+              <MappingFragment StoreEntitySet="OptionPart">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LiftOptionId" ColumnName="LiftOptionId" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProblemJobs">
+            <EntityTypeMapping TypeName="CustomManualsModel.ProblemJob">
+              <MappingFragment StoreEntitySet="ProblemJob">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Language_Code" ColumnName="Language_Code" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="LastCheckedDate" ColumnName="LastCheckedDate" />
+                <ScalarProperty Name="LastCheckedPerson" ColumnName="LastCheckedPerson" />
+                <ScalarProperty Name="LastCheckedMessage" ColumnName="LastCheckedMessage" />
+                <ScalarProperty Name="JobCleared" ColumnName="JobCleared" />
+                <ScalarProperty Name="JobClearedDate" ColumnName="JobClearedDate" />
+                <ScalarProperty Name="JobClearedBy" ColumnName="JobClearedBy" />
+                <ScalarProperty Name="ManuallyCleared" ColumnName="ManuallyCleared" />
+                <ScalarProperty Name="ManuallyClearedBy" ColumnName="ManuallyClearedBy" />
+                <ScalarProperty Name="ManuallyClearedNote" ColumnName="ManuallyClearedNote" />
+                <ScalarProperty Name="AutomaticEntryReason" ColumnName="AutomaticEntryReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="CustomManualsModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Settings_ID" ColumnName="Settings_ID" />
+                <ScalarProperty Name="Setting1" ColumnName="Setting" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

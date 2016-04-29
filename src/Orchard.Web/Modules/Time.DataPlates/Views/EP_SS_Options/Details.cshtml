@@ -1,0 +1,33 @@
+﻿@model Time.Data.EntityModels.DataPlates.EP_SS_Options
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EP_SS_Options</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Option)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Voltage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voltage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Option }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,68 @@
+﻿@model Time.Data.EntityModels.CustomManuals.ProblemJob
+@*@using Time.Data.Helpers*@
+
+<div class="row col-md-10">
+    <div class="col-md-2">
+        @Html.ActionLink(Model.SerialNumber, "Details", new { id = Model.Id })
+    </div>
+    <div class="col-md-3">
+        @Model.JobNumber
+    </div>
+    <div class="col-md-2">
+        @Model.RequiredDate.ToShortDateString()
+    </div>
+    <div class="col-md-5">
+        @Model.AutomaticEntryReason
+    </div>
+</div>
+
+<div class="row col-md-12">
+    @Html.DisplayWithBreaksFor(model => model.LastCheckedMessage)
+</div>
+<div class="row col-md-12">
+    <hr />
+</div>
+
+@*<div class="row">
+        <div class="col-md-5">
+            Ticket #: @Model.TicketID
+        </div>
+        <div class="col-md-push-5">
+            Status: @Model.TicketStatus.Name
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            Priority #: @Model.TicketPriority.Name
+        </div>
+        <div class="col-md-push-5">
+            @if (Model.TicketEmployee != null)
+            {
+                @:Assigned To: @Model.TicketEmployee.FullName
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            Category: @Model.TicketCategory.Name
+        </div>
+        <div class="col-md-push-5">
+            Dept: @Model.TicketDepartment.Name
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="container">
+            <div class="col-md-8">
+                @Html.DisplayWithBreaksFor(model => model.Description)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <i>Requested By: @Html.DisplayFor(model => model.RequestedBy)</i>
+        </div>
+        <div class="col-md-push-5">
+            <i>Request Date: @Model.RequestedDate.Value.ToShortDateString()</i>
+        </div>
+    </div>*@
