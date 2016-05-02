@@ -38,6 +38,9 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType SendTicketReminders { get { return new MessageType("SendTicketReminders"); } }
         public static MessageType TicketsNotApprovedTimer { get { return new MessageType("TicketsNotApprovedTimer"); } }
         public static MessageType TicketNotification { get { return new MessageType("TicketNotification"); } }
+        public static MessageType UpdatePartsDWG { get { return new MessageType("UpdatePartsDWG"); } }
+        public static MessageType UpdatePartsPDF { get { return new MessageType("UpdatePartsPDF"); } }
+        public static MessageType UpdateSerialsInEpicor10 { get { return new MessageType("UpdateSerialsInEpicor10"); } }
         public static MessageType WOL { get { return new MessageType("WOL"); } }
     }
 }
