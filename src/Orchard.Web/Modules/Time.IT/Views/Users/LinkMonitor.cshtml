@@ -1,10 +1,10 @@
 ﻿@model Time.IT.ViewModel.LinkMonitorViewModel
 
 @{
-    ViewBag.Title = "LinkMonitor";
+    ViewBag.Title = "Link Monitor";
 }
 
-<h2>LinkMonitor</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -12,7 +12,7 @@
     
     <div class="form-horizontal">
         @Html.HiddenFor(model => model.UserId)
-        <h4>LinkMonitorViewModel</h4>
+        <h4>Link Monitor View Model</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>

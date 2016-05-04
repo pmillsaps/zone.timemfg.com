@@ -1,12 +1,12 @@
 ﻿@model Time.Data.EntityModels.DataPlates.LiftData
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Lift + " Details";
 }
 
 <link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
     <h4>LiftData</h4>
