@@ -1,0 +1,91 @@
+﻿@model Time.Data.EntityModels.CustomManuals.LiftOption
+
+@{
+    ViewBag.Title = "Lift Option Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Lift Option</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptionNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DistributorViewable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistributorViewable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<hr />
+
+@Html.ActionLink("Add New Option Part", "Create_Part", new { id = ViewBag.OptionID })
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            Part
+        </th>
+        <th>
+            Sequence
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.OptionParts as IEnumerable<Time.Data.EntityModels.CustomManuals.OptionPart>)
+    {
+        <tr>
+            <td>
+                @item.Part
+            </td>
+            <td>
+                @item.Sequence
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit_Part", new { id = @item.Id }) |
+                @Html.ActionLink("Delete", "Delete_Part", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,63 @@
+﻿@model Time.Legacy.EntityModels.Legacy.SerNoMemo
+
+@{
+    ViewBag.Title = "Edit Memo " + Model.Id;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SerNoMemo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SerialNumber)
+                @Html.HiddenFor(model => model.SerialNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MemoDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MemoDate)
+                @Html.HiddenFor(model => model.MemoDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EnteredBy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EnteredBy)
+                @Html.HiddenFor(model => model.EnteredBy)
+            </dd>
+        </dl>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Memo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Memo, new { htmlAttributes = new { @class = "form-control", @rows = 7 } })
+                @Html.ValidationMessageFor(model => model.Memo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<p>
+    <a href="javascript:history.back()">Back to Details</a>
+</p>

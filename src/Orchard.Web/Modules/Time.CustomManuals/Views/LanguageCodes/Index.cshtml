@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Time.Data.EntityModels.CustomManuals.LanguageCode>
+
+@{
+    ViewBag.Title = "Custom Manual Language Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>
+
+<p>
+    To add a new Language, be sure to look up the proper 2 character language code at <a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO Codes</a><br />
+    Use the code from the '639-1' column.  The folder name has to match the language code also.<br />
+    When adding in a new language, you MUST add the localized message for replacement parts.
+</p>
+
+<p>
+    @Html.ActionLink("Add New Language", "Create")
+</p>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Language_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language_Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Language_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Language_ID })
+            </td>
+        </tr>
+    }
+</table>

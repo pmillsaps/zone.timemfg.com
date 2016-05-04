@@ -1,0 +1,105 @@
+﻿@model Time.Epicor.ViewModels.EmailLoadListVM
+
+@{
+    ViewBag.Title = "Email Load List";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+    <li>@Html.ActionLink("Back to the LoadList", "Details", "LoadList", new { id = Model.LoadListId }, new { @class = "btn btn-primary" })</li>
+</ul>
+<hr />
+
+@using (Html.BeginForm("EmailLoadList", "LoadList", new { id = Model.LoadListId }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.LoadListId)
+
+    <div class="row">
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Comments)
+        </div>
+        <div class="col-md-11">
+            @Html.TextAreaFor(model => model.Comments, new { @rows = 3 })
+        </div>
+    </div>
+    <hr />
+    <div id="data">
+        @{Html.RenderAction("_EmailList");}
+    </div>
+    <div>
+        <input type="submit" value="Email this Load List to selected Emails" class="btn btn-primary" />
+    </div>
+
+    <br /><br />
+    <div>
+        <h4>@Html.DisplayFor(model => model.LoadList.Name)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.DateSchedShip)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.TruckingCompany)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.TruckingCompany)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Comments)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Comments)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Complete)
+            </dt>
+            @if (Model.LoadList.Complete == 0)
+            {
+                <dd>
+                    @Html.CheckBox("Complete", new { @disabled = "disabled" })
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.CheckBox("Complete", true, new { @disabled = "disabled" })
+                </dd>
+            }
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Distributors)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Distributors)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LoadList.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LoadList.MakeReady)
+            </dt>
+            @if (Model.LoadList.MakeReady == 0)
+            {
+                <dd>
+                    @Html.CheckBox("MakeReady", new { @disabled = "disabled" })
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.CheckBox("MakeReady", true, new { @disabled = "disabled" })
+                </dd>
+            }
+        </dl>
+    </div>
+}
+<hr />
+@Html.Partial("_ViewLifts", Model.LoadList.LoadListJobs)

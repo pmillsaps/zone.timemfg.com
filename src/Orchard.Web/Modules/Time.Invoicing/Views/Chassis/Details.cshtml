@@ -1,0 +1,61 @@
+﻿@model Time.Invoicing.EntityModels.PcInvoice.Chassis
+@{
+    ViewBag.Title = "Details";
+}
+<h2>
+    Details</h2>
+<fieldset>
+    <legend>Chassis</legend>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ModelYearId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModelYearLookup.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ChassisModel.ChassisMake)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChassisModel.ChassisMake.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ChassisModel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChassisModel.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Transmission)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Transmission.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CALookup)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CALookup.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.GVWLookup)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GVWLookup.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FullName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullName)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Inactive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Inactive)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

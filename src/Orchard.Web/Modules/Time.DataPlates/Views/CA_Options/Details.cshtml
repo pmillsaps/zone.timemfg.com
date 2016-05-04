@@ -1,0 +1,50 @@
+﻿@model Time.Data.EntityModels.DataPlates.CA_Options
+
+@{
+    ViewBag.Title = "CA Options Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>CA_Options</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Option)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Option)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cap_LBS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cap_LBS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cap_KG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cap_KG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NonPlatformCap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NonPlatformCap)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Option }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
