@@ -87,7 +87,7 @@ else
         {
             <tr>
                 <td>
-                    <input type="checkbox" name="selectedLines" value="@item.Id" />
+                    <input type="checkbox" name="selectedLines" value="@item.Id" id="selectCheck"/>
                     @*<input type="checkbox" checked="yes" name="selectedLines" value="@item.jobnum" />*@
                 </td>
                 <td>
@@ -169,7 +169,7 @@ else
 {
     <script type="text/javascript">
         $('#checkAllSelected').change(function () {
-            var checkboxes = $(this).closest('form').find(':checkbox');
+            var checkboxes = $(this).closest('form').find('input[id*=selectCheck][type=checkbox]');
             if ($(this).is(':checked')) {
                 checkboxes.prop('checked', true);
             } else {

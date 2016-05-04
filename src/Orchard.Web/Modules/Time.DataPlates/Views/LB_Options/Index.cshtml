@@ -14,20 +14,20 @@
 <p>
     @Html.ActionLink("Create New  LB Option", "Create")
 </p>
-
+<hr />
 @using (Html.BeginForm("Index", "LB_Options", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-1">@Html.Label("Search By Option:")</div>
+        <div class="col-md-2">@Html.Label("Search By Option:")</div>
         <div class="col-md-4">@Html.TextBox("search")</div>
         <div class="col-md-4">
-            <input type="submit" value="Search" class="btn btn-default" />
+            <input type="submit" value="Search" class="btn btn-primary" />
         </div>
     </div>
 }
-<br />
+<hr />
 <table class="table table-striped table-bordered table-condensed">
-    <tr>
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.Option)
         </th>
