@@ -94,6 +94,7 @@
 	padding: .5em .5em .5em .7em;
 	min-height: 0; /* support: IE7 */
 	font-size: 100%;
+    background-color: #DFF0D8;
 }
 .ui-accordion .ui-accordion-icons {
 	padding-left: 2.2em;
