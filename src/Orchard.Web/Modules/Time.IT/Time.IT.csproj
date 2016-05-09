@@ -287,6 +287,7 @@
     <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\ScheduledTasksController.cs" />
     <Compile Include="Controllers\SchedulesController.cs" />
+    <Compile Include="Controllers\ServersController.cs" />
     <Compile Include="Controllers\SoundController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="ViewModel\LinkComputerViewModel.cs" />
     <Compile Include="ViewModel\LinkMonitorViewModel.cs" />
     <Compile Include="ViewModel\ProcessViewModel.cs" />
+    <Compile Include="ViewModel\ServerStatusViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
@@ -309,6 +311,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\IT\Index.cshtml" />
+    <Content Include="Views\Servers\Index.cshtml" />
+    <Content Include="Views\Servers\_PingResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Time.Data\Time.Data.csproj">
