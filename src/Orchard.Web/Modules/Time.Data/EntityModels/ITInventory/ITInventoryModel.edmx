@@ -73,6 +73,7 @@
           <Property Name="PurchasedFrom" Type="nvarchar" MaxLength="50" />
           <Property Name="PO" Type="nvarchar" MaxLength="50" />
           <Property Name="Cost" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Ref_Building">
           <Key>
@@ -255,16 +256,6 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="LicenseId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ITInventory.dbo.v_SwitchPort_Cable_NIC' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="v_SwitchPort_Cable_NIC">
-          <Property Name="MAC" Type="nvarchar" MaxLength="50" />
-          <Property Name="IP" Type="nvarchar" MaxLength="50" />
-          <Property Name="SpeedId" Type="int" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="SwitchPort" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="20" />
-        </EntityType>-->
         <Association Name="FK__Model_Manufacturer">
           <End Role="Ref_Manufacturer" Type="Self.Ref_Manufacturer" Multiplicity="0..1" />
           <End Role="Ref_Model" Type="Self.Ref_Model" Multiplicity="*" />
@@ -891,6 +882,7 @@ warning 6013: The table/view 'ITInventory.dbo.v_SwitchPort_Cable_NIC' does not h
           <NavigationProperty Name="Ref_Manufacturer" Relationship="ITInventoryModel.FK_Monitor_Manufacturer" FromRole="Monitor" ToRole="Ref_Manufacturer" />
           <NavigationProperty Name="Ref_MonitorSizes" Relationship="ITInventoryModel.FK_Monitor_Ref_MonitorSizes" FromRole="Monitor" ToRole="Ref_MonitorSizes" />
           <NavigationProperty Name="User" Relationship="ITInventoryModel.FK_Monitor_User" FromRole="Monitor" ToRole="User" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Ref_Building">
           <Key>
@@ -1409,6 +1401,7 @@ warning 6013: The table/view 'ITInventory.dbo.v_SwitchPort_Cable_NIC' does not h
           <EntitySetMapping Name="Monitors">
             <EntityTypeMapping TypeName="ITInventoryModel.Monitor">
               <MappingFragment StoreEntitySet="Monitor">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="PO" ColumnName="PO" />
                 <ScalarProperty Name="PurchasedFrom" ColumnName="PurchasedFrom" />
