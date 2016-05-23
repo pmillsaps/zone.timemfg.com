@@ -1,0 +1,87 @@
+﻿@model Time.OrderLog.Models.ReportViewModel
+
+@{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    ViewBag.Title = "Territory Summary Report";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DealerId, "Dealer", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DealerId", "-- Select Dealer --")
+                @Html.ValidationMessageFor(model => model.DealerId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TerritoryId, "Territory", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TerritoryId", "-- Select Territory --")
+                @Html.ValidationMessageFor(model => model.TerritoryId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegionId, "Region", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RegionId", "-- Select Region --")
+                @Html.ValidationMessageFor(model => model.RegionId)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="View Report" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        $("#StartDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+        $("#EndDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+
+    </script>
+}

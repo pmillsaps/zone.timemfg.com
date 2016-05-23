@@ -1,0 +1,30 @@
+﻿@model Time.Epicor.ViewModels.IMViewModel
+
+@{
+    ViewBag.Title = "Check Interim Tables - Must be Empty to Reboot";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<strong>Job Operation Table:</strong>
+@if (Model.ImJobOper.Count > 0)
+{
+    @Html.Partial("_imjoboper", Model.ImJobOper)
+
+}
+else
+{
+    <br />
+    @:Job Operation Table is Empty!!!
+}
+<br /><br /><br />
+<strong>Part Bin Table:</strong>
+@if (Model.ImPartBin.Count > 0)
+{
+    @Html.Partial("_impartbin", Model.ImPartBin)
+}
+else
+{
+    <br />
+    @:Part Bin Table is Empty!!!
+}

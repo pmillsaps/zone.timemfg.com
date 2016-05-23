@@ -1,0 +1,72 @@
+﻿@model Time.Epicor.ViewModels.AddLiftViewModel
+
+@{
+    Script.Require("JQuery");
+    ViewBag.Title = "Search For Jobs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Back to Load List", "Details", null, new { id = Model.LoadListId }, new { @class = "btn btn-primary" })
+</div>
+
+
+@using (Html.BeginForm("JobSearch", "LoadList", FormMethod.Post, new { id = "JobSearch" }))
+{
+    //, onsubmit = "showDiv()"
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.LoadListId)
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4" id="customerlist">
+            @{Html.RenderAction("_CustomerList");}
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            @Html.TextBox("Search")
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Search for Jobs" class="btn btn-default" />
+        </div>
+    </div>
+
+    <span id="hiddenStatus" style='display: none'>
+        <img src='/Content/images/transparent.gif' id='myAnimatedImage' align="middle">
+    </span>
+
+    <hr />
+}
+
+@using (Html.BeginForm("AddLift", "LoadList", new { id = Model.LoadListId }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div id="data">
+        @{Html.RenderAction("_JobList");}
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <input type="submit" value="Add Selected Jobs to Load List" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+@using (Script.Foot())
+{
+    <script language="javascript">
+        $(function () {
+            $('.companyselect').change(function () {
+                $('#JobSearch').submit();
+            });
+        });
+    </script>
+}

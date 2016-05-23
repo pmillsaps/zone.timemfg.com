@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Time.Data.EntityModels.CustomManuals.Lift>
+
+@{
+    ViewBag.Title = "Custom Manuals Lift Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Create New Lift Entry", "Create")
+    <br />
+    <br />
+    @Html.ActionLink("Create New Lift Group", "CreateGroup")
+</p>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Lift_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftGroup.Lift_Group)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lift_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftGroup.Lift_Group)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Lift_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Lift_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>

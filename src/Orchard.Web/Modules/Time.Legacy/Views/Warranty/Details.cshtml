@@ -1,0 +1,170 @@
+﻿@model Time.Legacy.EntityModels.Legacy.WarrantyInformation
+
+@{
+    ViewBag.Title = "Details for Serial# " + Model.SerialNumber;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href="javascript:history.back()">Back to List</a>
+</p>
+
+
+    <hr />
+
+<a href="#" onclick="toggle_visibility('Comments');"><h4>-> Full Details</h4></a>
+
+<div id="Comments" style="display:none;">
+    <span style="white-space: pre-line">@Model.AllData</span>
+</div>
+
+<hr />
+
+<h4>End User History</h4>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Address2
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Zip
+        </th>
+        <th>
+            In Service Date
+        </th>
+        <th>
+            Ship Date
+        </th>
+        <th>
+            Expiration Date
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Serial #
+        </th>
+        <th>
+            Id #
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.EndUser as IEnumerable<Time.Legacy.EntityModels.Legacy.WarrantyEndUser>)
+    {
+        @Html.Partial("_EndUser", item)
+    }
+</table>
+
+<br />
+
+<h4>Invoice History</h4>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            Company Id
+        </th>
+        <th>
+            Customer Id
+        </th>
+        <th>
+            Id
+        </th>
+        <th>
+            Invoice Date
+        </th>
+        <th>
+            Invoice #
+        </th>
+        <th>
+            Lift Order #
+        </th>
+        <th>
+            PO #
+        </th>
+        <th>
+            Sales Order #
+        </th>
+        <th>
+            Serial #
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.InvoiceHistory as IEnumerable<Time.Legacy.EntityModels.Legacy.WarrantyInvoice>)
+    {
+        @Html.Partial("_InvoiceHistory", item)
+    }
+</table>
+
+@*<br />
+
+<h4>Shop Work Order History</h4>*@
+
+<hr />
+
+<h4>Serial Number Memos</h4>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            Id
+        </th>
+        <th>
+            Serial #
+        </th>
+        <th>
+            Memo Date
+        </th>
+        <th>
+            Entered By
+        </th>
+        <th>
+            Memo
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.Memos as IEnumerable<Time.Legacy.EntityModels.Legacy.SerNoMemo>)
+    {
+        @Html.Partial("_Memos", item)
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Add Memo", "Add_Memo", new { id = Model.Id })
+</p>
+
+
+
+<br /><br />
+
+<p>
+    <a href="javascript:history.back()">Back to List</a>
+</p>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+    </script>
+}
