@@ -29,6 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.LiftGroup.Lift_Group)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpManualFile)
+        </th>
         <th></th>
     </tr>
 
@@ -40,6 +43,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LiftGroup.Lift_Group)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpManualFile)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Lift_ID }) |

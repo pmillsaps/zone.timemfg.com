@@ -11,13 +11,24 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Lift_ID)
+        </dt>
+        <dt>
             @Html.DisplayNameFor(model => model.LiftGroup.Lift_Group)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpManualFile)
         </dt>
 
         <dd>
+            @Html.DisplayFor(model => model.Lift_ID)
+        </dd>
+        <dd>
             @Html.DisplayFor(model => model.LiftGroup.Lift_Group)
         </dd>
-
+        <dd>
+            @Html.DisplayFor(model => model.OpManualFile)
+        </dd>
     </dl>
 </div>
 <p>

@@ -16,6 +16,7 @@ namespace Time.Data.EntityModels.CustomManuals
     {
         public string Lift_ID { get; set; }
         public string Lift_Group { get; set; }
+        public string OpManualFile { get; set; }
     
         public virtual LiftGroup LiftGroup { get; set; }
     }
