@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Time.Data.EntityModels.TimeMFG;
+using Time.Data.Models.MessageQueue;
 using Time.Epicor.Helpers;
 using Time.Epicor.Models;
 using Time.Epicor.ViewModels;
@@ -37,6 +38,8 @@ namespace Time.Epicor.Controllers
             {
                 ComparisonDates = dates
             };
+            if (!String.IsNullOrEmpty((string)TempData["ErrorMessage"])) ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            if (!String.IsNullOrEmpty((string)TempData["Notice"])) ViewBag.Notice = TempData["Notice"];
 
             return View(vm);
         }
@@ -62,6 +65,33 @@ namespace Time.Epicor.Controllers
             //vm.ValuedInventoryItems = db.ValuedInventories.Where(x => x.ComparisonDate == vm.ComparisonDate).OrderBy(x => x.PartNum).ToList();
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult GenerateData(string ComparisonDate)
+        {
+            try
+            {
+                var date = DateTime.Parse(ComparisonDate);
+                var comparisonDate = DateTime.Now;
+                if ((comparisonDate - date).TotalDays < 365 && date < comparisonDate)
+                {
+                    var command = new ValuedInventoryMessage
+                    {
+                        InventoryDate = date
+                    };
+                    var success = MSMQ.SendQueueMessage(command, MessageType.BuildValuedInventory.Value);
+                    if (success) TempData["Notice"] = String.Format("Please check the Message Queue to see when the data for {0} will be available", date);
+                }
+                else TempData["ErrorMessage"] = "Date can only be a year back";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error: " + ex.Message;
+                //throw;
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

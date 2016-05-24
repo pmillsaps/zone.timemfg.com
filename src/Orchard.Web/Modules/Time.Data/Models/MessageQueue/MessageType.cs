@@ -19,6 +19,7 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType BuildComplexLookups { get { return new MessageType("BuildComplexLookups"); } }
         public static MessageType BuildConfigOptions { get { return new MessageType("BuildConfigOptions"); } }
         public static MessageType BuildDLS { get { return new MessageType("BuildDLS"); } }
+        public static MessageType BuildValuedInventory { get { return new MessageType("BuildValuedInventory"); } }
         public static MessageType CheckWaterReports { get { return new MessageType("CheckWaterReports"); } }
         public static MessageType CustomManualCheckProblemJobs { get { return new MessageType("CustomManualCheckProblemJobs"); } }
         public static MessageType CustomManualJobQueue { get { return new MessageType("CustomManualJobQueue"); } }

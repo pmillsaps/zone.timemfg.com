@@ -7,24 +7,45 @@
 <div class="col-md-12">
     <h2>@ViewBag.Title</h2>
 
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+        <div class="row alert-danger">
+            @Html.Raw(ViewBag.ErrorMessage)
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+        <div class="row text-info">
+            @Html.Raw(ViewBag.Message)
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Notice))
+            {
+        <div class="row alert-info">
+            @Html.Raw(ViewBag.Notice)
+        </div>
+    }
+
     @using (Html.BeginForm())
     {
-    @Html.AntiForgeryToken()
-    @*@Html.HiddenFor(model => model.LoadListJobId)*@
-    <div class="editor-label"></div>
+        @Html.AntiForgeryToken()
+        @*@Html.HiddenFor(model => model.LoadListJobId)*@
+        <div class="editor-label"></div>
 
-    <div class="col-md-3">
-        @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
-    </div>
+        <div class="col-md-3">
+            @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
+        </div>
 
-    <div class="col-md-2">
-        <input type="submit" value="Export Data" />
-    </div>
+        <div class="col-md-2">
+            <input type="submit" value="Export Data" />
+        </div>
     }
 
     @*@if(Model.ValuedInventoryItems != null){
-    @Html.Partial("_Details", Model.ValuedInventoryItems)
-    }*@
+        @Html.Partial("_Details", Model.ValuedInventoryItems)
+        }*@
 
     <div class="row">
         <div class="col-md-4">
@@ -34,4 +55,23 @@
             </p>
         </div>
     </div>
+
+    <h2>
+        Generate New Valued Inventory Data
+    </h2>
+
+    @using (Html.BeginForm("GenerateData", "ValuedInventory"))
+    {
+        @Html.AntiForgeryToken()
+        @*@Html.HiddenFor(model => model.LoadListJobId)*@
+        <div class="editor-label"></div>
+
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.ComparisonDate)
+        </div>
+
+        <div class="col-md-2">
+            <input type="submit" value="Generate Data" />
+        </div>
+    }
 </div>
