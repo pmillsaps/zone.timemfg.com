@@ -1,0 +1,49 @@
+﻿@model Time.Data.EntityModels.CustomManuals.LanguageCode
+
+@{
+    ViewBag.Title = "Add New Custom Manual Language";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    To add a new Language, be sure to look up the proper 2 character language code at <a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO Codes</a><br />
+    Use the code from the '639-1' column.  The folder name has to match the language code also.<br />
+    When adding in a new language, you MUST add the localized message for replacement parts.
+</p>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>LanguageCode</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Language_Code, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Language_Code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Language_Code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

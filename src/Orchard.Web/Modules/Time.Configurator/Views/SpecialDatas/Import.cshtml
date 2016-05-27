@@ -1,0 +1,73 @@
+﻿@model Time.Configurator.ViewModels.SpecialDataImportViewModel
+
+@{
+    ViewBag.Title = "Import Special Data";
+}
+
+<div align="right">
+    <p>
+        @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
+    </p>
+</div>
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Back to Special Data Index", "Index")
+</p>
+
+<hr />
+
+<div>
+    <h5><b>Warning:</b></h5> Only paste in Assemblies or Materials.  Do not paste in both at the same time.  You will get an error.  A solution to this is being worked on.
+    <br /><hr />
+    <b>Note:</b> If you get an error when importing the parts, there are two things to check: <br />
+    First, make sure you have a value for each field: Part, Quantity, Price, Special Data Type Id, and Related Op Id(only on Materials).<br />
+    Second, make sure that there are no spaces between values.  Tabs and commas are fine.<br />
+    Third, check the list for duplicates.
+    <hr />
+    <h4>Example Data:</h4>
+    If Assembly<br />
+    Part,Quantity,Price,ASM<br />
+    AL-1210-2,1,0,ASM<br />
+    <br />
+    If Material<br />
+    Part,Quantity,Price,MTL,Operation<br />
+    22085-00,1,0,MTL,BOX<br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpecialConfigId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SpecialConfigId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.SpecialConfigId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImportData, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.ImportData, new { @rows = 16, htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImportData, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Import" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,10 @@
+﻿Name: Time.Install
+AntiForgery: enabled
+Author: Juan Salas
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Allows VSW to quote an installation.
+Features:
+    Time.Install:
+        Description: Allows VSW to quote an installation.
