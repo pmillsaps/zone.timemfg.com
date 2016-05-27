@@ -1,10 +1,10 @@
 ﻿@model Time.Data.EntityModels.ITInventory.Ref_VideoCard
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Video Card";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
@@ -42,7 +42,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>

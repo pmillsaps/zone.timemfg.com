@@ -18,6 +18,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.LiftGroup.Lift_Group)
         </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.OpManualFile)
+        </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Lift_ID)
@@ -25,14 +28,16 @@
         <dd>
             @Html.DisplayFor(model => model.LiftGroup.Lift_Group)
         </dd>
-
+        <dd>
+            @Html.DisplayFor(model => model.OpManualFile)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

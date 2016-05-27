@@ -108,13 +108,22 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Styles\Styles.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
-    <Content Include="Views\WarrantyInformations\Details.cshtml" />
-    <Content Include="Views\WarrantyInformations\Index.cshtml" />
+    <Content Include="Views\Warranty\Details.cshtml" />
+    <Content Include="Views\Warranty\_EndUser.cshtml" />
+    <Content Include="Views\Warranty\Index.cshtml" />
+    <Content Include="Views\Warranty\_InvoiceHistory.cshtml" />
+    <Content Include="Views\Warranty\InvoiceDetails.cshtml" />
+    <Content Include="Views\Warranty\_Memos.cshtml" />
+    <Content Include="Views\Warranty\Add_Memo.cshtml" />
+    <Content Include="Views\Warranty\Edit_Memo.cshtml" />
+    <Content Include="Views\Warranty\_InvoiceHeader.cshtml" />
+    <Content Include="Views\Warranty\_InvoiceLines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -134,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\WarrantyInformationsController.cs" />
+    <Compile Include="Controllers\WarrantyController.cs" />
     <Compile Include="EntityModels\Legacy\Customer.cs">
       <DependentUpon>LegacyModel.tt</DependentUpon>
     </Compile>
@@ -219,6 +228,8 @@
     <Compile Include="EntityModels\Legacy\WarrantyInvoice.cs">
       <DependentUpon>LegacyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InsertWarranty.cs" />
+    <Compile Include="Models\WarrantyItem.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -240,9 +251,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

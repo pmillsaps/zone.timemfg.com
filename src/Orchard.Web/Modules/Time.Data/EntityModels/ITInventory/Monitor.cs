@@ -25,6 +25,7 @@ namespace Time.Data.EntityModels.ITInventory
         public string PurchasedFrom { get; set; }
         public string PO { get; set; }
         public Nullable<decimal> Cost { get; set; }
+        public string Notes { get; set; }
     
         public virtual Ref_Manufacturer Ref_Manufacturer { get; set; }
         public virtual Ref_MonitorSizes Ref_MonitorSizes { get; set; }

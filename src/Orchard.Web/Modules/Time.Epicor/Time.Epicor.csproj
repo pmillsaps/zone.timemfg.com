@@ -256,6 +256,8 @@
     <Content Include="Views\QuoteOrderSearch\_QuoteOrderList.cshtml" />
     <Content Include="Views\NOWReport\Index.cshtml" />
     <Content Include="Views\NOWReport\_NOWReportDetails.cshtml" />
+    <Content Include="Views\V8PartSearch\_PartDetails.cshtml" />
+    <Content Include="Views\V8PartSearch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -280,6 +282,7 @@
     <Compile Include="Controllers\LoadListController.cs" />
     <Compile Include="Controllers\NOWReportController.cs" />
     <Compile Include="Controllers\InterimController.cs" />
+    <Compile Include="Controllers\V8PartSearchController.cs" />
     <Compile Include="Controllers\PartSearchController.cs" />
     <Compile Include="Controllers\QuoteOrderSearchController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
@@ -313,6 +316,7 @@
     <Compile Include="ViewModels\LoadListView.cs" />
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
     <Compile Include="ViewModels\NOWReportViewModel.cs" />
+    <Compile Include="ViewModels\V8PartSearchVM.cs" />
     <Compile Include="ViewModels\PartSearchVM.cs" />
     <Compile Include="ViewModels\QuoteOrderSearchVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />

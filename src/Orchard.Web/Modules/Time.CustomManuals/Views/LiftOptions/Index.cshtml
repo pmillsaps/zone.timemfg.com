@@ -31,7 +31,7 @@
 
         <div class="form-group">
             <div class="col-md-1">
-                <input type="submit" value="Search" class="btn btn-default" />
+                <input type="submit" value="Search" class="btn btn-primary" />
             </div>
         </div>
     }
@@ -43,8 +43,8 @@
     @Html.ActionLink("Create New Lift Option", "Create")
 </p>
 
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.OptionNo)
         </th>

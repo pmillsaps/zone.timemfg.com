@@ -148,12 +148,12 @@ namespace Time.CustomManuals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Lift_ID,Lift_Group")] Lift lift)
+        public ActionResult Edit([Bind(Include = "Lift_ID,Lift_Group,OpManualFile")] Lift lift)
         {
             //if (!Services.Authorizer.Authorize(Permissions.CustomManualsAdmin, T("You Do Not Have Permission to View this Page")))
             //    return new HttpUnauthorizedResult();
 
-            var dupeCheck = db.Lifts.FirstOrDefault(x => x.Lift_Group == lift.Lift_Group && x.Lift_ID == lift.Lift_ID);
+            var dupeCheck = db.Lifts.FirstOrDefault(x => x.Lift_Group == lift.Lift_Group && x.Lift_ID == lift.Lift_ID && x.OpManualFile == lift.OpManualFile);
             if (dupeCheck != null) ModelState.AddModelError("", "Duplicate Lift Groups and Lift IDs are not Allowed...");
 
             if (ModelState.IsValid)

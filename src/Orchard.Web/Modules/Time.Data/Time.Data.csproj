@@ -335,6 +335,9 @@
     <Compile Include="EntityModels\Epicor\v_JobInformation.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Epicor\v_PartDetails.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\ITInventory\Computer.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
@@ -675,6 +678,7 @@
     <Compile Include="Models\DataPlates\LiftData.cs" />
     <Compile Include="Models\DataPlates\PS_Option.cs" />
     <Compile Include="Models\GetSetting.cs" />
+    <Compile Include="Models\ITInventory\Monitor.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
     <Compile Include="Models\ITInventory\Ref_Location.cs" />
@@ -691,6 +695,7 @@
     <Compile Include="Models\MessageQueue\MSMQ.cs" />
     <Compile Include="Models\MessageQueue\PCInvoiceMessage.cs" />
     <Compile Include="Models\MessageQueue\TicketNotificationMessage.cs" />
+    <Compile Include="Models\MessageQueue\ValuedInventoryMessage.cs" />
     <Compile Include="Models\MessageQueue\WOLMessage.cs" />
     <Compile Include="Models\OrderLog\Dealer.cs" />
     <Compile Include="Models\OrderLog\Installer.cs" />

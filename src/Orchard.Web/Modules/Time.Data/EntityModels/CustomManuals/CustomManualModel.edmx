@@ -55,6 +55,7 @@
           </Key>
           <Property Name="Lift_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Lift_Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OpManualFile" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LocalMessages">
           <Key>
@@ -253,6 +254,7 @@
           <Property Name="Lift_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Lift_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="LiftGroup" Relationship="Self.FK_Lifts_LiftGroup" FromRole="Lifts" ToRole="LiftGroup" />
+          <Property Name="OpManualFile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LocalMessage">
           <Key>
@@ -450,6 +452,7 @@
           <EntitySetMapping Name="Lifts">
             <EntityTypeMapping TypeName="CustomManualsModel.Lift">
               <MappingFragment StoreEntitySet="Lifts">
+                <ScalarProperty Name="OpManualFile" ColumnName="OpManualFile" />
                 <ScalarProperty Name="Lift_ID" ColumnName="Lift_ID" />
                 <ScalarProperty Name="Lift_Group" ColumnName="Lift_Group" />
               </MappingFragment>

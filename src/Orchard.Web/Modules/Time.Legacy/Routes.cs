@@ -19,21 +19,20 @@ namespace Time.Legacy
                 new RouteDescriptor {
                     Priority = 5,
                      Route = new Route(
-                        "Legacy/{action}/{id}",
+                        "Legacy/{controller}/{action}/{id}",
                         new RouteValueDictionary {
-                                                {"area", "Time.Legacy"},
-                                                {"controller", "Home"},
-                                                {"action", "Index"},
-                                                {"id", null}
-                                            },
+                                                    {"area", "Time.Legacy"},
+                                                    {"controller", "Home"},
+                                                    {"action", "Index"},
+                                                    {"id", null}
+                                                },
+                        new RouteValueDictionary(),
                         new RouteValueDictionary {
-                                                {"area", "Time.Legacy"},
-                                                {"controller", "Home"},
-                                            },
-                        new RouteValueDictionary {
-                                                {"area", "Time.Legacy"}
-                                            },
-                        new MvcRouteHandler())}};
+                            {"area", "Time.Legacy"}
+                        },
+                        new MvcRouteHandler())
+                }
+            };
         }
     }
 }

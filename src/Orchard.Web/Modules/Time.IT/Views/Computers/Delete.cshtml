@@ -1,7 +1,7 @@
 ﻿@model Time.Data.EntityModels.ITInventory.Computer
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Computer";
 }
 <link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
 
@@ -162,7 +162,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

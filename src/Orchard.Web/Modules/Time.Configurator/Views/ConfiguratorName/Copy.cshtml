@@ -28,7 +28,7 @@
             @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-3">
-            <input type="submit" value="Create New Configurator" class="btn btn-default" />
+            <input type="submit" value="Create New Configurator" class="btn btn-primary" />
         </div>
     </div>
 }
@@ -40,8 +40,8 @@
 </p>
 @*Structure Table*@
 <h3>Structures</h3>
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
         <th>
             ConfigName
         </th>
@@ -64,8 +64,8 @@
 
 @*Structure Sequence Table*@
 <h3>Structure Sequence</h3>
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
         <th>
             ConfigName
         </th>
@@ -112,8 +112,8 @@
 
 @*Lookup Table*@
 <h3>Lookups</h3>
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
         <th>
             ConfigName
         </th>

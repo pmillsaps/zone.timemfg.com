@@ -1,10 +1,10 @@
 ﻿@model Time.Data.EntityModels.ITInventory.Monitor
 
 @{
-    ViewBag.Title = "AddMonitor";
+    ViewBag.Title = "Add Monitor";
 }
 
-<h2>AddMonitor</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -96,7 +96,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add Monitor" class="btn btn-default" />
+                <input type="submit" value="Add Monitor" class="btn btn-primary" />
             </div>
         </div>
     </div>

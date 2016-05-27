@@ -673,6 +673,39 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <Property Name="ponum" Type="varchar" MaxLength="50" />
           <Property Name="custid" Type="varchar" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_PartDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="partdescription" Type="text" />
+          <Property Name="typecode" Type="varchar" MaxLength="1" />
+          <Property Name="inactive" Type="tinyint" />
+          <Property Name="phantombom" Type="tinyint" />
+          <Property Name="baseprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="vendornum" Type="int" />
+          <Property Name="personid" Type="varchar" MaxLength="8" />
+          <Property Name="buyerid" Type="varchar" MaxLength="8" />
+          <Property Name="vendorid" Type="varchar" MaxLength="8" />
+          <Property Name="revisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="eco" Type="varchar" MaxLength="10" />
+          <Property Name="drawnum" Type="varchar" MaxLength="25" />
+          <Property Name="onhandqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="classid" Type="varchar" MaxLength="4" />
+          <Property Name="subpart" Type="varchar" MaxLength="50" />
+          <Property Name="prodcode" Type="varchar" MaxLength="8" />
+          <Property Name="lastmaterialcost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="venpartnum" Type="varchar" MaxLength="50" />
+          <Property Name="binnum" Type="varchar" MaxLength="10" />
+          <Property Name="binqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="buyername" Type="varchar" MaxLength="30" />
+          <Property Name="binqtyonhand" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="OpenJobCount" Type="int" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="MfgSys803ModelStoreContainer">
           <EntitySet Name="_TMC_Status" EntityType="Self._TMC_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imjoboper" EntityType="Self.imjoboper" store:Type="Tables" store:Schema="dbo">
@@ -1306,6 +1339,36 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
     [v_JobInformation].[custid] AS [custid]
     FROM [dbo].[v_JobInformation] AS [v_JobInformation]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_PartDetails" EntityType="Self.v_PartDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_PartDetails].[partnum] AS [partnum], 
+    [v_PartDetails].[partdescription] AS [partdescription], 
+    [v_PartDetails].[typecode] AS [typecode], 
+    [v_PartDetails].[inactive] AS [inactive], 
+    [v_PartDetails].[phantombom] AS [phantombom], 
+    [v_PartDetails].[baseprice] AS [baseprice], 
+    [v_PartDetails].[vendornum] AS [vendornum], 
+    [v_PartDetails].[personid] AS [personid], 
+    [v_PartDetails].[buyerid] AS [buyerid], 
+    [v_PartDetails].[vendorid] AS [vendorid], 
+    [v_PartDetails].[revisionnum] AS [revisionnum], 
+    [v_PartDetails].[eco] AS [eco], 
+    [v_PartDetails].[drawnum] AS [drawnum], 
+    [v_PartDetails].[onhandqty] AS [onhandqty], 
+    [v_PartDetails].[name] AS [name], 
+    [v_PartDetails].[classid] AS [classid], 
+    [v_PartDetails].[subpart] AS [subpart], 
+    [v_PartDetails].[prodcode] AS [prodcode], 
+    [v_PartDetails].[lastmaterialcost] AS [lastmaterialcost], 
+    [v_PartDetails].[venpartnum] AS [venpartnum], 
+    [v_PartDetails].[binnum] AS [binnum], 
+    [v_PartDetails].[binqty] AS [binqty], 
+    [v_PartDetails].[buyername] AS [buyername], 
+    [v_PartDetails].[binqtyonhand] AS [binqtyonhand], 
+    [v_PartDetails].[OpenJobCount] AS [OpenJobCount], 
+    [v_PartDetails].[Id] AS [Id]
+    FROM [dbo].[v_PartDetails] AS [v_PartDetails]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1863,6 +1926,7 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <EntitySet Name="sysagentscheds" EntityType="MfgSys803Model.sysagentsched" />
           <EntitySet Name="sysagenttasks" EntityType="MfgSys803Model.sysagenttask" />
           <EntitySet Name="C_TMC_Status" EntityType="MfgSys803Model.C_TMC_Status" />
+          <EntitySet Name="v_PartDetails" EntityType="MfgSys803Model.v_PartDetails" />
         </EntityContainer>
         <EntityType Name="systask">
           <Key>
@@ -1972,6 +2036,37 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Complete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_PartDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="partdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="typecode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="inactive" Type="Byte" />
+          <Property Name="phantombom" Type="Byte" />
+          <Property Name="baseprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="vendornum" Type="Int32" />
+          <Property Name="personid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="buyerid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="vendorid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="revisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="eco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="drawnum" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="onhandqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="classid" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="subpart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prodcode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="lastmaterialcost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="venpartnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="binnum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="binqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="buyername" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="binqtyonhand" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="OpenJobCount" Type="Int32" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2634,6 +2729,38 @@ warning 6002: The table/view 'MfgSys803.dbo.v_JobInformation' does not have a pr
                 <ScalarProperty Name="Complete" ColumnName="Complete" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_PartDetails">
+            <EntityTypeMapping TypeName="MfgSys803Model.v_PartDetails">
+              <MappingFragment StoreEntitySet="v_PartDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OpenJobCount" ColumnName="OpenJobCount" />
+                <ScalarProperty Name="binqtyonhand" ColumnName="binqtyonhand" />
+                <ScalarProperty Name="buyername" ColumnName="buyername" />
+                <ScalarProperty Name="binqty" ColumnName="binqty" />
+                <ScalarProperty Name="binnum" ColumnName="binnum" />
+                <ScalarProperty Name="venpartnum" ColumnName="venpartnum" />
+                <ScalarProperty Name="lastmaterialcost" ColumnName="lastmaterialcost" />
+                <ScalarProperty Name="prodcode" ColumnName="prodcode" />
+                <ScalarProperty Name="subpart" ColumnName="subpart" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="onhandqty" ColumnName="onhandqty" />
+                <ScalarProperty Name="drawnum" ColumnName="drawnum" />
+                <ScalarProperty Name="eco" ColumnName="eco" />
+                <ScalarProperty Name="revisionnum" ColumnName="revisionnum" />
+                <ScalarProperty Name="vendorid" ColumnName="vendorid" />
+                <ScalarProperty Name="buyerid" ColumnName="buyerid" />
+                <ScalarProperty Name="personid" ColumnName="personid" />
+                <ScalarProperty Name="vendornum" ColumnName="vendornum" />
+                <ScalarProperty Name="baseprice" ColumnName="baseprice" />
+                <ScalarProperty Name="phantombom" ColumnName="phantombom" />
+                <ScalarProperty Name="inactive" ColumnName="inactive" />
+                <ScalarProperty Name="typecode" ColumnName="typecode" />
+                <ScalarProperty Name="partdescription" ColumnName="partdescription" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

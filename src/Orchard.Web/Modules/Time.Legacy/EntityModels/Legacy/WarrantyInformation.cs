@@ -31,5 +31,7 @@ namespace Time.Legacy.EntityModels.Legacy
         public string SortKey { get; set; }
         public string Details { get; set; }
         public string AllData { get; set; }
+
+        public virtual WarrantyInvoice WarrantyInvoice { get; set; }
     }
 }

@@ -12,7 +12,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
         <div class="col-md-3">@Html.DropDownList("SConfigNamesTo", optionLabel: "--Select Name--")</div>
-        <div class="col-md-3"><input type="submit" value="Copy Special Data" class="btn btn-default" /></div>
+        <div class="col-md-3"><input type="submit" value="Copy Special Data" class="btn btn-primary" /></div>
     </div>
 }
 
@@ -30,8 +30,8 @@
     </p>
 
     <h4>Special Data</h4>
-    <table class="table table-striped table-bordered table-condensed">
-        <tr>
+    <table class="table table-striped table-bordered table-condensed table-hover">
+        <tr class="success">
             <th>
                 Part
             </th>

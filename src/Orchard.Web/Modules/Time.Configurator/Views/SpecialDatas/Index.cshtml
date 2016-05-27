@@ -27,7 +27,7 @@
     {
         <div>
             <div style="float: left; width: 250px" class="col-md-3">@Html.DropDownList("SpecialConfigId", optionLabel: "--- Select Customer ---")</div>
-            <div style="float: left; width: 75px"><input type="submit" value="Search" class="btn btn-default" stlye="" /></div>
+            <div style="float: left; width: 75px"><input type="submit" value="Search" class="btn btn-primary" stlye="" /></div>
         </div>
     }
 
@@ -35,7 +35,7 @@
     {
         <div style="float: left; width: 100px">
             <div class="col-md-3" style="display:none">@Html.DropDownList("SpecialConfigId", optionLabel: "---Select Customer ---")</div>
-            <div><input type="submit" value="Create Current Selection" class="btn btn-default col-sm-offset-3" /></div>
+            <div><input type="submit" value="Create Current Selection" class="btn btn-primary col-sm-offset-3" /></div>
         </div>
     }
 </div>
@@ -44,8 +44,8 @@
 <br />
 <br />
 
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.Part)
         </th>

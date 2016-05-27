@@ -4,24 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LegacyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Legacy.dbo.A-SUPPLIER' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="A-SUPPLIER">
-          <Property Name="Column 0" Type="nvarchar" MaxLength="6" />
-          <Property Name="Column 1" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 2" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 3" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 4" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 5" Type="nvarchar" MaxLength="14" />
-          <Property Name="Column 6" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 7" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 8" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 9" Type="nvarchar" MaxLength="4" />
-          <Property Name="Column 10" Type="nvarchar" MaxLength="24" />
-          <Property Name="Column 11" Type="nvarchar" MaxLength="14" />
-          <Property Name="Column 12" Type="nvarchar" MaxLength="2" />
-        </EntityType>-->
+    <Schema Namespace="LegacyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -218,28 +201,6 @@ warning 6013: The table/view 'Legacy.dbo.A-SUPPLIER' does not have a primary key
           <Property Name="SpecialInstructions2" Type="nvarchar" MaxLength="30" />
           <Property Name="SpecialInstructions3" Type="nvarchar" MaxLength="30" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Legacy.dbo.LEGACYSWO02Ha' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="LEGACYSWO02Ha">
-          <Property Name="Company" Type="nvarchar" MaxLength="3" />
-          <Property Name="WorkOrderNumber" Type="nvarchar" MaxLength="7" />
-          <Property Name="StepNumber" Type="nvarchar" MaxLength="3" />
-          <Property Name="WorkCenter" Type="nvarchar" MaxLength="3" />
-          <Property Name="OpCd" Type="nvarchar" MaxLength="3" />
-          <Property Name="DateBegin" Type="nvarchar" MaxLength="10" />
-          <Property Name="DateComplete" Type="nvarchar" MaxLength="10" />
-          <Property Name="PartNumber" Type="nvarchar" MaxLength="12" />
-          <Property Name="QtyRequired" Type="nvarchar" MaxLength="13" />
-          <Property Name="QrtRequiredStd" Type="nvarchar" MaxLength="13" />
-          <Property Name="SetUpHours" Type="nvarchar" MaxLength="13" />
-          <Property Name="BurdenRate" Type="nvarchar" MaxLength="13" />
-          <Property Name="BaseCost" Type="nvarchar" MaxLength="13" />
-          <Property Name="ActualHours" Type="nvarchar" MaxLength="13" />
-          <Property Name="CostActual" Type="nvarchar" MaxLength="13" />
-          <Property Name="CostUnit" Type="nvarchar" MaxLength="13" />
-          <Property Name="QtyIssuedComplete" Type="nvarchar" MaxLength="13" />
-          <Property Name="StandardHours" Type="nvarchar" MaxLength="13" />
-        </EntityType>-->
         <EntityType Name="LEGACYSWO02Hb">
           <Key>
             <PropertyRef Name="Company" />
@@ -492,82 +453,6 @@ warning 6002: The table/view 'Legacy.dbo.PurchaseHistory_Mods' does not have a p
           <Property Name="SalesOrderNumber" Type="varchar" MaxLength="50" />
           <Property Name="LiftOrderNumber" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Legacy.dbo.WarrantyRegistration' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="WarrantyRegistration">
-          <Property Name="Serial" Type="varchar" MaxLength="50" />
-          <Property Name="ProductRegistrationNo" Type="varchar" MaxLength="50" />
-          <Property Name="Model" Type="varchar" MaxLength="50" />
-          <Property Name="InServiceDate" Type="varchar" MaxLength="50" />
-          <Property Name="ManualReviewed" Type="varchar" MaxLength="50" />
-          <Property Name="UnitWorking" Type="varchar" MaxLength="50" />
-          <Property Name="WarrantyReviewed" Type="varchar" MaxLength="50" />
-          <Property Name="ContactEmail" Type="varchar" MaxLength="50" />
-          <Property Name="Distributor" Type="varchar" MaxLength="50" />
-          <Property Name="DistSignature" Type="varchar" MaxLength="50" />
-          <Property Name="AcceptedBy" Type="varchar" MaxLength="50" />
-          <Property Name="County" Type="varchar" MaxLength="50" />
-          <Property Name="Owner" Type="varchar" MaxLength="50" />
-          <Property Name="Address" Type="varchar" MaxLength="50" />
-          <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="State" Type="varchar" MaxLength="50" />
-          <Property Name="Zip" Type="varchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Legacy.dbo.WorkOrderHeader' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="WorkOrderHeader">
-          <Property Name="CompanyId" Type="varchar" MaxLength="3" />
-          <Property Name="WorkOrder" Type="varchar" MaxLength="7" />
-          <Property Name="DateLiftOrdered" Type="datetime" />
-          <Property Name="DateLiftOrdered_Orig" Type="varchar" MaxLength="10" />
-          <Property Name="DateRequired" Type="datetime" />
-          <Property Name="DateRequired_Orig" Type="varchar" MaxLength="10" />
-          <Property Name="CustomerNumber" Type="varchar" MaxLength="7" />
-          <Property Name="CustomerPo" Type="varchar" MaxLength="19" />
-          <Property Name="SalesOrder" Type="varchar" MaxLength="7" />
-          <Property Name="WorkorderComplete" Type="varchar" MaxLength="1" />
-          <Property Name="DateLiftOrdered2" Type="datetime" />
-          <Property Name="DateLiftOrdered2_Orig" Type="varchar" MaxLength="10" />
-          <Property Name="Description" Type="varchar" MaxLength="30" />
-          <Property Name="SpecInst" Type="varchar" MaxLength="19" />
-          <Property Name="SpecInst2" Type="varchar" MaxLength="18" />
-          <Property Name="PartNumber" Type="varchar" MaxLength="12" />
-          <Property Name="OrderQty" Type="float" />
-          <Property Name="OrderQty_Orig" Type="varchar" MaxLength="13" />
-          <Property Name="CompleteQty" Type="float" />
-          <Property Name="CompleteQty_Orig" Type="varchar" MaxLength="13" />
-          <Property Name="Cost" Type="float" />
-          <Property Name="Cost_Orig" Type="varchar" MaxLength="13" />
-          <Property Name="Issued" Type="float" />
-          <Property Name="Issued_Orig" Type="varchar" MaxLength="13" />
-          <Property Name="BaseQty" Type="float" />
-          <Property Name="BaseQty_Orig" Type="varchar" MaxLength="13" />
-          <Property Name="SalesAmount" Type="float" />
-          <Property Name="SalesAmount_Orig" Type="varchar" MaxLength="13" />
-          <Property Name="Column 19" Type="varchar" MaxLength="2" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Legacy.dbo.WorkOrderLines' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="WorkOrderLines">
-          <Property Name="Company" Type="varchar" MaxLength="3" />
-          <Property Name="WORK-ORDER-SWO02" Type="nvarchar" MaxLength="255" />
-          <Property Name="STEP-NO-SWO02" Type="nvarchar" MaxLength="255" />
-          <Property Name="WORK-CNTR-SWO02" Type="nvarchar" MaxLength="255" />
-          <Property Name="OP-CD-SWO02H" Type="nvarchar" MaxLength="255" />
-          <Property Name="DATE-BEGIN-SA-SWO02H" Type="datetime" />
-          <Property Name="DATE-COMP-SA-SWO02H" Type="datetime" />
-          <Property Name="PART-NO-SWO02H" Type="nvarchar" MaxLength="255" />
-          <Property Name="QTY-REQD-SWO02H" Type="float" />
-          <Property Name="QTY-REQD-STD-SWO02H" Type="float" />
-          <Property Name="SET-UP-HRS-SWO02H" Type="float" />
-          <Property Name="BURDEN-RATE-SWO02H" Type="float" />
-          <Property Name="BASE-COST-SWO02H" Type="float" />
-          <Property Name="ACTUAL-HRS-SWO02H" Type="float" />
-          <Property Name="COST-ACTUAL-SWO02H" Type="float" />
-          <Property Name="COST-UNIT-SWO02H" Type="float" />
-          <Property Name="QTY-ISS-COMP-SWO02H" Type="float" />
-          <Property Name="STANDARD-HRS-SWO02H" Type="float" />
-        </EntityType>-->
         <Association Name="FK_CostStepListingDetails_CostStepListing">
           <End Role="PartStep" Type="Self.PartStep" Multiplicity="1" />
           <End Role="PartStepDetails" Type="Self.PartStepDetails" Multiplicity="*" />
@@ -592,6 +477,18 @@ warning 6013: The table/view 'Legacy.dbo.WorkOrderLines' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_SerNoMemo_WarrantyInformation' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_SerNoMemo_WarrantyInformation" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_WarrantyComponent_WarrantyInformation' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_WarrantyComponent_WarrantyInformation" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_WarrantyEndUser_WarrantyInformation' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_WarrantyEndUser_WarrantyInformation" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_WarrantyInvoice_WarrantyInformation' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_WarrantyInvoice_WarrantyInformation" />-->
         <EntityContainer Name="LegacyModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
@@ -638,8 +535,7 @@ warning 6013: The table/view 'Legacy.dbo.WorkOrderLines' does not have a primary
             <End Role="PurchaseBOMItem" EntitySet="PurchaseBOMItem" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LegacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

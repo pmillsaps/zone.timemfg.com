@@ -19,6 +19,7 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType BuildComplexLookups { get { return new MessageType("BuildComplexLookups"); } }
         public static MessageType BuildConfigOptions { get { return new MessageType("BuildConfigOptions"); } }
         public static MessageType BuildDLS { get { return new MessageType("BuildDLS"); } }
+        public static MessageType BuildValuedInventory { get { return new MessageType("BuildValuedInventory"); } }
         public static MessageType CheckWaterReports { get { return new MessageType("CheckWaterReports"); } }
         public static MessageType CustomManualCheckProblemJobs { get { return new MessageType("CustomManualCheckProblemJobs"); } }
         public static MessageType CustomManualJobQueue { get { return new MessageType("CustomManualJobQueue"); } }
@@ -38,6 +39,9 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType SendTicketReminders { get { return new MessageType("SendTicketReminders"); } }
         public static MessageType TicketsNotApprovedTimer { get { return new MessageType("TicketsNotApprovedTimer"); } }
         public static MessageType TicketNotification { get { return new MessageType("TicketNotification"); } }
+        public static MessageType UpdatePartsDWG { get { return new MessageType("UpdatePartsDWG"); } }
+        public static MessageType UpdatePartsPDF { get { return new MessageType("UpdatePartsPDF"); } }
+        public static MessageType UpdateSerialsInEpicor10 { get { return new MessageType("UpdateSerialsInEpicor10"); } }
         public static MessageType WOL { get { return new MessageType("WOL"); } }
     }
 }
