@@ -48,6 +48,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -85,6 +93,22 @@
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\InstallHourlyRates\Create.cshtml" />
+    <Content Include="Views\InstallHourlyRates\Delete.cshtml" />
+    <Content Include="Views\InstallHourlyRates\Details.cshtml" />
+    <Content Include="Views\InstallHourlyRates\Edit.cshtml" />
+    <Content Include="Views\InstallHourlyRates\Index.cshtml" />
+    <Content Include="Views\LiftFamilies\Create.cshtml" />
+    <Content Include="Views\LiftFamilies\Delete.cshtml" />
+    <Content Include="Views\LiftFamilies\Details.cshtml" />
+    <Content Include="Views\LiftFamilies\Edit.cshtml" />
+    <Content Include="Views\LiftFamilies\Index.cshtml" />
+    <Content Include="Views\VSWOptions\Create.cshtml" />
+    <Content Include="Views\VSWOptions\Delete.cshtml" />
+    <Content Include="Views\VSWOptions\Details.cshtml" />
+    <Content Include="Views\VSWOptions\Edit.cshtml" />
+    <Content Include="Views\VSWOptions\Index.cshtml" />
+    <Content Include="Views\VSWOptions\AddOptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -98,7 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstallHourlyRatesController.cs" />
+    <Compile Include="Controllers\LiftFamiliesController.cs" />
+    <Compile Include="Controllers\VSWOptionsController.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="ViewModels\AddOptionsViewModel.cs" />
+    <Compile Include="ViewModels\SplitOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -123,6 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{c663c5f6-a683-41ca-b0f8-fc7c6f49e1d6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

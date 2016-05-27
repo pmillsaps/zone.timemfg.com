@@ -1,8 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "VSW Install Quote Index";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>Working on it</p>
+<ul>
+    <li>@Html.ActionLink("Create Lift Family", "Index", "LiftFamilies")</li>
+    <li>@Html.ActionLink("Create Option Group", "Index", "OptionGroups")</li>
+    <li>@Html.ActionLink("VSW Install Options", "Index", "VSWOptions")</li>
+    <li></li>
+    <li>@Html.ActionLink("Search Aerial Quote", "Index", "Quote")</li>
+    <li>@Html.ActionLink("Install Quotes Index", "ListOfInstallQuotes", "Quote")</li>
+    <li></li>
+    <li>@Html.ActionLink("Hour/Paint Rates", "Index", "InstallHourlyRates")</li>
+    <li>@Html.ActionLink("Labor Hours for Time Options", "Index", "TimeOptions")</li>
+</ul>

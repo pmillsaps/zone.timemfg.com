@@ -338,6 +338,66 @@
     <Compile Include="EntityModels\Epicor\v_PartDetails.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Install\EpicorDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\EpicorDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\EpicorDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallDetail.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallDetailsManuallyAddedOption.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallHourlyRate.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallQuote.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\LiftFamily.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\OptionGroup.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuoteDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDtl.cs">
+      <DependentUpon>EpicorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteQty.cs">
+      <DependentUpon>EpicorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\TimeOption.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\VSWOption.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\ITInventory\Computer.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
@@ -846,6 +906,40 @@
     </EntityDeploy>
     <Content Include="EntityModels\Versalift\VersaliftModel.edmx.diagram">
       <DependentUpon>VersaliftModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\Install\QuoteDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuoteDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Install\QuoteDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+      <LastGenOutput>QuoteDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Install\QuoteDBModel.edmx.diagram">
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Install\QuoteDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+      <LastGenOutput>QuoteDBModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Install\EpicorDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EpicorDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Install\EpicorDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Install\EpicorDBModel.edmx.diagram">
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Install\EpicorDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorDBModel.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
     <Content Include="Views\_ViewStart.cshtml" />
