@@ -109,6 +109,11 @@
     <Content Include="Views\VSWOptions\Edit.cshtml" />
     <Content Include="Views\VSWOptions\Index.cshtml" />
     <Content Include="Views\VSWOptions\AddOptions.cshtml" />
+    <Content Include="Views\OptionGroups\Create.cshtml" />
+    <Content Include="Views\OptionGroups\Delete.cshtml" />
+    <Content Include="Views\OptionGroups\Details.cshtml" />
+    <Content Include="Views\OptionGroups\Edit.cshtml" />
+    <Content Include="Views\OptionGroups\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -124,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstallHourlyRatesController.cs" />
     <Compile Include="Controllers\LiftFamiliesController.cs" />
+    <Compile Include="Controllers\OptionGroupsController.cs" />
     <Compile Include="Controllers\VSWOptionsController.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
