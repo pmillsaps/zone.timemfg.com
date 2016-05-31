@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Install;
+using Time.Install.Models;
 using Time.Install.ViewModels;
 
 namespace Time.Install.Controllers

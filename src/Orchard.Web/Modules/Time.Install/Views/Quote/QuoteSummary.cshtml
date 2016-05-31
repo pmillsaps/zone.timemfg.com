@@ -1,0 +1,130 @@
+﻿@model Time.Install.Models.InstallQuoteSummary
+
+@{
+    ViewBag.Title = "Install Quote Summary";
+    Script.Require("jQuery");
+}
+
+<link href="~/Modules/Time.Install/Styles/Site.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Go to List of Install Quotes", "ListOfInstallQuotes")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to Aerial Quote List", "Index")
+</div>
+
+<hr />
+<h3>Aerial Quote Number: @Model.InstallQuotes.LiftQuoteNumber</h3>
+<h4>Lift: @Model.InstallQuotes.LiftName</h4>
+<hr />
+
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
+    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
+</dl>
+
+<br />
+<div id="flip1">Click here to Display/Hide Installation Options</div>
+<div id="panel1">
+    <table class="table table-striped">
+        <tr class="success">
+            <th>Option</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Hours</th>
+            <th class="text-right">Extended Price</th>
+        </tr>
+
+        @foreach (var item in Model.InstallDetails)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.VSWOption.OptionName)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.Quantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.Price)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.InstallHours)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.ExtendedPrice)</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div id="flip2">Click here to Display/Hide Manually Added Installation Options</div>
+<div id="panel2">
+    <table class="table table-striped">
+        <tr class="success">
+            <th>Option</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Hours</th>
+            <th class="text-right">Extended Price</th>
+        </tr>
+
+        @foreach (var item in Model.InstallDetailsMnllyAdded)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => item.OptionName)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.Quantity)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.Price)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.InstallHours)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.ExtendedPrice)</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div id="flip3">Click here to Display/Hide Time Options</div>
+<div id="panel3">
+    <table class="table table-striped">
+        <tr class="success">
+            <th>Quantity Option Number   Description</th>
+            <th class="text-right">Hours</th>
+        </tr>
+        @foreach (var item in Model.AerialOptions)
+        {
+            <tr>
+                <td><span style="white-space:pre">@Html.DisplayFor(model => item.QtyPartAndDescription)</span></td>
+                <td class="text-right">@Html.DisplayFor(model => item.Hours)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@using(Script.Foot())
+{
+    <script type="text/javascript">
+        $('#flip1').click(function () {
+            $('#panel1').slideToggle('slow');
+        });
+
+        $('#flip2').click(function () {
+            $('#panel2').slideToggle('slow');
+        });
+
+        $('#flip3').click(function () {
+            $('#panel3').slideToggle('slow');
+        });
+    </script>
+}

@@ -78,7 +78,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Styles\jQueryCss.css" />
+    <Content Include="Styles\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -119,6 +120,13 @@
     <Content Include="Views\TimeOptions\Details.cshtml" />
     <Content Include="Views\TimeOptions\Edit.cshtml" />
     <Content Include="Views\TimeOptions\Index.cshtml" />
+    <Content Include="Views\Quote\AddQuote.cshtml" />
+    <Content Include="Views\Quote\Index.cshtml" />
+    <Content Include="Views\Quote\ListOfInstallQuotes.cshtml" />
+    <Content Include="Views\Quote\QuoteSummary.cshtml" />
+    <Content Include="Views\Quote\StartQuote.cshtml" />
+    <Content Include="Views\Quote\_AerialOptions.cshtml" />
+    <Content Include="Views\Quote\_SelectInstallOptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -135,15 +143,18 @@
     <Compile Include="Controllers\InstallHourlyRatesController.cs" />
     <Compile Include="Controllers\LiftFamiliesController.cs" />
     <Compile Include="Controllers\OptionGroupsController.cs" />
+    <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\TimeOptionsController.cs" />
     <Compile Include="Controllers\VSWOptionsController.cs" />
+    <Compile Include="Models\AddVSWOptionManually.cs" />
+    <Compile Include="Models\AerialOption.cs" />
+    <Compile Include="Models\InstallQuoteSummary.cs" />
+    <Compile Include="Models\SplitOptions.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
-    <Compile Include="ViewModels\SplitOptions.cs" />
+    <Compile Include="ViewModels\QuoteViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

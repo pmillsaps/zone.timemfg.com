@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Time.Install.ViewModels
+namespace Time.Install.Models
 {
     // This class handles the VSW options when imported form EXCEL
     public class SplitOptions
