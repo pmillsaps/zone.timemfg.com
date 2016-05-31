@@ -4,26 +4,38 @@
     ViewBag.Title = "VSW Install Options Index";
 }
 
-<h2>@ViewBag.Title</h2> 
+<h2>@ViewBag.Title</h2>
 
 <div align="right">
     @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
 </div>
 
-<p>
-    @Html.ActionLink("Add VSW Install Options (Two or more at a time)", "AddOptions")
-</p>
+<div class="alert alert-info">
+    <p>There are two ways of adding options to an Option Group:</p>
+    <p>
+        1. If you want to add just one option, click on the link "Add VSW Install Option (One at a time)". Using this page will allow you to
+        import one option at a time.
+    </p>
+    <p>
+        2. If you want to add more than one option at a time, click on the link "Add VSW Install Options (Two or more at a time)". On this page you will be 
+        able to copy and paste as many options as you want from the EXCEL Master sheet and import them to the website.
+    </p>
+</div>
+
 <p>
     @Html.ActionLink("Add VSW Install Option (One at a time)", "Create")
+</p>
+<p>
+    @Html.ActionLink("Add VSW Install Options (Two or more at a time)", "AddOptions")
 </p>
 
 <hr />
 @using (Html.BeginForm("Index", "VSWOptions", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-sm-4">@Html.DropDownList("LiftFamilyId", optionLabel: "---Select a Lift Family---")</div>
-        <div class="col-sm-4">@Html.DropDownList("GroupId", optionLabel: "---Select an Option Group---")</div>
-        <div class="col-sm-4"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+        <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
+        <div class="col-sm-3">@Html.DropDownList("GroupId", optionLabel: "--- Select an Option Group ---")</div>
+        <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
     </div>
 }
 
@@ -38,6 +50,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LaborHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaintFlag)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LiftFamily.FamilyName)
@@ -67,6 +82,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LaborHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaintFlag)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LiftFamily.FamilyName)

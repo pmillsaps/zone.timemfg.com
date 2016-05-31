@@ -738,6 +738,11 @@
     <Compile Include="Models\DataPlates\LiftData.cs" />
     <Compile Include="Models\DataPlates\PS_Option.cs" />
     <Compile Include="Models\GetSetting.cs" />
+    <Compile Include="Models\Install\InstallHourlyRate.cs" />
+    <Compile Include="Models\Install\LiftFamily.cs" />
+    <Compile Include="Models\Install\OptionGroup.cs" />
+    <Compile Include="Models\Install\TimeOption.cs" />
+    <Compile Include="Models\Install\VSWOption.cs" />
     <Compile Include="Models\ITInventory\Monitor.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />

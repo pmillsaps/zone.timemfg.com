@@ -114,6 +114,11 @@
     <Content Include="Views\OptionGroups\Details.cshtml" />
     <Content Include="Views\OptionGroups\Edit.cshtml" />
     <Content Include="Views\OptionGroups\Index.cshtml" />
+    <Content Include="Views\TimeOptions\Create.cshtml" />
+    <Content Include="Views\TimeOptions\Delete.cshtml" />
+    <Content Include="Views\TimeOptions\Details.cshtml" />
+    <Content Include="Views\TimeOptions\Edit.cshtml" />
+    <Content Include="Views\TimeOptions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -130,6 +135,7 @@
     <Compile Include="Controllers\InstallHourlyRatesController.cs" />
     <Compile Include="Controllers\LiftFamiliesController.cs" />
     <Compile Include="Controllers\OptionGroupsController.cs" />
+    <Compile Include="Controllers\TimeOptionsController.cs" />
     <Compile Include="Controllers\VSWOptionsController.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
