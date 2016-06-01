@@ -14,6 +14,7 @@ using Time.Install.ViewModels;
 namespace Time.Install.Controllers
 {
     [Themed]
+    [Authorize]
     public class QuoteController : Controller
     {
         private EpicorInstallEntities dbE = new EpicorInstallEntities();

@@ -14,6 +14,7 @@ using Time.Data.EntityModels.Install;
 namespace Time.Install.Controllers
 {
     [Themed]
+    [Authorize]
     public class InstallHourlyRatesController : Controller
     {
         private string ErrorMessage { get; set; }

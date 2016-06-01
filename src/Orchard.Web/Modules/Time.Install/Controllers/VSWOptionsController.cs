@@ -14,6 +14,7 @@ using Time.Install.ViewModels;
 namespace Time.Install.Controllers
 {
     [Themed]
+    [Authorize]
     public class VSWOptionsController : Controller
     {
         private VSWQuotesEntities db = new VSWQuotesEntities();

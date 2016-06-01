@@ -10,6 +10,7 @@ using System.Web.Mvc;
 namespace Time.Install.Controllers
 {
     [Themed]
+    [Authorize]
     public class HomeController : Controller
     {
         private string ErrorMessage { get; set; }
