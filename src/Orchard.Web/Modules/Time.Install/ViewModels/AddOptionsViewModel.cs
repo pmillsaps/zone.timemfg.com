@@ -11,11 +11,11 @@ namespace Time.Install.ViewModels
     {
         [Display(Name = "Lift Family Name")]
         [Required(ErrorMessage = "Group Name is required")]
-        public int GroupId { get; set; }
-
+        public int LiftFamilyId { get; set; }
+        
         [Display(Name = "Group Name")]
         [Required(ErrorMessage = "Lift Family Name is required")]
-        public int LiftFamilyId { get; set; }
+        public int GroupId { get; set; }
 
         [Display(Name = "Options to Import")]
         [Required(ErrorMessage = "Options are required")]

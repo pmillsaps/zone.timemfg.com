@@ -11,10 +11,9 @@
 </div>
 
 <hr />
-<div class="alert alert-info">
-    <p><strong>Note:</strong> A quote MUST have an INSTALL(PartNum) line to be displayed.</p>
-    <p>If a quote already has an Installation Quote, it won't be displayed in this list.</p>
-    <p>To edit or view the details of an existing Installation Quote go to @Html.ActionLink("List of Installation Quotes", "ListOfInstallQuotes", "Quote")</p>
+<div class="alert alert-warning">
+    <p><strong>Note:</strong> A quote MUST have an INSTALL(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
+    <p>To view or edit the details of an existing Installation Quote go to @Html.ActionLink("List of Installation Quotes", "ListOfInstallQuotes", "Quote")</p>
 </div>
 <hr />
 @using (Html.BeginForm("Index", "Quote", FormMethod.Get))

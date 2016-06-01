@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.Install.TimeOption>
 
 @{
-    ViewBag.Title = "Time Options Index";
+    ViewBag.Title = "Time Options with Install Hours Index";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -13,11 +13,16 @@
 <p>
     @Html.ActionLink("Create New Time Option", "Create")
 </p>
+
+<div class="alert alert-danger">
+    <p><strong>Note: </strong>When importing Time options, they must be imported individually. For example, you cannot import an option in this format: <strong>VK-1400-5/6/7/8</strong>.</p>
+    <p>It must be split, in this case, in four different options: <strong>VK-1400-5, VK-1400-6, VK-1400-7</strong>, and <strong>VK-1400-8</strong> .</p>
+</div>
 <hr />
 @using (Html.BeginForm("Index", "TimeOptions", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-3">@Html.DropDownList("LiftFamilyId", optionLabel: "---Select Lift Family---")</div>
+        <div class="col-md-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select Lift Family ---")</div>
         <div class="col-md-4">
             <input type="submit" value="Search " class="btn btn-primary" />
         </div>

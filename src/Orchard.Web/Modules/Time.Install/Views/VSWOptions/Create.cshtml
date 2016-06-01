@@ -21,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LiftFamilyId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LiftFamilyId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("LiftFamilyId", null, optionLabel: "--- Select Lift Family Name ---", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LiftFamilyId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GroupId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("GroupId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("GroupId", null, optionLabel: "--- Select Group Name ---", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
             </div>
         </div>
