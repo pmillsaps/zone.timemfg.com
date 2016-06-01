@@ -74,16 +74,20 @@ namespace Time.Install.Controllers
         // Adding the options to the Install Quote
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddQuote(QuoteViewModel quoteMV)
+        public ActionResult AddQuote(QuoteViewModel quoteVM)
         {
-            ViewBag.Groups = new SelectList(dbQ.OptionGroups.OrderBy(x => x.GroupName), "Id", "GroupName");
+            //ViewBag.Groups = new SelectList(dbQ.OptionGroups.OrderBy(x => x.GroupName), "Id", "GroupName");
+            // Option Groups
             ViewBag.OptionGroups = dbQ.OptionGroups.ToList();
-            quoteMV.Options = dbQ.VSWOptions.Where(x => x.LiftFamilyId == quoteMV.LiftFamilyId).ToList();
-            var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteMV.QuoteNum && x.QuoteLine == 1);
-            quoteMV.AerialOptions = aQuote(aerialOp.QuoteComment, quoteMV.LiftFamilyId);
-            quoteMV.AddOptnMnlly = new List<AddVSWOptionManually>();
+            // Options in each group
+            quoteVM.Options = dbQ.VSWOptions.Where(x => x.LiftFamilyId == quoteVM.LiftFamilyId).ToList();
+            // Time options
+            var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteVM.QuoteNum && x.QuoteLine == 1);
+            quoteVM.AerialOptions = aQuote(aerialOp.QuoteComment, quoteVM.LiftFamilyId);
+            // Manually added options
+            quoteVM.AddOptnMnlly = new List<AddVSWOptionManually>();
 
-            return View(quoteMV);
+            return View(quoteVM);
         }
 
         // Adding the options to the Install Quote
