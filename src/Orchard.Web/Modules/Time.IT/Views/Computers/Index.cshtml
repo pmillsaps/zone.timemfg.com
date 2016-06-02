@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.Computer>
+
+@{
+    ViewBag.Title = "Computer Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Create New", "Create")
+</div>
+
+<hr />
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.TextBox("search")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    Search includes: User Name, Computer Name, Model, OS, Device Type, Serial Number, Status
+</div>
+
+<hr />
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.WindowsKey)
+            </th>*@
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.PO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.Ref_Memory.Name)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Status.Status)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Ref_VideoCard.VideoCard)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_DeviceType.DeviceType)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Ref_Processor.Processor)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.Ref_Sound.Sound)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_OS.OS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastBuildDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEditedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDateEdited)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.WindowsKey)
+                </td>*@
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PO)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>*@
+            <td>
+                @if (item.UserId != null && item.UserId != 0)
+                {
+                    @*@Html.DisplayFor(modelItem => item.LastDateEdited.Value.ToShortDateString())*@
+                    @*@item.User.Name*@
+                    @Html.ActionLink(item.User.Name, "Details", "Users", new { id = item.UserId }, null)
+                }
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Ref_Memory.Name)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Model.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Status.Status)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Ref_VideoCard.VideoCard)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_DeviceType.DeviceType)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Ref_Processor.Processor)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Ref_Sound.Sound)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_OS.OS)
+            </td>
+            <td>
+                @if (item.LastBuildDate != null)
+                {
+                    @*@Html.DisplayFor(modelItem => item.LastDateEdited.Value.ToShortDateString())*@
+                    @item.LastBuildDate.Value.ToShortDateString()
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditedBy)
+            </td>
+            <td>
+                @if (item.LastDateEdited != null)
+                {
+                    @*@Html.DisplayFor(modelItem => item.LastDateEdited.Value.ToShortDateString())*@
+                    @item.LastDateEdited.Value.ToShortDateString()
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

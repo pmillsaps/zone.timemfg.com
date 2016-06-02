@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJob>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.JobNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadList.DateSchedShip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadList.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Claimed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReadyToTest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tested)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Posted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Green)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LShip)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadList.DateSchedShip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadList.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Claimed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReadyToTest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tested)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Green)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LShip)
+            </td>
+        </tr>
+    }
+</table>

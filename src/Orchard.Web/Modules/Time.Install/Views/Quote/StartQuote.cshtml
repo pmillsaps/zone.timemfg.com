@@ -1,0 +1,48 @@
+﻿@model Time.Install.ViewModels.QuoteViewModel
+
+@{
+    ViewBag.Title = "Start Install Quote";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to Aerial Quote List", "Index")
+</div>
+
+<hr />
+<h3>Aerial Quote Num: @Model.QuoteNum</h3>
+<h4>@Model.InstallDescr</h4>
+<hr />
+
+@if (ViewBag.AerialOptions != null)
+{
+    using (Html.BeginForm("AddQuote", "Quote"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.QuoteNum)
+        @Html.HiddenFor(model => model.InstallDescr)
+        <div class="row">
+            <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "---Select a Lift Family---")</div>
+            <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Lift has not been configured yet. Installation Quote is not available.</strong>
+    </div>
+}
+@if (ViewBag.AlreadyExist == 1)
+{
+    <hr />
+    <div class="alert alert-danger">An Install quote already exists for this Aerial Quote. If you want to Edit an existing Install quote, go to "Install Quotes Index"</div>
+    <hr />
+}
+<hr />
+@Html.ActionLink("Back to Aerial Quote List", "Index")
+
