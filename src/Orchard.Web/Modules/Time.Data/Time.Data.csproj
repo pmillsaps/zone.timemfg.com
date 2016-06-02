@@ -739,6 +739,7 @@
     <Compile Include="Models\DataPlates\PS_Option.cs" />
     <Compile Include="Models\GetSetting.cs" />
     <Compile Include="Models\Install\InstallHourlyRate.cs" />
+    <Compile Include="Models\Install\InstallQuote.cs" />
     <Compile Include="Models\Install\LiftFamily.cs" />
     <Compile Include="Models\Install\OptionGroup.cs" />
     <Compile Include="Models\Install\TimeOption.cs" />

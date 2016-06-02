@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="115c80a74465476c84f6fc18a09cfe86" Name="Diagram1" ZoomLevel="247">
+      <Diagram DiagramId="115c80a74465476c84f6fc18a09cfe86" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="TestModel.QuoteDtl" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TestModel.QuoteQty" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
