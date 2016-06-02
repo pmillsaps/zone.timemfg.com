@@ -18,5 +18,6 @@ namespace Time.Data.EntityModels.TimeMFG
         public string ClassId { get; set; }
         public System.DateTime ComparisonDate { get; set; }
         public Nullable<decimal> ExtCost { get; set; }
+        public long Id { get; set; }
     }
 }

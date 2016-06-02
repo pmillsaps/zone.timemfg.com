@@ -400,13 +400,13 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ClassIdSummary' does not have a prim
 warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ValuedInventoryByPeriod">
           <Key>
-            <PropertyRef Name="PeriodYear" />
-            <PropertyRef Name="ComparisonDate" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="PeriodYear" Type="int" Nullable="false" />
           <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
           <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
           <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_LoadList_Distributor_LoadList">
           <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
@@ -733,7 +733,8 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
     [V_ValuedInventoryByPeriod].[PeriodYear] AS [PeriodYear], 
     [V_ValuedInventoryByPeriod].[ClassId] AS [ClassId], 
     [V_ValuedInventoryByPeriod].[ComparisonDate] AS [ComparisonDate], 
-    [V_ValuedInventoryByPeriod].[ExtCost] AS [ExtCost]
+    [V_ValuedInventoryByPeriod].[ExtCost] AS [ExtCost], 
+    [V_ValuedInventoryByPeriod].[Id] AS [Id]
     FROM [dbo].[V_ValuedInventoryByPeriod] AS [V_ValuedInventoryByPeriod]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_LoadList_Distributor_LoadList" Association="Self.FK_LoadList_Distributor_LoadList">
@@ -1634,13 +1635,13 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
         </EntityType>
         <EntityType Name="V_ValuedInventoryByPeriod">
           <Key>
-            <PropertyRef Name="PeriodYear" />
-            <PropertyRef Name="ComparisonDate" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="PeriodYear" Type="Int32" Nullable="false" />
           <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExtCost" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="V_ClassIdSummary">
           <Key>
@@ -2068,6 +2069,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <EntitySetMapping Name="V_ValuedInventoryByPeriod">
             <EntityTypeMapping TypeName="TimeMFGModel.V_ValuedInventoryByPeriod">
               <MappingFragment StoreEntitySet="V_ValuedInventoryByPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ExtCost" ColumnName="ExtCost" />
                 <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
