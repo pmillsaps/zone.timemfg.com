@@ -1,0 +1,103 @@
+﻿@model Time.Data.EntityModels.TimeMFG.LoadList
+
+@{
+    ViewBag.Title = String.Format("'{0}' Details", Model.Name);
+    Script.Require("jQuery");
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+    @if (ViewBag.LoadListEditor)
+    {
+        <li>@Html.ActionLink("Add Lifts to this LoadList", "JobSearch", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Upload Pictures for this LoadList", "UploadPictures", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Mark LoadList as SHIPPED", "CompleteLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>
+        @*<li>@Html.ActionLink("Move Jobs to Another Load List", "MoveLoadListJobs", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>*@
+        @*<li>@Html.ActionLink("Email Load List", "EmailLoadList", "LoadList", new { id = Model.Id }, new { @class = "btn btn-primary" })</li>*@
+    }
+</ul>
+<br /><br />
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+    <dd>@Html.DisplayFor(model => model.Name)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DateIssued)</dt>
+    <dd>@Html.DisplayFor(model => model.DateIssued)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DateRevised)</dt>
+    <dd>@Html.DisplayFor(model => model.DateRevised)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DateSchedShip)</dt>
+    <dd>@Html.DisplayFor(model => model.DateSchedShip)</dd>
+    <dt>@Html.DisplayNameFor(model => model.TruckingCompany)</dt>
+    <dd>@Html.DisplayFor(model => model.TruckingCompany)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Comments)</dt>
+    <dd>@Html.DisplayWithBreaksFor(model => model.Comments)</dd>
+    <dt>@Html.DisplayNameFor(model => model.MakeReady)</dt>
+
+    @if (Model.MakeReady == 1)
+    {
+        <dd>@Html.CheckBox("MakeReady", true, new { @disabled = "disabled" })</dd>}
+    else
+    {
+        <dd>@Html.CheckBox("MakeReady", new { @disabled = "disabled" })</dd>}
+
+    <dt>@Html.DisplayNameFor(model => model.Complete)</dt>
+
+    @if (Model.Complete == 1)
+    {
+        <dd>@Html.CheckBox("Complete", true, new { @disabled = "disabled" })</dd>}
+    else
+    {
+        <dd>@Html.CheckBox("Complete", new { @disabled = "disabled" })</dd>}
+</dl>
+
+<p>
+    @if (ViewBag.LoadListEditor)
+    {
+        @Html.ActionLink("Edit Load List", "Edit", "LoadList", new { id = Model.Id }, null) @:|
+    }
+
+</p>
+
+@using (Html.BeginForm("PrintLoadLists", "LoadList"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="hidden">
+        <input type="checkbox" name="selectedLines" value="@Model.Id" checked="checked" />
+    </div>
+    <div class="editor-field">
+        <input type="submit" name="command" value="Print Load List(s)..." class="btn btn-primary" />&nbsp;&nbsp;
+        <input type="submit" name="command" value="Print Load List(s) With Statuses..." class="btn btn-primary" />&nbsp;&nbsp;
+    </div>
+}
+
+<br />
+
+@{Html.RenderAction("_ListLifts", "LoadList", new { id = Model.Id });}
+
+@*@Html.Partial("_ListLifts", Model.LoadListJobs)*@
+
+<br />
+
+<a id="Comments" href="javascript:toggleComments();">Toggle Special Instructions History Visibility</a>
+
+<div id="Comments">
+    @{Html.RenderAction("_ListLoadComments", "LoadList", new { id = Model.Id });}
+</div>
+
+<div id="images">
+    @{Html.RenderAction("_DisplayThumbNails", "LoadList", new { id = Model.Id });}
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () { $('.Comments').hide(); })
+        function toggleComments() {
+            $('.Comments').toggle("slow");
+        }
+    </script>
+}

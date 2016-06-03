@@ -1,0 +1,54 @@
+﻿@model Time.Data.EntityModels.Install.TimeOption
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+</div>
+
+<div>
+    <h4>Time Option</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Option)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LaborHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LaborHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaintFlag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaintFlag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiftFamily.FamilyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiftFamily.FamilyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { LiftFamilyId = Model.LiftFamilyId })
+</p>

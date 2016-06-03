@@ -1,0 +1,107 @@
+﻿@model Time.Epicor.ViewModels.PartSearchVM
+
+@{
+    ViewBag.Title = "Epicor 10 Part Search";
+    if(Model.PartData != null) {ViewBag.Title = String.Format("Epicor 10 Part Search [{0}]", Model.PartData.Count);}
+}
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+
+    @using(Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        <div class="col-md-12">
+
+            <div class="col-md-1">
+                <input type="submit" name="submitButton" value="Search" />
+            </div>
+
+            @*<div class="col-md-1">
+                @Html.DisplayNameFor(model => model.Query)
+            </div>*@
+
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Query)
+            </div>
+            <div class="col-md-1">
+                @Html.DisplayNameFor(model => model.Type)
+            </div>
+
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.Type, new { @class = "form-control" })
+            </div>
+            <div class="col-md-1">
+                @Html.DisplayNameFor(model => model.Status)
+            </div>
+
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.Status, new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ShowService)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ShowService)
+        </div>
+
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ShowReedrill)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ShowReedrill)
+        </div>
+
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ShowExportVT)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ShowExportVT)
+        </div>
+
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ShowPrototypes)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ShowPrototypes)
+        </div>
+
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ShowMRO)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ShowMRO)
+        </div>
+
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ShowSpecial)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ShowSpecial)
+        </div>
+        @if(Model.PartData != null){
+        <div class="col-md-1">
+            @Html.DisplayNameFor(model => model.ExportToExcel)
+        </div>
+
+        <div class="col-md-1">
+            @Html.EditorFor(model => model.ExportToExcel)
+        </div>
+        }
+    </div>
+
+    }
+
+    @if(Model.PartData != null){
+    @Html.Partial("_PartDetails", Model.PartData)
+    }
+</div>

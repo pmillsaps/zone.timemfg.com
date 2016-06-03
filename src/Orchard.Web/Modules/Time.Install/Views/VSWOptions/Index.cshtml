@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.VSWOption>
+
+@{
+    ViewBag.Title = "VSW Install Options Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+</div>
+
+<div class="alert alert-warning">
+    <p>There are two ways of adding options to an Option Group:</p>
+    <p>
+        1. If you want to add just one option, click on the link "Add VSW Install Option (One at a time)". Using this page will allow you to
+        import one option at a time.
+    </p>
+    <p>
+        2. If you want to add more than one option at a time, click on the link "Add VSW Install Options (Two or more at a time)". On this page you will be 
+        able to copy and paste as many options as you want from the EXCEL Master sheet and import them to the website.
+    </p>
+</div>
+
+<p>
+    @Html.ActionLink("Add VSW Install Option (One at a time)", "Create")
+</p>
+<p>
+    @Html.ActionLink("Add VSW Install Options (Two or more at a time)", "AddOptions")
+</p>
+
+<hr />
+@using (Html.BeginForm("Index", "VSWOptions", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
+        <div class="col-sm-3">@Html.DropDownList("GroupId", optionLabel: "--- Select an Option Group ---")</div>
+        <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+    </div>
+}
+
+<hr />
+<table class="table table-striped">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.OptionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaborHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaintFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftFamily.FamilyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptionGroup.GroupName)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="5" class="lead">No rows matched search criteria</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OptionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LaborHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaintFlag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftFamily.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OptionGroup.GroupName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+</table>

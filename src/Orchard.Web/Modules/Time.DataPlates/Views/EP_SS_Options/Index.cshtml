@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Time.Data.EntityModels.DataPlates.EP_SS_Options>
+
+@{
+    ViewBag.Title = "EP/SS Options Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to DataPlates Index", "Index", "Home")
+    </p>
+</div>
+
+<p>
+    @Html.ActionLink("Create New EP/SS Option", "Create")
+</p>
+<hr />
+@using (Html.BeginForm("Index", "EP_SS_Options", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-2">@Html.Label("Search By Option:")</div>
+        <div class="col-md-4">@Html.TextBox("search")</div>
+        <div class="col-md-4">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<hr />
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Option)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Voltage)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="2">
+                No rows match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Option)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Voltage)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Option }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Option }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Option })
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to DataPlates Index", "Index", "Home")
+    </p>
+</div>

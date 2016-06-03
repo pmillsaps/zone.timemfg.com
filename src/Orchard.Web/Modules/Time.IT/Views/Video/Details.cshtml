@@ -1,0 +1,41 @@
+﻿@model Time.Data.EntityModels.ITInventory.Ref_VideoCard
+
+@{
+    ViewBag.Title = "Video Card Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Ref_VideoCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoCard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoCard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManufacturerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManufacturerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoMemory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoMemory)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
