@@ -650,7 +650,7 @@ namespace Time.Support.Controllers
                 return new HttpUnauthorizedResult();
             TicketProject ticketProject = _db.TicketProjects.Find(id);
 
-            var requestors = new SelectList(_db.TicketProjects.DistinctBy(x => x.RequestedBy).ToList(), "RequestedBy", "RequestedBy", ticketProject.RequestedBy);
+            var requestors = new SelectList(_db.TicketProjects.DistinctBy(x => x.RequestedBy).OrderBy(x => x.RequestedBy).ToList(), "RequestedBy", "RequestedBy", ticketProject.RequestedBy);
             //select new SelectListItem
             //{
             //    Text = col.RequestedBy,
