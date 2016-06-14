@@ -404,8 +404,9 @@ namespace Time.Support.Controllers
             if (ticket.PriorityID != ticketProject.PriorityID)
             {
                 var priority = _db.TicketPriorities.Single(x => x.PriorityID == ticketProject.PriorityID);
+                var oldPriority = _db.TicketPriorities.Single(x => x.PriorityID == ticket.PriorityID);
                 ticket.PriorityID = ticketProject.PriorityID;
-                string updateNote = string.Format("Zone: Priority was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketPriority.Name, priority.Name);
+                string updateNote = string.Format("Zone: Priority was changed: {0} -> {1}" + Environment.NewLine, oldPriority.Name, priority.Name);
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
