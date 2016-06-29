@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.InstallQuote>
+
+@{
+    ViewBag.Title = "List Of Installation Quotes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to Aerial Quote List", "Index")
+</div>
+
+<hr />
+
+<table class="table table-striped">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.LiftName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftQuoteNumber)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.LiftQuoteLine)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.LiftInstallLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstallQuotedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPriceLabor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPriceMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalInstallPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalInstallHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPaintHours)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LiftName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LiftQuoteNumber)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.LiftQuoteLine)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.LiftInstallLine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstallQuotedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuoteDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPriceLabor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPriceMaterial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalInstallPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalInstallHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPaintHours)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
+        </td>
+    </tr>
+}
+
+</table>

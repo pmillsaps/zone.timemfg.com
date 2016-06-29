@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Time.Admin.EntityModels.Versalift.VersaliftLiftCategory>
+
+@{
+    ViewBag.Title = "Versalift Lift Categories for versalift.com";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Add New Category", "VLC_Create")
+</p>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryGroup)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CategoryParentID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.isEnabled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OverrideURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoURL)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryGroup)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CategoryParentID)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.isEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sequence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverrideURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VideoURL)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "VLC_Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "VLC_Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "VLC_Delete", new { id = item.CategoryID })
+            </td>
+        </tr>
+    }
+
+</table>
