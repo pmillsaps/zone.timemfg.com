@@ -40,5 +40,7 @@ namespace Time.Data.EntityModels.Production
         public int MtlSeq { get; set; }
         public bool ViewAsAsm { get; set; }
         public System.Guid Id { get; set; }
+        public string WarehouseCode { get; set; }
+        public string Plant { get; set; }
     }
 }

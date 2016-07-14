@@ -1372,20 +1372,22 @@ warning 6002: The table/view 'Prod.dbo.V_WhereUsed' does not have a primary key 
           <Property Name="PersonID" Type="nvarchar" MaxLength="8" />
           <Property Name="BuyerID" Type="nvarchar" MaxLength="8" />
           <Property Name="VendorID" Type="nvarchar" MaxLength="8" />
-          <Property Name="binqtyonhand" Type="decimal" Precision="38" Scale="8" />
           <Property Name="LastMaterialCost" Type="decimal" Precision="15" Scale="5" />
           <Property Name="VenPartNum" Type="nvarchar" MaxLength="50" />
-          <Property Name="Latest_Rev" Type="nvarchar" MaxLength="12" />
-          <Property Name="OpenJobCount" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="PhantomBOM" Type="bit" />
+          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" />
           <Property Name="OnHandQty" Type="decimal" Precision="22" Scale="8" />
-          <Property Name="OpenJobs" Type="int" />
           <Property Name="MtlPartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FixedQty" Type="bit" Nullable="false" />
           <Property Name="RelatedOperation" Type="int" Nullable="false" />
           <Property Name="MtlSeq" Type="int" Nullable="false" />
           <Property Name="ViewAsAsm" Type="bit" Nullable="false" />
+          <Property Name="Plant" Type="nvarchar" MaxLength="8" />
+          <Property Name="binqtyonhand" Type="decimal" Precision="38" Scale="8" />
+          <Property Name="Latest_Rev" Type="nvarchar" MaxLength="12" />
+          <Property Name="OpenJobCount" Type="int" />
+          <Property Name="OpenJobs" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1954,20 +1956,22 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
     [V_WhereUsed].[PersonID] AS [PersonID], 
     [V_WhereUsed].[BuyerID] AS [BuyerID], 
     [V_WhereUsed].[VendorID] AS [VendorID], 
-    [V_WhereUsed].[binqtyonhand] AS [binqtyonhand], 
     [V_WhereUsed].[LastMaterialCost] AS [LastMaterialCost], 
     [V_WhereUsed].[VenPartNum] AS [VenPartNum], 
-    [V_WhereUsed].[Latest_Rev] AS [Latest_Rev], 
-    [V_WhereUsed].[OpenJobCount] AS [OpenJobCount], 
     [V_WhereUsed].[Name] AS [Name], 
     [V_WhereUsed].[PhantomBOM] AS [PhantomBOM], 
+    [V_WhereUsed].[WarehouseCode] AS [WarehouseCode], 
     [V_WhereUsed].[OnHandQty] AS [OnHandQty], 
-    [V_WhereUsed].[OpenJobs] AS [OpenJobs], 
     [V_WhereUsed].[MtlPartNum] AS [MtlPartNum], 
     [V_WhereUsed].[FixedQty] AS [FixedQty], 
     [V_WhereUsed].[RelatedOperation] AS [RelatedOperation], 
     [V_WhereUsed].[MtlSeq] AS [MtlSeq], 
     [V_WhereUsed].[ViewAsAsm] AS [ViewAsAsm], 
+    [V_WhereUsed].[Plant] AS [Plant], 
+    [V_WhereUsed].[binqtyonhand] AS [binqtyonhand], 
+    [V_WhereUsed].[Latest_Rev] AS [Latest_Rev], 
+    [V_WhereUsed].[OpenJobCount] AS [OpenJobCount], 
+    [V_WhereUsed].[OpenJobs] AS [OpenJobs], 
     [V_WhereUsed].[Id] AS [Id]
     FROM [dbo].[V_WhereUsed] AS [V_WhereUsed]</DefiningQuery>
           </EntitySet>
@@ -2858,6 +2862,8 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="MtlSeq" Type="Int32" Nullable="false" />
           <Property Name="ViewAsAsm" Type="Boolean" Nullable="false" />
           <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="WarehouseCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Plant" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_YardReport">
           <Key>
@@ -4006,6 +4012,8 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <EntitySetMapping Name="V_WhereUsed">
             <EntityTypeMapping TypeName="ProductionModel.V_WhereUsed">
               <MappingFragment StoreEntitySet="V_WhereUsed">
+                <ScalarProperty Name="Plant" ColumnName="Plant" />
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ViewAsAsm" ColumnName="ViewAsAsm" />
                 <ScalarProperty Name="MtlSeq" ColumnName="MtlSeq" />
