@@ -1137,6 +1137,7 @@ warning 6002: The table/view 'Prod.dbo.V_NowReport' does not have a primary key 
           <Property Name="Part" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="QtyShortage" Type="decimal" Precision="23" Scale="8" />
+          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" />
           <Property Name="QtyOnHand" Type="decimal" Precision="22" Scale="8" />
           <Property Name="QtyAvailable" Type="decimal" Precision="24" Scale="8" />
           <Property Name="Bin" Type="nvarchar" MaxLength="10" />
@@ -1792,6 +1793,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
     [V_NowReport].[Part] AS [Part], 
     [V_NowReport].[Description] AS [Description], 
     [V_NowReport].[QtyShortage] AS [QtyShortage], 
+    [V_NowReport].[WarehouseCode] AS [WarehouseCode], 
     [V_NowReport].[QtyOnHand] AS [QtyOnHand], 
     [V_NowReport].[QtyAvailable] AS [QtyAvailable], 
     [V_NowReport].[Bin] AS [Bin], 
@@ -3092,6 +3094,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="LaborAssySeq" Type="Int32" />
           <Property Name="OprSeq" Type="Int32" />
           <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="WarehouseCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="JobOper">
           <Key>
@@ -4173,6 +4176,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <EntitySetMapping Name="V_NowReport">
             <EntityTypeMapping TypeName="ProductionModel.V_NowReport">
               <MappingFragment StoreEntitySet="V_NowReport">
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
                 <ScalarProperty Name="LaborAssySeq" ColumnName="LaborAssySeq" />

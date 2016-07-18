@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="462905cdb942468bac65443207d2bafb" Name="Diagram1" ZoomLevel="16">
+      <Diagram DiagramId="462905cdb942468bac65443207d2bafb" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="ProductionModel.Part" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProductionModel.SysAgentTask" Width="1.5" PointX="3.5" PointY="4.875" />
         <EntityTypeShape EntityType="ProductionModel.IMJobOper" Width="1.5" PointX="11.5" PointY="0.75" />

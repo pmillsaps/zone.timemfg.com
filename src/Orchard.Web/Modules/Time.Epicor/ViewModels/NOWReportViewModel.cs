@@ -162,6 +162,7 @@ namespace Time.Epicor.ViewModels
                 Part = x.Part,
                 Description = x.Description,
                 QtyShortage = x.QtyShortage ?? 0,
+                WarehouseCode = x.WarehouseCode,
                 QtyOnHand = x.QtyOnHand ?? 0,
                 QtyAvailable = x.QtyAvailable ?? -(x.QtyShortage ?? 0),
                 Bin = x.Bin ?? x.PrimBin,
@@ -192,7 +193,7 @@ namespace Time.Epicor.ViewModels
                 DrawStepDate = x.DrawStepDate ?? new DateTime(1900, 1, 1),
                 Id = x.Id,
                 RowColor = ""
-            }).Where(x => x.PartClass != "PNT" && x.BackFlush != true);
+            }).Where(x => x.PartClass != "PNT" && x.BackFlush != true && (x.WarehouseCode == "VLI" || x.QtyOnHand > 0)).OrderBy(x => x.SerialNumber);
 
             return qry;
         }

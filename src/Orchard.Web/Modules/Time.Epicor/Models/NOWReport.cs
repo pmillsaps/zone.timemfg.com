@@ -17,6 +17,7 @@ namespace Time.Epicor.Models
         public int MtlSeq { get; set; }
         public string RelOpDescription { get; set; }
         public Decimal QtyShortage { get; set; }
+        public string WarehouseCode { get; set; }
         public Decimal OnHand { get; set; }
         public Decimal QtyAvailable { get; set; }
         public string Bin { get; set; }
