@@ -5,13 +5,13 @@
 <tr class="JobStatus">
     <td></td>
     <td colspan="9">
-        @foreach (var item in Model.Where(x => x.IgnoreFlag != 1))
+        @foreach (var item in Model.Where(x => x.IgnoreFlag != true))
         {
             count++;
             @Html.DisplayFor(modelItem => item.OpCode) @: :
             @*@Html.DisplayFor(modelItem => item.OpComplete)*@
 
-            if (item.OpComplete == 1)
+            if (item.OpComplete)
             {
                 @Html.CheckBox("OpComplete", true, new { @disabled = "disabled" });
             }

@@ -65,13 +65,13 @@ namespace Time.Epicor.Controllers
 
             if (id == 0)
             {
-                loadlists = loadlists.Where(x => x.Complete == id);
+                loadlists = loadlists.Where(x => x.Complete == (id == 1));
                 loadlists = loadlists.OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
             }
             else
             {
-                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == DateTime.Now.Year || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
-                else loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == LoadListYear || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == true && (x.DateSchedShip.Value.Year == DateTime.Now.Year || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+                else loadlists = loadlists.Where(x => x.Complete == true && (x.DateSchedShip.Value.Year == LoadListYear || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
             }
 
             ViewBag.Complete = id;
@@ -91,15 +91,15 @@ namespace Time.Epicor.Controllers
             if (vm == null) vm = new AsmInspectViewModel();
             var jobs = _db.LoadListJobs
                 .Include(x => x.LoadList)
-                .Where(x => x.LoadList.MakeReady == 1 ||
-                    x.LoadList.Complete != 1 &&
+                .Where(x => x.LoadList.MakeReady ||
+                    x.LoadList.Complete != true &&
                     x.LoadList.DateSchedShip <= vm.EndDate).AsEnumerable();
             // jobs = jobs.Where(x => x.LShip != true);
 
             jobs = jobs.Where(x =>
                 (!vm.Claimed && x.Claimed == false) ||
                 (!vm.Tested && x.Tested == false) ||
-                (!vm.Posted && x.Posted == false) ||
+                (!vm.Posted && x.Blue == false) ||
                 (!vm.Green && x.Green == false));
 
             jobs = jobs.OrderBy(x => x.LoadList.MakeReady)
@@ -133,7 +133,7 @@ namespace Time.Epicor.Controllers
             var loadListJob = _db.LoadListJobs.FirstOrDefault(x => x.Id == id);
             if (loadListJob == null) return RedirectToAction("EditJob", new { id = id });
 
-            var loadLists = new SelectList(_db.LoadLists.Where(x => x.Complete != 1 && x.Id != loadListJob.LoadListId).OrderBy(x => x.Name),
+            var loadLists = new SelectList(_db.LoadLists.Where(x => x.Complete != true && x.Id != loadListJob.LoadListId).OrderBy(x => x.Name),
                 "id", "name");
 
             var vm = new MoveLoadListJobVM() { LoadListJobId = id, LoadLists = loadLists, JobNumber = loadListJob.JobNumber, OriginalLLId = loadListJob.LoadListId };
@@ -173,7 +173,7 @@ namespace Time.Epicor.Controllers
                 }
             }
 
-            vm.LoadLists = new SelectList(_db.LoadLists.Where(x => x.Complete != 1 && x.Id != llj.LoadListId).OrderBy(x => x.Name),
+            vm.LoadLists = new SelectList(_db.LoadLists.Where(x => x.Complete != true && x.Id != llj.LoadListId).OrderBy(x => x.Name),
                 "id", "name");
 
             return View(vm);
@@ -258,8 +258,8 @@ namespace Time.Epicor.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
                 return new HttpUnauthorizedResult();
-            load.LoadList.Complete = Convert.ToByte(load.Complete);
-            load.LoadList.MakeReady = Convert.ToByte(load.MakeReady);
+            load.LoadList.Complete = load.Complete;
+            load.LoadList.MakeReady = load.MakeReady;
 
             var exists = _db.LoadLists.FirstOrDefault(x => x.Name == load.LoadList.Name);
             if (exists != null)
@@ -330,7 +330,7 @@ namespace Time.Epicor.Controllers
                 return new HttpUnauthorizedResult();
             var load = _db.LoadLists.FirstOrDefault(x => x.Id == id);
             if (load == null) return HttpNotFound();
-            var llvm = new LoadListView() { LoadList = load, Complete = load.Complete == 1, MakeReady = load.MakeReady == 1 };
+            var llvm = new LoadListView() { LoadList = load, Complete = load.Complete == true, MakeReady = load.MakeReady == true };
 
             return View(llvm);
         }
@@ -355,8 +355,8 @@ namespace Time.Epicor.Controllers
                 _db.Entry(loadList).State = EntityState.Modified;
                 //_db.ObjectStateManager.ChangeObjectState(loadList, EntityState.Modified);
                 loadList.DateRevised = DateTime.Now;
-                loadList.Complete = Convert.ToByte(vm.Complete);
-                loadList.MakeReady = Convert.ToByte(vm.MakeReady);
+                loadList.Complete = vm.Complete;
+                loadList.MakeReady = vm.MakeReady;
                 _db.SaveChanges();
 
                 SaveLoadListComment(loadList);
@@ -416,7 +416,7 @@ namespace Time.Epicor.Controllers
                 return new HttpUnauthorizedResult();
             var load = _db.LoadLists.Single(x => x.Id == id);
 
-            load.Complete = 1;
+            load.Complete = true;
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -726,13 +726,13 @@ namespace Time.Epicor.Controllers
 
             if (id == 0)
             {
-                loadlists = loadlists.Where(x => x.Complete == id);
+                loadlists = loadlists.Where(x => x.Complete == (id == 1));
                 loadlists = loadlists.OrderBy(x => x.Name).ThenBy(x => x.MakeReady);
             }
             else
             {
-                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == DateTime.Now.Year || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
-                else loadlists = loadlists.Where(x => x.Complete == 1 && (x.DateSchedShip.Value.Year == LoadListYear || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+                if (LoadListYear == null) loadlists = loadlists.Where(x => x.Complete == true && (x.DateSchedShip.Value.Year == DateTime.Now.Year || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
+                else loadlists = loadlists.Where(x => x.Complete == true && (x.DateSchedShip.Value.Year == LoadListYear || x.DateSchedShip.Value.Year == null)).OrderBy(x => x.Name);
             }
 
             ViewBag.Complete = id;
@@ -957,7 +957,7 @@ namespace Time.Epicor.Controllers
             else
                 ModelState.AddModelError("", "You must select at least one LoadList to continue...");
 
-            var loadlists = _db.LoadLists.Where(x => x.Complete != 1).OrderBy(x => x.DateSchedShip);
+            var loadlists = _db.LoadLists.Where(x => x.Complete != true).OrderBy(x => x.DateSchedShip);
 
             ViewBag.View = "Open";
             return View(loadlists);
@@ -1018,7 +1018,7 @@ namespace Time.Epicor.Controllers
                         JobNumber = newLift.JobNumber,
                         LoadListJobId = newLift.Id,
                         OpCode = oper.OpCode,
-                        OpComplete = Convert.ToByte(oper.OpComplete),
+                        OpComplete = oper.OpComplete,
                         OprSeq = oper.OprSeq
                     };
                     _db.LoadListJobStatus.Add(lls);
@@ -1030,7 +1030,7 @@ namespace Time.Epicor.Controllers
                     {
                         existing.AssemblySeq = 1;
                         existing.OprSeq = oper.OprSeq;
-                        if (oper.OpComplete == true) existing.OpComplete = 1;
+                        if (oper.OpComplete == true) existing.OpComplete = true;
                         _db.SaveChanges();
                     }
                 }

@@ -28,13 +28,28 @@
             <p> Test </p>
         </th>
         <th>
-            <p> Post </p>
+            <p> Blue </p>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Green)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LShip)
+        </th>
+        <th>
+            <p>  Box  </p>
+        </th>
+        <th>
+            <p> Ship </p>
+        </th>
+        <th>
+            <p>  Ped </p>
+        </th>
+        <th>
+            <p>  OR  </p>
+        </th>
+        <th>
+            <p>Bukt </p>
         </th>
     </tr>
 
@@ -57,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.LoadList.Name)
             </td>
             <td>
-                @Html.EditorFor(modelItem => item.Claimed, new { htmlAttributes = new { @class = "form-control", disabled="disabled" } })
+                @Html.EditorFor(modelItem => item.Claimed, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
             </td>
             <td>
                 @Html.EditorFor(modelItem => item.ReadyToTest, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
@@ -66,13 +81,37 @@
                 @Html.EditorFor(modelItem => item.Tested, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
             </td>
             <td>
-                @Html.EditorFor(modelItem => item.Posted, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.EditorFor(modelItem => item.Blue, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
             </td>
             <td>
                 @Html.EditorFor(modelItem => item.Green, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
             </td>
             <td>
                 @Html.EditorFor(modelItem => item.LShip, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Box, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Ship, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @if (item.Ped_Ignored != true)
+                {
+                    @Html.EditorFor(modelItem => item.Ped, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                }
+            </td>
+            <td>
+                @if (item.OutRigger_Ignored != true)
+                {
+                    @Html.EditorFor(modelItem => item.OutRigger, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                }
+            </td>
+            <td>
+                @if (item.Bucket_Ignored != true)
+                {
+                    @Html.EditorFor(modelItem => item.Bucket, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                }
             </td>
         </tr>
     }

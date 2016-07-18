@@ -20,8 +20,8 @@ namespace Time.Data.EntityModels.TimeMFG
         public int AssemblySeq { get; set; }
         public int OprSeq { get; set; }
         public string OpCode { get; set; }
-        public byte OpComplete { get; set; }
-        public Nullable<byte> IgnoreFlag { get; set; }
+        public bool OpComplete { get; set; }
+        public Nullable<bool> IgnoreFlag { get; set; }
     
         public virtual LoadListJob LoadListJob { get; set; }
     }

@@ -29,9 +29,9 @@ namespace Time.Data.EntityModels.TimeMFG
         public string Name { get; set; }
         public string TruckingCompany { get; set; }
         public string Comments { get; set; }
-        public byte Complete { get; set; }
+        public bool Complete { get; set; }
         public string Distributors { get; set; }
-        public byte MakeReady { get; set; }
+        public bool MakeReady { get; set; }
     
         public virtual ICollection<LoadListComment> LoadListComments { get; set; }
         public virtual ICollection<LoadListImage> LoadListImages { get; set; }

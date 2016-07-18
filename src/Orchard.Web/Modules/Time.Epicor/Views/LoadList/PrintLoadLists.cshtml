@@ -11,14 +11,14 @@
 
 <ul class="list-inline">
     <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
-@if (ViewBag.Complete == 1)
-{
-    <li>@Html.ActionLink("Show Only Open LoadLists", "PrintLoadLists", "LoadList",  new { id = 0 }, new { @class = "btn btn-primary" })</li>
-}
-else
-{
-    <li>@Html.ActionLink("Show Only Completed LoadLists", "PrintLoadLists", "LoadList",  new { id = 1 }, new { @class = "btn btn-primary" })</li>
-}
+    @if (ViewBag.Complete == 1)
+    {
+        <li>@Html.ActionLink("Show Only Open LoadLists", "PrintLoadLists", "LoadList", new { id = 0 }, new { @class = "btn btn-primary" })</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Show Only Completed LoadLists", "PrintLoadLists", "LoadList", new { id = 1 }, new { @class = "btn btn-primary" })</li>
+    }
 </ul>
 
 <hr />
@@ -87,7 +87,7 @@ else
         {
             <tr>
                 <td>
-                    <input type="checkbox" name="selectedLines" value="@item.Id" id="selectCheck"/>
+                    <input type="checkbox" name="selectedLines" value="@item.Id" id="selectCheck" />
                     @*<input type="checkbox" checked="yes" name="selectedLines" value="@item.jobnum" />*@
                 </td>
                 <td>
@@ -108,7 +108,7 @@ else
                 <td>
                     @Html.DisplayFor(modelItem => item.Comments)
                 </td>
-                @if (item.Complete == 1)
+                @if (item.Complete)
                 {
                     <td>
                         @Html.CheckBox("Complete", true, new { @disabled = "disabled" })
@@ -120,7 +120,7 @@ else
                         @Html.CheckBox("Complete", new { @disabled = "disabled" })
                     </td>
                 }
-                @if (item.MakeReady == 1)
+                @if (item.MakeReady)
                 {
                     <td>
                         @Html.CheckBox("MakeReady", true, new { @disabled = "disabled" })
@@ -138,11 +138,10 @@ else
                 </td>
             </tr>
         }
-
     </table>
-    
+
     <hr />
-    
+
     <div class="row">
         <div class="col-md-1">
             @Html.Label("Email Address :", new { @class = "control-label col-md-1" })
@@ -152,7 +151,7 @@ else
         </div>
     </div>
     <br />
-    
+
     <div class="row">
         <div class="col-md-2">
             <input type="submit" name="command" value="Print Load List(s)..." class="btn btn-primary" />&nbsp;&nbsp;
@@ -160,8 +159,8 @@ else
         <div class="col-md-4">
             <input type="submit" name="command" value="Print Load List(s) With Statuses..." class="btn btn-primary" />&nbsp;&nbsp;
         </div>
-    </div>  
-    
+    </div>
+
     <br />
 }
 

@@ -34,8 +34,8 @@ namespace Time.Data.EntityModels.TimeMFG
         public string ShipTo { get; set; }
         public string SalesOrder { get; set; }
     
-        public virtual LoadList LoadList { get; set; }
         public virtual ICollection<LoadListJobComment> LoadListJobComments { get; set; }
         public virtual ICollection<LoadListJobStatu> LoadListJobStatus { get; set; }
+        public virtual LoadList LoadList { get; set; }
     }
 }

@@ -16,9 +16,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TruckingCompany" Type="nvarchar" MaxLength="75" />
           <Property Name="Comments" Type="nvarchar(max)" />
-          <Property Name="Complete" Type="tinyint" Nullable="false" />
+          <Property Name="Complete" Type="bit" Nullable="false" />
           <Property Name="Distributors" Type="nvarchar" MaxLength="200" />
-          <Property Name="MakeReady" Type="tinyint" Nullable="false" />
+          <Property Name="MakeReady" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="LoadList_Distributor">
           <Key>
@@ -103,8 +103,8 @@
           <Property Name="AssemblySeq" Type="int" Nullable="false" />
           <Property Name="OprSeq" Type="int" Nullable="false" />
           <Property Name="OpCode" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="OpComplete" Type="tinyint" Nullable="false" />
-          <Property Name="IgnoreFlag" Type="tinyint" />
+          <Property Name="OpComplete" Type="bit" Nullable="false" />
+          <Property Name="IgnoreFlag" Type="bit" />
         </EntityType>
         <EntityType Name="Message_Type">
           <Key>
@@ -399,6 +399,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ClassIdSummary' does not have a prim
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_ValuedInventoryByPeriod">
+          
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -834,25 +835,6 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TimeMFGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="LoadList">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateRevised" Type="DateTime" Precision="3" />
-          <Property Name="DateSchedShip" Type="DateTime" Precision="3" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TruckingCompany" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Complete" Type="Byte" Nullable="false" />
-          <Property Name="Distributors" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MakeReady" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="LoadListComments" Relationship="Self.FK_LoadListComment_LoadList" FromRole="LoadList" ToRole="LoadListComment" />
-          <NavigationProperty Name="LoadListImages" Relationship="Self.FK_LoadListImage_LoadList" FromRole="LoadList" ToRole="LoadListImage" />
-          <NavigationProperty Name="LoadListJobs" Relationship="Self.FK_LoadListJobs_LoadList" FromRole="LoadList" ToRole="LoadListJobs" />
-          <NavigationProperty Name="LoadListDistributors" Relationship="Self.LoadList_Distributor" FromRole="LoadList" ToRole="LoadListDistributors" />
-        </EntityType>
         <EntityType Name="LoadListComment">
           <Key>
             <PropertyRef Name="Id" />
@@ -862,7 +844,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LoadList" Relationship="Self.FK_LoadListComment_LoadList" FromRole="LoadListComment" ToRole="LoadList" />
+          <NavigationProperty Name="LoadList" Relationship="TimeMFGModel.FK_LoadListComment_LoadList" FromRole="LoadListComment" ToRole="LoadList" />
         </EntityType>
         <EntityType Name="LoadListDistributor">
           <Key>
@@ -871,7 +853,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LoadLists" Relationship="Self.LoadList_Distributor" FromRole="LoadListDistributors" ToRole="LoadList" />
+          <NavigationProperty Name="LoadLists" Relationship="TimeMFGModel.LoadList_Distributor" FromRole="LoadListDistributor" ToRole="LoadList" />
         </EntityType>
         <EntityType Name="LoadListEmail">
           <Key>
@@ -891,7 +873,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="FilePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UploadedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="LoadList" Relationship="Self.FK_LoadListImage_LoadList" FromRole="LoadListImage" ToRole="LoadList" />
+          <NavigationProperty Name="LoadList" Relationship="TimeMFGModel.FK_LoadListImage_LoadList" FromRole="LoadListImage" ToRole="LoadList" />
         </EntityType>
         <EntityType Name="LoadListJobComment">
           <Key>
@@ -921,23 +903,9 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="ShipTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SalesOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LoadList" Relationship="Self.FK_LoadListJobs_LoadList" FromRole="LoadListJobs" ToRole="LoadList" />
           <NavigationProperty Name="LoadListJobComments" Relationship="Self.FK_LoadListJobComment_LoadListJobs" FromRole="LoadListJobs" ToRole="LoadListJobComment" />
-          <NavigationProperty Name="LoadListJobStatus" Relationship="Self.FK_LoadListJobStatus_LoadListJobs" FromRole="LoadListJobs" ToRole="LoadListJobStatus" />
-        </EntityType>
-        <EntityType Name="LoadListJobStatu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LoadListJobId" Type="Int32" Nullable="false" />
-          <Property Name="JobNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
-          <Property Name="OprSeq" Type="Int32" Nullable="false" />
-          <Property Name="OpCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OpComplete" Type="Byte" Nullable="false" />
-          <Property Name="IgnoreFlag" Type="Byte" />
-          <NavigationProperty Name="LoadListJob" Relationship="Self.FK_LoadListJobStatus_LoadListJobs" FromRole="LoadListJobStatus" ToRole="LoadListJobs" />
+          <NavigationProperty Name="LoadListJobStatus" Relationship="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs" FromRole="LoadListJob" ToRole="LoadListJobStatu" />
+          <NavigationProperty Name="LoadList" Relationship="TimeMFGModel.FK_LoadListJobs_LoadList" FromRole="LoadListJob" ToRole="LoadList" />
         </EntityType>
         <EntityType Name="TicketAttachment">
           <Key>
@@ -1104,44 +1072,6 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="Extension" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK_LoadListComment_LoadList">
-          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="LoadListComment" Type="Self.LoadListComment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoadList">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LoadListComment">
-              <PropertyRef Name="LoadListId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoadListImage_LoadList">
-          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
-          <End Role="LoadListImage" Type="Self.LoadListImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoadList">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LoadListImage">
-              <PropertyRef Name="LoadListId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoadListJobs_LoadList">
-          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
-          <End Role="LoadListJobs" Type="Self.LoadListJob" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoadList">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LoadListJobs">
-              <PropertyRef Name="LoadListId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LoadListJobComment_LoadListJobs">
           <End Role="LoadListJobs" Type="Self.LoadListJob" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1152,20 +1082,6 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="LoadListJobComment">
-              <PropertyRef Name="LoadListJobId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoadListJobStatus_LoadListJobs">
-          <End Role="LoadListJobs" Type="Self.LoadListJob" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="LoadListJobStatus" Type="Self.LoadListJobStatu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoadListJobs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LoadListJobStatus">
               <PropertyRef Name="LoadListJobId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1326,19 +1242,13 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="LoadList_Distributor">
-          <End Role="LoadList" Type="Self.LoadList" Multiplicity="*" />
-          <End Role="LoadListDistributors" Type="Self.LoadListDistributor" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="TimeMFGEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="LoadLists" EntityType="Self.LoadList" />
           <EntitySet Name="LoadListComments" EntityType="Self.LoadListComment" />
           <EntitySet Name="LoadListDistributors" EntityType="Self.LoadListDistributor" />
           <EntitySet Name="LoadListEmails" EntityType="Self.LoadListEmail" />
           <EntitySet Name="LoadListImages" EntityType="Self.LoadListImage" />
           <EntitySet Name="LoadListJobComments" EntityType="Self.LoadListJobComment" />
           <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJob" />
-          <EntitySet Name="LoadListJobStatus" EntityType="Self.LoadListJobStatu" />
           <EntitySet Name="TicketAttachments" EntityType="Self.TicketAttachment" />
           <EntitySet Name="TicketCategories" EntityType="Self.TicketCategory" />
           <EntitySet Name="TicketDepartments" EntityType="Self.TicketDepartment" />
@@ -1350,25 +1260,9 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <EntitySet Name="TicketStatusHistories" EntityType="Self.TicketStatusHistory" />
           <EntitySet Name="TicketTasks" EntityType="Self.TicketTask" />
           <EntitySet Name="TicketRequestors" EntityType="Self.TicketRequestor" />
-          <AssociationSet Name="FK_LoadListComment_LoadList" Association="Self.FK_LoadListComment_LoadList">
-            <End Role="LoadList" EntitySet="LoadLists" />
-            <End Role="LoadListComment" EntitySet="LoadListComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoadListImage_LoadList" Association="Self.FK_LoadListImage_LoadList">
-            <End Role="LoadList" EntitySet="LoadLists" />
-            <End Role="LoadListImage" EntitySet="LoadListImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoadListJobs_LoadList" Association="Self.FK_LoadListJobs_LoadList">
-            <End Role="LoadList" EntitySet="LoadLists" />
-            <End Role="LoadListJobs" EntitySet="LoadListJobs" />
-          </AssociationSet>
           <AssociationSet Name="FK_LoadListJobComment_LoadListJobs" Association="Self.FK_LoadListJobComment_LoadListJobs">
             <End Role="LoadListJobs" EntitySet="LoadListJobs" />
             <End Role="LoadListJobComment" EntitySet="LoadListJobComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoadListJobStatus_LoadListJobs" Association="Self.FK_LoadListJobStatus_LoadListJobs">
-            <End Role="LoadListJobs" EntitySet="LoadListJobs" />
-            <End Role="LoadListJobStatus" EntitySet="LoadListJobStatus" />
           </AssociationSet>
           <AssociationSet Name="FK_TicketAttachments_TicketProjects" Association="Self.FK_TicketAttachments_TicketProjects">
             <End Role="TicketProjects" EntitySet="TicketProjects" />
@@ -1422,10 +1316,6 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
             <End Role="TicketProjects" EntitySet="TicketProjects" />
             <End Role="TicketTasks" EntitySet="TicketTasks" />
           </AssociationSet>
-          <AssociationSet Name="LoadList_Distributor" Association="Self.LoadList_Distributor">
-            <End Role="LoadList" EntitySet="LoadLists" />
-            <End Role="LoadListDistributors" EntitySet="LoadListDistributors" />
-          </AssociationSet>
           <EntitySet Name="Settings" EntityType="TimeMFGModel.Setting" />
           <EntitySet Name="TicketVisibilities" EntityType="TimeMFGModel.TicketVisibility" />
           <EntitySet Name="WaterTests" EntityType="TimeMFGModel.WaterTest" />
@@ -1450,6 +1340,28 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <EntitySet Name="ValuedInventories" EntityType="TimeMFGModel.ValuedInventory" />
           <EntitySet Name="V_ValuedInventoryByPeriod" EntityType="TimeMFGModel.V_ValuedInventoryByPeriod" />
           <EntitySet Name="V_ClassIdSummary" EntityType="TimeMFGModel.V_ClassIdSummary" />
+          <EntitySet Name="LoadListJobStatus" EntityType="TimeMFGModel.LoadListJobStatu" />
+          <AssociationSet Name="FK_LoadListJobStatus_LoadListJobs" Association="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs">
+            <End Role="LoadListJob" EntitySet="LoadListJobs" />
+            <End Role="LoadListJobStatu" EntitySet="LoadListJobStatus" />
+          </AssociationSet>
+          <EntitySet Name="LoadLists" EntityType="TimeMFGModel.LoadList" />
+          <AssociationSet Name="FK_LoadListComment_LoadList" Association="TimeMFGModel.FK_LoadListComment_LoadList">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListComment" EntitySet="LoadListComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListImage_LoadList" Association="TimeMFGModel.FK_LoadListImage_LoadList">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListImage" EntitySet="LoadListImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListJobs_LoadList" Association="TimeMFGModel.FK_LoadListJobs_LoadList">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListJob" EntitySet="LoadListJobs" />
+          </AssociationSet>
+          <AssociationSet Name="LoadList_Distributor" Association="TimeMFGModel.LoadList_Distributor">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListDistributor" EntitySet="LoadListDistributors" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -1652,28 +1564,101 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="ExtCost" Type="Decimal" Nullable="false" Precision="38" Scale="10" />
           <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="LoadListJobStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadListJobId" Type="Int32" Nullable="false" />
+          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="OprSeq" Type="Int32" Nullable="false" />
+          <Property Name="OpCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OpComplete" Type="Boolean" Nullable="false" />
+          <Property Name="IgnoreFlag" Type="Boolean" />
+          <NavigationProperty Name="LoadListJob" Relationship="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs" FromRole="LoadListJobStatu" ToRole="LoadListJob" />
+        </EntityType>
+        <Association Name="FK_LoadListJobStatus_LoadListJobs">
+          <End Type="TimeMFGModel.LoadListJob" Role="LoadListJob" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeMFGModel.LoadListJobStatu" Role="LoadListJobStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadListJob">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJobStatu">
+              <PropertyRef Name="LoadListJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoadList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateRevised" Type="DateTime" Precision="3" />
+          <Property Name="DateSchedShip" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TruckingCompany" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Complete" Type="Boolean" Nullable="false" />
+          <Property Name="Distributors" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MakeReady" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LoadListComments" Relationship="TimeMFGModel.FK_LoadListComment_LoadList" FromRole="LoadList" ToRole="LoadListComment" />
+          <NavigationProperty Name="LoadListImages" Relationship="TimeMFGModel.FK_LoadListImage_LoadList" FromRole="LoadList" ToRole="LoadListImage" />
+          <NavigationProperty Name="LoadListJobs" Relationship="TimeMFGModel.FK_LoadListJobs_LoadList" FromRole="LoadList" ToRole="LoadListJob" />
+          <NavigationProperty Name="LoadListDistributors" Relationship="TimeMFGModel.LoadList_Distributor" FromRole="LoadList" ToRole="LoadListDistributor" />
+        </EntityType>
+        <Association Name="FK_LoadListComment_LoadList">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeMFGModel.LoadListComment" Role="LoadListComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListComment">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListImage_LoadList">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="1" />
+          <End Type="TimeMFGModel.LoadListImage" Role="LoadListImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListImage">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListJobs_LoadList">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="1" />
+          <End Type="TimeMFGModel.LoadListJob" Role="LoadListJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJob">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LoadList_Distributor">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="*" />
+          <End Type="TimeMFGModel.LoadListDistributor" Role="LoadListDistributor" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TimeMFGModelStoreContainer" CdmEntityContainer="TimeMFGEntities">
-          <EntitySetMapping Name="LoadLists">
-            <EntityTypeMapping TypeName="TimeMFGModel.LoadList">
-              <MappingFragment StoreEntitySet="LoadList">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
-                <ScalarProperty Name="DateRevised" ColumnName="DateRevised" />
-                <ScalarProperty Name="DateSchedShip" ColumnName="DateSchedShip" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TruckingCompany" ColumnName="TruckingCompany" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="Complete" ColumnName="Complete" />
-                <ScalarProperty Name="Distributors" ColumnName="Distributors" />
-                <ScalarProperty Name="MakeReady" ColumnName="MakeReady" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoadListComments">
             <EntityTypeMapping TypeName="TimeMFGModel.LoadListComment">
               <MappingFragment StoreEntitySet="LoadListComment">
@@ -1742,20 +1727,6 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
                 <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LoadListJobStatus">
-            <EntityTypeMapping TypeName="TimeMFGModel.LoadListJobStatu">
-              <MappingFragment StoreEntitySet="LoadListJobStatus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="LoadListJobId" ColumnName="LoadListJobId" />
-                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
-                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
-                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
-                <ScalarProperty Name="OpCode" ColumnName="OpCode" />
-                <ScalarProperty Name="OpComplete" ColumnName="OpComplete" />
-                <ScalarProperty Name="IgnoreFlag" ColumnName="IgnoreFlag" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1907,14 +1878,6 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="LoadList_Distributor" TypeName="TimeMFGModel.LoadList_Distributor" StoreEntitySet="LoadList_Distributor">
-            <EndProperty Name="LoadList">
-              <ScalarProperty Name="Id" ColumnName="LoadListId" />
-            </EndProperty>
-            <EndProperty Name="LoadListDistributors">
-              <ScalarProperty Name="Id" ColumnName="DistributorId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="TimeMFGModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
@@ -2086,6 +2049,44 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LoadListJobStatus">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListJobStatu">
+              <MappingFragment StoreEntitySet="LoadListJobStatus">
+                <ScalarProperty Name="IgnoreFlag" ColumnName="IgnoreFlag" />
+                <ScalarProperty Name="OpComplete" ColumnName="OpComplete" />
+                <ScalarProperty Name="OpCode" ColumnName="OpCode" />
+                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="LoadListJobId" ColumnName="LoadListJobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadLists">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadList">
+              <MappingFragment StoreEntitySet="LoadList">
+                <ScalarProperty Name="MakeReady" ColumnName="MakeReady" />
+                <ScalarProperty Name="Distributors" ColumnName="Distributors" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TruckingCompany" ColumnName="TruckingCompany" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateSchedShip" ColumnName="DateSchedShip" />
+                <ScalarProperty Name="DateRevised" ColumnName="DateRevised" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LoadList_Distributor" TypeName="TimeMFGModel.LoadList_Distributor" StoreEntitySet="LoadList_Distributor">
+            <EndProperty Name="LoadListDistributor">
+              <ScalarProperty Name="Id" ColumnName="DistributorId" />
+            </EndProperty>
+            <EndProperty Name="LoadList">
+              <ScalarProperty Name="Id" ColumnName="LoadListId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

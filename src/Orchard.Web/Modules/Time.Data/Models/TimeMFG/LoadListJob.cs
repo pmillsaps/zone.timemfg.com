@@ -18,7 +18,7 @@ namespace Time.Data.EntityModels.TimeMFG
             {
                 var _claimed = false;
                 var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "CLAIM");
-                if (tmp != null) _claimed = tmp.OpComplete == 1;
+                if (tmp != null) _claimed = tmp.OpComplete;
                 return _claimed;
             }
         }
@@ -31,7 +31,7 @@ namespace Time.Data.EntityModels.TimeMFG
                 var _rt = false;
                 var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "RT");
                 if (tmp == null) tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "MISC");
-                if (tmp != null) _rt = tmp.OpComplete == 1;
+                if (tmp != null) _rt = tmp.OpComplete;
                 return _rt;
             }
         }
@@ -43,20 +43,20 @@ namespace Time.Data.EntityModels.TimeMFG
             {
                 var _tested = false;
                 var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "TEST");
-                if (tmp != null) _tested = tmp.OpComplete == 1;
+                if (tmp != null) _tested = tmp.OpComplete;
                 return _tested;
             }
         }
 
-        [DisplayName("Post")]
-        public bool Posted
+        [DisplayName("Blue")]
+        public bool Blue
         {
             get
             {
-                var _posted = false;
-                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "POST");
-                if (tmp != null) _posted = tmp.OpComplete == 1;
-                return _posted;
+                var _blue = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "BLUE");
+                if (tmp != null) _blue = tmp.OpComplete;
+                return _blue;
             }
         }
 
@@ -67,7 +67,7 @@ namespace Time.Data.EntityModels.TimeMFG
             {
                 var _green = false;
                 var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "GREEN");
-                if (tmp != null) _green = tmp.OpComplete == 1;
+                if (tmp != null) _green = tmp.OpComplete;
                 return _green;
             }
         }
@@ -79,10 +79,77 @@ namespace Time.Data.EntityModels.TimeMFG
             {
                 var _lship = false;
                 var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "LSHIP");
-                if (tmp != null) _lship = tmp.OpComplete == 1;
+                if (tmp != null) _lship = tmp.OpComplete;
                 return _lship;
             }
         }
+
+        [DisplayName("  Box  ")]
+        public bool Box
+        {
+            get
+            {
+                var _box = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "BOX");
+                if (tmp != null) _box = tmp.OpComplete;
+                return _box;
+            }
+        }
+
+        [DisplayName("Ship")]
+        public bool Ship
+        {
+            get
+            {
+                var _ship = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "SHIP");
+                if (tmp != null) _ship = tmp.OpComplete;
+                return _ship;
+            }
+        }
+
+        [DisplayName("OR")]
+        public bool OutRigger
+        {
+            get
+            {
+                var _outrigger = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "OR");
+                if (tmp != null) _outrigger = tmp.OpComplete;
+                if (tmp != null && tmp.IgnoreFlag == true) OutRigger_Ignored = true; else OutRigger_Ignored = false;
+                return _outrigger;
+            }
+        }
+
+        [DisplayName("Ped")]
+        public bool Ped
+        {
+            get
+            {
+                var _ped = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "PED");
+                if (tmp != null) _ped = tmp.OpComplete;
+                if (tmp != null && tmp.IgnoreFlag == true) Ped_Ignored = true; else Ped_Ignored = false;
+                return _ped;
+            }
+        }
+
+        [DisplayName("Bucket")]
+        public bool Bucket
+        {
+            get
+            {
+                var _bucket = false;
+                var tmp = this.LoadListJobStatus.FirstOrDefault(x => x.OpCode.ToUpper() == "BUCKET");
+                if (tmp != null) _bucket = tmp.OpComplete;
+                if (tmp != null && tmp.IgnoreFlag == true) Bucket_Ignored = true; else Bucket_Ignored = false;
+                return _bucket;
+            }
+        }
+
+        public bool Bucket_Ignored { get; set; }
+        public bool OutRigger_Ignored { get; set; }
+        public bool Ped_Ignored { get; set; }
     }
 
     public class LoadListJobMetadata

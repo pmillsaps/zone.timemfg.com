@@ -25,14 +25,12 @@ namespace Time.Data.EntityModels.TimeMFG
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<LoadList> LoadLists { get; set; }
         public virtual DbSet<LoadListComment> LoadListComments { get; set; }
         public virtual DbSet<LoadListDistributor> LoadListDistributors { get; set; }
         public virtual DbSet<LoadListEmail> LoadListEmails { get; set; }
         public virtual DbSet<LoadListImage> LoadListImages { get; set; }
         public virtual DbSet<LoadListJobComment> LoadListJobComments { get; set; }
         public virtual DbSet<LoadListJob> LoadListJobs { get; set; }
-        public virtual DbSet<LoadListJobStatu> LoadListJobStatus { get; set; }
         public virtual DbSet<TicketAttachment> TicketAttachments { get; set; }
         public virtual DbSet<TicketCategory> TicketCategories { get; set; }
         public virtual DbSet<TicketDepartment> TicketDepartments { get; set; }
@@ -56,5 +54,7 @@ namespace Time.Data.EntityModels.TimeMFG
         public virtual DbSet<ValuedInventory> ValuedInventories { get; set; }
         public virtual DbSet<V_ValuedInventoryByPeriod> V_ValuedInventoryByPeriod { get; set; }
         public virtual DbSet<V_ClassIdSummary> V_ClassIdSummary { get; set; }
+        public virtual DbSet<LoadListJobStatu> LoadListJobStatus { get; set; }
+        public virtual DbSet<LoadList> LoadLists { get; set; }
     }
 }

@@ -36,7 +36,7 @@
     <dd>@Html.DisplayWithBreaksFor(model => model.Comments)</dd>
     <dt>@Html.DisplayNameFor(model => model.MakeReady)</dt>
 
-    @if (Model.MakeReady == 1)
+    @if (Model.MakeReady)
     {
         <dd>@Html.CheckBox("MakeReady", true, new { @disabled = "disabled" })</dd>}
     else
@@ -45,7 +45,7 @@
 
     <dt>@Html.DisplayNameFor(model => model.Complete)</dt>
 
-    @if (Model.Complete == 1)
+    @if (Model.Complete)
     {
         <dd>@Html.CheckBox("Complete", true, new { @disabled = "disabled" })</dd>}
     else
@@ -58,13 +58,12 @@
     {
         @Html.ActionLink("Edit Load List", "Edit", "LoadList", new { id = Model.Id }, null) @:|
     }
-
 </p>
 
 @using (Html.BeginForm("PrintLoadLists", "LoadList"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="hidden">
         <input type="checkbox" name="selectedLines" value="@Model.Id" checked="checked" />
     </div>
