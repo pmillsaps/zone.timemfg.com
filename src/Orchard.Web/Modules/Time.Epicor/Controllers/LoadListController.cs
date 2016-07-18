@@ -1150,7 +1150,7 @@ namespace Time.Epicor.Controllers
         public ActionResult SearchLoadLists(string Search)
         {
             if (!String.IsNullOrEmpty(Search))
-                return View(_db.LoadListJobs.Where(x => x.JobNumber.Contains(Search) || x.SerialNo.Contains(Search)).OrderBy(x => x.LoadList.Name));
+                return View(_db.LoadListJobs.Where(x => x.JobNumber.Contains(Search.Trim()) || x.SerialNo.Contains(Search)).OrderBy(x => x.LoadList.Name));
 
             return View();
         }
