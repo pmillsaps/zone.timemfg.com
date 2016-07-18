@@ -274,6 +274,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\Reports\LoadListExternal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoadListExternal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controllers\BOMCostingController.cs" />
     <Compile Include="Controllers\DistributorOrdersController.cs" />
     <Compile Include="Controllers\DLSController.cs" />
@@ -323,7 +329,12 @@
     <Compile Include="ViewModels\ValuedInventoryVM.cs" />
     <Compile Include="ViewModels\WhereUsedBomVM.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Reports\LoadListExternal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LoadListExternal.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

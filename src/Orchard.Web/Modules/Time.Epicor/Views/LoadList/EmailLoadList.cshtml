@@ -17,6 +17,7 @@
 
 @using (Html.BeginForm("EmailLoadList", "LoadList", new { id = Model.LoadListId }))
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.LoadListId)
 
@@ -59,7 +60,7 @@
             <dt>
                 @Html.DisplayNameFor(model => model.LoadList.Complete)
             </dt>
-            @if (Model.LoadList.Complete == 0)
+            @if (Model.LoadList.Complete == false)
             {
                 <dd>
                     @Html.CheckBox("Complete", new { @disabled = "disabled" })
@@ -86,7 +87,7 @@
             <dt>
                 @Html.DisplayNameFor(model => model.LoadList.MakeReady)
             </dt>
-            @if (Model.LoadList.MakeReady == 0)
+            @if (Model.LoadList.MakeReady == false)
             {
                 <dd>
                     @Html.CheckBox("MakeReady", new { @disabled = "disabled" })
@@ -100,6 +101,6 @@
             }
         </dl>
     </div>
-}
+            }
 <hr />
 @Html.Partial("_ViewLifts", Model.LoadList.LoadListJobs)

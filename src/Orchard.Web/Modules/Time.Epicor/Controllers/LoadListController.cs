@@ -1,4 +1,5 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 using MoreLinq;
 using Orchard;
 using Orchard.Localization;
@@ -6,6 +7,7 @@ using Orchard.Logging;
 using Orchard.Themes;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -330,7 +332,7 @@ namespace Time.Epicor.Controllers
                 return new HttpUnauthorizedResult();
             var load = _db.LoadLists.FirstOrDefault(x => x.Id == id);
             if (load == null) return HttpNotFound();
-            var llvm = new LoadListView() { LoadList = load, Complete = load.Complete == true, MakeReady = load.MakeReady == true };
+            var llvm = new LoadListView() { LoadList = load, Complete = load.Complete == true, MakeReady = load.MakeReady == true, DateSchedShip = load.DateSchedShip };
 
             return View(llvm);
         }
@@ -357,6 +359,7 @@ namespace Time.Epicor.Controllers
                 loadList.DateRevised = DateTime.Now;
                 loadList.Complete = vm.Complete;
                 loadList.MakeReady = vm.MakeReady;
+                loadList.DateSchedShip = vm.DateSchedShip;
                 _db.SaveChanges();
 
                 SaveLoadListComment(loadList);
@@ -864,66 +867,66 @@ namespace Time.Epicor.Controllers
             return RedirectToAction("EmailIndex");
         }
 
-        //[HttpGet]
-        //public ActionResult EmailLoadList(int id)
-        //{
-        //    var loadlist = _db.LoadLists.Single(x => x.Id == id);
-        //    EmailLoadListVM vm = new EmailLoadListVM() { LoadListId = id, LoadList = loadlist };
+        [HttpGet]
+        public ActionResult EmailLoadList(int id)
+        {
+            var loadlist = _db.LoadLists.Single(x => x.Id == id);
+            EmailLoadListVM vm = new EmailLoadListVM() { LoadListId = id, LoadList = loadlist };
 
-        //    return View(vm);
-        //}
+            return View(vm);
+        }
 
-        //[HttpPost]
+        [HttpPost]
         //[ValidateAntiForgeryToken]
-        //public ActionResult EmailLoadList(EmailLoadListVM vm)
-        //{
-        //    if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
-        //        return new HttpUnauthorizedResult();
-        //    if (vm.selectedLines == null)
-        //    {
-        //        ModelState.AddModelError("", "You must select at least one email address...");
-        //        var loadlist = _db.LoadLists.Single(x => x.Id == vm.LoadListId);
-        //        return View(loadlist);
-        //    }
+        public ActionResult EmailLoadList(EmailLoadListVM vm)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
+                return new HttpUnauthorizedResult();
+            if (vm.selectedLines == null)
+            {
+                ModelState.AddModelError("", "You must select at least one email address...");
+                var loadlist = _db.LoadLists.Single(x => x.Id == vm.LoadListId);
+                return View(loadlist);
+            }
 
-        //    // Now generate the PDF then Email it to the selected email addresses The Crystal
-        //    // Reports version
-        //    string fileName = String.Format("LoadList_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
-        //    fileName.Replace(@"/", "").Replace(@"\", "");
-        //    var OutputDirectory = ConfigurationManager.AppSettings["LoadListEmailDirectory"];
-        //    var emailPath = Server.MapPath(OutputDirectory);
-        //    if (!Directory.Exists(emailPath)) Directory.CreateDirectory(emailPath);
-        //    CleanOutOldAttachments(emailPath);
-        //    var outputFile = Path.Combine(emailPath, fileName);
-        //    ReportClass rptH = new ReportClass();
-        //    rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadListExternal.rpt");
-        //    rptH.Load();
-        //    rptH.SetDatabaseLogon(DbLogon, DbPassword);
-        //    rptH.SetParameterValue("SelectedItems", vm.LoadListId.ToString());
+            // Now generate the PDF then Email it to the selected email addresses The Crystal
+            // Reports version
+            string fileName = String.Format("LoadList_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
+            fileName.Replace(@"/", "").Replace(@"\", "");
+            var OutputDirectory = ConfigurationManager.AppSettings["LoadListEmailDirectory"];
+            var emailPath = Server.MapPath(OutputDirectory);
+            if (!Directory.Exists(emailPath)) Directory.CreateDirectory(emailPath);
+            CleanOutOldAttachments(emailPath);
+            var outputFile = Path.Combine(emailPath, fileName);
+            ReportClass rptH = new ReportClass();
+            rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadListExternal.rpt");
+            rptH.Load();
+            rptH.SetDatabaseLogon(DbLogon, DbPassword);
+            rptH.SetParameterValue("SelectedItems", vm.LoadListId.ToString());
 
-        //    rptH.ExportToDisk(ExportFormatType.PortableDocFormat, outputFile);
-        //    if (!String.IsNullOrEmpty(vm.Comments)) vm.Comments = vm.Comments.Replace(Environment.NewLine, "<br />");
+            rptH.ExportToDisk(ExportFormatType.PortableDocFormat, outputFile);
+            if (!String.IsNullOrEmpty(vm.Comments)) vm.Comments = vm.Comments.Replace(Environment.NewLine, "<br />");
 
-        //    string body = String.Format("Attached File: Load List {0}<br /><br />{1}", vm.LoadList.Name, vm.Comments);
+            string body = String.Format("Attached File: Load List {0}<br /><br />{1}", vm.LoadList.Name, vm.Comments);
 
-        //    EmailNotifier.FromAddress = ConfigurationManager.AppSettings["LoadListFromAddress"];
-        //    EmailNotifier.FromName = ConfigurationManager.AppSettings["LoadListFromName"];
-        //    EmailNotifier.SendMail("Load List Attached", body, vm.selectedLines, true, true, outputFile);
+            EmailNotifier.FromAddress = ConfigurationManager.AppSettings["LoadListFromAddress"];
+            EmailNotifier.FromName = ConfigurationManager.AppSettings["LoadListFromName"];
+            EmailNotifier.SendMailDirect("Load List Attached", body, vm.selectedLines, true, true, outputFile);
 
-        //    //Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
-        //    //return File(stream, "application/pdf", fileName);
+            //Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
+            //return File(stream, "application/pdf", fileName);
 
-        //    return RedirectToAction("Details", new { id = vm.LoadListId });
-        //}
+            return RedirectToAction("Details", new { id = vm.LoadListId });
+        }
 
-        //private void CleanOutOldAttachments(string emailPath)
-        //{
-        //    DirectoryInfo di = new DirectoryInfo(emailPath);
-        //    foreach (FileInfo fi in di.GetFiles())
-        //    {
-        //        if (fi.CreationTime <= DateTime.Now.AddDays(-1)) fi.Delete();
-        //    }
-        //}
+        private void CleanOutOldAttachments(string emailPath)
+        {
+            DirectoryInfo di = new DirectoryInfo(emailPath);
+            foreach (FileInfo fi in di.GetFiles())
+            {
+                if (fi.CreationTime <= DateTime.Now.AddDays(-1)) fi.Delete();
+            }
+        }
 
         //[HttpGet]
         //public ActionResult EmailLoadLists()
