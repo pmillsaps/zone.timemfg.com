@@ -332,7 +332,13 @@ namespace Time.Epicor.Controllers
                 return new HttpUnauthorizedResult();
             var load = _db.LoadLists.FirstOrDefault(x => x.Id == id);
             if (load == null) return HttpNotFound();
-            var llvm = new LoadListView() { LoadList = load, Complete = load.Complete == true, MakeReady = load.MakeReady == true, DateSchedShip = load.DateSchedShip };
+            var llvm = new LoadListView()
+            {
+                LoadList = load,
+                Complete = load.Complete == true,
+                MakeReady = load.MakeReady == true,
+                DateSchedShip = load.DateSchedShip
+            };
 
             return View(llvm);
         }
