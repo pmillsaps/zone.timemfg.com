@@ -17,6 +17,7 @@ using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Production;
 using Time.Data.EntityModels.TimeMFG;
+using Time.Data.Models;
 using Time.Epicor.ViewModels;
 using Time.Support.Helpers;
 
@@ -33,9 +34,9 @@ namespace Time.Epicor.Controllers
         public ILogger Logger { get; set; }
         private DateTime DefaultDate = DateTime.Parse("1900,01,01");
 
-        private const string DbLogon = "TimeMFGApp";
-        private const string DbPassword = "Tm@Time$!";
-        private const string DbServer = "Aruba-Sql";
+        //private const string DbLogon = "TimeMFGApp";
+        //private const string DbPassword = "Tm@Time$!";
+        //private const string DbServer = "Aruba-Sql";
 
         public LoadListController(IOrchardServices services)
         {
@@ -895,28 +896,43 @@ namespace Time.Epicor.Controllers
                 return View(loadlist);
             }
 
+            if (vm.LoadList == null) vm.LoadList = _db.LoadLists.Single(x => x.Id == vm.LoadListId);
+
             // Now generate the PDF then Email it to the selected email addresses The Crystal
             // Reports version
-            string fileName = String.Format("LoadList_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
-            fileName.Replace(@"/", "").Replace(@"\", "");
-            var OutputDirectory = ConfigurationManager.AppSettings["LoadListEmailDirectory"];
+
+            var OutputDirectory = GetSetting.String("LoadListEmailDirectory");
             var emailPath = Server.MapPath(OutputDirectory);
             if (!Directory.Exists(emailPath)) Directory.CreateDirectory(emailPath);
             CleanOutOldAttachments(emailPath);
+            string fileName = String.Format("LoadList_{0}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""));
+            fileName.Replace(@"/", "").Replace(@"\", "");
             var outputFile = Path.Combine(emailPath, fileName);
+            int counter = 0;
+            while (System.IO.File.Exists(outputFile))
+            {
+                counter++;
+                fileName = String.Format("LoadList_{0}_{1}.pdf", DateTime.Now.ToShortDateString().Replace(@"/", "").Replace(@"\", ""), counter);
+                fileName.Replace(@"/", "").Replace(@"\", "");
+                outputFile = Path.Combine(emailPath, fileName);
+            }
+
             ReportClass rptH = new ReportClass();
             rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadListExternal.rpt");
             rptH.Load();
+            var DbLogon = GetSetting.String("DbLogon");
+            var DbPassword = GetSetting.String("DbPassword");
             rptH.SetDatabaseLogon(DbLogon, DbPassword);
             rptH.SetParameterValue("SelectedItems", vm.LoadListId.ToString());
 
             rptH.ExportToDisk(ExportFormatType.PortableDocFormat, outputFile);
             if (!String.IsNullOrEmpty(vm.Comments)) vm.Comments = vm.Comments.Replace(Environment.NewLine, "<br />");
 
-            string body = String.Format("Attached File: Load List {0}<br /><br />{1}", vm.LoadList.Name, vm.Comments);
+            string body = String.Format("Attached File: Load List {0}<br /><br />", vm.LoadList.Name);
+            if (!String.IsNullOrEmpty(vm.Comments)) body += vm.Comments;
 
-            EmailNotifier.FromAddress = ConfigurationManager.AppSettings["LoadListFromAddress"];
-            EmailNotifier.FromName = ConfigurationManager.AppSettings["LoadListFromName"];
+            EmailNotifier.FromAddress = GetSetting.String("LoadListFromAddress");
+            EmailNotifier.FromName = GetSetting.String("LoadListFromName");
             EmailNotifier.SendMailDirect("Load List Attached", body, vm.selectedLines, true, true, outputFile);
 
             //Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
@@ -980,6 +996,8 @@ namespace Time.Epicor.Controllers
             ReportClass rptH = new ReportClass();
             rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadList.rpt");
             rptH.Load();
+            var DbLogon = GetSetting.String("DbLogon");
+            var DbPassword = GetSetting.String("DbPassword");
             rptH.SetDatabaseLogon(DbLogon, DbPassword);
 
             rptH.SetParameterValue("SelectedItems", string.Join(",", selectedLines));
@@ -996,6 +1014,8 @@ namespace Time.Epicor.Controllers
             ReportClass rptH = new ReportClass();
             rptH.FileName = Server.MapPath("~/Modules/Time.Epicor/Content/Reports/LoadListStatus.rpt");
             rptH.Load();
+            var DbLogon = GetSetting.String("DbLogon");
+            var DbPassword = GetSetting.String("DbPassword");
             rptH.SetDatabaseLogon(DbLogon, DbPassword);
 
             rptH.SetParameterValue("SelectedItems", string.Join(",", selectedLines));
