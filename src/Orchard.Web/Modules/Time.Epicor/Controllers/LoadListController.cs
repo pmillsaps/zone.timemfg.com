@@ -94,9 +94,8 @@ namespace Time.Epicor.Controllers
             if (vm == null) vm = new AsmInspectViewModel();
             var jobs = _db.LoadListJobs
                 .Include(x => x.LoadList)
-                .Where(x => x.LoadList.MakeReady ||
-                    x.LoadList.Complete != true &&
-                    x.LoadList.DateSchedShip <= vm.EndDate).AsEnumerable();
+                .Where(x => x.LoadList.Complete != true &&
+                (x.LoadList.MakeReady || x.LoadList.DateSchedShip <= vm.EndDate)).AsEnumerable();
             // jobs = jobs.Where(x => x.LShip != true);
 
             jobs = jobs.Where(x =>
