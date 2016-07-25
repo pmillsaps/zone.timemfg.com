@@ -15,7 +15,7 @@ namespace Time.Data.EntityModels.TimeMFG
 
     public class LoadListJobStatusMetadata
     {
-        [UIHint("ByteCheckBox")]
-        public byte OpComplete { get; set; }
+        //[UIHint("ByteCheckBox")]
+        //public bool OpComplete { get; set; }
     }
 }

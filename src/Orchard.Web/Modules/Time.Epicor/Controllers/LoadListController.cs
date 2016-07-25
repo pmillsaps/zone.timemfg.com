@@ -581,7 +581,8 @@ namespace Time.Epicor.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                ViewBag.Error = "Error When Adding Job to the Load List";
+                ErrorTools.SendEmail(Request.Url, ex, User.Identity.Name);
             }
 
             AddNewJobOperations(loadListJob.JobNumber);

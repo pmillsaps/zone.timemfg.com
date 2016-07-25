@@ -21,6 +21,8 @@
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.LoadListId)
 
+   
+
     <div class="row">
         <div class="col-md-1">
             @Html.LabelFor(model => model.Comments)
@@ -30,6 +32,11 @@
         </div>
     </div>
     <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="Email this Load List to selected Emails" class="btn btn-primary" />
+        </div>
+    </div>
     <div id="data">
         @{Html.RenderAction("_EmailList");}
     </div>
