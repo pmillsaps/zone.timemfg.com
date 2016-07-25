@@ -49,7 +49,11 @@
 @using (Html.BeginForm("AddLift", "LoadList", new { id = Model.LoadListId }))
 {
     @Html.AntiForgeryToken()
-    
+    <div class="row">
+        <div class="col-md-4">
+            <input type="submit" value="Add Selected Jobs to Load List" class="btn btn-primary" />
+        </div>
+    </div>
     <div id="data">
         @{Html.RenderAction("_JobList");}
     </div>

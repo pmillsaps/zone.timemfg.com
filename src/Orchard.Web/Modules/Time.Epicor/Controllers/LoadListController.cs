@@ -578,6 +578,7 @@ namespace Time.Epicor.Controllers
             {
                 _db.LoadListJobs.Add(loadListJob);
                 _db.SaveChanges();
+                AddNewJobOperations(loadListJob.JobNumber);
             }
             catch (Exception ex)
             {
@@ -585,7 +586,6 @@ namespace Time.Epicor.Controllers
                 ErrorTools.SendEmail(Request.Url, ex, User.Identity.Name);
             }
 
-            AddNewJobOperations(loadListJob.JobNumber);
             // These line adds the distributor to the load list
             CheckDistributorLoadList(id);
         }
@@ -700,6 +700,7 @@ namespace Time.Epicor.Controllers
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
                 return new HttpUnauthorizedResult();
             var job = _db.LoadListJobs.Single(x => x.Id == id);
+            var jobId = job.LoadListId;
             //var loadlist = _db.LoadLists.Single(x => x.Id == job.LoadListId);
             //// Added null reference check to filter out bad customers PEM 20140630
             //if (loadlist.LoadListJobs.Where(x => x.CustomerId == job.CustomerId).Count() == 1
@@ -710,9 +711,9 @@ namespace Time.Epicor.Controllers
 
             _db.LoadListJobs.Remove(job);
             _db.SaveChanges();
-            // Removing the distributor tide to this job from the Load List distributors
-            CheckDistributorLoadList(job.LoadListId);
-            return RedirectToAction("Details", new { id = job.LoadListId });
+            // Removing the distributor tied to this job from the Load List distributors
+            CheckDistributorLoadList(jobId);
+            return RedirectToAction("Details", new { id = jobId });
         }
 
         public ActionResult JobDetails(int id)
@@ -1048,7 +1049,8 @@ namespace Time.Epicor.Controllers
                         LoadListJobId = newLift.Id,
                         OpCode = oper.OpCode,
                         OpComplete = oper.OpComplete,
-                        OprSeq = oper.OprSeq
+                        OprSeq = oper.OprSeq,
+                        IgnoreFlag = false,
                     };
                     _db.LoadListJobStatus.Add(lls);
                     _db.SaveChanges();
