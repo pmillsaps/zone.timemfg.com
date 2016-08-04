@@ -8,6 +8,8 @@ namespace Time.Epicor.ViewModels
     public class LoadListView
     {
         public LoadList LoadList { get; set; }
+
+        public int LoadListId { get; set; }
         public bool Complete { get; set; }
         public bool MakeReady { get; set; }
         public DateTime? DateSchedShip { get; set; }

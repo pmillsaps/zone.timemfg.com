@@ -11,7 +11,8 @@
 <hr />
 
 <ul class="list-inline">
-    <li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>
+    @*<li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>*@
+    <a href="~/Epicor/LoadList/Index" class="btn btn-primary">LoadList Home Page</a>
 </ul>
 
 <hr />
@@ -24,7 +25,8 @@
     <div class="form-horizontal">
         <h4>Load List</h4>
 
-        @Html.HiddenFor(model => model.LoadList.Id)
+        @*@Html.HiddenFor(model => model.LoadList.Id)*@
+        @Html.HiddenFor(model => model.LoadListId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.LoadList.Name, new { @class = "control-label col-md-2" })

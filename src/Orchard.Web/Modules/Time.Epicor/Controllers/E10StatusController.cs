@@ -75,22 +75,6 @@ namespace Time.Epicor.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (!Services.Authorizer.Authorize(Permissions.EpicorAccess, T("You do not have access to this area. Please log in")))
-                return new HttpUnauthorizedResult();
-
-            //var vm = new EpicorStatusViewModel();
-
-            //var tasks = db.sysagenttasks
-            //    .Join(db.sysagentscheds,
-            //        c => c.agentschednum,
-            //        t => t.agentschednum,
-            //        (c, t) => new myTask
-            //        {
-            //            sysagenttask = c,
-            //            tasksched = t
-            //        }
-            //    );
-            //vm.ScheduledTasks = tasks;
             ViewBag.MRPStatus = GetMrpStatus();
 
             return View();

@@ -337,8 +337,12 @@ namespace Time.Epicor.Controllers
                 LoadList = load,
                 Complete = load.Complete == true,
                 MakeReady = load.MakeReady == true,
-                DateSchedShip = load.DateSchedShip
+                DateSchedShip = load.DateSchedShip,
+                LoadListId = id
             };
+
+            if (llvm.LoadListId == 0) llvm.LoadListId = id;
+            if (llvm.LoadListId == 0) llvm.LoadListId = load.Id;
 
             return View(llvm);
         }
@@ -346,14 +350,16 @@ namespace Time.Epicor.Controllers
         //
         // POST: /LoadList/Edit/5
         [HttpPost]
-        //[Authorize(Roles = "LoadListEditor")]
+        //[Authorize(Roles = "LoadListEditor")]C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Epicor\Controllers\LoadListController.cs
         public ActionResult Edit(LoadListView vm)
         {
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
                 return new HttpUnauthorizedResult();
-            var loadList = vm.LoadList;
+            //var loadList = vm.LoadList;
+            var loadList = _db.LoadLists.FirstOrDefault(x => x.Id == vm.LoadListId);
 
-            var exists = _db.LoadLists.FirstOrDefault(x => x.Name == vm.LoadList.Name && x.Id != vm.LoadList.Id);
+            var exists = _db.LoadLists.FirstOrDefault(x => x.Name == vm.LoadList.Name && x.Id != vm.LoadListId);
+
             if (exists != null)
                 ModelState.AddModelError("LoadList.Name", "Duplicate Load List Name...Please Correct");
 
@@ -370,7 +376,7 @@ namespace Time.Epicor.Controllers
 
                 SaveLoadListComment(loadList);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = vm.LoadListId});
             }
 
             return View(vm);
@@ -494,19 +500,19 @@ namespace Time.Epicor.Controllers
 
         public ActionResult _JobList(AddLiftViewModel vm)
         {
-            var jobsEntered = _db.LoadListJobs.Select(x => x.JobNumber).ToList();
-            var jobQuery = production.V_JobInformation.Where(x => !jobsEntered.Contains(x.JobNum) && !String.IsNullOrEmpty(x.SerialNumber)).AsQueryable();
-            if (!String.IsNullOrEmpty(vm.Customer))
-            {
-                var custnum = int.Parse(vm.Customer);
-                jobQuery = jobQuery.Where(x => x.CustNum == custnum && x.JobClosed != true);
-            }
-
-            if (!String.IsNullOrEmpty(vm.Search)) jobQuery = jobQuery.Where(x => x.JobNum.Contains(vm.Search));
-
             List<V_JobInformation> jobs = new List<V_JobInformation>();
             if (!String.IsNullOrEmpty(vm.Customer) || !String.IsNullOrEmpty(vm.Search))
             {
+                var jobsEntered = _db.LoadListJobs.Select(x => x.JobNumber).ToList();
+                var jobQuery = production.V_JobInformation.Where(x => !jobsEntered.Contains(x.JobNum) && !String.IsNullOrEmpty(x.SerialNumber)).AsQueryable();
+                if (!String.IsNullOrEmpty(vm.Customer))
+                {
+                    var custnum = int.Parse(vm.Customer);
+                    jobQuery = jobQuery.Where(x => x.CustNum == custnum && x.JobClosed != true);
+                }
+
+                if (!String.IsNullOrEmpty(vm.Search)) jobQuery = jobQuery.Where(x => x.JobNum.Contains(vm.Search));
+
                 jobs = jobQuery.OrderBy(x => x.ReqDueDate).ToList();
             }
 
