@@ -153,7 +153,8 @@ namespace Time.Legacy.Controllers
         {
             WarrantyInformation warrantyInformation = db.WarrantyInformations.Find(id);
 
-            var serialNumber = db.SerNoMemoes.Where(x => x.SerialNumber == warrantyInformation.SerialNumber).Select(x => x.SerialNumber).Single().ToString();
+            //var serialNumber = db.SerNoMemoes.Where(x => x.SerialNumber == warrantyInformation.SerialNumber).Select(x => x.SerialNumber).Single().ToString();
+            var serialNumber = db.WarrantyInformations.Where(x => x.Id == id).Select(x => x.SerialNumber).Single().ToString();
             ViewBag.SerialNumber = serialNumber;
             ViewBag.MemoDate = DateTime.Now.ToString();
             ViewBag.EnteredBy = User.Identity.Name;
