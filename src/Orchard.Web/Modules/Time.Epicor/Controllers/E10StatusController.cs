@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Time.Data.EntityModels.Epicor;
 using Time.Data.EntityModels.Production;
 using Time.Epicor.ViewModels;
 
@@ -19,6 +20,7 @@ namespace Time.Epicor.Controllers
         public IOrchardServices Services { get; set; }
         public Localizer T { get; set; }
         private ProductionEntities db;
+        private EpicorEntities epicor;
 
         public E10StatusController(IOrchardServices services)
         {

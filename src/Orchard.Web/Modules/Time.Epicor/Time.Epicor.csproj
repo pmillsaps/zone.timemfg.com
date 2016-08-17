@@ -258,6 +258,7 @@
     <Content Include="Views\NOWReport\_NOWReportDetails.cshtml" />
     <Content Include="Views\V8PartSearch\_PartDetails.cshtml" />
     <Content Include="Views\V8PartSearch\Index.cshtml" />
+    <Content Include="Views\E10\RequestPartTransfer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -283,6 +284,7 @@
     <Compile Include="Controllers\BOMCostingController.cs" />
     <Compile Include="Controllers\DistributorOrdersController.cs" />
     <Compile Include="Controllers\DLSController.cs" />
+    <Compile Include="Controllers\E10Controller.cs" />
     <Compile Include="Controllers\E10StatusController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoadListController.cs" />
