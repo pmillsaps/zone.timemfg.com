@@ -914,14 +914,14 @@ namespace Time.Support.Controllers
                     ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
                     ticket.TicketEmployee1 = ticket.TicketEmployee;
                 }
-                if (completed && ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
-                {
-                    string oldEmp = String.Format("{0} {1}", ticket.TicketEmployee.FirstName, ticket.TicketEmployee.LastName);
-                    string newEmp = String.Format("{0} {1}", ticket.TicketEmployee1.FirstName, ticket.TicketEmployee1.LastName);
-                    ticket.AssignedEmployeeID = ticket.ResourceEmployeeID;
-                    ticket.TicketEmployee = ticket.TicketEmployee1;
-                    ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Reset Assigned To from {0} to {1}", oldEmp, newEmp), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
-                }
+                //if (completed && ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
+                //{
+                //    string oldEmp = String.Format("{0} {1}", ticket.TicketEmployee.FirstName, ticket.TicketEmployee.LastName);
+                //    string newEmp = String.Format("{0} {1}", ticket.TicketEmployee1.FirstName, ticket.TicketEmployee1.LastName);
+                //    ticket.AssignedEmployeeID = ticket.ResourceEmployeeID;
+                //    ticket.TicketEmployee = ticket.TicketEmployee1;
+                //    ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Reset Assigned To from {0} to {1}", oldEmp, newEmp), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                //}
                 _db.SaveChanges();
 
                 //ticket.SendUpdateNotificationToAssigned();                // Added the completion notification to let the assigned person know it is complete.
