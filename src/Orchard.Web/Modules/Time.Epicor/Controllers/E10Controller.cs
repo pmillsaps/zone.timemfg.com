@@ -3,6 +3,7 @@ using Orchard.Localization;
 using Orchard.Themes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -75,8 +76,47 @@ namespace Time.Epicor.Controllers
 
                 var success = MSMQ.SendEmailMessage(subject, emailBody, email, true);
                 ViewBag.Message = String.Format("Transfer request for '{0}' has been submitted...", PartNum);
+
+                RequestTransferFile(PartNum);
             }
             return View();
+        }
+
+        private void RequestTransferFile(string partNum)
+        {
+            var command = "J:" + Environment.NewLine;
+            command += @"CD \IncomingConversion\E10_DataTransformer" + Environment.NewLine;
+            command += String.Format("E10_DataTransformer.exe --spawn --prod -i \"{0}\"<br />", partNum) + Environment.NewLine;
+            command += "(goto) 2>nul & DEL \"%~f0\"" + Environment.NewLine;
+
+            var OutputDirectory = GetSetting.String("RequestTransferFile_MoveDirectory");
+            var filePath = Server.MapPath(OutputDirectory);
+            if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+            var fileName = Path.Combine(filePath, partNum + ".bat");
+            using (var sw = new StreamWriter(fileName))
+            {
+                sw.Write(command);
+                sw.Close();
+
+                var fi = new FileInfo(fileName);
+                if (fi.Exists)
+                {
+                    string sourceFile = GetUNCPath(fi.FullName);
+                    string targetDirectory = GetSetting.String("Belize_TransferFileDirectory");
+                    var ret = MSMQ.SendMoveFileMessage(sourceFile, targetDirectory, fi.Name);
+                }
+            }
+        }
+
+        private string GetUNCPath(string fullFileName)
+        {
+            string returnName = "";
+            string server = Environment.MachineName;
+            string drive = fullFileName.Substring(0, 1);
+            returnName = String.Format(@"\\{0}\{1}$", server, drive);
+            returnName += fullFileName.Substring(2);
+
+            return returnName;
         }
     }
 }

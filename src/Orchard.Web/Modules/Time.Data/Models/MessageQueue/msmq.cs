@@ -115,5 +115,20 @@ namespace Time.Data.Models.MessageQueue
             }
             return msgviews;
         }
+
+        public static bool SendMoveFileMessage(string sourceFile, string targetDirectory, string targetFile)
+        {
+            bool ret = false;
+            var command = new MoveFileMessage
+            {
+                SourceFile = sourceFile,
+                TargetDirectory = targetDirectory,
+                TargetFile = targetFile
+            };
+
+            SendQueueMessage(command, "MoveFile");
+
+            return ret;
+        }
     }
 }
