@@ -748,6 +748,7 @@
     <Compile Include="Models\Install\VSWOption.cs" />
     <Compile Include="Models\ITInventory\Monitor.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
+    <Compile Include="Models\ITInventory\Ref_DeviceType.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
     <Compile Include="Models\ITInventory\Ref_Location.cs" />
     <Compile Include="Models\ITInventory\Ref_Building.cs" />
