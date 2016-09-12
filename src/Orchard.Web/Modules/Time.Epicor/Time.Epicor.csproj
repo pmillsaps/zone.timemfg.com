@@ -194,7 +194,6 @@
     <Content Include="Views\LoadList\Delete.cshtml" />
     <Content Include="Views\LoadList\DeleteJob.cshtml" />
     <Content Include="Views\LoadList\Details.cshtml" />
-    <Content Include="Views\LoadList\Edit.cshtml" />
     <Content Include="Views\LoadList\EditJob.cshtml" />
     <Content Include="Views\LoadList\EmailCreate.cshtml" />
     <Content Include="Views\LoadList\EmailDelete.cshtml" />
@@ -259,6 +258,8 @@
     <Content Include="Views\V8PartSearch\_PartDetails.cshtml" />
     <Content Include="Views\V8PartSearch\Index.cshtml" />
     <Content Include="Views\E10\RequestPartTransfer.cshtml" />
+    <Content Include="Views\LoadList\Edit.cshtml" />
+    <Content Include="Views\LoadList\Edit_Original.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

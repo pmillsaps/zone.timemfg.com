@@ -332,54 +332,56 @@ namespace Time.Epicor.Controllers
                 return new HttpUnauthorizedResult();
             var load = _db.LoadLists.FirstOrDefault(x => x.Id == id);
             if (load == null) return HttpNotFound();
-            var llvm = new LoadListView()
-            {
-                LoadList = load,
-                Complete = load.Complete == true,
-                MakeReady = load.MakeReady == true,
-                DateSchedShip = load.DateSchedShip,
-                LoadListId = id
-            };
+            //var llvm = new LoadListView()
+            //{
+            //    LoadList = load,
+            //    Complete = load.Complete == true,
+            //    MakeReady = load.MakeReady == true,
+            //    DateSchedShip = load.DateSchedShip,
+            //    LoadListId = id
+            //};
 
-            if (llvm.LoadListId == 0) llvm.LoadListId = id;
-            if (llvm.LoadListId == 0) llvm.LoadListId = load.Id;
+            //if (llvm.LoadListId == 0) llvm.LoadListId = id;
+            //if (llvm.LoadListId == 0) llvm.LoadListId = load.Id;
 
-            return View(llvm);
+            return View(load);
         }
 
         //
         // POST: /LoadList/Edit/5
         [HttpPost]
         //[Authorize(Roles = "LoadListEditor")]C:\Users\PaulM\Desktop\Projects\zone.timemfg.com\src\Orchard.Web\Modules\Time.Epicor\Controllers\LoadListController.cs
-        public ActionResult Edit(LoadListView vm)
+        public ActionResult Edit(LoadList loadlist)
         {
             if (!Services.Authorizer.Authorize(Permissions.LoadListEditor, T("Not Authorized")))
                 return new HttpUnauthorizedResult();
             //var loadList = vm.LoadList;
-            var loadList = _db.LoadLists.FirstOrDefault(x => x.Id == vm.LoadListId);
+            //var loadList = _db.LoadLists.FirstOrDefault(x => x.Id == loadlist.Id);
 
-            var exists = _db.LoadLists.FirstOrDefault(x => x.Name == vm.LoadList.Name && x.Id != vm.LoadListId);
+            var exists = _db.LoadLists.FirstOrDefault(x => x.Name == loadlist.Name && x.Id != loadlist.Id);
 
             if (exists != null)
                 ModelState.AddModelError("LoadList.Name", "Duplicate Load List Name...Please Correct");
 
             if (ModelState.IsValid)
             {
-                _db.LoadLists.Attach(loadList);
-                _db.Entry(loadList).State = EntityState.Modified;
+                _db.LoadLists.Attach(loadlist);
+                _db.Entry(loadlist).State = EntityState.Modified;
+                loadlist.DateRevised = DateTime.Now;
                 //_db.ObjectStateManager.ChangeObjectState(loadList, EntityState.Modified);
-                loadList.DateRevised = DateTime.Now;
-                loadList.Complete = vm.Complete;
-                loadList.MakeReady = vm.MakeReady;
-                loadList.DateSchedShip = vm.DateSchedShip;
+                //loadList.DateRevised = DateTime.Now;
+                //loadList.Complete = vm.Complete;
+                //loadList.MakeReady = vm.MakeReady;
+                //loadList.DateSchedShip = vm.DateSchedShip;
+                //loadList = loadlist;
                 _db.SaveChanges();
 
-                SaveLoadListComment(loadList);
+                SaveLoadListComment(loadlist);
 
-                return RedirectToAction("Details", new { id = vm.LoadListId});
+                return RedirectToAction("Details", new { id = loadlist.Id });
             }
 
-            return View(vm);
+            return View(loadlist);
         }
 
         [HttpGet]

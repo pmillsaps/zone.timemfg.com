@@ -86,7 +86,7 @@ namespace Time.Epicor.Controllers
         {
             var command = "J:" + Environment.NewLine;
             command += @"CD \IncomingConversion\E10_DataTransformer" + Environment.NewLine;
-            command += String.Format("E10_DataTransformer.exe --spawn --prod -i \"{0}\"<br />", partNum) + Environment.NewLine;
+            command += String.Format("E10_DataTransformer.exe --spawn --prod -i \"{0}\"", partNum) + Environment.NewLine;
             command += "(goto) 2>nul & DEL \"%~f0\"" + Environment.NewLine;
 
             var OutputDirectory = GetSetting.String("RequestTransferFile_MoveDirectory");
