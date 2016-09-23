@@ -76,11 +76,11 @@ namespace Time.Epicor.Controllers
                         bomInfo = bom,
                         LaborTime = partCost.Sum(x => x.EstProdHrs),
                         SetupTime = partCost.Sum(x => x.EstSetHrs),
-                        LastLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5),
-                        LastBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost), 5),
-                        LastMaterialCost = 0,
-                        LastMtlBurCost = 0,
-                        LastSubCost = 0,
+                        AvgLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5),
+                        AvgBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost), 5),
+                        AvgMaterialCost = 0,
+                        AvgMtlBurCost = 0,
+                        AvgSubCost = 0,
                     };
                     tmpBOM.Add(first);
                 }
@@ -113,11 +113,11 @@ namespace Time.Epicor.Controllers
                     flattenedBOM.Select(c => { c.ULPart = item.MtlPartNum; return c; }).ToList(); // This wil put the part number within the flatened BOM under ULPart
 
                     // Total the Extended MaterialCost, as well as the lastLaborCost and LastBurdenCost into the first item
-                    flattenedBOM[0].ExtBurCost = flattenedBOM.Sum(x => x.ExtBurCost) + flattenedBOM[0].LastBurdenCost;
-                    flattenedBOM[0].ExtLaborCost = flattenedBOM.Sum(x => x.ExtLaborCost) + flattenedBOM[0].LastLaborCost;
-                    flattenedBOM[0].ExtMaterialCost = flattenedBOM.Sum(x => x.ExtMaterialCost) + flattenedBOM[0].LastMaterialCost;
-                    flattenedBOM[0].ExtMtlBurCost = flattenedBOM.Sum(x => x.ExtMtlBurCost) + flattenedBOM[0].LastMtlBurCost;
-                    flattenedBOM[0].ExtSubCost = flattenedBOM.Sum(x => x.ExtSubCost) + flattenedBOM[0].LastSubCost;
+                    flattenedBOM[0].ExtBurCost = flattenedBOM.Sum(x => x.ExtBurCost) + flattenedBOM[0].AvgBurdenCost;
+                    flattenedBOM[0].ExtLaborCost = flattenedBOM.Sum(x => x.ExtLaborCost) + flattenedBOM[0].AvgLaborCost;
+                    flattenedBOM[0].ExtMaterialCost = flattenedBOM.Sum(x => x.ExtMaterialCost) + flattenedBOM[0].AvgMaterialCost;
+                    flattenedBOM[0].ExtMtlBurCost = flattenedBOM.Sum(x => x.ExtMtlBurCost) + flattenedBOM[0].AvgMtlBurCost;
+                    flattenedBOM[0].ExtSubCost = flattenedBOM.Sum(x => x.ExtSubCost) + flattenedBOM[0].AvgSubCost;
                     flattenedBOM[0].TotalLaborTime = flattenedBOM.Sum(x => x.LaborTime) + flattenedBOM[0].LaborTime;
                     flattenedBOM[0].TotalSetupTime = flattenedBOM.Sum(x => x.SetupTime) + flattenedBOM[0].SetupTime;
 
@@ -191,7 +191,7 @@ namespace Time.Epicor.Controllers
                 PartLocation = x.BinNum,
                 Draw = x.DrawNum,
                 Price = x.BasePrice,
-                Cost = x.LastMaterialCost,
+                Cost = x.AvgMaterialCost,
                 VendorName = x.Name,
                 VendorID = x.VendorID,
                 VendorPartNumber = x.VenPartNum,
@@ -242,21 +242,21 @@ namespace Time.Epicor.Controllers
                     item.LLMaterialCost = item.bomInfo.Sum(x => x.ExtMaterialCost);
                 }
                 else
-                    item.ExtMaterialCost = Math.Round(item.LastMaterialCost * item.Factor, 5);
+                    item.ExtMaterialCost = Math.Round(item.AvgMaterialCost * item.Factor, 5);
                 var partCost = GetPartCost(item.MtlPartNum).ToList();
                 if (item.PartType != "P")
                 {
                     item.LaborTime = partCost.Sum(x => x.EstProdHrs);
                     item.SetupTime = partCost.Sum(x => x.EstSetHrs);
-                    item.LastLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5);
-                    item.LastBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost), 5);
+                    item.AvgLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5);
+                    item.AvgBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost), 5);
 
                     // Calculate Extended Costs
-                    item.ExtBurCost = Math.Round(item.LastBurdenCost * item.Factor, 5);
-                    item.ExtLaborCost = Math.Round(item.LastLaborCost * item.Factor, 5);
+                    item.ExtBurCost = Math.Round(item.AvgBurdenCost * item.Factor, 5);
+                    item.ExtLaborCost = Math.Round(item.AvgLaborCost * item.Factor, 5);
                 }
-                item.LastSubCost = Math.Round(partCost.Where(x => x.SubContract == true).Sum(x => x.EstUnitCost), 5);
-                item.ExtSubCost = Math.Round(item.LastSubCost * item.Factor, 5);
+                item.AvgSubCost = Math.Round(partCost.Where(x => x.SubContract == true).Sum(x => x.EstUnitCost), 5);
+                item.ExtSubCost = Math.Round(item.AvgSubCost * item.Factor, 5);
             }
 
             return list.ToList();
@@ -271,10 +271,10 @@ namespace Time.Epicor.Controllers
                     if (item.bomInfo.Count() > 0)
                         item.bomInfo = ClearCosts(item.bomInfo);
                     item.LLMaterialCost = 0;
-                    item.LastMaterialCost = 0;
-                    item.LastLaborCost = 0;
-                    item.LastBurdenCost = 0;
-                    item.LastSubCost = 0;
+                    item.AvgMaterialCost = 0;
+                    item.AvgLaborCost = 0;
+                    item.AvgBurdenCost = 0;
+                    item.AvgSubCost = 0;
                     item.ExtMtlBurCost = 0;
                     item.ExtSubCost = 0;
                 }
@@ -339,11 +339,11 @@ namespace Time.Epicor.Controllers
                 AllocQty = x.AllocQty ?? 0,
                 UnfirmAllocQty = x.UnfirmAllocQty ?? 0,
                 MfgLotSize = x.MfgLotSize ?? 0,
-                LastBurdenCost = x.LastBurdenCost ?? 0,
-                LastLaborCost = x.LastLaborCost ?? 0,
-                LastMaterialCost = x.LastMaterialCost ?? 0,
-                LastMtlBurCost = x.LastMtlBurCost ?? 0,
-                LastSubCost = x.LastSubContCost ?? 0,
+                AvgBurdenCost = x.AvgBurdenCost ?? 0,
+                AvgLaborCost = x.AvgLaborCost ?? 0,
+                AvgMaterialCost = x.AvgMaterialCost ?? 0,
+                AvgMtlBurCost = x.AvgMtlBurCost ?? 0,
+                AvgSubCost = x.AvgSubContCost ?? 0,
             });
         }
 

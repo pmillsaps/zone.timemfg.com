@@ -38,11 +38,20 @@ namespace Time.Epicor.Models
         public decimal SetupTime { get; set; }
         public decimal TotalLaborTime { get; set; }
         public decimal TotalSetupTime { get; set; }
-        public decimal LastMaterialCost { get; set; }
-        public decimal LastSubCost { get; set; }
-        public decimal LastLaborCost { get; set; }
-        public decimal LastBurdenCost { get; set; }
-        public decimal LastMtlBurCost { get; set; }
+        //public decimal LastMaterialCost { get; set; }
+        //public decimal LastSubCost { get; set; }
+        //public decimal LastLaborCost { get; set; }
+        //public decimal LastBurdenCost { get; set; }
+        //public decimal LastMtlBurCost { get; set; }
+
+        // Changing to Average Costing
+        public decimal AvgMaterialCost { get; set; }
+
+        public decimal AvgSubCost { get; set; }
+        public decimal AvgLaborCost { get; set; }
+        public decimal AvgBurdenCost { get; set; }
+        public decimal AvgMtlBurCost { get; set; }
+
         public decimal LLMaterialCost { get; set; }
         public decimal ExtMaterialCost { get; set; }
         public decimal ExtSubCost { get; set; }

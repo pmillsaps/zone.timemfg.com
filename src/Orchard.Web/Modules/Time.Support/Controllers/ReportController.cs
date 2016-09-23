@@ -61,7 +61,7 @@ namespace Time.Support.Controllers
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
             SetDBLogonForReport(rptH);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -79,7 +79,7 @@ namespace Time.Support.Controllers
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
             SetDBLogonForReport(rptH);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -96,7 +96,7 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests-ByDept.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+            Stream stream = rptH.ExportToStream(ExportFormatType.Excel);
             return File(stream, "application/vnd.ms-excel");
         }
 
@@ -113,7 +113,7 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -127,11 +127,12 @@ namespace Time.Support.Controllers
                     return new HttpUnauthorizedResult();
             }
             ReportClass rptH = new ReportClass();
+            var empID = _db.TicketEmployees.FirstOrDefault(x => x.NTLogin == HttpContext.User.Identity.Name).EmployeeID;
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource_Personal.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            rptH.SetParameterValue("UserId", HttpContext.User.Identity.Name);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            rptH.SetParameterValue("UserId", empID);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -149,7 +150,7 @@ namespace Time.Support.Controllers
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
             rptH.SetParameterValue("UserId", HttpContext.User.Identity.Name);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -166,7 +167,7 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByRequestor.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -183,7 +184,7 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource_Closed.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -200,7 +201,7 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource_CompDate_Closed.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -223,7 +224,7 @@ namespace Time.Support.Controllers
             rptH.SetParameterValue("StartDate", startDate);
             rptH.SetParameterValue("EndDate", endDate);
 
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -259,7 +260,7 @@ namespace Time.Support.Controllers
             rptH.SetParameterValue("StartDate", startDate);
             rptH.SetParameterValue("UserId", HttpContext.User.Identity.Name);
 
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 
@@ -276,7 +277,7 @@ namespace Time.Support.Controllers
             rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource_Priority.rpt");
             rptH.Load();
             rptH.SetDatabaseLogon(_db_logon, _db_password);
-            Stream stream = rptH.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
             return File(stream, "application/pdf");
         }
 

@@ -41,5 +41,10 @@ namespace Time.Data.EntityModels.Production
         public Nullable<int> OpenJobCount { get; set; }
         public System.Guid Id { get; set; }
         public string PrimBin { get; set; }
+        public Nullable<decimal> AvgLaborCost { get; set; }
+        public Nullable<decimal> AvgBurdenCost { get; set; }
+        public Nullable<decimal> AvgMaterialCost { get; set; }
+        public Nullable<decimal> AvgSubContCost { get; set; }
+        public Nullable<decimal> AvgMtlBurCost { get; set; }
     }
 }

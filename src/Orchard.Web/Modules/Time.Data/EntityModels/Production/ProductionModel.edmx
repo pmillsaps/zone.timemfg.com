@@ -973,6 +973,11 @@ warning 6002: The table/view 'Prod.dbo.V_BillOfMaterials' does not have a primar
           <Property Name="OpenJobCount" Type="int" />
           <Property Name="OpenJobs" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AvgLaborCost" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="AvgBurdenCost" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="AvgMaterialCost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="AvgSubContCost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="AvgMtlBurCost" Type="decimal" Precision="15" Scale="5" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Prod.dbo.V_CustomersWithOpenOrderPartLines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1066,6 +1071,9 @@ warning 6002: The table/view 'Prod.dbo.V_JobInformation' does not have a primary
           <Property Name="CustName" Type="nvarchar" MaxLength="50" />
           <Property Name="PONum" Type="nvarchar" MaxLength="50" />
           <Property Name="CustID" Type="nvarchar" MaxLength="10" />
+          <Property Name="UseOTS" Type="bit" />
+          <Property Name="OTSCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="OTSState" Type="nvarchar" MaxLength="50" />
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1315,6 +1323,11 @@ warning 6002: The table/view 'Prod.dbo.V_PartDetails' does not have a primary ke
           <Property Name="SubPart" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProdCode" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="LastMaterialCost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="AvgLaborCost" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="AvgBurdenCost" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="AvgMaterialCost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="AvgSubContCost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="AvgMtlBurCost" Type="decimal" Precision="15" Scale="5" />
           <Property Name="VenPartNum" Type="nvarchar" MaxLength="50" />
           <Property Name="BinNum" Type="nvarchar" MaxLength="10" />
           <Property Name="binqty" Type="decimal" Precision="22" Scale="8" />
@@ -1686,7 +1699,12 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
     [V_BillOfMaterials].[VenPartNum] AS [VenPartNum], 
     [V_BillOfMaterials].[OpenJobCount] AS [OpenJobCount], 
     [V_BillOfMaterials].[OpenJobs] AS [OpenJobs], 
-    [V_BillOfMaterials].[Id] AS [Id]
+    [V_BillOfMaterials].[Id] AS [Id], 
+    [V_BillOfMaterials].[AvgLaborCost] AS [AvgLaborCost], 
+    [V_BillOfMaterials].[AvgBurdenCost] AS [AvgBurdenCost], 
+    [V_BillOfMaterials].[AvgMaterialCost] AS [AvgMaterialCost], 
+    [V_BillOfMaterials].[AvgSubContCost] AS [AvgSubContCost], 
+    [V_BillOfMaterials].[AvgMtlBurCost] AS [AvgMtlBurCost]
     FROM [dbo].[V_BillOfMaterials] AS [V_BillOfMaterials]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_CustomersWithOpenOrderPartLines" EntityType="Self.V_CustomersWithOpenOrderPartLines" store:Type="Views" store:Schema="dbo">
@@ -1749,6 +1767,9 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
     [V_JobInformation].[CustName] AS [CustName], 
     [V_JobInformation].[PONum] AS [PONum], 
     [V_JobInformation].[CustID] AS [CustID], 
+    [V_JobInformation].[UseOTS] AS [UseOTS], 
+    [V_JobInformation].[OTSCity] AS [OTSCity], 
+    [V_JobInformation].[OTSState] AS [OTSState], 
     [V_JobInformation].[ID] AS [ID]
     FROM [dbo].[V_JobInformation] AS [V_JobInformation]</DefiningQuery>
           </EntitySet>
@@ -1920,6 +1941,11 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
     [V_PartDetails].[SubPart] AS [SubPart], 
     [V_PartDetails].[ProdCode] AS [ProdCode], 
     [V_PartDetails].[LastMaterialCost] AS [LastMaterialCost], 
+    [V_PartDetails].[AvgLaborCost] AS [AvgLaborCost], 
+    [V_PartDetails].[AvgBurdenCost] AS [AvgBurdenCost], 
+    [V_PartDetails].[AvgMaterialCost] AS [AvgMaterialCost], 
+    [V_PartDetails].[AvgSubContCost] AS [AvgSubContCost], 
+    [V_PartDetails].[AvgMtlBurCost] AS [AvgMtlBurCost], 
     [V_PartDetails].[VenPartNum] AS [VenPartNum], 
     [V_PartDetails].[BinNum] AS [BinNum], 
     [V_PartDetails].[binqty] AS [binqty], 
@@ -2946,6 +2972,11 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="OpenJobCount" Type="Int32" />
           <Property Name="OpenJobs" Type="Int32" />
           <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AvgLaborCost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="AvgBurdenCost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="AvgMaterialCost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="AvgSubContCost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="AvgMtlBurCost" Type="Decimal" Precision="15" Scale="5" />
         </EntityType>
         <EntityType Name="V_PartCostStd">
           <Key>
@@ -3031,6 +3062,11 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="OpenJobCount" Type="Int32" />
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="PrimBin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AvgLaborCost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="AvgBurdenCost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="AvgMaterialCost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="AvgSubContCost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="AvgMtlBurCost" Type="Decimal" Precision="15" Scale="5" />
         </EntityType>
         <EntityType Name="V_NowReport">
           <Key>
@@ -3338,6 +3374,9 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="PONum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CustID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UseOTS" Type="Boolean" />
+          <Property Name="OTSCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OTSState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_JobInformation_NotClosed">
           <Key>
@@ -4070,6 +4109,11 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <EntitySetMapping Name="V_BillOfMaterials">
             <EntityTypeMapping TypeName="ProductionModel.V_BillOfMaterials">
               <MappingFragment StoreEntitySet="V_BillOfMaterials">
+                <ScalarProperty Name="AvgMtlBurCost" ColumnName="AvgMtlBurCost" />
+                <ScalarProperty Name="AvgSubContCost" ColumnName="AvgSubContCost" />
+                <ScalarProperty Name="AvgMaterialCost" ColumnName="AvgMaterialCost" />
+                <ScalarProperty Name="AvgBurdenCost" ColumnName="AvgBurdenCost" />
+                <ScalarProperty Name="AvgLaborCost" ColumnName="AvgLaborCost" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OpenJobs" ColumnName="OpenJobs" />
                 <ScalarProperty Name="OpenJobCount" ColumnName="OpenJobCount" />
@@ -4143,6 +4187,11 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <EntitySetMapping Name="V_PartDetails">
             <EntityTypeMapping TypeName="ProductionModel.V_PartDetails">
               <MappingFragment StoreEntitySet="V_PartDetails">
+                <ScalarProperty Name="AvgMtlBurCost" ColumnName="AvgMtlBurCost" />
+                <ScalarProperty Name="AvgSubContCost" ColumnName="AvgSubContCost" />
+                <ScalarProperty Name="AvgMaterialCost" ColumnName="AvgMaterialCost" />
+                <ScalarProperty Name="AvgBurdenCost" ColumnName="AvgBurdenCost" />
+                <ScalarProperty Name="AvgLaborCost" ColumnName="AvgLaborCost" />
                 <ScalarProperty Name="PrimBin" ColumnName="PrimBin" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OpenJobCount" ColumnName="OpenJobCount" />
@@ -4423,6 +4472,9 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <EntitySetMapping Name="V_JobInformation">
             <EntityTypeMapping TypeName="ProductionModel.V_JobInformation">
               <MappingFragment StoreEntitySet="V_JobInformation">
+                <ScalarProperty Name="OTSState" ColumnName="OTSState" />
+                <ScalarProperty Name="OTSCity" ColumnName="OTSCity" />
+                <ScalarProperty Name="UseOTS" ColumnName="UseOTS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CustID" ColumnName="CustID" />
                 <ScalarProperty Name="PONum" ColumnName="PONum" />

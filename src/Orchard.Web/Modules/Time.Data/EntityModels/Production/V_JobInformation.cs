@@ -42,5 +42,8 @@ namespace Time.Data.EntityModels.Production
         public string PONum { get; set; }
         public string CustID { get; set; }
         public System.Guid ID { get; set; }
+        public Nullable<bool> UseOTS { get; set; }
+        public string OTSCity { get; set; }
+        public string OTSState { get; set; }
     }
 }
