@@ -27,6 +27,7 @@ namespace Time.Data.Models.MessageQueue
         public static MessageType E10EmailInvoices { get { return new MessageType("E10EmailInvoices"); } }
         public static MessageType EmailMessage { get { return new MessageType("EmailMessage"); } }
         public static MessageType EmailProblemJobs { get { return new MessageType("EmailProblemJobs"); } }
+        public static MessageType JobMaterialUpdate { get { return new MessageType("JobMaterialUpdate"); } }
         public static MessageType MoveFile { get { return new MessageType("MoveFile"); } }
         public static MessageType MoveQueuedDataPlates { get { return new MessageType("MoveQueuedDataPlates"); } }
         public static MessageType MoveQueuedManuals { get { return new MessageType("MoveQueuedManuals"); } }

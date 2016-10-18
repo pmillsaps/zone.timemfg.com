@@ -239,24 +239,26 @@ namespace Time.Epicor.Controllers
                 if (item.bomInfo.Count() > 0)
                 {
                     item.bomInfo = CalculateCosts(item.bomInfo, searchVM);
-                    item.LLMaterialCost = item.bomInfo.Sum(x => x.ExtMaterialCost);
+                    item.LLMaterialCost = item.bomInfo.Sum(x => x.ExtMaterialCost) * item.Factor;
                 }
                 else
                     item.ExtMaterialCost = Math.Round(item.AvgMaterialCost * item.Factor, 5);
                 var partCost = GetPartCost(item.MtlPartNum).ToList();
                 if (item.PartType != "P")
                 {
-                    item.LaborTime = partCost.Sum(x => x.EstProdHrs);
-                    item.SetupTime = partCost.Sum(x => x.EstSetHrs);
-                    item.AvgLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5);
-                    item.AvgBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost), 5);
+                    item.LaborTime = partCost.Sum(x => x.EstProdHrs) * item.Factor;
+                    item.SetupTime = partCost.Sum(x => x.EstSetHrs) * item.Factor;
+                    item.AvgLaborCost = Math.Round(partCost.Sum(x => x.LaborCost) * item.Factor, 5);
+                    item.AvgBurdenCost = Math.Round(partCost.Sum(x => x.BurdenCost) * item.Factor, 5);
 
                     // Calculate Extended Costs
                     item.ExtBurCost = Math.Round(item.AvgBurdenCost * item.Factor, 5);
                     item.ExtLaborCost = Math.Round(item.AvgLaborCost * item.Factor, 5);
                 }
-                item.AvgSubCost = Math.Round(partCost.Where(x => x.SubContract == true).Sum(x => x.EstUnitCost), 5);
+                item.AvgSubCost = Math.Round((partCost.Where(x => x.SubContract == true).Sum(x => x.EstUnitCost)) * item.Factor, 5);
                 item.ExtSubCost = Math.Round(item.AvgSubCost * item.Factor, 5);
+
+                item.TotalExtendedCost = item.ExtBurCost + item.ExtLaborCost + item.ExtMaterialCost + item.ExtMtlBurCost + item.ExtSubCost;
             }
 
             return list.ToList();
