@@ -161,7 +161,11 @@ namespace Time.OrderLog.Controllers
                 db.SaveChanges();
                 //return RedirectToAction("Index");
                 //Redirect to Details page instead of Index -- see: http://stackoverflow.com/questions/9772947/c-sharp-asp-net-mvc-return-to-previous-page
-                return Redirect(returnUrl);
+                // @Html.ActionLink("Back to List", "Details", "OrderLog", new { id = Model.OrderId }, null)
+                if (String.IsNullOrEmpty(returnUrl))
+                    return RedirectToAction("Details", "OrderLog", new { id = ordertran.OrderId });
+                else
+                    return Redirect(returnUrl);
             }
             getDropDowns(ordertran);
             return View(ordertran);

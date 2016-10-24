@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Date, new { @readonly = "readonly" })
+                @Html.DisplayFor(model => model.Date, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.Date)
             </div>
         </div>
@@ -46,7 +46,7 @@
             @Html.LabelFor(model => model.LiftModelId, "LiftModelId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("LiftModelId", String.Empty)*@
-                @Html.TextBoxFor(model => model.LiftModel.LiftModelName, new { @readonly = "readonly" })
+                @Html.DisplayFor(model => model.LiftModel.LiftModelName, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.LiftModelId)
             </div>
         </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NewQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.NewQty, new { @readonly = "readonly" })
+                @Html.DisplayFor(model => model.NewQty, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.NewQty)
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CancelQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CancelQty, new { @readonly = "readonly" })
+                @Html.DisplayFor(model => model.CancelQty, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.CancelQty)
             </div>
         </div>
@@ -133,7 +133,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AsOfDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.AsOfDate, new { @class = "datepicker" })
+                @Html.DisplayFor(model => model.AsOfDate, new { @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.AsOfDate)
             </div>
         </div>
