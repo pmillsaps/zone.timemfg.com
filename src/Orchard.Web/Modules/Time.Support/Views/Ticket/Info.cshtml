@@ -141,6 +141,18 @@
                 </div>
             }
 
+            @*Ticket Re-Open*@
+            @if ((Model.Ticket.TicketStatus.isOpen == false) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Re-Open Ticket", "ReOpen", new { ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Re-Open Ticket", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
             <div class="row">
                 &nbsp;
             </div>

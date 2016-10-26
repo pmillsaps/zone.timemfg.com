@@ -904,9 +904,8 @@ namespace Time.Support.Controllers
 
                 var oldstatus = ticket.TicketStatus.Name;
                 var origTicket = ticket;
-                ticket.TicketStatus = completed ? _db.TicketStatuses.First(c => c.StatusID == 5) : _db.TicketStatuses.First(c => c.StatusID == 11);
-
-                ticket.CompletionDate = DateTime.Now;
+                ticket.TicketStatus = completed ? _db.TicketStatuses.First(c => c.StatusID == 5) : _db.TicketStatuses.First(c => c.StatusID == 3);
+                if (completed) ticket.CompletionDate = DateTime.Now;
                 ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Status was changed: {0} -> {1}", oldstatus, ticket.TicketStatus.Name), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 ticket.TicketStatusHistories.Add(new TicketStatusHistory() { TicketStatus = ticket.TicketStatus, CreateDate = DateTime.Now });
                 if (ticket.ResourceEmployeeID == null && ticket.AssignedEmployeeID != null)
@@ -914,23 +913,13 @@ namespace Time.Support.Controllers
                     ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
                     ticket.TicketEmployee1 = ticket.TicketEmployee;
                 }
-                //if (completed && ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
-                //{
-                //    string oldEmp = String.Format("{0} {1}", ticket.TicketEmployee.FirstName, ticket.TicketEmployee.LastName);
-                //    string newEmp = String.Format("{0} {1}", ticket.TicketEmployee1.FirstName, ticket.TicketEmployee1.LastName);
-                //    ticket.AssignedEmployeeID = ticket.ResourceEmployeeID;
-                //    ticket.TicketEmployee = ticket.TicketEmployee1;
-                //    ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Reset Assigned To from {0} to {1}", oldEmp, newEmp), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
-                //}
                 _db.SaveChanges();
 
-                //ticket.SendUpdateNotificationToAssigned();                // Added the completion notification to let the assigned person know it is complete.
-                var command = new TicketNotificationMessage
+                var command = new TicketNotificationMessage             // Added the completion notification to let the assigned person know it is complete.
                 {
                     TicketId = ticket.TicketID,
                     Notification = TicketNotificationMessage.NotificationType.UpdateAssigned,
                     Sender = HttpContext.User.Identity.Name,
-                    //NoteId = ticket.TicketNotes.OrderByDescending(x => x.CreatedDate).First().NoteID
                 };
                 var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
                 if (completed) msg = "Ticket has been completed"; else msg = "Ticket has been denied completion";
@@ -1011,6 +1000,50 @@ namespace Time.Support.Controllers
             catch (Exception err)
             {
                 //result = "Could not process your request at this time";
+                ErrorTools.SendEmail(Request.Url, err);
+            }
+
+            TempData["message"] = msg;
+            return RedirectToAction("Info", new { id = ticketId });
+        }
+
+        public ActionResult ReOpen(int ticketId)
+        {
+            var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
+            var user = HttpContext.User.Identity.Name;
+            if (user.ToLower() != ticket.RequestedBy.ToLower())
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Re-Open this Ticket")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportApprover, T("You Do Not Have Permission to Re-Open this Ticket")) &&
+                !Services.Authorizer.Authorize(Permissions.SupportIT, T("You Do Not Have Permission to Re-Open this Ticket")))
+                    return new HttpUnauthorizedResult();
+            }
+            string msg = "";
+            try
+            {
+                ticket.TicketStatus = _db.TicketStatuses.First(c => c.StatusID == 3);
+                ticket.Status = 3;
+
+                ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Ticket Re-Opened by {0}", HttpContext.User.Identity.Name), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
+                ticket.TicketStatusHistories.Add(new TicketStatusHistory() { TicketStatus = ticket.TicketStatus, CreateDate = DateTime.Now });
+                if (ticket.ResourceEmployeeID == null && ticket.AssignedEmployeeID != null)
+                {
+                    ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
+                    ticket.TicketEmployee1 = ticket.TicketEmployee;
+                }
+
+                _db.SaveChanges();
+
+                var command = new TicketNotificationMessage         // Added the approved notification to let the .
+                {
+                    TicketId = ticket.TicketID,
+                    Notification = TicketNotificationMessage.NotificationType.Assignment,
+                    Sender = HttpContext.User.Identity.Name,
+                };
+                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+            }
+            catch (Exception err)
+            {
                 ErrorTools.SendEmail(Request.Url, err);
             }
 
