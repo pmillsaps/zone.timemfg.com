@@ -896,16 +896,17 @@ namespace Time.Support.Controllers
             string msg = "";
             try
             {
-                //var ticket = _db.TicketProjects.Single(c => c.TicketID == ticketId);
-                //if (!ticket.TicketStatusesReference.IsLoaded)
-                //    ticket.TicketStatusesReference.Load();
-                //if (!ticket.TicketEmployeesReference.IsLoaded)
-                //    ticket.TicketEmployeesReference.Load();
-
                 var oldstatus = ticket.TicketStatus.Name;
                 var origTicket = ticket;
+
                 ticket.TicketStatus = completed ? _db.TicketStatuses.First(c => c.StatusID == 5) : _db.TicketStatuses.First(c => c.StatusID == 3);
-                if (completed) ticket.CompletionDate = DateTime.Now;
+                if (completed)
+                {
+                    ticket.Status = 5;
+                    ticket.CompletionDate = DateTime.Now;
+                }
+                else
+                    ticket.Status = 3;
                 ticket.TicketNotes.Add(new TicketNote() { Note = String.Format("Status was changed: {0} -> {1}", oldstatus, ticket.TicketStatus.Name), CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 ticket.TicketStatusHistories.Add(new TicketStatusHistory() { TicketStatus = ticket.TicketStatus, CreateDate = DateTime.Now });
                 if (ticket.ResourceEmployeeID == null && ticket.AssignedEmployeeID != null)
