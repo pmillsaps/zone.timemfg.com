@@ -428,8 +428,9 @@ namespace Time.Support.Controllers
             if (ticket.DepartmentID != ticketProject.DepartmentID)
             {
                 var dept = _db.TicketDepartments.Single(x => x.DepartmentID == ticketProject.DepartmentID);
+                var oldDept = _db.TicketDepartments.Single(x => x.DepartmentID == ticket.DepartmentID);
                 ticket.DepartmentID = ticketProject.DepartmentID;
-                string updateNote = string.Format("Zone: Department was changed: {0} -> {1}" + Environment.NewLine, ticket.TicketDepartment.Name, dept.Name);
+                string updateNote = string.Format("Zone: Department was changed: {0} -> {1}" + Environment.NewLine, oldDept.Name, dept.Name);
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
