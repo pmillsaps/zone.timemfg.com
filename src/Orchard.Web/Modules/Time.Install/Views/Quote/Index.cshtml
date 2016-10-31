@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.QuoteDtl>
+
+@{
+    ViewBag.Title = "Aerial Quote Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+</div>
+
+<hr />
+<div class="alert alert-warning">
+    <p><strong>Note:</strong> A quote MUST have an INSTALLS(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
+    <p>To view or edit the details of an existing Installation Quote go to @Html.ActionLink("List of Installation Quotes", "ListOfInstallQuotes", "Quote")</p>
+</div>
+<hr />
+@using (Html.BeginForm("Index", "Quote", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-sm-2">@Html.Label("Search Aerial Quote: ")</div>
+        <div class="col-sm-2">@Html.TextBox("quote")</div>
+        <div class="col-sm-4"><input type="submit" class="btn btn-primary" value="Search" /></div>
+    </div>
+}
+
+<hr />
+<table class="table table-striped table-bordered">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LineDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDcdUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangeDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.QuoteNum)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.QuoteLine)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.PartNum)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.LineDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.LastUpdate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.LastDcdUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.OrderQty)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.ChangedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.ChangeDate)
+            </td>
+            <td>
+                @Html.ActionLink("Start Install Quote", "StartQuote", new { quoteNum = item.QuoteNum, installDesc = item.LineDesc })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Send Problem Jobs Email";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Clicking the button below will immediately trigger the 'Problem Jobs' Emails"</h4>
+
+<h4>Are you sure you wish to do this?</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Send Problem Jobs Email" />
+}

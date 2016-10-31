@@ -1,0 +1,10 @@
+﻿@model Time.Support.Models.SupportSettingsPart
+
+<fieldset>
+    <legend>@T("Time Support Module Settings")</legend>
+    <div>
+        @Html.LabelFor(m => m.EmailServer, @T("Email Server"))
+        @Html.EditorFor(m => m.EmailServer)
+        @Html.ValidationMessageFor(m => m.EmailServer, "*")
+    </div>
+</fieldset>

@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Request Part Transfer";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert">
+        @ViewBag.Message
+    </div>
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.TextBox("PartNum", "PartNum")
+    <input type="submit" value="@ViewBag.Title" />
+}

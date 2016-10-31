@@ -1,0 +1,342 @@
+﻿@model Time.Legacy.EntityModels.Legacy.WarrantyInvoice
+
+@{
+    ViewBag.Title = "Details for Invoice: #" + Model.InvoiceNumber;
+    Script.Require("jQueryUI_Accordion").AtFoot();
+}
+<link href="~/Modules/Time.Legacy/Styles/Styles.css" rel="stylesheet" />
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href="javascript:history.back()">Back to Details</a>
+</p>
+
+<br />
+
+<hr />
+
+<div id="accordion">
+    <h4>Customer Information</h4>
+    <div>
+        <table class="table-condensed table-striped table-hover" style="float: left">
+            <tr>
+                <th>
+                    Customer #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.CustomerNumber)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Name:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.CustomerName)
+                </td>
+            <tr />
+            <tr>
+                <th>
+                    Address 1:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.CustomerInfo.CustomerAddress))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Address 2:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.CustomerInfo.CustomerAddress2))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Address 3:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.CustomerInfo.CustomerAddress3))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    ShipTo Code:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.ShipToCode)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Customer Order #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.CustomerOrderNumber)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Last Order #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.LastOrderNumber)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Lift Order #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.LiftOrderNumber)
+                </td>
+            </tr>
+        </table>
+        <table class="table-condensed table-striped table-hover" style="display: inline-block">
+            <tr>
+                <th>
+                    Company #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.CompanyId)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Serial #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.SerialNumber)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Batch #:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.BatchNumber)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Order Type:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.OrderType)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Drop Ship:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.DropShipFlag)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Ship Via:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.CustomerInfo.ShipVia)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Date Ordered:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.CustomerInfo.DateOrdered))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Date Invoiced:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.CustomerInfo.DateInvoiced))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Date Shipped:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.CustomerInfo.DateShipped))
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h4>ShipTo Information</h4>
+    <div>
+        <table class="table-condensed">
+            <tr>
+                <th>
+                    Name:
+                </th>
+                <td>
+                    @Html.DisplayName((string)ViewBag.ShipTo.ShipToName)
+                </td>
+            <tr />
+            <tr>
+                <th>
+                    Address 1:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.ShipTo.Address))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Address 2:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.ShipTo.Address2))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Address 3:
+                </th>
+                <td>
+                    @Html.Raw(Html.Encode(ViewBag.ShipTo.Address3))
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<hr />
+
+<h4>More Details</h4>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            InvoiceNumber
+        </th>
+        <th>
+            LineNumber
+        </th>
+        <th>
+            LineType
+        </th>
+        <th>
+            PartNumber
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            QtyOrdered
+        </th>
+        <th>
+            QtyShipped
+        </th>
+        <th>
+            QtyBackordered
+        </th>
+        <th>
+            UnitPerMeasure
+        </th>
+        <th>
+            PriceCD
+        </th>
+        <th>
+            Taxable
+        </th>
+        <th>
+            Commissionable
+        </th>
+        <th>
+            DropShip
+        </th>
+        <th>
+            VendorNumber
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            DistributionCode
+        </th>
+        <th>
+            Kitted
+        </th>
+        <th>
+            ProdCode
+        </th>
+        <th>
+            KitOrdered
+        </th>
+        <th>
+            CommunityCode
+        </th>
+        <th>
+            MiscCode
+        </th>
+        <th>
+            ProductCode
+        </th>
+        <th>
+            Warehouse
+        </th>
+        <th>
+            PriceUnit
+        </th>
+        <th>
+            PriceExtended
+        </th>
+        <th>
+            CostUnit
+        </th>
+        <th>
+            Discount
+        </th>
+        <th>
+            QtyOriginalOrder
+        </th>
+        <th>
+            CommissionRate
+        </th>
+        <th>
+            CostExtended
+        </th>
+        <th>
+            ClosedFromWo
+        </th>
+        <th>
+            CompanyId
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.InvoiceLines as IEnumerable<Time.Legacy.EntityModels.Legacy.InvoiceLineItem>)
+    {
+        @Html.Partial("_InvoiceLines", item)
+    }
+</table>
+
+<p>
+    <a href="javascript:history.back()">Back to Details</a>
+</p>
+
+@using (Script.Foot())
+{
+    <script>
+        $(function () {
+            var icons = {
+                header: "ui-icon-circle-arrow-e",
+                activeHeader: "ui-icon-circle-arrow-s"
+            };
+            $("#accordion").accordion({
+                icons: icons
+            });
+            $("#toggle").button().click(function () {
+                if ($("#accordion").accordion("option", "icons")) {
+                    $("#accordion").accordion("option", "icons", null);
+                } else {
+                    $("#accordion").accordion("option", "icons", icons);
+                }
+            });
+        });
+    </script>
+}
