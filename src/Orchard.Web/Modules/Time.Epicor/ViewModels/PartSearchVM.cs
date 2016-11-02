@@ -199,7 +199,7 @@ namespace Time.Epicor.ViewModels
                     foreach (var item in PartData)
                     {
                         item.Cost = null;
-                        item.OnHand = null;
+                        item.binqty = null;
                         item.Price = null;
                     }
                 }
@@ -212,7 +212,7 @@ namespace Time.Epicor.ViewModels
             {
                 PartNumber = x.PartNum,
                 Description = x.PartDescription,
-                OnHand = x.binqtyonhand,
+                binqty = x.binqty,
                 PartLocation = x.BinNum,
                 Draw = x.DrawNum,
                 Price = x.BasePrice,
@@ -229,7 +229,7 @@ namespace Time.Epicor.ViewModels
                 BuyerName = x.buyername,
                 SubPart = x.SubPart,
                 Eco = x.ECO,
-                PrimBin = x.PrimBin
+                BinNum = x.BinNum
             });
         }
     }

@@ -187,7 +187,7 @@ namespace Time.Epicor.Controllers
             {
                 PartNumber = x.PartNum,
                 Description = x.PartDescription,
-                OnHand = x.binqtyonhand,
+                binqty = x.binqty,
                 PartLocation = x.BinNum,
                 Draw = x.DrawNum,
                 Price = x.BasePrice,

@@ -17,6 +17,8 @@ namespace Time.Epicor.Models
 
         public decimal? OnHand { get; set; }
 
+        public decimal? binqty { get; set; }
+
         public decimal? Price { get; set; }
 
         public string VendorID { get; set; }
@@ -44,6 +46,6 @@ namespace Time.Epicor.Models
         public string SubPart { get; set; }
 
         public string Eco { get; set; }
-        public string PrimBin { get; set; }
+        public string BinNum { get; set; }
     }
 }
