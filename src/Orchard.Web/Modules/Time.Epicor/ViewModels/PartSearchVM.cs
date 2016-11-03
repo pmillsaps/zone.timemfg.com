@@ -229,7 +229,6 @@ namespace Time.Epicor.ViewModels
                 BuyerName = x.buyername,
                 SubPart = x.SubPart,
                 Eco = x.ECO,
-                BinNum = x.BinNum
             });
         }
     }

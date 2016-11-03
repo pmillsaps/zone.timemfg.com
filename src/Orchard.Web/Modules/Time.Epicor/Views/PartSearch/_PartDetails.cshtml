@@ -9,22 +9,22 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BinNum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.Revision)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Draw)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.binqty)
+            @Html.DisplayNameFor(model => model.PartLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnHand) @*used binqty for information to display, not onhand.  want it to say onhand though*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.InActive)
@@ -42,25 +42,13 @@
             @Html.DisplayNameFor(model => model.Cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Revision)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ClassID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PartLocation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuyerID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.BuyerName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SubPart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Eco)
         </th>
     </tr>
 
@@ -74,22 +62,22 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BinNum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.Revision)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Draw)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.PartLocation)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.binqty)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VendorID)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InActive)
@@ -107,25 +95,13 @@
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Revision)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ClassID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PartLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuyerID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BuyerName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SubPart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Eco)
             </td>
         </tr>
     }

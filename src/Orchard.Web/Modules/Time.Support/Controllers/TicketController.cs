@@ -967,7 +967,7 @@ namespace Time.Support.Controllers
                 }
                 else
                 {
-                    ticket.TicketStatus = _db.TicketStatuses.Where(c => c.StatusID == 14).First(); // Status = Cancellation Rejected
+                    ticket.TicketStatus = _db.TicketStatuses.Where(c => c.StatusID == 3).First(); // Status = Cancellation Rejected
                     statusMessage += "The ticket cancellation has been rejected.  Please look at the ticket, and continue working on it, or get with the requestor, and discuss how it should be handled.";
                     statusMessage += "<br />If you feel this is an error, please contact your Supervisor, or IT to discuss the issue";
                 }
