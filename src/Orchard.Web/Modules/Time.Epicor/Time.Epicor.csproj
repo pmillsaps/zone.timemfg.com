@@ -260,6 +260,9 @@
     <Content Include="Views\E10\RequestPartTransfer.cshtml" />
     <Content Include="Views\LoadList\Edit.cshtml" />
     <Content Include="Views\LoadList\Edit_Original.cshtml" />
+    <Content Include="Views\V8WhereUsedBom\Index.cshtml" />
+    <Content Include="Views\V8WhereUsedBom\_WhereUsed.cshtml" />
+    <Content Include="Views\V8WhereUsedBom\_BOM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -295,6 +298,7 @@
     <Compile Include="Controllers\PartSearchController.cs" />
     <Compile Include="Controllers\QuoteOrderSearchController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\V8WhereUsedBomController.cs" />
     <Compile Include="Controllers\ValuedInventoryController.cs" />
     <Compile Include="Controllers\WhereUsedBomController.cs" />
     <Compile Include="Controllers\YardReportController.cs" />
@@ -329,6 +333,7 @@
     <Compile Include="ViewModels\PartSearchVM.cs" />
     <Compile Include="ViewModels\QuoteOrderSearchVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
+    <Compile Include="ViewModels\V8WhereUsedBomVM.cs" />
     <Compile Include="ViewModels\ValuedInventoryVM.cs" />
     <Compile Include="ViewModels\WhereUsedBomVM.cs" />
   </ItemGroup>

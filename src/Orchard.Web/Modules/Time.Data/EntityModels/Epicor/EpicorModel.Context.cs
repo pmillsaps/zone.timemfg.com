@@ -36,5 +36,7 @@ namespace Time.Data.EntityModels.Epicor
         public virtual DbSet<sysagenttask> sysagenttasks { get; set; }
         public virtual DbSet<C_TMC_Status> C_TMC_Status { get; set; }
         public virtual DbSet<v_PartDetails> v_PartDetails { get; set; }
+        public virtual DbSet<v_BillOfMaterials> v_BillOfMaterials { get; set; }
+        public virtual DbSet<v_WhereUsed> v_WhereUsed { get; set; }
     }
 }

@@ -1,101 +1,101 @@
-﻿@model IEnumerable<Time.Data.EntityModels.Production.V_BillOfMaterials>
+﻿@model IEnumerable<Time.Data.EntityModels.Epicor.v_BillOfMaterials>
 
 <h4>Bill Of Materials</h4>
 
 <table class="table table-striped table-bordered table-condensed">
     <tr class="success">
         <th colspan="3">
-            @Html.DisplayNameFor(model => model.MtlPartNum)
+            @Html.DisplayNameFor(model => model.mtlpartnum)
         </th>
         <th colspan="4">
-            @Html.DisplayNameFor(model => model.PartDescription)
+            @Html.DisplayNameFor(model => model.partdescription)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Latest_Rev)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeCode)
+            @Html.DisplayNameFor(model => model.typecode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClassID)
+            @Html.DisplayNameFor(model => model.classid)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AltMethod)
+            @Html.DisplayNameFor(model => model.altmethod)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InActive)
+            @Html.DisplayNameFor(model => model.inactive)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QtyPer)
+            @Html.DisplayNameFor(model => model.qtyper)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.onhandqty)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VendorNum)
+            @Html.DisplayNameFor(model => model.vendornum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VendorID)
+            @Html.DisplayNameFor(model => model.vendorid)
         </th>
         <th colspan="4">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.VenPartNum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhantomBOM)
+            @Html.DisplayNameFor(model => model.phantombom)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.PartNum)
+                @Html.DisplayNameFor(model => model.partnum)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BasePrice)
+                @Html.DisplayNameFor(model => model.baseprice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PersonID)
+                @Html.DisplayNameFor(model => model.personid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BuyerID)
+                @Html.DisplayNameFor(model => model.buyerid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MfgLotSize)
+                @Html.DisplayNameFor(model => model.mfglotsize)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RevisionNum)
+                @Html.DisplayNameFor(model => model.revisionnum)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FixedQty)
+                @Html.DisplayNameFor(model => model.fixedqty)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RelatedOperation)
+                @Html.DisplayNameFor(model => model.relatedoperation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MtlSeq)
+                @Html.DisplayNameFor(model => model.mtlseq)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastMaterialCost)
+                @Html.DisplayNameFor(model => model.lastmaterialcost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ViewAsAsm)
+                @Html.DisplayNameFor(model => model.viewasasm)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastSubContCost)
+                @Html.DisplayNameFor(model => model.lastsubcontcost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastMtlBurCost)
+                @Html.DisplayNameFor(model => model.lastmtlburcost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastLaborCost)
+                @Html.DisplayNameFor(model => model.lastlaborcost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastBurdenCost)
+                @Html.DisplayNameFor(model => model.lastburdencost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeadTime)
+                @Html.DisplayNameFor(model => model.leadtime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OpCode)
+                @Html.DisplayNameFor(model => model.opcode)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.binqtyonhand)
@@ -121,97 +121,97 @@
     {
         <tr>
             <td colspan="3">
-                @Html.ActionLink(item.MtlPartNum, "Index", new { search = item.MtlPartNum })
+                @Html.ActionLink(item.mtlpartnum, "Index", new { search = item.mtlpartnum })
             </td>
             <td colspan="4">
-                @Html.DisplayFor(modelItem => item.PartDescription)
+                @Html.DisplayFor(modelItem => item.partdescription)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Latest_Rev)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeCode)
+                @Html.DisplayFor(modelItem => item.typecode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClassID)
+                @Html.DisplayFor(modelItem => item.classid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AltMethod)
+                @Html.DisplayFor(modelItem => item.altmethod)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InActive)
+                @Html.DisplayFor(modelItem => item.inactive)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QtyPer)
+                @Html.DisplayFor(modelItem => item.qtyper)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.onhandqty)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VendorNum)
+                @Html.DisplayFor(modelItem => item.vendornum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VendorID)
+                @Html.DisplayFor(modelItem => item.vendorid)
             </td>
             <td colspan="4">
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VenPartNum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhantomBOM)
+                @Html.DisplayFor(modelItem => item.phantombom)
             </td>
             @*<td>
-                    @Html.DisplayFor(modelItem => item.PartNum)
+                    @Html.DisplayFor(modelItem => item.partnum)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BasePrice)
+                    @Html.DisplayFor(modelItem => item.baseprice)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PersonID)
+                    @Html.DisplayFor(modelItem => item.personid)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BuyerID)
+                    @Html.DisplayFor(modelItem => item.buyerid)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MfgLotSize)
+                    @Html.DisplayFor(modelItem => item.mfglotsize)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RevisionNum)
+                    @Html.DisplayFor(modelItem => item.revisionnum)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FixedQty)
+                    @Html.DisplayFor(modelItem => item.fixedqty)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RelatedOperation)
+                    @Html.DisplayFor(modelItem => item.relatedoperation)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MtlSeq)
+                    @Html.DisplayFor(modelItem => item.mtlseq)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastMaterialCost)
+                    @Html.DisplayFor(modelItem => item.lastmaterialcost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ViewAsAsm)
+                    @Html.DisplayFor(modelItem => item.viewasasm)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastSubContCost)
+                    @Html.DisplayFor(modelItem => item.lastsubcontcost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastMtlBurCost)
+                    @Html.DisplayFor(modelItem => item.lastmtlburcost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastLaborCost)
+                    @Html.DisplayFor(modelItem => item.lastlaborcost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastBurdenCost)
+                    @Html.DisplayFor(modelItem => item.lastburdencost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LeadTime)
+                    @Html.DisplayFor(modelItem => item.leadtime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OpCode)
+                    @Html.DisplayFor(modelItem => item.opcode)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.binqtyonhand)

@@ -1374,6 +1374,7 @@ warning 6002: The table/view 'Prod.dbo.V_WhereUsed' does not have a primary key 
             <PropertyRef Name="MtlSeq" />
             <PropertyRef Name="ViewAsAsm" />
             <PropertyRef Name="Id" />
+            <PropertyRef Name="WarehouseCode" />
           </Key>
           <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
@@ -1390,7 +1391,7 @@ warning 6002: The table/view 'Prod.dbo.V_WhereUsed' does not have a primary key 
           <Property Name="VenPartNum" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="PhantomBOM" Type="bit" />
-          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" />
+          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="OnHandQty" Type="decimal" Precision="22" Scale="8" />
           <Property Name="MtlPartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FixedQty" Type="bit" Nullable="false" />
@@ -2863,6 +2864,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
             <PropertyRef Name="MtlSeq" />
             <PropertyRef Name="ViewAsAsm" />
             <PropertyRef Name="Id" />
+            <PropertyRef Name="WarehouseCode" />
           </Key>
           <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
@@ -2890,7 +2892,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="MtlSeq" Type="Int32" Nullable="false" />
           <Property Name="ViewAsAsm" Type="Boolean" Nullable="false" />
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="WarehouseCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="WarehouseCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Plant" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_YardReport">

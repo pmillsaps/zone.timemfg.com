@@ -622,6 +622,51 @@ warning 6002: The table/view 'MfgSys803.dbo.systaskparam' does not have a primar
           <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.v_BillOfMaterials' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_BillOfMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="mtlpartnum" Type="varchar" MaxLength="50" />
+          <Property Name="partdescription" Type="text" />
+          <Property Name="typecode" Type="varchar" MaxLength="1" />
+          <Property Name="inactive" Type="tinyint" />
+          <Property Name="qtyper" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="baseprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="vendornum" Type="int" />
+          <Property Name="personid" Type="varchar" MaxLength="8" />
+          <Property Name="buyerid" Type="varchar" MaxLength="8" />
+          <Property Name="mfglotsize" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="vendorid" Type="varchar" MaxLength="8" />
+          <Property Name="revisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="fixedqty" Type="tinyint" />
+          <Property Name="relatedoperation" Type="int" />
+          <Property Name="mtlseq" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="phantombom" Type="tinyint" />
+          <Property Name="lastmaterialcost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="viewasasm" Type="tinyint" />
+          <Property Name="classid" Type="varchar" MaxLength="4" />
+          <Property Name="altmethod" Type="varchar" MaxLength="12" />
+          <Property Name="lastsubcontcost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="lastmtlburcost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="lastlaborcost" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="lastburdencost" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="leadtime" Type="int" />
+          <Property Name="opcode" Type="varchar" MaxLength="8" />
+          <Property Name="binqtyonhand" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="onhandqty" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="AllocQty" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="UnfirmAllocQty" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="Latest_Rev" Type="varchar" MaxLength="12" />
+          <Property Name="Current_Rev" Type="varchar" MaxLength="12" />
+          <Property Name="VenPartNum" Type="varchar" MaxLength="50" />
+          <Property Name="OpenJobCount" Type="int" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="OpenJobs" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'MfgSys803.dbo.v_CustomersWithOpenOrderPartLines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_CustomersWithOpenOrderPartLines">
           <Key>
@@ -705,6 +750,39 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
           <Property Name="binqtyonhand" Type="decimal" Precision="38" Scale="2" />
           <Property Name="OpenJobCount" Type="int" />
           <Property Name="Id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.v_WhereUsed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_WhereUsed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="revisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="partdescription" Type="text" />
+          <Property Name="typecode" Type="varchar" MaxLength="1" />
+          <Property Name="inactive" Type="tinyint" />
+          <Property Name="qtyper" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="baseprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="vendornum" Type="int" />
+          <Property Name="personid" Type="varchar" MaxLength="8" />
+          <Property Name="buyerid" Type="varchar" MaxLength="8" />
+          <Property Name="vendorid" Type="varchar" MaxLength="8" />
+          <Property Name="binqtyonhand" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="lastmaterialcost" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="venpartnum" Type="varchar" MaxLength="50" />
+          <Property Name="Latest_Rev" Type="varchar" MaxLength="12" />
+          <Property Name="OpenJobCount" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="phantombom" Type="tinyint" />
+          <Property Name="onhandqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="OpenJobs" Type="int" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="mtlpartnum" Type="varchar" MaxLength="50" />
+          <Property Name="fixedqty" Type="tinyint" />
+          <Property Name="relatedoperation" Type="int" />
+          <Property Name="mtlseq" Type="int" />
+          <Property Name="viewasasm" Type="tinyint" />
         </EntityType>
         <EntityContainer Name="MfgSys803ModelStoreContainer">
           <EntitySet Name="_TMC_Status" EntityType="Self._TMC_Status" Schema="dbo" store:Type="Tables" />
@@ -1293,6 +1371,48 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
     [systaskparam].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
     FROM [dbo].[systaskparam] AS [systaskparam]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_BillOfMaterials" EntityType="Self.v_BillOfMaterials" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_BillOfMaterials].[partnum] AS [partnum], 
+    [v_BillOfMaterials].[mtlpartnum] AS [mtlpartnum], 
+    [v_BillOfMaterials].[partdescription] AS [partdescription], 
+    [v_BillOfMaterials].[typecode] AS [typecode], 
+    [v_BillOfMaterials].[inactive] AS [inactive], 
+    [v_BillOfMaterials].[qtyper] AS [qtyper], 
+    [v_BillOfMaterials].[baseprice] AS [baseprice], 
+    [v_BillOfMaterials].[vendornum] AS [vendornum], 
+    [v_BillOfMaterials].[personid] AS [personid], 
+    [v_BillOfMaterials].[buyerid] AS [buyerid], 
+    [v_BillOfMaterials].[mfglotsize] AS [mfglotsize], 
+    [v_BillOfMaterials].[vendorid] AS [vendorid], 
+    [v_BillOfMaterials].[revisionnum] AS [revisionnum], 
+    [v_BillOfMaterials].[fixedqty] AS [fixedqty], 
+    [v_BillOfMaterials].[relatedoperation] AS [relatedoperation], 
+    [v_BillOfMaterials].[mtlseq] AS [mtlseq], 
+    [v_BillOfMaterials].[name] AS [name], 
+    [v_BillOfMaterials].[phantombom] AS [phantombom], 
+    [v_BillOfMaterials].[lastmaterialcost] AS [lastmaterialcost], 
+    [v_BillOfMaterials].[viewasasm] AS [viewasasm], 
+    [v_BillOfMaterials].[classid] AS [classid], 
+    [v_BillOfMaterials].[altmethod] AS [altmethod], 
+    [v_BillOfMaterials].[lastsubcontcost] AS [lastsubcontcost], 
+    [v_BillOfMaterials].[lastmtlburcost] AS [lastmtlburcost], 
+    [v_BillOfMaterials].[lastlaborcost] AS [lastlaborcost], 
+    [v_BillOfMaterials].[lastburdencost] AS [lastburdencost], 
+    [v_BillOfMaterials].[leadtime] AS [leadtime], 
+    [v_BillOfMaterials].[opcode] AS [opcode], 
+    [v_BillOfMaterials].[binqtyonhand] AS [binqtyonhand], 
+    [v_BillOfMaterials].[onhandqty] AS [onhandqty], 
+    [v_BillOfMaterials].[AllocQty] AS [AllocQty], 
+    [v_BillOfMaterials].[UnfirmAllocQty] AS [UnfirmAllocQty], 
+    [v_BillOfMaterials].[Latest_Rev] AS [Latest_Rev], 
+    [v_BillOfMaterials].[Current_Rev] AS [Current_Rev], 
+    [v_BillOfMaterials].[VenPartNum] AS [VenPartNum], 
+    [v_BillOfMaterials].[OpenJobCount] AS [OpenJobCount], 
+    [v_BillOfMaterials].[Id] AS [Id], 
+    [v_BillOfMaterials].[OpenJobs] AS [OpenJobs]
+    FROM [dbo].[v_BillOfMaterials] AS [v_BillOfMaterials]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="v_CustomersWithOpenOrderPartLines" EntityType="Self.v_CustomersWithOpenOrderPartLines" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [v_CustomersWithOpenOrderPartLines].[custnum] AS [custnum], 
@@ -1368,6 +1488,36 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
     [v_PartDetails].[OpenJobCount] AS [OpenJobCount], 
     [v_PartDetails].[Id] AS [Id]
     FROM [dbo].[v_PartDetails] AS [v_PartDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_WhereUsed" EntityType="Self.v_WhereUsed" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_WhereUsed].[partnum] AS [partnum], 
+    [v_WhereUsed].[revisionnum] AS [revisionnum], 
+    [v_WhereUsed].[partdescription] AS [partdescription], 
+    [v_WhereUsed].[typecode] AS [typecode], 
+    [v_WhereUsed].[inactive] AS [inactive], 
+    [v_WhereUsed].[qtyper] AS [qtyper], 
+    [v_WhereUsed].[baseprice] AS [baseprice], 
+    [v_WhereUsed].[vendornum] AS [vendornum], 
+    [v_WhereUsed].[personid] AS [personid], 
+    [v_WhereUsed].[buyerid] AS [buyerid], 
+    [v_WhereUsed].[vendorid] AS [vendorid], 
+    [v_WhereUsed].[binqtyonhand] AS [binqtyonhand], 
+    [v_WhereUsed].[lastmaterialcost] AS [lastmaterialcost], 
+    [v_WhereUsed].[venpartnum] AS [venpartnum], 
+    [v_WhereUsed].[Latest_Rev] AS [Latest_Rev], 
+    [v_WhereUsed].[OpenJobCount] AS [OpenJobCount], 
+    [v_WhereUsed].[name] AS [name], 
+    [v_WhereUsed].[phantombom] AS [phantombom], 
+    [v_WhereUsed].[onhandqty] AS [onhandqty], 
+    [v_WhereUsed].[OpenJobs] AS [OpenJobs], 
+    [v_WhereUsed].[Id] AS [Id], 
+    [v_WhereUsed].[mtlpartnum] AS [mtlpartnum], 
+    [v_WhereUsed].[fixedqty] AS [fixedqty], 
+    [v_WhereUsed].[relatedoperation] AS [relatedoperation], 
+    [v_WhereUsed].[mtlseq] AS [mtlseq], 
+    [v_WhereUsed].[viewasasm] AS [viewasasm]
+    FROM [dbo].[v_WhereUsed] AS [v_WhereUsed]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1927,6 +2077,8 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
           <EntitySet Name="sysagenttasks" EntityType="MfgSys803Model.sysagenttask" />
           <EntitySet Name="C_TMC_Status" EntityType="MfgSys803Model.C_TMC_Status" />
           <EntitySet Name="v_PartDetails" EntityType="MfgSys803Model.v_PartDetails" />
+          <EntitySet Name="v_BillOfMaterials" EntityType="MfgSys803Model.v_BillOfMaterials" />
+          <EntitySet Name="v_WhereUsed" EntityType="MfgSys803Model.v_WhereUsed" />
         </EntityContainer>
         <EntityType Name="systask">
           <Key>
@@ -2067,6 +2219,80 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
           <Property Name="binqtyonhand" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="OpenJobCount" Type="Int32" />
           <Property Name="Id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_BillOfMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mtlpartnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="partdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="typecode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="inactive" Type="Byte" />
+          <Property Name="qtyper" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="baseprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="vendornum" Type="Int32" />
+          <Property Name="personid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="buyerid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="mfglotsize" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="vendorid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="revisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="fixedqty" Type="Byte" />
+          <Property Name="relatedoperation" Type="Int32" />
+          <Property Name="mtlseq" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phantombom" Type="Byte" />
+          <Property Name="lastmaterialcost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="viewasasm" Type="Byte" />
+          <Property Name="classid" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="altmethod" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="lastsubcontcost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="lastmtlburcost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="lastlaborcost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="lastburdencost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="leadtime" Type="Int32" />
+          <Property Name="opcode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="binqtyonhand" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="onhandqty" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="AllocQty" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="UnfirmAllocQty" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Latest_Rev" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Current_Rev" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="VenPartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OpenJobCount" Type="Int32" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="OpenJobs" Type="Int32" />
+        </EntityType>
+        <EntityType Name="v_WhereUsed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="revisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="partdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="typecode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="inactive" Type="Byte" />
+          <Property Name="qtyper" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="baseprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="vendornum" Type="Int32" />
+          <Property Name="personid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="buyerid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="vendorid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="binqtyonhand" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="lastmaterialcost" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="venpartnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latest_Rev" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="OpenJobCount" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phantombom" Type="Byte" />
+          <Property Name="onhandqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="OpenJobs" Type="Int32" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="mtlpartnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fixedqty" Type="Byte" />
+          <Property Name="relatedoperation" Type="Int32" />
+          <Property Name="mtlseq" Type="Int32" />
+          <Property Name="viewasasm" Type="Byte" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2760,6 +2986,82 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
                 <ScalarProperty Name="inactive" ColumnName="inactive" />
                 <ScalarProperty Name="typecode" ColumnName="typecode" />
                 <ScalarProperty Name="partdescription" ColumnName="partdescription" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_BillOfMaterials">
+            <EntityTypeMapping TypeName="MfgSys803Model.v_BillOfMaterials">
+              <MappingFragment StoreEntitySet="v_BillOfMaterials">
+                <ScalarProperty Name="OpenJobs" ColumnName="OpenJobs" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OpenJobCount" ColumnName="OpenJobCount" />
+                <ScalarProperty Name="VenPartNum" ColumnName="VenPartNum" />
+                <ScalarProperty Name="Current_Rev" ColumnName="Current_Rev" />
+                <ScalarProperty Name="Latest_Rev" ColumnName="Latest_Rev" />
+                <ScalarProperty Name="UnfirmAllocQty" ColumnName="UnfirmAllocQty" />
+                <ScalarProperty Name="AllocQty" ColumnName="AllocQty" />
+                <ScalarProperty Name="onhandqty" ColumnName="onhandqty" />
+                <ScalarProperty Name="binqtyonhand" ColumnName="binqtyonhand" />
+                <ScalarProperty Name="opcode" ColumnName="opcode" />
+                <ScalarProperty Name="leadtime" ColumnName="leadtime" />
+                <ScalarProperty Name="lastburdencost" ColumnName="lastburdencost" />
+                <ScalarProperty Name="lastlaborcost" ColumnName="lastlaborcost" />
+                <ScalarProperty Name="lastmtlburcost" ColumnName="lastmtlburcost" />
+                <ScalarProperty Name="lastsubcontcost" ColumnName="lastsubcontcost" />
+                <ScalarProperty Name="altmethod" ColumnName="altmethod" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="viewasasm" ColumnName="viewasasm" />
+                <ScalarProperty Name="lastmaterialcost" ColumnName="lastmaterialcost" />
+                <ScalarProperty Name="phantombom" ColumnName="phantombom" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="mtlseq" ColumnName="mtlseq" />
+                <ScalarProperty Name="relatedoperation" ColumnName="relatedoperation" />
+                <ScalarProperty Name="fixedqty" ColumnName="fixedqty" />
+                <ScalarProperty Name="revisionnum" ColumnName="revisionnum" />
+                <ScalarProperty Name="vendorid" ColumnName="vendorid" />
+                <ScalarProperty Name="mfglotsize" ColumnName="mfglotsize" />
+                <ScalarProperty Name="buyerid" ColumnName="buyerid" />
+                <ScalarProperty Name="personid" ColumnName="personid" />
+                <ScalarProperty Name="vendornum" ColumnName="vendornum" />
+                <ScalarProperty Name="baseprice" ColumnName="baseprice" />
+                <ScalarProperty Name="qtyper" ColumnName="qtyper" />
+                <ScalarProperty Name="inactive" ColumnName="inactive" />
+                <ScalarProperty Name="typecode" ColumnName="typecode" />
+                <ScalarProperty Name="partdescription" ColumnName="partdescription" />
+                <ScalarProperty Name="mtlpartnum" ColumnName="mtlpartnum" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_WhereUsed">
+            <EntityTypeMapping TypeName="MfgSys803Model.v_WhereUsed">
+              <MappingFragment StoreEntitySet="v_WhereUsed">
+                <ScalarProperty Name="viewasasm" ColumnName="viewasasm" />
+                <ScalarProperty Name="mtlseq" ColumnName="mtlseq" />
+                <ScalarProperty Name="relatedoperation" ColumnName="relatedoperation" />
+                <ScalarProperty Name="fixedqty" ColumnName="fixedqty" />
+                <ScalarProperty Name="mtlpartnum" ColumnName="mtlpartnum" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OpenJobs" ColumnName="OpenJobs" />
+                <ScalarProperty Name="onhandqty" ColumnName="onhandqty" />
+                <ScalarProperty Name="phantombom" ColumnName="phantombom" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="OpenJobCount" ColumnName="OpenJobCount" />
+                <ScalarProperty Name="Latest_Rev" ColumnName="Latest_Rev" />
+                <ScalarProperty Name="venpartnum" ColumnName="venpartnum" />
+                <ScalarProperty Name="lastmaterialcost" ColumnName="lastmaterialcost" />
+                <ScalarProperty Name="binqtyonhand" ColumnName="binqtyonhand" />
+                <ScalarProperty Name="vendorid" ColumnName="vendorid" />
+                <ScalarProperty Name="buyerid" ColumnName="buyerid" />
+                <ScalarProperty Name="personid" ColumnName="personid" />
+                <ScalarProperty Name="vendornum" ColumnName="vendornum" />
+                <ScalarProperty Name="baseprice" ColumnName="baseprice" />
+                <ScalarProperty Name="qtyper" ColumnName="qtyper" />
+                <ScalarProperty Name="inactive" ColumnName="inactive" />
+                <ScalarProperty Name="typecode" ColumnName="typecode" />
+                <ScalarProperty Name="partdescription" ColumnName="partdescription" />
+                <ScalarProperty Name="revisionnum" ColumnName="revisionnum" />
                 <ScalarProperty Name="partnum" ColumnName="partnum" />
               </MappingFragment>
             </EntityTypeMapping>
