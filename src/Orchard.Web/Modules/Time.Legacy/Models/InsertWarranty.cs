@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Time.Legacy.EntityModels.Legacy;
+using Time.Data.EntityModels.Legacy;
 
 namespace Time.Legacy.Models
 {

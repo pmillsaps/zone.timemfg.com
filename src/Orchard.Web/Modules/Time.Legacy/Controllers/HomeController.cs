@@ -9,7 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
-using Time.Legacy.EntityModels.Legacy;
+using Time.Data.EntityModels.Legacy;
 
 namespace Time.Legacy.Controllers
 {

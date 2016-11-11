@@ -248,13 +248,6 @@ namespace Time.Support.Controllers
                 ticketProject.Status = 1;   // Set Ticket Status to 1=Waiting Supervisor Approval
 
                 var user = HttpContext.User.Identity.Name;
-
-                //if (Services.Authorizer.Authorize(Permissions.SupportApprover)) ticketProject.Status = 2;
-                ticketProject.TicketStatus = _db.TicketStatuses.Find(ticketProject.Status);
-                ticketProject.RequestedDate = DateTime.Now;
-                ticketProject.RequestedBy = user;
-                ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
-
                 var groups = ADHelper.GetGroupNames(user);
 
                 if (groups != null && groups.Contains("SupportTicketApprover"))
@@ -262,15 +255,26 @@ namespace Time.Support.Controllers
                     ticketProject.Status = 2;
                 }
 
+                //if (Services.Authorizer.Authorize(Permissions.SupportApprover)) ticketProject.Status = 2;
+                ticketProject.TicketStatus = _db.TicketStatuses.Find(ticketProject.Status);
+                ticketProject.RequestedDate = DateTime.Now;
+                ticketProject.RequestedBy = user;
+                ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
                 _db.TicketStatusHistories.Add(new TicketStatusHistory { TicketStatus = ticketProject.TicketStatus, CreateDate = DateTime.Now });
-                var codegen = new CreateRandomCode();
-                var code = codegen.GenerateCode(12);
-                while (_db.TicketProjects.Any(x => x.ApprovalCode == code))
+
+                // Approval COdeGen
+                if (ticketProject.Status == 1)
                 {
-                    // regenerate a new code if it already exists
-                    code = codegen.GenerateCode(12);
+                    var codegen = new CreateRandomCode();
+                    var code = codegen.GenerateCode(12);
+                    while (_db.TicketProjects.Any(x => x.ApprovalCode == code))
+                    {
+                        // regenerate a new code if it already exists
+                        code = codegen.GenerateCode(12);
+                    }
+                    ticketProject.ApprovalCode = code;
                 }
-                ticketProject.ApprovalCode = code;
+
                 _db.TicketProjects.Add(ticketProject);
                 _db.SaveChanges();
                 // ticketProject.SendNewTicketNotification();
@@ -281,7 +285,7 @@ namespace Time.Support.Controllers
                     Sender = HttpContext.User.Identity.Name
                 };
                 var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
-                if (ADHelper.GetGroupNames(user).Contains("SupportTicketApprover"))
+                if (ticketProject.Status == 2)
                 {
                     var cmd = new TicketNotificationMessage
                     {
