@@ -7,21 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class WarrantyInvoice
+    public partial class PurchaseBOMItem
     {
         public int Id { get; set; }
-        public string SerialNumber { get; set; }
-        public Nullable<System.DateTime> InvoiceDate { get; set; }
-        public string InvoiceNumber { get; set; }
-        public string CompanyId { get; set; }
-        public string CustomerId { get; set; }
-        public string PoNumber { get; set; }
-        public string SalesOrderNumber { get; set; }
-        public string LiftOrderNumber { get; set; }
+        public int PurchaseBOMId { get; set; }
+        public string ULPartNumber { get; set; }
+        public string VendorNumber { get; set; }
+        public int LineNumber { get; set; }
+        public string PartNumber { get; set; }
+        public string TimePartNumber { get; set; }
+        public float Qty { get; set; }
+        public string Description { get; set; }
+    
+        public virtual PurchaseBOM PurchaseBOM { get; set; }
     }
 }

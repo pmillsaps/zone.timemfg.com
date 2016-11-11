@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class LEGACYSWO02Hb
+    public partial class InvoiceShipTo
     {
-        public string Company { get; set; }
-        public string WorkOrderNumber { get; set; }
-        public string StepNumber { get; set; }
-        public string LineType { get; set; }
-        public string Comments { get; set; }
+        public string CompanyId { get; set; }
+        public string InvoiceNumber { get; set; }
+        public string LineNumber { get; set; }
+        public string ShipToName { get; set; }
+        public string Address { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }
     }
 }

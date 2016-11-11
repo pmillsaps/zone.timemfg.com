@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class InvoiceShipTo
+    public partial class WarrantyInvoice
     {
-        public string CompanyId { get; set; }
+        public int Id { get; set; }
+        public string SerialNumber { get; set; }
+        public Nullable<System.DateTime> InvoiceDate { get; set; }
         public string InvoiceNumber { get; set; }
-        public string LineNumber { get; set; }
-        public string ShipToName { get; set; }
-        public string Address { get; set; }
-        public string Address2 { get; set; }
-        public string Address3 { get; set; }
+        public string CompanyId { get; set; }
+        public string CustomerId { get; set; }
+        public string PoNumber { get; set; }
+        public string SalesOrderNumber { get; set; }
+        public string LiftOrderNumber { get; set; }
     }
 }

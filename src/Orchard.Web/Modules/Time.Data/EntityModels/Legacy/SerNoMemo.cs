@@ -7,23 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseBOMItem
+    public partial class SerNoMemo
     {
         public int Id { get; set; }
-        public int PurchaseBOMId { get; set; }
-        public string ULPartNumber { get; set; }
-        public string VendorNumber { get; set; }
-        public int LineNumber { get; set; }
-        public string PartNumber { get; set; }
-        public string TimePartNumber { get; set; }
-        public float Qty { get; set; }
-        public string Description { get; set; }
-    
-        public virtual PurchaseBOM PurchaseBOM { get; set; }
+        public string SerialNumber { get; set; }
+        public System.DateTime MemoDate { get; set; }
+        public string EnteredBy { get; set; }
+        public string Memo { get; set; }
     }
 }

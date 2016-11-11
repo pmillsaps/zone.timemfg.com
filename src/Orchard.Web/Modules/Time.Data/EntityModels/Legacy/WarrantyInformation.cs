@@ -7,24 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class WarrantyEndUser
+    public partial class WarrantyInformation
     {
         public int Id { get; set; }
         public string SerialNumber { get; set; }
-        public Nullable<System.DateTime> ExpirationDate { get; set; }
-        public Nullable<System.DateTime> ShipDate { get; set; }
-        public Nullable<System.DateTime> InServiceDate { get; set; }
-        public string EndUser { get; set; }
+        public string Company { get; set; }
         public string Address { get; set; }
         public string Address2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip { get; set; }
+        public string Address3 { get; set; }
+        public string Address4 { get; set; }
+        public Nullable<System.DateTime> ShipDate { get; set; }
+        public Nullable<System.DateTime> InServiceDate { get; set; }
+        public Nullable<System.DateTime> ExpDate { get; set; }
         public string Phone { get; set; }
+        public string LTDCost { get; set; }
+        public string EndUserName { get; set; }
+        public string Comments { get; set; }
+        public string SortKey { get; set; }
+        public string Details { get; set; }
+        public string AllData { get; set; }
     }
 }

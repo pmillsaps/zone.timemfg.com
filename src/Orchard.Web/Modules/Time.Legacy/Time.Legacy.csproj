@@ -134,118 +134,19 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="EntityModels\Legacy\LegacyModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LegacyModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <ProjectReference Include="..\Time.Data\Time.Data.csproj">
+      <Project>{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6}</Project>
+      <Name>Time.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WarrantyController.cs" />
-    <Compile Include="EntityModels\Legacy\Customer.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\Inventory.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\InvoiceHeader.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\InvoiceLineItem.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\InvoiceShipTo.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\LegacyModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LegacyModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\LegacyModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\LegacyModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LegacyModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\LEGACYSWO011H.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\LEGACYSWO02Hb.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\LiftCost.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PartStep.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PartStepDetail.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PartXRef.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PullSheetHistory.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PurchaseBOM.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PurchaseBOMItem.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PurchaseHistory.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\PurchaseHistory_Mods.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\RedrillPartXRef.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\SerNoMemo.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\SupplierInformation.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\WarrantyComponent.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\WarrantyEndUser.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\WarrantyInformation.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityModels\Legacy\WarrantyInvoice.cs">
-      <DependentUpon>LegacyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\InsertWarranty.cs" />
     <Compile Include="Models\WarrantyItem.cs" />
     <Compile Include="Routes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EntityModels\Legacy\LegacyModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LegacyModel.edmx</DependentUpon>
-      <LastGenOutput>LegacyModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityModels\Legacy\LegacyModel.edmx.diagram">
-      <DependentUpon>LegacyModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="EntityModels\Legacy\LegacyModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LegacyModel.edmx</DependentUpon>
-      <LastGenOutput>LegacyModel.cs</LastGenOutput>
-    </Content>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

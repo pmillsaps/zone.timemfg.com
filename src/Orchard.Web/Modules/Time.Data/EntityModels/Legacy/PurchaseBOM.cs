@@ -7,24 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PartStep
+    public partial class PurchaseBOM
     {
-        public PartStep()
+        public PurchaseBOM()
         {
-            this.PartStepDetails = new HashSet<PartStepDetail>();
+            this.PurchaseBOMItems = new HashSet<PurchaseBOMItem>();
         }
     
         public int Id { get; set; }
         public string PartNumber { get; set; }
-        public string Description { get; set; }
-        public string Cost { get; set; }
-        public string Lab { get; set; }
+        public string VendorNumber { get; set; }
     
-        public virtual ICollection<PartStepDetail> PartStepDetails { get; set; }
+        public virtual ICollection<PurchaseBOMItem> PurchaseBOMItems { get; set; }
     }
 }
