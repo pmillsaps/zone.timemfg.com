@@ -9,8 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Time.Data.EntityModels.Legacy;
 using Time.Legacy.Models;
-using Time.Legacy.EntityModels.Legacy;
 
 namespace Time.Legacy.Controllers
 {
@@ -24,10 +24,11 @@ namespace Time.Legacy.Controllers
         // GET: Warranty
         public ActionResult Index(string search = "")
         {
-            var combined = from o in db.WarrantyInformations join o2 in db.WarrantyInvoices on o.SerialNumber equals o2.SerialNumber
+            var combined = from o in db.WarrantyInformations
+                           join o2 in db.WarrantyInvoices on o.SerialNumber equals o2.SerialNumber
                            where o.SerialNumber.Equals(o2.SerialNumber)
                            select new { Information = o, Invoice = o2 };
-                           //select new InsertWarranty { Information = o, Invoice = o2 };
+            //select new InsertWarranty { Information = o, Invoice = o2 };
 
             if (search.Length < 3)
             {
@@ -44,8 +45,18 @@ namespace Time.Legacy.Controllers
                 if (combined != null)
                 {
                     List<InsertWarranty> final2 = new List<InsertWarranty>();
-                    var final = combined.Select(x => new { x.Information.Id, x.Information.SerialNumber, x.Information.EndUserName, x.Information.Phone, x.Information.Address, x.Invoice.LiftOrderNumber,
-                    x.Invoice.InvoiceNumber, x.Invoice.PoNumber, x.Information.Comments}).Distinct().OrderBy(x => x.SerialNumber).ToList();
+                    var final = combined.Select(x => new
+                    {
+                        x.Information.Id,
+                        x.Information.SerialNumber,
+                        x.Information.EndUserName,
+                        x.Information.Phone,
+                        x.Information.Address,
+                        x.Invoice.LiftOrderNumber,
+                        x.Invoice.InvoiceNumber,
+                        x.Invoice.PoNumber,
+                        x.Information.Comments
+                    }).Distinct().OrderBy(x => x.SerialNumber).ToList();
 
                     string temp = "";
                     foreach (var item in final)
@@ -163,7 +174,7 @@ namespace Time.Legacy.Controllers
         }
 
         // POST: Warranty/Add_Memo
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -199,7 +210,7 @@ namespace Time.Legacy.Controllers
         }
 
         // POST: Warranty/Edit_Memo
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

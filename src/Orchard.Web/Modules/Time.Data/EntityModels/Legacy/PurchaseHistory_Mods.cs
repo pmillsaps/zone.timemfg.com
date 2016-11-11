@@ -7,14 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseHistory
+    public partial class PurchaseHistory_Mods
     {
-        public int Id { get; set; }
         public string Company { get; set; }
         public string PartNumber { get; set; }
         public Nullable<System.DateTime> ReceiptDate { get; set; }

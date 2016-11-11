@@ -7,22 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseHistory_Mods
+    public partial class LEGACYSWO02Hb
     {
         public string Company { get; set; }
-        public string PartNumber { get; set; }
-        public Nullable<System.DateTime> ReceiptDate { get; set; }
-        public string SupplierNumber { get; set; }
-        public string PO_Number { get; set; }
-        public string PO_Line_Number { get; set; }
-        public string ReceiptQty { get; set; }
-        public string Qty { get; set; }
-        public Nullable<int> SupplierId { get; set; }
-        public string SupplierName { get; set; }
+        public string WorkOrderNumber { get; set; }
+        public string StepNumber { get; set; }
+        public string LineType { get; set; }
+        public string Comments { get; set; }
     }
 }

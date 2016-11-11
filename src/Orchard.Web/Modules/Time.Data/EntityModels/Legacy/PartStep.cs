@@ -7,17 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SerNoMemo
+    public partial class PartStep
     {
+        public PartStep()
+        {
+            this.PartStepDetails = new HashSet<PartStepDetail>();
+        }
+    
         public int Id { get; set; }
-        public string SerialNumber { get; set; }
-        public System.DateTime MemoDate { get; set; }
-        public string EnteredBy { get; set; }
-        public string Memo { get; set; }
+        public string PartNumber { get; set; }
+        public string Description { get; set; }
+        public string Cost { get; set; }
+        public string Lab { get; set; }
+    
+        public virtual ICollection<PartStepDetail> PartStepDetails { get; set; }
     }
 }

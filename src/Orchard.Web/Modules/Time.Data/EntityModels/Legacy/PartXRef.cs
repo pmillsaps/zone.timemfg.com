@@ -7,17 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Legacy.EntityModels.Legacy
+namespace Time.Data.EntityModels.Legacy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class WarrantyComponent
+    public partial class PartXRef
     {
-        public int Id { get; set; }
-        public string SerialNumber { get; set; }
-        public string Name { get; set; }
-        public string LineNumber { get; set; }
-        public string ManufactorName { get; set; }
+        public string NewPart { get; set; }
+        public string OldPart { get; set; }
     }
 }
