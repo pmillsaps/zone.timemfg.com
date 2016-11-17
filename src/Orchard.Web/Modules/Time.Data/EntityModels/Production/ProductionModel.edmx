@@ -921,10 +921,10 @@ warning 6002: The table/view 'Prod.dbo.V_BillOfMaterials' does not have a primar
           <Key>
             <PropertyRef Name="PartNum" />
             <PropertyRef Name="MtlPartNum" />
+            <PropertyRef Name="QtyPer" />
             <PropertyRef Name="PartDescription" />
             <PropertyRef Name="TypeCode" />
             <PropertyRef Name="InActive" />
-            <PropertyRef Name="QtyPer" />
             <PropertyRef Name="RevisionNum" />
             <PropertyRef Name="FixedQty" />
             <PropertyRef Name="RelatedOperation" />
@@ -937,10 +937,10 @@ warning 6002: The table/view 'Prod.dbo.V_BillOfMaterials' does not have a primar
           </Key>
           <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MtlPartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
           <Property Name="PartDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TypeCode" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="InActive" Type="bit" Nullable="false" />
-          <Property Name="QtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
           <Property Name="BasePrice" Type="decimal" Precision="17" Scale="5" />
           <Property Name="VendorNum" Type="int" />
           <Property Name="PersonID" Type="nvarchar" MaxLength="8" />
@@ -1343,11 +1343,11 @@ warning 6002: The table/view 'Prod.dbo.V_QuoteOrderInformation' does not have a 
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="Type" />
-            <PropertyRef Name="partnum" />
-            <PropertyRef Name="linedesc" />
-            <PropertyRef Name="Comment" />
-            <PropertyRef Name="QuoteReference" />
-            <PropertyRef Name="Id1" />
+            
+            
+            
+            
+            
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="5" Nullable="false" />
@@ -1665,10 +1665,10 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
             <DefiningQuery>SELECT 
     [V_BillOfMaterials].[PartNum] AS [PartNum], 
     [V_BillOfMaterials].[MtlPartNum] AS [MtlPartNum], 
+    [V_BillOfMaterials].[QtyPer] AS [QtyPer], 
     [V_BillOfMaterials].[PartDescription] AS [PartDescription], 
     [V_BillOfMaterials].[TypeCode] AS [TypeCode], 
     [V_BillOfMaterials].[InActive] AS [InActive], 
-    [V_BillOfMaterials].[QtyPer] AS [QtyPer], 
     [V_BillOfMaterials].[BasePrice] AS [BasePrice], 
     [V_BillOfMaterials].[VendorNum] AS [VendorNum], 
     [V_BillOfMaterials].[PersonID] AS [PersonID], 
@@ -2835,11 +2835,6 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="Type" />
-            <PropertyRef Name="partnum" />
-            <PropertyRef Name="linedesc" />
-            <PropertyRef Name="Comment" />
-            <PropertyRef Name="QuoteReference" />
-            <PropertyRef Name="Id1" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />

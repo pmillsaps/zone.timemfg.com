@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Models\Epicor\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EntityModels\TimeMFG\TimeMfgModel.edmx">
@@ -351,6 +350,9 @@
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Epicor\v_PartDetails.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_QuoteOrderInformation.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Epicor\v_WhereUsed.cs">
@@ -839,6 +841,8 @@
     <Compile Include="Models\DataPlates\LB_Options.cs" />
     <Compile Include="Models\DataPlates\LiftData.cs" />
     <Compile Include="Models\DataPlates\PS_Option.cs" />
+    <Compile Include="Models\Epicor\E10V_QuoteOrderInformation.cs" />
+    <Compile Include="Models\Epicor\v_QuoteOrderInformation.cs" />
     <Compile Include="Models\GetSetting.cs" />
     <Compile Include="Models\Install\InstallHourlyRate.cs" />
     <Compile Include="Models\Install\InstallQuote.cs" />

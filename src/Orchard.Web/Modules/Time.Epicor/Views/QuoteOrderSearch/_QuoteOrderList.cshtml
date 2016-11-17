@@ -18,9 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.linedesc)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Comment)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.duedate)
         </th>
@@ -36,6 +36,7 @@
         @*<th>
                 @Html.DisplayNameFor(model => model.Id1)
             </th>*@
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -53,12 +54,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.linedesc)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayWithBreaksTruncated(item.Comment, 4)
-                @*@Html.DisplayWithBreaks(Html.Truncate(item.Comment, 80))*@
-                @*@Html.Truncate(item.Comment, 40)*@
-                @*@Html.DisplayFor(modelItem => item.Comment)*@
-            </td>
+                @Html.DisplayWithBreaks(Html.Truncate(item.Comment, 80))
+                @Html.Truncate(item.Comment, 40)
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.duedate)
             </td>
@@ -74,6 +75,9 @@
             @*<td>
                     @Html.DisplayFor(modelItem => item.Id1)
                 </td>*@
+            <td>
+                @Html.ActionLink("Comments", "Comments", new { id = item.Id, type = item.Type })
+            </td>
         </tr>
     }
 </table>

@@ -1,4 +1,4 @@
-﻿@model Time.Legacy.EntityModels.Legacy.WarrantyInformation
+﻿@model Time.Data.EntityModels.Legacy.WarrantyInformation
 
 @{
     ViewBag.Title = "Details for Serial# " + Model.SerialNumber;
@@ -62,7 +62,7 @@
             Id #
         </th>
     </tr>
-    @foreach (var item in ViewBag.EndUser as IEnumerable<Time.Legacy.EntityModels.Legacy.WarrantyEndUser>)
+    @foreach (var item in ViewBag.EndUser as IEnumerable<Time.Data.EntityModels.Legacy.WarrantyEndUser>)
     {
         @Html.Partial("_EndUser", item)
     }
@@ -103,7 +103,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in ViewBag.InvoiceHistory as IEnumerable<Time.Legacy.EntityModels.Legacy.WarrantyInvoice>)
+    @foreach (var item in ViewBag.InvoiceHistory as IEnumerable<Time.Data.EntityModels.Legacy.WarrantyInvoice>)
     {
         @Html.Partial("_InvoiceHistory", item)
     }
@@ -136,7 +136,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in ViewBag.Memos as IEnumerable<Time.Legacy.EntityModels.Legacy.SerNoMemo>)
+    @foreach (var item in ViewBag.Memos as IEnumerable<Time.Data.EntityModels.Legacy.SerNoMemo>)
     {
         @Html.Partial("_Memos", item)
     }

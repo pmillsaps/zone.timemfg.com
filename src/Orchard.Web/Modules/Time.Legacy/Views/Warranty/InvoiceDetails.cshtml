@@ -1,4 +1,4 @@
-﻿@model Time.Legacy.EntityModels.Legacy.WarrantyInvoice
+﻿@model Time.Data.EntityModels.Legacy.WarrantyInvoice
 
 @{
     ViewBag.Title = "Details for Invoice: #" + Model.InvoiceNumber;
@@ -309,7 +309,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in ViewBag.InvoiceLines as IEnumerable<Time.Legacy.EntityModels.Legacy.InvoiceLineItem>)
+    @foreach (var item in ViewBag.InvoiceLines as IEnumerable<Time.Data.EntityModels.Legacy.InvoiceLineItem>)
     {
         @Html.Partial("_InvoiceLines", item)
     }

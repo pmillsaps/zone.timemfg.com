@@ -38,5 +38,6 @@ namespace Time.Data.EntityModels.Epicor
         public virtual DbSet<v_PartDetails> v_PartDetails { get; set; }
         public virtual DbSet<v_BillOfMaterials> v_BillOfMaterials { get; set; }
         public virtual DbSet<v_WhereUsed> v_WhereUsed { get; set; }
+        public virtual DbSet<v_QuoteOrderInformation> v_QuoteOrderInformation { get; set; }
     }
 }

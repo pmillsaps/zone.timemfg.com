@@ -752,6 +752,25 @@ warning 6002: The table/view 'MfgSys803.dbo.v_PartDetails' does not have a prima
           <Property Name="Id" Type="bigint" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.v_QuoteOrderInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_QuoteOrderInformation">
+          <Key>
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ponum" Type="varchar" MaxLength="50" />
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="linedesc" Type="text" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="duedate" Type="datetime" />
+          <Property Name="entrydate" Type="datetime" />
+          <Property Name="changedby" Type="varchar" MaxLength="20" />
+          <Property Name="QuoteReference" Type="int" />
+          <Property Name="progress_recid" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'MfgSys803.dbo.v_WhereUsed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_WhereUsed">
           <Key>
@@ -1489,6 +1508,21 @@ warning 6002: The table/view 'MfgSys803.dbo.v_WhereUsed' does not have a primary
     [v_PartDetails].[Id] AS [Id]
     FROM [dbo].[v_PartDetails] AS [v_PartDetails]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_QuoteOrderInformation" EntityType="Self.v_QuoteOrderInformation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_QuoteOrderInformation].[Id] AS [Id], 
+    [v_QuoteOrderInformation].[Type] AS [Type], 
+    [v_QuoteOrderInformation].[ponum] AS [ponum], 
+    [v_QuoteOrderInformation].[partnum] AS [partnum], 
+    [v_QuoteOrderInformation].[linedesc] AS [linedesc], 
+    [v_QuoteOrderInformation].[Comment] AS [Comment], 
+    [v_QuoteOrderInformation].[duedate] AS [duedate], 
+    [v_QuoteOrderInformation].[entrydate] AS [entrydate], 
+    [v_QuoteOrderInformation].[changedby] AS [changedby], 
+    [v_QuoteOrderInformation].[QuoteReference] AS [QuoteReference], 
+    [v_QuoteOrderInformation].[progress_recid] AS [progress_recid]
+    FROM [dbo].[v_QuoteOrderInformation] AS [v_QuoteOrderInformation]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="v_WhereUsed" EntityType="Self.v_WhereUsed" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [v_WhereUsed].[partnum] AS [partnum], 
@@ -2079,6 +2113,7 @@ warning 6002: The table/view 'MfgSys803.dbo.v_WhereUsed' does not have a primary
           <EntitySet Name="v_PartDetails" EntityType="MfgSys803Model.v_PartDetails" />
           <EntitySet Name="v_BillOfMaterials" EntityType="MfgSys803Model.v_BillOfMaterials" />
           <EntitySet Name="v_WhereUsed" EntityType="MfgSys803Model.v_WhereUsed" />
+          <EntitySet Name="v_QuoteOrderInformation" EntityType="MfgSys803Model.v_QuoteOrderInformation" />
         </EntityContainer>
         <EntityType Name="systask">
           <Key>
@@ -2293,6 +2328,23 @@ warning 6002: The table/view 'MfgSys803.dbo.v_WhereUsed' does not have a primary
           <Property Name="relatedoperation" Type="Int32" />
           <Property Name="mtlseq" Type="Int32" />
           <Property Name="viewasasm" Type="Byte" />
+        </EntityType>
+        <EntityType Name="v_QuoteOrderInformation">
+          <Key>
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ponum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="linedesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="duedate" Type="DateTime" Precision="3" />
+          <Property Name="entrydate" Type="DateTime" Precision="3" />
+          <Property Name="changedby" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="QuoteReference" Type="Int32" />
+          <Property Name="progress_recid" Type="Int64" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3063,6 +3115,23 @@ warning 6002: The table/view 'MfgSys803.dbo.v_WhereUsed' does not have a primary
                 <ScalarProperty Name="partdescription" ColumnName="partdescription" />
                 <ScalarProperty Name="revisionnum" ColumnName="revisionnum" />
                 <ScalarProperty Name="partnum" ColumnName="partnum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_QuoteOrderInformation">
+            <EntityTypeMapping TypeName="MfgSys803Model.v_QuoteOrderInformation">
+              <MappingFragment StoreEntitySet="v_QuoteOrderInformation">
+                <ScalarProperty Name="progress_recid" ColumnName="progress_recid" />
+                <ScalarProperty Name="QuoteReference" ColumnName="QuoteReference" />
+                <ScalarProperty Name="changedby" ColumnName="changedby" />
+                <ScalarProperty Name="entrydate" ColumnName="entrydate" />
+                <ScalarProperty Name="duedate" ColumnName="duedate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="linedesc" ColumnName="linedesc" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+                <ScalarProperty Name="ponum" ColumnName="ponum" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
