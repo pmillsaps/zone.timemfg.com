@@ -1023,6 +1023,23 @@
     <Content Include="EntityModels\Versalift\VersaliftModel.edmx.diagram">
       <DependentUpon>VersaliftModel.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="EntityModels\Install\EpicorDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EpicorDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Install\EpicorDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Install\EpicorDBModel.edmx.diagram">
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Install\EpicorDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorDBModel.cs</LastGenOutput>
+    </Content>
     <EntityDeploy Include="EntityModels\Install\QuoteDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QuoteDBModel.Designer.cs</LastGenOutput>
@@ -1040,6 +1057,8 @@
       <DependentUpon>QuoteDBModel.edmx</DependentUpon>
       <LastGenOutput>QuoteDBModel.cs</LastGenOutput>
     </Content>
+<<<<<<< working copy
+=======
     <EntityDeploy Include="EntityModels\Install\EpicorDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EpicorDBModel.Designer.cs</LastGenOutput>
@@ -1064,6 +1083,7 @@
     <Content Include="EntityModels\Legacy\LegacyModel.edmx.diagram">
       <DependentUpon>LegacyModel.edmx</DependentUpon>
     </Content>
+>>>>>>> destination
     <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

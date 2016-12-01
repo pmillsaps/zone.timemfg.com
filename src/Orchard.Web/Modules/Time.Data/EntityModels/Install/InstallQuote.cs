@@ -19,6 +19,7 @@ namespace Time.Data.EntityModels.Install
         {
             this.InstallDetails = new HashSet<InstallDetail>();
             this.InstallDetailsManuallyAddedOptions = new HashSet<InstallDetailsManuallyAddedOption>();
+            this.QuoteChangesLogs = new HashSet<QuoteChangesLog>();
         }
     
         public int Id { get; set; }
@@ -40,5 +41,7 @@ namespace Time.Data.EntityModels.Install
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InstallDetailsManuallyAddedOption> InstallDetailsManuallyAddedOptions { get; set; }
         public virtual LiftFamily LiftFamily { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuoteChangesLog> QuoteChangesLogs { get; set; }
     }
 }

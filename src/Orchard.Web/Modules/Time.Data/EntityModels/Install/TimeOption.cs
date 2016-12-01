@@ -17,7 +17,7 @@ namespace Time.Data.EntityModels.Install
         public int Id { get; set; }
         public int LiftFamilyId { get; set; }
         public string Option { get; set; }
-        public decimal LaborHours { get; set; }
+        public decimal InstallHours { get; set; }
         public bool PaintFlag { get; set; }
     
         public virtual LiftFamily LiftFamily { get; set; }

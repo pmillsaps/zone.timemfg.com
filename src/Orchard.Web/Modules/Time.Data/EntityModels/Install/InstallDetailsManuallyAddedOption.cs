@@ -20,11 +20,8 @@ namespace Time.Data.EntityModels.Install
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public Nullable<decimal> ExtendedPrice { get; set; }
-        public Nullable<decimal> InstallHours { get; set; }
+        public decimal InstallHours { get; set; }
         public bool PaintFlag { get; set; }
-        public string UpdatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedOn { get; set; }
-        public string OptionStatus { get; set; }
     
         public virtual InstallQuote InstallQuote { get; set; }
     }

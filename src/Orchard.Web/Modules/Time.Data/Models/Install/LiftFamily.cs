@@ -17,8 +17,8 @@ namespace Time.Data.EntityModels.Install
         [Required(ErrorMessage = "Lift Family Name is Required")]
         public string FamilyName { get; set; }
 
-        [Display(Name = "Base Labor Hours")]
+        [Display(Name = "Base Install Hours")]
         [Required(ErrorMessage = "Hours are Required")]
-        public decimal LaborHours { get; set; }
+        public decimal InstallHours { get; set; }
     }
 }

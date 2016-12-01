@@ -35,19 +35,19 @@ namespace Time.Install.Controllers
             if (quote != null)
             {
                 // This line is for testing 
-                //var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2 && x.QuoteNum == quote).OrderByDescending(x => x.QuoteNum).ToList();
+                var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2 && x.QuoteNum == quote).OrderByDescending(x => x.QuoteNum).ToList();
 
                 // Uncomment this line when going live
-                var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2 && x.QuoteNum == quote && x.QuoteComment == "").OrderByDescending(x => x.QuoteNum).ToList();
+                //var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2 && x.QuoteNum == quote && x.QuoteComment == "").OrderByDescending(x => x.QuoteNum).ToList();
                 return View(quotes);
             }
             else
             {
                 // This line is for testing
-                //var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2).OrderByDescending(x => x.QuoteNum).ToList();
+                var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2).OrderByDescending(x => x.QuoteNum).ToList();
 
                 // Uncomment this line when going live
-                var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2 && x.QuoteComment == "").OrderByDescending(x => x.QuoteNum).ToList();
+                //var quotes = dbE.QuoteDtls.Where(x => x.QuoteLine == 2 && x.QuoteComment == "").OrderByDescending(x => x.QuoteNum).ToList();
                 return View(quotes);
             }
         }
@@ -60,14 +60,16 @@ namespace Time.Install.Controllers
 
         // Start the Install Quote
         [HttpGet]
-        public ActionResult StartQuote(int quoteNum, string installDesc, int? alreadyExist)
+        public ActionResult StartQuote(int quoteNum, string installDesc, int? alreadyExist, bool editQuote, int? liftFamilyId)
         {
             var vm = new QuoteViewModel();
             vm.QuoteNum = quoteNum;
             vm.InstallDescr = installDesc;
+            vm.EditQuote = editQuote;
             ViewBag.AlreadyExist = alreadyExist;
             ViewBag.AerialOptions = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteNum && x.QuoteComment != "");
-            ViewBag.LiftFamilyId = new SelectList(dbQ.LiftFamilies.OrderBy(x => x.FamilyName), "Id", "FamilyName");
+            if (editQuote) ViewBag.LiftFamilyId = new SelectList(dbQ.LiftFamilies.OrderBy(x => x.FamilyName), "Id", "FamilyName", liftFamilyId);
+            else ViewBag.LiftFamilyId = new SelectList(dbQ.LiftFamilies.OrderBy(x => x.FamilyName), "Id", "FamilyName");
             return View(vm);
         }
 
@@ -76,16 +78,44 @@ namespace Time.Install.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddQuote(QuoteViewModel quoteVM)
         {
-            //ViewBag.Groups = new SelectList(dbQ.OptionGroups.OrderBy(x => x.GroupName), "Id", "GroupName");
-            // Option Groups
             ViewBag.OptionGroups = dbQ.OptionGroups.ToList();
-            // Options in each group
-            quoteVM.Options = dbQ.VSWOptions.Where(x => x.LiftFamilyId == quoteVM.LiftFamilyId).ToList();
-            // Time options
             var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteVM.QuoteNum && x.QuoteLine == 1);
             quoteVM.AerialOptions = aQuote(aerialOp.QuoteComment, quoteVM.LiftFamilyId);
-            // Manually added options
+            quoteVM.Options = dbQ.VSWOptions.Where(x => x.LiftFamilyId == quoteVM.LiftFamilyId).ToList();
             quoteVM.AddOptnMnlly = new List<AddVSWOptionManually>();
+
+            if (quoteVM.EditQuote)
+            {
+                var installQuote = dbQ.InstallQuotes.SingleOrDefault(x => x.LiftQuoteNumber == quoteVM.QuoteNum);
+                var installDetail = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuote.Id).ToList();
+                // Loading the existing lines for the Install details
+                foreach (var item in installDetail)
+                {
+                    foreach (var opt in quoteVM.Options)
+                    {
+                        if (item.VSWOption.OptionName == opt.OptionName)
+                        {
+                            opt.Quantity = item.Quantity;
+                            opt.Price = item.Price;
+                            opt.InstallHours = item.InstallHours;
+                        }
+                    }
+                }
+                // Loading the existing lines for the Install details
+                var installDetailsMnllyAdded = dbQ.InstallDetailsManuallyAddedOptions.Where(x => x.InstallQuoteId == installQuote.Id).ToList();
+                foreach (var item in installDetailsMnllyAdded)
+                {
+                    AddVSWOptionManually addMnlly = new AddVSWOptionManually
+                    {
+                        AddOptionManually = item.OptionName,
+                        AddQuantityManually = item.Quantity,
+                        AddPriceManually = item.Price,
+                        AddInstallHoursManually = item.InstallHours,
+                        AddPaintFlagManually = item.PaintFlag
+                    };
+                    quoteVM.AddOptnMnlly.Add(addMnlly);
+                }
+            }
 
             return View(quoteVM);
         }
@@ -97,125 +127,27 @@ namespace Time.Install.Controllers
         {
             // Checking for existing install quote
             var installQuoteExists = dbQ.InstallQuotes.FirstOrDefault(x => x.LiftQuoteNumber == vm.QuoteNum);
-            if (installQuoteExists != null)
+            if (installQuoteExists != null && vm.EditQuote == false)
             {
                 return RedirectToAction("StartQuote", new { quoteNum = vm.QuoteNum, installDesc = vm.InstallDescr, alreadyExist = 1 });
-                //ModelState.AddModelError("", "An Install Quote already exists for this Quote Number");
             }
-            else // New install quote if (ModelState.IsValid)
+            else
             {
-                // Getting the hourly rate for the labor and paint
-                var rate = dbQ.InstallHourlyRates;
-                decimal hourRate = 0;
-                decimal paintRate = 0;
-                foreach (var item in rate)
+                // Logging the changes when updating the installation quote
+                if (vm.EditQuote)
                 {
-                    if (item.RateType == "Hour Rate") hourRate = item.Rate;
-                    else paintRate = item.Rate;
+                    LogInstallQuotesChanges(vm);
                 }
-                // Getting the labor hours for the lift
-                var laborHoursLift = dbQ.LiftFamilies.SingleOrDefault(x => x.Id == vm.LiftFamilyId);
-                // Calculating the totals for Labor and Materials
-                decimal totalPriceMaterial = 0;
-                decimal totalHours = laborHoursLift.LaborHours; // totalHours is initialized with the labor hours of the lift
-                decimal totalPriceLabor = 0;
-                decimal totalPaintHours = 0;
-                // Adding the Time options labor hours
-                foreach (var item in vm.AerialOptions.Where(x => x.Hours > 0))
-                {
-                    totalHours += item.Hours;
-                }
-                totalPriceLabor = (totalHours * hourRate); // Adding the cost of the lift hours(lift and aerial options) to the labor cost
-                // Processing VSW options
-                foreach (var item in vm.Options.Where(x => x.Quantity > 0))
-                {
-                    //totalPriceLabor += ((item.LaborHours * item.Quantity) * hourRate);
-                    totalPriceMaterial += (item.Price * item.Quantity);
-                    if (item.OptionName.Contains("PAINT"))
-                    {
-                        totalPriceLabor += ((item.LaborHours * item.Quantity) * paintRate);
-                        totalPaintHours += (item.LaborHours * item.Quantity);
-                    }
-                    else
-                    {
-                        totalPriceLabor += ((item.LaborHours * item.Quantity) * hourRate);
-                        totalHours += (item.LaborHours * item.Quantity);
-                    }
-                }
-                // Processing VSW manually added options
-                foreach (var item in vm.AddOptnMnlly.Where(x => x.AddQuantityManually > 0))
-                {
-
-                    totalPriceMaterial += (item.AddPriceManually * item.AddQuantityManually);
-                    if (item.AddPaintFlagManually == true)
-                    {
-                        totalPriceLabor += ((item.AddLaborHoursManually * item.AddQuantityManually) * paintRate);
-                        totalPaintHours += (item.AddLaborHoursManually * item.AddQuantityManually);
-                    }
-                    else
-                    {
-                        totalPriceLabor += ((item.AddLaborHoursManually * item.AddQuantityManually) * hourRate);
-                        totalHours += (item.AddLaborHoursManually * item.AddQuantityManually);
-                    }
-                }
-
-                // Saving the install quote to the db
-                var liftName = dbE.QuoteDtls.SingleOrDefault(x => x.QuoteNum == vm.QuoteNum && x.QuoteLine == 1);
-                InstallQuote installQ = new InstallQuote
-                {
-                    LiftName = liftName.PartNum,
-                    LiftQuoteNumber = vm.QuoteNum,
-                    LiftQuoteLine = liftName.QuoteLine,
-                    LiftInstallLine = 2,
-                    InstallQuotedBy = HttpContext.User.Identity.Name,
-                    QuoteDate = DateTime.Now,
-                    TotalPriceLabor = totalPriceLabor,
-                    TotalPriceMaterial = totalPriceMaterial,
-                    TotalInstallHours = totalHours,
-                    TotalPaintHours = totalPaintHours,
-                    LiftFamilyId = vm.LiftFamilyId
-                };
-                dbQ.InstallQuotes.Add(installQ);
-                dbQ.SaveChanges();
-
-                // Saving the install quote details to the db
-                var installQid = dbQ.InstallQuotes.Where(x => x.LiftQuoteNumber == vm.QuoteNum).Select(x => new { installId = x.Id }).Single();
-                foreach (var item in vm.Options.Where(x => x.Quantity > 0))// VSW Options in the db
-                {
-                    InstallDetail installD = new InstallDetail
-                    {
-                        InstallQuoteId = installQid.installId,
-                        GroupId = item.GroupId,
-                        OptionId = item.Id,
-                        Quantity = item.Quantity,
-                        Price = item.Price,
-                        InstallHours = (item.LaborHours * item.Quantity)
-                    };
-                    dbQ.InstallDetails.Add(installD);
-                }
-                foreach (var item in vm.AddOptnMnlly.Where(x => x.AddQuantityManually > 0))// VSW Options added manually
-                {
-                    InstallDetailsManuallyAddedOption installDM = new InstallDetailsManuallyAddedOption
-                    {
-                        InstallQuoteId = installQid.installId,
-                        OptionName = item.AddOptionManually,
-                        Quantity = item.AddQuantityManually,
-                        Price = item.AddPriceManually,
-                        InstallHours = (item.AddLaborHoursManually * item.AddQuantityManually),
-                        PaintFlag = item.AddPaintFlagManually
-                    };
-                    dbQ.InstallDetailsManuallyAddedOptions.Add(installDM);
-                }
-                dbQ.SaveChanges();
-
+                // Inserting the data into InstallQuote 
+                InsertNewDataIntoInstallQuoteTable(vm);
+                // Inserting data into the InstallDetails tables
+                InsertDataIntoInstallDetailsAndManuallyAddedOptions(vm);
                 // Inserting the Install details into the Epicor db
-                InsertInstallDetails(installQid.installId);
+                var installQid = dbQ.InstallQuotes.Where(x => x.LiftQuoteNumber == vm.QuoteNum).Select(x => new { installId = x.Id }).Single();
+                InsertInstallDetailsInEpicor(installQid.installId);
 
-                return RedirectToAction("QuoteSummary", new { installQuoteId = installQid.installId, quoteNum = installQ.LiftQuoteNumber, liftFamilyId = vm.LiftFamilyId });
+                return RedirectToAction("QuoteSummary", new { installQuoteId = installQid.installId, quoteNum = vm.QuoteNum, liftFamilyId = vm.LiftFamilyId });
             }
-            //ViewBag.OptionGroups = dbQ.OptionGroups.ToList();
-            //return View(vm);
-            //return RedirectToAction("StartQuote", new { quoteNum = vm.QuoteNum, installDesc = vm.InstallDescr, alreadyExist = 1 });
         }
 
         [HttpGet]
@@ -232,8 +164,199 @@ namespace Time.Install.Controllers
             return View(installQuoteSummary);
         }
 
+        // Logging the Install Quote changes when updated
+        private void LogInstallQuotesChanges(QuoteViewModel vm)
+        {
+            string changes = "";
+            bool optionUpdated = false;
+            var installQuote = dbQ.InstallQuotes.SingleOrDefault(x => x.LiftQuoteNumber == vm.QuoteNum);
+            var installDetail = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuote.Id).ToList();
+            // Looping trough existing lines in Install details to log changes
+            foreach (var item in installDetail)
+            {
+                foreach (var opt in vm.Options)
+                {
+                    if (item.VSWOption.OptionName == opt.OptionName)
+                    {
+                        changes = opt.OptionName + " ";
+                        if (opt.Quantity != item.Quantity)
+                        {
+                            changes += "-- Quantity went from " + item.Quantity.ToString() + " to " + opt.Quantity.ToString();
+                            optionUpdated = true;
+                        }
+                        if (opt.Price != item.Price)
+                        {
+                            changes += " -- Price went from " + item.Price.ToString("c") + " to " + opt.Price.ToString("c");
+                            optionUpdated = true;
+                        }
+                        if (opt.InstallHours != item.InstallHours)
+                        {
+                            changes += " -- InstallHours went from " + item.InstallHours.ToString() + " to " + opt.InstallHours.ToString();
+                            optionUpdated = true;
+                        }
+                        if (optionUpdated)
+                        {
+                            QuoteChangesLog chLog = new QuoteChangesLog
+                            {
+                                InstallQuoteId = installQuote.Id,
+                                UpdatedBy = HttpContext.User.Identity.Name,
+                                UpdatedOn = DateTime.Now,
+                                ValueChanged = changes
+                            };
+                            dbQ.QuoteChangesLogs.Add(chLog);   
+                        }
+                    }
+                    optionUpdated = false;
+                }
+            }
+            // Checking for new option added to the Install quote
+            foreach (var item in vm.Options.Where(x => x.Quantity > 0))
+            {
+                var vswOption = dbQ.VSWOptions.SingleOrDefault(x => x.OptionName == item.OptionName && x.GroupId == item.GroupId && x.LiftFamilyId == item.LiftFamilyId);
+                var iDetail = dbQ.InstallDetails.SingleOrDefault(x => x.OptionId == vswOption.Id && x.InstallQuoteId == installQuote.Id);
+                if (iDetail == null)
+                {
+                    QuoteChangesLog chLog = new QuoteChangesLog
+                        {
+                            InstallQuoteId = installQuote.Id,
+                            UpdatedBy = HttpContext.User.Identity.Name,
+                            UpdatedOn = DateTime.Now,
+                            ValueChanged = item.OptionName + " was added"
+                        };
+                        dbQ.QuoteChangesLogs.Add(chLog);
+                }
+            }
+            foreach (var item in vm.AddOptnMnlly.Where(x => x.AddQuantityManually > 0))
+            {
+                var iDetail = dbQ.InstallDetailsManuallyAddedOptions.SingleOrDefault(x => x.OptionName == item.AddOptionManually && x.InstallQuoteId == installQuote.Id);
+                if (iDetail == null)
+                {
+                    QuoteChangesLog chLog = new QuoteChangesLog
+                    {
+                        InstallQuoteId = installQuote.Id,
+                        UpdatedBy = HttpContext.User.Identity.Name,
+                        UpdatedOn = DateTime.Now,
+                        ValueChanged = item.AddOptionManually + " was added"
+                    };
+                    dbQ.QuoteChangesLogs.Add(chLog);
+                }
+            }
+            dbQ.SaveChanges();
+        }
+
+        // Inserting the Installation details
+        private void InsertDataIntoInstallDetailsAndManuallyAddedOptions(QuoteViewModel vm)
+        {
+            // Saving the install quote details to the db
+            var installQid = dbQ.InstallQuotes.Where(x => x.LiftQuoteNumber == vm.QuoteNum).Select(x => new { installId = x.Id }).Single();
+            foreach (var item in vm.Options.Where(x => x.Quantity > 0))// VSW Options in the db
+            {
+                InstallDetail installD = new InstallDetail
+                {
+                    InstallQuoteId = installQid.installId,
+                    GroupId = item.GroupId,
+                    OptionId = item.Id,
+                    Quantity = item.Quantity,
+                    Price = item.Price,
+                    InstallHours = (item.InstallHours * item.Quantity)
+                };
+                dbQ.InstallDetails.Add(installD);
+            }
+            foreach (var item in vm.AddOptnMnlly.Where(x => x.AddQuantityManually > 0))// VSW Options added manually
+            {
+                InstallDetailsManuallyAddedOption installDM = new InstallDetailsManuallyAddedOption
+                {
+                    InstallQuoteId = installQid.installId,
+                    OptionName = item.AddOptionManually,
+                    Quantity = item.AddQuantityManually,
+                    Price = item.AddPriceManually,
+                    InstallHours = (item.AddInstallHoursManually * item.AddQuantityManually),
+                    PaintFlag = item.AddPaintFlagManually
+                };
+                dbQ.InstallDetailsManuallyAddedOptions.Add(installDM);
+            }
+            dbQ.SaveChanges();
+        }
+
+        // Inserting new data into InstallQuote table
+        private void InsertNewDataIntoInstallQuoteTable(QuoteViewModel vm)
+        {
+            // Getting the hourly rate for the labor and paint
+            var rate = dbQ.InstallHourlyRates;
+            decimal hourRate = 0;
+            decimal paintRate = 0;
+            foreach (var item in rate)
+            {
+                if (item.RateType == "Hour Rate") hourRate = item.Rate;
+                else paintRate = item.Rate;
+            }
+            // Getting the labor hours for the lift
+            var laborHoursLift = dbQ.LiftFamilies.SingleOrDefault(x => x.Id == vm.LiftFamilyId);
+            // Calculating the totals for Labor and Materials
+            decimal totalPriceMaterial = 0;
+            decimal totalHours = laborHoursLift.InstallHours; // totalHours is initialized with the labor hours of the lift
+            decimal totalPriceLabor = 0;
+            decimal totalPaintHours = 0;
+            // Adding the Time options labor hours
+            foreach (var item in vm.AerialOptions.Where(x => x.Hours > 0))
+            {
+                totalHours += item.Hours;
+            }
+            totalPriceLabor = (totalHours * hourRate); // Adding the cost of the lift hours(lift and aerial options) to the labor cost
+            // Processing VSW options
+            foreach (var item in vm.Options.Where(x => x.Quantity > 0))
+            {
+                //totalPriceLabor += ((item.LaborHours * item.Quantity) * hourRate);
+                totalPriceMaterial += (item.Price * item.Quantity);
+                if (item.OptionName.Contains("PAINT"))
+                {
+                    totalPriceLabor += ((item.InstallHours * item.Quantity) * paintRate);
+                    totalPaintHours += (item.InstallHours * item.Quantity);
+                }
+                else
+                {
+                    totalPriceLabor += ((item.InstallHours * item.Quantity) * hourRate);
+                    totalHours += (item.InstallHours * item.Quantity);
+                }
+            }
+            // Processing VSW manually added options
+            foreach (var item in vm.AddOptnMnlly.Where(x => x.AddQuantityManually > 0))
+            {
+
+                totalPriceMaterial += (item.AddPriceManually * item.AddQuantityManually);
+                if (item.AddPaintFlagManually == true)
+                {
+                    totalPriceLabor += ((item.AddInstallHoursManually * item.AddQuantityManually) * paintRate);
+                    totalPaintHours += (item.AddInstallHoursManually * item.AddQuantityManually);
+                }
+                else
+                {
+                    totalPriceLabor += ((item.AddInstallHoursManually * item.AddQuantityManually) * hourRate);
+                    totalHours += (item.AddInstallHoursManually * item.AddQuantityManually);
+                }
+            }
+
+            // Saving the install quote to the db
+            var liftName = dbE.QuoteDtls.SingleOrDefault(x => x.QuoteNum == vm.QuoteNum && x.QuoteLine == 1);
+            InstallQuote installQ = new InstallQuote
+            {
+                LiftName = liftName.PartNum,
+                LiftQuoteNumber = vm.QuoteNum,
+                LiftQuoteLine = liftName.QuoteLine,
+                LiftInstallLine = 2,
+                InstallQuotedBy = HttpContext.User.Identity.Name,
+                QuoteDate = DateTime.Now,
+                TotalPriceLabor = totalPriceLabor,
+                TotalPriceMaterial = totalPriceMaterial,
+                TotalInstallHours = totalHours,
+                TotalPaintHours = totalPaintHours,
+                LiftFamilyId = vm.LiftFamilyId
+            };
+            dbQ.InstallQuotes.Add(installQ);
+            dbQ.SaveChanges();
+        }
         // Inserting the Install details into the Epicor db
-        private void InsertInstallDetails(int installQuoteId)
+        private void InsertInstallDetailsInEpicor(int installQuoteId)
         {
             var installQ = dbQ.InstallQuotes.SingleOrDefault(x => x.Id == installQuoteId);
             var installDetails = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuoteId).ToList();
@@ -335,10 +458,12 @@ namespace Time.Install.Controllers
                                 aQ.QtyPartAndDescription = aQ.QtyPartAndDescription.Replace(">", "!");
                             }
                             // Extracting the part number from the string to assign the labor hours
-                            int index = aQ.QtyPartAndDescription.IndexOf('-') - 3;
+                            //int index = aQ.QtyPartAndDescription.IndexOf('-') - 3;
+                            int index = aQ.QtyPartAndDescription.IndexOf('.') + 8;
                             if (index > 0)
                             {
-                                partNum = aQ.QtyPartAndDescription.Substring(index, 11);
+                                partNum = aQ.QtyPartAndDescription.Substring(index, 17);
+                                //partNum = aQ.QtyPartAndDescription.Substring(index, 11);
                                 partNum = RemoveWhitespace(partNum);
                                 // Assigns the labor hours to the Time options
                                 var timeHours = dbQ.TimeOptions.Where(x => x.LiftFamilyId == liftFamilyId);
@@ -346,7 +471,7 @@ namespace Time.Install.Controllers
                                 {
                                     if (partNum == item.Option)
                                     {
-                                        aQ.Hours = item.LaborHours;
+                                        aQ.Hours = item.InstallHours;
                                         break;
                                     }
                                 }

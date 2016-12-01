@@ -89,7 +89,7 @@
             @Html.DisplayFor(modelItem => item.TotalPaintHours)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "StartQuote", new { quoteNum = item.LiftQuoteNumber, installDesc = item.LiftName, editQuote = true, liftFamilyId = item.LiftFamilyId }) |
             @Html.ActionLink("Details", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
         </td>
     </tr>

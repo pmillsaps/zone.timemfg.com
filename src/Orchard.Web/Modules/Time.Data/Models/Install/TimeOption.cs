@@ -21,9 +21,9 @@ namespace Time.Data.EntityModels.Install
         [Required(ErrorMessage = "Time Option is Required")]
         public string Option { get; set; }
 
-        [Display(Name = "Labor Hours")]
+        [Display(Name = "Install Hours")]
         [Required(ErrorMessage = "Labor Hours are Required")]
-        public decimal LaborHours { get; set; }
+        public decimal InstallHours { get; set; }
 
         [Display(Name = "Paint Rate?")]
         public bool PaintFlag { get; set; }

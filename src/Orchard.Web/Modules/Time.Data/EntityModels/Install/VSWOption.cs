@@ -26,7 +26,7 @@ namespace Time.Data.EntityModels.Install
         public string OptionName { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public decimal LaborHours { get; set; }
+        public decimal InstallHours { get; set; }
         public bool PaintFlag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f0163483f7fe4d24ad463fcf6dff81db" Name="Diagram1">
-        <EntityTypeShape EntityType="VSWQuotesModel.InstallDetail" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VSWQuotesModel.InstallDetailsManuallyAddedOption" Width="2.625" PointX="7.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VSWQuotesModel.InstallHourlyRate" Width="1.5" PointX="7.875" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VSWQuotesModel.InstallQuote" Width="1.5" PointX="5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VSWQuotesModel.LiftFamily" Width="1.5" PointX="3.125" PointY="5.5" IsExpanded="true" />
+      <Diagram DiagramId="187efc0f0e4b422099efb617abf0da18" Name="Diagram1">
+        <EntityTypeShape EntityType="VSWQuotesModel.InstallDetail" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSWQuotesModel.InstallDetailsManuallyAddedOption" Width="2.625" PointX="7.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSWQuotesModel.InstallHourlyRate" Width="1.5" PointX="8.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSWQuotesModel.InstallQuote" Width="2.625" PointX="4.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSWQuotesModel.LiftFamily" Width="1.5" PointX="2.625" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VSWQuotesModel.OptionGroup" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSWQuotesModel.QuoteChangesLog" Width="2.125" PointX="8.125" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="VSWQuotesModel.TimeOption" Width="1.5" PointX="5.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="VSWQuotesModel.VSWOption" Width="1.5" PointX="0.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSWQuotesModel.VSWOption" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="VSWQuotesModel.tblInstallDetails_GroupId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblInstallDetails_InstallQuoteId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblInstallDetails_OptionId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblInstallQuote_LiftFamilyId_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="VSWQuotesModel.tblQuoteChangesLog_InstallQuoteId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblOptions_LiftFamilyId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblTimeOptions_LiftFamilyId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblOptions_GroupId_FK" ManuallyRouted="false" />

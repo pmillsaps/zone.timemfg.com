@@ -10,7 +10,7 @@
     @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-success">
     <p>There are two ways of adding options to an Option Group:</p>
     <p>
         1. If you want to add just one option, click on the link "Add VSW Install Option (One at a time)". Using this page will allow you to
@@ -49,7 +49,7 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LaborHours)
+            @Html.DisplayNameFor(model => model.InstallHours)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PaintFlag)
@@ -81,7 +81,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LaborHours)
+                    @Html.DisplayFor(modelItem => item.InstallHours)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PaintFlag)

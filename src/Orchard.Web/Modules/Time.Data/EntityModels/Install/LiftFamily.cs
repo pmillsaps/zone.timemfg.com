@@ -24,7 +24,7 @@ namespace Time.Data.EntityModels.Install
     
         public int Id { get; set; }
         public string FamilyName { get; set; }
-        public decimal LaborHours { get; set; }
+        public decimal InstallHours { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InstallQuote> InstallQuotes { get; set; }

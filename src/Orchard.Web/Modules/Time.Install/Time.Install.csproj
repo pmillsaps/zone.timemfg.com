@@ -154,7 +154,9 @@
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
     <Compile Include="ViewModels\QuoteViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Business Logic\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

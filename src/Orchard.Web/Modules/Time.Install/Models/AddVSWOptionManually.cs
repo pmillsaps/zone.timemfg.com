@@ -10,7 +10,7 @@ namespace Time.Install.Models
         public string AddOptionManually { get; set; }
         public int AddQuantityManually { get; set; }
         public decimal AddPriceManually { get; set; }
-        public decimal AddLaborHoursManually { get; set; }
+        public decimal AddInstallHoursManually { get; set; }
         public bool AddPaintFlagManually { get; set; }
     }
 }

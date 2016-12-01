@@ -32,12 +32,15 @@ namespace Time.Data.EntityModels.Install
         public System.DateTime QuoteDate { get; set; }
 
         [Display(Name = "Total Price Labor")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal TotalPriceLabor { get; set; }
 
         [Display(Name = "Total Price Material")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal TotalPriceMaterial { get; set; }
 
         [Display(Name = "Total Install Price")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public Nullable<decimal> TotalInstallPrice { get; set; }
 
         [Display(Name = "Total Install Hours")]

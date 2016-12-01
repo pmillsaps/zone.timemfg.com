@@ -12,19 +12,14 @@ namespace Time.Data.EntityModels.Install
     using System;
     using System.Collections.Generic;
     
-    public partial class InstallDetail
+    public partial class QuoteChangesLog
     {
         public int Id { get; set; }
         public int InstallQuoteId { get; set; }
-        public int GroupId { get; set; }
-        public int OptionId { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-        public Nullable<decimal> ExtendedPrice { get; set; }
-        public decimal InstallHours { get; set; }
+        public string UpdatedBy { get; set; }
+        public System.DateTime UpdatedOn { get; set; }
+        public string ValueChanged { get; set; }
     
-        public virtual OptionGroup OptionGroup { get; set; }
         public virtual InstallQuote InstallQuote { get; set; }
-        public virtual VSWOption VSWOption { get; set; }
     }
 }

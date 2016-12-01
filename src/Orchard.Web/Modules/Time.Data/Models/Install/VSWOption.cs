@@ -34,7 +34,7 @@ namespace Time.Data.EntityModels.Install
 
         [Display(Name = "Install Hours")]
         [Required(ErrorMessage = "Hours are Required")]
-        public decimal LaborHours { get; set; }
+        public decimal InstallHours { get; set; }
 
         [Display(Name = "Paint Rate?")]
         public bool PaintFlag { get; set; }

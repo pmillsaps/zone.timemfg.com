@@ -173,12 +173,12 @@ namespace Time.Install.Controllers
                         GroupId = vm.GroupId,
                         OptionName = splittedOptions[i].Option,
                         Price = splittedOptions[i].Price,
-                        LaborHours = Convert.ToDecimal(splittedOptions[i].Hours),
+                        InstallHours = Convert.ToDecimal(splittedOptions[i].Hours),
                         PaintFlag = paint
                     };
                     var optionExists = db.VSWOptions.FirstOrDefault(x => x.LiftFamilyId == newOption.LiftFamilyId && x.GroupId == newOption.GroupId
                                                                  && x.OptionName == newOption.OptionName && x.Price == newOption.Price
-                                                                 && x.LaborHours == newOption.LaborHours);
+                                                                 && x.InstallHours == newOption.InstallHours);
                     if (optionExists == null)
                     {
                         db.VSWOptions.Add(newOption); // Adding a new option to group
@@ -187,11 +187,11 @@ namespace Time.Install.Controllers
                     {
                         // Updating price or hours in an existing option
                         optionExists.Price = splittedOptions[i].Price;
-                        optionExists.LaborHours = Convert.ToDecimal(splittedOptions[i].Hours);
+                        optionExists.InstallHours = Convert.ToDecimal(splittedOptions[i].Hours);
                         db.VSWOptions.Attach(optionExists);
                         var entry = db.Entry(optionExists);
                         entry.Property(e => e.Price).IsModified = true;
-                        entry.Property(e => e.LaborHours).IsModified = true;
+                        entry.Property(e => e.InstallHours).IsModified = true;
                     }
                 }
                 db.SaveChanges();

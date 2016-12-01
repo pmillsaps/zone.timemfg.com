@@ -26,6 +26,7 @@
     @Html.HiddenFor(model => model.QuoteNum)
     @Html.HiddenFor(model => model.InstallDescr)
     @Html.HiddenFor(model => model.LiftFamilyId)
+    @Html.HiddenFor(model => model.EditQuote)
 
     <div class="container">
         <ul class="nav nav-pills nav-justified">
@@ -65,7 +66,7 @@
                                             @Html.Hidden("options[" + @i + "].GroupId", Model.Options[i].GroupId)
                                             <td>@Html.TextBox("options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-right" })</td>
                                             <td>@Html.TextBox("options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-right" })</td>
-                                            <td>@Html.TextBox("options[" + @i + "].LaborHours", Model.Options[i].LaborHours, htmlAttributes: new { @class = "text-right" })</td>
+                                            <td>@Html.TextBox("options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-right" })</td>
                                         </tr>
                                     }
                                 }
@@ -99,7 +100,7 @@
                         <td><textarea name="addOptnMnlly[0].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter VSW Option"></textarea></td>
                         <td><input type="number" name="addOptnMnlly[0].AddQuantityManually" class="form-control" placeholder="Quantity"></td>
                         <td><input type="number" name="addOptnMnlly[0].AddPriceManually" class="form-control" placeholder="Price"></td>
-                        <td><input type="number" name="addOptnMnlly[0].AddLaborHoursManually" class="form-control" placeholder="Labor Hours"></td>
+                        <td><input type="number" name="addOptnMnlly[0].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>
                         <td><input type="checkbox" name="addOptnMnlly[0].AddPaintFlagManually" value="true"></td>
                         <td></td>
                     </tr>
@@ -108,9 +109,18 @@
         </div>
     </div>
     <hr />
-    <div>
-        <input type="submit" value="Save Quote" class="btn btn-primary" />
-    </div>
+    if (Model.EditQuote)
+    {
+        <div>
+            <input type="submit" value="Update Quote" class="btn btn-primary" />
+        </div>
+    }
+    else
+    {
+        <div>
+            <input type="submit" value="Save Quote" class="btn btn-primary" />
+        </div>
+    }
 }
 <br />
 <div>
@@ -136,12 +146,13 @@
                                             + '<td><textarea name="addOptnMnlly[' + x + '].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter VSW Option"></textarea></td>'
                                             + '<td><input type="number" name="addOptnMnlly[' + x + '].AddQuantityManually" class="form-control" placeholder="Quantity"></td>'
                                             + '<td><input type="number" name="addOptnMnlly[' + x + '].AddPriceManually" class="form-control" placeholder="Price"></td>'
-                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddLaborHoursManually" class="form-control" placeholder="Labor Hours"></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>'
                                             + '<td><input type="checkbox" name="addOptnMnlly[' + x + '].AddPaintFlagManually"  value="true"></td>'
                                             + '<td><a href="javascript:void(0);" class="remCF">Remove</a></td>'
                                             + '</tr>');
             });
             $("#customFields").on('click', '.remCF', function () {
+                x--; // decrease the text box number
                 $(this).parent().parent().remove();
             });
         });

@@ -21,28 +21,30 @@
 <h4>Lift: @Model.InstallQuotes.LiftName</h4>
 <hr />
 
-<dl class="dl-horizontal">
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
+<div class="alert alert-info">
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
 
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
 
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
 
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
 
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
 
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
 
-    <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
-    <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
-</dl>
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
+    </dl>
+</div>
 
 <br />
 <div id="flip1">Click here to Display/Hide Installation Options</div>

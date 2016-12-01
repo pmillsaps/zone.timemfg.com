@@ -1,7 +1,8 @@
 ﻿@model Time.Install.ViewModels.QuoteViewModel
 
 @{
-    ViewBag.Title = "Start Install Quote";
+    if (Model.EditQuote) {ViewBag.Title = "Edit Install Quote";}
+    else {ViewBag.Title = "Start Install Quote";}
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,7 +16,8 @@
 
 <hr />
 <h3>Aerial Quote Num: @Model.QuoteNum</h3>
-<h4>@Model.InstallDescr</h4>
+@if (Model.EditQuote) {<h4>Installation for @Model.InstallDescr</h4>}
+else {<h4>@Model.InstallDescr</h4>}
 <hr />
 
 @if (ViewBag.AerialOptions != null)
@@ -25,9 +27,20 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.QuoteNum)
         @Html.HiddenFor(model => model.InstallDescr)
+        @Html.HiddenFor(model => model.EditQuote)
         <div class="row">
-            <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "---Select a Lift Family---")</div>
-            <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+            @if (Model.EditQuote)
+            {
+                <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", null, optionLabel: "--- Select a Lift Family ---", htmlAttributes: new { @disabled = "disabled" })</div>
+                @Html.HiddenFor(model => model.LiftFamilyId)
+                <div class="col-sm-3"><input type="submit" value="Edit Installation Quote" class="btn btn-primary" /></div>
+            }
+            else
+            {
+                <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
+                @Html.HiddenFor(model => model.LiftFamilyId)
+                <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+            }
         </div>
     }
 }

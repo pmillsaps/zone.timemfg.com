@@ -31,6 +31,7 @@ namespace Time.Data.EntityModels.Install
         public virtual DbSet<InstallQuote> InstallQuotes { get; set; }
         public virtual DbSet<LiftFamily> LiftFamilies { get; set; }
         public virtual DbSet<OptionGroup> OptionGroups { get; set; }
+        public virtual DbSet<QuoteChangesLog> QuoteChangesLogs { get; set; }
         public virtual DbSet<TimeOption> TimeOptions { get; set; }
         public virtual DbSet<VSWOption> VSWOptions { get; set; }
     }

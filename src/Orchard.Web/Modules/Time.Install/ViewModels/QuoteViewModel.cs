@@ -12,6 +12,8 @@ namespace Time.Install.ViewModels
         public int QuoteNum { get; set; }
         public string InstallDescr { get; set; }
         public int LiftFamilyId { get; set; }
+        public bool EditQuote { get; set; }
+        public int InstallQuoteId { get; set; }
         public List<VSWOption> Options { get; set; }
         public List<AerialOption> AerialOptions { get; set; }
         public List<AddVSWOptionManually> AddOptnMnlly { get; set; }
