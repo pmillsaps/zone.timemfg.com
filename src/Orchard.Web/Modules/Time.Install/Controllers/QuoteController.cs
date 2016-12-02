@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Install;
+using Time.Install.Business_Logic;
 using Time.Install.Models;
 using Time.Install.ViewModels;
 
@@ -78,46 +79,7 @@ namespace Time.Install.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddQuote(QuoteViewModel quoteVM)
         {
-            ViewBag.OptionGroups = dbQ.OptionGroups.ToList();
-            var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteVM.QuoteNum && x.QuoteLine == 1);
-            quoteVM.AerialOptions = aQuote(aerialOp.QuoteComment, quoteVM.LiftFamilyId);
-            quoteVM.Options = dbQ.VSWOptions.Where(x => x.LiftFamilyId == quoteVM.LiftFamilyId).ToList();
-            quoteVM.AddOptnMnlly = new List<AddVSWOptionManually>();
-
-            if (quoteVM.EditQuote)
-            {
-                var installQuote = dbQ.InstallQuotes.SingleOrDefault(x => x.LiftQuoteNumber == quoteVM.QuoteNum);
-                var installDetail = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuote.Id).ToList();
-                // Loading the existing lines for the Install details
-                foreach (var item in installDetail)
-                {
-                    foreach (var opt in quoteVM.Options)
-                    {
-                        if (item.VSWOption.OptionName == opt.OptionName)
-                        {
-                            opt.Quantity = item.Quantity;
-                            opt.Price = item.Price;
-                            opt.InstallHours = item.InstallHours;
-                        }
-                    }
-                }
-                // Loading the existing lines for the Install details
-                var installDetailsMnllyAdded = dbQ.InstallDetailsManuallyAddedOptions.Where(x => x.InstallQuoteId == installQuote.Id).ToList();
-                foreach (var item in installDetailsMnllyAdded)
-                {
-                    AddVSWOptionManually addMnlly = new AddVSWOptionManually
-                    {
-                        AddOptionManually = item.OptionName,
-                        AddQuantityManually = item.Quantity,
-                        AddPriceManually = item.Price,
-                        AddInstallHoursManually = item.InstallHours,
-                        AddPaintFlagManually = item.PaintFlag
-                    };
-                    quoteVM.AddOptnMnlly.Add(addMnlly);
-                }
-            }
-
-            return View(quoteVM);
+            return View(LoadOptionsForQuote.GetOptions(quoteVM));
         }
 
         // Adding the options to the Install Quote
@@ -159,7 +121,7 @@ namespace Time.Install.Controllers
             installQuoteSummary.InstallDetails = dbQ.InstallDetails.Where(x => x.InstallQuoteId == installQuoteId).ToList();
             installQuoteSummary.InstallDetailsMnllyAdded = dbQ.InstallDetailsManuallyAddedOptions.Where(x => x.InstallQuoteId == installQuoteId).ToList();
             var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteNum && x.QuoteLine == 1);
-            installQuoteSummary.AerialOptions = aQuote(aerialOp.QuoteComment, liftFamilyId);
+            installQuoteSummary.AerialOptions = ParsingQuoteComments.GetAerialOptions(aerialOp.QuoteComment, liftFamilyId, dbQ);
 
             return View(installQuoteSummary);
         }
@@ -174,7 +136,7 @@ namespace Time.Install.Controllers
             // Looping trough existing lines in Install details to log changes
             foreach (var item in installDetail)
             {
-                foreach (var opt in vm.Options)
+                foreach (var opt in vm.GroupAndOptions.Options)
                 {
                     if (item.VSWOption.OptionName == opt.OptionName)
                     {
@@ -210,7 +172,7 @@ namespace Time.Install.Controllers
                 }
             }
             // Checking for new option added to the Install quote
-            foreach (var item in vm.Options.Where(x => x.Quantity > 0))
+            foreach (var item in vm.GroupAndOptions.Options.Where(x => x.Quantity > 0))
             {
                 var vswOption = dbQ.VSWOptions.SingleOrDefault(x => x.OptionName == item.OptionName && x.GroupId == item.GroupId && x.LiftFamilyId == item.LiftFamilyId);
                 var iDetail = dbQ.InstallDetails.SingleOrDefault(x => x.OptionId == vswOption.Id && x.InstallQuoteId == installQuote.Id);
@@ -249,7 +211,7 @@ namespace Time.Install.Controllers
         {
             // Saving the install quote details to the db
             var installQid = dbQ.InstallQuotes.Where(x => x.LiftQuoteNumber == vm.QuoteNum).Select(x => new { installId = x.Id }).Single();
-            foreach (var item in vm.Options.Where(x => x.Quantity > 0))// VSW Options in the db
+            foreach (var item in vm.GroupAndOptions.Options.Where(x => x.Quantity > 0))// VSW Options in the db
             {
                 InstallDetail installD = new InstallDetail
                 {
@@ -304,7 +266,7 @@ namespace Time.Install.Controllers
             }
             totalPriceLabor = (totalHours * hourRate); // Adding the cost of the lift hours(lift and aerial options) to the labor cost
             // Processing VSW options
-            foreach (var item in vm.Options.Where(x => x.Quantity > 0))
+            foreach (var item in vm.GroupAndOptions.Options.Where(x => x.Quantity > 0))
             {
                 //totalPriceLabor += ((item.LaborHours * item.Quantity) * hourRate);
                 totalPriceMaterial += (item.Price * item.Quantity);
@@ -416,83 +378,6 @@ namespace Time.Install.Controllers
             entry2.Property(x => x.UnitPrice).IsModified = true;
             entry2.Property(x => x.DocUnitPrice).IsModified = true;
             dbE.SaveChanges(); // Saving the changes
-        }
-
-        // Parsing the Quote Comments that contain the Lift Options
-        private List<AerialOption> aQuote(string comment, int liftFamilyId)
-        {
-            string[] quoteComment = comment.Split(new String[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var aerialOptions = new List<AerialOption>();
-            string line = "";
-            int counter = 0;
-            bool endOfAssMatl = false;
-            string partNum = "";
-
-            for (int i = 0; i < quoteComment.Length; i++)
-            {
-                line = quoteComment[i];
-                if (line.Contains("Assemblies:"))
-                {
-                    endOfAssMatl = true;
-                    counter = 1;
-                }
-                if (line.Contains("PAGE 1 SELECTIONS:"))
-                {
-                    endOfAssMatl = false;
-                    break;
-                }
-                if (endOfAssMatl && counter == 3)
-                {
-                    AerialOption aQ = new AerialOption();
-
-                    aQ.QtyPartAndDescription = line.Trim();
-                    aQ.Hours = 0;
-                    if (!String.IsNullOrEmpty(aQ.QtyPartAndDescription))
-                    {
-                        if ((!aQ.QtyPartAndDescription.Contains("Materials:")))
-                        {
-                            if (aQ.QtyPartAndDescription.Contains("<"))
-                            {
-                                // Replacing the angular brackets in the "<Error> Part Not Found" description to prevent an exception in MVC
-                                aQ.QtyPartAndDescription = aQ.QtyPartAndDescription.Replace("<", "");
-                                aQ.QtyPartAndDescription = aQ.QtyPartAndDescription.Replace(">", "!");
-                            }
-                            // Extracting the part number from the string to assign the labor hours
-                            //int index = aQ.QtyPartAndDescription.IndexOf('-') - 3;
-                            int index = aQ.QtyPartAndDescription.IndexOf('.') + 8;
-                            if (index > 0)
-                            {
-                                partNum = aQ.QtyPartAndDescription.Substring(index, 17);
-                                //partNum = aQ.QtyPartAndDescription.Substring(index, 11);
-                                partNum = RemoveWhitespace(partNum);
-                                // Assigns the labor hours to the Time options
-                                var timeHours = dbQ.TimeOptions.Where(x => x.LiftFamilyId == liftFamilyId);
-                                foreach (var item in timeHours)
-                                {
-                                    if (partNum == item.Option)
-                                    {
-                                        aQ.Hours = item.InstallHours;
-                                        break;
-                                    }
-                                }
-                            }
-                            aerialOptions.Add(aQ);
-                        }
-                    }
-                    counter = 2;
-                }
-                counter++;
-                line = "";
-            }
-            return aerialOptions;
-        }
-
-        // Removing white spaces on the Part Number while processing the Line Comments from Epicor
-        public string RemoveWhitespace(string input)
-        {
-            return new string(input.ToCharArray()
-                .Where(c => !Char.IsWhiteSpace(c))
-                .ToArray());
         }
     }
 }

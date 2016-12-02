@@ -1,0 +1,30 @@
+﻿
+
+<div class="alert alert-danger">
+    <p>
+        <strong>When you add options manually:</strong> If you delete an option after adding several options, you must delete them in
+        sequential order, starting from the last one. If you delete an option from the middle, the options after the one deleted will not
+        be imported.
+    </p>
+    <p>An alternative to deleting the option is to set its quantity to zero and that option will be ignore when the program saves the data.</p>
+</div>
+<a href="javascript:void(0);" class="addCF btn btn-primary">Add More Options</a>
+<hr />
+<table class="table" id="customFields">
+    <tr class="success">
+        <th>Option</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Hours</th>
+        <th>Paint?</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td><textarea name="addOptnMnlly[0].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>
+        <td><input type="number" name="addOptnMnlly[0].AddQuantityManually" class="form-control" placeholder="Quantity"></td>
+        <td><input type="number" name="addOptnMnlly[0].AddPriceManually" class="form-control" placeholder="Price"></td>
+        <td><input type="number" name="addOptnMnlly[0].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>
+        <td><input type="checkbox" name="addOptnMnlly[0].AddPaintFlagManually" value="true"></td>
+        <td></td>
+    </tr>
+</table>

@@ -2,6 +2,7 @@
 
 @{
     Script.Require("jQueryUI_Accordion").AtFoot();
+    Script.Require("jQueryUI_Spinner").AtFoot();
     ViewBag.Title = "Installation Quote";
 }
 
@@ -30,81 +31,23 @@
 
     <div class="container">
         <ul class="nav nav-pills nav-justified">
-            <li class="active"><a data-toggle="tab" href="#tab1">Click here for Lift Quote (TIME Options)</a></li>
-            <li><a data-toggle="tab" href="#tab2">Click here for Install Quote (VSW Options)</a></li>
-            <li><a data-toggle="tab" href="#tab3">Click here to Add VSW Options Manually</a></li>
+            <li class="active"><a data-toggle="tab" href="#tab1"><strong>Click here for Lift Quote (TIME Options)</strong></a></li>
+            <li><a data-toggle="tab" href="#tab2"><strong>Click here for Install Quote (VSW Options)</strong></a></li>
+            <li><a data-toggle="tab" href="#tab3"><strong>Click here to Add VSW Options Manually</strong></a></li>
         </ul>
 
         <div class="tab-content">
             <div id="tab1" class="tab-pane fade in active">
                 <hr />
-                @Html.Partial("_AerialOptions", Model.AerialOptions)
+                @Html.Partial("_DisplayAerialOptions", Model.AerialOptions)
             </div>
             <div id="tab2" class="tab-pane fade">
                 <hr />
-                <div id="accordion">
-                    @foreach (var item in ViewBag.OptionGroups)
-                    {
-                        <h3>@item.GroupName</h3>
-                        <div>
-                            <table class="table">
-                                <tr class="success">
-                                    <th>Option</th>
-                                    <th>Qty</th>
-                                    <th>Price</th>
-                                    <th>Hours</th>
-                                </tr>
-                                @for (int i = 0; i < Model.Options.Count; i++)
-                                {
-                                    if (Model.Options[i].GroupId == item.Id)
-                                    {
-                                        <tr>
-                                            <td>@Html.Label("options[" + @i + "].OptionName", Model.Options[i].OptionName)</td>
-                                            @Html.Hidden("options[" + @i + "].Id", Model.Options[i].Id)
-                                            @Html.Hidden("options[" + @i + "].OptionName", Model.Options[i].OptionName)
-                                            @Html.Hidden("options[" + @i + "].LiftFamilyId", Model.Options[i].LiftFamilyId)
-                                            @Html.Hidden("options[" + @i + "].GroupId", Model.Options[i].GroupId)
-                                            <td>@Html.TextBox("options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-right" })</td>
-                                            <td>@Html.TextBox("options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-right" })</td>
-                                            <td>@Html.TextBox("options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-right" })</td>
-                                        </tr>
-                                    }
-                                }
-                            </table>
-                        </div>
-                    }
-                </div>
+                @Html.Partial("_DisplayVSWOptions", Model.GroupAndOptions)
             </div>
             <div id="tab3" class="tab-pane fade">
                 <hr />
-                <div class="alert alert-danger">
-                    <p>
-                        <strong>When you add options manually:</strong> If you delete an option after adding several options, you must delete them in
-                        sequential order, starting from the last one. If you delete an option from the middle, the options after the one deleted will not
-                        be imported.
-                    </p>
-                    <p>An alternative to deleting the option is to set its quantity to zero and that option will be ignore when the program saves the data.</p>
-                </div>
-                <a href="javascript:void(0);" class="addCF btn btn-primary">Add More Options</a>
-                <hr />
-                <table class="table" id="customFields">
-                    <tr class="success">
-                        <th>Option</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Hours</th>
-                        <th>Paint?</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><textarea name="addOptnMnlly[0].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter VSW Option"></textarea></td>
-                        <td><input type="number" name="addOptnMnlly[0].AddQuantityManually" class="form-control" placeholder="Quantity"></td>
-                        <td><input type="number" name="addOptnMnlly[0].AddPriceManually" class="form-control" placeholder="Price"></td>
-                        <td><input type="number" name="addOptnMnlly[0].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>
-                        <td><input type="checkbox" name="addOptnMnlly[0].AddPaintFlagManually" value="true"></td>
-                        <td></td>
-                    </tr>
-                </table>
+                @Html.Partial("_DisplayManuallyAddedOptions")
             </div>
         </div>
     </div>
@@ -138,12 +81,27 @@
             });
         });
 
+        $(function() {
+            $(".spinner1").spinner({
+                min: 0, 
+                max: 100
+            });
+        });
+
+        $(function () {
+            $(".spinner2").spinner({
+                min: 0,
+                numberFormat: "C",
+                culture:"en-US"
+            });
+        });
+
         $(document).ready(function () {
             var x = 0; //initial text box count
             $(".addCF").click(function () {
                 x++; //text box increment
                 $("#customFields").append('<tr>'
-                                            + '<td><textarea name="addOptnMnlly[' + x + '].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter VSW Option"></textarea></td>'
+                                            + '<td><textarea name="addOptnMnlly[' + x + '].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>'
                                             + '<td><input type="number" name="addOptnMnlly[' + x + '].AddQuantityManually" class="form-control" placeholder="Quantity"></td>'
                                             + '<td><input type="number" name="addOptnMnlly[' + x + '].AddPriceManually" class="form-control" placeholder="Price"></td>'
                                             + '<td><input type="number" name="addOptnMnlly[' + x + '].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>'

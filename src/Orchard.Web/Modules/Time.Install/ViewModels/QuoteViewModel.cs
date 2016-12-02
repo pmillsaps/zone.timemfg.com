@@ -14,8 +14,14 @@ namespace Time.Install.ViewModels
         public int LiftFamilyId { get; set; }
         public bool EditQuote { get; set; }
         public int InstallQuoteId { get; set; }
-        public List<VSWOption> Options { get; set; }
+        public GroupsAndOptionsViewModel GroupAndOptions { get; set; } // Added the GroupsAndOptions view model to simplify the view
+        //public List<VSWOption> Options { get; set; }
         public List<AerialOption> AerialOptions { get; set; }
         public List<AddVSWOptionManually> AddOptnMnlly { get; set; }
+
+        public QuoteViewModel()
+        {
+            GroupAndOptions = new GroupsAndOptionsViewModel();
+        }
     }
 }
