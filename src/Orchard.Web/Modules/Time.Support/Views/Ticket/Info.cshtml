@@ -78,7 +78,7 @@
                 @if (Model.Admin)
                 {
                     <div class="col-md-2">
-                        @Html.ActionLink("Change User", "ChangeUser", new { id = Model.Ticket.TicketID }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Change User", "ChangeUser", new { id = Model.Ticket.TicketID }, new { @class = "btn btn-primary" })
                     </div>
                 }
             </div>
@@ -102,10 +102,10 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="col-md-3">
-                            @Html.ActionLink("Approve Ticket", "Approval", new { approved = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Approve", border = 0, hspace = 2 })
+                            @Html.ActionLink("Approve Ticket", "Approval", new { approved = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Approve", border = 0, hspace = 2 })
                         </div>
                         <div class="col-md-3">
-                            @Html.ActionLink("Reject Ticket", "Approval", new { approved = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny", border = 0, hspace = 2 })
+                            @Html.ActionLink("Reject Ticket", "Approval", new { approved = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Deny", border = 0, hspace = 2 })
                         </div>
                     </div>
                 </div>
@@ -117,10 +117,10 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="col-md-3">
-                            @Html.ActionLink("Complete Ticket", "Complete", new { completed = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Complete", border = 0, hspace = 2 })
+                            @Html.ActionLink("Complete Ticket", "Complete", new { completed = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Complete", border = 0, hspace = 2 })
                         </div>
                         <div class="col-md-3">
-                            @Html.ActionLink("Deny Completion", "Complete", new { completed = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny", border = 0, hspace = 2 })
+                            @Html.ActionLink("Deny Completion", "Complete", new { completed = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Deny", border = 0, hspace = 2 })
                         </div>
                     </div>
                 </div>
@@ -132,10 +132,10 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="col-md-3">
-                            @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Cancel Ticket", border = 0, hspace = 2 })
+                            @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Cancel Ticket", border = 0, hspace = 2 })
                         </div>
                         <div class="col-md-3">
-                            @Html.ActionLink("Deny Cancellation", "CancelTicket", new { cancelled = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Deny Cancellation", border = 0, hspace = 2 })
+                            @Html.ActionLink("Deny Cancellation", "CancelTicket", new { cancelled = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Deny Cancellation", border = 0, hspace = 2 })
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-2">
                         <div class="col-md-3">
-                            @Html.ActionLink("Re-Open Ticket", "ReOpen", new { ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-default", title = "Re-Open Ticket", border = 0, hspace = 2 })
+                            @Html.ActionLink("Re-Open Ticket", "ReOpen", new { ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Re-Open Ticket", border = 0, hspace = 2 })
                         </div>
                     </div>
                 </div>
@@ -189,10 +189,10 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-2">
-                            <input type="submit" name="operation" value="Add Note" class="btn btn-default" />
+                            <input type="submit" name="operation" value="Add Note" class="btn btn-primary" />
                         </div>
                         <div class="col-md-2">
-                            <input type="submit" name="operation" value="Upload File" class="btn btn-default" />
+                            <input type="submit" name="operation" value="Upload File" class="btn btn-primary" />
                         </div>
                         <div class="col-md-6">
                             <input id="fileBlob" name="fileBlob" type="file" />

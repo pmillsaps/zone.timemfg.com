@@ -80,7 +80,7 @@ namespace Time.Install.Business_Logic
         }
 
         // Removing white spaces on the Part Number while processing the Line Comments from Epicor
-        private static string RemoveWhitespace(string input)
+        protected static string RemoveWhitespace(string input)
         {
             return new string(input.ToCharArray()
                 .Where(c => !Char.IsWhiteSpace(c))

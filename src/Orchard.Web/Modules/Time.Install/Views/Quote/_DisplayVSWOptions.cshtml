@@ -17,14 +17,14 @@
                     if (Model.Options[i].GroupId == item.Id)
                     {
                         <tr>
-                            <td>@Html.Label("options[" + @i + "].OptionName", Model.Options[i].OptionName)</td>
-                            @Html.Hidden("options[" + @i + "].Id", Model.Options[i].Id)
-                            @Html.Hidden("options[" + @i + "].OptionName", Model.Options[i].OptionName)
-                            @Html.Hidden("options[" + @i + "].LiftFamilyId", Model.Options[i].LiftFamilyId)
-                            @Html.Hidden("options[" + @i + "].GroupId", Model.Options[i].GroupId)
-                            <td>@Html.TextBox("options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-right spinner1" })</td>
-                            <td>@Html.TextBox("options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-right spinner2" })</td>
-                            <td>@Html.TextBox("options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-right spinner1" })</td>
+                            <td>@Html.Label("GroupAndOptions.Options[" + @i + "].OptionName", Model.Options[i].OptionName)</td>
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].Id", Model.Options[i].Id)
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].OptionName", Model.Options[i].OptionName)
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].LiftFamilyId", Model.Options[i].LiftFamilyId)
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].GroupId", Model.Options[i].GroupId)
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-right spinner1" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-right spinner2" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-right spinner1" })</td>
                         </tr>
                     }
                 }

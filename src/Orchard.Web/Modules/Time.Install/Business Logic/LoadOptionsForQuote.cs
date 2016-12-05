@@ -12,11 +12,8 @@ namespace Time.Install.Business_Logic
     {
         // This class takes a QuoteViewModel and loads the Time and VSW options.
         // The user can then start a new quote or update an existing one. 
-        public static QuoteViewModel GetOptions(QuoteViewModel quoteVM)
+        public static QuoteViewModel GetOptions(QuoteViewModel quoteVM, EpicorInstallEntities dbE, VSWQuotesEntities dbQ)
         {
-            EpicorInstallEntities dbE = new EpicorInstallEntities();
-            VSWQuotesEntities dbQ = new VSWQuotesEntities();
-
             QuoteViewModel qVM = quoteVM;
             var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == qVM.QuoteNum && x.QuoteLine == 1);
             qVM.GroupAndOptions.OptionGroups = dbQ.OptionGroups.ToList();// Added this line to simplify the view

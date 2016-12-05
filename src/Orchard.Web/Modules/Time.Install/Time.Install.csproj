@@ -144,7 +144,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business Logic\InsertInstallDetailsIntoEpicorDb.cs" />
+    <Compile Include="Business Logic\InsertIntoInstallDetailsAndManuallyAddedOptions.cs" />
+    <Compile Include="Business Logic\InsertIntoInstallQuote.cs" />
     <Compile Include="Business Logic\LoadOptionsForQuote.cs" />
+    <Compile Include="Business Logic\LogQuoteChanges.cs" />
     <Compile Include="Business Logic\ParsingQuoteComments.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstallHourlyRatesController.cs" />
