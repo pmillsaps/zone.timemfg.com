@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.Install.InstallQuote>
 
 @{
-    ViewBag.Title = "List Of Installation Quotes";
+    ViewBag.Title = "List Of VSW Install Quotes";
 }
 
 <h2>@ViewBag.Title</h2>
 
 <div align="right">
-    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 <div align="right">
-    @Html.ActionLink("Back to Aerial Quote List", "Index")
+    @Html.ActionLink("Go to Aerial Quote List", "Index")
 </div>
 
 <hr />
@@ -90,7 +90,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "StartQuote", new { quoteNum = item.LiftQuoteNumber, installDesc = item.LiftName, editQuote = true, liftFamilyId = item.LiftFamilyId }) |
-            @Html.ActionLink("Details", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
+            @Html.ActionLink("Summary", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
         </td>
     </tr>
 }

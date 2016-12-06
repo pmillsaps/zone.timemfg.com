@@ -31,8 +31,8 @@
 
     <div class="container">
         <ul class="nav nav-pills nav-justified">
-            <li class="active"><a data-toggle="tab" href="#tab1"><strong>Click here for Lift Quote (TIME Options)</strong></a></li>
-            <li><a data-toggle="tab" href="#tab2"><strong>Click here for Install Quote (VSW Options)</strong></a></li>
+            <li class="active"><a data-toggle="tab" href="#tab1"><strong>Click here for Aerial Quote (TIME Options)</strong></a></li>
+            <li><a data-toggle="tab" href="#tab2"><strong>Click here for VSW Install Quote (VSW Options)</strong></a></li>
             <li><a data-toggle="tab" href="#tab3"><strong>Click here to Add VSW Options Manually</strong></a></li>
         </ul>
 
@@ -47,7 +47,7 @@
             </div>
             <div id="tab3" class="tab-pane fade">
                 <hr />
-                @Html.Partial("_DisplayManuallyAddedOptions")
+                @Html.Partial("_DisplayManuallyAddedOptions", Model)
             </div>
         </div>
     </div>
@@ -83,6 +83,7 @@
 
         $(function() {
             $(".spinner1").spinner({
+                //icons: { down: "ui-icon-caret-1-s", up: "ui-icon-caret-1-n" },
                 min: 0, 
                 max: 100
             });
@@ -90,9 +91,9 @@
 
         $(function () {
             $(".spinner2").spinner({
-                min: 0,
-                numberFormat: "C",
-                culture:"en-US"
+                min: 0
+                //numberFormat: "C",
+                //culture:"en-US"
             });
         });
 

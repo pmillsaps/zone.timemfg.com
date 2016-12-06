@@ -22,9 +22,9 @@
                             @Html.Hidden("GroupAndOptions.Options[" + @i + "].OptionName", Model.Options[i].OptionName)
                             @Html.Hidden("GroupAndOptions.Options[" + @i + "].LiftFamilyId", Model.Options[i].LiftFamilyId)
                             @Html.Hidden("GroupAndOptions.Options[" + @i + "].GroupId", Model.Options[i].GroupId)
-                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-right spinner1" })</td>
-                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-right spinner2" })</td>
-                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-right spinner1" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-center spinner2" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-center spinner1" })</td>
                         </tr>
                     }
                 }

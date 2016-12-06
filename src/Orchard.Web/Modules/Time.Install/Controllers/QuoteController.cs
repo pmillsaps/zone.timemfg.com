@@ -81,7 +81,7 @@ namespace Time.Install.Controllers
             return View(LoadOptionsForQuote.GetOptions(quoteVM, dbE, dbQ));
         }
 
-        // Adding the options to the Install Quote
+        // Saving the Install Quote to the db
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddQuoteConfirmed(QuoteViewModel vm)
@@ -99,7 +99,7 @@ namespace Time.Install.Controllers
                 {
                     LogQuoteChanges.LogInstallQuotesChanges(vm, dbQ);
                 }
-                // Inserting the data into InstallQuote 
+                // Inserting the data into InstallQuote table
                 InsertIntoInstallQuote.InsertData(vm, dbQ, dbE);
                 // Inserting data into the InstallDetails tables
                 InsertIntoInstallDetailsAndManuallyAddedOptions.InsertData(vm, dbQ );

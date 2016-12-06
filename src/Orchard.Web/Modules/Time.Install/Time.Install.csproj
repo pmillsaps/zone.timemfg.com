@@ -82,6 +82,42 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Styles\images\calendar-blue.gif" />
+    <Content Include="Styles\images\calendar-green.gif" />
+    <Content Include="Styles\images\calendar.gif" />
+    <Content Include="Styles\images\colorbox\border.png" />
+    <Content Include="Styles\images\colorbox\controls.png" />
+    <Content Include="Styles\images\colorbox\loading.gif" />
+    <Content Include="Styles\images\colorbox\loading_background.png" />
+    <Content Include="Styles\images\spinnerBlue.png" />
+    <Content Include="Styles\images\spinnerBlueBig.png" />
+    <Content Include="Styles\images\spinnerDefault.png" />
+    <Content Include="Styles\images\spinnerDefaultBig.png" />
+    <Content Include="Styles\images\spinnerGem.png" />
+    <Content Include="Styles\images\spinnerGemBig.png" />
+    <Content Include="Styles\images\spinnerGreen.png" />
+    <Content Include="Styles\images\spinnerGreenBig.png" />
+    <Content Include="Styles\images\spinnerOrange.png" />
+    <Content Include="Styles\images\spinnerOrangeBig.png" />
+    <Content Include="Styles\images\spinnerSquare.png" />
+    <Content Include="Styles\images\spinnerSquareBig.png" />
+    <Content Include="Styles\images\spinnerText.png" />
+    <Content Include="Styles\images\spinnerTextBig.png" />
+    <Content Include="Styles\images\spinnerUpDown.png" />
+    <Content Include="Styles\images\spinnerUpDownBig.png" />
+    <Content Include="Styles\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Styles\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Styles\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Styles\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Styles\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Styles\images\ui-icons_222222_256x240.png" />
+    <Content Include="Styles\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Styles\images\ui-icons_454545_256x240.png" />
+    <Content Include="Styles\images\ui-icons_888888_256x240.png" />
+    <Content Include="Styles\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Styles\jQueryCss.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -132,6 +168,10 @@
     <Content Include="Views\Quote\_DisplayAerialOptions.cshtml" />
     <Content Include="Views\Quote\_DisplayVSWOptions.cshtml" />
     <Content Include="Views\Quote\_DisplayManuallyAddedOptions.cshtml" />
+    <Content Include="Views\Quote\_SummaryVSWOptions.cshtml" />
+    <Content Include="Views\Quote\_SummaryManuallyAddedVSWOptions.cshtml" />
+    <Content Include="Views\Quote\_SummaryTimeOptions.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

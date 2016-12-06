@@ -1,0 +1,24 @@
+﻿@model Time.Install.Models.InstallQuoteSummary
+
+<table class="table table-striped">
+    <tr class="success">
+        <th>Option</th>
+        <th class="text-right">Quantity</th>
+        <th class="text-right">Price</th>
+        <th class="text-right">Hours</th>
+        <th class="text-right">Extended Price</th>
+    </tr>
+
+    @foreach (var item in Model.InstallDetails)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.VSWOption.OptionName)</td>
+            <td class="text-right">@Html.DisplayFor(model => item.Quantity)</td>
+            <td class="text-right">@Html.DisplayFor(model => item.Price)</td>
+            <td class="text-right">@Html.DisplayFor(model => item.InstallHours)</td>
+            <td class="text-right">@Html.DisplayFor(model => item.ExtendedPrice)</td>
+        </tr>
+    }
+
+</table>
+

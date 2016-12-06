@@ -847,6 +847,7 @@
     <Compile Include="Models\Epicor\E10V_QuoteOrderInformation.cs" />
     <Compile Include="Models\Epicor\v_QuoteOrderInformation.cs" />
     <Compile Include="Models\GetSetting.cs" />
+    <Compile Include="Models\Install\InstallDetail.cs" />
     <Compile Include="Models\Install\InstallHourlyRate.cs" />
     <Compile Include="Models\Install\InstallQuote.cs" />
     <Compile Include="Models\Install\LiftFamily.cs" />

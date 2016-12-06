@@ -10,7 +10,7 @@
         <tr>
             <td><span style="white-space:pre">@Html.Label("aerialOptions[" + @i + "].QtyPartAndDescription", Model[i].QtyPartAndDescription)</span></td>
             @Html.Hidden("aerialOptions[" + @i + "].QtyPartAndDescription", Model[i].QtyPartAndDescription)
-            <td>@Html.TextBox("aerialOptions[" + @i + "].Hours", Model[i].Hours, htmlAttributes: new { @class = "text-right spinner1" })</td>
+            <td>@Html.TextBox("aerialOptions[" + @i + "].Hours", Model[i].Hours, htmlAttributes: new { @class = "text-center spinner1" })</td>
         </tr>
     }
 </table>

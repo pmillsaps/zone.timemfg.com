@@ -30,6 +30,7 @@ namespace Time.Data.EntityModels.Install
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Price is Required")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Price { get; set; }
 
         [Display(Name = "Install Hours")]

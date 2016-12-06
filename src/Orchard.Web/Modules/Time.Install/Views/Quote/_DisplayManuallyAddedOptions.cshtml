@@ -1,4 +1,4 @@
-﻿
+﻿@model Time.Install.ViewModels.QuoteViewModel
 
 <div class="alert alert-danger">
     <p>
@@ -19,12 +19,22 @@
         <th>Paint?</th>
         <th></th>
     </tr>
-    <tr>
-        <td><textarea name="addOptnMnlly[0].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>
-        <td><input type="number" name="addOptnMnlly[0].AddQuantityManually" class="form-control" placeholder="Quantity"></td>
-        <td><input type="number" name="addOptnMnlly[0].AddPriceManually" class="form-control" placeholder="Price"></td>
-        <td><input type="number" name="addOptnMnlly[0].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>
-        <td><input type="checkbox" name="addOptnMnlly[0].AddPaintFlagManually" value="true"></td>
-        <td></td>
-    </tr>
+    @if(Model.EditQuote)
+    {
+        @for (int i = 0; i <= Model.AddOptnMnlly.Count; i++)
+        {
+
+        }
+    }
+    else
+    {
+        <tr>
+            <td><textarea name="addOptnMnlly[0].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>
+            <td><input type="number" name="addOptnMnlly[0].AddQuantityManually" class="form-control" placeholder="Quantity"></td>
+            <td><input type="number" name="addOptnMnlly[0].AddPriceManually" class="form-control" placeholder="Price"></td>
+            <td><input type="number" name="addOptnMnlly[0].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>
+            <td><input type="checkbox" name="addOptnMnlly[0].AddPaintFlagManually" value="true"></td>
+            <td></td>
+        </tr>
+    }
 </table>
