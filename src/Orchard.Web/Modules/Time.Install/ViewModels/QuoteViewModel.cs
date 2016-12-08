@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Time.Data.EntityModels.Install;
@@ -11,6 +12,8 @@ namespace Time.Install.ViewModels
     {
         public int QuoteNum { get; set; }
         public string InstallDescr { get; set; }
+
+        [Required(ErrorMessage = "Please Select a Family Lift")]
         public int LiftFamilyId { get; set; }
         public bool EditQuote { get; set; }
         public int InstallQuoteId { get; set; }
