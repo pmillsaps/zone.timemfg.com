@@ -21,6 +21,7 @@ namespace Time.Install.ViewModels
 
         public QuoteViewModel()
         {
+            EditQuote = false;
             GroupAndOptions = new GroupsAndOptionsViewModel();
         }
     }

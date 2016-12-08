@@ -1,14 +1,14 @@
 ﻿@model Time.Install.ViewModels.QuoteViewModel
 
 @{
-    if (Model.EditQuote) {ViewBag.Title = "Edit Install Quote";}
-    else {ViewBag.Title = "Start Install Quote";}
+    if (Model.EditQuote) { ViewBag.Title = "Edit Install Quote"; }
+    else { ViewBag.Title = "Start Install Quote"; }
 }
 
 <h2>@ViewBag.Title</h2>
 
 <div align="right">
-    @Html.ActionLink("Back to VSW Install Index", "Index", "Home")
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 <div align="right">
     @Html.ActionLink("Back to Aerial Quote List", "Index")
@@ -16,13 +16,15 @@
 
 <hr />
 <h3>Aerial Quote Num: @Model.QuoteNum</h3>
-@if (Model.EditQuote) {<h4>Installation for @Model.InstallDescr</h4>}
-else {<h4>@Model.InstallDescr</h4>}
+@if (Model.EditQuote)
+{<h4>Installation for @Model.InstallDescr</h4>}
+else
+{<h4>@Model.InstallDescr</h4>}
 <hr />
 
 @if (ViewBag.AerialOptions != null)
 {
-    using (Html.BeginForm("AddQuote", "Quote"))
+    using (Html.BeginForm("AddQuote", "Quote", FormMethod.Post, htmlAttributes: new { id="myForm" }))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.QuoteNum)
@@ -33,13 +35,19 @@ else {<h4>@Model.InstallDescr</h4>}
             {
                 <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", null, optionLabel: "--- Select a Lift Family ---", htmlAttributes: new { @disabled = "disabled" })</div>
                 @Html.HiddenFor(model => model.LiftFamilyId)
-                <div class="col-sm-3"><input type="submit" value="Edit Installation Quote" class="btn btn-primary" /></div>
+                <div class="col-sm-3">
+                    <input type="submit" value="Edit Installation Quote" class="btn btn-primary .se-pre-con" />
+                    <img src=@Url.Content("~/Styles/images/rubiksCube.gif") style="display: none;" id="loading_image" />
+                </div>
             }
             else
             {
                 <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
                 @Html.HiddenFor(model => model.LiftFamilyId)
-                <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+                <div class="col-sm-3">
+                    <input type="submit" value="Display Install Options" class="btn btn-primary .se-pre-con" />
+                    <img src=@Url.Content("~/Styles/images/rubiksCube.gif") style="display: none;" id="loading_image"/>
+                </div>
             }
         </div>
     }
@@ -59,3 +67,13 @@ else
 <hr />
 @Html.ActionLink("Back to Aerial Quote List", "Index")
 
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('#myForm').submit(function () {
+            $('#loading_image').show(); // show animation
+            return true; // allow regular form submission
+        });
+    </script>
+}

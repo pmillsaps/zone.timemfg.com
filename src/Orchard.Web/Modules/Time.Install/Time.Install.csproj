@@ -63,6 +63,10 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AD.System.Web.Helpers.dll.2.0.0\lib\net20\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
@@ -82,6 +86,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Styles\images\ajax-loader.gif" />
     <Content Include="Styles\images\calendar-blue.gif" />
     <Content Include="Styles\images\calendar-green.gif" />
     <Content Include="Styles\images\calendar.gif" />
@@ -89,6 +94,8 @@
     <Content Include="Styles\images\colorbox\controls.png" />
     <Content Include="Styles\images\colorbox\loading.gif" />
     <Content Include="Styles\images\colorbox\loading_background.png" />
+    <Content Include="Styles\images\ring-alt.gif" />
+    <Content Include="Styles\images\rubiksCube.gif" />
     <Content Include="Styles\images\spinnerBlue.png" />
     <Content Include="Styles\images\spinnerBlueBig.png" />
     <Content Include="Styles\images\spinnerDefault.png" />

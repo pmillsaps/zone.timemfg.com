@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Time.Data.EntityModels.Install;
@@ -82,7 +83,32 @@ namespace Time.Install.Business_Logic
                 TotalPaintHours = totalPaintHours,
                 LiftFamilyId = vm.LiftFamilyId
             };
-            dbQ.InstallQuotes.Add(installQ);
+
+            if(vm.EditQuote)
+            {
+                // Variables needed to perform the update
+                var instQt = dbQ.InstallQuotes.FirstOrDefault(x => x.LiftQuoteNumber == vm.QuoteNum);
+                dbQ.InstallQuotes.Attach(instQt);
+                var entry = dbQ.Entry(instQt);
+                // Updating the fields
+                instQt.InstallQuotedBy = HttpContext.Current.User.Identity.Name;
+                instQt.QuoteDate = DateTime.Now;
+                instQt.TotalPriceLabor = totalPriceLabor;
+                instQt.TotalPriceMaterial = totalPriceMaterial;
+                instQt.TotalInstallHours = totalHours;
+                instQt.TotalPaintHours = totalPaintHours;
+                entry.Property(e => e.InstallQuotedBy).IsModified = true;
+                entry.Property(e => e.QuoteDate).IsModified = true;
+                entry.Property(e => e.TotalPriceLabor).IsModified = true;
+                entry.Property(e => e.TotalPriceMaterial).IsModified = true;
+                entry.Property(e => e.TotalInstallHours).IsModified = true;
+                entry.Property(e => e.TotalPaintHours).IsModified = true;
+            }
+            else
+            {
+                // Adding a new Install quote
+                dbQ.InstallQuotes.Add(installQ);
+            }
             dbQ.SaveChanges();
         }
     }

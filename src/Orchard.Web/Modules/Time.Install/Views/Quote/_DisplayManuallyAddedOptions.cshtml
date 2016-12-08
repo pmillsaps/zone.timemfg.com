@@ -19,11 +19,18 @@
         <th>Paint?</th>
         <th></th>
     </tr>
-    @if(Model.EditQuote)
+    @if(Model.EditQuote && Model.AddOptnMnlly.Count != 0)
     {
-        @for (int i = 0; i <= Model.AddOptnMnlly.Count; i++)
+        for (int i = 0; i < Model.AddOptnMnlly.Count; i++)
         {
-
+            <tr>
+                <td>@Html.TextArea("addOptnMnlly[" + @i + "].AddOptionManually", Model.AddOptnMnlly[i].AddOptionManually, htmlAttributes: new { @rows = 3, @cols = 100 })</td>
+                <td>@Html.TextBox("addOptnMnlly[" + @i + "].AddQuantityManually", Model.AddOptnMnlly[i].AddQuantityManually, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                <td>@Html.TextBox("addOptnMnlly[" + @i + "].AddPriceManually", Model.AddOptnMnlly[i].AddPriceManually, htmlAttributes: new { @class = "text-center spinner2" })</td>
+                <td>@Html.TextBox("addOptnMnlly[" + @i + "].AddInstallHoursManually", Model.AddOptnMnlly[i].AddInstallHoursManually, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                <td>@Html.CheckBox("addOptnMnlly[" + @i + "].AddPaintFlagManually", Model.AddOptnMnlly[i].AddPaintFlagManually)</td>
+                <td></td>
+            </tr>
         }
     }
     else

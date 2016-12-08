@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.Install.InstallQuote>
 
 @{
-    ViewBag.Title = "List Of VSW Install Quotes";
+    ViewBag.Title = "List Of VSW Quoted Installs";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -50,7 +50,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TotalPaintHours)
         </th>
-        <th></th>
+        <th>Quote Actions</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -89,7 +89,7 @@
             @Html.DisplayFor(modelItem => item.TotalPaintHours)
         </td>
         <td>
-            @Html.ActionLink("Edit", "StartQuote", new { quoteNum = item.LiftQuoteNumber, installDesc = item.LiftName, editQuote = true, liftFamilyId = item.LiftFamilyId }) |
+            @Html.ActionLink("Update", "StartQuote", new { quoteNum = item.LiftQuoteNumber, installDesc = item.LiftName, editQuote = true, liftFamilyId = item.LiftFamilyId }) |
             @Html.ActionLink("Summary", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
         </td>
     </tr>
