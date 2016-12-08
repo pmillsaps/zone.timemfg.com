@@ -39,8 +39,8 @@ else
                 <div class="col-sm-3">
                     <input type="submit" value="Edit Installation Quote" class="btn btn-primary" />
                 </div>
-                <div class="col-md-3" style="display: none;" id="loading_image">
-                    <img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif")/>&nbsp;Please wait...
+                <div class="col-sm-3" style="display: none;" id="loading_image2">
+                    <img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif") />&nbsp;Please wait...
                 </div>
             }
             else
@@ -50,9 +50,8 @@ else
                 @Html.ValidationMessageFor(model => model.LiftFamilyId)
                 <div class="col-sm-3">
                     <input type="submit" value="Display Install Options" class="btn btn-primary" />
-                    @*<img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif") style="display: none;" id="loading_image"/>*@
                 </div>
-                <div class="col-md-3" style="display: none;" id="loading_image">
+                <div class="col-sm-3" style="display: none;" id="loading_image1">
                     <img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif") />&nbsp;Please wait...
                 </div>
             }
@@ -79,7 +78,12 @@ else
 {
     <script type="text/javascript">
         $('#myForm').submit(function () {
-            $('#loading_image').show(); // show animation
+            $('#loading_image1').show(); // show animation
+            return true; // allow regular form submission
+        });
+
+        $('#myForm').submit(function () {
+            $('#loading_image2').show(); // show animation
             return true; // allow regular form submission
         });
     </script>
