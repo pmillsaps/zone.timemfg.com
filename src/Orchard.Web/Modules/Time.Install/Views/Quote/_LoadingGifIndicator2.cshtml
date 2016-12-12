@@ -1,0 +1,14 @@
+﻿
+<div class="col-sm-3" style="display: none;" id="loading_image2">
+    <img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif") />&nbsp;Please wait...
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('#myForm').submit(function () {
+            $('#loading_image2').show(); // show animation
+            return true; // allow regular form submission
+        });
+    </script>
+}

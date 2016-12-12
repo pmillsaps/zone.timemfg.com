@@ -5,8 +5,6 @@
     else { ViewBag.Title = "Start Install Quote"; }
 }
 
-<div class="loader"></div>
-
 <h2>@ViewBag.Title</h2>
 
 <div align="right">
@@ -41,6 +39,7 @@ else
                 <div class="col-sm-3">
                     <input type="submit" value="Edit Installation Quote" class="btn btn-primary" />
                 </div>
+                @Html.Partial("_LoadingGifIndicator2")
                 @*<div class="col-sm-3" style="display: none;" id="loading_image2">
                     <img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif") />&nbsp;Please wait...
                 </div>*@
@@ -53,6 +52,7 @@ else
                 <div class="col-sm-3">
                     <input type="submit" value="Display Install Options" class="btn btn-primary" />
                 </div>
+                @Html.Partial("_LoadingGifIndicator1")
                 @*<div class="col-sm-3" style="display: none;" id="loading_image1">
                     <img src=@Url.Content("~/Media/Default/Page/rubiksCube.gif") />&nbsp;Please wait...
                 </div>*@
@@ -76,27 +76,17 @@ else
 @Html.ActionLink("Back to Aerial Quote List", "Index")
 
 
-@using (Script.Foot())
+@*@using (Script.Foot())
 {
     <script type="text/javascript">
-        //$('#myForm').submit(function () {
-        //    $('#loading_image1').show(); // show animation
-        //    return true; // allow regular form submission
-        //});
-
-        //$('#myForm').submit(function () {
-        //    $('#loading_image2').show(); // show animation
-        //    return true; // allow regular form submission
-        //});
-
         $('#myForm').submit(function () {
-            $('.loader').show(); // show animation
+            $('#loading_image1').show(); // show animation
             return true; // allow regular form submission
         });
 
         $('#myForm').submit(function () {
-            $('.loader').show(); // show animation
+            $('#loading_image2').show(); // show animation
             return true; // allow regular form submission
         });
     </script>
-}
+}*@

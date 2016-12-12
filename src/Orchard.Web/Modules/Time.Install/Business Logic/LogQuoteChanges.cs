@@ -17,6 +17,7 @@ namespace Time.Install.Business_Logic
             bool optionUpdated = false;
             var installQuote = dbQ.InstallQuotes.SingleOrDefault(x => x.LiftQuoteNumber == vm.QuoteNum);
             var installDetail = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuote.Id).ToList();
+            List<int> ids = new List<int>();
 
             // Looping trough existing lines in InstallDetails to log changes
             foreach (var item in installDetail)
@@ -35,8 +36,16 @@ namespace Time.Install.Business_Logic
                         {
                             changes += "-- Quantity went from " + item.Quantity.ToString() + " to " + opt.Quantity.ToString();
                             optionUpdated = true;
-                            instDtls.Quantity = opt.Quantity;
-                            entry.Property(e => e.Quantity).IsModified = true;
+                            if(opt.Quantity > 0)// Update the row only if qty is 1 or more else delete it
+                            {
+                                instDtls.Quantity = opt.Quantity;
+                                entry.Property(e => e.Quantity).IsModified = true;
+                            }
+                            else
+                            {
+                                ids.Add(item.Id);
+                                //entry.State = EntityState.Deleted;
+                            }
                         }
                         if (opt.Price != item.Price && opt.Quantity > 0)// If price changes
                         {
@@ -68,12 +77,21 @@ namespace Time.Install.Business_Logic
                 }
                 dbQ.SaveChanges();
             }
+            // Deleting the options with qty of zero form the Install Details table
+            foreach (var item in ids)
+            {
+                var instDtls = dbQ.InstallDetails.FirstOrDefault(x => x.Id == item);
+                dbQ.InstallDetails.Attach(instDtls);
+                var entry = dbQ.Entry(instDtls);
+                entry.State = EntityState.Deleted;
+            }
+            dbQ.SaveChanges();
             // Checking for new options added
             foreach (var item in vm.GroupAndOptions.Options.Where(x => x.Quantity > 0))
             {
                 var vswOption = dbQ.VSWOptions.SingleOrDefault(x => x.OptionName == item.OptionName && x.GroupId == item.GroupId && x.LiftFamilyId == item.LiftFamilyId);
-                var iDetail = dbQ.InstallDetails.SingleOrDefault(x => x.OptionId == vswOption.Id && x.InstallQuoteId == installQuote.Id);
-                if (iDetail == null)
+                var inDetail = dbQ.InstallDetails.SingleOrDefault(x => x.OptionId == vswOption.Id && x.InstallQuoteId == installQuote.Id);
+                if (inDetail == null)
                 {
                     QuoteChangesLog chLog = new QuoteChangesLog // Adding the new row to the log
                     {
@@ -84,7 +102,7 @@ namespace Time.Install.Business_Logic
                     };
                     dbQ.QuoteChangesLogs.Add(chLog);
 
-                    InstallDetail iDt = new InstallDetail // Adding the new row to the InstallDetail table
+                    InstallDetail inDt = new InstallDetail // Adding the new row to the InstallDetail table
                     {
                         InstallQuoteId = installQuote.Id,
                         GroupId = item.GroupId,
@@ -93,11 +111,12 @@ namespace Time.Install.Business_Logic
                         Price = item.Price,
                         InstallHours = item.InstallHours
                     };
-                    dbQ.InstallDetails.Add(iDt);
+                    dbQ.InstallDetails.Add(inDt);
                 }
             }
 
             // Resetting the variables
+            ids.Clear();
             changes = "";
             optionUpdated = false;
             var installDetailManuallyAdded = dbQ.InstallDetailsManuallyAddedOptions.Where(x => x.InstallQuoteId == installQuote.Id).ToList();
@@ -118,16 +137,17 @@ namespace Time.Install.Business_Logic
                         {
                             changes += "-- Quantity went from " + item.Quantity.ToString() + " to " + opt.AddQuantityManually.ToString();
                             optionUpdated = true;
-                            instDtlsMnAd.Quantity = opt.AddQuantityManually;
-                            entry.Property(e => e.Quantity).IsModified = true;
+                            if(opt.AddQuantityManually > 0)// Update the row only if qty is 1 or more else delete it
+                            {
+                                instDtlsMnAd.Quantity = opt.AddQuantityManually;
+                                entry.Property(e => e.Quantity).IsModified = true;
+                            }
+                            else
+                            {
+                                ids.Add(item.Id);
+                                //entry.State = EntityState.Deleted;
+                            }
                         }
-                        //if (opt.AddOptionManually != item.OptionName && opt.AddQuantityManually > 0)// If name changes
-                        //{
-                        //    changes += " -- Option went from " + item.OptionName + " to " + opt.AddOptionManually;
-                        //    optionUpdated = true;
-                        //    instDtlsMnAd.OptionName = opt.AddOptionManually;
-                        //    entry.Property(e => e.OptionName).IsModified = true;
-                        //}
                         if (opt.AddPriceManually != item.Price && opt.AddQuantityManually > 0)// If price changes
                         {
                             changes += " -- Price went from " + item.Price.ToString("c") + " to " + opt.AddPriceManually.ToString("c");
@@ -159,12 +179,19 @@ namespace Time.Install.Business_Logic
                     }
                 }
             }
-
+            // Deleting the options with qty of zero form the InstallDetailsManuallyAddedOption table
+            foreach (var id in ids)
+            {
+                var instDtlsMnAd = dbQ.InstallDetailsManuallyAddedOptions.FirstOrDefault(x => x.Id == id);
+                dbQ.InstallDetailsManuallyAddedOptions.Attach(instDtlsMnAd);
+                var entry = dbQ.Entry(instDtlsMnAd);
+                entry.State = EntityState.Deleted;
+            }
             // Checking for new option added manually
             foreach (var item in vm.AddOptnMnlly.Where(x => x.AddQuantityManually > 0))
             {
-                var iDetail = dbQ.InstallDetailsManuallyAddedOptions.SingleOrDefault(x => x.OptionName == item.AddOptionManually && x.InstallQuoteId == installQuote.Id);
-                if (iDetail == null)
+                var inDetail = dbQ.InstallDetailsManuallyAddedOptions.SingleOrDefault(x => x.OptionName == item.AddOptionManually && x.InstallQuoteId == installQuote.Id);
+                if (inDetail == null)
                 {
                     QuoteChangesLog chLog = new QuoteChangesLog// Adding the new row to the log
                     {
@@ -175,7 +202,7 @@ namespace Time.Install.Business_Logic
                     };
                     dbQ.QuoteChangesLogs.Add(chLog);
                     // Adding the new row to the InstallDetailsManuallyAddedOption table
-                    InstallDetailsManuallyAddedOption iDtMnAd = new InstallDetailsManuallyAddedOption
+                    InstallDetailsManuallyAddedOption inDtMnAd = new InstallDetailsManuallyAddedOption
                     {
                         InstallQuoteId = installQuote.Id,
                         OptionName = item.AddOptionManually,
@@ -184,7 +211,7 @@ namespace Time.Install.Business_Logic
                         InstallHours = item.AddInstallHoursManually,
                         PaintFlag = item.AddPaintFlagManually
                     };
-                    dbQ.InstallDetailsManuallyAddedOptions.Add(iDtMnAd);
+                    dbQ.InstallDetailsManuallyAddedOptions.Add(inDtMnAd);
                 }
             }
             dbQ.SaveChanges();

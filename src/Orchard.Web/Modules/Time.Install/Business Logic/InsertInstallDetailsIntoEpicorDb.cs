@@ -15,10 +15,11 @@ namespace Time.Install.Business_Logic
             var installQ = dbQ.InstallQuotes.SingleOrDefault(x => x.Id == installQuoteId);
             var installDetails = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuoteId).ToList();
             var installManuallyAddedOpt = dbQ.InstallDetailsManuallyAddedOptions.Where(x => x.InstallQuoteId == installQuoteId).ToList();
+            var logChangesToQuote = dbQ.QuoteChangesLogs.Where(x => x.InstallQuoteId == installQuoteId).ToList();
             string line = "";
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("INSTALL DETAILS:");
+            sb.AppendLine("INSTALL DETAILS:");// Writing the Install Quote Summary
             sb.AppendLine();
             sb.AppendLine("Quoted by: " + installQ.InstallQuotedBy);
             sb.AppendLine("Quote Date: " + installQ.QuoteDate.ToShortDateString());
@@ -27,11 +28,11 @@ namespace Time.Install.Business_Logic
             sb.AppendLine("Total Install Price: " + installQ.TotalInstallPrice.Value.ToString("c"));
             sb.AppendLine("Installation Hours: " + installQ.TotalInstallHours);
             sb.AppendLine("Paint Hours: " + installQ.TotalPaintHours);
-            sb.AppendLine();
+            sb.AppendLine();// Header
             sb.AppendLine("Qty".PadLeft(3) + "Price".PadLeft(17) + "Install Hours".PadLeft(19) + "Extended Price".PadLeft(18) + "    VSW Option".PadRight(64));
             sb.AppendLine("----------------------------------------------------------------------------------------------------------------------------");
 
-            foreach (var item in installDetails)
+            foreach (var item in installDetails)// Writing individual options
             {
                 line += item.Quantity.ToString().PadLeft(3);
                 line += item.Price.ToString("c").PadLeft(17);
@@ -42,7 +43,7 @@ namespace Time.Install.Business_Logic
                 line = "";
             }
             sb.AppendLine();
-            sb.AppendLine("Manually Added Options");
+            sb.AppendLine("-- Manually Added Options --");
             sb.AppendLine();
             foreach (var item in installManuallyAddedOpt)
             {
@@ -54,7 +55,26 @@ namespace Time.Install.Business_Logic
                 sb.AppendLine(line);
                 line = "";
             }
-
+            sb.AppendLine();
+            sb.AppendLine("-- Changes to the Istall Quote --");
+            sb.AppendLine();
+            if(logChangesToQuote.Count > 0)
+            {
+                foreach (var item in logChangesToQuote)
+                {
+                    line += item.UpdatedBy + "\t";
+                    line += item.UpdatedOn.ToString(@"MMM dd, yyyy hh:mm:ss tt") + "\t";
+                    line += item.ValueChanged.PadLeft(30);
+                    sb.AppendLine(line);
+                    line = "";
+                }
+            }
+            else
+            {
+                line += "The Install Quote hasn't been changed";
+                sb.AppendLine(line);
+            }
+            
             var installQouteEpicor = dbE.QuoteDtls.SingleOrDefault(x => x.QuoteNum == installQ.LiftQuoteNumber && x.QuoteLine == 2);
             var installPriceEpicor = dbE.QuoteQties.SingleOrDefault(x => x.QuoteNum == installQ.LiftQuoteNumber && x.QuoteLine == 2);
             // Inserting the quote details into QuoteDtl table

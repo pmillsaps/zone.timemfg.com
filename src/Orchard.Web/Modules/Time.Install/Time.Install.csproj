@@ -179,6 +179,8 @@
     <Content Include="Views\Quote\_SummaryManuallyAddedVSWOptions.cshtml" />
     <Content Include="Views\Quote\_SummaryTimeOptions.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Quote\_LoadingGifIndicator2.cshtml" />
+    <Content Include="Views\Quote\_LoadingGifIndicator1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

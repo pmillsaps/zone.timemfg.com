@@ -21,7 +21,7 @@
 <h3>Aerial Quote Number: @Model.QuoteNum</h3>
 <h4>@Model.InstallDescr</h4>
 <hr />
-@using (Html.BeginForm("AddQuoteConfirmed", "Quote", FormMethod.Post))
+@using (Html.BeginForm("AddQuoteConfirmed", "Quote", FormMethod.Post, htmlAttributes: new { id = "myForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -53,18 +53,22 @@
         </div>
     </div>
     <hr />
-    if (Model.EditQuote)
-    {
-        <div>
-            <input type="submit" value="Update Quote" class="btn btn-primary" />
-        </div>
-    }
-    else
-    {
-        <div>
-            <input type="submit" value="Save Quote" class="btn btn-primary" />
-        </div>
-    }
+    <div class="row">
+        @if (Model.EditQuote)
+        {
+            <div class="col-sm-3">
+                <input type="submit" value="Update Quote" class="btn btn-primary" />
+            </div>
+            @Html.Partial("_LoadingGifIndicator2")
+        }
+        else
+        {
+            <div class="col-sm-3">
+                <input type="submit" value="Save Quote" class="btn btn-primary" />
+            </div>
+            @Html.Partial("_LoadingGifIndicator1")
+        }
+    </div>
 }
 <br />
 <div>
@@ -89,9 +93,9 @@
                 //x++; //text box increment
                 $("#customFields").append('<tr>'
                                             + '<td><textarea name="addOptnMnlly[' + x + '].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>'
-                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddQuantityManually" class="form-control" placeholder="Quantity"></td>'
-                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddPriceManually" class="form-control" placeholder="Price"></td>'
-                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddInstallHoursManually" class="form-control" placeholder="Labor Hours"></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddQuantityManually" class="form-control text-center" placeholder="Quantity"></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddPriceManually" class="form-control text-center" placeholder="Price"></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddInstallHoursManually" class="form-control text-center" placeholder="Labor Hours"></td>'
                                             + '<td><input type="checkbox" name="addOptnMnlly[' + x + '].AddPaintFlagManually"  value="true"></td>'
                                             + '<td><a href="javascript:void(0);" class="remCF">Remove</a></td>'
                                             + '</tr>');
