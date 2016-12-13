@@ -43,7 +43,7 @@ namespace Time.Install.Business_Logic
                 line = "";
             }
             sb.AppendLine();
-            sb.AppendLine("-- Manually Added Options --");
+            sb.AppendLine("-- Manually Added Options --");// Writing manually added options
             sb.AppendLine();
             foreach (var item in installManuallyAddedOpt)
             {
@@ -56,7 +56,7 @@ namespace Time.Install.Business_Logic
                 line = "";
             }
             sb.AppendLine();
-            sb.AppendLine("-- Changes to the Istall Quote --");
+            sb.AppendLine("-- Changes to the Istall Quote --");// Writing any updates to the quote
             sb.AppendLine();
             if(logChangesToQuote.Count > 0)
             {

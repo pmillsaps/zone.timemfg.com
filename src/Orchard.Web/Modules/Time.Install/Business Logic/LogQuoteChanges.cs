@@ -17,7 +17,7 @@ namespace Time.Install.Business_Logic
             bool optionUpdated = false;
             var installQuote = dbQ.InstallQuotes.SingleOrDefault(x => x.LiftQuoteNumber == vm.QuoteNum);
             var installDetail = dbQ.InstallDetails.Include("VSWOption").Where(x => x.InstallQuoteId == installQuote.Id).ToList();
-            List<int> ids = new List<int>();
+            List<int> ids = new List<int>();// To store the ids of the options that qty was set to zero
 
             // Looping trough existing lines in InstallDetails to log changes
             foreach (var item in installDetail)
@@ -43,8 +43,7 @@ namespace Time.Install.Business_Logic
                             }
                             else
                             {
-                                ids.Add(item.Id);
-                                //entry.State = EntityState.Deleted;
+                                ids.Add(item.Id);// Storing the Ids of the options that went from qty greater than 0 to qty of 0
                             }
                         }
                         if (opt.Price != item.Price && opt.Quantity > 0)// If price changes
@@ -77,7 +76,7 @@ namespace Time.Install.Business_Logic
                 }
                 dbQ.SaveChanges();
             }
-            // Deleting the options with qty of zero form the Install Details table
+            // Deleting the options with qty of zero form the InstallDetail table
             foreach (var item in ids)
             {
                 var instDtls = dbQ.InstallDetails.FirstOrDefault(x => x.Id == item);
@@ -144,8 +143,7 @@ namespace Time.Install.Business_Logic
                             }
                             else
                             {
-                                ids.Add(item.Id);
-                                //entry.State = EntityState.Deleted;
+                                ids.Add(item.Id);// Storing the Ids of the options that went from qty greater than 0 to qty of 0
                             }
                         }
                         if (opt.AddPriceManually != item.Price && opt.AddQuantityManually > 0)// If price changes

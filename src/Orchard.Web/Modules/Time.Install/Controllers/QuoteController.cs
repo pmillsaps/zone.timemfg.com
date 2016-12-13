@@ -115,6 +115,7 @@ namespace Time.Install.Controllers
             // Loading the install quote info
             InstallQuoteSummary installQuoteSummary = new InstallQuoteSummary();
             installQuoteSummary.InstallQuotes = dbQ.InstallQuotes.SingleOrDefault(x => x.Id == installQuoteId);
+            installQuoteSummary.OptionGroups = dbQ.OptionGroups.ToList();
             installQuoteSummary.InstallDetails = dbQ.InstallDetails.Where(x => x.InstallQuoteId == installQuoteId).ToList();
             installQuoteSummary.InstallDetailsMnllyAdded = dbQ.InstallDetailsManuallyAddedOptions.Where(x => x.InstallQuoteId == installQuoteId).ToList();
             var aerialOp = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteNum && x.QuoteLine == 1);
