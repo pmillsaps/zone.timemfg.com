@@ -35,10 +35,9 @@ else
             @if (Model.EditQuote)
             {
                 <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", null, optionLabel: "--- Select a Lift Family ---", htmlAttributes: new { @disabled = "disabled" })</div>
-                @*<div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>*@
                 @Html.HiddenFor(model => model.LiftFamilyId)
                 @Html.ValidationMessageFor(model => model.LiftFamilyId)
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <input type="submit" value="Edit Installation Quote" class="btn btn-primary" id="startInstall" />
                 </div>
                 @Html.Partial("_LoadingGifIndicator2")
@@ -48,7 +47,7 @@ else
                 <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
                 @Html.HiddenFor(model => model.LiftFamilyId)
                 @Html.ValidationMessageFor(model => model.LiftFamilyId)
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <input type="submit" value="Display Install Options" class="btn btn-primary" id="startInstall" />
                 </div>
                 @Html.Partial("_LoadingGifIndicator1")
