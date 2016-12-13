@@ -10,21 +10,26 @@
     @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 <div align="right">
-    @Html.ActionLink("List Of VSW Quoted Installs", "ListOfInstallQuotes", "Quote")
+    @Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")
 </div>
 
 <hr />
 <div class="alert alert-success">
     <p><strong>Note:</strong> A quote MUST have an INSTALLS(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
-    <p>To view or edit the details of an existing Install Quote go to <strong>@Html.ActionLink("List Of VSW Quoted Installs", "ListOfInstallQuotes", "Quote")</strong></p>
+    <p>To view or edit the details of an existing Install Quote go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong></p>
 </div>
 <hr />
 @using (Html.BeginForm("Index", "Quote", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-sm-2">@Html.Label("Enter Aerial Quote: ")</div>
-        <div class="col-sm-2">@Html.TextBox("quote")</div>
-        <div class="col-sm-4"><input type="submit" class="btn btn-primary" value="Search" /></div>
+        <div class="col-xs-4">
+            <div class="input-group">
+                @Html.TextBox("quote", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search for Aerial Quote..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
     </div>
 }
 
@@ -60,41 +65,48 @@
         </th>
         <th>Actions</th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (Model == null || Model.Count() == 0)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(model => item.QuoteNum)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.QuoteLine)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.PartNum)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.LineDesc)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.LastUpdate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.LastDcdUserID)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.OrderQty)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.ChangedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.ChangeDate)
-            </td>
-            <td>
-                @Html.ActionLink("Start Install Quote", "StartQuote", new { quoteNum = item.QuoteNum, installDesc = item.LineDesc, editQuote = false })
-            </td>
+            <td colspan="10" class="lead bg-danger">No rows matched search criteria</td>
         </tr>
     }
-
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.QuoteNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.QuoteLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.PartNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LineDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LastUpdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LastDcdUserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.OrderQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ChangedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ChangeDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Start Install Quote", "StartQuote", new { quoteNum = item.QuoteNum, installDesc = item.LineDesc, editQuote = false })
+                </td>
+            </tr>
+        }
+    }
 </table>

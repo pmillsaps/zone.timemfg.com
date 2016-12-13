@@ -53,9 +53,16 @@ namespace Time.Install.Controllers
         }
 
         // List of VSW Install quotes
-        public ActionResult ListOfInstallQuotes()
+        public ActionResult ListOfInstallQuotes(int? liftQuoteNum)
         {
-            return View(dbQ.InstallQuotes.ToList());
+            if (liftQuoteNum == null)
+            {
+                return View(dbQ.InstallQuotes.ToList());
+            }
+            else
+            {
+                return View(dbQ.InstallQuotes.Where(x => x.LiftQuoteNumber == liftQuoteNum).ToList());
+            }
         }
 
         // Start the Install Quote

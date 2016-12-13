@@ -1,7 +1,7 @@
 ﻿@model Time.Install.Models.InstallQuoteSummary
 
 @{
-    ViewBag.Title = "Install Quote Summary";
+    ViewBag.Title = "Installation Quotation Summary";
     Script.Require("jQuery");
 }
 
@@ -62,7 +62,7 @@
     @Html.Partial("_SummaryTimeOptions", Model)
 </div>
 
-@using(Script.Foot())
+@using (Script.Foot())
 {
     <script type="text/javascript">
         $('#flip1').click(function () {

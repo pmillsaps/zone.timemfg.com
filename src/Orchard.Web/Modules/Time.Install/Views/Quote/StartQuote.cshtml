@@ -1,8 +1,8 @@
 ﻿@model Time.Install.ViewModels.QuoteViewModel
 
 @{
-    if (Model.EditQuote) { ViewBag.Title = "Edit Install Quote"; }
-    else { ViewBag.Title = "Start Install Quote"; }
+    if (Model.EditQuote) { ViewBag.Title = "Edit Installation Quote"; }
+    else { ViewBag.Title = "Start Installation Quote"; }
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,7 +11,7 @@
     @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 <div align="right">
-    @Html.ActionLink("Back to Aerial Quote List", "Index")
+    @Html.ActionLink("Go to Aerial Quotes List without Installation Quote", "Index")
 </div>
 
 <hr />

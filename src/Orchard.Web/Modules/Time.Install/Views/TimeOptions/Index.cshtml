@@ -22,9 +22,13 @@
 @using (Html.BeginForm("Index", "TimeOptions", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select Lift Family ---")</div>
-        <div class="col-md-4">
-            <input type="submit" value="Search " class="btn btn-primary" />
+        <div class="col-xs-4">
+            <div class="input-group">
+                @Html.DropDownList("LiftFamilyId", optionLabel: "--- Select Lift Family ---")
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
         </div>
     </div>
 }
@@ -48,8 +52,8 @@
 
     @if (Model == null || Model.Count() == 0)
     {
-        <tr class="lead">
-            <td colspan="4">
+        <tr>
+            <td colspan="5" class="lead bg-danger">
                 No rows match search criteria
             </td>
         </tr>
