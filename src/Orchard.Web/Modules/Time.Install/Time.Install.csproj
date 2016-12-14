@@ -130,6 +130,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\Time.Install.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -210,6 +211,7 @@
     <Compile Include="Models\AerialOption.cs" />
     <Compile Include="Models\InstallQuoteSummary.cs" />
     <Compile Include="Models\SplitOptions.cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
     <Compile Include="ViewModels\GroupsAndOptionsViewModel.cs" />

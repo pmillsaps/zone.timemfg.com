@@ -7,14 +7,14 @@
 <h2>@ViewBag.Title</h2>
 
 <div align="right">
-    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+    @Html.ActionLink("Back to Main Menu", "Index", "Home", htmlAttributes: new { @class = "" })
 </div>
 <div align="right">
     @Html.ActionLink("Go to Aerial Quotes List without Installation Quote", "Index")
 </div>
 
 <div class="alert alert-info">
-    <p>This page displays the Aerial Quotes that already have an Installation Quotation</p>
+    <p>This page displays the Aerial Quotes that already have an Installation Quotation.</p>
     <p>You can search for, update, or view the summary of a specific quote.</p>
 </div>
 <hr />
