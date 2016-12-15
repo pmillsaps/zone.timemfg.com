@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.InstallQuote>
+
+@{
+    ViewBag.Title = "List Of VSW Quoted Installations";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home", htmlAttributes: new { @class = "" })
+</div>
+<div align="right">
+    @Html.ActionLink("Go to Aerial Quotes List without Installation Quote", "Index")
+</div>
+
+<div class="alert alert-info">
+    <p>This page displays the Aerial Quotes that already have an Installation Quotation.</p>
+    <p>You can search for, update, or view the summary of a specific quote.</p>
+</div>
+<hr />
+@using (Html.BeginForm("ListOfInstallQuotes", "Quote", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="input-group">
+                @Html.TextBox("liftQuoteNum", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search for Quote Number..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<table class="table table-striped">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.LiftName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftQuoteNumber)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.LiftQuoteLine)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.LiftInstallLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstallQuotedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPriceLabor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPriceMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalInstallPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalInstallHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPaintHours)
+        </th>
+        <th>Quote Actions</th>
+    </tr>
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="11" class="lead bg-danger">No rows matched search criteria</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftQuoteNumber)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.LiftQuoteLine)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftInstallLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstallQuotedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuoteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPriceLabor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPriceMaterial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalInstallPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalInstallHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPaintHours)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "StartQuote", new { quoteNum = item.LiftQuoteNumber, installDesc = item.LiftName, editQuote = true, liftFamilyId = item.LiftFamilyId }) |
+                    @Html.ActionLink("Summary", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
+                </td>
+            </tr>
+        }
+    }
+</table>

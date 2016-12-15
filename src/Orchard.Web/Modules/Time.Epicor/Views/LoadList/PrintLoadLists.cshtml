@@ -1,0 +1,180 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadList>
+
+@{
+    ViewBag.Title = "E10 Print Load Lists...";
+    Script.Require("jQuery");
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+<ul class="list-inline">
+    @*<li>@Html.ActionLink("LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })</li>*@
+    <a href="~/Epicor/LoadList/Index" class="btn btn-primary">LoadList Home Page</a>
+    @if (ViewBag.Complete == 1)
+    {
+        <li>@Html.ActionLink("Show Only Open LoadLists", "PrintLoadLists", "LoadList", new { id = 0 }, new { @class = "btn btn-primary" })</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Show Only Completed LoadLists", "PrintLoadLists", "LoadList", new { id = 1 }, new { @class = "btn btn-primary" })</li>
+    }
+</ul>
+
+<hr />
+
+@if (ViewBag.Complete == 1)
+{
+    using (Html.BeginForm("PrintLoadLists", "LoadList", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <b>Schedule Ship Date Year:</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 lead">
+                @Html.DropDownList("LoadListYear")
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Display Load Lists" class="btn btn-default" />
+            </div>
+        </div>
+        <hr />
+    }
+}
+
+@using (Html.BeginForm("PrintLoadLists", "LoadList"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr class="success">
+            <th>
+                <input type="checkbox" name="checkAllSelected" id="checkAllSelected" />
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateIssued)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRevised)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateSchedShip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TruckingCompany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MakeReady)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distributors)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="selectedLines" value="@item.Id" id="selectCheck" />
+                    @*<input type="checkbox" checked="yes" name="selectedLines" value="@item.jobnum" />*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateIssued)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRevised)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateSchedShip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TruckingCompany)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                @if (item.Complete)
+                {
+                    <td>
+                        @Html.CheckBox("Complete", true, new { @disabled = "disabled" })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.CheckBox("Complete", new { @disabled = "disabled" })
+                    </td>
+                }
+                @if (item.MakeReady)
+                {
+                    <td>
+                        @Html.CheckBox("MakeReady", true, new { @disabled = "disabled" })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.CheckBox("MakeReady", new { @disabled = "disabled" })
+                    </td>
+                }
+                <td>
+                    @String.Join(",", item.LoadListDistributors.Select(x => x.Name).ToArray())
+                    @*@Html.DisplayFor(modelItem => item.Distributors)*@
+                </td>
+            </tr>
+        }
+    </table>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-1">
+            @Html.Label("Email Address :", new { @class = "control-label col-md-1" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBox("EmailAddress")
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <input type="submit" name="command" value="Print Load List(s)..." class="btn btn-primary" />&nbsp;&nbsp;
+        </div>
+        <div class="col-md-4">
+            <input type="submit" name="command" value="Print Load List(s) With Statuses..." class="btn btn-primary" />&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <br />
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('#checkAllSelected').change(function () {
+            var checkboxes = $(this).closest('form').find('input[id*=selectCheck][type=checkbox]');
+            if ($(this).is(':checked')) {
+                checkboxes.prop('checked', true);
+            } else {
+                checkboxes.prop('checked', false);
+            }
+        });
+    </script>
+}

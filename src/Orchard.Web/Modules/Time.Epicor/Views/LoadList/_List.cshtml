@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadList>
+
+<link href="~/Content/WebGrid.css" rel="stylesheet" />
+
+@{
+    var grid = new WebGrid(Model, canPage: false);
+}
+
+<div>
+    @grid.GetHtml(
+    tableStyle: "table table-striped table-condensed table-hover table-bordered",
+    headerStyle: "success",
+    columns: grid.Columns(
+        grid.Column("Name", format: (item) => Html.ActionLink((string)item.Name, "Details", "LoadList", new { id = item.Id }, null)),
+        grid.Column("DateIssued", header: "Issued Date", format: (item) => item.DateIssued.ToShortDateString()),
+        grid.Column("DateRevised", header: "Revised Date", format: (item) => item.DateRevised == null ? "" : item.DateRevised.ToShortDateString()),
+        grid.Column("DateSchedShip", header: "Schedule Ship Date", format: (item) => item.DateSchedShip == null ? "" : item.DateSchedShip.ToShortDateString()),
+        grid.Column("TruckingCompany", header: "Trucking Company"),
+        grid.Column("Comments", header: "Special Instructions", style: "col-lg-3"),
+        grid.Column("Complete", header: "Cmp", format: (item) => (item.Complete) ? Html.CheckBox("Complete", true, new { @disabled = "disabled" }) : Html.CheckBox("Complete", new { @disabled = "disabled" }), style: "text-align-center"),
+        grid.Column("MakeReady", header: "Mk. Rdy", format: (item) => (item.MakeReady) ? Html.CheckBox("MakeReady", true, new { @disabled = "disabled" }) : Html.CheckBox("MakeReady", new { @disabled = "disabled" }), style: "text-align-center"),
+        grid.Column("AllDistributors", header: "Distributors", canSort: false, style: "col-lg-2"),
+        grid.Column("DEL", format: (item) => Html.ActionLink("Delete", "Delete", "LoadList", new { id = item.Id }, new { @class = "delete16image" }))
+    ))
+</div>
+
+@*<div>
+        @grid.GetHtml(
+        tableStyle: "table table-striped table-condensed table-hover table-bordered",
+        headerStyle: "success",
+        columns: grid.Columns(
+            grid.Column("Name", format: (item) => Html.ActionLink((string)item.Name, "Details", "LoadList", new { id = item.Id }, null)),
+            grid.Column("DateIssued", header: "Issued Date", format: (item) => item.DateIssued.ToShortDateString()),
+            grid.Column("DateRevised", header: "Revised Date", format: (item) => item.DateRevised == null ? "" : item.DateRevised.ToShortDateString()),
+            grid.Column("DateSchedShip", header: "Schedule Ship Date", format: (item) => item.DateSchedShip == null ? "" : item.DateSchedShip.ToShortDateString()),
+            grid.Column("TruckingCompany", header: "Trucking Company"),
+            grid.Column("Comments", header: "Special Instructions", style: "col-lg-3"),
+            grid.Column("Complete", header: "Cmp", format: (item) =>
+            {
+                if (item.Complete == 1)
+                {
+                    return Html.Raw(string.Format("<text><img src=\"{0}\" alt=\"Image\" /></text>", Url.Content("~/Modules/Time.Epicor/Content/images/CheckboxFull.png")));
+                }
+                else
+                {
+                    return Html.Raw(string.Format("<text><img src=\"{0}\" alt=\"Image\" /></text>", Url.Content("~/Modules/Time.Epicor/Content/images/CheckboxFull.png")));
+                }
+            }, style: "text-align-center"),
+                    grid.Column("MakeReady", header: "Mk. Rdy", style: "text-align-center", format: (item) => (item.MakeReady == 1) ? Html.Raw("<img src='~/Content/images/CheckboxFull.png' />") : Html.Raw("<img src='~/Content/images/CheckboxEmpty.png' alt=\"Image\" />")),
+            grid.Column("AllDistributors", header: "Distributors", canSort: false, style: "col-lg-2"),
+            grid.Column("DEL", format: (item) => Html.ActionLink("Delete", "Delete", "LoadList", new { id = item.Id }, new { @class = "delete16image" }))
+        ))
+    </div>*@

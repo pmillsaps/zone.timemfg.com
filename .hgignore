@@ -1,0 +1,4 @@
+
+syntax: glob
+src/Orchard.Web/App_Data
+src/.vs/config/applicationhost.config

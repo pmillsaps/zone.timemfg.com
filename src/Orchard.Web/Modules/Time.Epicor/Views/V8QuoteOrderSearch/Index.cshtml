@@ -1,0 +1,44 @@
+﻿@model Time.Epicor.ViewModels.V8QuoteOrderSearchVM
+
+@{
+    ViewBag.Title = "Vantage 8 Quote / Order Search";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        <hr />
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Search, null, htmlAttributes: new { @class = "form-control", @placeholder = "Search for..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*<div>
+                <hr />
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.Search)
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" name="submitButton" value="Search" />
+                    </div>
+                </div>
+            </div>*@
+    }
+
+    @if (Model.Details != null)
+    {
+
+        @Html.Partial("_QuoteOrderList", Model.Details)
+    }
+</div>

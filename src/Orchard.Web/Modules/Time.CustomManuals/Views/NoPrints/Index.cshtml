@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Time.Data.EntityModels.CustomManuals.NoPrint>
+
+
+@{
+    ViewBag.Title = "Non-Print Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>
+
+<br />
+
+<p>
+    @Html.ActionLink("Create New NoPrint Item", "Create")
+</p>
+<table class="table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th></th>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Part)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Part)
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>

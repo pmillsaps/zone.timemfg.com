@@ -1,0 +1,85 @@
+﻿@model Time.Data.EntityModels.Configurator.Lookup
+
+@{
+    ViewBag.Title = "Edit Lookup";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Lookup</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigName)
+                @Html.HiddenFor(model => model.ConfigName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigData)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigData)
+                @Html.HiddenFor(model => model.ConfigData)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Sequence)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Sequence)
+                @Html.HiddenFor(model => model.Sequence)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Data)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Data)
+                @Html.HiddenFor(model => model.Data)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PickDefault)
+            </dt>
+
+            <dd>
+                @Html.EditorFor(model => model.PickDefault)
+                @Html.ValidationMessageFor(model => model.PickDefault)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Inactive)
+            </dt>
+
+            <dd>
+                @Html.EditorFor(model => model.Inactive)
+                @Html.ValidationMessageFor(model => model.Inactive)
+            </dd>
+        </dl>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName, ConfigData = Model.ConfigData })
+</div>
