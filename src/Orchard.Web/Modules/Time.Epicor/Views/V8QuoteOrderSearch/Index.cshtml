@@ -13,7 +13,7 @@
         @Html.AntiForgeryToken()
         <hr />
         <div class="row">
-            <div class="col-xs-4">
+            <div class="col-md-4">
                 <div class="input-group">
                     @Html.TextBoxFor(model => model.Search, null, htmlAttributes: new { @class = "form-control", @placeholder = "Search for..." })
                     <span class="input-group-btn">
@@ -23,17 +23,6 @@
             </div>
         </div>
         <hr />
-        @*<div>
-                <hr />
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        @Html.EditorFor(model => model.Search)
-                    </div>
-                    <div class="col-md-1">
-                        <input type="submit" name="submitButton" value="Search" />
-                    </div>
-                </div>
-            </div>*@
     }
 
     @if (Model.Details != null)
