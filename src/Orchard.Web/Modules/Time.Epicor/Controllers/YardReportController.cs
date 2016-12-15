@@ -11,6 +11,7 @@ using Time.Epicor.Helpers;
 
 namespace Time.Epicor.Controllers
 {
+    [Authorize]
     [Themed]
     public class YardReportController : Controller
     {

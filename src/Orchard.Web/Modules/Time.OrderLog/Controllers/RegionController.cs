@@ -10,6 +10,7 @@ using Time.OrderLog.Models;
 
 namespace Time.OrderLog.Controllers
 {
+    [Authorize]
     [Themed]
     public class RegionController : Controller
     {

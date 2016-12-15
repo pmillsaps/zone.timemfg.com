@@ -10,6 +10,7 @@ using Time.Data.EntityModels.Versalift;
 
 namespace Time.Epicor.Controllers
 {
+    [Authorize]
     [Themed]
     public class DLSController : Controller
     {

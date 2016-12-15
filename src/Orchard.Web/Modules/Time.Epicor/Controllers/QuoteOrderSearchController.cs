@@ -12,6 +12,7 @@ using Time.Epicor.ViewModels;
 
 namespace Time.Epicor.Controllers
 {
+    [Authorize]
     [Themed]
     public class QuoteOrderSearchController : Controller
     {

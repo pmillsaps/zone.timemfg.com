@@ -13,6 +13,7 @@ using Time.Data.EntityModels.Legacy;
 
 namespace Time.Legacy.Controllers
 {
+    [Authorize]
     [Themed]
     public class LegacyPartSearchController : Controller
     {
