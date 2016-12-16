@@ -345,7 +345,7 @@ namespace Time.Support.Controllers
                 {
                     ticket.ResourceEmployeeID = ticket.AssignedEmployeeID;
                     ticketProject.ResourceEmployeeID = ticket.AssignedEmployeeID;
-                    msg += string.Format("Zone: {1}Assigned Ticket Resource to {0}" + Environment.NewLine, emp.FullName, Environment.NewLine);
+                    msg += string.Format("Zone: Assigned Ticket Resource to {0}" + Environment.NewLine, emp.FullName);
                 }
                 _db.SaveChanges();
 
@@ -388,7 +388,7 @@ namespace Time.Support.Controllers
                 {
                     msg += string.Format("Assigned ticket resource to {0}", emp.FullName);
                     ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
-                    msg += string.Format("{1}Assigned Ticket Resource to {0}", emp.FullName, Environment.NewLine);
+                    msg += string.Format("Assigned Ticket Resource to {0}", emp.FullName);
                 }
 
                 //ticket.AssignedEmployeeID = ticketProject.AssignedEmployeeID;
