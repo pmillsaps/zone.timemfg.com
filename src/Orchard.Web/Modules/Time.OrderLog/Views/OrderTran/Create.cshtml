@@ -1,6 +1,8 @@
 ﻿@model Time.Data.EntityModels.OrderLog.OrderTran
 
 @{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
     ViewBag.Title = "Add Order Transaction";
 }
 
@@ -44,7 +46,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NewQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NewQty)
+                @Html.TextBoxFor(model => model.NewQty)
                 @Html.ValidationMessageFor(model => model.NewQty)
             </div>
         </div>
@@ -52,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CancelQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CancelQty)
+                @Html.TextBoxFor(model => model.CancelQty)
                 @Html.ValidationMessageFor(model => model.CancelQty)
             </div>
         </div>
@@ -115,7 +117,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AsOfDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AsOfDate, new { @class = "datepicker" })
+                @Html.TextBoxFor(model => model.AsOfDate, new { @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.AsOfDate)
             </div>
         </div>
@@ -123,14 +125,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Comment)
+                @Html.TextAreaFor(model => model.Comment, new { @rows = 3 })
                 @Html.ValidationMessageFor(model => model.Comment)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -139,3 +141,13 @@
 <div>
     @Html.ActionLink("Back to List", "Details", new { @id = ViewBag.OrderId })
 </div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#AsOfDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+    </script>
+}

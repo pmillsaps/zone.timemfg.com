@@ -3,7 +3,9 @@ using Orchard.Localization;
 using Orchard;
 using Orchard.Themes;
 
-namespace Time.Epicor.Controllers {
+namespace Time.Epicor.Controllers
+{
+    [Authorize]
     [Themed]
     public class InventoryController : Controller {
         public IOrchardServices Services { get; set; }

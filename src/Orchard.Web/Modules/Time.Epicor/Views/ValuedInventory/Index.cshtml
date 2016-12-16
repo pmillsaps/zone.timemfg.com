@@ -4,7 +4,7 @@
     ViewBag.Title = "Valued Inventory Index";
 }
 
-<div class="col-md-12">
+<div class="container">
     <h2>@ViewBag.Title</h2>
 
     @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -28,34 +28,24 @@
         </div>
     }
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @*@Html.HiddenFor(model => model.LoadListJobId)*@
-        <div class="col-xs-4">
-            <div class="input-group">
-                @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Export Data</button>
-                </span>
-            </div>
-        </div>
-        @*<div class="editor-label"></div>
-
-        <div class="col-md-3">
-            @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
-        </div>
-
-        <div class="col-md-2">
-            <input type="submit" value="Export Data" />
-        </div>*@
-    }
-
-    @*@if(Model.ValuedInventoryItems != null){
-        @Html.Partial("_Details", Model.ValuedInventoryItems)
-        }*@
-
     <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @*@Html.HiddenFor(model => model.LoadListJobId)*@
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Export Data</button>
+                    </span>
+                </div>
+            </div>
+        }
+
+        @*@if(Model.ValuedInventoryItems != null){
+            @Html.Partial("_Details", Model.ValuedInventoryItems)
+            }*@
         <div class="col-md-4 alert alert-info">
             <p>
                 Each Comparison Date period is the BOH on that date based on tranactions rolled back to the Comparison Date.
@@ -64,30 +54,21 @@
         </div>
     </div>
 
-    <h2>
-        Generate New Valued Inventory Data
-    </h2>
+    <h2>Generate New Valued Inventory Data</h2>
 
     @using (Html.BeginForm("GenerateData", "ValuedInventory"))
     {
         @Html.AntiForgeryToken()
         @*@Html.HiddenFor(model => model.LoadListJobId)*@
-        <div class="col-xs-4">
-            <div class="input-group">
-                @Html.TextBoxFor(model => model.ComparisonDate)
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Generate Data</button>
-                </span>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.ComparisonDate)
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Generate Data</button>
+                    </span>
+                </div>
             </div>
         </div>
-        @*<div class="editor-label"></div>
-
-        <div class="col-md-3">
-            @Html.EditorFor(model => model.ComparisonDate)
-        </div>
-
-        <div class="col-md-2">
-            <input type="submit" value="Generate Data" />
-        </div>*@
     }
 </div>

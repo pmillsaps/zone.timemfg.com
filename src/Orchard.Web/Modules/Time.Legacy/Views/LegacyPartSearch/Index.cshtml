@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     <h4>Search by Part Number, Description, Vendor Part Number, Additional Description, or Additional Description 2.</h4>
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-md-4">
             <div class="input-group">
                 @Html.TextBox("search", null, htmlAttributes: new { @placeholder = "Search..." })
                 <span class="input-group-btn">
@@ -21,20 +21,6 @@
             </div>
         </div>
     </div>
-        @*<div>
-            <hr />
-            <div class="col-md-12">
-                <h4>Search by Part Number, Description, Vendor Part Number, Additional Description, or Additional Description 2.</h4>
-                <div class="col-md-3">*@
-        @*@Html.EditorFor(model => model.Search)*@
-        @*@Html.TextBox("search")
-                        <br />
-                    </div>
-                    <div class="col-md-1">
-                        <input type="submit" name="submitbutton" value="Search" />
-                    </div>
-                </div>
-            </div>*@
 }
 
 <hr />
