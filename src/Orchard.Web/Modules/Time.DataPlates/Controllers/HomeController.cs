@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Time.DataPlates.Controllers
 {
+    [Authorize]
     [Themed]
     public class HomeController : Controller
     {

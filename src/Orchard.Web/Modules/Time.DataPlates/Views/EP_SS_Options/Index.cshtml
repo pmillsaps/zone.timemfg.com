@@ -19,10 +19,13 @@
 @using (Html.BeginForm("Index", "EP_SS_Options", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-2">@Html.Label("Search By Option:")</div>
-        <div class="col-md-4">@Html.TextBox("search")</div>
         <div class="col-md-4">
-            <input type="submit" value="Search" class="btn btn-primary" />
+            <div class="input-group">
+                @Html.TextBox("search", null, new { @placeholder = "Search by Option..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
         </div>
     </div>
 }
