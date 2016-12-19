@@ -3,18 +3,21 @@
     {
         @Html.AntiForgeryToken()
         <div>
-            Use # in front of a ticket number to find a ticket directly
+            @Html.Label("Use # in front of a ticket number to find a ticket directly")
         </div>
 
         <div class="row">
-            @*<div class="col-md-1">Search:</div>*@
-            <div class="col-md-6">@Html.TextBox("Search")</div>      
-            @*<div class="col-md-1">&nbsp;</div>*@
-            <div class="col-md-2">
-                <input type="submit" value="Search" class="btn btn-primary"/>
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.TextBox("Search", null, new { @placeholder = "Search..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
             </div>
             <div class="col-md-4">
-                @Html.CheckBox("IncludeComplete") Include Completed
+                @Html.CheckBox("IncludeComplete") 
+                @Html.Label("Include Completed")
             </div>
         </div>
 

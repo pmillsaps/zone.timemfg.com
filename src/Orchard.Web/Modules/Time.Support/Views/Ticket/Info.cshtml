@@ -42,13 +42,14 @@
 
             <div class="row">
                 <div class="col-md-9">
-                    @Html.DisplayFor(model => model.Ticket.Title)
+                    <h4>@Html.DisplayFor(model => model.Ticket.Title)</h4>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-9">
-                    Ticket #: @Html.DisplayFor(model => model.Ticket.TicketID)
+                    @Html.Label("Ticket #: ")
+                    @Html.DisplayFor(model => model.Ticket.TicketID)
                 </div>
             </div>
 
@@ -57,7 +58,7 @@
                 @*<div class="col-md-1">
                     </div>*@
                 <div class="col-md-8">
-                    Description
+                    @Html.Label("Description:")
                 </div>
             </div>
 
@@ -70,7 +71,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    Request By:
+                    @Html.Label("Request By:")
                 </div>
                 <div class="col-md-4">
                     @Html.DisplayFor(model => model.Ticket.RequestedBy)
@@ -85,7 +86,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    Requested Date:
+                    @Html.Label("Requested Date:")
                 </div>
                 <div class="col-md-6">
                     @Model.Ticket.RequestedDate.Value.ToShortDateString()

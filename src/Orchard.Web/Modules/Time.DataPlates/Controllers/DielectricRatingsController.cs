@@ -13,6 +13,7 @@ using Time.Data.EntityModels.DataPlates;
 
 namespace Time.DataPlates.Controllers
 {
+    [Authorize]
     [Themed]
     public class DielectricRatingsController : Controller
     {

@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <div class="col-md-2">
-            Priority:
+            @Html.Label("Priority:")
         </div>
         <div class="col-md-4">
             @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
@@ -27,7 +27,7 @@
 
     <div class="form-group">
         <div class="col-md-2">
-            Department:
+            @Html.Label("Department:")
         </div>
         <div class="col-md-4">
             @if ((bool)ViewBag.Admin)
@@ -44,7 +44,7 @@
 
     <div class="form-group">
         <div class="col-md-2">
-            Category:
+            @Html.Label("Category:")
         </div>
         <div class="col-md-4">
             @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
@@ -61,7 +61,7 @@
 
     <div class="form-group">
         <div class="col-md-2">
-            Assigned To:
+            @Html.Label("Assigned To:")
         </div>
         <div class="col-md-4">
             @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
@@ -78,7 +78,7 @@
 
     <div class="form-group">
         <div class="col-md-2">
-            Resource:
+            @Html.Label("Resource:")
         </div>
         <div class="col-md-4">
             @if ((bool)ViewBag.Admin || (bool)ViewBag.IT)
@@ -95,7 +95,7 @@
 
     <div class="form-group">
         <div class="col-md-2">
-            Status:
+            @Html.Label("Status:")
         </div>
         <div class="col-md-4">
             @if ((bool)ViewBag.Admin || (bool)ViewBag.AssignedToMe)
