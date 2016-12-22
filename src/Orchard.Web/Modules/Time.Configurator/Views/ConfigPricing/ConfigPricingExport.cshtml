@@ -11,9 +11,9 @@
         @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
     </p>
 </div>
-<p>
+<div align="right">
     @Html.ActionLink("Back to ConfigPricing Index", "Index")
-</p>
+</div>
 <h4>Select the Configurator to export pricing to Excel</h4>
 <hr />
 
@@ -23,8 +23,14 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="row">
-        <div class="col-md-3">@Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName--")</div>
-        <div><input type="submit" value="Export to Excel" class="btn btn-primary" /></div>
+        <div class="col-md-4">
+            <div class="input-group">
+            @Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName--")
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Export to Excel</button>
+                </span>
+            </div>
+        </div>
     </div>
 }
 
