@@ -1,0 +1,47 @@
+﻿@model Time.Install.ViewModels.QuoteViewModel
+
+<div class="alert alert-danger">
+    <p>
+        <strong>When you add options manually:</strong> If you delete an option after adding several options, you must delete them in
+        sequential order, starting from the last one. If you delete an option from the middle, the options after the one deleted will not
+        be imported.
+    </p>
+    <p>An alternative to deleting the option is to set its quantity to zero and that option will be ignore when the program saves the data.</p>
+</div>
+<a href="javascript:void(0);" class="addCF btn btn-primary">Add More Options</a>
+<hr />
+<table class="table" id="customFields">
+    <tr class="success">
+        <th>Option</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Hours</th>
+        <th>Paint?</th>
+        <th></th>
+    </tr>
+    @if(Model.EditQuote && Model.AddOptnMnlly.Count != 0)
+    {
+        for (int i = 0; i < Model.AddOptnMnlly.Count; i++)
+        {
+            <tr>
+                <td>@Html.TextArea("addOptnMnlly[" + @i + "].AddOptionManually", Model.AddOptnMnlly[i].AddOptionManually, htmlAttributes: new { @rows = 3, @cols = 100 })</td>
+                <td>@Html.TextBox("addOptnMnlly[" + @i + "].AddQuantityManually", Model.AddOptnMnlly[i].AddQuantityManually, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                <td>@Html.TextBox("addOptnMnlly[" + @i + "].AddPriceManually", Model.AddOptnMnlly[i].AddPriceManually, htmlAttributes: new { @class = "text-center spinner2" })</td>
+                <td>@Html.TextBox("addOptnMnlly[" + @i + "].AddInstallHoursManually", Model.AddOptnMnlly[i].AddInstallHoursManually, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                <td>@Html.CheckBox("addOptnMnlly[" + @i + "].AddPaintFlagManually", Model.AddOptnMnlly[i].AddPaintFlagManually)</td>
+                <td></td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td><textarea name="addOptnMnlly[0].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>
+            <td><input type="number" name="addOptnMnlly[0].AddQuantityManually" class="form-control text-center" placeholder="Quantity"></td>
+            <td><input type="number" name="addOptnMnlly[0].AddPriceManually" class="form-control text-center" placeholder="Price"></td>
+            <td><input type="number" name="addOptnMnlly[0].AddInstallHoursManually" class="form-control text-center" placeholder="Labor Hours"></td>
+            <td><input type="checkbox" name="addOptnMnlly[0].AddPaintFlagManually" value="true"></td>
+            <td></td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,9 @@
+﻿
+    @if (Request.Url.AbsoluteUri.Contains("/Support/Ticket/MyOpenTickets"))
+    {
+        <img src="@Url.Content("~/Media/Default/Page/greenarrow.gif")" title="Click to Up the Priority" /> <text>(</text> @Model.TicketSequence <text>)</text>
+    }
+    else
+    {
+
+    }
