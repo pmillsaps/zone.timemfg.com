@@ -5,27 +5,32 @@
 }
 
 <h2>@ViewBag.Title (@Model.Orders.Count() records)</h2>
+<hr />
 
 @using (Html.BeginForm("Index", "DistributorOrders", FormMethod.Post, new { id = "DistributorSearch" }))
 {
     @Html.AntiForgeryToken()
-    <div class="col-md-8">
-        @{Html.RenderAction("_DistributorList", new { id = Model.Distributor });
-        }
+    <div class="row">
+        <div class="col-md-8">
+            <div class="input-group">
+                @{
+                    Html.RenderAction("_DistributorList", new { id = Model.Distributor });
+                }
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Go!</button>
+                </span>
+            </div>
+        </div>
     </div>
-
-    <div class="col-md-2">
-        <input type="submit" value="Search" />
-    </div>
-
-            }
+                    }
 
 <br />
 
 @Html.Partial("_DistributorOrderList", Model.Orders)
 
-@section Scripts {
-    <script language="javascript">
+@using (Script.Foot())
+{
+    <script type="text/javascript">
         $(function () {
             $('#Distributor').change(function () {
                 $('#DistributorSearch').submit();

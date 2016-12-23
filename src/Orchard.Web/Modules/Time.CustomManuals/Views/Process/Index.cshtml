@@ -24,14 +24,19 @@
                 @using (Html.BeginForm("QueueJobsForManuals", "Process"))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="submit" value="Add New Problem Jobs For Custom Manuals" />
+                    <div class="col-md-4">
+                        <input type="submit" value="Add New Problem Jobs For Custom Manuals" class="btn btn-primary" />
+                    </div>
                 }
             </div>
+            <br />
             <div class="row">
                 @using (Html.BeginForm("CheckManuals", "Process"))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="submit" value="Send Custom Manual Status Email" />
+                    <div class="col-md-4">
+                        <input type="submit" value="Send Custom Manual Status Email" class="btn btn-primary"/>
+                    </div>
                 }
             </div>
         </div>

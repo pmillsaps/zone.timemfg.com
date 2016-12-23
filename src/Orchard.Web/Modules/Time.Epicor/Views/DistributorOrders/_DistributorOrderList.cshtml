@@ -69,14 +69,16 @@
 
                 @{if (item.OpenLine == true)
                 {
-                    <img src='/Content/images/CheckboxFull.png' />
-                }
-                else
-                {
-                    <img src='/Content/images/CheckboxEmpty.png' />
-                }
+                        <img src=@Url.Content("~/Media/Default/Page/CheckboxFull.png") />
+                        @*<img src='/Content/images/CheckboxFull.png' />*@
+                    }
+                    else
+                    {
+                        <img src=@Url.Content("~/Media/Default/Page/CheckboxEmpty.png") />
+                        @*<img src='/Content/images/CheckboxEmpty.png' />*@
+                    }
                 }
             </td>
         </tr>
-    }
+                    }
 </table>
