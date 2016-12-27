@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.TicketProject>
+
+@{
+//ViewBag.Title = "Support Home";
+}
+
+@*<h2>@ViewBag.Title</h2>*@
+
+<div class="container">
+    <div class="row">
+        @Html.Action("SideBar")
+
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="row">
+                <div class="col-md-5"><h4>@ViewBag.Title</h4></div>
+                <div class="col-md-5"><h4>@ViewBag.SubTitle</h4></div>
+            </div>
+            <div class="row">
+                <div class="col-md-5"><i>@Model.Count() tickets</i></div>
+            </div>
+            <hr />
+            @Html.Partial("_TicketSearch")
+            <hr />
+        </div>
+
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            @foreach (var item in Model)
+            {
+                @Html.Partial("_Ticket", item)
+            }
+        </div>
+    </div>
+</div>

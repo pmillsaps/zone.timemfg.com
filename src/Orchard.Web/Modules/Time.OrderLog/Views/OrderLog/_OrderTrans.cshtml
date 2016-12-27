@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Time.Data.EntityModels.OrderLog.OrderTran>
+
+<hr />
+<h3>Order Transactions</h3>
+<div class="wrap">
+    <table class="table table-striped table-bordered table-condensed">
+        <tr class="success">
+            <th width="150">@Html.DisplayNameFor(model => model.Date)</th>
+            <th width="100">@Html.DisplayNameFor(model => model.AsOfDate)</th>
+            <th width="150">@Html.DisplayNameFor(model => model.LiftModel.LiftModelName)</th>
+            <th width="70">@Html.DisplayNameFor(model => model.NewQty)</th>
+            <th width="70">@Html.DisplayNameFor(model => model.CancelQty)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.Special)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.Stock)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.Demo)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.RTG)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.TruGuard)</th>
+            <th width="20">@Html.DisplayNameFor(model => model.GSA)</th>
+            <th width="400">@Html.DisplayNameFor(model => model.Comment)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Date != null)
+                    {
+                        <span>
+                            @String.Format("{0} @ {1}", item.Date.Value.ToShortDateString(), item.Date.Value.ToShortTimeString())
+                        </span>
+                    }
+                </td>
+                <td>
+                    @if (item.AsOfDate != null)
+                    {
+                        <span>
+                            @item.AsOfDate.Value.ToShortDateString()
+                        </span>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.LiftModel.LiftModelName)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.NewQty)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.CancelQty)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.Special)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.Stock)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.Demo)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.RTG)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.TruGuard)</td>
+                @if (item.GSA == null)
+                {
+                    <td>
+                        @Html.CheckBox("GSA", new { @disabled = "disabled" })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GSA)
+                    </td>
+                }
+                <td>@Html.DisplayFor(modelItem => item.Comment)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "OrderTran", new { id = item.OrderTranId }, null)</td>
+            </tr>
+        }
+    </table>
+    <br />
+</div>
+<hr />
+@*<a href="~/Views/OrderLog/_OrderLines.cshtml">~/Views/OrderLog/_OrderLines.cshtml</a>*@
