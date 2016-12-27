@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.TicketProject>
 
 @{
-//ViewBag.Title = "Support Home";
+    //ViewBag.Title = "Support Home";
+    var location = ViewBag.Location;
 }
 
 @*<h2>@ViewBag.Title</h2>*@
@@ -20,6 +21,7 @@
             </div>
             <hr />
             @Html.Partial("_TicketSearch")
+            @Html.Partial("_TicketSort")
             <hr />
         </div>
 

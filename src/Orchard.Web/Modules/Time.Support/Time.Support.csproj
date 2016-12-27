@@ -171,6 +171,8 @@
     <Content Include="Views\Ticket\_TicketSearch.cshtml" />
     <Content Include="Views\Ticket\PrintScreen.cshtml" />
     <Content Include="Views\Ticket\_TicketUpdatePrint.cshtml" />
+    <Content Include="Views\Ticket\_TicketSort.cshtml" />
+    <Content Include="Views\Ticket\_TicketSequence.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

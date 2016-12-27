@@ -97,8 +97,9 @@ namespace Time.Support.Helpers
                 msg.To.Add(new MailAddress(item));
             }
 
-            var ccList = "paulm@timemfg.com";
-            msg.Bcc.Add(ccList);
+            // Debugging code to trace issues
+            //var ccList = "paulm@timemfg.com";
+            //msg.Bcc.Add(ccList);
 
             msg.Body = p_Body;
             msg.Subject = p_Subject;

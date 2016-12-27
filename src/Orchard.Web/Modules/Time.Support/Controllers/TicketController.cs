@@ -98,7 +98,7 @@ namespace Time.Support.Controllers
             return PartialView("SideBar", vm);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
             var qry = _db.TicketProjects.Include("TicketEmployee").Where(c => c.TicketStatus.isOpen).ToList();
 
@@ -115,6 +115,22 @@ namespace Time.Support.Controllers
             //}
             ViewBag.Title = "Overview";
             ViewBag.SubTitle = "Open Tickets";
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    qry = qry.OrderByDescending(x => x.PriorityID).ToList();
+                    break;
+                case "name_desc":
+                    qry = qry.OrderBy(x => x.Title).ToList();
+                    break;
+                default:
+                    qry = qry.OrderBy(x => x.TicketID).ToList();
+                    break;
+            }
+
             return View(qry);
         }
 
@@ -520,26 +536,74 @@ namespace Time.Support.Controllers
         //    return RedirectToAction("Info", new { id = ticketProject.Ticket.TicketID });
         //}
 
-        public ActionResult All()
+        public ActionResult All(string sortOrder)
         {
             var login = HttpContext.User.Identity.Name.ToUpper();
             var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && (x.TicketEmployee.NTLogin.ToUpper() == login || x.TicketEmployee1.NTLogin.ToUpper() == login));
             ViewBag.Title = "All My Tickets";
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
-        public ActionResult MyStatus(int id)
+        public ActionResult MyStatus(int id, string sortOrder)
         {
             var login = HttpContext.User.Identity.Name;
             var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketStatus.StatusID == id && (x.TicketEmployee.NTLogin == login || x.TicketEmployee1.NTLogin == login));
             ViewBag.Title = string.Format("[{0}] My Tickets", _db.TicketStatuses.Single(x => x.StatusID == id).Name);
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
-        public ActionResult Status(int id)
+        public ActionResult Status(int id, string sortOrder)
         {
             var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketStatus.StatusID == id);
             ViewBag.Title = string.Format("[{0}] Status", _db.TicketStatuses.Single(x => x.StatusID == id).Name);
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
@@ -551,34 +615,102 @@ namespace Time.Support.Controllers
             return View("Index", tickets);
         }
 
-        public ActionResult Category(int id)
+        public ActionResult Category(int id, string sortOrder)
         {
             var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketCategory.CategoryID == id);
             ViewBag.Title = string.Format("[{0}] Category", _db.TicketCategories.Single(x => x.CategoryID == id).Name);
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
-        public ActionResult Department(int id)
+        public ActionResult Department(int id, string sortOrder)
         {
             var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.TicketDepartment.DepartmentID == id);
             ViewBag.Title = string.Format("[{0}] Department", _db.TicketDepartments.Single(x => x.DepartmentID == id).Name);
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
-        public ActionResult MyOpenTickets()
+        public ActionResult MyOpenTickets(string sortOrder)
         {
             var login = HttpContext.User.Identity.Name;
-            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.RequestedBy == login);
+            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.RequestedBy == login).OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence);
             ViewBag.Title = "My Open Tickets";
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.SequenceSortParm = String.IsNullOrEmpty(sortOrder) ? "sequence_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                case "sequence_desc":
+                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
-        public ActionResult MyTickets()
+        public ActionResult MyTickets(string sortOrder)
         {
             var login = HttpContext.User.Identity.Name;
             var tickets = _db.TicketProjects.Where(x => x.RequestedBy == login);
             ViewBag.Title = "All My Tickets";
             ViewBag.SubTitle = string.Format("{0} Tickets, {1} Open Tickets", tickets.Count(), tickets.Count(x => x.TicketStatus.isOpen));
+
+            ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            switch (sortOrder)
+            {
+                case "priority_desc":
+                    tickets = tickets.OrderByDescending(x => x.PriorityID);
+                    break;
+                case "name_desc":
+                    tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                default:
+                    tickets = tickets.OrderBy(x => x.TicketID);
+                    break;
+            }
+
             return View("Index", tickets);
         }
 
