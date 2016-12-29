@@ -11,32 +11,30 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Structure</h4>
     <p>
         @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName })
     </p>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ConfigName)
-        </dt>
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ConfigName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ConfigName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ConfigData)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigData)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ConfigData)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ConfigData)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
 </div>
-
-<hr />
 
 @*Displays structure sequences associated with the structure details you click on*@
 <h4>Structure Sequence</h4>
@@ -65,6 +63,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
     @foreach (var item in ViewBag.StructureSeq as IEnumerable<Time.Data.EntityModels.Configurator.StructureSeq>)
     {
@@ -88,7 +87,9 @@
                 @Html.ActionLink("Edit", "Edit_Seq", new { id = @item.Id })
             </td>
             <td>
-                @Html.ActionLink("Import To Lookup", "Import_Seq", new { id = @item.Id }) |
+                @Html.ActionLink("Import To Lookup", "Import_Seq", new { id = @item.Id })
+            </td>
+            <td>
                 @Html.ActionLink("Copy To Existing Configurator", "Copy_Seq", new { id = @item.Id })
             </td>
             <td>

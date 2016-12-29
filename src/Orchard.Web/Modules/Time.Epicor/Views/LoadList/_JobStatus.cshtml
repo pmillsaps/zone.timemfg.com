@@ -2,62 +2,56 @@
 
 @{var count = 0;}
 
-<tr class="JobStatus">
-    <td></td>
-    <td colspan="9">
-        @foreach (var item in Model.Where(x => x.IgnoreFlag != true))
-        {
-            count++;
-            @Html.DisplayFor(modelItem => item.OpCode) @: :
-            @*@Html.DisplayFor(modelItem => item.OpComplete)*@
-
-            if (item.OpComplete)
-            {
-                @Html.CheckBox("OpComplete", true, new { @disabled = "disabled" });
-            }
-            else
-            {
-                @Html.CheckBox("OpComplete", new { @disabled = "disabled" });
-            }
-
-            @:&nbsp;&nbsp;&nbsp;
-            if (count >= 8)
-            {
-                @:</td></tr><tr class="JobStatus"><td></td><td colspan="9">
-                count = 0;
-            }
-        }
-    </td>
-</tr>
-
-@*<tr class="JobStatus info">
+@*<tr class="JobStatus">
         <td></td>
         <td colspan="9">
-            @foreach (var item in Model.Where(x => x.IgnoreFlag != 1))
+            @foreach (var item in Model.Where(x => x.IgnoreFlag != true))
             {
                 count++;
                 @Html.DisplayFor(modelItem => item.OpCode) @: :
 
-                if (item.OpComplete == 1)
+                if (item.OpComplete)
                 {
-                    <img src='/Content/images/CheckboxFull.png' />
+                    @Html.CheckBox("OpComplete", true, new { @disabled = "disabled" });
                 }
                 else
                 {
-                    <img src='/Content/images/CheckboxEmpty.png' />
+                    @Html.CheckBox("OpComplete", new { @disabled = "disabled" });
                 }
 
                 @:&nbsp;&nbsp;&nbsp;
                 if (count >= 8)
                 {
-                    @:
-                </td>
-            </tr>
-            <tr class="JobStatus info">
-                <td></td>
-                <td colspan="9">
+                    @:</td></tr><tr class="JobStatus"><td></td><td colspan="9">
                     count = 0;
                 }
             }
         </td>
     </tr>*@
+
+<tr class="JobStatus warning">
+    <td></td>
+    <td colspan="9">
+        @foreach (var item in Model.Where(x => x.IgnoreFlag != true))
+            {
+                count++;
+            @Html.DisplayFor(modelItem => item.OpCode) @: :
+
+            if (item.OpComplete)
+            {
+                <img src=@Url.Content("~/Media/Default/Page/CheckboxFull.png") />
+            }
+            else
+            {
+                <img src=@Url.Content("~/Media/Default/Page/CheckboxEmpty.png") />
+            }
+
+            @:&nbsp;&nbsp;&nbsp;
+                if (count >= 8)
+                {
+                @:</td></tr><tr class="JobStatus warning"><td></td><td colspan="9">
+                    count = 0;
+                }
+            }
+    </td>
+</tr>

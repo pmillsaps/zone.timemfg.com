@@ -11,14 +11,12 @@
 {
     @Html.AntiForgeryToken()
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="input-group">
+                <span class="input-group-addon">@Html.Label("Select a Distributor:")</span>
                 @{
                     Html.RenderAction("_DistributorList", new { id = Model.Distributor });
                 }
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">Go!</button>
-                </span>
             </div>
         </div>
     </div>
