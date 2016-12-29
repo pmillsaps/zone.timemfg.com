@@ -1,0 +1,152 @@
+﻿@*@model Time.Support.EntityModels.TimeMfg.TicketProject*@
+
+@model Time.Support.Models.TicketViewModel
+
+@{
+    ViewBag.Title = "Print Support Ticket Info";
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="hidden-print">
+            @Html.Action("SideBar")
+        </div>
+
+        <div class="form-horizontal col-md-9 col-sm-9 col-xs-9">
+            <div class="row hidden-print">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="row hidden-print">
+                <hr />
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Ticket.Title)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    Ticket #: @Html.DisplayFor(model => model.Ticket.TicketID)
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="col-md-8">
+                    Description
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayWithBreaksFor(model => model.Ticket.Description)
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-4">
+                    Request By:
+                    @Html.DisplayFor(model => model.Ticket.RequestedBy)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    Requested Date:
+                    @Model.Ticket.RequestedDate.Value.ToShortDateString()
+                </div>
+            </div>
+
+            @Html.Partial("_TicketUpdatePrint", Model.Ticket)
+    
+
+            @if (Model.Ticket.TicketAttachments.Count() > 0)
+            {
+                <br />
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-2">
+                        <h5><strong>Ticket Attachments</strong></h5>
+                    </div>
+                </div>
+                foreach (var item in Model.Ticket.TicketAttachments)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-2">
+                            @Html.DisplayFor(m => item.UploadedDate)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.ActionLink(item.FileName, "GetAttachment", new { id = item.AttachmentID })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.DisplayWithBreaksFor(m => item.Description)
+                        </div>
+                    </div>
+                }
+            }
+
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <h5><strong>Public Notes</strong></h5>
+                </div>
+            </div>
+            @foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility >= 5))
+            {
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-9">
+                        @Html.DisplayWithBreaksFor(m => item.Note)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-9">
+                        <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate</i>
+                    </div>
+                </div>
+                <hr class="col-md-offset-2" />
+            }
+
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <h5><strong>Private Notes</strong></h5>
+                </div>
+            </div>
+
+            @if (Model.IT || Model.Admin)
+            {
+                foreach (var item in Model.Ticket.TicketNotes.Where(x => x.Visibility < 5))
+                {
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            @Html.DisplayWithBreaksFor(m => item.Note)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            <i>@Html.DisplayFor(m => item.CreatedBy) - @item.CreatedDate</i>
+                        </div>
+                    </div>
+                }
+
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-1">
+                    <h5><strong>Tasks</strong></h5>
+                </div>
+            </div>
+            @foreach (var item in Model.Tasks.OrderBy(x => x.Completed).ThenBy(x => x.ID))
+            {
+                @Html.Partial("_TaskView", item)
+            }
+        </div>
+    </div>
+</div>

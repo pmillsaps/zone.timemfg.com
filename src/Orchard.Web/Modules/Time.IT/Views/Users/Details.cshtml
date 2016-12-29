@@ -1,0 +1,87 @@
+﻿@model Time.Data.EntityModels.ITInventory.User
+
+@{
+    ViewBag.Title = "User Details";
+}
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastDateEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastDateEdited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEditedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastEditedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Building.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Building.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Location.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Location.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayWithBreaksFor(model => model.Notes)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div>
+    <p>
+        @Html.ActionLink("Link Computer", "LinkComputer", new { id = Model.Id })
+    </p>
+    @Html.Partial("_Computers", Model.Computers.OrderBy(x => x.Name))
+</div>
+
+<div>
+    <p>
+        @Html.ActionLink("Add Monitor", "AddMonitor", new { id = Model.Id }) | @Html.ActionLink("Link Monitor", "LinkMonitor", new { id = Model.Id })
+    </p>
+    @Html.Partial("_Monitors", Model.Monitors.OrderBy(x => x.Model))
+</div>
+
+<div>
+    <p>
+        @Html.ActionLink("Link License", "LinkLicense", new { id = Model.Id })
+    </p>
+    @Html.Partial("_Licenses", Model.Licenses.OrderBy(x => x.FullName))
+</div>
