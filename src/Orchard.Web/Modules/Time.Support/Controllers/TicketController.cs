@@ -690,7 +690,7 @@ namespace Time.Support.Controllers
         //POST: /Ticket/MyOpenTickets
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MyOpenTickets(TicketProject tickets, string command)
+        public ActionResult MyOpenTickets(TicketProject tickets, string command, TicketProject ticketup, TicketProject ticketdown)
         {
             var sequence = _db.TicketProjects.Where(x => x.TicketID == tickets.TicketID && x.TicketSequence != null).Select(x => x.TicketSequence).ToList();
             var existingsequence = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.RequestedBy == tickets.RequestedBy).Max(x => x.TicketSequence);
@@ -709,10 +709,18 @@ namespace Time.Support.Controllers
                 {
                     var newpos = sequence.Single() - 1;
 
-                    var ticketdown = _db.TicketProjects.FirstOrDefault(x => x.TicketSequence == newpos);
+                    ticketdown = _db.TicketProjects.FirstOrDefault(x => x.RequestedBy == tickets.RequestedBy && x.TicketSequence == newpos);
 
                     tickets.TicketSequence = newpos;
                     ticketdown.TicketSequence = sequence.Single();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    _db.Entry(tickets).State = EntityState.Modified;
+                    _db.SaveChanges();
+                    var ticket = _db.TicketProjects.First(x => x.TicketID == tickets.TicketID);
+                    return RedirectToAction("MyOpenTickets");
                 }
             }
             else //moves ticket priority down
@@ -721,7 +729,7 @@ namespace Time.Support.Controllers
                 {
                     var newpos = sequence.Single() + 1;
 
-                    var ticketup = _db.TicketProjects.FirstOrDefault(x => x.TicketSequence == newpos);
+                    ticketup = _db.TicketProjects.FirstOrDefault(x => x.RequestedBy == tickets.RequestedBy && x.TicketSequence == newpos);
 
                     if (sequence.Count != 0 && sequence.Single() == existingsequence)
                     {
@@ -731,16 +739,16 @@ namespace Time.Support.Controllers
                     {
                         tickets.TicketSequence = newpos;
                         ticketup.TicketSequence = sequence.Single();
+                }
+
+                    if (ModelState.IsValid)
+                    {
+                        _db.Entry(tickets).State = EntityState.Modified;
+                        _db.SaveChanges();
+                        var ticket = _db.TicketProjects.First(x => x.TicketID == tickets.TicketID);
+                        return RedirectToAction("MyOpenTickets");
                     }
                 }
-            }
-
-            if (ModelState.IsValid)
-            {
-                _db.Entry(tickets).State = EntityState.Modified;
-                _db.SaveChanges();
-                var ticket = _db.TicketProjects.First(x => x.TicketID == tickets.TicketID);
-                return RedirectToAction("MyOpenTickets");
             }
 
             return View(tickets);
