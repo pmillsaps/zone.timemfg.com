@@ -206,7 +206,12 @@ namespace Time.Support.Controllers
             if (Regex.IsMatch(Search, @"#\d"))
                 return RedirectToAction("Info", new { id = Search.Substring(1) });
 
-            var qry = _db.TicketProjects.AsQueryable();
+            //var qry = _db.TicketProjects.AsQueryable();
+            var qry = from t in _db.TicketProjects
+                      join emp in _db.TicketEmployees on t.AssignedEmployeeID equals emp.EmployeeID
+                      select t;
+                      
+
             if (!IncludeComplete) qry = qry.Where(x => x.TicketStatus.isOpen);
 
             //List<int> tickets = new List<int>();
@@ -232,6 +237,8 @@ namespace Time.Support.Controllers
                     || x.PrivateNotes.Contains(item)
                     || x.TicketNotes.Any(n => n.Visibility >= searchVisibility && n.Note.Contains(item))
                     || x.TicketTasks.Any(t => t.Task.Contains(item) || t.Notes.Contains(item))
+                    || x.RequestedBy.Contains(item)
+                    || x.TicketEmployee.NTLogin.Contains(item)
                 );
 
                 var tmp = qry.ToList();
