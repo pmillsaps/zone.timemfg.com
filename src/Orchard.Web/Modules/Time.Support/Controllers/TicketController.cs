@@ -1115,7 +1115,7 @@ namespace Time.Support.Controllers
                     ticket.Status = 5;
                     ticket.CompletionDate = DateTime.Now;
 
-                    var restoftickets = _db.TicketProjects.Where(x => x.TicketSequence > ticket.TicketSequence && x.TicketSequence != null).ToList();
+                    var restoftickets = _db.TicketProjects.Where(x => x.RequestedBy == ticket.RequestedBy && x.TicketSequence > ticket.TicketSequence && x.TicketSequence != null).ToList();
 
                     foreach (var item in restoftickets)
                     {
