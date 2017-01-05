@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Time.Configurator.Models;
 using Time.Data.EntityModels.Configurator;
 
 namespace Time.Configurator.Controllers
@@ -36,14 +37,19 @@ namespace Time.Configurator.Controllers
         }
 
         // GET: ConfigOptions
-        public ActionResult Index(string display, string ConfigNames, string ConfigData)
+        public ActionResult Index(string ConfigNames, string ConfigData)
         {
             ViewBag.ConfigNames = new SelectList(db.ConfiguratorNames.OrderBy(x => x.ConfigName), "ConfigName", "ConfigName");
-            ViewBag.ConfigData = new SelectList(db.ConfigOptions.Select(x => new { x.ConfigData }).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
+            return View();
+        }
 
+        // This method retrieves the ConfigOptions and the Key's Descrptions and appends them to the Index view. It's called from the Index view.
+        public JsonResult LoadOptions(string display, string ConfigNames, string ConfigData)
+        {
+            ConfigOptionsViewModel model = new ConfigOptionsViewModel();
             if (String.IsNullOrEmpty(ConfigNames) && String.IsNullOrEmpty(ConfigData))
             {
-                return View();
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -55,10 +61,33 @@ namespace Time.Configurator.Controllers
                 if (display == "NoPick") configOptions = configOptions.Where(x => x.PartNum.Contains("-PICK"));
                 if (display == "NoPart") configOptions = configOptions.Where(x => x.PartNum == "");
 
-                ViewBag.Notes = db.StructureSeqs.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).ToList();
+                var keys = db.StructureSeqs.Where(x => x.ConfigName == ConfigNames && x.ConfigData == ConfigData).ToList();
+                foreach (var item in configOptions)
+                {
+                    if (item.Key01 == null) item.Key01 = "";
+                    if (item.Key02 == null) item.Key02 = "";
+                    if (item.Key03 == null) item.Key03 = "";
+                    if (item.Key04 == null) item.Key04 = "";
+                    if (item.Key05 == null) item.Key05 = "";
+                    if (item.Key06 == null) item.Key06 = "";
+                    if (item.Key07 == null) item.Key07 = "";
+                    if (item.Key08 == null) item.Key08 = "";
+                    if (item.Key09 == null) item.Key09 = "";
+                    if (item.Key10 == null) item.Key10 = "";
+                }
+                model.ConfigOptions = configOptions.ToList();
+                model.KeyDescriptions = keys.ToList();
 
-                return View(configOptions.OrderBy(x => x.ConfigName).ThenBy(x => x.ConfigData).ToList());
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        // This method generates the drop down for the ConfigData. It's called from the Index view.
+        public JsonResult ConfigDataDropDown(string ConfigNames)
+        {
+            var result = new SelectList(db.ConfigOptions.Select(x => new { x.ConfigData, x.ConfigName }).Where(x => x.ConfigName == ConfigNames).Distinct().OrderBy(x => x.ConfigData), "ConfigData", "ConfigData");
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: ConfigOptions/Details/5
