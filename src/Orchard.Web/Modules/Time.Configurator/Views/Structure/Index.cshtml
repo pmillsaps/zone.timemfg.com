@@ -16,15 +16,16 @@
     @Html.ActionLink("Create New Structure", "Create")
 </p>
 
-@using (Html.BeginForm("Index", "Structure", FormMethod.Get))
+@using (Html.BeginForm("Index", "Structure", FormMethod.Post, new { id = "getStructures" }))
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-4">
             <div class="input-group">
-                @Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName --")
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Go!</button>
+                <span class="input-group-addon">
+                    @Html.Label("Select CFG:")
                 </span>
+                @Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName --")
             </div>
         </div>
     </div>
@@ -78,3 +79,12 @@
         @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
     </p>
 </div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#ConfigNames").change(function () {
+            $("#getStructures").submit();
+        });
+    </script>
+}

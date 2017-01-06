@@ -9,26 +9,50 @@
     To appear on this list, a unit must be on an Open Load List. The date here is based on the Load List Shipping Date.
 </p>
 
+<div class="alert alert-info">
+    <p>
+        To print in Internet Explorer, go to Print Preview and change the Orientation from Portrait to Landscape.  Then change the percentage from 100% or Shrink to Fit, to 70%.
+    </p>
+</div>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    @Html.DisplayNameFor(model => model.EndDate)
-    @Html.EditorFor(model => model.EndDate)
-    @Html.DisplayNameFor(model => model.Claimed)
-    @Html.EditorFor(model => model.Claimed)
-    @Html.DisplayNameFor(model => model.Tested)
-    @Html.EditorFor(model => model.Tested)
-    @Html.DisplayNameFor(model => model.Posted)
-    @Html.EditorFor(model => model.Posted)
-    @Html.DisplayNameFor(model => model.Green)
-    @Html.EditorFor(model => model.Green)
-    <input type="submit" value="Refresh" name="Refresh" />
-    @Html.Label("If checked, the List will ignore that operation")
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    @Html.Label("End Date:")
+                </span>
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.AddDays(30) } })
+            </div>
+        </div>
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Claimed)
+            @Html.EditorFor(model => model.Claimed)
+        </div>
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Tested)
+            @Html.EditorFor(model => model.Tested)
+        </div>
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Posted)
+            @Html.EditorFor(model => model.Posted)
+        </div>
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Green)
+            @Html.EditorFor(model => model.Green)
+        </div>
+        <div class="col-md-5">
+            <input type="submit" value="Refresh" name="Refresh" class="btn btn-primary" />
+            @Html.Label("If checked, the List will ignore that operation")
+        </div>
+    </div>
 }
 
-<br /><br />
+<br />
 <div class="table">
     @Html.Partial("_AsmInspect", Model.JobList)
 </div>

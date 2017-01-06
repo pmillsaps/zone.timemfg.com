@@ -104,9 +104,10 @@ namespace Time.Epicor.Controllers
                 (!vm.Posted && x.Blue == false) ||
                 (!vm.Green && x.Green == false));
 
-            jobs = jobs.OrderBy(x => x.LoadList.MakeReady)
-                .ThenBy(x => x.LoadList.DateSchedShip)
-                .ThenBy(x => x.CustomerName);
+            //jobs = jobs.OrderBy(x => x.LoadList.MakeReady)
+            //    .ThenBy(x => x.LoadList.DateSchedShip)
+            //    .ThenBy(x => x.CustomerName);
+            jobs = jobs.OrderBy(x => x.LoadList.DateSchedShip == null).ThenBy(x => x.LoadList.DateSchedShip).ThenBy(x => x.LoadList.MakeReady).ThenBy(x => x.CustomerName).ThenBy(x => x.SerialNo);
 
             vm.JobList = jobs.ToList();
 

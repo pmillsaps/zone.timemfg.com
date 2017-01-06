@@ -34,11 +34,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 lead">
-                @Html.DropDownList("LoadListYear")
-            </div>
-            <div class="col-md-2">
-                <input type="submit" value="Display Load Lists" class="btn btn-default" />
+            <div class="col-md-3">
+                <div class="input-group">
+                    @Html.DropDownList("LoadListYear")
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Display Load Lists</button>
+                    </span>
+                </div>
             </div>
         </div>
         <hr />

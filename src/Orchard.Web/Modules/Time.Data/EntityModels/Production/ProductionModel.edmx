@@ -951,7 +951,7 @@ warning 6002: The table/view 'Prod.dbo.V_BillOfMaterials' does not have a primar
           <Property Name="FixedQty" Type="bit" Nullable="false" />
           <Property Name="RelatedOperation" Type="int" Nullable="false" />
           <Property Name="MtlSeq" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhantomBOM" Type="bit" Nullable="false" />
           <Property Name="LastMaterialCost" Type="decimal" Precision="15" Scale="5" />
           <Property Name="ViewAsAsm" Type="bit" Nullable="false" />
@@ -1375,6 +1375,7 @@ warning 6002: The table/view 'Prod.dbo.V_WhereUsed' does not have a primary key 
             <PropertyRef Name="ViewAsAsm" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="WarehouseCode" />
+            <PropertyRef Name="Name" />
           </Key>
           <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
@@ -1389,7 +1390,7 @@ warning 6002: The table/view 'Prod.dbo.V_WhereUsed' does not have a primary key 
           <Property Name="VendorID" Type="nvarchar" MaxLength="8" />
           <Property Name="LastMaterialCost" Type="decimal" Precision="15" Scale="5" />
           <Property Name="VenPartNum" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhantomBOM" Type="bit" />
           <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="OnHandQty" Type="decimal" Precision="22" Scale="8" />
@@ -2860,6 +2861,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
             <PropertyRef Name="ViewAsAsm" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="WarehouseCode" />
+            <PropertyRef Name="Name" />
           </Key>
           <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
@@ -2877,7 +2879,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="VenPartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latest_Rev" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="OpenJobCount" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhantomBOM" Type="Boolean" />
           <Property Name="OnHandQty" Type="Decimal" Precision="22" Scale="8" />
           <Property Name="OpenJobs" Type="Int32" />
@@ -2947,7 +2949,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="FixedQty" Type="Boolean" Nullable="false" />
           <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
           <Property Name="MtlSeq" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhantomBOM" Type="Boolean" Nullable="false" />
           <Property Name="LastMaterialCost" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="ViewAsAsm" Type="Boolean" Nullable="false" />

@@ -206,7 +206,12 @@ namespace Time.Support.Controllers
             if (Regex.IsMatch(Search, @"#\d"))
                 return RedirectToAction("Info", new { id = Search.Substring(1) });
 
-            var qry = _db.TicketProjects.AsQueryable();
+            //var qry = _db.TicketProjects.AsQueryable();
+            var qry = from t in _db.TicketProjects
+                      join emp in _db.TicketEmployees on t.AssignedEmployeeID equals emp.EmployeeID
+                      select t;
+                      
+
             if (!IncludeComplete) qry = qry.Where(x => x.TicketStatus.isOpen);
 
             //List<int> tickets = new List<int>();
@@ -232,6 +237,8 @@ namespace Time.Support.Controllers
                     || x.PrivateNotes.Contains(item)
                     || x.TicketNotes.Any(n => n.Visibility >= searchVisibility && n.Note.Contains(item))
                     || x.TicketTasks.Any(t => t.Task.Contains(item) || t.Notes.Contains(item))
+                    || x.RequestedBy.Contains(item)
+                    || x.TicketEmployee.NTLogin.Contains(item)
                 );
 
                 var tmp = qry.ToList();
@@ -661,15 +668,16 @@ namespace Time.Support.Controllers
             return View("Index", tickets);
         }
 
+        //GET: /Ticket/MyOpenTickets
         public ActionResult MyOpenTickets(string sortOrder)
         {
             var login = HttpContext.User.Identity.Name;
-            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.RequestedBy == login).OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence);
+            var tickets = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.RequestedBy == login);
+
             ViewBag.Title = "My Open Tickets";
 
             ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.SequenceSortParm = String.IsNullOrEmpty(sortOrder) ? "sequence_desc" : "";
             switch (sortOrder)
             {
                 case "priority_desc":
@@ -678,16 +686,81 @@ namespace Time.Support.Controllers
                 case "name_desc":
                     tickets = tickets.OrderBy(x => x.Title);
                     break;
-                case "sequence_desc":
-                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence);
-                    break;
                 default:
-                    tickets = tickets.OrderBy(x => x.TicketID);
+                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence).ThenBy(x => x.TicketID);
                     break;
             }
 
             return View("Index", tickets);
         }
+
+        //POST: /Ticket/MyOpenTickets
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MyOpenTickets(TicketProject tickets, string command, TicketProject ticketup, TicketProject ticketdown)
+        {
+            var sequence = _db.TicketProjects.Where(x => x.TicketID == tickets.TicketID && x.TicketSequence != null).Select(x => x.TicketSequence).ToList();
+            var existingsequence = _db.TicketProjects.Where(x => x.TicketStatus.isOpen && x.RequestedBy == tickets.RequestedBy).Max(x => x.TicketSequence);
+
+            if (command == "UpArrow") //moves ticket priority up
+            {
+                if (sequence.Count == 0 && (existingsequence == 0 || existingsequence == null))
+                {
+                    tickets.TicketSequence = 1;
+                }
+                else if (sequence.Count == 0 && (existingsequence != 0 || existingsequence != null))
+                {
+                    tickets.TicketSequence = existingsequence + 1;
+                }
+                else if (sequence.Count != 0 && (existingsequence != 0 || existingsequence != null))
+                {
+                    var newpos = sequence.Single() - 1;
+
+                    ticketdown = _db.TicketProjects.FirstOrDefault(x => x.RequestedBy == tickets.RequestedBy && x.TicketSequence == newpos);
+
+                    tickets.TicketSequence = newpos;
+                    ticketdown.TicketSequence = sequence.Single();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    _db.Entry(tickets).State = EntityState.Modified;
+                    _db.SaveChanges();
+                    var ticket = _db.TicketProjects.First(x => x.TicketID == tickets.TicketID);
+                    return RedirectToAction("MyOpenTickets");
+                }
+            }
+            else //moves ticket priority down
+            {
+                if ((sequence.Count != 0 && sequence.Count != existingsequence) || existingsequence == 1)
+                {
+                    var newpos = sequence.Single() + 1;
+
+                    ticketup = _db.TicketProjects.FirstOrDefault(x => x.RequestedBy == tickets.RequestedBy && x.TicketSequence == newpos);
+
+                    if (sequence.Count != 0 && sequence.Single() == existingsequence)
+                    {
+                        tickets.TicketSequence = null;
+                    }
+                    else
+                    {
+                        tickets.TicketSequence = newpos;
+                        ticketup.TicketSequence = sequence.Single();
+                }
+
+                    if (ModelState.IsValid)
+                    {
+                        _db.Entry(tickets).State = EntityState.Modified;
+                        _db.SaveChanges();
+                        var ticket = _db.TicketProjects.First(x => x.TicketID == tickets.TicketID);
+                        return RedirectToAction("MyOpenTickets");
+                    }
+                }
+            }
+
+            return View(tickets);
+        }
+
 
         public ActionResult MyTickets(string sortOrder)
         {
@@ -1041,6 +1114,15 @@ namespace Time.Support.Controllers
                 {
                     ticket.Status = 5;
                     ticket.CompletionDate = DateTime.Now;
+
+                    var restoftickets = _db.TicketProjects.Where(x => x.RequestedBy == ticket.RequestedBy && x.TicketSequence > ticket.TicketSequence && x.TicketSequence != null).ToList();
+
+                    foreach (var item in restoftickets)
+                    {
+                        item.TicketSequence = item.TicketSequence - 1;
+                    }
+
+                    ticket.TicketSequence = null;
                 }
                 else
                     ticket.Status = 3;

@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Time.Data.EntityModels.Configurator.ConfigOption>
-
-@{
+﻿@{
     ViewBag.Title = "Config Options Index";
 }
 
@@ -12,166 +10,132 @@
     </p>
 </div>
 
-@*<p>
-        @Html.ActionLink("Create New Config Option", "Create")
-    </p>*@
-
-@using (Html.BeginForm("Index", "ConfigOptions", FormMethod.Get))
-{
-    <div class="row">
-        <div class="col-md-8">
-            <b>PartNum Display:&nbsp;</b>
-            @Html.RadioButton("display", "All", true) <text>All&nbsp;</text>
-            @Html.RadioButton("display", "New") <text>New Only&nbsp;</text>
-            @Html.RadioButton("display", "Eng") <text>Engineered Only&nbsp;</text>
-            @Html.RadioButton("display", "NoPick") <text>No-Pick Only&nbsp;</text>
-            @Html.RadioButton("display", "NoPart") <text>No-Part Only&nbsp;</text>
-        </div>
+<div class="row">
+    <div class="col-md-8">
+        <b>PartNum Display:&nbsp;</b>
+        @Html.RadioButton("display", "All", true) <text>All&nbsp;</text>
+        @Html.RadioButton("display", "New") <text>New Only&nbsp;</text>
+        @Html.RadioButton("display", "Eng") <text>Engineered Only&nbsp;</text>
+        @Html.RadioButton("display", "NoPick") <text>No-Pick Only&nbsp;</text>
+        @Html.RadioButton("display", "NoPart") <text>No-Part Only&nbsp;</text>
     </div>
-    <br />
-    <div class="row">
-        <div class="col-md-3">@Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName --")</div>
-        <div class="col-md-3">@Html.DropDownList("ConfigData", optionLabel: "-- Select ConfigData --")</div>
-        <div class="col-md-3"><input type="submit" value="Search" class="btn btn-primary" /></div>
-    </div>
-}
-
-<br />
-<div class="alert alert-info">
-    <h4>Key Descriptions:</h4>
-
-    @{ int count = 1; }
-    @if (ViewBag.Notes != null)
-    {
-        foreach (var item in ViewBag.Notes as IEnumerable<Time.Data.EntityModels.Configurator.StructureSeq>)
-        {
-            if (count < 10)
-            {
-                <div>
-                    <b>Key 0@(count) :</b>&nbsp; &nbsp; &nbsp;@item.Notes
-                </div>
-
-            }
-            else
-            {
-                <div>
-                    <b>Key @(count) :</b>&nbsp; &nbsp; &nbsp;@item.Notes
-                </div>
-            }
-
-            count++;
-        }
-    }
 </div>
 <br />
-<table class="table table-striped table-bordered table-condensed table-hover">
-    <tr class="success">
-        <th>
-            @Html.DisplayNameFor(model => model.ConfigName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ConfigData)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key01)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key02)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key03)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key04)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key05)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key06)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key07)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key08)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key09)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key10)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PartNum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InActive)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-md-3">@Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName --")</div>
+    <div class="col-md-3">
+        <select id="ConfigData" name="ConfigData" class="form-control">
+            <option>Select a CFG first</option>
+        </select>
+    </div>
+    <div class="col-md-3"><input type="submit" value="Search" class="btn btn-primary" id="ConfigOptionsBtn" /></div>
+</div>
 
-    @if (Model == null || Model.Count() == 0)
-    {
-        <tr>
-            <td colspan="15">
-                No rows match search criteria
-            </td>
-        </tr>
-    }
-    else
-    {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConfigName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConfigData)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key01)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key02)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key03)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key04)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key05)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key06)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key07)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key08)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key09)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key10)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PartNum)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InActive)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    }
-</table>
+<div id="_LoadOptions">
+    @Html.Partial("_LoadConfigOptions")
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        // This function appends the ConfigOptions to the table body
+        $('#ConfigOptionsBtn').click(function () {
+            GetConfigOptions();
+        });
+
+        function GetConfigOptions() {
+            var configUrl = '@Url.Action("LoadOptions", "ConfigOptions")';
+            var cName = $("#ConfigNames").val();
+            var cData = $("#ConfigData").val();
+            var disp;
+            if ($("input:radio[name=display]").is(':checked')) disp = $("input:radio[name=display]:checked").val();
+            var optionsD = $("#optionsDiv");
+            var keysDiv = $("#keysDiv");
+            $.ajax({
+                url: configUrl,
+                type: "GET",
+                data: { ConfigNames: cName, ConfigData: cData, display: disp },
+
+                success: function (model) {
+                    var row = "";
+                    var keyD = "<h4>Key Descriptions:</h4>";
+                    var count = 1;
+
+                    if (jQuery.isEmptyObject(model.ConfigOptions)) {
+                        row += "<tr><td colspan= '14' class='danger lead'>No rows match search criteria.</td></tr>";
+                    }
+                    else {
+                        $.each(model.KeyDescriptions, function (index, item) {
+                            if (count < 10) keyD += "<div><b>Key 0" + count + ":</b>&nbsp; &nbsp; &nbsp;" + item.Notes + "</div>";
+                            else keyD += "<div><b>Key " + count + ":</b>&nbsp; &nbsp; &nbsp;" + item.Notes + "</div>";
+                            count++;
+                        });
+
+                        $.each(model.ConfigOptions, function (index, item) {
+                            row += "<tr><td>" + item.ConfigName + "</td><td>" + item.ConfigData + "</td><td>" + item.Key01 +
+                                   "</td><td>" + item.Key02 + "</td><td>" + item.Key03 + "</td><td>" + item.Key04 +
+                                   "</td><td>" + item.Key05 + "</td><td>" + item.Key06 + "</td><td>" + item.Key07 +
+                                   "</td><td>" + item.Key08 + "</td><td>" + item.Key09 + "</td><td>" + item.Key10 +
+                                   "</td><td>" + item.PartNum + "</td>" +
+                                   "<td><a href='ConfigOptions/Edit/" + item.Id + "'>Edit</a> | <a href='ConfigOptions/Details/" + item.Id + "'>Details</a> | <a href='ConfigOptions/Delete/" + item.Id + "'>Delete</a></td></tr>";
+                        });
+                    }
+                    keysDiv.html(keyD);
+                    optionsD.html(row);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+        };// End of GetConfigOptions function
+
+        $(document).ready(function () {
+            if ($("#ConfigNames").val() != "") {
+                GetConfigData();
+            }
+        });
+
+        $("#ConfigNames").change(function (){
+            GetConfigData();
+        });
+        // This function appends the Structures to the ConfigData drop down list
+        function GetConfigData(){
+            var requrl = '@Url.Action("ConfigDataDropDown", "ConfigOptions")';
+            var selectedValue = $("#ConfigNames").val();
+            var configData = $("#ConfigData");
+            $.ajax({
+                url: requrl,
+                type: "GET",
+                data: { ConfigNames: selectedValue },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    configData.empty();
+                    alert(xhr.status + "-Please Select a CFG");
+                },
+
+                success: function (result) {
+                    configData.empty();
+
+                    if (jQuery.isEmptyObject(result)) {
+                        alert("This CFG has no ConfigOptions");
+                    }
+                    else {
+                        configData.append(
+                                $('<option>', {
+                                    value: ""
+                                }).text("--Select ConfigOption--")
+                                )
+
+                        $.each(result, function () {
+                            configData.append(
+                                $('<option>', {
+                                    value: this.Value
+                                }).text(this.Text)
+                                )
+                        })
+                    }
+                }
+            });
+        };// End of ConfigData function
+    </script>
+}
