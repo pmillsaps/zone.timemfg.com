@@ -1,0 +1,109 @@
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Lucida Sans;
+            background: #FFF;
+        }
+
+        #wrapper {
+            width: 700px;
+            border: solid 1px blue;
+        }
+
+        #title {
+            text-align: center;
+            padding: 25px 0 25px 0;
+        }
+
+            #title img {
+            }
+
+            #title h2 {
+                color: Black;
+            }
+
+        #headinfo ul {
+            list-style-type: none;
+            margin: 25px;
+            padding: 25px;
+            border: solid 1px black;
+        }
+
+            #headinfo ul li {
+                list-style-type: none;
+                color: Black;
+            }
+
+        #content {
+            margin: 25px;
+            color: Black;
+            background: White;
+            padding: 25px;
+            border: solid 1px black;
+        }
+
+        #ticketdescription {
+            margin: 25px;
+            padding: 25px;
+            background-color: #dddddd;
+            color: Black;
+        }
+
+        a {
+            color: #A8002A;
+            text-decoration: none;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    [header]
+    <div id="wrapper">
+        <div id="title">
+            <img alt="Time Manufacturing" src="http://www.timemfg.com/imgs/timelogo-graysmall.png" />
+            <h2>The Task Below Has Been Completed!!</h2>
+        </div>
+        <div id="headinfo">
+            <ul>
+                <li>Ticket #: [ticketnumber]</li>
+                <li>Status: [ticketstatus]</li>
+                <li>Requested By: [ticketrequestedby]</li>
+                <li>Date Requested: [ticketrequesteddate]</li>
+            </ul>
+        </div>
+        <div id="content">
+            <h2>
+                [additionalbody]
+            </h2>
+            <br />
+            <h3>[tickettitle]</h3>
+            <p id="ticketdescription">[ticketdescription]</p>
+            <p>
+                Click on the link to view your ticket: <a href="[ticketurl]">Ticket #[ticketnumber]</a>
+            </p>
+            <p>
+                Please work with the Requestor to understand their needs, offer alternative solutions, and/or complete the request.
+                Change the Status as needed to track the solution.<br />
+            </p>
+            <p>
+                Status Meanings:<br />
+            </p>
+            <ul>
+                <li><b>Waiting Supervisor Approval</b> – This step may be skipped depending on the requirement.</li>
+                <li><b>Pending</b> – Supervisor has approved, not yet been addressed by IT</li>
+                <li><b>Waiting on Resources</b> – IT is busy, but the request is on the List</li>
+                <li><b>Assigned</b> – IT has designated a resource</li>
+                <li><b>Waiting for more details</b> – Need more info from the requestor</li>
+                <li><b>Cannot Complete</b> – The request is not valid or has no solution</li>
+                <li><b>QC/Test</b> – User is testing in the Test environment</li>
+                <li><b>Pending Final Approval</b> – User is testing in the Production environment</li>
+            </ul>
+        </div>
+        [footer]
+    </div>
+</body>
+</html>

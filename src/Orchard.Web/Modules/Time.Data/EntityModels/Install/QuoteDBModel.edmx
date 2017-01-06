@@ -1,0 +1,678 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VSWQuotesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="InstallDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallQuoteId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="OptionId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="ExtendedPrice" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstallDetailsManuallyAddedOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallQuoteId" Type="int" Nullable="false" />
+          <Property Name="OptionName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="ExtendedPrice" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PaintFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstallHourlyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RateType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstallQuote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LiftQuoteNumber" Type="int" Nullable="false" />
+          <Property Name="LiftQuoteLine" Type="int" Nullable="false" />
+          <Property Name="LiftInstallLine" Type="int" Nullable="false" />
+          <Property Name="InstallQuotedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuoteDate" Type="datetime" Nullable="false" />
+          <Property Name="TotalPriceLabor" Type="money" Nullable="false" />
+          <Property Name="TotalPriceMaterial" Type="money" Nullable="false" />
+          <Property Name="TotalInstallPrice" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="TotalInstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TotalPaintHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiftFamily">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FamilyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteChangesLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallQuoteId" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ValueChanged" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TimeOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="int" Nullable="false" />
+          <Property Name="Option" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PaintFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSWOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="OptionName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PaintFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="tblInstallDetails_GroupId_FK">
+          <End Role="OptionGroup" Type="Self.OptionGroup" Multiplicity="1" />
+          <End Role="InstallDetails" Type="Self.InstallDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetails">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallDetails_InstallQuoteId_FK">
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
+          <End Role="InstallDetails" Type="Self.InstallDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstallQuote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetails">
+              <PropertyRef Name="InstallQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallDetails_OptionId_FK">
+          <End Role="VSWOption" Type="Self.VSWOption" Multiplicity="1" />
+          <End Role="InstallDetails" Type="Self.InstallDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VSWOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetails">
+              <PropertyRef Name="OptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK">
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
+          <End Role="InstallDetailsManuallyAddedOption" Type="Self.InstallDetailsManuallyAddedOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstallQuote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetailsManuallyAddedOption">
+              <PropertyRef Name="InstallQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallQuote_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallQuote">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptions_GroupId_FK">
+          <End Role="OptionGroup" Type="Self.OptionGroup" Multiplicity="1" />
+          <End Role="VSWOption" Type="Self.VSWOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VSWOption">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptions_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="VSWOption" Type="Self.VSWOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VSWOption">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblQuoteChangesLog_InstallQuoteId_FK">
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
+          <End Role="QuoteChangesLog" Type="Self.QuoteChangesLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstallQuote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteChangesLog">
+              <PropertyRef Name="InstallQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblTimeOptions_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="TimeOption" Type="Self.TimeOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeOption">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VSWQuotesModelStoreContainer">
+          <EntitySet Name="InstallDetails" EntityType="Self.InstallDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstallDetailsManuallyAddedOption" EntityType="Self.InstallDetailsManuallyAddedOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstallHourlyRate" EntityType="Self.InstallHourlyRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstallQuote" EntityType="Self.InstallQuote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiftFamily" EntityType="Self.LiftFamily" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionGroup" EntityType="Self.OptionGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteChangesLog" EntityType="Self.QuoteChangesLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeOption" EntityType="Self.TimeOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VSWOption" EntityType="Self.VSWOption" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="tblInstallDetails_GroupId_FK" Association="Self.tblInstallDetails_GroupId_FK">
+            <End Role="OptionGroup" EntitySet="OptionGroup" />
+            <End Role="InstallDetails" EntitySet="InstallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallDetails_InstallQuoteId_FK" Association="Self.tblInstallDetails_InstallQuoteId_FK">
+            <End Role="InstallQuote" EntitySet="InstallQuote" />
+            <End Role="InstallDetails" EntitySet="InstallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallDetails_OptionId_FK" Association="Self.tblInstallDetails_OptionId_FK">
+            <End Role="VSWOption" EntitySet="VSWOption" />
+            <End Role="InstallDetails" EntitySet="InstallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK" Association="Self.tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK">
+            <End Role="InstallQuote" EntitySet="InstallQuote" />
+            <End Role="InstallDetailsManuallyAddedOption" EntitySet="InstallDetailsManuallyAddedOption" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallQuote_LiftFamilyId_FK" Association="Self.tblInstallQuote_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamily" />
+            <End Role="InstallQuote" EntitySet="InstallQuote" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptions_GroupId_FK" Association="Self.tblOptions_GroupId_FK">
+            <End Role="OptionGroup" EntitySet="OptionGroup" />
+            <End Role="VSWOption" EntitySet="VSWOption" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptions_LiftFamilyId_FK" Association="Self.tblOptions_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamily" />
+            <End Role="VSWOption" EntitySet="VSWOption" />
+          </AssociationSet>
+          <AssociationSet Name="tblQuoteChangesLog_InstallQuoteId_FK" Association="Self.tblQuoteChangesLog_InstallQuoteId_FK">
+            <End Role="InstallQuote" EntitySet="InstallQuote" />
+            <End Role="QuoteChangesLog" EntitySet="QuoteChangesLog" />
+          </AssociationSet>
+          <AssociationSet Name="tblTimeOptions_LiftFamilyId_FK" Association="Self.tblTimeOptions_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamily" />
+            <End Role="TimeOption" EntitySet="TimeOption" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VSWQuotesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="InstallDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallQuoteId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="OptionId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ExtendedPrice" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="InstallHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <NavigationProperty Name="OptionGroup" Relationship="Self.tblInstallDetails_GroupId_FK" FromRole="InstallDetails" ToRole="OptionGroup" />
+          <NavigationProperty Name="InstallQuote" Relationship="Self.tblInstallDetails_InstallQuoteId_FK" FromRole="InstallDetails" ToRole="InstallQuote" />
+          <NavigationProperty Name="VSWOption" Relationship="Self.tblInstallDetails_OptionId_FK" FromRole="InstallDetails" ToRole="VSWOption" />
+        </EntityType>
+        <EntityType Name="InstallDetailsManuallyAddedOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallQuoteId" Type="Int32" Nullable="false" />
+          <Property Name="OptionName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ExtendedPrice" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="InstallHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PaintFlag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InstallQuote" Relationship="Self.tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK" FromRole="InstallDetailsManuallyAddedOption" ToRole="InstallQuote" />
+        </EntityType>
+        <EntityType Name="InstallHourlyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RateType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstallQuote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LiftQuoteNumber" Type="Int32" Nullable="false" />
+          <Property Name="LiftQuoteLine" Type="Int32" Nullable="false" />
+          <Property Name="LiftInstallLine" Type="Int32" Nullable="false" />
+          <Property Name="InstallQuotedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuoteDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalPriceLabor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalPriceMaterial" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalInstallPrice" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TotalInstallHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TotalPaintHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InstallDetails" Relationship="Self.tblInstallDetails_InstallQuoteId_FK" FromRole="InstallQuote" ToRole="InstallDetails" />
+          <NavigationProperty Name="InstallDetailsManuallyAddedOptions" Relationship="Self.tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK" FromRole="InstallQuote" ToRole="InstallDetailsManuallyAddedOption" />
+          <NavigationProperty Name="LiftFamily" Relationship="Self.tblInstallQuote_LiftFamilyId_FK" FromRole="InstallQuote" ToRole="LiftFamily" />
+          <NavigationProperty Name="QuoteChangesLogs" Relationship="Self.tblQuoteChangesLog_InstallQuoteId_FK" FromRole="InstallQuote" ToRole="QuoteChangesLog" />
+        </EntityType>
+        <EntityType Name="LiftFamily">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FamilyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InstallHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <NavigationProperty Name="InstallQuotes" Relationship="Self.tblInstallQuote_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="InstallQuote" />
+          <NavigationProperty Name="VSWOptions" Relationship="Self.tblOptions_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="VSWOption" />
+          <NavigationProperty Name="TimeOptions" Relationship="Self.tblTimeOptions_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="TimeOption" />
+        </EntityType>
+        <EntityType Name="OptionGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="InstallDetails" Relationship="Self.tblInstallDetails_GroupId_FK" FromRole="OptionGroup" ToRole="InstallDetails" />
+          <NavigationProperty Name="VSWOptions" Relationship="Self.tblOptions_GroupId_FK" FromRole="OptionGroup" ToRole="VSWOption" />
+        </EntityType>
+        <EntityType Name="QuoteChangesLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallQuoteId" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValueChanged" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="InstallQuote" Relationship="Self.tblQuoteChangesLog_InstallQuoteId_FK" FromRole="QuoteChangesLog" ToRole="InstallQuote" />
+        </EntityType>
+        <EntityType Name="TimeOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftFamilyId" Type="Int32" Nullable="false" />
+          <Property Name="Option" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InstallHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PaintFlag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LiftFamily" Relationship="Self.tblTimeOptions_LiftFamilyId_FK" FromRole="TimeOption" ToRole="LiftFamily" />
+        </EntityType>
+        <EntityType Name="VSWOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftFamilyId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="OptionName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="InstallHours" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PaintFlag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InstallDetails" Relationship="Self.tblInstallDetails_OptionId_FK" FromRole="VSWOption" ToRole="InstallDetails" />
+          <NavigationProperty Name="LiftFamily" Relationship="Self.tblOptions_LiftFamilyId_FK" FromRole="VSWOption" ToRole="LiftFamily" />
+          <NavigationProperty Name="OptionGroup" Relationship="Self.tblOptions_GroupId_FK" FromRole="VSWOption" ToRole="OptionGroup" />
+        </EntityType>
+        <Association Name="tblInstallDetails_GroupId_FK">
+          <End Role="OptionGroup" Type="Self.OptionGroup" Multiplicity="1" />
+          <End Role="InstallDetails" Type="Self.InstallDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetails">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallDetails_InstallQuoteId_FK">
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
+          <End Role="InstallDetails" Type="Self.InstallDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstallQuote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetails">
+              <PropertyRef Name="InstallQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallDetails_OptionId_FK">
+          <End Role="VSWOption" Type="Self.VSWOption" Multiplicity="1" />
+          <End Role="InstallDetails" Type="Self.InstallDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VSWOption">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetails">
+              <PropertyRef Name="OptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK">
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
+          <End Role="InstallDetailsManuallyAddedOption" Type="Self.InstallDetailsManuallyAddedOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstallQuote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallDetailsManuallyAddedOption">
+              <PropertyRef Name="InstallQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblInstallQuote_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstallQuote">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblQuoteChangesLog_InstallQuoteId_FK">
+          <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
+          <End Role="QuoteChangesLog" Type="Self.QuoteChangesLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstallQuote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteChangesLog">
+              <PropertyRef Name="InstallQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptions_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="VSWOption" Type="Self.VSWOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VSWOption">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblTimeOptions_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="TimeOption" Type="Self.TimeOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeOption">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptions_GroupId_FK">
+          <End Role="OptionGroup" Type="Self.OptionGroup" Multiplicity="1" />
+          <End Role="VSWOption" Type="Self.VSWOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VSWOption">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VSWQuotesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="InstallDetails" EntityType="Self.InstallDetail" />
+          <EntitySet Name="InstallDetailsManuallyAddedOptions" EntityType="Self.InstallDetailsManuallyAddedOption" />
+          <EntitySet Name="InstallHourlyRates" EntityType="Self.InstallHourlyRate" />
+          <EntitySet Name="InstallQuotes" EntityType="Self.InstallQuote" />
+          <EntitySet Name="LiftFamilies" EntityType="Self.LiftFamily" />
+          <EntitySet Name="OptionGroups" EntityType="Self.OptionGroup" />
+          <EntitySet Name="QuoteChangesLogs" EntityType="Self.QuoteChangesLog" />
+          <EntitySet Name="TimeOptions" EntityType="Self.TimeOption" />
+          <EntitySet Name="VSWOptions" EntityType="Self.VSWOption" />
+          <AssociationSet Name="tblInstallDetails_GroupId_FK" Association="Self.tblInstallDetails_GroupId_FK">
+            <End Role="OptionGroup" EntitySet="OptionGroups" />
+            <End Role="InstallDetails" EntitySet="InstallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallDetails_InstallQuoteId_FK" Association="Self.tblInstallDetails_InstallQuoteId_FK">
+            <End Role="InstallQuote" EntitySet="InstallQuotes" />
+            <End Role="InstallDetails" EntitySet="InstallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallDetails_OptionId_FK" Association="Self.tblInstallDetails_OptionId_FK">
+            <End Role="VSWOption" EntitySet="VSWOptions" />
+            <End Role="InstallDetails" EntitySet="InstallDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK" Association="Self.tblInstallDetailsManuallyAddedOption_InstallQuoteId_FK">
+            <End Role="InstallQuote" EntitySet="InstallQuotes" />
+            <End Role="InstallDetailsManuallyAddedOption" EntitySet="InstallDetailsManuallyAddedOptions" />
+          </AssociationSet>
+          <AssociationSet Name="tblInstallQuote_LiftFamilyId_FK" Association="Self.tblInstallQuote_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamilies" />
+            <End Role="InstallQuote" EntitySet="InstallQuotes" />
+          </AssociationSet>
+          <AssociationSet Name="tblQuoteChangesLog_InstallQuoteId_FK" Association="Self.tblQuoteChangesLog_InstallQuoteId_FK">
+            <End Role="InstallQuote" EntitySet="InstallQuotes" />
+            <End Role="QuoteChangesLog" EntitySet="QuoteChangesLogs" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptions_LiftFamilyId_FK" Association="Self.tblOptions_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamilies" />
+            <End Role="VSWOption" EntitySet="VSWOptions" />
+          </AssociationSet>
+          <AssociationSet Name="tblTimeOptions_LiftFamilyId_FK" Association="Self.tblTimeOptions_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamilies" />
+            <End Role="TimeOption" EntitySet="TimeOptions" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptions_GroupId_FK" Association="Self.tblOptions_GroupId_FK">
+            <End Role="OptionGroup" EntitySet="OptionGroups" />
+            <End Role="VSWOption" EntitySet="VSWOptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VSWQuotesModelStoreContainer" CdmEntityContainer="VSWQuotesEntities">
+          <EntitySetMapping Name="InstallDetails">
+            <EntityTypeMapping TypeName="VSWQuotesModel.InstallDetail">
+              <MappingFragment StoreEntitySet="InstallDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InstallQuoteId" ColumnName="InstallQuoteId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
+                <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstallDetailsManuallyAddedOptions">
+            <EntityTypeMapping TypeName="VSWQuotesModel.InstallDetailsManuallyAddedOption">
+              <MappingFragment StoreEntitySet="InstallDetailsManuallyAddedOption">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InstallQuoteId" ColumnName="InstallQuoteId" />
+                <ScalarProperty Name="OptionName" ColumnName="OptionName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
+                <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
+                <ScalarProperty Name="PaintFlag" ColumnName="PaintFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstallHourlyRates">
+            <EntityTypeMapping TypeName="VSWQuotesModel.InstallHourlyRate">
+              <MappingFragment StoreEntitySet="InstallHourlyRate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RateType" ColumnName="RateType" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstallQuotes">
+            <EntityTypeMapping TypeName="VSWQuotesModel.InstallQuote">
+              <MappingFragment StoreEntitySet="InstallQuote">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LiftName" ColumnName="LiftName" />
+                <ScalarProperty Name="LiftQuoteNumber" ColumnName="LiftQuoteNumber" />
+                <ScalarProperty Name="LiftQuoteLine" ColumnName="LiftQuoteLine" />
+                <ScalarProperty Name="LiftInstallLine" ColumnName="LiftInstallLine" />
+                <ScalarProperty Name="InstallQuotedBy" ColumnName="InstallQuotedBy" />
+                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+                <ScalarProperty Name="TotalPriceLabor" ColumnName="TotalPriceLabor" />
+                <ScalarProperty Name="TotalPriceMaterial" ColumnName="TotalPriceMaterial" />
+                <ScalarProperty Name="TotalInstallPrice" ColumnName="TotalInstallPrice" />
+                <ScalarProperty Name="TotalInstallHours" ColumnName="TotalInstallHours" />
+                <ScalarProperty Name="TotalPaintHours" ColumnName="TotalPaintHours" />
+                <ScalarProperty Name="LiftFamilyId" ColumnName="LiftFamilyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiftFamilies">
+            <EntityTypeMapping TypeName="VSWQuotesModel.LiftFamily">
+              <MappingFragment StoreEntitySet="LiftFamily">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionGroups">
+            <EntityTypeMapping TypeName="VSWQuotesModel.OptionGroup">
+              <MappingFragment StoreEntitySet="OptionGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteChangesLogs">
+            <EntityTypeMapping TypeName="VSWQuotesModel.QuoteChangesLog">
+              <MappingFragment StoreEntitySet="QuoteChangesLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InstallQuoteId" ColumnName="InstallQuoteId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="ValueChanged" ColumnName="ValueChanged" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeOptions">
+            <EntityTypeMapping TypeName="VSWQuotesModel.TimeOption">
+              <MappingFragment StoreEntitySet="TimeOption">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LiftFamilyId" ColumnName="LiftFamilyId" />
+                <ScalarProperty Name="Option" ColumnName="Option" />
+                <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
+                <ScalarProperty Name="PaintFlag" ColumnName="PaintFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSWOptions">
+            <EntityTypeMapping TypeName="VSWQuotesModel.VSWOption">
+              <MappingFragment StoreEntitySet="VSWOption">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LiftFamilyId" ColumnName="LiftFamilyId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="OptionName" ColumnName="OptionName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
+                <ScalarProperty Name="PaintFlag" ColumnName="PaintFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

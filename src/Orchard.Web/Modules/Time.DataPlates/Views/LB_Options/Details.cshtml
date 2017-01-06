@@ -1,0 +1,33 @@
+﻿@model Time.Data.EntityModels.DataPlates.LB_Options
+
+@{
+    ViewBag.Title = Model.Option + " Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>LB_Options</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Option)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InsulatedBoom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsulatedBoom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Option }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

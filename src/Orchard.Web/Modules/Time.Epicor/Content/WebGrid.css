@@ -1,0 +1,25 @@
+﻿
+
+div.gridG{
+    width: 830px;
+    height:500px;
+    overflow:auto;
+    border: 2px solid #a1a1a1;
+}
+
+.tranlist tr:nth-child(odd) { background-color: #afc1d9; }
+.tranlist tr:nth-child(even) { background-color: white; }
+.tranlist th { background-color: #c1bdbd; color: White; }
+.tranlist a { color: Blue; }
+.smallcolumn {min-width:20px;}
+.medcolumn {min-width: 50px; max-width: 100px}
+.bigcolumn{min-width:180px; max-width: 250px}
+.linkcolumn { min-width: 90px; text-align: center; } 
+.linkcolumn a { color: Black;}
+.linkcolumn a:hover { color: Red; }
+.footstuff { background-color: White; color: Red; }
+.footstuff a:visited { color: Blue; } 
+.footstuff a { color: Blue;}
+.footstuff td { background-color: White; border-color: White; } 
+.headerstyle th {text-transform: capitalize; text-align: center;}
+
