@@ -1,0 +1,15 @@
+﻿@model String
+
+@if (Model.Contains("Alive"))
+{
+    <td class="alert-success">
+        @Model
+    </td>
+}
+else
+{
+    <td class="alert-danger">
+        @Model
+    </td>
+
+}
