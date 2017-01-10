@@ -1,0 +1,45 @@
+﻿@model Time.Data.EntityModels.OrderLog.Dealer
+
+@{
+    ViewBag.Title = "Edit Dealer";
+}
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.DealerId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DealerName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DealerName)
+                @Html.ValidationMessageFor(model => model.DealerName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TerritoryId, "TerritoryId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TerritoryId", String.Empty)
+                @Html.ValidationMessageFor(model => model.TerritoryId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
