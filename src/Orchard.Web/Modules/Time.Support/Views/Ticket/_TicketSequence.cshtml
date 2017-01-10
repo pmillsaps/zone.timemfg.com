@@ -49,6 +49,11 @@
         <span class="bg-info">Priority: @Html.DisplayFor(model => model.TicketSequence)</span>
     }
 }
+else if (Request.Url.AbsoluteUri.Contains("rated_desc"))
+{
+    <br />
+    <span class="bg-info">Priority: @Html.DisplayFor(model => model.TicketSequence)</span>
+}
 else
 {
 

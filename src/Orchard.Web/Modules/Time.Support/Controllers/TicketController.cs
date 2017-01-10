@@ -118,13 +118,17 @@ namespace Time.Support.Controllers
 
             ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RatedSortParm = String.IsNullOrEmpty(sortOrder) ? "rated_desc" : "";
             switch (sortOrder)
             {
+                case "name_desc":
+                    qry = qry.OrderBy(x => x.Title).ToList();
+                    break;
                 case "priority_desc":
                     qry = qry.OrderByDescending(x => x.PriorityID).ToList();
                     break;
-                case "name_desc":
-                    qry = qry.OrderBy(x => x.Title).ToList();
+                case "rated_desc":
+                    qry = qry.Where(x => x.TicketSequence != null).OrderBy(x => x.RequestedBy).ThenBy(x => x.TicketSequence).ToList();
                     break;
                 default:
                     qry = qry.OrderBy(x => x.TicketID).ToList();

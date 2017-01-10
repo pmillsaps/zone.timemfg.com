@@ -122,7 +122,7 @@ namespace Time.OrderLog.Controllers
                     else o.InstallerName = item.Installer.InstallerName;
                     foreach (var trans in item.OrderTrans)
                     {
-                        oT = new OrderTransactions();
+                        oT = new OrderTransactions();                       //http://csharp.net-informations.com/excel/csharp-format-excel.htm
 
                         oT.PO = o.PONum;
                         oT.Date = trans.Date;
