@@ -3,14 +3,16 @@
     ViewBag.Title = "Send Problem Jobs Email";
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="alert alert-info">
+    <h2>@ViewBag.Title</h2>
 
-<h4>Clicking the button below will immediately trigger the 'Problem Jobs' Emails"</h4>
+    <h4>Clicking the button below will immediately trigger the 'Problem Jobs' Emails"</h4>
 
-<h4>Are you sure you wish to do this?</h4>
+    <h4>Are you sure you wish to do this?</h4>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <input type="submit" value="Send Problem Jobs Email" />
+    <input type="submit" value="Send Problem Jobs Email" class="btn btn-primary"/>
 }

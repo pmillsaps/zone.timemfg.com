@@ -12,11 +12,18 @@
 @using (Html.BeginForm("Index", "Additional", FormMethod.Get))
 {
     <div class="row">
-        <div class="col-md-4">@Html.Label("Enter Drawing Number(or part of it):", new { @class = "lead" })</div>
-        <div class="col-md-4">@Html.TextBox("search")</div>
+        @*<div class="col-md-4">@Html.Label("Enter Drawing Number(or part of it):", new { @class = "lead" })</div>*@
         <div class="col-md-4">
-            <input type="submit" value="Search" class="btn btn-primary" />
+            <div class="input-group">
+                @Html.TextBox("search", null, htmlAttributes: new { @placeholder = "Enter Drawing Number(or part of it):" })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
         </div>
+        @*<div class="col-md-4">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>*@
     </div>
 }
 

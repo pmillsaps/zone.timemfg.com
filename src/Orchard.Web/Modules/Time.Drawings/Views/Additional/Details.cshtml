@@ -12,33 +12,34 @@
         @Html.ActionLink("Add Additional Drawing", "AddAdditionalDrawing", new { id = Model.Id })
     </p>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Drawing)
-        </dt>
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Drawing)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Drawing)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Drawing)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FileName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FileName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Directory)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Directory)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Directory)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Directory)
+            </dd>
 
-    </dl>
-
+        </dl>
+    </div>
     <p><strong>Additional Drawings</strong></p>
 
     <table class="table table-bordered table-condensed">
