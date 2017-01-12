@@ -1,4 +1,4 @@
-﻿/*.dl-horizontal > dd:after {
+﻿.dl-horizontal > dd:after {
     display: table;
     content: "";
     clear: both;
@@ -6,7 +6,7 @@
 
 dl {
     vertical-align: top;
-}*/
+}
 
 
 table.dataTable thead .sorting:after,
