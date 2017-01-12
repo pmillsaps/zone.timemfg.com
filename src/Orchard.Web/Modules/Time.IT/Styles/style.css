@@ -1,0 +1,39 @@
+﻿/*.dl-horizontal > dd:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+dl {
+    vertical-align: top;
+}*/
+
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+  font-family: 'FontAwesome';
+}
+
+table.dataTable thead .sorting:after {
+  content: "\f0dc";
+}
+
+table.dataTable thead .sorting_asc:after {
+  content: "\f0de";
+}
+
+table.dataTable thead .sorting_desc:after {
+  content: "\f0dd";
+}
+
+/*@font-face{
+    font-family:'Glyphicons Halflings' !important;
+    src:url(~/Modules/Time.IT/fonts/glyphicons-halflings-regular.eot) !important;
+    src:url(~/Modules/Time.IT/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),
+        url(~/Modules/Time.IT/fonts/glyphicons-halflings-regular.woff) format('woff'),
+        url(~/Modules/Time.IT/fonts/glyphicons-halflings-regular.ttf) format('truetype'),
+        url(~/Modules/Time.IT/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg') !important
+}*/

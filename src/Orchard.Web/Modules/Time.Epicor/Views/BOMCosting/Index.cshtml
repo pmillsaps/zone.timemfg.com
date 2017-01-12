@@ -1,0 +1,105 @@
+﻿@model Time.Epicor.ViewModels.BOMSearchVM
+
+@{
+    ViewBag.Title = "E10 Bill of Material Costing";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="TicketSearch" class="container">
+    @using (Html.BeginForm("Index", "BOMCosting", FormMethod.Post, new { onsubmit = "showDiv()" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    @Html.TextBoxFor(x => x.SearchText)
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Load BOM</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        @*<label for="txtSearch" class="label">
+                Search:
+            </label>
+            @Html.EditorFor(x => x.SearchText)
+            <input type="submit" value="Load BOM" />*@
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.CheckBoxFor(x => x.DrillIntoPurchaseItems)
+                @Html.LabelFor(x => x.DrillIntoPurchaseItems)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(x => x.FilterRawMaterial)
+                @Html.LabelFor(x => x.FilterRawMaterial)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(x => x.ExportToExcel)
+                @Html.LabelFor(x => x.ExportToExcel)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.CheckBoxFor(x => x.UseTestData)
+                @Html.LabelFor(x => x.UseTestData)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(x => x.PurchaseItemsOnly)
+                @Html.LabelFor(x => x.PurchaseItemsOnly)
+            </div>
+        </div>
+    }
+</div>
+
+<div class="alert alert-info">
+    <p>
+        If you filter raw material, or drill into purchase items, the costs will be wrong
+        in the list.<br />
+        If you export to Excel, these choices will be ignored.<br />
+        By selecting 'Purchase Items Only', total costs should be correct, but you will
+        be missing all of the 'M' items.<br />
+        You can run the report for multiple items by separating them with commas (i.e.,
+        'OR-1400-2,MH-802').
+    </p>
+</div>
+<span id="hiddenStatus" style='display: none'>
+    <img src='~/Modules/Time.Epicor/Content/Images/transparent.gif' id='myAnimatedImage' align="middle">
+    <p>
+        Loading Data ...
+    </p>
+</span>
+
+<span id="exportHidden" style='display: none'>
+    <p>
+        Please wait for the Exported XLS document to finish ...
+    </p>
+</span>
+
+<span id="data">
+    @if (Model != null)
+    {
+        @Html.Partial("_BOMListing", Model.bomInfo);
+    }
+    @if (ViewBag._ElapsedTime != null)
+    {
+        <p>@String.Format("Query Time: {0:0.00} Seconds", (ViewBag._ElapsedTime / 1000.0))</p>
+    }
+</span>
+
+<script language='javascript'>
+    function showDiv() {
+        document.getElementById('data').style.display = "none";
+        document.getElementById('exportHidden').style.display = "none";
+        var chkBox = document.getElementById('ExportToExcel');
+        if (!chkBox.checked) {
+            setTimeout('document.images["myAnimatedImage"].src="~/Modules/Time.Epicor/Content/Images/loadingAnimation.gif"', 200);
+            document.getElementById('hiddenStatus').style.display = "";
+        }
+        if (chkBox.checked) {
+            document.getElementById('exportHidden').style.display = "";
+        }
+    }
+</script>

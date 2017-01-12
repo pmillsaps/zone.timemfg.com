@@ -1,0 +1,38 @@
+﻿@model Time.Data.EntityModels.Install.LiftFamily
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+
+<div>
+    <h4>LiftFamily</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FamilyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FamilyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InstallHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstallHours)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
