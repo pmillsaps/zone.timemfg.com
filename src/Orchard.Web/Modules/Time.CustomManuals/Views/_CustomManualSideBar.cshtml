@@ -1,0 +1,40 @@
+﻿@*<div class="hidden-sm hidden-xs hidden col-md-0">
+    <br />
+    <br />
+    <br />
+    <br />
+</div>*@
+
+
+<div class="col-md-2">
+    <div class="navbar navbar-default"  id="sidebar">
+        <div class="btn-group-vertical">
+            <ul class="nav nav-pills nav-stacked btn-group-vertical">
+                <li>Menu</li>
+                <li>@Html.ActionLink("Overview", "Index", "", null, new { @style = "padding-top: 0; padding-bottom: 0; color:black" })</li>
+
+                <li class="nav-divider"></li>
+                <li>Problem Jobs</li>
+                <li>@Html.ActionLink("View All", "Index", "ProblemJobs", null, new { @style = "padding-top: 0; padding-bottom: 0; color:black" })</li>
+                <li>@Html.ActionLink("View RTG", "Ready", "ProblemJobs", null, new { @style = "padding-top: 0; padding-bottom: 0; color:black" })</li>
+                <li>@Html.ActionLink("Send Email", "Index", "Process", null, new { @style = "padding-top: 0; padding-bottom: 0; color:black" })</li>
+            </ul>
+        </div>
+    </div> <!--well bs-sidebar affix-->
+</div> <!--col-md-3-->
+
+@*<div class="col-md-2 col-sm-2">
+    <div class="well bs-sidebar" id="sidebar">
+        <div class="btn-group-vertical">
+            <ul class="nav nav-pills nav-stacked btn-group-vertical">
+                <li>Menu</li>
+                <li>@Html.ActionLink("Overview", "Index", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                
+                <li class="nav-divider"></li>
+                <li>Problem Jobs</li>
+                <li>@Html.ActionLink("View", "Index", "ProblemJobs", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                <li>@Html.ActionLink("Send Email", "Index", "Process", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+            </ul>
+        </div>
+    </div> <!--well bs-sidebar affix-->
+</div> <!--col-md-3-->*@
