@@ -1,0 +1,124 @@
+﻿@model Time.Data.EntityModels.CustomManuals.Formatting
+
+@{
+    ViewBag.Title = "Formatting Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Formatting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PullsFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PullsFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmptyPageL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmptyPageL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmptyPageR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmptyPageR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlankPage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlankPage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SectionStarts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SectionStarts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PageNumbers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageNumbers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlankPageMsg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlankPageMsg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckFacings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckFacings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiftGroup.Lift_Group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiftGroup.Lift_Group)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Formatting_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

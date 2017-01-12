@@ -1,0 +1,34 @@
+﻿@model Time.Install.ViewModels.GroupsAndOptionsViewModel
+
+<div id="accordion">
+    @foreach (var item in Model.OptionGroups)
+    {
+        <h3>@item.GroupName</h3>
+        <div>
+            <table class="table">
+                <tr class="success">
+                    <th>Option</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Hours</th>
+                </tr>
+                @for (int i = 0; i < Model.Options.Count; i++)
+                {
+                    if (Model.Options[i].GroupId == item.Id)
+                    {
+                        <tr>
+                            <td>@Html.Label("GroupAndOptions.Options[" + @i + "].OptionName", Model.Options[i].OptionName)</td>
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].Id", Model.Options[i].Id)
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].OptionName", Model.Options[i].OptionName)
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].LiftFamilyId", Model.Options[i].LiftFamilyId)
+                            @Html.Hidden("GroupAndOptions.Options[" + @i + "].GroupId", Model.Options[i].GroupId)
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Quantity", Model.Options[i].Quantity, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].Price", Model.Options[i].Price, htmlAttributes: new { @class = "text-center spinner2" })</td>
+                            <td>@Html.TextBox("GroupAndOptions.Options[" + @i + "].InstallHours", Model.Options[i].InstallHours, htmlAttributes: new { @class = "text-center spinner1" })</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    }
+</div>

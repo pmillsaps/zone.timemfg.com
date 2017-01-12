@@ -1,0 +1,10 @@
+﻿@{
+    //Layout = null;
+}
+
+@*<iframe src='@{Html.RenderAction("PDFViewer", new {id = ViewBag.File)};}' width="90%" height="90%">
+        <p>IFrame is not supported.</p>
+    </iframe>
+*@
+
+@Response.AppendHeader("Content-Disposition", "inline; filename=" + ViewBag.FileName);
