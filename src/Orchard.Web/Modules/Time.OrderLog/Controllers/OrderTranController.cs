@@ -103,17 +103,30 @@ namespace Time.OrderLog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude = "OrderTranId")] OrderTran ordertran)
+        public ActionResult Create([Bind(Exclude = "OrderTranId")] OrderTran ordertran, Order order)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditOrders, T("You Do Not Have Permission to Edit")))
                 return new HttpUnauthorizedResult();
             if (ordertran.NewQty < 0) ModelState.AddModelError("NewQty", "Negative Quantities are Not Allowed");
             if (ordertran.CancelQty < 0) ModelState.AddModelError("CancelQty", "Negative Quantities are Not Allowed");
             if (ordertran.NewQty == 0 && ordertran.CancelQty == 0) ModelState.AddModelError("", "At Least One of the Quantities Must Be Used");
+
             if (ModelState.IsValid)
             {
                 if (ordertran.AsOfDate == null) ordertran.AsOfDate = ordertran.Date;
                 db.OrderTrans.Add(ordertran);
+                db.SaveChanges();
+
+                order = db.Orders.Where(x => x.OrderId == ordertran.OrderId).Single();
+                var ordertrans = db.OrderTrans.Where(x => x.OrderId == ordertran.OrderId).ToList();
+                var ordertrantotal = 0;
+                foreach (var item in ordertrans)
+                {
+                    ordertrantotal += (item.NewQty - item.CancelQty) * item.Price;
+                }
+                order.Price = ordertrantotal;
+
+                db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "OrderLog", new { id = ordertran.OrderId });
             }
@@ -155,6 +168,7 @@ namespace Time.OrderLog.Controllers
         {
             if (!Services.Authorizer.Authorize(Permissions.EditOrders, T("You Do Not Have Permission to Edit")))
                 return new HttpUnauthorizedResult();
+
             if (ModelState.IsValid)
             {
                 if (ordertran.AsOfDate == null) ordertran.AsOfDate = ordertran.Date;

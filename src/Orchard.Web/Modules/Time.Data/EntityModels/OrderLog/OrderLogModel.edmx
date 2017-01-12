@@ -55,6 +55,7 @@
           <Property Name="RTG" Type="bit" Nullable="false" />
           <Property Name="TruGuard" Type="bit" Nullable="false" />
           <Property Name="GSA" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="int" />
         </EntityType>
         <EntityType Name="OrderLineUnit">
           <Key>
@@ -92,6 +93,7 @@
           <Property Name="RTG" Type="bit" Nullable="false" />
           <Property Name="TruGuard" Type="bit" Nullable="false" />
           <Property Name="GSA" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -437,6 +439,7 @@
           <NavigationProperty Name="Install" Relationship="OrderLogModel.FK_Order_Install" FromRole="Order" ToRole="Install" />
           <NavigationProperty Name="Installer" Relationship="OrderLogModel.FK_Order_Installer" FromRole="Order" ToRole="Installer" />
           <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
+          <Property Name="Price" Type="Int32" />
         </EntityType>
         <EntityType Name="OrderTran">
           <Key>
@@ -458,6 +461,7 @@
           <Property Name="GSA" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LiftModel" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="OrderTran" ToRole="LiftModel" />
           <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="OrderTran" ToRole="Order" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_OrderTran_LiftModel">
           <End Type="OrderLogModel.LiftModel" Role="LiftModel" Multiplicity="1" />
@@ -621,6 +625,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="OrderLogModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="GSA" ColumnName="GSA" />
                 <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
                 <ScalarProperty Name="RTG" ColumnName="RTG" />
@@ -644,6 +649,7 @@
           <EntitySetMapping Name="OrderTrans">
             <EntityTypeMapping TypeName="OrderLogModel.OrderTran">
               <MappingFragment StoreEntitySet="OrderTran">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="GSA" ColumnName="GSA" />
                 <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
                 <ScalarProperty Name="RTG" ColumnName="RTG" />

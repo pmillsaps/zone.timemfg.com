@@ -48,9 +48,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -216,79 +213,66 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CPTIReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITMeeting.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ITMeeting.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests-ByDept.cs">
       <DependentUpon>ITRequests-ByDept.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByCategory.cs">
       <DependentUpon>ITRequests_ByCategory.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByRequestor.cs">
       <DependentUpon>ITRequests_ByRequestor.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ZoneRequests_ByResource_Personal.cs">
       <DependentUpon>ZoneRequests_ByResource_Personal.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByResource_Personal.cs">
       <DependentUpon>ITRequests_ByResource_Personal.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByResource.cs">
       <DependentUpon>ITRequests_ByResource.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByResource_Closed.cs">
       <DependentUpon>ITRequests_ByResource_Closed.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByResource_CompDate_Closed.cs">
       <DependentUpon>ITRequests_ByResource_CompDate_Closed.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByResource_CompDate_Closed_Limited.cs">
       <DependentUpon>ITRequests_ByResource_CompDate_Closed_Limited.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\EditorTemplates\ITMeeting.cs">
       <DependentUpon>ITMeeting.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\Report\ITRequests_ByResource_Priority.cs">
       <DependentUpon>ITRequests_ByResource_Priority.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

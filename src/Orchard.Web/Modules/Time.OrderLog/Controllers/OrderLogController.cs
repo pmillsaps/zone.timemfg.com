@@ -112,25 +112,29 @@ namespace Time.OrderLog.Controllers
                 foreach (var item in report)
                 {
                     o = new OrderDetails();
+                    var highdate = item.OrderTrans.Where(x => x.OrderId == item.OrderId).Select(x => x.Date).Max();
 
                     o.PONum = item.PO;
-                    o.OrderDate = item.Date;
+                    o.OrderDate = item.Date.ToShortDateString();
                     o.DealerName = item.Dealer.DealerName;
+                    //o.LiftModel = item.OrderTrans.Where(x => x.OrderId == item.OrderId && x.Date == highdate).Select(x => x.LiftModel).ToString();
                     if (item.Install == null) o.InstallType = "";
                     else o.InstallType = item.Install.InstallName;
                     if (item.Installer == null) o.InstallerName = "";
                     else o.InstallerName = item.Installer.InstallerName;
                     foreach (var trans in item.OrderTrans)
                     {
-                        oT = new OrderTransactions();                       //http://csharp.net-informations.com/excel/csharp-format-excel.htm
+                        oT = new OrderTransactions();
 
                         oT.PO = o.PONum;
-                        oT.Date = trans.Date;
-                        oT.AsOfDate = trans.AsOfDate;
+                        oT.Date = trans.Date.ToString();
+                        oT.AsOfDate = trans.AsOfDate.ToString();
                         var lift = db.LiftModels.FirstOrDefault(l => l.LiftModelId == trans.LiftModelId);
                         oT.LiftModel = lift.LiftModelName.ToString();
                         oT.NewQty = trans.NewQty;
                         oT.CancelQty = trans.CancelQty;
+                        oT.UnitPrice = trans.Price;
+                        oT.ExtPrice = (trans.NewQty - trans.CancelQty) * trans.Price;
                         oT.Special = trans.Special;
                         oT.Stock = trans.Stock;
                         oT.Demo = trans.Demo;
@@ -143,6 +147,8 @@ namespace Time.OrderLog.Controllers
                         sum += trans.NewQty - trans.CancelQty;
                     }
                     o.OrderQty = sum;
+                    o.Price = item.Price / sum;
+                    o.ExtPrice = item.Price;
                     o.Special = item.Special;
                     o.Stock = item.Stock;
                     o.Demo = item.Demo;

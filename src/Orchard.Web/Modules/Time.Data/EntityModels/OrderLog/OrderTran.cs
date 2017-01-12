@@ -28,6 +28,7 @@ namespace Time.Data.EntityModels.OrderLog
         public bool RTG { get; set; }
         public bool TruGuard { get; set; }
         public bool GSA { get; set; }
+        public int Price { get; set; }
     
         public virtual LiftModel LiftModel { get; set; }
         public virtual Order Order { get; set; }

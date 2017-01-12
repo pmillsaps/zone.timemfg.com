@@ -37,6 +37,7 @@ namespace Time.Data.EntityModels.OrderLog
         public bool RTG { get; set; }
         public bool TruGuard { get; set; }
         public bool GSA { get; set; }
+        public Nullable<int> Price { get; set; }
     
         public virtual ICollection<OrderLineUnit> OrderLineUnits { get; set; }
         public virtual ICollection<OrderTran> OrderTrans { get; set; }

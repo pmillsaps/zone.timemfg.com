@@ -7,9 +7,10 @@
         <tr class="success">
             <th width="150">@Html.DisplayNameFor(model => model.Date)</th>
             <th width="100">@Html.DisplayNameFor(model => model.AsOfDate)</th>
-            <th width="150">@Html.DisplayNameFor(model => model.LiftModel.LiftModelName)</th>
+            <th width="150">Lift Model</th>
             <th width="70">@Html.DisplayNameFor(model => model.NewQty)</th>
             <th width="70">@Html.DisplayNameFor(model => model.CancelQty)</th>
+            <th width="70">Unit Price</th>
             <th width="20">@Html.DisplayNameFor(model => model.Special)</th>
             <th width="20">@Html.DisplayNameFor(model => model.Stock)</th>
             <th width="20">@Html.DisplayNameFor(model => model.Demo)</th>
@@ -42,6 +43,7 @@
                 <td>@Html.DisplayFor(modelItem => item.LiftModel.LiftModelName)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.NewQty)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.CancelQty)</td>
+                <td align="center">@Html.DisplayFor(modelItem => item.Price)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.Special)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.Stock)</td>
                 <td align="center">@Html.DisplayFor(modelItem => item.Demo)</td>
