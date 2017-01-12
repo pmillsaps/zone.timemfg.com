@@ -10,6 +10,8 @@
 }
 <link href="~/Modules/Time.IT/Styles/dataTables.bootstrap.min.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/dataTableSortIcons.css" rel="stylesheet" />
 
 <h2>@ViewBag.Title</h2>
 <div class="row">
@@ -54,6 +56,7 @@
                     "datatype": "json"
                 },
                 "order": [[7, "asc"]],
+                "displayLength": -1,
                 "lengthMenu": [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "All"]],
                 "columns": [
                     { "data": "Model", "autoWidth": true },
