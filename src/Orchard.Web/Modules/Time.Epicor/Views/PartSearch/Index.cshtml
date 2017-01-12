@@ -1,0 +1,80 @@
+﻿@model Time.Epicor.ViewModels.PartSearchVM
+
+@{
+    ViewBag.Title = "Epicor 10 Part Search";
+    if (Model.PartData != null) { ViewBag.Title = String.Format("Epicor 10 Part Search [{0}]", Model.PartData.Count); }
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Query, null, htmlAttributes: new { @placeholder = "Search..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.DisplayNameFor(model => model.Type)</span>
+                    @Html.EnumDropDownListFor(model => model.Type, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">@Html.DisplayNameFor(model => model.Status)</span>
+                    @Html.EnumDropDownListFor(model => model.Status, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ShowReedrill)
+                @Html.LabelFor(model => model.ShowReedrill)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ShowPrototypes)
+                @Html.LabelFor(model => model.ShowPrototypes)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ShowSpecial)
+                @Html.LabelFor(model => model.ShowSpecial)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ShowExportVT)
+                @Html.LabelFor(model => model.ShowExportVT)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ShowService)
+                @Html.LabelFor(model => model.ShowService)
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ShowMRO)
+                @Html.LabelFor(model => model.ShowMRO)
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.PartData != null)
+                { <div class="col-md-4">
+                @Html.CheckBoxFor(model => model.ExportToExcel)
+                @Html.LabelFor(model => model.ExportToExcel)
+            </div>
+            }
+        </div>
+    </div>
+    <hr />
+}
+
+@if (Model.PartData != null)
+{
+    @Html.Partial("_PartDetails", Model.PartData)
+}

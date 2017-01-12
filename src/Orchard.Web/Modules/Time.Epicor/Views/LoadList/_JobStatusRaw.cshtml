@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJobStatu>
+@{var count = 0;}
+<tr class="JobStatus">
+    <td></td>
+    <td colspan="9">
+        @*@foreach (var item in Model.Where(x => x.IgnoreFlag != 1))
+        {
+            count++;
+            @Html.DisplayFor(modelItem => item.OpCode) @: :
+            if(item.OpComplete == 1) {Html.Raw("<img src='/Content/images/CheckboxFull.png' />");}
+            else {Html.Raw("<img src='/Content/images/CheckboxEmpty.png' />";}
+            //@Html.DisplayFor(modelItem => item.OpComplete)
+            @:&nbsp;&nbsp;&nbsp;
+            if (count >= 8)
+            {
+                @:</td></tr><tr class="JobStatus"><td></td><td colspan="9">
+                count = 0;
+            }
+        }*@
+</td>
+</tr>

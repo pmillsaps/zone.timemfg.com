@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Request Part Transfer";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert">
+        @ViewBag.Message
+    </div>
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBox("PartNum", null, htmlAttributes: new { @class = "form-control", @placeholder = "Enter Part Number..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    @*@Html.TextBox("PartNum", "PartNum")
+    <input type="submit" value="@ViewBag.Title" />*@
+}

@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJob>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <thead>
+        <tr class="success">
+            <th>
+                <strong>ShpDate @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.ShipDateUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.ShipDateDown })</strong>
+            </th>
+            <th>
+                <strong>MakeRdy @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.MakeReadyCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.MakeReadyNot })</strong>
+            </th>
+            <th>
+                <strong>Name <br />@Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.NameUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.NameDown })</strong>
+            </th>
+            <th>
+                <strong>Serial No @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.SerialUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.SerialDown })</strong>
+            </th>
+            <th>
+                <strong>Job Number<br /> @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.JobUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.JobDown })</strong>
+            </th>
+            <th>
+                <strong>LiftModel<br /> @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.LiftUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.LiftDown })</strong>
+            </th>
+            <th>
+                <strong>Claim @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ClaimedCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ClaimedNot })</strong>
+            </th>
+            @*Using <p> tags so that all the checkbox columns are the same size.  Using Alt + 0160 for the spaces so they show up*@
+            <th>
+                <strong>  RT  <br />@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.RTCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.RTNot })</strong>
+            </th>
+            <th>
+                <strong> Test @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.TestCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.TestNot })</strong>
+            </th>
+            <th>
+                <strong> Blue @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BlueCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BlueNot })</strong>
+            </th>
+            <th>
+                <strong> Box @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BoxCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BoxNot })</strong>
+            </th>
+            <th>
+                <strong> Ship @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ShipCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ShipNot })</strong>
+            </th>
+            <th>
+                <strong> Ped  @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.PedCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.PedNot })</strong>
+            </th>
+            <th>
+                <strong>  OR  @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ORCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ORNot })</strong>
+            </th>
+            <th>
+                <strong> Bukt @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BuktCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BuktNot })</strong>
+            </th>
+            <th>
+                <strong>Green @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.GreenCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.GreenNot })</strong>
+            </th>
+            <th>
+                <strong>LShip @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.LShipCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.LShipNot })</strong>
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadList.DateSchedShip)
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.LoadList.MakeReady, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadList.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LiftModel)
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Claimed, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.ReadyToTest, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Tested, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Blue, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Box, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Ship, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @if (item.Ped_Ignored != true)
+                {
+                    @Html.EditorFor(modelItem => item.Ped, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                }
+                else
+                {
+                    //should display nothing
+                }
+            </td>
+            <td>
+                @if (item.OutRigger_Ignored != true)
+                {
+                    @Html.EditorFor(modelItem => item.OutRigger, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                }
+                else
+                {
+                    //should display nothing
+                }
+            </td>
+            <td>
+                @if (item.Bucket_Ignored != true)
+                {
+                    @Html.EditorFor(modelItem => item.Bucket, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                }
+                else
+                {
+                    //should display nothing
+                }
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.Green, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.LShip, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+            </td>
+        </tr>
+    }
+</table>

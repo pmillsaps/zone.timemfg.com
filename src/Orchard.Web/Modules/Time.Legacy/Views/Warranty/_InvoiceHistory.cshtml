@@ -1,0 +1,35 @@
+﻿@model Time.Data.EntityModels.Legacy.WarrantyInvoice
+
+<tr>
+    <td>
+        @Model.CompanyId
+    </td>
+    <td>
+        @Model.CustomerId
+    </td>
+    <td>
+        @Model.Id
+    </td>
+    <td>
+        @Model.InvoiceDate
+    </td>
+    <td>
+        @Model.InvoiceNumber
+    </td>
+    <td>
+        @Model.LiftOrderNumber
+    </td>
+    <td>
+        @Model.PoNumber
+    </td>
+    <td>
+        @Model.SalesOrderNumber
+    </td>
+    <td>
+        @Model.SerialNumber
+    </td>
+    <td>
+        @Html.ActionLink("Details", "InvoiceDetails", new { id = Model.Id })
+    </td>
+</tr>
+

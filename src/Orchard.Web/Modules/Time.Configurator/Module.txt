@@ -1,0 +1,12 @@
+﻿Name: Time.Configurator
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: E10 Configurator Specific Functions
+Features:
+    Time.Configurator:
+        Description: E10 Configurator Specific Functions
+		Dependencies: Time.Data
+		Category: .Time
