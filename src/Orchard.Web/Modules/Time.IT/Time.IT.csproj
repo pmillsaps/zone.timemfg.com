@@ -592,6 +592,7 @@
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Models\ComputersViewModel.cs" />
     <Compile Include="Models\MonitorsViewModel.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
