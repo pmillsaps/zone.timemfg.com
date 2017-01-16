@@ -1,8 +1,23 @@
 ﻿
 
 <div class="row">
-    <div class="col-md-2">
-        <h5>Sort By: </h5>
+    <div class="col-md-2">     
+        @if (Request.Url.AbsoluteUri.Contains("priority_desc"))
+        {
+            <h5>Sort By: Priority</h5>
+        }
+        else if (Request.Url.AbsoluteUri.Contains("name_desc"))
+        {
+            <h5>Sort By: Name</h5>
+        }
+        else if (Request.Url.AbsoluteUri.Contains("rated_desc"))
+        {
+            <h5>Sort By: Rating</h5>
+        }
+        else
+        {
+            <h5>Sort By: </h5>
+        }
     </div>
 </div>
 <div class="row">

@@ -112,12 +112,12 @@ namespace Time.OrderLog.Controllers
                 foreach (var item in report)
                 {
                     o = new OrderDetails();
-                    var highdate = item.OrderTrans.Where(x => x.OrderId == item.OrderId).Select(x => x.Date).Max();
-
+                    var lifts = db.OrderTrans.Where(x => x.OrderId == item.OrderId).OrderByDescending(x => x.Date).Select(x => x.LiftModel.LiftModelName).FirstOrDefault();
+                    
                     o.PONum = item.PO;
                     o.OrderDate = item.Date.ToShortDateString();
                     o.DealerName = item.Dealer.DealerName;
-                    //o.LiftModel = item.OrderTrans.Where(x => x.OrderId == item.OrderId && x.Date == highdate).Select(x => x.LiftModel).ToString();
+                    o.LiftModel = lifts;
                     if (item.Install == null) o.InstallType = "";
                     else o.InstallType = item.Install.InstallName;
                     if (item.Installer == null) o.InstallerName = "";

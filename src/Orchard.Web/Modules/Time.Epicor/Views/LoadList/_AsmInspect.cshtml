@@ -4,56 +4,56 @@
     <thead>
         <tr class="success">
             <th>
-                <strong>ShpDate @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.ShipDateUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.ShipDateDown })</strong>
+                <strong>ShpDate</strong><div class="hidden-print"><div class="hidden-print">@Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.ShipDateUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.ShipDateDown })</div>
             </th>
             <th>
-                <strong>MakeRdy @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.MakeReadyCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.MakeReadyNot })</strong>
+                <strong>MakeRdy</strong><div class="hidden-print"> @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.MakeReadyCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.MakeReadyNot })
             </th>
             <th>
-                <strong>Name <br />@Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.NameUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.NameDown })</strong>
+                <strong>Name </strong><div class="hidden-print">@Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.NameUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.NameDown })</div>
             </th>
             <th>
-                <strong>Serial No @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.SerialUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.SerialDown })</strong>
+                <strong>Serial No</strong><div class="hidden-print"> @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.SerialUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.SerialDown })</div>
             </th>
             <th>
-                <strong>Job Number<br /> @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.JobUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.JobDown })</strong>
+                <strong>Job Number</strong><div class="hidden-print">@Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.JobUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.JobDown })</div>
             </th>
             <th>
-                <strong>LiftModel<br /> @Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.LiftUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.LiftDown })</strong>
+                <strong>LiftModel</strong><div class="hidden-print">@Html.ActionLink("▲", "AsmInspect", new { sortOrder = ViewBag.LiftUp })@Html.ActionLink("▼", "AsmInspect", new { sortOrder = ViewBag.LiftDown })</div>
             </th>
             <th>
-                <strong>Claim @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ClaimedCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ClaimedNot })</strong>
+                <strong>Claim </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ClaimedCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ClaimedNot })</div>
             </th>
             @*Using <p> tags so that all the checkbox columns are the same size.  Using Alt + 0160 for the spaces so they show up*@
             <th>
-                <strong>  RT  <br />@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.RTCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.RTNot })</strong>
+                <strong>  RT  </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.RTCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.RTNot })</div>
             </th>
             <th>
-                <strong> Test @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.TestCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.TestNot })</strong>
+                <strong> Test  </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.TestCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.TestNot })</div>
             </th>
             <th>
-                <strong> Blue @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BlueCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BlueNot })</strong>
+                <strong> Blue </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BlueCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BlueNot })</div>
             </th>
             <th>
-                <strong> Box @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BoxCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BoxNot })</strong>
+                <strong> Box </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BoxCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BoxNot })</div>
             </th>
             <th>
-                <strong> Ship @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ShipCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ShipNot })</strong>
+                <strong> Ship </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ShipCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ShipNot })</div>
             </th>
             <th>
-                <strong> Ped  @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.PedCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.PedNot })</strong>
+                <strong> Ped  </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.PedCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.PedNot })</div>
             </th>
             <th>
-                <strong>  OR  @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ORCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ORNot })</strong>
+                <strong>  OR  </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.ORCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.ORNot })</div>
             </th>
             <th>
-                <strong> Bukt @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BuktCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BuktNot })</strong>
+                <strong> Bukt </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.BuktCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.BuktNot })</div>
             </th>
             <th>
-                <strong>Green @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.GreenCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.GreenNot })</strong>
+                <strong>Green </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.GreenCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.GreenNot })</div>
             </th>
             <th>
-                <strong>LShip @Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.LShipCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.LShipNot })</strong>
+                <strong>LShip </strong><div class="hidden-print">@Html.ActionLink("✓", "AsmInspect", new { sortOrder = ViewBag.LShipCheck }) @Html.ActionLink("☐", "AsmInspect", new { sortOrder = ViewBag.LShipNot })</div>
             </th>
         </tr>
     </thead>

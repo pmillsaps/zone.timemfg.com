@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.ITInventory;
 using Time.Data.Models.MessageQueue;
+using Time.IT.Models;
 using Time.IT.ViewModel;
 
 namespace Time.IT.Controllers
@@ -26,19 +27,59 @@ namespace Time.IT.Controllers
         // GET: Computers
         public ActionResult Index(string search = "")
         {
-            var computers = db.Computers.OrderBy(x => x.Name).Include(c => c.Ref_Memory).Include(c => c.Ref_Model).Include(c => c.Ref_Status).Include(c => c.Ref_VideoCard).Include(c => c.Ref_DeviceType).Include(c => c.Ref_Processor).Include(c => c.Ref_Sound).Include(c => c.Ref_OS);
-            if (!String.IsNullOrEmpty(search))
-            {
-                foreach (var item in search.Split(' '))
-                {
-                    computers = computers.Where(x => x.User.Name.Contains(item) || x.Name.Contains(item)
-                    || x.Ref_Model.Model.Contains(item) || x.Ref_OS.OS.Contains(item) || x.Ref_DeviceType.DeviceType.Contains(item)
-                    || x.Ref_Status.Status.Contains(item) || x.SerialNumber.Contains(item));
-                }
-            }
+            return View();
+            //var computers = db.Computers.OrderBy(x => x.Name).Include(c => c.Ref_Memory).Include(c => c.Ref_Model).Include(c => c.Ref_Status).Include(c => c.Ref_VideoCard).Include(c => c.Ref_DeviceType).Include(c => c.Ref_Processor).Include(c => c.Ref_Sound).Include(c => c.Ref_OS);
+            //if (!String.IsNullOrEmpty(search))
+            //{
+            //    foreach (var item in search.Split(' '))
+            //    {
+            //        computers = computers.Where(x => x.User.Name.Contains(item) || x.Name.Contains(item)
+            //        || x.Ref_Model.Model.Contains(item) || x.Ref_OS.OS.Contains(item) || x.Ref_DeviceType.DeviceType.Contains(item)
+            //        || x.Ref_Status.Status.Contains(item) || x.SerialNumber.Contains(item));
+            //    }
+            //}
 
-            ViewBag.SearchIncludes = "Search Includes: User Name, Computer Name, Model, OS, Device Type, Serial Number, Status";
-            return View(computers.ToList());
+            //ViewBag.SearchIncludes = "Search Includes: User Name, Computer Name, Model, OS, Device Type, Serial Number, Status";
+            //return View(computers.ToList());
+        }
+
+        // Load the data for the Index table
+        public ActionResult LoadComputers()
+        {
+            List<ComputersViewModel> model = new List<ComputersViewModel>();
+            var computers = db.Computers.OrderBy(x => x.Name).Include(c => c.Ref_Memory).Include(c => c.Ref_Model).Include(c => c.Ref_Status).Include(c => c.Ref_VideoCard).Include(c => c.Ref_DeviceType).Include(c => c.Ref_Processor).Include(c => c.Ref_Sound).Include(c => c.Ref_OS);
+            foreach (var item in computers)
+            {
+                ComputersViewModel cvm = new ComputersViewModel();
+                cvm.Id = item.Id;
+                cvm.CmpName = item.Name;
+                cvm.Status = item.Ref_Status.Status;
+                cvm.Model = item.Ref_Model.Model;
+                cvm.WindowsKey = item.WindowsKey;
+                cvm.Memory = (item.Ref_Memory == null) ? "" : item.Ref_Memory.Name;
+                cvm.Processor = (item.Ref_Processor == null) ? "" : item.Ref_Processor.Processor;
+                cvm.DeviceType = (item.Ref_DeviceType == null) ? "" : item.Ref_DeviceType.DeviceType;
+                cvm.OS = (item.Ref_OS == null) ? "" : item.Ref_OS.OS;
+                cvm.VideoCard = (item.Ref_VideoCard == null) ? "" : item.Ref_VideoCard.VideoCard;
+                cvm.Sound = (item.Ref_Sound == null) ? "" : item.Ref_Sound.Sound;
+                cvm.LastEditedBy = item.LastEditedBy;
+                cvm.LastDateEdited = (item.LastDateEdited == null) ? "" : item.LastDateEdited.Value.ToShortDateString();
+                cvm.Note = item.Note;
+                cvm.PO = item.PO;
+                cvm.PurchaseDate = (item.PurchaseDate == null) ? "" : item.PurchaseDate.Value.ToShortDateString();
+                cvm.AssetTag = item.AssetTag;
+                cvm.BIOS_Version = item.BIOS_Version;
+                cvm.WarrantyExpirationDate = (item.WarrantyExpirationDate == null) ? "" : item.WarrantyExpirationDate.Value.ToShortDateString();
+                cvm.Notes = item.Notes;
+                cvm.UserName = item.User.Name;
+                cvm.UserId = item.UserId.Value;
+                cvm.LastBuildDate = (item.LastBuildDate == null) ? "" : item.LastBuildDate.Value.ToShortDateString();
+                cvm.PhoneNumber = item.PhoneNumber;
+                cvm.SerialNumber = item.SerialNumber;
+                cvm.AdditionalHW = item.AdditionalHW;
+                model.Add(cvm);
+            }
+            return Json(new { data = model }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Computers/Details/5
