@@ -276,7 +276,7 @@ namespace Time.IT.Controllers
 
                 db.Entry(computer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = computer.Id });
             }
             GenerateDropDowns(computer);
             return View(computer);

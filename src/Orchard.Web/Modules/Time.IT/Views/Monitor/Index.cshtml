@@ -38,7 +38,6 @@
                 <td>@Html.Label("User Name")</td>
                 <td></td>
                 <td></td>
-                <td></td>
             </tr>
         </thead>
     </table>
@@ -59,7 +58,11 @@
                 "displayLength": -1,
                 "lengthMenu": [[10, 25, 50, 100, 500, 1000, -1], [10, 25, 50, 100, 500, 1000, "All"]],
                 "columns": [
-                    { "data": "Model", "autoWidth": true },
+                    {
+                        "data": null, "autoWidth": true, "render": function (data, type, row) {
+                            return '<a class="popup" href="Monitor/Details/' + row.Id + '">'+ row.Model +'</a>';
+                        }
+                    },
                     { "data": "SerialNo", "autoWidth": true },
                     { "data": "AssetId", "autoWidth": true },
                     {
@@ -76,11 +79,6 @@
                     {
                         "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
                             return '<a class="popup" href="Monitor/Edit/' + data + '"><img src="/Media/Default/Page/EditIcon.png" width="20" height="20"/></a>';
-                        }
-                    },
-                    {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
-                            return '<a class="popup" href="Monitor/Details/' + data + '"><img src="/Media/Default/Page/DetailIcon.png" width="20" height="20"/></a>';
                         }
                     },
                     {

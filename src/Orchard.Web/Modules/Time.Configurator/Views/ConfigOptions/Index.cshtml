@@ -53,6 +53,8 @@
             var keysDiv = $("#keysDiv");
             $.ajax({
                 url: configUrl,
+                async: true,
+                cache: false,
                 type: "GET",
                 data: { ConfigNames: cName, ConfigData: cData, display: disp },
 

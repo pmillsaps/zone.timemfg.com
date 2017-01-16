@@ -34,10 +34,10 @@ namespace Time.Epicor.Controllers
         // GET: ValuedInventory
         public ActionResult Index()
         {
-            var dates = new SelectList(db.ValuedInventories.OrderBy(x => x.ComparisonDate).DistinctBy(x => x.ComparisonDate), "ComparisonDate", "ComparisonDate");
+            //var dates = new SelectList(db.ValuedInventories.OrderBy(x => x.ComparisonDate).DistinctBy(x => x.ComparisonDate), "ComparisonDate", "ComparisonDate");
             ValuedInventoryVM vm = new ValuedInventoryVM
             {
-                ComparisonDates = dates
+                ComparisonDates = new SelectList(db.ValuedInventories.OrderBy(x => x.ComparisonDate).DistinctBy(x => x.ComparisonDate), "ComparisonDate", "ComparisonDate")
             };
             if (!String.IsNullOrEmpty((string)TempData["ErrorMessage"])) ViewBag.ErrorMessage = TempData["ErrorMessage"];
             if (!String.IsNullOrEmpty((string)TempData["Notice"])) ViewBag.Notice = TempData["Notice"];
@@ -69,11 +69,16 @@ namespace Time.Epicor.Controllers
         }
 
         [HttpPost]
-        public ActionResult GenerateData(string ComparisonDate)
+        //public ActionResult GenerateData(string ComparisonDate)
+        // Changed the name of the string parameter from ComparisonDate to DateToCompare for the datepicker to work in the index view.
+        // Both the drop down and the textbox had the same name and they conflicted with each other when rendering the datepicker. 
+        // Juan
+        public ActionResult GenerateData(string DateToCompare)
         {
             try
             {
-                var date = DateTime.Parse(ComparisonDate);
+                //var date = DateTime.Parse(ComparisonDate);
+                var date = DateTime.Parse(DateToCompare);
                 var comparisonDate = DateTime.Now;
                 if ((comparisonDate - date).TotalDays < 365 && date < comparisonDate)
                 {
