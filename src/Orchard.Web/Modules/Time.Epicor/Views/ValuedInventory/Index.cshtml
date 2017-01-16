@@ -1,0 +1,87 @@
+﻿@model Time.Epicor.ViewModels.ValuedInventoryVM
+
+@{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    ViewBag.Title = "Valued Inventory Index";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+        <div class="row alert-danger">
+            @Html.Raw(ViewBag.ErrorMessage)
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+        <div class="row text-info">
+            @Html.Raw(ViewBag.Message)
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Notice))
+            {
+        <div class="row alert-info">
+            @Html.Raw(ViewBag.Notice)
+        </div>
+    }
+
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @*@Html.HiddenFor(model => model.LoadListJobId)*@
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.DropDownList("ComparisonDate", (IEnumerable<SelectListItem>)Model.ComparisonDates, "-- Select Comparison Date --", new { @class = "form-control" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Export Data</button>
+                    </span>
+                </div>
+            </div>
+        }
+
+        @*@if(Model.ValuedInventoryItems != null){
+            @Html.Partial("_Details", Model.ValuedInventoryItems)
+            }*@
+        <div class="col-md-4 alert alert-info">
+            <p>
+                Each Comparison Date period is the BOH on that date based on tranactions rolled back to the Comparison Date.
+                The costs are based on the Current Cost at the time the data was generated (CalculationDate) so there may be a cost discrepancy.
+            </p>
+        </div>
+    </div>
+
+    <h2>Generate New Valued Inventory Data</h2>
+
+    @using (Html.BeginForm("GenerateData", "ValuedInventory"))
+    {
+        @Html.AntiForgeryToken()
+        @*@Html.HiddenFor(model => model.LoadListJobId)*@
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    @*@Html.TextBoxFor(model => model.ComparisonDate, null, htmlAttributes: new { @class = "CompDateDPckr" })*@
+                    @Html.TextBox("ComparisonDate", String.Empty, htmlAttributes: new { @class = "CompDateDPckr" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Generate Data</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(".CompDateDPckr").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+    </script>
+}

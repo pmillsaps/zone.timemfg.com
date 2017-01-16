@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "DataPlates Index";
+}
+
+<div class="alert alert-info">
+    <h2>@ViewBag.Title</h2>
+    <ul>
+        <li>
+            @Html.ActionLink("CA Options", "Index", "CA_Options")
+        </li>
+        <li>
+            @Html.ActionLink("Dielectric Ratings", "Index", "DielectricRatings")
+        </li>
+        <li>
+            @Html.ActionLink("EP/SS Options", "Index", "EP_SS_Options")
+        </li>
+        <li>
+            @Html.ActionLink("HR Options", "Index", "HR_Options")
+        </li>
+        <li>
+            @Html.ActionLink("LB Options", "Index", "LB_Options")
+        </li>
+        <li>
+            @Html.ActionLink("Lift Data", "Index", "LiftDatas")
+        </li>
+        <li>
+            @Html.ActionLink("PS Option", "Index", "PS_Option")
+        </li>
+        @*<li>
+                @Html.ActionLink("Template Data", "Index", "TemplateDatas")
+            </li>
+            <li>
+                @Html.ActionLink("Templates", "Index", "Templates")
+            </li>*@
+    </ul>
+</div>
+

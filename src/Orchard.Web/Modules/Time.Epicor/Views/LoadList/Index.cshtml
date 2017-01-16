@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadList>
+
+@{
+    ViewBag.Title = "E10 Load List Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+@using (Html.BeginForm("Index", "LoadList", FormMethod.Get))
+{
+    <ul class="list-inline">
+        @if (ViewBag.LoadListEditor == true)
+        {
+            <li>@Html.ActionLink("Add New LoadList", "Create", "LoadList", null, new { @class = "btn btn-primary" })</li>
+        }
+        @if (ViewBag.Complete == 1)
+        {
+            <li>@Html.ActionLink("View Open Load Lists", "Index", "LoadList", new { id = 0 }, new { @class = "btn btn-primary" })</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("View Completed Load Lists", "Index", "LoadList", new { id = 1 }, new { @class = "btn btn-primary" })</li>
+        }
+
+        <li>@Html.ActionLink("Print Load Lists", "PrintLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Search for Jobs on Load Lists", "SearchLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>
+
+        @if (ViewBag.LoadListEditor == true)
+        {
+            @*<li>@Html.ActionLink("Email Load Lists", "EmailLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>*@
+            <li>@Html.ActionLink("Maintain Emails", "EmailIndex", "LoadList", null, new { @class = "btn btn-primary" })</li>
+        }
+        <li><input type="submit" value="Refresh" name="Refresh" class="btn btn-primary" /></li>
+    </ul>
+}
+
+<hr />
+
+@if (ViewBag.Complete == 1)
+{
+    using (Html.BeginForm("Index", "LoadList", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <b>Schedule Ship Date Year:</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.DropDownList("LoadListYear", null, htmlAttributes: new { @class = "form-control" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Display Load Lists</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
+}
+
+@Html.Partial("_List")
+
+
+<script type="text/javascript">
+    function reFresh() {
+        //document.form.submit();
+        document.all("Refresh").click();
+    }
+    window.setInterval("reFresh()", 300000);
+</script>

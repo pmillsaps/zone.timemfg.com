@@ -1,0 +1,23 @@
+﻿@model Time.Data.EntityModels.Legacy.SerNoMemo
+
+<tr>
+    <td>
+        @Model.Id
+    </td>
+    <td>
+        @Model.SerialNumber
+    </td>
+    <td>
+        @Model.MemoDate
+    </td>
+    <td>
+        @Model.EnteredBy
+    </td>
+    <td>
+        @Model.Memo
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit_Memo", new { id = Model.Id })
+    </td>
+</tr>
+
