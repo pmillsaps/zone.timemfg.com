@@ -861,6 +861,7 @@
     <Compile Include="Models\ITInventory\Ref_Location.cs" />
     <Compile Include="Models\ITInventory\Ref_Building.cs" />
     <Compile Include="Models\ITInventory\Computer.cs" />
+    <Compile Include="Models\ITInventory\Ref_VideoCard.cs" />
     <Compile Include="Models\ITInventory\ScheduledTask.cs" />
     <Compile Include="Models\ITInventory\User.cs" />
     <Compile Include="Models\ITInventory\Ref_Memory.cs" />
