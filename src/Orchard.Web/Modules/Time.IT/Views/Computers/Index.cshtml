@@ -38,6 +38,7 @@
                 <td>@Html.Label("Purch Date")</td>
                 <td>@Html.Label("Edit Date")</td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
     </table>
@@ -75,6 +76,11 @@
                     { "data": "LastBuildDate", "autoWidth": true },
                     { "data": "PurchaseDate", "autoWidth": true },
                     { "data": "LastDateEdited", "autoWidth": true },
+                    {
+                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
+                            return '<a class="popup" href="Computers/Edit/' + data + '"><img src="/Media/Default/Page/EditIcon.png" width="20" height="20"/></a>';
+                        }
+                    },
                     {
                         "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
                             return '<a class="popup" href="Computers/Delete/' + data + '"><img src="/Media/Default/Page/DeleteIcon.png" width="20" height="20"/></a>';
