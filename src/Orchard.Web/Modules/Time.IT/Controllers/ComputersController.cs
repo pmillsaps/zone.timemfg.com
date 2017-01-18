@@ -71,8 +71,8 @@ namespace Time.IT.Controllers
                 cvm.BIOS_Version = item.BIOS_Version;
                 cvm.WarrantyExpirationDate = (item.WarrantyExpirationDate == null) ? "" : item.WarrantyExpirationDate.Value.ToShortDateString();
                 cvm.Notes = item.Notes;
-                cvm.UserName = item.User.Name;
-                cvm.UserId = item.UserId.Value;
+                cvm.UserName = (item.User == null) ? "" : item.User.Name;
+                cvm.UserId = (item.UserId == null) ? 0 : item.UserId.Value;
                 cvm.LastBuildDate = (item.LastBuildDate == null) ? "" : item.LastBuildDate.Value.ToShortDateString();
                 cvm.PhoneNumber = item.PhoneNumber;
                 cvm.SerialNumber = item.SerialNumber;
