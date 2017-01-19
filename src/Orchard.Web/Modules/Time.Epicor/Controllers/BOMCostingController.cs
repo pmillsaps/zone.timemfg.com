@@ -66,7 +66,11 @@ namespace Time.Epicor.Controllers
                 var part = db.V_PartDetails.FirstOrDefault(x => x.PartNum == option);
                 if (part != null)
                 {
-                    var bom = BuildBomInMemory(option, searchVM, factorQty: 1, level: 1);
+                    var bom = new List<BOMInfo>();
+                    if (part.TypeCode != "P" || (part.TypeCode == "P" && searchVM.DrillIntoPurchaseItems))
+                    {
+                        bom = BuildBomInMemory(option, searchVM, factorQty: 1, level: 1);
+                    }
                     var partCost = GetPartCost(part.PartNum).ToList();
                     BOMInfo first = new BOMInfo
                     {
@@ -75,6 +79,7 @@ namespace Time.Epicor.Controllers
                         Description = part.PartDescription,
                         QtyPer = 1,
                         bomInfo = bom,
+                        PartType = part.TypeCode,
                         LaborTime = partCost.Sum(x => x.EstProdHrs),
                         SetupTime = partCost.Sum(x => x.EstSetHrs),
                         AvgLaborCost = Math.Round(partCost.Sum(x => x.LaborCost), 5),
@@ -83,6 +88,22 @@ namespace Time.Epicor.Controllers
                         AvgMtlBurCost = 0,
                         AvgSubCost = 0,
                     };
+
+                    if (part.TypeCode == "P" && !searchVM.DrillIntoPurchaseItems)
+                    {
+                        first.AvgBurdenCost = part.AvgBurdenCost ?? 0;
+                        first.AvgLaborCost = part.AvgLaborCost ?? 0;
+                        first.AvgMaterialCost = part.AvgMaterialCost ?? 0;
+                        first.AvgMtlBurCost = part.AvgMtlBurCost ?? 0;
+                        first.AvgSubCost = part.AvgSubContCost ?? 0;
+
+                        first.ExtBurCost = first.AvgBurdenCost;
+                        first.ExtLaborCost = first.AvgLaborCost;
+                        first.ExtMaterialCost = first.AvgMaterialCost;
+                        first.ExtMtlBurCost = first.AvgMtlBurCost;
+                        first.ExtSubCost = first.AvgSubCost;
+                    }
+
                     tmpBOM.Add(first);
                 }
             }
