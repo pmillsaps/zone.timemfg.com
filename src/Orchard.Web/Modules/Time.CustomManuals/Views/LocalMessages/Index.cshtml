@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Time.Data.EntityModels.CustomManuals.LocalMessage>
+
+@{
+    ViewBag.Title = "Message Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="left">
+    <p>
+        @Html.ActionLink("Back to Custom Manuals Index", "Index", "Home")
+    </p>
+</div>
+
+<div class="alert alert-info">
+    Currently this is only being used for the 'Replacement' message, but we will be able to use it for other things in the future.<br />
+    Be sure to add in the replacement message for ALL new languages as we add them. <br /><br />
+</div>
+<div>
+    @Html.ActionLink("Create New Message", "Create")
+</div>
+<hr />
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LanguageCode.Language_Code)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanguageCode.Language_Code)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

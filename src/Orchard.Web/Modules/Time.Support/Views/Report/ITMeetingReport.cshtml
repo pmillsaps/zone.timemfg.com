@@ -1,0 +1,40 @@
+﻿@{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    ViewBag.Title = "IT Meeting Report";
+}
+<div class="container">
+    <div class="row">
+        @Html.Action("SideBar", "Ticket")
+
+        <div class="form-horizontal col-md-9 col-sm-9 col-xs-9">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="lead text-info">
+                    Starting Date For The Completed Items :
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.TextBox("StartDate")
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+                <hr />
+            }
+        </div>
+    </div>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#StartDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+    </script>
+}
