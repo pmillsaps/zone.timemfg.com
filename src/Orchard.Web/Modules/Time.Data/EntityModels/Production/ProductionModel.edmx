@@ -5,6 +5,291 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ProductionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="JobAsmbl">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="JobComplete" Type="bit" Nullable="false" />
+          <Property Name="JobNum" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="AssemblySeq" Type="int" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="QtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="IUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="RequiredQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="PullQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="MtlBurRate" Type="decimal" Precision="10" Scale="5" Nullable="false" />
+          <Property Name="EstUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstMtlBurUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="OverRunQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="StartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="DueDate" Type="date" />
+          <Property Name="DueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Parent" Type="int" Nullable="false" />
+          <Property Name="PriorPeer" Type="int" Nullable="false" />
+          <Property Name="NextPeer" Type="int" Nullable="false" />
+          <Property Name="Child" Type="int" Nullable="false" />
+          <Property Name="TotalCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="MtlBurCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="IssuedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="DrawNum" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="IssuedComplete" Type="bit" Nullable="false" />
+          <Property Name="CommentText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InCopyList" Type="bit" Nullable="false" />
+          <Property Name="BomSequence" Type="int" Nullable="false" />
+          <Property Name="BomLevel" Type="int" Nullable="false" />
+          <Property Name="WIStartDate" Type="date" />
+          <Property Name="WIStartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIDueDate" Type="date" />
+          <Property Name="WIDueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="TLALaborCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLABurdenCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMaterialCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLASubcontractCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMtlBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLASetupHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TLAProdHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TLELaborCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLEBurdenCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLEMaterialCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLESubcontractCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLEMtlBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLESetupHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TLEProdHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LLALaborCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLABurdenCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="LLAMaterialCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLASubcontractCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMtlBurCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLASetupHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LLAProdHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LLELaborCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="LLEBurdenCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="LLEMaterialCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLESubcontractCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLEMtlBurCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLESetupHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LLEProdHours" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="AutoRecOpr" Type="int" Nullable="false" />
+          <Property Name="FinalOpr" Type="int" Nullable="false" />
+          <Property Name="FindNum" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReceivedToStock" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="Plant" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Direct" Type="bit" Nullable="false" />
+          <Property Name="RelatedOperation" Type="int" Nullable="false" />
+          <Property Name="TLAMaterialLabCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMaterialMtlCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMaterialSubCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMaterialBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="LLAMaterialLabCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMaterialMtlCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMaterialSubCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMaterialBurCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="TotalMtlMtlCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="TotalMtlLabCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="TotalMtlSubCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="TotalMtlBurCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="CallNum" Type="int" Nullable="false" />
+          <Property Name="CallLine" Type="int" Nullable="false" />
+          <Property Name="RestoreFlag" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="AnalysisCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="LastConfigDate" Type="date" />
+          <Property Name="LastConfigTime" Type="int" Nullable="false" />
+          <Property Name="LastConfigUserID" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="OrigRequiredQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="UserMapData" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WhseAllocFlag" Type="bit" Nullable="false" />
+          <Property Name="TLAMaterialMtlBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="LLAMaterialMtlBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMfgCompLabCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMfgCompMtlCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMfgCompSubCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMfgCompBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="TLAMfgCompMtlBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="LLAMfgCompLabCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMfgCompMtlCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMfgCompSubCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMfgCompBurCost" Type="decimal" Precision="16" Scale="5" Nullable="false" />
+          <Property Name="LLAMfgCompMtlBurCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="WeightUOM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="OrigMtlSeq" Type="int" Nullable="false" />
+          <Property Name="OrigRuleTag" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ValRefDes" Type="bit" Nullable="false" />
+          <Property Name="BasePartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BaseRevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="EstMtlUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstLbrUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstBurUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstSubUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PlanAsAsm" Type="bit" Nullable="false" />
+          <Property Name="PAARef" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="PAAFirm" Type="bit" Nullable="false" />
+          <Property Name="EstScrap" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="EstScrapType" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="SmartStringProcessed" Type="bit" Nullable="false" />
+          <Property Name="SmartString" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReqRefDes" Type="int" Nullable="false" />
+          <Property Name="ReassignSNAsm" Type="bit" Nullable="false" />
+          <Property Name="TLAODCCost" Type="decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="AssemblyMatch" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JdfStatus" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PressDevice" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DigitalFileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PrepressJobName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="JdfPrepressAction" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SendToPress" Type="bit" Nullable="false" />
+          <Property Name="RemovedFromPlan" Type="bit" Nullable="false" />
+          <Property Name="SendToPressInitiator" Type="int" Nullable="false" />
+          <Property Name="OperationType" Type="int" Nullable="false" />
+          <Property Name="SendToPrePress" Type="bit" Nullable="false" />
+          <Property Name="GroupSeq" Type="int" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PartPlanInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OrigStructTag" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ContractID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LinkToContract" Type="bit" Nullable="false" />
+          <Property Name="PCLinkRemoved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobMtl">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="JobComplete" Type="bit" Nullable="false" />
+          <Property Name="IssuedComplete" Type="bit" Nullable="false" />
+          <Property Name="JobNum" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="AssemblySeq" Type="int" Nullable="false" />
+          <Property Name="MtlSeq" Type="int" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="RequiredQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="IUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="LeadTime" Type="int" Nullable="false" />
+          <Property Name="RelatedOperation" Type="int" Nullable="false" />
+          <Property Name="MtlBurRate" Type="decimal" Precision="10" Scale="5" Nullable="false" />
+          <Property Name="EstMtlBurUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="IssuedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="TotalCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="MtlBurCost" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="ReqDate" Type="date" />
+          <Property Name="WarehouseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="SalvagePartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SalvageDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SalvageQtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="SalvageUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="SalvageMtlBurRate" Type="decimal" Precision="10" Scale="5" Nullable="false" />
+          <Property Name="SalvageUnitCredit" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="SalvageEstMtlBurUnitCredit" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="SalvageQtyToDate" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SalvageCredit" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="SalvageMtlBurCredit" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="MfgComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VendorNum" Type="int" Nullable="false" />
+          <Property Name="PurPoint" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="BuyIt" Type="bit" Nullable="false" />
+          <Property Name="Ordered" Type="bit" Nullable="false" />
+          <Property Name="PurComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BackFlush" Type="bit" Nullable="false" />
+          <Property Name="EstScrap" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="EstScrapType" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="FixedQty" Type="bit" Nullable="false" />
+          <Property Name="FindNum" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="SndAlrtCmpl" Type="bit" Nullable="false" />
+          <Property Name="RcvInspectionReq" Type="bit" Nullable="false" />
+          <Property Name="Plant" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Direct" Type="bit" Nullable="false" />
+          <Property Name="MaterialMtlCost" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="MaterialLabCost" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="MaterialSubCost" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="MaterialBurCost" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="SalvageMtlCredit" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="SalvageLbrCredit" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="SalvageBurCredit" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="SalvageSubCredit" Type="decimal" Precision="15" Scale="3" Nullable="false" />
+          <Property Name="APSAddResType" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="CallNum" Type="int" Nullable="false" />
+          <Property Name="CallLine" Type="int" Nullable="false" />
+          <Property Name="ProdCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocBillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ResReasonCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PricePerCode" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Billable" Type="bit" Nullable="false" />
+          <Property Name="ShippedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="DocUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="QtyStagedToDate" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="AddedMtl" Type="bit" Nullable="false" />
+          <Property Name="MiscCharge" Type="bit" Nullable="false" />
+          <Property Name="MiscCode" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="SCMiscCode" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="RFQNeeded" Type="bit" Nullable="false" />
+          <Property Name="RFQVendQuotes" Type="int" Nullable="false" />
+          <Property Name="RFQNum" Type="int" Nullable="false" />
+          <Property Name="RFQLine" Type="int" Nullable="false" />
+          <Property Name="RFQStat" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="AnalysisCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="GlbRFQ" Type="bit" Nullable="false" />
+          <Property Name="WhseAllocFlag" Type="bit" Nullable="false" />
+          <Property Name="WIReqDate" Type="date" />
+          <Property Name="Rpt1BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3BillableUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="BaseRequiredQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="BaseUOM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="WeightUOM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="ReqRefDes" Type="int" Nullable="false" />
+          <Property Name="BasePartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BaseRevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="SelectForPicking" Type="bit" Nullable="false" />
+          <Property Name="StagingWarehouseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="StagingBinNum" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PickError" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="EstMtlUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstLbrUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstBurUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="EstSubUnitCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="SalvageEstMtlUnitCredit" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="SalvageEstLbrUnitCredit" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="SalvageEstBurUnitCredit" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="SalvageEstSubUnitCredit" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="LoanedQty" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="BorrowedQty" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="ReassignSNAsm" Type="bit" Nullable="false" />
+          <Property Name="GeneralPlanInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EstStdDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PricingUOM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="RemovedFromPlan" Type="bit" Nullable="false" />
+          <Property Name="IsPOCostingMaintained" Type="bit" Nullable="false" />
+          <Property Name="EstStdType" Type="int" Nullable="false" />
+          <Property Name="POCostingFactor" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="PlannedQtyPerUnit" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="POCostingDirection" Type="int" Nullable="false" />
+          <Property Name="POCostingUnitVal" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="GroupSeq" Type="int" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrigStructTag" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="OrigGroupSeq" Type="int" Nullable="false" />
+          <Property Name="ShowStatusIcon" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ContractID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LinkToContract" Type="bit" Nullable="false" />
+          <Property Name="StagingLotNum" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PCLinkRemoved" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="JobOper">
           <Key>
             <PropertyRef Name="SysRowID" />
@@ -951,7 +1236,7 @@ warning 6002: The table/view 'Prod.dbo.V_BillOfMaterials' does not have a primar
           <Property Name="FixedQty" Type="bit" Nullable="false" />
           <Property Name="RelatedOperation" Type="int" Nullable="false" />
           <Property Name="MtlSeq" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="PhantomBOM" Type="bit" Nullable="false" />
           <Property Name="LastMaterialCost" Type="decimal" Precision="15" Scale="5" />
           <Property Name="ViewAsAsm" Type="bit" Nullable="false" />
@@ -1373,9 +1658,9 @@ warning 6002: The table/view 'Prod.dbo.V_WhereUsed' does not have a primary key 
             <PropertyRef Name="RelatedOperation" />
             <PropertyRef Name="MtlSeq" />
             <PropertyRef Name="ViewAsAsm" />
+            <PropertyRef Name="Name" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="WarehouseCode" />
-            <PropertyRef Name="Name" />
           </Key>
           <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
@@ -1446,6 +1731,8 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProductionModelStoreContainer">
+          <EntitySet Name="JobAsmbl" EntityType="Self.JobAsmbl" Schema="Erp" store:Type="Tables" />
+          <EntitySet Name="JobMtl" EntityType="Self.JobMtl" Schema="Erp" store:Type="Tables" />
           <EntitySet Name="JobOper" EntityType="Self.JobOper" Schema="Erp" store:Type="Tables" />
           <EntitySet Name="SysAgentSched" EntityType="Self.SysAgentSched" Schema="Ice" store:Type="Tables" />
           <EntitySet Name="SysAgentTask" EntityType="Self.SysAgentTask" Schema="Ice" store:Type="Tables" />
@@ -2462,6 +2749,8 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
             <End Role="SysTask" EntitySet="SysTasks" />
             <End Role="SysTaskLog" EntitySet="SysTaskLogs" />
           </AssociationSet>
+          <EntitySet Name="JobAsmbls" EntityType="ProductionModel.JobAsmbl" />
+          <EntitySet Name="JobMtls" EntityType="ProductionModel.JobMtl" />
         </EntityContainer>
         <EntityType Name="SysAgentTask">
           <Key>
@@ -2949,7 +3238,7 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
           <Property Name="FixedQty" Type="Boolean" Nullable="false" />
           <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
           <Property Name="MtlSeq" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhantomBOM" Type="Boolean" Nullable="false" />
           <Property Name="LastMaterialCost" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="ViewAsAsm" Type="Boolean" Nullable="false" />
@@ -3470,6 +3759,291 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="JobAsmbl">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="JobComplete" Type="Boolean" Nullable="false" />
+          <Property Name="JobNum" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="QtyPer" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="IUM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="RequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="PullQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="WarehouseCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="MtlBurRate" Type="Decimal" Nullable="false" Precision="10" Scale="5" />
+          <Property Name="EstUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstMtlBurUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="OverRunQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="StartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="DueDate" Type="DateTime" Precision="0" />
+          <Property Name="DueHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="Parent" Type="Int32" Nullable="false" />
+          <Property Name="PriorPeer" Type="Int32" Nullable="false" />
+          <Property Name="NextPeer" Type="Int32" Nullable="false" />
+          <Property Name="Child" Type="Int32" Nullable="false" />
+          <Property Name="TotalCost" Type="Decimal" Nullable="false" Precision="17" Scale="3" />
+          <Property Name="MtlBurCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="IssuedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="DrawNum" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedComplete" Type="Boolean" Nullable="false" />
+          <Property Name="CommentText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InCopyList" Type="Boolean" Nullable="false" />
+          <Property Name="BomSequence" Type="Int32" Nullable="false" />
+          <Property Name="BomLevel" Type="Int32" Nullable="false" />
+          <Property Name="WIStartDate" Type="DateTime" Precision="0" />
+          <Property Name="WIStartHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="WIDueDate" Type="DateTime" Precision="0" />
+          <Property Name="WIDueHour" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="TLALaborCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLABurdenCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMaterialCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLASubcontractCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMtlBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLASetupHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TLAProdHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TLELaborCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLEBurdenCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLEMaterialCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLESubcontractCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLEMtlBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLESetupHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TLEProdHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="LLALaborCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLABurdenCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="LLAMaterialCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLASubcontractCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMtlBurCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLASetupHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="LLAProdHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="LLELaborCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="LLEBurdenCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="LLEMaterialCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLESubcontractCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLEMtlBurCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLESetupHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="LLEProdHours" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="AutoRecOpr" Type="Int32" Nullable="false" />
+          <Property Name="FinalOpr" Type="Int32" Nullable="false" />
+          <Property Name="FindNum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ReceivedToStock" Type="Decimal" Nullable="false" Precision="13" Scale="3" />
+          <Property Name="Plant" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Direct" Type="Boolean" Nullable="false" />
+          <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
+          <Property Name="TLAMaterialLabCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMaterialMtlCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMaterialSubCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMaterialBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="LLAMaterialLabCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMaterialMtlCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMaterialSubCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMaterialBurCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="TotalMtlMtlCost" Type="Decimal" Nullable="false" Precision="17" Scale="3" />
+          <Property Name="TotalMtlLabCost" Type="Decimal" Nullable="false" Precision="17" Scale="3" />
+          <Property Name="TotalMtlSubCost" Type="Decimal" Nullable="false" Precision="17" Scale="3" />
+          <Property Name="TotalMtlBurCost" Type="Decimal" Nullable="false" Precision="17" Scale="3" />
+          <Property Name="CallNum" Type="Int32" Nullable="false" />
+          <Property Name="CallLine" Type="Int32" Nullable="false" />
+          <Property Name="RestoreFlag" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="AnalysisCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="LastConfigDate" Type="DateTime" Precision="0" />
+          <Property Name="LastConfigTime" Type="Int32" Nullable="false" />
+          <Property Name="LastConfigUserID" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="OrigRequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="UserMapData" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WhseAllocFlag" Type="Boolean" Nullable="false" />
+          <Property Name="TLAMaterialMtlBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="LLAMaterialMtlBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMfgCompLabCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMfgCompMtlCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMfgCompSubCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMfgCompBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="TLAMfgCompMtlBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="LLAMfgCompLabCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMfgCompMtlCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMfgCompSubCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMfgCompBurCost" Type="Decimal" Nullable="false" Precision="16" Scale="5" />
+          <Property Name="LLAMfgCompMtlBurCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="WeightUOM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="OrigMtlSeq" Type="Int32" Nullable="false" />
+          <Property Name="OrigRuleTag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ValRefDes" Type="Boolean" Nullable="false" />
+          <Property Name="BasePartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BaseRevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="EstMtlUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstLbrUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstBurUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstSubUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="PlanAsAsm" Type="Boolean" Nullable="false" />
+          <Property Name="PAARef" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="PAAFirm" Type="Boolean" Nullable="false" />
+          <Property Name="EstScrap" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="EstScrapType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SmartStringProcessed" Type="Boolean" Nullable="false" />
+          <Property Name="SmartString" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReqRefDes" Type="Int32" Nullable="false" />
+          <Property Name="ReassignSNAsm" Type="Boolean" Nullable="false" />
+          <Property Name="TLAODCCost" Type="Decimal" Nullable="false" Precision="19" Scale="5" />
+          <Property Name="AssemblyMatch" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JdfStatus" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PressDevice" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DigitalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrepressJobName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="JdfPrepressAction" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SendToPress" Type="Boolean" Nullable="false" />
+          <Property Name="RemovedFromPlan" Type="Boolean" Nullable="false" />
+          <Property Name="SendToPressInitiator" Type="Int32" Nullable="false" />
+          <Property Name="OperationType" Type="Int32" Nullable="false" />
+          <Property Name="SendToPrePress" Type="Boolean" Nullable="false" />
+          <Property Name="GroupSeq" Type="Int32" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+          <Property Name="PartPlanInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrigStructTag" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LinkToContract" Type="Boolean" Nullable="false" />
+          <Property Name="PCLinkRemoved" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobMtl">
+          <Key>
+            <PropertyRef Name="SysRowID" />
+          </Key>
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="JobComplete" Type="Boolean" Nullable="false" />
+          <Property Name="IssuedComplete" Type="Boolean" Nullable="false" />
+          <Property Name="JobNum" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="MtlSeq" Type="Int32" Nullable="false" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QtyPer" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="RequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="IUM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="LeadTime" Type="Int32" Nullable="false" />
+          <Property Name="RelatedOperation" Type="Int32" Nullable="false" />
+          <Property Name="MtlBurRate" Type="Decimal" Nullable="false" Precision="10" Scale="5" />
+          <Property Name="EstMtlBurUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="IssuedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="TotalCost" Type="Decimal" Nullable="false" Precision="17" Scale="3" />
+          <Property Name="MtlBurCost" Type="Decimal" Nullable="false" Precision="13" Scale="3" />
+          <Property Name="ReqDate" Type="DateTime" Precision="0" />
+          <Property Name="WarehouseCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SalvagePartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalvageDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SalvageQtyPer" Type="Decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="SalvageUM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="SalvageMtlBurRate" Type="Decimal" Nullable="false" Precision="10" Scale="5" />
+          <Property Name="SalvageUnitCredit" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="SalvageEstMtlBurUnitCredit" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="SalvageQtyToDate" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="SalvageCredit" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="SalvageMtlBurCredit" Type="Decimal" Nullable="false" Precision="13" Scale="3" />
+          <Property Name="MfgComment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VendorNum" Type="Int32" Nullable="false" />
+          <Property Name="PurPoint" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="BuyIt" Type="Boolean" Nullable="false" />
+          <Property Name="Ordered" Type="Boolean" Nullable="false" />
+          <Property Name="PurComment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BackFlush" Type="Boolean" Nullable="false" />
+          <Property Name="EstScrap" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="EstScrapType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="FixedQty" Type="Boolean" Nullable="false" />
+          <Property Name="FindNum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="SndAlrtCmpl" Type="Boolean" Nullable="false" />
+          <Property Name="RcvInspectionReq" Type="Boolean" Nullable="false" />
+          <Property Name="Plant" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Direct" Type="Boolean" Nullable="false" />
+          <Property Name="MaterialMtlCost" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="MaterialLabCost" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="MaterialSubCost" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="MaterialBurCost" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="SalvageMtlCredit" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="SalvageLbrCredit" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="SalvageBurCredit" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="SalvageSubCredit" Type="Decimal" Nullable="false" Precision="15" Scale="3" />
+          <Property Name="APSAddResType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="CallNum" Type="Int32" Nullable="false" />
+          <Property Name="CallLine" Type="Int32" Nullable="false" />
+          <Property Name="ProdCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="DocBillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="ResReasonCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PricePerCode" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Billable" Type="Boolean" Nullable="false" />
+          <Property Name="ShippedQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="DocUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="QtyStagedToDate" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="AddedMtl" Type="Boolean" Nullable="false" />
+          <Property Name="MiscCharge" Type="Boolean" Nullable="false" />
+          <Property Name="MiscCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="SCMiscCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="RFQNeeded" Type="Boolean" Nullable="false" />
+          <Property Name="RFQVendQuotes" Type="Int32" Nullable="false" />
+          <Property Name="RFQNum" Type="Int32" Nullable="false" />
+          <Property Name="RFQLine" Type="Int32" Nullable="false" />
+          <Property Name="RFQStat" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="AnalysisCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="GlbRFQ" Type="Boolean" Nullable="false" />
+          <Property Name="WhseAllocFlag" Type="Boolean" Nullable="false" />
+          <Property Name="WIReqDate" Type="DateTime" Precision="0" />
+          <Property Name="Rpt1BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt2BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt3BillableUnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt1UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt2UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="Rpt3UnitPrice" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="BaseRequiredQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="BaseUOM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="WeightUOM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="ReqRefDes" Type="Int32" Nullable="false" />
+          <Property Name="BasePartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BaseRevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="SelectForPicking" Type="Boolean" Nullable="false" />
+          <Property Name="StagingWarehouseCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="StagingBinNum" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PickError" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="EstMtlUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstLbrUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstBurUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="EstSubUnitCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="SalvageEstMtlUnitCredit" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="SalvageEstLbrUnitCredit" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="SalvageEstBurUnitCredit" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="SalvageEstSubUnitCredit" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="LoanedQty" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="BorrowedQty" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="ReassignSNAsm" Type="Boolean" Nullable="false" />
+          <Property Name="GeneralPlanInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EstStdDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PricingUOM" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="RemovedFromPlan" Type="Boolean" Nullable="false" />
+          <Property Name="IsPOCostingMaintained" Type="Boolean" Nullable="false" />
+          <Property Name="EstStdType" Type="Int32" Nullable="false" />
+          <Property Name="POCostingFactor" Type="Decimal" Nullable="false" Precision="14" Scale="5" />
+          <Property Name="PlannedQtyPerUnit" Type="Decimal" Nullable="false" Precision="14" Scale="5" />
+          <Property Name="POCostingDirection" Type="Int32" Nullable="false" />
+          <Property Name="POCostingUnitVal" Type="Decimal" Nullable="false" Precision="14" Scale="5" />
+          <Property Name="GroupSeq" Type="Int32" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+          <Property Name="OrigStructTag" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OrigGroupSeq" Type="Int32" Nullable="false" />
+          <Property Name="ShowStatusIcon" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ContractID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LinkToContract" Type="Boolean" Nullable="false" />
+          <Property Name="StagingLotNum" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PCLinkRemoved" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4577,6 +5151,293 @@ warning 6002: The table/view 'Prod.dbo.V_YardReport' does not have a primary key
                 <ScalarProperty Name="TaskType" ColumnName="TaskType" />
                 <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
                 <ScalarProperty Name="SysTaskNum" ColumnName="SysTaskNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobAsmbls">
+            <EntityTypeMapping TypeName="ProductionModel.JobAsmbl">
+              <MappingFragment StoreEntitySet="JobAsmbl">
+                <ScalarProperty Name="PCLinkRemoved" ColumnName="PCLinkRemoved" />
+                <ScalarProperty Name="LinkToContract" ColumnName="LinkToContract" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="OrigStructTag" ColumnName="OrigStructTag" />
+                <ScalarProperty Name="PartPlanInfo" ColumnName="PartPlanInfo" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="GroupSeq" ColumnName="GroupSeq" />
+                <ScalarProperty Name="SendToPrePress" ColumnName="SendToPrePress" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="SendToPressInitiator" ColumnName="SendToPressInitiator" />
+                <ScalarProperty Name="RemovedFromPlan" ColumnName="RemovedFromPlan" />
+                <ScalarProperty Name="SendToPress" ColumnName="SendToPress" />
+                <ScalarProperty Name="JdfPrepressAction" ColumnName="JdfPrepressAction" />
+                <ScalarProperty Name="PrepressJobName" ColumnName="PrepressJobName" />
+                <ScalarProperty Name="DigitalFileName" ColumnName="DigitalFileName" />
+                <ScalarProperty Name="PressDevice" ColumnName="PressDevice" />
+                <ScalarProperty Name="JdfStatus" ColumnName="JdfStatus" />
+                <ScalarProperty Name="AssemblyMatch" ColumnName="AssemblyMatch" />
+                <ScalarProperty Name="TLAODCCost" ColumnName="TLAODCCost" />
+                <ScalarProperty Name="ReassignSNAsm" ColumnName="ReassignSNAsm" />
+                <ScalarProperty Name="ReqRefDes" ColumnName="ReqRefDes" />
+                <ScalarProperty Name="SmartString" ColumnName="SmartString" />
+                <ScalarProperty Name="SmartStringProcessed" ColumnName="SmartStringProcessed" />
+                <ScalarProperty Name="EstScrapType" ColumnName="EstScrapType" />
+                <ScalarProperty Name="EstScrap" ColumnName="EstScrap" />
+                <ScalarProperty Name="PAAFirm" ColumnName="PAAFirm" />
+                <ScalarProperty Name="PAARef" ColumnName="PAARef" />
+                <ScalarProperty Name="PlanAsAsm" ColumnName="PlanAsAsm" />
+                <ScalarProperty Name="EstSubUnitCost" ColumnName="EstSubUnitCost" />
+                <ScalarProperty Name="EstBurUnitCost" ColumnName="EstBurUnitCost" />
+                <ScalarProperty Name="EstLbrUnitCost" ColumnName="EstLbrUnitCost" />
+                <ScalarProperty Name="EstMtlUnitCost" ColumnName="EstMtlUnitCost" />
+                <ScalarProperty Name="BaseRevisionNum" ColumnName="BaseRevisionNum" />
+                <ScalarProperty Name="BasePartNum" ColumnName="BasePartNum" />
+                <ScalarProperty Name="ValRefDes" ColumnName="ValRefDes" />
+                <ScalarProperty Name="OrigRuleTag" ColumnName="OrigRuleTag" />
+                <ScalarProperty Name="OrigMtlSeq" ColumnName="OrigMtlSeq" />
+                <ScalarProperty Name="WeightUOM" ColumnName="WeightUOM" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="LLAMfgCompMtlBurCost" ColumnName="LLAMfgCompMtlBurCost" />
+                <ScalarProperty Name="LLAMfgCompBurCost" ColumnName="LLAMfgCompBurCost" />
+                <ScalarProperty Name="LLAMfgCompSubCost" ColumnName="LLAMfgCompSubCost" />
+                <ScalarProperty Name="LLAMfgCompMtlCost" ColumnName="LLAMfgCompMtlCost" />
+                <ScalarProperty Name="LLAMfgCompLabCost" ColumnName="LLAMfgCompLabCost" />
+                <ScalarProperty Name="TLAMfgCompMtlBurCost" ColumnName="TLAMfgCompMtlBurCost" />
+                <ScalarProperty Name="TLAMfgCompBurCost" ColumnName="TLAMfgCompBurCost" />
+                <ScalarProperty Name="TLAMfgCompSubCost" ColumnName="TLAMfgCompSubCost" />
+                <ScalarProperty Name="TLAMfgCompMtlCost" ColumnName="TLAMfgCompMtlCost" />
+                <ScalarProperty Name="TLAMfgCompLabCost" ColumnName="TLAMfgCompLabCost" />
+                <ScalarProperty Name="LLAMaterialMtlBurCost" ColumnName="LLAMaterialMtlBurCost" />
+                <ScalarProperty Name="TLAMaterialMtlBurCost" ColumnName="TLAMaterialMtlBurCost" />
+                <ScalarProperty Name="WhseAllocFlag" ColumnName="WhseAllocFlag" />
+                <ScalarProperty Name="UserMapData" ColumnName="UserMapData" />
+                <ScalarProperty Name="OrigRequiredQty" ColumnName="OrigRequiredQty" />
+                <ScalarProperty Name="LastConfigUserID" ColumnName="LastConfigUserID" />
+                <ScalarProperty Name="LastConfigTime" ColumnName="LastConfigTime" />
+                <ScalarProperty Name="LastConfigDate" ColumnName="LastConfigDate" />
+                <ScalarProperty Name="AnalysisCode" ColumnName="AnalysisCode" />
+                <ScalarProperty Name="RestoreFlag" ColumnName="RestoreFlag" />
+                <ScalarProperty Name="CallLine" ColumnName="CallLine" />
+                <ScalarProperty Name="CallNum" ColumnName="CallNum" />
+                <ScalarProperty Name="TotalMtlBurCost" ColumnName="TotalMtlBurCost" />
+                <ScalarProperty Name="TotalMtlSubCost" ColumnName="TotalMtlSubCost" />
+                <ScalarProperty Name="TotalMtlLabCost" ColumnName="TotalMtlLabCost" />
+                <ScalarProperty Name="TotalMtlMtlCost" ColumnName="TotalMtlMtlCost" />
+                <ScalarProperty Name="LLAMaterialBurCost" ColumnName="LLAMaterialBurCost" />
+                <ScalarProperty Name="LLAMaterialSubCost" ColumnName="LLAMaterialSubCost" />
+                <ScalarProperty Name="LLAMaterialMtlCost" ColumnName="LLAMaterialMtlCost" />
+                <ScalarProperty Name="LLAMaterialLabCost" ColumnName="LLAMaterialLabCost" />
+                <ScalarProperty Name="TLAMaterialBurCost" ColumnName="TLAMaterialBurCost" />
+                <ScalarProperty Name="TLAMaterialSubCost" ColumnName="TLAMaterialSubCost" />
+                <ScalarProperty Name="TLAMaterialMtlCost" ColumnName="TLAMaterialMtlCost" />
+                <ScalarProperty Name="TLAMaterialLabCost" ColumnName="TLAMaterialLabCost" />
+                <ScalarProperty Name="RelatedOperation" ColumnName="RelatedOperation" />
+                <ScalarProperty Name="Direct" ColumnName="Direct" />
+                <ScalarProperty Name="Plant" ColumnName="Plant" />
+                <ScalarProperty Name="ReceivedToStock" ColumnName="ReceivedToStock" />
+                <ScalarProperty Name="FindNum" ColumnName="FindNum" />
+                <ScalarProperty Name="FinalOpr" ColumnName="FinalOpr" />
+                <ScalarProperty Name="AutoRecOpr" ColumnName="AutoRecOpr" />
+                <ScalarProperty Name="LLEProdHours" ColumnName="LLEProdHours" />
+                <ScalarProperty Name="LLESetupHours" ColumnName="LLESetupHours" />
+                <ScalarProperty Name="LLEMtlBurCost" ColumnName="LLEMtlBurCost" />
+                <ScalarProperty Name="LLESubcontractCost" ColumnName="LLESubcontractCost" />
+                <ScalarProperty Name="LLEMaterialCost" ColumnName="LLEMaterialCost" />
+                <ScalarProperty Name="LLEBurdenCost" ColumnName="LLEBurdenCost" />
+                <ScalarProperty Name="LLELaborCost" ColumnName="LLELaborCost" />
+                <ScalarProperty Name="LLAProdHours" ColumnName="LLAProdHours" />
+                <ScalarProperty Name="LLASetupHours" ColumnName="LLASetupHours" />
+                <ScalarProperty Name="LLAMtlBurCost" ColumnName="LLAMtlBurCost" />
+                <ScalarProperty Name="LLASubcontractCost" ColumnName="LLASubcontractCost" />
+                <ScalarProperty Name="LLAMaterialCost" ColumnName="LLAMaterialCost" />
+                <ScalarProperty Name="LLABurdenCost" ColumnName="LLABurdenCost" />
+                <ScalarProperty Name="LLALaborCost" ColumnName="LLALaborCost" />
+                <ScalarProperty Name="TLEProdHours" ColumnName="TLEProdHours" />
+                <ScalarProperty Name="TLESetupHours" ColumnName="TLESetupHours" />
+                <ScalarProperty Name="TLEMtlBurCost" ColumnName="TLEMtlBurCost" />
+                <ScalarProperty Name="TLESubcontractCost" ColumnName="TLESubcontractCost" />
+                <ScalarProperty Name="TLEMaterialCost" ColumnName="TLEMaterialCost" />
+                <ScalarProperty Name="TLEBurdenCost" ColumnName="TLEBurdenCost" />
+                <ScalarProperty Name="TLELaborCost" ColumnName="TLELaborCost" />
+                <ScalarProperty Name="TLAProdHours" ColumnName="TLAProdHours" />
+                <ScalarProperty Name="TLASetupHours" ColumnName="TLASetupHours" />
+                <ScalarProperty Name="TLAMtlBurCost" ColumnName="TLAMtlBurCost" />
+                <ScalarProperty Name="TLASubcontractCost" ColumnName="TLASubcontractCost" />
+                <ScalarProperty Name="TLAMaterialCost" ColumnName="TLAMaterialCost" />
+                <ScalarProperty Name="TLABurdenCost" ColumnName="TLABurdenCost" />
+                <ScalarProperty Name="TLALaborCost" ColumnName="TLALaborCost" />
+                <ScalarProperty Name="WIDueHour" ColumnName="WIDueHour" />
+                <ScalarProperty Name="WIDueDate" ColumnName="WIDueDate" />
+                <ScalarProperty Name="WIStartHour" ColumnName="WIStartHour" />
+                <ScalarProperty Name="WIStartDate" ColumnName="WIStartDate" />
+                <ScalarProperty Name="BomLevel" ColumnName="BomLevel" />
+                <ScalarProperty Name="BomSequence" ColumnName="BomSequence" />
+                <ScalarProperty Name="InCopyList" ColumnName="InCopyList" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="IssuedComplete" ColumnName="IssuedComplete" />
+                <ScalarProperty Name="DrawNum" ColumnName="DrawNum" />
+                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
+                <ScalarProperty Name="MtlBurCost" ColumnName="MtlBurCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="NextPeer" ColumnName="NextPeer" />
+                <ScalarProperty Name="PriorPeer" ColumnName="PriorPeer" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="DueHour" ColumnName="DueHour" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="OverRunQty" ColumnName="OverRunQty" />
+                <ScalarProperty Name="EstMtlBurUnitCost" ColumnName="EstMtlBurUnitCost" />
+                <ScalarProperty Name="EstUnitCost" ColumnName="EstUnitCost" />
+                <ScalarProperty Name="MtlBurRate" ColumnName="MtlBurRate" />
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
+                <ScalarProperty Name="PullQty" ColumnName="PullQty" />
+                <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
+                <ScalarProperty Name="IUM" ColumnName="IUM" />
+                <ScalarProperty Name="QtyPer" ColumnName="QtyPer" />
+                <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+                <ScalarProperty Name="JobComplete" ColumnName="JobComplete" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobMtls">
+            <EntityTypeMapping TypeName="ProductionModel.JobMtl">
+              <MappingFragment StoreEntitySet="JobMtl">
+                <ScalarProperty Name="PCLinkRemoved" ColumnName="PCLinkRemoved" />
+                <ScalarProperty Name="StagingLotNum" ColumnName="StagingLotNum" />
+                <ScalarProperty Name="LinkToContract" ColumnName="LinkToContract" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="ShowStatusIcon" ColumnName="ShowStatusIcon" />
+                <ScalarProperty Name="OrigGroupSeq" ColumnName="OrigGroupSeq" />
+                <ScalarProperty Name="OrigStructTag" ColumnName="OrigStructTag" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="GroupSeq" ColumnName="GroupSeq" />
+                <ScalarProperty Name="POCostingUnitVal" ColumnName="POCostingUnitVal" />
+                <ScalarProperty Name="POCostingDirection" ColumnName="POCostingDirection" />
+                <ScalarProperty Name="PlannedQtyPerUnit" ColumnName="PlannedQtyPerUnit" />
+                <ScalarProperty Name="POCostingFactor" ColumnName="POCostingFactor" />
+                <ScalarProperty Name="EstStdType" ColumnName="EstStdType" />
+                <ScalarProperty Name="IsPOCostingMaintained" ColumnName="IsPOCostingMaintained" />
+                <ScalarProperty Name="RemovedFromPlan" ColumnName="RemovedFromPlan" />
+                <ScalarProperty Name="PricingUOM" ColumnName="PricingUOM" />
+                <ScalarProperty Name="EstStdDescription" ColumnName="EstStdDescription" />
+                <ScalarProperty Name="GeneralPlanInfo" ColumnName="GeneralPlanInfo" />
+                <ScalarProperty Name="ReassignSNAsm" ColumnName="ReassignSNAsm" />
+                <ScalarProperty Name="BorrowedQty" ColumnName="BorrowedQty" />
+                <ScalarProperty Name="LoanedQty" ColumnName="LoanedQty" />
+                <ScalarProperty Name="SalvageEstSubUnitCredit" ColumnName="SalvageEstSubUnitCredit" />
+                <ScalarProperty Name="SalvageEstBurUnitCredit" ColumnName="SalvageEstBurUnitCredit" />
+                <ScalarProperty Name="SalvageEstLbrUnitCredit" ColumnName="SalvageEstLbrUnitCredit" />
+                <ScalarProperty Name="SalvageEstMtlUnitCredit" ColumnName="SalvageEstMtlUnitCredit" />
+                <ScalarProperty Name="EstSubUnitCost" ColumnName="EstSubUnitCost" />
+                <ScalarProperty Name="EstBurUnitCost" ColumnName="EstBurUnitCost" />
+                <ScalarProperty Name="EstLbrUnitCost" ColumnName="EstLbrUnitCost" />
+                <ScalarProperty Name="EstMtlUnitCost" ColumnName="EstMtlUnitCost" />
+                <ScalarProperty Name="PickError" ColumnName="PickError" />
+                <ScalarProperty Name="StagingBinNum" ColumnName="StagingBinNum" />
+                <ScalarProperty Name="StagingWarehouseCode" ColumnName="StagingWarehouseCode" />
+                <ScalarProperty Name="SelectForPicking" ColumnName="SelectForPicking" />
+                <ScalarProperty Name="BaseRevisionNum" ColumnName="BaseRevisionNum" />
+                <ScalarProperty Name="BasePartNum" ColumnName="BasePartNum" />
+                <ScalarProperty Name="ReqRefDes" ColumnName="ReqRefDes" />
+                <ScalarProperty Name="WeightUOM" ColumnName="WeightUOM" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="BaseUOM" ColumnName="BaseUOM" />
+                <ScalarProperty Name="BaseRequiredQty" ColumnName="BaseRequiredQty" />
+                <ScalarProperty Name="Rpt3UnitPrice" ColumnName="Rpt3UnitPrice" />
+                <ScalarProperty Name="Rpt2UnitPrice" ColumnName="Rpt2UnitPrice" />
+                <ScalarProperty Name="Rpt1UnitPrice" ColumnName="Rpt1UnitPrice" />
+                <ScalarProperty Name="Rpt3BillableUnitPrice" ColumnName="Rpt3BillableUnitPrice" />
+                <ScalarProperty Name="Rpt2BillableUnitPrice" ColumnName="Rpt2BillableUnitPrice" />
+                <ScalarProperty Name="Rpt1BillableUnitPrice" ColumnName="Rpt1BillableUnitPrice" />
+                <ScalarProperty Name="WIReqDate" ColumnName="WIReqDate" />
+                <ScalarProperty Name="WhseAllocFlag" ColumnName="WhseAllocFlag" />
+                <ScalarProperty Name="GlbRFQ" ColumnName="GlbRFQ" />
+                <ScalarProperty Name="AnalysisCode" ColumnName="AnalysisCode" />
+                <ScalarProperty Name="RFQStat" ColumnName="RFQStat" />
+                <ScalarProperty Name="RFQLine" ColumnName="RFQLine" />
+                <ScalarProperty Name="RFQNum" ColumnName="RFQNum" />
+                <ScalarProperty Name="RFQVendQuotes" ColumnName="RFQVendQuotes" />
+                <ScalarProperty Name="RFQNeeded" ColumnName="RFQNeeded" />
+                <ScalarProperty Name="SCMiscCode" ColumnName="SCMiscCode" />
+                <ScalarProperty Name="MiscCode" ColumnName="MiscCode" />
+                <ScalarProperty Name="MiscCharge" ColumnName="MiscCharge" />
+                <ScalarProperty Name="AddedMtl" ColumnName="AddedMtl" />
+                <ScalarProperty Name="QtyStagedToDate" ColumnName="QtyStagedToDate" />
+                <ScalarProperty Name="DocUnitPrice" ColumnName="DocUnitPrice" />
+                <ScalarProperty Name="ShippedQty" ColumnName="ShippedQty" />
+                <ScalarProperty Name="Billable" ColumnName="Billable" />
+                <ScalarProperty Name="PricePerCode" ColumnName="PricePerCode" />
+                <ScalarProperty Name="ResReasonCode" ColumnName="ResReasonCode" />
+                <ScalarProperty Name="DocBillableUnitPrice" ColumnName="DocBillableUnitPrice" />
+                <ScalarProperty Name="BillableUnitPrice" ColumnName="BillableUnitPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProdCode" ColumnName="ProdCode" />
+                <ScalarProperty Name="CallLine" ColumnName="CallLine" />
+                <ScalarProperty Name="CallNum" ColumnName="CallNum" />
+                <ScalarProperty Name="APSAddResType" ColumnName="APSAddResType" />
+                <ScalarProperty Name="SalvageSubCredit" ColumnName="SalvageSubCredit" />
+                <ScalarProperty Name="SalvageBurCredit" ColumnName="SalvageBurCredit" />
+                <ScalarProperty Name="SalvageLbrCredit" ColumnName="SalvageLbrCredit" />
+                <ScalarProperty Name="SalvageMtlCredit" ColumnName="SalvageMtlCredit" />
+                <ScalarProperty Name="MaterialBurCost" ColumnName="MaterialBurCost" />
+                <ScalarProperty Name="MaterialSubCost" ColumnName="MaterialSubCost" />
+                <ScalarProperty Name="MaterialLabCost" ColumnName="MaterialLabCost" />
+                <ScalarProperty Name="MaterialMtlCost" ColumnName="MaterialMtlCost" />
+                <ScalarProperty Name="Direct" ColumnName="Direct" />
+                <ScalarProperty Name="Plant" ColumnName="Plant" />
+                <ScalarProperty Name="RcvInspectionReq" ColumnName="RcvInspectionReq" />
+                <ScalarProperty Name="SndAlrtCmpl" ColumnName="SndAlrtCmpl" />
+                <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+                <ScalarProperty Name="FindNum" ColumnName="FindNum" />
+                <ScalarProperty Name="FixedQty" ColumnName="FixedQty" />
+                <ScalarProperty Name="EstScrapType" ColumnName="EstScrapType" />
+                <ScalarProperty Name="EstScrap" ColumnName="EstScrap" />
+                <ScalarProperty Name="BackFlush" ColumnName="BackFlush" />
+                <ScalarProperty Name="PurComment" ColumnName="PurComment" />
+                <ScalarProperty Name="Ordered" ColumnName="Ordered" />
+                <ScalarProperty Name="BuyIt" ColumnName="BuyIt" />
+                <ScalarProperty Name="PurPoint" ColumnName="PurPoint" />
+                <ScalarProperty Name="VendorNum" ColumnName="VendorNum" />
+                <ScalarProperty Name="MfgComment" ColumnName="MfgComment" />
+                <ScalarProperty Name="SalvageMtlBurCredit" ColumnName="SalvageMtlBurCredit" />
+                <ScalarProperty Name="SalvageCredit" ColumnName="SalvageCredit" />
+                <ScalarProperty Name="SalvageQtyToDate" ColumnName="SalvageQtyToDate" />
+                <ScalarProperty Name="SalvageEstMtlBurUnitCredit" ColumnName="SalvageEstMtlBurUnitCredit" />
+                <ScalarProperty Name="SalvageUnitCredit" ColumnName="SalvageUnitCredit" />
+                <ScalarProperty Name="SalvageMtlBurRate" ColumnName="SalvageMtlBurRate" />
+                <ScalarProperty Name="SalvageUM" ColumnName="SalvageUM" />
+                <ScalarProperty Name="SalvageQtyPer" ColumnName="SalvageQtyPer" />
+                <ScalarProperty Name="SalvageDescription" ColumnName="SalvageDescription" />
+                <ScalarProperty Name="SalvagePartNum" ColumnName="SalvagePartNum" />
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
+                <ScalarProperty Name="ReqDate" ColumnName="ReqDate" />
+                <ScalarProperty Name="MtlBurCost" ColumnName="MtlBurCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
+                <ScalarProperty Name="EstUnitCost" ColumnName="EstUnitCost" />
+                <ScalarProperty Name="EstMtlBurUnitCost" ColumnName="EstMtlBurUnitCost" />
+                <ScalarProperty Name="MtlBurRate" ColumnName="MtlBurRate" />
+                <ScalarProperty Name="RelatedOperation" ColumnName="RelatedOperation" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="IUM" ColumnName="IUM" />
+                <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
+                <ScalarProperty Name="QtyPer" ColumnName="QtyPer" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="MtlSeq" ColumnName="MtlSeq" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+                <ScalarProperty Name="IssuedComplete" ColumnName="IssuedComplete" />
+                <ScalarProperty Name="JobComplete" ColumnName="JobComplete" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -637,6 +637,12 @@
     <Compile Include="EntityModels\Production\IMPartBin.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Production\JobAsmbl.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\JobMtl.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Production\JobOper.cs">
       <DependentUpon>ProductionModel.tt</DependentUpon>
     </Compile>

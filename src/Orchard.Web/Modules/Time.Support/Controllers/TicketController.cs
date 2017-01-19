@@ -214,7 +214,7 @@ namespace Time.Support.Controllers
             var qry = from t in _db.TicketProjects
                       join emp in _db.TicketEmployees on t.AssignedEmployeeID equals emp.EmployeeID
                       select t;
-                      
+
 
             if (!IncludeComplete) qry = qry.Where(x => x.TicketStatus.isOpen);
 
@@ -555,6 +555,7 @@ namespace Time.Support.Controllers
 
             ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RatedSortParm = String.IsNullOrEmpty(sortOrder) ? "rated_desc" : "";
             switch (sortOrder)
             {
                 case "priority_desc":
@@ -562,6 +563,9 @@ namespace Time.Support.Controllers
                     break;
                 case "name_desc":
                     tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                case "rated_desc":
+                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence).ThenBy(x => x.TicketID);
                     break;
                 default:
                     tickets = tickets.OrderBy(x => x.TicketID);
@@ -579,6 +583,7 @@ namespace Time.Support.Controllers
 
             ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RatedSortParm = String.IsNullOrEmpty(sortOrder) ? "rated_desc" : "";
             switch (sortOrder)
             {
                 case "priority_desc":
@@ -586,6 +591,9 @@ namespace Time.Support.Controllers
                     break;
                 case "name_desc":
                     tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                case "rated_desc":
+                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence).ThenBy(x => x.TicketID);
                     break;
                 default:
                     tickets = tickets.OrderBy(x => x.TicketID);
@@ -682,6 +690,7 @@ namespace Time.Support.Controllers
 
             ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RatedSortParm = String.IsNullOrEmpty(sortOrder) ? "rated_desc" : "";
             switch (sortOrder)
             {
                 case "priority_desc":
@@ -689,6 +698,9 @@ namespace Time.Support.Controllers
                     break;
                 case "name_desc":
                     tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                case "rated_desc":
+                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence).ThenBy(x => x.TicketID);
                     break;
                 default:
                     tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence).ThenBy(x => x.TicketID);
@@ -750,7 +762,7 @@ namespace Time.Support.Controllers
                     {
                         tickets.TicketSequence = newpos;
                         ticketup.TicketSequence = sequence.Single();
-                }
+                    }
 
                     if (ModelState.IsValid)
                     {
@@ -775,6 +787,7 @@ namespace Time.Support.Controllers
 
             ViewBag.PrioritySortParm = String.IsNullOrEmpty(sortOrder) ? "priority_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RatedSortParm = String.IsNullOrEmpty(sortOrder) ? "rated_desc" : "";
             switch (sortOrder)
             {
                 case "priority_desc":
@@ -782,6 +795,9 @@ namespace Time.Support.Controllers
                     break;
                 case "name_desc":
                     tickets = tickets.OrderBy(x => x.Title);
+                    break;
+                case "rated_desc":
+                    tickets = tickets.OrderBy(x => x.TicketSequence == null).ThenBy(x => x.TicketSequence).ThenBy(x => x.TicketID);
                     break;
                 default:
                     tickets = tickets.OrderBy(x => x.TicketID);

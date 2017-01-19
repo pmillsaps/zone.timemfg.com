@@ -45,5 +45,7 @@ namespace Time.Data.EntityModels.Production
         public virtual DbSet<V_JobInformation_NotClosed> V_JobInformation_NotClosed { get; set; }
         public virtual DbSet<SysTaskLog> SysTaskLogs { get; set; }
         public virtual DbSet<SysTask> SysTasks { get; set; }
+        public virtual DbSet<JobAsmbl> JobAsmbls { get; set; }
+        public virtual DbSet<JobMtl> JobMtls { get; set; }
     }
 }
