@@ -1,0 +1,49 @@
+﻿@model Time.Invoicing.EntityModels.PcInvoice.Chassis
+@Html.HiddenFor(model => model.FullName)
+<div class="editor-label">
+    @Html.LabelFor(model => model.ModelYearLookup)
+</div>
+<div class="editor-field">
+    @Html.DropDownList("ModelYearId", "-- Select --")
+    @*@Html.DropDownListFor(model => model.ModelYearId, (SelectList)ViewBag.ModelYearId, "-- Select --")*@
+    @Html.ValidationMessageFor(model => model.ModelYearId)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.ChassisModel)
+</div>
+<div class="editor-field">
+    @Html.DropDownList("ChassisModelId", "-- Select --")
+    @*@Html.DropDownListFor(model => model.ChassisModelId, (SelectList)ViewBag.ChassisModelId, "-- Select --")*@
+    @Html.ValidationMessageFor(model => model.ChassisModel)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.Transmission)
+</div>
+<div class="editor-field">
+    @Html.DropDownList("TransmissionId", "-- Select --")
+    @*@Html.DropDownListFor(model => model.TransmissionId, (SelectList)ViewBag.TransmissionId, "-- Select --")*@
+    @Html.ValidationMessageFor(model => model.TransmissionId)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.CALookup)
+</div>
+<div class="editor-field">
+    @Html.DropDownList("CALookupId", "-- Select --")
+    @*@Html.DropDownListFor(model => model.CALookupId, (SelectList)ViewBag.CALookupId, "-- Select --")*@
+    @Html.ValidationMessageFor(model => model.CALookupId)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.GVWLookup)
+</div>
+<div class="editor-field">
+    @Html.DropDownList("GVWLookupId", "-- Select --")
+    @*@Html.DropDownListFor(model => model.GVWLookupId, (SelectList)ViewBag.GVWLookupId, "-- Select --")*@
+    @Html.ValidationMessageFor(model => model.GVWLookupId)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.Inactive)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Inactive)
+    @Html.ValidationMessageFor(model => model.Inactive)
+</div>

@@ -1,0 +1,872 @@
+﻿
+
+<div class="row">
+    <div class="col-md-2">     
+        @if (Request.Url.AbsoluteUri.Contains("priority_desc"))
+        {
+            <h5>Sort By: Priority</h5>
+        }
+        else if (Request.Url.AbsoluteUri.Contains("name_desc"))
+        {
+            <h5>Sort By: Name</h5>
+        }
+        else if (Request.Url.AbsoluteUri.Contains("rated_desc"))
+        {
+            <h5>Sort By: Rating</h5>
+        }
+        else
+        {
+            <h5>Sort By: </h5>
+        }
+    </div>
+</div>
+<div class="row">
+    @if (Request.Url.AbsoluteUri.Contains("Support?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Index", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/All?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "All", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyOpenTickets?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyOpenTickets", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyTickets?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyTickets", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/0?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/0", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/1?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/1", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/2?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/2", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/3?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/3", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/4?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/4", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/5?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/5", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/6?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/6", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/7?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/7", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/8?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/8", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/9?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/9", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/10?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/10", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/11?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/11", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/12?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/12", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/13?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/13", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/14?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/14", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/15?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/15", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/16?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/16", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/17?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/17", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/18?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/18", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/19?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/19", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyStatus/20?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "MyStatus/20", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/0?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/0", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/1?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/1", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/2?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/2", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/3?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/3", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/4?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/4", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/5?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/5", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/6?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/6", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/7?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/7", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/8?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/8", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/9?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/9", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/10?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/10", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/11?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/11", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/12?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/12", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/13?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/13", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/14?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/14", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/15?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/15", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/16?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/16", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/17?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/17", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/18?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/18", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/19?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/19", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Status/20?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Status/20", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/1?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/1", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/2?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/2", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/3?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/3", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/4?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/4", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/5?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/5", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/6?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/6", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/7?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/7", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/8?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/8", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/9?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/9", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/10?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/10", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/11?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/11", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/12?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/12", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/13?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/13", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/14?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/14", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/15?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/15", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Category/16?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Category/16", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/1?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/1", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/2?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/2", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/3?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/3", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/4?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/4", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/5?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/5", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/6?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/6", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/7?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/7", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/8?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/8", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/9?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/9", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/10?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/10", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/11?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/11", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/12?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/12", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/13?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/13", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/14?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/14", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/15?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/15", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/16?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/16", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/17?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/17", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/18?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/18", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/19?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/19", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/20?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/20", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/21?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/21", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/22?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/22", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/Department/23?sortOrder="))
+    {
+        <div class="col-md-2">@Html.ActionLink("Clear Sort", "Department/23", null, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("All"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "All", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-1">@Html.ActionLink("Priority", "All", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyOpenTickets"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyOpenTickets", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-1">@Html.ActionLink("Priority", "MyOpenTickets", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Support/Ticket/MyTickets"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyTickets", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-1">@Html.ActionLink("Priority", "MyTickets", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/0"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/0", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/0", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/1"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/1", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/1", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/2"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/2", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/2", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/3"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/3", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/3", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/4"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/4", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/4", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/5"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/5", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/5", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/6"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/6", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/6", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/7"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/7", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/7", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/8"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/8", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/8", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/9"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/9", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/9", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/10"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/10", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/10", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/11"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/11", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/11", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/12"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/12", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/12", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/13"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/13", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/13", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/14"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/14", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/14", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/15"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/15", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/15", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/16"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/16", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/16", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/17"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/17", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/17", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/18"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/18", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/18", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/19"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/19", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/19", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("MyStatus/20"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "MyStatus/20", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "MyStatus/20", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/0"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/0", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/0", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/1"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/1", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/1", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/2"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/2", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/2", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/3"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/3", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/3", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/4"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/4", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/4", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/5"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/5", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/5", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/6"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/6", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/6", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/7"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/7", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/7", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/8"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/8", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/8", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/9"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/9", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/9", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/10"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/10", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/10", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/11"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/11", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/11", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/12"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/12", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/12", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/13"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/13", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/13", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/14"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/14", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/14", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/15"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/15", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/15", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/16"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/16", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/16", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/17"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/17", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/17", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/18"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/18", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/18", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/19"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/19", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/19", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Status/20"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Status/20", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Status/20", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/1"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/1", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/1", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/2"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/2", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/2", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/3"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/3", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/3", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/4"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/4", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/4", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/5"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/5", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/5", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/6"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/6", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/6", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/7"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/7", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/7", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/8"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/8", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/8", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/9"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/9", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/9", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/10"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/10", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/10", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/11"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/11", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/11", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/12"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/12", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/12", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/13"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/13", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/13", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/14"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/14", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/14", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/15"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/15", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/15", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/16"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/16", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/16", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/1"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/1", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/1", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/2"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/2", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/2", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/3"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/3", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/3", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/4"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/4", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/4", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/5"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/5", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/5", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/6"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/6", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/6", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/7"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/7", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/7", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/8"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/8", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/8", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/9"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/9", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/9", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/10"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/10", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/10", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/11"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/11", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/11", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/12"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/12", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/12", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/13"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/13", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/13", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/14"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/14", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/14", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/15"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/15", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/15", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Category/16"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Category/16", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Category/16", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/1"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/1", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/1", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/2"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/2", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/2", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/3"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/3", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/3", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/4"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/4", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/4", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/5"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/5", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/5", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/6"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/6", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/6", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/7"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/7", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/7", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/8"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/8", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/8", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/9"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/9", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/9", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/10"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/10", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/10", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/11"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/11", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/11", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/12"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/12", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/12", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/13"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/13", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/13", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/14"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/14", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/14", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/15"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/15", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/15", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/16"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/16", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/16", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/17"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/17", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/17", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/18"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/18", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/18", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/19"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/19", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/19", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/20"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/20", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/20", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/21"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/21", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/21", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/22"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/22", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/22", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else if (Request.Url.AbsoluteUri.Contains("Department/23"))
+    {
+        <div class="col-md-1">@Html.ActionLink("Title", "Department/23", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+        <div class="col-md-2">@Html.ActionLink("Priority", "Department/23", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</div>
+    }
+    else
+    {
+        <ul class="list-inline">
+            <li>@Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.NameSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</li>
+            <li>@Html.ActionLink("Priority", "Index", new { sortOrder = ViewBag.PrioritySortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</li>
+            <li>@Html.ActionLink("Rated", "", new { sortOrder = ViewBag.RatedSortParm }, new { @class = "btn btn-info", border = 0, hspace = 2 })</li>
+        </ul>
+    }
+</div>

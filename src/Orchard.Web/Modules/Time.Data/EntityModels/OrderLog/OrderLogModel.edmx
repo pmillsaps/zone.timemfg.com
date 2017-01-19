@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OrderLogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DealerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TerritoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Install">
+          <Key>
+            <PropertyRef Name="InstallId" />
+          </Key>
+          <Property Name="InstallId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Installer">
+          <Key>
+            <PropertyRef Name="InstallerId" />
+          </Key>
+          <Property Name="InstallerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LiftModel">
+          <Key>
+            <PropertyRef Name="LiftModelId" />
+          </Key>
+          <Property Name="LiftModelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftModelName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DealerId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="TerritoryId" Type="int" Nullable="false" />
+          <Property Name="InstallId" Type="int" />
+          <Property Name="InstallerId" Type="int" />
+          <Property Name="Special" Type="bit" Nullable="false" />
+          <Property Name="Stock" Type="bit" Nullable="false" />
+          <Property Name="Demo" Type="bit" Nullable="false" />
+          <Property Name="RTG" Type="bit" Nullable="false" />
+          <Property Name="TruGuard" Type="bit" Nullable="false" />
+          <Property Name="GSA" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderLineUnit">
+          <Key>
+            <PropertyRef Name="OrderLineUnitId" />
+          </Key>
+          <Property Name="OrderLineUnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ATSDate" Type="datetime" />
+          <Property Name="SalesOrderNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="InvoiceAmt" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UnitComment" Type="nvarchar" MaxLength="512" />
+          <Property Name="Cancel" Type="bit" Nullable="false" />
+          <Property Name="Special" Type="bit" />
+          <Property Name="Stock" Type="bit" />
+          <Property Name="Demo" Type="bit" />
+          <Property Name="RTG" Type="bit" />
+          <Property Name="GSA" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderTran">
+          <Key>
+            <PropertyRef Name="OrderTranId" />
+          </Key>
+          <Property Name="OrderTranId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="LiftModelId" Type="int" Nullable="false" />
+          <Property Name="NewQty" Type="int" Nullable="false" />
+          <Property Name="CancelQty" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="512" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="AsOfDate" Type="datetime" />
+          <Property Name="Special" Type="bit" Nullable="false" />
+          <Property Name="Stock" Type="bit" Nullable="false" />
+          <Property Name="Demo" Type="bit" Nullable="false" />
+          <Property Name="RTG" Type="bit" Nullable="false" />
+          <Property Name="TruGuard" Type="bit" Nullable="false" />
+          <Property Name="GSA" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="TerritoryId" />
+          </Key>
+          <Property Name="TerritoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="TerritoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Dealer_Territory">
+          <End Role="Territory" Type="Self.Territory" Multiplicity="1" />
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Dealer">
+              <PropertyRef Name="TerritoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Dealer">
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Install">
+          <End Role="Install" Type="Self.Install" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Install">
+              <PropertyRef Name="InstallId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="InstallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Installer">
+          <End Role="Installer" Type="Self.Installer" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installer">
+              <PropertyRef Name="InstallerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="InstallerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Territory">
+          <End Role="Territory" Type="Self.Territory" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TerritoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLineUnit_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderLineUnit" Type="Self.OrderLineUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderLineUnit">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTran_LiftModel">
+          <End Role="LiftModel" Type="Self.LiftModel" Multiplicity="1" />
+          <End Role="OrderTran" Type="Self.OrderTran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftModel">
+              <PropertyRef Name="LiftModelId" />
+            </Principal>
+            <Dependent Role="OrderTran">
+              <PropertyRef Name="LiftModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTran_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderTran" Type="Self.OrderTran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderTran">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Territory_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Territory" Type="Self.Territory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Territory">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OrderLogModelStoreContainer">
+          <EntitySet Name="Dealer" EntityType="Self.Dealer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Install" EntityType="Self.Install" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Installer" EntityType="Self.Installer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiftModel" EntityType="Self.LiftModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderLineUnit" EntityType="Self.OrderLineUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTran" EntityType="Self.OrderTran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dealer_Territory" Association="Self.FK_Dealer_Territory">
+            <End Role="Territory" EntitySet="Territory" />
+            <End Role="Dealer" EntitySet="Dealer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Dealer" Association="Self.FK_Order_Dealer">
+            <End Role="Dealer" EntitySet="Dealer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Install" Association="Self.FK_Order_Install">
+            <End Role="Install" EntitySet="Install" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Installer" Association="Self.FK_Order_Installer">
+            <End Role="Installer" EntitySet="Installer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Territory" Association="Self.FK_Order_Territory">
+            <End Role="Territory" EntitySet="Territory" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLineUnit_Order" Association="Self.FK_OrderLineUnit_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderLineUnit" EntitySet="OrderLineUnit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTran_LiftModel" Association="Self.FK_OrderTran_LiftModel">
+            <End Role="LiftModel" EntitySet="LiftModel" />
+            <End Role="OrderTran" EntitySet="OrderTran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTran_Order" Association="Self.FK_OrderTran_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderTran" EntitySet="OrderTran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Territory_Region" Association="Self.FK_Territory_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Territory" EntitySet="Territory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OrderLogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OrderLogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dealers" EntityType="OrderLogModel.Dealer" />
+          <EntitySet Name="Installs" EntityType="OrderLogModel.Install" />
+          <EntitySet Name="Installers" EntityType="OrderLogModel.Installer" />
+          <EntitySet Name="LiftModels" EntityType="OrderLogModel.LiftModel" />
+          <EntitySet Name="Regions" EntityType="OrderLogModel.Region" />
+          <EntitySet Name="Territories" EntityType="OrderLogModel.Territory" />
+          <AssociationSet Name="FK_Dealer_Territory" Association="OrderLogModel.FK_Dealer_Territory">
+            <End Role="Territory" EntitySet="Territories" />
+            <End Role="Dealer" EntitySet="Dealers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Territory_Region" Association="OrderLogModel.FK_Territory_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Territory" EntitySet="Territories" />
+          </AssociationSet>
+          <EntitySet Name="OrderLineUnits" EntityType="OrderLogModel.OrderLineUnit" />
+          <EntitySet Name="Orders" EntityType="OrderLogModel.Order" />
+          <EntitySet Name="OrderTrans" EntityType="OrderLogModel.OrderTran" />
+          <AssociationSet Name="FK_OrderTran_LiftModel" Association="OrderLogModel.FK_OrderTran_LiftModel">
+            <End Role="LiftModel" EntitySet="LiftModels" />
+            <End Role="OrderTran" EntitySet="OrderTrans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLineUnit_Order" Association="OrderLogModel.FK_OrderLineUnit_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderLineUnit" EntitySet="OrderLineUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTran_Order" Association="OrderLogModel.FK_OrderTran_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderTran" EntitySet="OrderTrans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Dealer" Association="OrderLogModel.FK_Order_Dealer">
+            <End Role="Dealer" EntitySet="Dealers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Install" Association="OrderLogModel.FK_Order_Install">
+            <End Role="Install" EntitySet="Installs" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Installer" Association="OrderLogModel.FK_Order_Installer">
+            <End Role="Installer" EntitySet="Installers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Territory" Association="OrderLogModel.FK_Order_Territory">
+            <End Role="Territory" EntitySet="Territories" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DealerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Dealer_Territory" FromRole="Dealer" ToRole="Territory" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Dealer" FromRole="Dealer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Install">
+          <Key>
+            <PropertyRef Name="InstallId" />
+          </Key>
+          <Property Name="InstallId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Install" FromRole="Install" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Installer">
+          <Key>
+            <PropertyRef Name="InstallerId" />
+          </Key>
+          <Property Name="InstallerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Installer" FromRole="Installer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="LiftModel">
+          <Key>
+            <PropertyRef Name="LiftModelId" />
+          </Key>
+          <Property Name="LiftModelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftModelName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderTrans" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="LiftModel" ToRole="OrderTran" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Territories" Relationship="OrderLogModel.FK_Territory_Region" FromRole="Region" ToRole="Territory" />
+        </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="TerritoryId" />
+          </Key>
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="TerritoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dealers" Relationship="OrderLogModel.FK_Dealer_Territory" FromRole="Territory" ToRole="Dealer" />
+          <NavigationProperty Name="Region" Relationship="OrderLogModel.FK_Territory_Region" FromRole="Territory" ToRole="Region" />
+          <NavigationProperty Name="Orders" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Territory" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Dealer_Territory">
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="1" />
+          <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Dealer">
+              <PropertyRef Name="TerritoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Territory_Region">
+          <End Type="OrderLogModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Territory">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderLineUnit">
+          <Key>
+            <PropertyRef Name="OrderLineUnitId" />
+          </Key>
+          <Property Name="OrderLineUnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ATSDate" Type="DateTime" Precision="3" />
+          <Property Name="SalesOrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UnitComment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Cancel" Type="Boolean" Nullable="false" />
+          <Property Name="Special" Type="Boolean" />
+          <Property Name="Stock" Type="Boolean" />
+          <Property Name="Demo" Type="Boolean" />
+          <Property Name="RTG" Type="Boolean" />
+          <Property Name="GSA" Type="Boolean" />
+          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="OrderLineUnit" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DealerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TerritoryId" Type="Int32" Nullable="false" />
+          <Property Name="InstallId" Type="Int32" />
+          <Property Name="InstallerId" Type="Int32" />
+          <Property Name="Special" Type="Boolean" Nullable="false" />
+          <Property Name="Stock" Type="Boolean" Nullable="false" />
+          <Property Name="Demo" Type="Boolean" Nullable="false" />
+          <Property Name="RTG" Type="Boolean" Nullable="false" />
+          <Property Name="TruGuard" Type="Boolean" Nullable="false" />
+          <Property Name="GSA" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrderLineUnits" Relationship="OrderLogModel.FK_OrderLineUnit_Order" FromRole="Order" ToRole="OrderLineUnit" />
+          <NavigationProperty Name="OrderTrans" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="Order" ToRole="OrderTran" />
+          <NavigationProperty Name="Dealer" Relationship="OrderLogModel.FK_Order_Dealer" FromRole="Order" ToRole="Dealer" />
+          <NavigationProperty Name="Install" Relationship="OrderLogModel.FK_Order_Install" FromRole="Order" ToRole="Install" />
+          <NavigationProperty Name="Installer" Relationship="OrderLogModel.FK_Order_Installer" FromRole="Order" ToRole="Installer" />
+          <NavigationProperty Name="Territory" Relationship="OrderLogModel.FK_Order_Territory" FromRole="Order" ToRole="Territory" />
+          <Property Name="Price" Type="Int32" />
+        </EntityType>
+        <EntityType Name="OrderTran">
+          <Key>
+            <PropertyRef Name="OrderTranId" />
+          </Key>
+          <Property Name="OrderTranId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="LiftModelId" Type="Int32" Nullable="false" />
+          <Property Name="NewQty" Type="Int32" Nullable="false" />
+          <Property Name="CancelQty" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="AsOfDate" Type="DateTime" Precision="3" />
+          <Property Name="Special" Type="Boolean" Nullable="false" />
+          <Property Name="Stock" Type="Boolean" Nullable="false" />
+          <Property Name="Demo" Type="Boolean" Nullable="false" />
+          <Property Name="RTG" Type="Boolean" Nullable="false" />
+          <Property Name="TruGuard" Type="Boolean" Nullable="false" />
+          <Property Name="GSA" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LiftModel" Relationship="OrderLogModel.FK_OrderTran_LiftModel" FromRole="OrderTran" ToRole="LiftModel" />
+          <NavigationProperty Name="Order" Relationship="OrderLogModel.FK_OrderTran_Order" FromRole="OrderTran" ToRole="Order" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OrderTran_LiftModel">
+          <End Type="OrderLogModel.LiftModel" Role="LiftModel" Multiplicity="1" />
+          <End Type="OrderLogModel.OrderTran" Role="OrderTran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftModel">
+              <PropertyRef Name="LiftModelId" />
+            </Principal>
+            <Dependent Role="OrderTran">
+              <PropertyRef Name="LiftModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLineUnit_Order">
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="OrderLogModel.OrderLineUnit" Role="OrderLineUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderLineUnit">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTran_Order">
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="OrderLogModel.OrderTran" Role="OrderTran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderTran">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Dealer">
+          <End Type="OrderLogModel.Dealer" Role="Dealer" Multiplicity="1" />
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Install">
+          <End Type="OrderLogModel.Install" Role="Install" Multiplicity="0..1" />
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Install">
+              <PropertyRef Name="InstallId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="InstallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Installer">
+          <End Type="OrderLogModel.Installer" Role="Installer" Multiplicity="0..1" />
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installer">
+              <PropertyRef Name="InstallerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="InstallerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Territory">
+          <End Type="OrderLogModel.Territory" Role="Territory" Multiplicity="1" />
+          <End Type="OrderLogModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Territory">
+              <PropertyRef Name="TerritoryId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TerritoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OrderLogModelStoreContainer" CdmEntityContainer="OrderLogEntities">
+          <EntitySetMapping Name="Dealers">
+            <EntityTypeMapping TypeName="OrderLogModel.Dealer">
+              <MappingFragment StoreEntitySet="Dealer">
+                <ScalarProperty Name="TerritoryId" ColumnName="TerritoryId" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Installs">
+            <EntityTypeMapping TypeName="OrderLogModel.Install">
+              <MappingFragment StoreEntitySet="Install">
+                <ScalarProperty Name="InstallName" ColumnName="InstallName" />
+                <ScalarProperty Name="InstallId" ColumnName="InstallId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Installers">
+            <EntityTypeMapping TypeName="OrderLogModel.Installer">
+              <MappingFragment StoreEntitySet="Installer">
+                <ScalarProperty Name="InstallerName" ColumnName="InstallerName" />
+                <ScalarProperty Name="InstallerId" ColumnName="InstallerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiftModels">
+            <EntityTypeMapping TypeName="OrderLogModel.LiftModel">
+              <MappingFragment StoreEntitySet="LiftModel">
+                <ScalarProperty Name="LiftModelName" ColumnName="LiftModelName" />
+                <ScalarProperty Name="LiftModelId" ColumnName="LiftModelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="OrderLogModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Territories">
+            <EntityTypeMapping TypeName="OrderLogModel.Territory">
+              <MappingFragment StoreEntitySet="Territory">
+                <ScalarProperty Name="TerritoryName" ColumnName="TerritoryName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="TerritoryId" ColumnName="TerritoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLineUnits">
+            <EntityTypeMapping TypeName="OrderLogModel.OrderLineUnit">
+              <MappingFragment StoreEntitySet="OrderLineUnit">
+                <ScalarProperty Name="GSA" ColumnName="GSA" />
+                <ScalarProperty Name="RTG" ColumnName="RTG" />
+                <ScalarProperty Name="Demo" ColumnName="Demo" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
+                <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+                <ScalarProperty Name="UnitComment" ColumnName="UnitComment" />
+                <ScalarProperty Name="InvoiceAmt" ColumnName="InvoiceAmt" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="SalesOrderNum" ColumnName="SalesOrderNum" />
+                <ScalarProperty Name="ATSDate" ColumnName="ATSDate" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderLineUnitId" ColumnName="OrderLineUnitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="OrderLogModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="GSA" ColumnName="GSA" />
+                <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
+                <ScalarProperty Name="RTG" ColumnName="RTG" />
+                <ScalarProperty Name="Demo" ColumnName="Demo" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
+                <ScalarProperty Name="InstallerId" ColumnName="InstallerId" />
+                <ScalarProperty Name="InstallId" ColumnName="InstallId" />
+                <ScalarProperty Name="TerritoryId" ColumnName="TerritoryId" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTrans">
+            <EntityTypeMapping TypeName="OrderLogModel.OrderTran">
+              <MappingFragment StoreEntitySet="OrderTran">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="GSA" ColumnName="GSA" />
+                <ScalarProperty Name="TruGuard" ColumnName="TruGuard" />
+                <ScalarProperty Name="RTG" ColumnName="RTG" />
+                <ScalarProperty Name="Demo" ColumnName="Demo" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
+                <ScalarProperty Name="AsOfDate" ColumnName="AsOfDate" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CancelQty" ColumnName="CancelQty" />
+                <ScalarProperty Name="NewQty" ColumnName="NewQty" />
+                <ScalarProperty Name="LiftModelId" ColumnName="LiftModelId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderTranId" ColumnName="OrderTranId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
