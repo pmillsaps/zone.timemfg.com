@@ -32,5 +32,11 @@ namespace Time.Epicor.ViewModels
 
         [DataType(DataType.MultilineText)]
         public string SearchText { get; set; }
+
+        [DisplayName("Search by Job")]
+        public bool SearchByJob { get; set; }
+
+        [DisplayName("Drill Into Job")]
+        public bool DrillJob { get; set; }
     }
 }

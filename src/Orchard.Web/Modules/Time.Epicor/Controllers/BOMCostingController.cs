@@ -48,10 +48,26 @@ namespace Time.Epicor.Controllers
             searchVM.SearchText = searchVM.SearchText.Replace("\r", "");
             searchVM.SearchText = searchVM.SearchText.Replace(" ", "");
 
-            if (searchVM.SearchText.Contains(","))
-                partList.AddRange(searchVM.SearchText.Split(','));
+            if (searchVM.SearchByJob == false)
+            {
+                if (searchVM.SearchText.Contains(","))
+                    partList.AddRange(searchVM.SearchText.Split(','));
+                else
+                    partList.Add(searchVM.SearchText);
+            }
             else
-                partList.Add(searchVM.SearchText);
+            {
+                var jobassembly = db.JobAsmbls.Where(x => x.JobNum == searchVM.SearchText && !(x.PartNum.Contains("QA")) && !(x.PartNum.Contains("-ENG")) && !(x.Description.Contains("Placeholder"))).Select(x => x.PartNum).ToList();
+                var jobmaterial = db.JobMtls.Where(x => x.JobNum == searchVM.SearchText && (x.MtlSeq < 10 || x.MtlSeq > 1400)).Select(x => x.PartNum).ToList();
+                foreach (var item in jobassembly)
+                {
+                    partList.Add(item.ToString());
+                }
+                foreach (var item in jobmaterial)
+                {
+                    partList.Add(item.ToString());
+                }
+            }
 
             if (searchVM.ExportToExcel)
             {
@@ -157,7 +173,20 @@ namespace Time.Epicor.Controllers
                     allOptions[0].TotalLaborTime = allOptions[0].TotalLaborTime + flattenedBOM[0].TotalLaborTime;
                     allOptions[0].TotalSetupTime = allOptions[0].TotalSetupTime + flattenedBOM[0].TotalSetupTime;
 
-                    allOptions.AddRange(flattenedBOM);
+                    if (searchVM.SearchByJob == true && searchVM.DrillJob == false)
+                    {
+                        var flat = flattenedBOM.Where(x => x.Level == 0);
+                        allOptions.AddRange(flat);
+                    }
+                    else if (searchVM.SearchByJob == true && searchVM.DrillJob == true)
+                    {
+                        var flat = flattenedBOM.Where(x => x.Description != "ASM Config Placeholder" && x.Description != "MTL Config Placeholder");
+                        allOptions.AddRange(flat);
+                    }
+                    else
+                    {
+                        allOptions.AddRange(flattenedBOM);
+                    }
                 }
                 allOptions[0].TotalExtendedCost = allOptions[0].ExtBurCost +
                                                     allOptions[0].ExtLaborCost +
