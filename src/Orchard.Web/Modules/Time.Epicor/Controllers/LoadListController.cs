@@ -98,11 +98,12 @@ namespace Time.Epicor.Controllers
                 (x.LoadList.MakeReady || x.LoadList.DateSchedShip <= vm.EndDate)).AsEnumerable();
             // jobs = jobs.Where(x => x.LShip != true);
 
-            jobs = jobs.Where(x =>
-                (!vm.Claimed && x.Claimed == false) ||
-                (!vm.Tested && x.Tested == false) ||
-                (!vm.Posted && x.Blue == false) ||
-                (!vm.Green && x.Green == false));
+            //////////////////////////////////////////////////////////following 5 lines removed per Mark Gradel, Ticket #17397 & Ticket #17458
+            //jobs = jobs.Where(x =>
+            //    (!vm.Claimed && x.Claimed == false) ||
+            //    (!vm.Tested && x.Tested == false) ||
+            //    (!vm.Posted && x.Blue == false) ||
+            //    (!vm.Green && x.Green == false));
 
             //jobs = jobs.OrderBy(x => x.LoadList.MakeReady)
             //    .ThenBy(x => x.LoadList.DateSchedShip)
