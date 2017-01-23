@@ -32,7 +32,6 @@
             @*<li>@Html.ActionLink("Email Load Lists", "EmailLoadLists", "LoadList", null, new { @class = "btn btn-primary" })</li>*@
             <li>@Html.ActionLink("Maintain Emails", "EmailIndex", "LoadList", null, new { @class = "btn btn-primary" })</li>
         }
-        <li><input type="submit" value="Refresh" name="Refresh" class="btn btn-primary" /></li>
     </ul>
 }
 
@@ -62,12 +61,3 @@
 }
 
 @Html.Partial("_List")
-
-
-<script type="text/javascript">
-    function reFresh() {
-        //document.form.submit();
-        document.all("Refresh").click();
-    }
-    window.setInterval("reFresh()", 300000);
-</script>
