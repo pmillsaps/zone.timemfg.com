@@ -5,8 +5,12 @@
     Script.Require("jQuery");
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.min.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot();
 }
 @*<link href="~/Modules/Time.IT/Styles/dataTables.bootstrap.min.css" rel="stylesheet" />*@
+<link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/dataTableSortIcons.css" rel="stylesheet" />
 
@@ -50,6 +54,8 @@
                     "type": "GET",
                     "datatype": "json"
                 },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary excelButton", filename: 'ComputersList', }],
                 "order": [[0, "asc"]],
                 "displayLength": -1,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],

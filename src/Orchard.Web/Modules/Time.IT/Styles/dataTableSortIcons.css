@@ -8,13 +8,21 @@ table.dataTable thead .sorting_desc_disabled:after {
 }
 
 table.dataTable thead .sorting:after {
-    content: "\f0dc";
+    /*content: "\f0dc";*/
+    color:#a4a4a4;
+    content: "\f176 \f175";
 }
 
 table.dataTable thead .sorting_asc:after {
-    content: "\f0de";
+    /*content: "\f0de";*/
+    content: "\f160";
 }
 
 table.dataTable thead .sorting_desc:after {
-    content: "\f0dd";
+    /*content: "\f0dd";*/
+    content: "\f161";
+}
+
+.excelButton{
+    margin-bottom:10px;
 }
