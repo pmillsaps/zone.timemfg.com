@@ -1,0 +1,39 @@
+﻿@model Time.Data.EntityModels.TimeMFG.TicketProject
+
+@{
+    ViewBag.Title = "Ticket";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="editor-button">
+        <input type="submit" value="Approve Ticket" />
+    </div>
+
+    @Html.HiddenFor(model => model.TicketID)
+
+    <div class="display-label">Title</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Title)
+        </div>
+
+        <div class="display-label">Description</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+
+        <div class="display-label">Requested By</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.RequestedByFriendly)
+        </div>
+
+        <div class="display-label">Date Requested</div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.RequestedDate)
+        </div>
+
+}

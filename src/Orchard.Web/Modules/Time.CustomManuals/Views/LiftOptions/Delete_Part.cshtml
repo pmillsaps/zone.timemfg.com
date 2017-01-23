@@ -1,0 +1,48 @@
+﻿@model Time.Data.EntityModels.CustomManuals.OptionPart
+
+@{
+    ViewBag.Title = "Delete Option Part";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Option Part</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Part)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Part)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiftOption.OptionNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiftOption.OptionNo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to Option", "Details", new { id = ViewBag.LiftOptionId })
+        </div>
+    }
+</div>

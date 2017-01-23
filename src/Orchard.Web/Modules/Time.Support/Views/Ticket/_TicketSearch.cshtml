@@ -1,0 +1,24 @@
+﻿<div class="form-group">
+    @using (Html.BeginForm("Search", "Ticket"))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.Label("Use # in front of a ticket number to find a ticket directly")
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.TextBox("Search", null, new { @placeholder = "Search..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBox("IncludeComplete") 
+                @Html.Label("Include Completed")
+            </div>
+        </div>
+    }
+</div>

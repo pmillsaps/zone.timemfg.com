@@ -1,0 +1,50 @@
+﻿
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    font-family: 'FontAwesome';
+}
+
+table.dataTable thead .sorting:after {
+    /*content: "\f0dc";*/
+    color:#a4a4a4;
+    content: "\f176 \f175";
+}
+
+table.dataTable thead .sorting_asc:after {
+    /*content: "\f0de";*/
+    content: "\f160";
+}
+
+table.dataTable thead .sorting_desc:after {
+    /*content: "\f0dd";*/
+    content: "\f161";
+}
+
+.excelButton{
+    margin-bottom:10px;
+}
+
+.mbri-trash {
+ font-size:25px; 
+ color:#CFD8DC;}
+
+ .mbri-trash:hover {
+ color: #EC407A;
+ text-shadow: 0px 0px 5px #EC407A,
+ 0px 0px 10px #EC407A, 
+ 0px 0px 15px #EC407A;
+ transition-duration: 1s;}
+
+ .mbri-edit {
+ font-size:25px; 
+ color:#CFD8DC;}
+
+ .mbri-edit:hover {
+ color: #4FC3F7;
+ text-shadow: 0px 0px 5px #4FC3F7,
+ 0px 0px 10px #4FC3F7, 
+ 0px 0px 15px #4FC3F7;
+ transition-duration: 1s;}
