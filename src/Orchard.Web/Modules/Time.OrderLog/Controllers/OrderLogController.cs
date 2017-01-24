@@ -91,9 +91,7 @@ namespace Time.OrderLog.Controllers
         // Export Order Log to Excel
         public ActionResult ExportOrderLog(DatePickerVM dpVM, string command)
         {
-            if (dpVM.StartDate == null || dpVM.EndDate == null)
-                return View(); // Returning an empty view if the dates are empty
-            else
+            if ((dpVM.StartDate != null || dpVM.EndDate != null) && command == "Export Order Details Report")
             {
                 // Retrieving the data for the report from the different tables
                 dpVM.EndDate = dpVM.EndDate.Value.AddDays(1).Date.AddSeconds(-1);
@@ -164,14 +162,88 @@ namespace Time.OrderLog.Controllers
                     sum = 0;
                     orderD.Add(o);
                 }
-                if (command == "Export Order Details Report")
+                return new ExporttoExcelResult("OrderLogReport", orderD.Cast<object>().ToList());
+            }
+            else if ((dpVM.StartDate != null || dpVM.EndDate != null) && command == "Export Order Transactions Report")
+            {
+                // Retrieving the data for the report from the different tables
+                dpVM.EndDate = dpVM.EndDate.Value.AddDays(1).Date.AddSeconds(-1);
+
+                var reports = db.OrderTrans.Where(x => x.Date >= dpVM.StartDate && x.Date <= dpVM.EndDate)
+                                      .Include(d => d.Order.Dealer).Include(i => i.Order.Install)
+                                      .Include(ir => ir.Order.Installer).Include(t => t.Order.Territory)
+                                      .Include(y => y.Order).GroupBy(x => x.OrderId).Select(x => x.FirstOrDefault()).ToList();
+                var report = reports.Distinct().ToList();
+
+                // Generating the list of Orders
+                OrderDetails o;
+                List<OrderDetails> orderD = new List<OrderDetails>();
+                // Generating the list of Orders Transactions
+                OrderTransactions oT;
+                List<OrderTransactions> orderT = new List<OrderTransactions>();
+                int sum = 0;
+
+                foreach (var item in report)
                 {
-                    return new ExporttoExcelResult("OrderLogReport", orderD.Cast<object>().ToList());
+                    o = new OrderDetails();
+                    var lifts = db.OrderTrans.Where(x => x.OrderId == item.OrderId).OrderByDescending(x => x.Date).Select(x => x.LiftModel.LiftModelName).FirstOrDefault();
+
+                    o.PONum = item.Order.PO;
+                    o.OrderDate = item.Order.Date.ToShortDateString();
+                    o.DealerName = item.Order.Dealer.DealerName;
+                    o.LiftModel = lifts;
+                    if (item.Order.Install == null) o.InstallType = "";
+                    else o.InstallType = item.Order.Install.InstallName;
+                    if (item.Order.Installer == null) o.InstallerName = "";
+                    else o.InstallerName = item.Order.Installer.InstallerName;
+                    foreach (var trans in item.Order.OrderTrans.Where(x => x.Date >= dpVM.StartDate && x.Date <= dpVM.EndDate))
+                    {
+                        oT = new OrderTransactions();
+
+                        oT.PO = o.PONum;
+                        oT.Date = trans.Date.ToString();
+                        oT.AsOfDate = trans.AsOfDate.ToString();
+                        var lift = db.LiftModels.FirstOrDefault(l => l.LiftModelId == trans.LiftModelId);
+                        oT.LiftModel = lift.LiftModelName.ToString();
+                        oT.NewQty = trans.NewQty;
+                        oT.CancelQty = trans.CancelQty;
+                        oT.UnitPrice = trans.Price;
+                        oT.ExtPrice = (trans.NewQty - trans.CancelQty) * trans.Price;
+                        oT.Special = trans.Special;
+                        oT.Stock = trans.Stock;
+                        oT.Demo = trans.Demo;
+                        oT.RTG = trans.RTG;
+                        oT.TruGuard = trans.TruGuard;
+                        oT.Comment = trans.Comment;
+
+                        orderT.Add(oT);
+
+                        sum += trans.NewQty - trans.CancelQty;
+                    }
+                    o.OrderQty = sum;
+                    if (sum == 0)
+                        o.Price = 0;
+                    else
+                        o.Price = item.Price / sum;
+                    o.ExtPrice = item.Price;
+                    o.Special = item.Special;
+                    o.Stock = item.Stock;
+                    o.Demo = item.Demo;
+                    o.RTG = item.RTG;
+                    o.TruGuard = item.TruGuard;
+                    if (item.Order.Customer == null) o.Customer = "";
+                    else o.Customer = item.Order.Customer;
+                    if (item.Order.CityStateZip == null) o.CityStateZip = "";
+                    else o.CityStateZip = item.Order.CityStateZip;
+
+                    sum = 0;
+                    orderD.Add(o);
                 }
-                else
-                {
-                    return new ExporttoExcelResult("OrderTransactionReport", orderT.Cast<object>().ToList());
-                }
+                return new ExporttoExcelResult("OrderTransactionReport", orderT.Cast<object>().ToList());
+            }
+            else
+            {
+                return View(); // Returning an empty view if the dates are empty
             }
         }
 
