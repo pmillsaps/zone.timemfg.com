@@ -180,7 +180,7 @@ namespace Time.Epicor.Controllers
                     }
                     else if (searchVM.SearchByJob == true && searchVM.DrillJob == true)
                     {
-                        var flat = flattenedBOM.Where(x => x.Description != "ASM Config Placeholder" && x.Description != "MTL Config Placeholder");
+                        var flat = flattenedBOM.Where(x => x.Description != "ASM Config Placeholder" && x.Description != "MTL Config Placeholder" && !(x.Part_Indented.Contains("QA")));
                         allOptions.AddRange(flat);
                     }
                     else

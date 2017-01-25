@@ -63,19 +63,24 @@
                 </div>
             </div>
 
-            <div class="row">
+            <br />
+
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => Model.TicketID)
-                    <div class="col-md-3">
-                        Assigned To: @Html.DropDownList("requestor", (SelectList)ViewBag.requestor, optionLabel: "-- Select --")
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" value="submit">Update Requestor</button><br />
-                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Assigned To:
+                            </div>
+                            <div class="input-group">       
+                                <div class="col-md-7">
+                                    @Html.DropDownList("requestor", (SelectList)ViewBag.requestor, optionLabel: "-- Select --")
+                                </div>
+                                    <button type="submit" value="submit" class="btn-primary">Update Requestor</button><br />
+                            </div>
+                        </div>
                 }
-            </div>
             <br />
         </div>
     </div>

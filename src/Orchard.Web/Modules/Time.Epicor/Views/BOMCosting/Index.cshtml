@@ -28,25 +28,33 @@
             <input type="submit" value="Load BOM" />*@
         <br />
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
+                @Html.CheckBoxFor(x => x.SearchByJob)
+                @Html.LabelFor(x => x.SearchByJob)
+            </div>
+            <div class="col-md-3">
                 @Html.CheckBoxFor(x => x.DrillIntoPurchaseItems)
                 @Html.LabelFor(x => x.DrillIntoPurchaseItems)
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @Html.CheckBoxFor(x => x.FilterRawMaterial)
                 @Html.LabelFor(x => x.FilterRawMaterial)
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @Html.CheckBoxFor(x => x.ExportToExcel)
                 @Html.LabelFor(x => x.ExportToExcel)
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
+                @Html.CheckBoxFor(x => x.DrillJob)
+                @Html.LabelFor(x => x.DrillJob)
+            </div>
+            <div class="col-md-3">
                 @Html.CheckBoxFor(x => x.UseTestData)
                 @Html.LabelFor(x => x.UseTestData)
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 @Html.CheckBoxFor(x => x.PurchaseItemsOnly)
                 @Html.LabelFor(x => x.PurchaseItemsOnly)
             </div>
@@ -66,7 +74,7 @@
     </p>
 </div>
 <span id="hiddenStatus" style='display: none'>
-    <img src='~/Modules/Time.Epicor/Content/Images/transparent.gif' id='myAnimatedImage' align="middle">
+    <img src='~/Media/Default/Page/transparent.gif' id='myAnimatedImage' align="middle">
     <p>
         Loading Data ...
     </p>
@@ -95,7 +103,7 @@
         document.getElementById('exportHidden').style.display = "none";
         var chkBox = document.getElementById('ExportToExcel');
         if (!chkBox.checked) {
-            setTimeout('document.images["myAnimatedImage"].src="~/Modules/Time.Epicor/Content/Images/loadingAnimation.gif"', 200);
+            setTimeout('document.images["myAnimatedImage"].src="~/Media/Default/Page/loadingAnimation.gif"', 200);
             document.getElementById('hiddenStatus').style.display = "";
         }
         if (chkBox.checked) {
