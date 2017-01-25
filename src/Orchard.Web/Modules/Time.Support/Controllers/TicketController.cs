@@ -877,9 +877,17 @@ namespace Time.Support.Controllers
         [HttpGet]
         public ActionResult ChangeUser(int id)
         {
-            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")))
-                return new HttpUnauthorizedResult();
             TicketProject ticketProject = _db.TicketProjects.Find(id);
+            if (ticketProject.RequestedBy.ToUpper() == HttpContext.User.Identity.Name.ToUpper())
+            {
+
+            }
+            else
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")))
+                    return new HttpUnauthorizedResult();
+            }
+            //TicketProject ticketProject = _db.TicketProjects.Find(id);
 
             var requestors = new SelectList(_db.TicketProjects.DistinctBy(x => x.RequestedBy).OrderBy(x => x.RequestedBy).ToList(), "RequestedBy", "RequestedBy", ticketProject.RequestedBy);
             //select new SelectListItem
@@ -898,9 +906,17 @@ namespace Time.Support.Controllers
         [HttpPost]
         public ActionResult ChangeUser(int id, string requestor)
         {
-            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")))
-                return new HttpUnauthorizedResult();
             TicketProject ticketProject = _db.TicketProjects.Find(id);
+            if (ticketProject.RequestedBy.ToUpper() == HttpContext.User.Identity.Name.ToUpper())
+            {
+
+            }
+            else
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You Do Not Have Permission to Change Users")))
+                    return new HttpUnauthorizedResult();
+            }
+            //TicketProject ticketProject = _db.TicketProjects.Find(id);
             //var tr = new TicketRepository();
             ////var id = Convert.ToInt32(formValues.GetValue("id"));
             //var ticket = tr.Single(c => c.TicketID == id);
