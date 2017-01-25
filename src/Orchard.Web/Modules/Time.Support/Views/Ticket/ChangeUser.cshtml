@@ -1,0 +1,82 @@
+﻿@model Time.Data.EntityModels.TimeMFG.TicketProject
+
+@{
+    ViewBag.Title = "Change User";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+    <div class="row">
+
+        @Html.Action("SideBar")
+
+        <div class="col-md-9 col-sm-9 col-xs-9">
+            <div class="row">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="row text-info">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Title)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    Ticket #: @Html.DisplayFor(model => model.TicketID)
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="col-md-8">
+                    Description
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayWithBreaksFor(model => model.Description)
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-3">
+                    Request By:
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.RequestedBy)
+                </div>
+            </div>
+
+            <div class="row">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => Model.TicketID)
+                    <div class="col-md-3">
+                        Assigned To: @Html.DropDownList("requestor", (SelectList)ViewBag.requestor, optionLabel: "-- Select --")
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" value="submit">Update Requestor</button><br />
+                    </div>
+                }
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

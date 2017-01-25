@@ -1,0 +1,11 @@
+﻿Name: Time.Admin
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Time Admin modules, for versalift.com, as well as zone.timemfg.com
+Features:
+    Time.Admin:
+        Description: Time Admin modules, for versalift.com, as well as zone.timemfg.com.
+		Category: .Time

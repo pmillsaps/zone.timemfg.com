@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Time.Drawings.EntityModels.Drawings_PDF>
+
+
+
+@if (Model.Count() == 0 || Model == null)
+{
+    <tr>
+        <td></td>
+    </tr>
+}
+else
+{
+    <tr>
+        <td class="text-warning">Additional Drawing for this Drawing:</td>
+    </tr>
+
+    foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-warning">
+                @Html.DisplayFor(modelItem => item.Drawing)
+            </td>
+        </tr>
+    }
+
+}

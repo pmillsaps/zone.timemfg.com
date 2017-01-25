@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "DeleteJobNotAllowed";
+}
+<br /><br /><br /><hr />
+<div class="alert alert-danger">
+    <h2>
+        Deleting this Job is not allowed.
+    </h2>
+    <h3>
+        This job is marked as closed.
+    </h3>
+</div>
+<br />
+@Html.ActionLink("Back to Load List", "Details", "LoadList", new { id = ViewBag.ID }, null)
