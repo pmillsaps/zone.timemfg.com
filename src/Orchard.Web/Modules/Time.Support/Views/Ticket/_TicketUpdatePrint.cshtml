@@ -1,0 +1,58 @@
+﻿@model Time.Data.EntityModels.TimeMFG.TicketProject
+
+@using (Html.BeginForm("Update", "Ticket", FormMethod.Post))
+            {
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("TicketID", Model.TicketID)
+
+    @*@Html.HiddenFor(model => model.Ticket.TicketID)*@
+
+    <div class="row">
+        <div class="col-md-4">
+            Priority:
+                @Html.HiddenFor(model => model.PriorityID)
+                @Html.DisplayFor(model => model.TicketPriority.Name)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            Department:
+                @Html.HiddenFor(model => model.DepartmentID)
+                @Html.DisplayFor(model => model.TicketDepartment.Name)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            Category:
+                @Html.HiddenFor(model => model.CategoryID)
+                @Html.DisplayFor(model => model.TicketCategory.Name)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            Assigned To:
+                @Html.HiddenFor(model => model.AssignedEmployeeID)
+                @Html.DisplayFor(model => model.TicketEmployee.FullName)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            Resource:
+                @Html.HiddenFor(model => model.ResourceEmployeeID)
+                @Html.DisplayFor(model => model.TicketEmployee1.FullName)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            Status:
+                @Html.HiddenFor(model => model.Status)
+                @Html.DisplayFor(model => model.TicketStatus.Name)
+        </div>
+    </div>
+}
