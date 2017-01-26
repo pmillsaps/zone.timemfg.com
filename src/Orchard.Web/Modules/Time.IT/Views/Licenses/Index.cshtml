@@ -58,7 +58,7 @@
                 columnDefs: [{ "sClass": "clampClmn", targets: [6] }],
                 "columns": [
                     {
-                        "data": null, "render": function (data, type, row) {//"autoWidth": true,
+                        "data": null, "render": function (data, type, row) {
                             return '<a href="Licenses/Details/' + row.Id + '">' + row.Name + '</a>';
                         }
                     },
@@ -68,11 +68,6 @@
                     { "data": "CompOrUserName" },
                     { "data": "PO" },
                     { "data": "Note" },
-                    //{
-                    //    "data": null, "render": function (data, type, row) {
-                    //        return "<div class=my_elipsis>" + data.Note + "</div>"
-                    //    }
-                    //},
                     { "data": "LicenseType" },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
@@ -80,9 +75,8 @@
                         }
                     },
                     {
-                        "data": "Id", "sortable": false, "render": function (data) {// "width": "20px",
+                        "data": "Id", "sortable": false, "render": function (data) {
                             return '<a href="Licenses/Delete/' + data + '"><span class="mbri-trash"></span></a>';
-                            //return '<a href="Users/Delete/' + data + '"><img src="/Media/Default/Page/DeleteIcon.png" width="20" height="20"/></a>';
                         }
                     }
                 ]

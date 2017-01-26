@@ -31,6 +31,7 @@
                 <td>@Html.Label("Building")</td>
                 <td>@Html.Label("Location")</td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
     </table>
@@ -68,8 +69,12 @@
                     { "data": "Location", "autoWidth": true },
                     {
                         "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
+                            return '<a href="Users/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                        }
+                    },
+                    {
+                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
                             return '<a href="Users/Delete/' + data + '"><span class="mbri-trash"></span></a>';
-                            //return '<a href="Users/Delete/' + data + '"><img src="/Media/Default/Page/DeleteIcon.png" width="20" height="20"/></a>';
                         }
                     }
                 ]
