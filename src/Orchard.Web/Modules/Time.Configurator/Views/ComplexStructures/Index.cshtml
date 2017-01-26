@@ -16,14 +16,17 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm("Index", "ComplexStructures", FormMethod.Get))
-{
-    <div class="row">
+<div class="row">
+    @using (Html.BeginForm("Index", "ComplexStructures", FormMethod.Get))
+    {
+
         <div class="col-md-3">@Html.DropDownList("ConfigNames", optionLabel: "-- Select ConfigName --")</div>
         <div class="col-md-3">@Html.DropDownList("ConfigData", optionLabel: "-- Select ConfigData --")</div>
-        <div class="col-md-3"><input type="submit" value="Search" class="btn btn-primary" /></div>
-    </div>
-}
+        <div class="col-md-2"><input type="submit" value="Search" class="btn btn-primary" /></div>
+
+    }
+    <div class="col-md-4">@Html.TextBox("detailsSearch", null, htmlAttributes: new { @placeholder = "Enter alternate value for Details view..." })</div>
+</div>
 
 <br />
 
@@ -83,7 +86,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                    <a href="#" class="DetailsLink">Details</a> |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
@@ -98,3 +102,22 @@
         @Html.ActionLink("Back to Configurator Index", "Index", "Configurator")
     </p>
 </div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        var model;
+        var altSearch;
+        var url;
+        $(".DetailsLink").click(function () {
+            getValues();
+            window.open(url);
+        });
+
+        function getValues(){
+            model = @Html.Raw(Json.Encode(Model));
+            altSearch = $("#detailsSearch").val();
+            url = "ComplexStructures/Details/" + model[0].Id + "?Search=" + altSearch;
+        };
+    </script>
+}
