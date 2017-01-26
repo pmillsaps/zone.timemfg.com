@@ -1,0 +1,72 @@
+﻿@model Time.Admin.Models.CategoryAddVM
+
+@{
+    ViewBag.Title = "Create Category Link";
+}
+
+<h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>@ViewBag.Title</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            Add This Category to the Lift Model:
+            <hr />
+
+            @Html.HiddenFor(model => model.ModelId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategoryId", Model.Categories, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add Category" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+<div>
+    <h4>VersaliftLiftModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lift.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lift.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lift.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lift.Description)
+            &nbsp;
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lift.isVisible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lift.isVisible)
+        </dd>
+    </dl>
+</div>

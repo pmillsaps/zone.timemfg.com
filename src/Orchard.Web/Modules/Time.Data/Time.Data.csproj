@@ -1,0 +1,1128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C663C5F6-A683-41CA-B0F8-FC7C6F49E1D6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Time.Data</RootNamespace>
+    <AssemblyName>Time.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+      <LastGenOutput>DataPlatesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+      <LastGenOutput>DataPlatesModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Legacy\LegacyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LegacyModel.edmx</DependentUpon>
+      <LastGenOutput>LegacyModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Legacy\LegacyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LegacyModel.edmx</DependentUpon>
+      <LastGenOutput>LegacyModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Production\ProductionModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+      <LastGenOutput>ProductionModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Production\ProductionModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+      <LastGenOutput>ProductionModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Versalift\VersaliftModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
+      <LastGenOutput>VersaliftModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Versalift\VersaliftModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
+      <LastGenOutput>VersaliftModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Module.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EntityModels\TimeMFG\TimeMfgModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TimeMfgModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EntityModels\Configurator\ComplexLink.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ComplexLookup.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ComplexStructure.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigOption.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfigPricing.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Configurator.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Configurator.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Configurator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Configurator.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Configurator.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\ConfiguratorName.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Lookup.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\PartOverride.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialConfig.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialCustomer.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialData.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialDataType.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\SpecialRelatedOp.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\Structure.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Configurator\StructureSeq.cs">
+      <DependentUpon>Configurator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\CustomManualModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomManualModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\CustomManualModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\CustomManualModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\Formatting.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LanguageCode.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\Lift.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LiftGroup.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LiftOption.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\LocalMessage.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\NoPrint.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\OptionPart.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\ProblemJob.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\CustomManuals\Setting.cs">
+      <DependentUpon>CustomManualModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\CA_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DataPlatesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\DielectricRating.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\EP_SS_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\HR_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\LB_Options.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\LiftData.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\PS_Option.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\Template.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\DataPlates\TemplateData.cs">
+      <DependentUpon>DataPlatesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\C_TMC_Status.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\EpicorModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\EpicorModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\EpicorModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\imjoboper.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\impartbin.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\joboper.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\sysagentsched.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\sysagenttask.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\systask.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\systaskparam.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_BillOfMaterials.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_CustomersWithOpenOrderPartLines.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_JobInformation.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_PartDetails.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_QuoteOrderInformation.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Epicor\v_WhereUsed.cs">
+      <DependentUpon>EpicorModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\EpicorDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\EpicorDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\EpicorDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallDetail.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallDetailsManuallyAddedOption.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallHourlyRate.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\InstallQuote.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\LiftFamily.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\OptionGroup.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteChangesLog.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuoteDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDtl.cs">
+      <DependentUpon>EpicorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteQty.cs">
+      <DependentUpon>EpicorDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\TimeOption.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\VSWOption.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Computer.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ITInventoryModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITInventoryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ITInventoryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ITInventoryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\License.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Monitor.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Building.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_BuildYear.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_CableNo.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_DeviceType.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_LicenseType.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Location.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Manufacturer.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Memory.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Model.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_MonitorSizes.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_NIC.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_NICSpeed.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_OS.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Processor.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Sound.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_Status.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_SwitchPort.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\Ref_VideoCard.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\ScheduledTask.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\User.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\Customer.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\Inventory.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\InvoiceHeader.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\InvoiceLineItem.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\InvoiceShipTo.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\LegacyModel.Context.cs">
+      <DependentUpon>LegacyModel.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\LegacyModel.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\LegacyModel.Designer.cs">
+      <DependentUpon>LegacyModel.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\LEGACYSWO011H.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\LEGACYSWO02Hb.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\LiftCost.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PartStep.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PartStepDetail.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PartXRef.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PullSheetHistory.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PurchaseBOM.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PurchaseBOMItem.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PurchaseHistory.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\PurchaseHistory_Mods.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\RedrillPartXRef.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\SerNoMemo.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\SupplierInformation.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\WarrantyComponent.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\WarrantyEndUser.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\WarrantyInformation.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Legacy\WarrantyInvoice.cs">
+      <DependentUpon>LegacyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\Dealer.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\Install.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\Installer.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\LiftModel.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\Order.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderLineUnit.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderLogModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderLogModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderLogModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderLogModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderLogModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\OrderTran.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\Region.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\OrderLog\Territory.cs">
+      <DependentUpon>OrderLogModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\IMJobOper.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\IMPartBin.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\JobAsmbl.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\JobMtl.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\JobOper.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\Part.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\ProductionModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\ProductionModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\ProductionModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysAgentSched.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysAgentTask.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysTask.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\SysTaskLog.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_BillOfMaterials.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_CustomersWithOpenOrderPartLines.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_DistributorOrderList.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_JobInformation.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_JobInformation_NotClosed.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_NowReport.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_NowReportClaim.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_PartCostStd.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_PartDetails.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_QuoteOrderInformation.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_WhereUsed.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Production\V_YardReport.cs">
+      <DependentUpon>ProductionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadList.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListComment.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListDistributor.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListEmail.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListImage.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListJob.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListJobComment.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\LoadListJobStatu.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\Message_Type.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\MSMQ_Status.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\NLog_Entries.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\Setting.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\SysTask.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\SysTaskSchedule.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketAttachment.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketCategory.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketDepartment.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketEmployee.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketLink.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketNote.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketPriority.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketProject.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketRequestor.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketStatus.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketStatusHistory.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketTask.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TicketVisibility.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TimeMfgModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeMfgModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TimeMfgModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\TimeMfgModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeMfgModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\ValuedInventory.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\V_ClassIdSummary.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\V_ValuedInventoryByPeriod.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\TimeMFG\WaterTest.cs">
+      <DependentUpon>TimeMfgModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\E10_DLS.cs">
+      <DependentUpon>VersaliftModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\VersaliftModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersaliftModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\VersaliftModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersaliftModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Versalift\VersaliftModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Models\Configurator\ComplexStructure.cs" />
+    <Compile Include="Models\Configurator\ConfigID.cs" />
+    <Compile Include="Models\Configurator\ConfigOption.cs" />
+    <Compile Include="Models\Configurator\ConfigPricing.cs" />
+    <Compile Include="Models\Configurator\Lookup.cs" />
+    <Compile Include="Models\DataPlates\CA_Options.cs" />
+    <Compile Include="Models\DataPlates\EP_SS_Options.cs" />
+    <Compile Include="Models\DataPlates\HR_Options.cs" />
+    <Compile Include="Models\DataPlates\LB_Options.cs" />
+    <Compile Include="Models\DataPlates\LiftData.cs" />
+    <Compile Include="Models\DataPlates\PS_Option.cs" />
+    <Compile Include="Models\Epicor\E10V_QuoteOrderInformation.cs" />
+    <Compile Include="Models\Epicor\v_QuoteOrderInformation.cs" />
+    <Compile Include="Models\GetSetting.cs" />
+    <Compile Include="Models\Install\InstallDetail.cs" />
+    <Compile Include="Models\Install\InstallHourlyRate.cs" />
+    <Compile Include="Models\Install\InstallQuote.cs" />
+    <Compile Include="Models\Install\LiftFamily.cs" />
+    <Compile Include="Models\Install\OptionGroup.cs" />
+    <Compile Include="Models\Install\TimeOption.cs" />
+    <Compile Include="Models\Install\VSWOption.cs" />
+    <Compile Include="Models\ITInventory\Monitor.cs" />
+    <Compile Include="Models\ITInventory\License.cs" />
+    <Compile Include="Models\ITInventory\Ref_DeviceType.cs" />
+    <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
+    <Compile Include="Models\ITInventory\Ref_Location.cs" />
+    <Compile Include="Models\ITInventory\Ref_Building.cs" />
+    <Compile Include="Models\ITInventory\Computer.cs" />
+    <Compile Include="Models\ITInventory\Ref_VideoCard.cs" />
+    <Compile Include="Models\ITInventory\ScheduledTask.cs" />
+    <Compile Include="Models\ITInventory\User.cs" />
+    <Compile Include="Models\ITInventory\Ref_Memory.cs" />
+    <Compile Include="Models\MessageQueue\EmailMessage.cs" />
+    <Compile Include="Models\MessageQueue\EmptyMessage.cs" />
+    <Compile Include="Models\MessageQueue\MessageType.cs" />
+    <Compile Include="Models\MessageQueue\MessageView.cs" />
+    <Compile Include="Models\MessageQueue\MoveFileMessage.cs" />
+    <Compile Include="Models\MessageQueue\MSMQ.cs" />
+    <Compile Include="Models\MessageQueue\PCInvoiceMessage.cs" />
+    <Compile Include="Models\MessageQueue\TicketNotificationMessage.cs" />
+    <Compile Include="Models\MessageQueue\ValuedInventoryMessage.cs" />
+    <Compile Include="Models\MessageQueue\WOLMessage.cs" />
+    <Compile Include="Models\OrderLog\Dealer.cs" />
+    <Compile Include="Models\OrderLog\Installer.cs" />
+    <Compile Include="Models\OrderLog\Install.cs" />
+    <Compile Include="Models\OrderLog\LiftModel.cs" />
+    <Compile Include="Models\Configurator\StructureSeq.cs" />
+    <Compile Include="Models\TimeMFG\LoadList.cs" />
+    <Compile Include="Models\TimeMFG\LoadListEmail.cs" />
+    <Compile Include="Models\TimeMFG\LoadListJob.cs" />
+    <Compile Include="Models\TimeMFG\LoadListJobStatus.cs" />
+    <Compile Include="Models\OrderLog\Order.cs" />
+    <Compile Include="Models\OrderLog\OrderTran.cs" />
+    <Compile Include="Models\OrderLog\OrderLineUnit.cs" />
+    <Compile Include="Models\OrderLog\Territory.cs" />
+    <Compile Include="Models\TimeMFG\Setting.cs" />
+    <Compile Include="Models\TimeMFG\SettingRepository.cs" />
+    <Compile Include="Models\TimeMFG\SysTaskSchedule.cs" />
+    <Compile Include="Models\TimeMFG\TicketEmployee.cs" />
+    <Compile Include="Models\TimeMFG\TicketProject.cs" />
+    <Compile Include="Models\TimeMFG\TicketTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityModels\TimeMFG\TimeMfgModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TimeMfgModel.edmx</DependentUpon>
+      <LastGenOutput>TimeMfgModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\TimeMFG\TimeMfgModel.edmx.diagram">
+      <DependentUpon>TimeMfgModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\TimeMFG\TimeMfgModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TimeMfgModel.edmx</DependentUpon>
+      <LastGenOutput>TimeMfgModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EntityModels\Epicor\EpicorModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EpicorModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityModels\Epicor\EpicorModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Epicor\EpicorModel.edmx.diagram">
+      <DependentUpon>EpicorModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Epicor\EpicorModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EntityModels\OrderLog\OrderLogModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderLogModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\OrderLog\OrderLogModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderLogModel.edmx</DependentUpon>
+      <LastGenOutput>OrderLogModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\OrderLog\OrderLogModel.edmx.diagram">
+      <DependentUpon>OrderLogModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\OrderLog\OrderLogModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderLogModel.edmx</DependentUpon>
+      <LastGenOutput>OrderLogModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\ITInventory\ITInventoryModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ITInventoryModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\ITInventory\ITInventoryModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+      <LastGenOutput>ITInventoryModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\ITInventory\ITInventoryModel.edmx.diagram">
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\ITInventory\ITInventoryModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ITInventoryModel.edmx</DependentUpon>
+      <LastGenOutput>ITInventoryModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\CustomManuals\CustomManualModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CustomManualModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\CustomManuals\CustomManualModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+      <LastGenOutput>CustomManualModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\CustomManuals\CustomManualModel.edmx.diagram">
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\CustomManuals\CustomManualModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomManualModel.edmx</DependentUpon>
+      <LastGenOutput>CustomManualModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Configurator\Configurator.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Configurator.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Configurator\Configurator.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Configurator.edmx</DependentUpon>
+      <LastGenOutput>Configurator.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Configurator\Configurator.edmx.diagram">
+      <DependentUpon>Configurator.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Configurator\Configurator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Configurator.edmx</DependentUpon>
+      <LastGenOutput>Configurator.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Production\ProductionModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductionModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Production\ProductionModel.edmx.diagram">
+      <DependentUpon>ProductionModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\DataPlates\DataPlatesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataPlatesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\DataPlates\DataPlatesModel.edmx.diagram">
+      <DependentUpon>DataPlatesModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\Versalift\VersaliftModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VersaliftModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Versalift\VersaliftModel.edmx.diagram">
+      <DependentUpon>VersaliftModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityModels\Install\QuoteDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuoteDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Install\QuoteDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+      <LastGenOutput>QuoteDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Install\QuoteDBModel.edmx.diagram">
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Install\QuoteDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+      <LastGenOutput>QuoteDBModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Install\EpicorDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EpicorDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Install\EpicorDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModels\Install\EpicorDBModel.edmx.diagram">
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityModels\Install\EpicorDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EpicorDBModel.edmx</DependentUpon>
+      <LastGenOutput>EpicorDBModel.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="EntityModels\Legacy\LegacyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LegacyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityModels\Legacy\LegacyModel.edmx.diagram">
+      <DependentUpon>LegacyModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Time.Data.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ConfigSetup\Create.cshtml" />
+    <Content Include="Views\ConfigSetup\Delete.cshtml" />
+    <Content Include="Views\ConfigSetup\Details.cshtml" />
+    <Content Include="Views\ConfigSetup\Edit.cshtml" />
+    <Content Include="Views\ConfigSetup\Index.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
