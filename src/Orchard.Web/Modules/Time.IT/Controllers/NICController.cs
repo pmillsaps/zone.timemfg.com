@@ -1,11 +1,13 @@
 ﻿using Orchard.Themes;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using Time.Data.EntityModels.ITInventory;
+using Time.IT.Models;
 
 namespace Time.IT.Controllers
 {
@@ -18,14 +20,42 @@ namespace Time.IT.Controllers
         // GET: Ref_NIC
         public ActionResult Index(string search = "")
         {
+            return View();
+            //var ref_NIC = db.Ref_NIC.Include(r => r.Ref_CableNo).Include(r => r.Ref_NICSpeed).Include(r => r.Ref_SwitchPort).Include(x => x.Computer);
+            //if (!String.IsNullOrEmpty(search))
+            //    ref_NIC = ref_NIC.Where(x => x.MAC.Contains(search) || x.IP.Contains(search)
+            //        || x.Type.Contains(search) || x.Ref_CableNo.Name.Contains(search) || x.Ref_SwitchPort.SwitchPort.Contains(search));
+
+            //ref_NIC = ref_NIC.OrderBy(x => x.IP).ThenBy(x => x.Computer.Name);
+
+            //return View(ref_NIC.ToList());
+        }
+
+        // Load the data for the Index table
+        public ActionResult LoadNICs()
+        {
+            List<NICViewModel> model = new List<NICViewModel>();
             var ref_NIC = db.Ref_NIC.Include(r => r.Ref_CableNo).Include(r => r.Ref_NICSpeed).Include(r => r.Ref_SwitchPort).Include(x => x.Computer);
-            if (!String.IsNullOrEmpty(search))
-                ref_NIC = ref_NIC.Where(x => x.MAC.Contains(search) || x.IP.Contains(search)
-                    || x.Type.Contains(search) || x.Ref_CableNo.Name.Contains(search) || x.Ref_SwitchPort.SwitchPort.Contains(search));
-
-            ref_NIC = ref_NIC.OrderBy(x => x.IP).ThenBy(x => x.Computer.Name);
-
-            return View(ref_NIC.ToList());
+            foreach (var item in ref_NIC)
+            {
+                NICViewModel nvm = new NICViewModel();
+                nvm.Id = item.Id;
+                nvm.MAC = item.MAC;
+                nvm.IP = item.IP;
+                nvm.NICSpeed = (item.Ref_NICSpeed == null) ? "" : item.Ref_NICSpeed.NIC_Speed;
+                nvm.Type = item.Type;
+                nvm.SwitchPort = (item.Ref_SwitchPort == null) ? "" : item.Ref_SwitchPort.SwitchPort;
+                nvm.CableName = (item.Ref_CableNo == null) ? "" : item.Ref_CableNo.Name;
+                if (item.Computer != null)
+                {
+                    nvm.ComputerId = item.Computer.Id;
+                    nvm.ComputerName = item.Computer.Name;
+                    nvm.UserId = item.Computer.User.Id;
+                    nvm.UserName = item.Computer.User.Name;
+                }
+                model.Add(nvm);
+            }
+            return Json(new { data = model }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Ref_NIC/Details/5

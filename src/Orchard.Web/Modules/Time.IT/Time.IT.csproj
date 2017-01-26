@@ -387,7 +387,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Styles\buttons.bootstrap.min.css" />
     <Content Include="Styles\dataTables.bootstrap.min.css" />
-    <Content Include="Styles\dataTableSortIcons.css" />
+    <Content Include="Styles\customStyle.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\font-awesome.min.css" />
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
@@ -600,7 +600,9 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Models\ComputersViewModel.cs" />
+    <Compile Include="Models\LicensesViewModel.cs" />
     <Compile Include="Models\MonitorsViewModel.cs" />
+    <Compile Include="Models\NICViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />

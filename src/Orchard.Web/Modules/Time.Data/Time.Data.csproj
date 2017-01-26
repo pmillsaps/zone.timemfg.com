@@ -862,11 +862,16 @@
     <Compile Include="Models\Install\VSWOption.cs" />
     <Compile Include="Models\ITInventory\Monitor.cs" />
     <Compile Include="Models\ITInventory\License.cs" />
+    <Compile Include="Models\ITInventory\Ref_CableNo.cs" />
     <Compile Include="Models\ITInventory\Ref_DeviceType.cs" />
     <Compile Include="Models\ITInventory\Ref_BuildYear.cs" />
+    <Compile Include="Models\ITInventory\Ref_LicenseType.cs" />
     <Compile Include="Models\ITInventory\Ref_Location.cs" />
     <Compile Include="Models\ITInventory\Ref_Building.cs" />
     <Compile Include="Models\ITInventory\Computer.cs" />
+    <Compile Include="Models\ITInventory\Ref_NIC.cs" />
+    <Compile Include="Models\ITInventory\Ref_NICSpeed.cs" />
+    <Compile Include="Models\ITInventory\Ref_SwitchPort.cs" />
     <Compile Include="Models\ITInventory\Ref_VideoCard.cs" />
     <Compile Include="Models\ITInventory\ScheduledTask.cs" />
     <Compile Include="Models\ITInventory\User.cs" />

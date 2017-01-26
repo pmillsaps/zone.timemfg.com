@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.ITInventory;
+using Time.IT.Models;
 
 namespace Time.IT.Controllers
 {
@@ -20,11 +21,48 @@ namespace Time.IT.Controllers
         // GET: Licenses
         public ActionResult Index(string search = "")
         {
+            return View();
+            //var licenses = db.Licenses.OrderBy(x => x.Name).ThenBy(x => x.LicenseKey).ThenBy(x => x.Quantity).Include(l => l.Ref_LicenseType);
+            //if (!String.IsNullOrEmpty(search))
+            //    licenses = licenses.Where(x => x.Name.Contains(search) || x.Note.Contains(search) ||
+            //    x.LicenseKey.Contains(search) || x.PO.Contains(search));
+            //return View(licenses.ToList());
+        }
+
+        // Load the data for the Index table
+        public ActionResult LoadLicenses()
+        {
+            List<LicensesViewModel> model = new List<LicensesViewModel>();
             var licenses = db.Licenses.OrderBy(x => x.Name).ThenBy(x => x.LicenseKey).ThenBy(x => x.Quantity).Include(l => l.Ref_LicenseType);
-            if (!String.IsNullOrEmpty(search))
-                licenses = licenses.Where(x => x.Name.Contains(search) || x.Note.Contains(search) ||
-                x.LicenseKey.Contains(search) || x.PO.Contains(search));
-            return View(licenses.ToList());
+            foreach (var item in licenses)
+            {
+                LicensesViewModel lvm = new LicensesViewModel();
+                lvm.Id = item.Id;
+                lvm.Name = item.Name;
+                lvm.Quantity = item.Quantity;
+                lvm.LicenseKey = item.LicenseKey;
+                lvm.QuantityAssigned = item.QuantityAssigned;
+                lvm.LicenseType = (item.Ref_LicenseType == null)? "" : item.Ref_LicenseType.LicenseType;
+                lvm.PO = item.PO;
+                lvm.PurchaseDate = (item.PurchaseDate == null) ? "" : item.PurchaseDate.Value.ToShortDateString();
+                lvm.Note = (item.Note == null)? "" : item.Note;
+                if (item.Computers.Count() == 1)
+                {
+                    var cmp = item.Computers.First();
+                    lvm.CompOrUserName = cmp.Name;
+                }
+                else if (item.Users.Count() == 1)
+                {
+                    var user = item.Users.First();
+                    lvm.CompOrUserName = user.Name;
+                }
+                else
+                {
+                    lvm.CompOrUserName = "";
+                }
+                model.Add(lvm);
+            }
+            return Json(new { data = model }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Licenses/Details/5
