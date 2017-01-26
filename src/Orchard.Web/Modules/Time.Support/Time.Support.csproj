@@ -251,6 +251,12 @@
       <DesignTime>True</DesignTime>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\Report\ITRequests_ByResource_Rating_Priority.cs">
+      <DependentUpon>ITRequests_ByResource_Rating_Priority.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Report\ZoneRequests_ByResource_Personal.cs">
       <DependentUpon>ZoneRequests_ByResource_Personal.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -379,6 +385,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ITMeeting.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="Views\Report\ITRequests_ByResource_Rating_Priority.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ITRequests_ByResource_Rating_Priority.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -281,6 +281,23 @@ namespace Time.Support.Controllers
             return File(stream, "application/pdf");
         }
 
+        public ActionResult TicketsByResourceRatingPriority()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.SupportAdmin) && !Services.Authorizer.Authorize(Permissions.SupportIT))
+            {
+                if (!Services.Authorizer.Authorize(Permissions.SupportIT, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+                if (!Services.Authorizer.Authorize(Permissions.SupportAdmin, T("You do not have access to this report. Please log in.")))
+                    return new HttpUnauthorizedResult();
+            }
+            ReportClass rptH = new ReportClass();
+            rptH.FileName = Server.MapPath("~/Modules/Time.Support/Views/Report/ITRequests_ByResource_Rating_Priority.rpt");
+            rptH.Load();
+            rptH.SetDatabaseLogon(_db_logon, _db_password);
+            Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
+            return File(stream, "application/pdf");
+        }
+
         private void SetDBLogonForReport(ReportDocument reportDocument)
         {
             ConnectionInfo info = new ConnectionInfo();
