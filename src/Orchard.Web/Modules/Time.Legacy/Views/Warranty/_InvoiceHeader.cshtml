@@ -1,0 +1,306 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Legacy.InvoiceHeader>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DropShipFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAddress2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAddress3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipToCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerOrderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipVia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOrdered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateShipped)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateInvoiced)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimesUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastOrderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salesman)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TermsCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftOrderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartsFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateRequired)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipViaCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warranty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateATSCurrent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateATSPrior)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateATSOriginal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Open136)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSales1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSales2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSales3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSales4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSalesOther)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostOfSales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiscCharges)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxableTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesTaxAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FreightAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommissionBaseAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberShipLabels)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftModel)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BatchNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DropShipFlag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerAddress2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerAddress3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipToCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipVia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOrdered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateShipped)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateInvoiced)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimesUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salesman)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TermsCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LiftOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartsFlag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateRequired)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SerialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipViaCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Warranty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InventoryStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateATSCurrent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateATSPrior)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateATSOriginal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Open136)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrossSales1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrossSales2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrossSales3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrossSales4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrossSalesOther)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostOfSales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MiscCharges)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxableTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscountAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesTaxAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FreightAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommissionBaseAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesTax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberShipLabels)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LiftModel)
+        </td>
+    </tr>
+}
+
+</table>

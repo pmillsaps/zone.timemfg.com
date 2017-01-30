@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.Computer>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <caption class="lead"><strong>Linked Computers</strong></caption>
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastBuildDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Memory.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Status.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_DeviceType.DeviceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_OS.OS)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", "Computers", new { id = item.Id })">@item.Name</a>
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "Users", new { id = item.UserId})">@item.User.Name</a> @*@Html.DisplayFor(modelItem => item.User.Name)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastBuildDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Memory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Model.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Status.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_DeviceType.DeviceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_OS.OS)
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", "Computers", new { id = item.Id })">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

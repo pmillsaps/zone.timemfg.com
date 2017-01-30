@@ -1,0 +1,12 @@
+﻿Name: Time.Support
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Support Ticket System
+Features:
+    Time.Support:
+        Description: Support Ticket System.
+		Dependencies: Time.Data
+		Category: .Time
