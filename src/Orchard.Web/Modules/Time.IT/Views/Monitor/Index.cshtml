@@ -15,7 +15,7 @@
 <h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-md-2">
-        <a class="popup btn btn-primary" href="Monitor/Create" >Add New Monitor</a>
+        <a class="btn btn-primary" href="Monitor/Create" >Add New Monitor</a>
     </div>
     <div class="col-md-10">
         <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
@@ -48,45 +48,44 @@
         $(document).ready(function () {
             var urlLM = '@Url.Action("LoadMonitors", "Monitor")';
             var oTable = $("#monitorsTable").DataTable({
-                "ajax": {
-                    "url": urlLM,
-                    "type": "GET",
-                    "datatype": "json"
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
                 },
                 dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
                 buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary excelButton", filename: 'MonitorsList', }],
-                "order": [[7, "asc"]],
-                "displayLength": -1,
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "columns": [
+                order: [[7, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columns: [
                     {
-                        "data": null, "autoWidth": true, "render": function (data, type, row) {
-                            return '<a class="popup" href="Monitor/Details/' + row.Id + '">'+ row.Model +'</a>';
+                        data: null, autoWidth: true, render: function (data, type, row) {
+                            return '<a href="Monitor/Details/' + row.Id + '">'+ row.Model +'</a>';
                         }
                     },
-                    { "data": "SerialNo", "autoWidth": true },
-                    { "data": "AssetId", "autoWidth": true },
+                    { data: "SerialNo", autoWidth: true },
+                    { data: "AssetId", autoWidth: true },
                     {
-                        "data": "PurchaseDate", "autoWidth": true, "render": function (data, type, full) {
+                        data: "PurchaseDate", autoWidth: true, render: function (data, type, full) {
                             return (dtConvFromJSON(data));
                         }
                     },
-                    { "data": "PurchasedFrom", "autoWidth": true },
-                    { "data": "PO", "autoWidth": true },
-                    { "data": "Cost", "autoWidth": true },
-                    { "data": "MFRName", "autoWidth": true },
-                    { "data": "Size", "autoWidth": true },
-                    { "data": "UserName", "autoWidth": true },
+                    { data: "PurchasedFrom", autoWidth: true },
+                    { data: "PO", autoWidth: true },
+                    { data: "Cost", autoWidth: true },
+                    { data: "MFRName", autoWidth: true },
+                    { data: "Size", autoWidth: true },
+                    { data: "UserName", autoWidth: true },
                     {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
-                            return '<a class="popup" href="Monitor/Edit/' + data + '"><span class="mbri-edit"></span></a>';
-                            //return '<a class="popup" href="Monitor/Edit/' + data + '"><img src="/Media/Default/Page/EditIcon.png" width="20" height="20"/></a>';
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Monitor/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
-                            return '<a class="popup" href="Monitor/Delete/' + data + '"><span class="mbri-trash"></span></a>';
-                            //return '<a class="popup" href="Monitor/Delete/' + data + '"><img src="/Media/Default/Page/DeleteIcon.png" width="20" height="20"/></a>';
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Monitor/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }
                 ]

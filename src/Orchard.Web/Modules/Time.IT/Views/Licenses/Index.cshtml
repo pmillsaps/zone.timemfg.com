@@ -45,37 +45,38 @@
         $(document).ready(function () {
             var urlLM = '@Url.Action("LoadLicenses", "Licenses")';
             var oTable = $("#licensesTable").DataTable({
-                "ajax": {
-                    "url": urlLM,
-                    "type": "GET",
-                    "datatype": "json"
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
                 },
                 dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
                 buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary excelButton", filename: 'LicensesList', }],
-                "order": [[0, "asc"]],
-                "displayLength": -1,
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [{ "sClass": "clampClmn", targets: [6] }],
-                "columns": [
+                order: [[0, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "clampClmn", targets: [6] }],
+                columns: [
                     {
-                        "data": null, "render": function (data, type, row) {
+                        data: null, render: function (data, type, row) {
                             return '<a href="Licenses/Details/' + row.Id + '">' + row.Name + '</a>';
                         }
                     },
-                    { "data": "Quantity" },
-                    { "data": "QuantityAssigned" },
-                    { "data": "LicenseKey" },
-                    { "data": "CompOrUserName" },
-                    { "data": "PO" },
-                    { "data": "Note" },
-                    { "data": "LicenseType" },
+                    { data: "Quantity" },
+                    { data: "QuantityAssigned" },
+                    { data: "LicenseKey" },
+                    { data: "CompOrUserName" },
+                    { data: "PO" },
+                    { data: "Note" },
+                    { data: "LicenseType" },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
                             return '<a href="Licenses/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
-                        "data": "Id", "sortable": false, "render": function (data) {
+                        data: "Id", sortable: false, render: function (data) {
                             return '<a href="Licenses/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }

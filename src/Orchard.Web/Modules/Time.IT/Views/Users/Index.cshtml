@@ -15,7 +15,7 @@
 <h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-md-2">
-        <a class="popup btn btn-primary" href="Users/Create">Add New User</a>
+        <a class="btn btn-primary" href="Users/Create">Add New User</a>
     </div>
     <div class="col-md-10">
         <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
@@ -42,38 +42,39 @@
         $(document).ready(function () {
             var urlLM = '@Url.Action("LoadUsers", "Users")';
             var oTable = $("#usersTable").DataTable({
-                "ajax": {
-                    "url": urlLM,
-                    "type": "GET",
-                    "datatype": "json"
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
                 },
                 dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
                 buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary excelButton", filename: 'UsersList', }],
-                "order": [[0, "asc"]],
-                "displayLength": -1,
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "columns": [
+                order: [[0, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columns: [
                     {
-                        "data": null, "autoWidth": true, "render": function (data, type, row) {
+                        data: null, autoWidth: true, render: function (data, type, row) {
                             return '<a href="Users/Details/' + row.Id + '">' + row.Name + '</a>';
                         }
                     },
                     {
-                        "data": null, "autoWidth": true, "render": function (data, type, row) {
+                        data: null, autoWidth: true, render: function (data, type, row) {
                             return '<a href="Computers/Details/' + row.ComputerId + '">' + row.ComputerName + '</a>';
                         }
                     },
-                    { "data": "LastDateEdited", "autoWidth": true },
-                    { "data": "LastEditedBy", "autoWidth": true },
-                    { "data": "Building", "autoWidth": true },
-                    { "data": "Location", "autoWidth": true },
+                    { data: "LastDateEdited", autoWidth: true },
+                    { data: "LastEditedBy", autoWidth: true },
+                    { data: "Building", autoWidth: true },
+                    { data: "Location", autoWidth: true },
                     {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
                             return '<a href="Users/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
                             return '<a href="Users/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }

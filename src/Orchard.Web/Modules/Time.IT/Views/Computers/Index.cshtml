@@ -49,44 +49,43 @@
         $(document).ready(function () {
             var urlLM = '@Url.Action("LoadComputers", "Computers")';
             var oTable = $("#computersTable").DataTable({
-                "ajax": {
-                    "url": urlLM,
-                    "type": "GET",
-                    "datatype": "json"
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
                 },
                 dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
                 buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary excelButton", filename: 'ComputersList', }],
-                "order": [[0, "asc"]],
-                "displayLength": -1,
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "columns": [
+                order: [[0, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columns: [
                     {
-                        "data": null, "autoWidth": true, "render": function (data, type, row) {
-                            return '<a class="popup" href="Computers/Details/' + row.Id + '">' + row.CmpName + '</a>';
+                        data: null, autoWidth: true, render: function (data, type, row) {
+                            return '<a href="Computers/Details/' + row.Id + '">' + row.CmpName + '</a>';
                         }
                     },
                     {
-                        "data": null, "autoWidth": true, "render": function (data, type, row) {
-                            return '<a class="popup" href="Users/Details/' + row.UserId + '">' + row.UserName + '</a>';
+                        data: null, autoWidth: true, render: function (data, type, row) {
+                            return '<a href="Users/Details/' + row.UserId + '">' + row.UserName + '</a>';
                         }
                     },
-                    { "data": "Model", "autoWidth": true },
-                    { "data": "Status", "autoWidth": true},
-                    { "data": "DeviceType", "autoWidth": true },
-                    { "data": "OS", "autoWidth": true },
-                    { "data": "LastBuildDate", "autoWidth": true },
-                    { "data": "PurchaseDate", "autoWidth": true },
-                    { "data": "LastDateEdited", "autoWidth": true },
+                    { data: "Model", autoWidth: true },
+                    { data: "Status", autoWidth: true},
+                    { data: "DeviceType", autoWidth: true },
+                    { data: "OS", autoWidth: true },
+                    { data: "LastBuildDate", autoWidth: true },
+                    { data: "PurchaseDate", autoWidth: true },
+                    { data: "LastDateEdited", autoWidth: true },
                     {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
-                            return '<a class="popup" href="Computers/Edit/' + data + '"><span class="mbri-edit"></span></a>';
-                            //return '<a class="popup" href="Computers/Edit/' + data + '"><img src="/Media/Default/Page/EditIcon.png" width="20" height="20"/></a>';
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Computers/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
-                        "data": "Id", "width": "20px", "sortable": false, "render": function (data) {
-                            return '<a class="popup" href="Computers/Delete/' + data + '"><span class="mbri-trash"></span></a>';
-                            //return '<a class="popup" href="Computers/Delete/' + data + '"><img src="/Media/Default/Page/DeleteIcon.png" width="20" height="20"/></a>';
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Computers/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }
                 ]
