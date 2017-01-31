@@ -46,6 +46,7 @@ namespace Time.Data.EntityModels.ITInventory
         public string PhoneNumber { get; set; }
         public string SerialNumber { get; set; }
         public string AdditionalHW { get; set; }
+        public string FirmwareVersion { get; set; }
     
         public virtual Ref_Memory Ref_Memory { get; set; }
         public virtual Ref_Model Ref_Model { get; set; }

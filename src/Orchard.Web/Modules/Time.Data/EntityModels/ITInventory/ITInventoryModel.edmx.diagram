@@ -51,6 +51,9 @@
         <AssociationConnector Association="ITInventoryModel.FK_Ref_NIC_Ref_SwitchPort" />
         <AssociationConnector Association="ITInventoryModel.Computer_License" />
         <AssociationConnector Association="ITInventoryModel.User_License" />
+        <EntityTypeShape EntityType="ITInventoryModel.MaintenanceData" Width="1.75" PointX="5.125" PointY="0.75" />
+        <EntityTypeShape EntityType="ITInventoryModel.MaintenanceDataDetail" Width="2.25" PointX="7.625" PointY="0.75" />
+        <AssociationConnector Association="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
