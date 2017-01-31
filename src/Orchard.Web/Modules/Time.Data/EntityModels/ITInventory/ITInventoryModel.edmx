@@ -34,6 +34,7 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
           <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="AdditionalHW" Type="nvarchar(max)" />
+          <Property Name="FirmwareVersion" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Computer_License">
           <Key>
@@ -57,6 +58,34 @@
           <Property Name="PO" Type="nvarchar" MaxLength="50" />
           <Property Name="PurchaseDate" Type="datetime" />
           <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MaintenanceData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BudgetItem" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Supplier" Type="varchar" MaxLength="50" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OriginalPurchDate" Type="datetime" />
+          <Property Name="ComputerId" Type="int" />
+          <Property Name="LicenseId" Type="int" />
+        </EntityType>
+        <EntityType Name="MaintenanceDataDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaintenanceDataId" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Duration" Type="varchar" MaxLength="50" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Monthly" Type="varchar" MaxLength="50" />
+          <Property Name="Explanation" Type="varchar" MaxLength="50" />
+          <Property Name="AlternateInfo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Monitor">
           <Key>
@@ -247,6 +276,7 @@
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="LastDateEdited" Type="datetime" />
           <Property Name="LastEditedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="InActive" Type="bit" />
         </EntityType>
         <EntityType Name="User_License">
           <Key>
@@ -556,10 +586,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="tblMaintenanceDataDetails_MaintenanceDataId_FK">
+          <End Role="MaintenanceData" Type="Self.MaintenanceData" Multiplicity="1" />
+          <End Role="MaintenanceDataDetails" Type="Self.MaintenanceDataDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceDataDetails">
+              <PropertyRef Name="MaintenanceDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ITInventoryModelStoreContainer">
           <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Computer_License" EntityType="Self.Computer_License" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="License" EntityType="Self.License" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceData" EntityType="Self.MaintenanceData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceDataDetails" EntityType="Self.MaintenanceDataDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Monitor" EntityType="Self.Monitor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ref_Building" EntityType="Self.Ref_Building" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ref_BuildYear" EntityType="Self.Ref_BuildYear" Schema="dbo" store:Type="Tables" />
@@ -682,6 +726,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="User_License" EntitySet="User_License" />
           </AssociationSet>
+          <AssociationSet Name="tblMaintenanceDataDetails_MaintenanceDataId_FK" Association="Self.tblMaintenanceDataDetails_MaintenanceDataId_FK">
+            <End Role="MaintenanceData" EntitySet="MaintenanceData" />
+            <End Role="MaintenanceDataDetails" EntitySet="MaintenanceDataDetails" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -803,6 +851,12 @@
             <End Role="License" EntitySet="Licenses" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="MaintenanceDatas" EntityType="ITInventoryModel.MaintenanceData" />
+          <EntitySet Name="MaintenanceDataDetails" EntityType="ITInventoryModel.MaintenanceDataDetail" />
+          <AssociationSet Name="tblMaintenanceDataDetails_MaintenanceDataId_FK" Association="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK">
+            <End Role="MaintenanceData" EntitySet="MaintenanceDatas" />
+            <End Role="MaintenanceDataDetail" EntitySet="MaintenanceDataDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Computer">
           <Key>
@@ -845,6 +899,7 @@
           <NavigationProperty Name="Ref_NIC" Relationship="ITInventoryModel.FK_Ref_NIC_Computer" FromRole="Computer" ToRole="Ref_NIC" />
           <NavigationProperty Name="ScheduledTasks" Relationship="ITInventoryModel.FK_ScheduledTasks_Computer" FromRole="Computer" ToRole="ScheduledTask" />
           <NavigationProperty Name="Licenses" Relationship="ITInventoryModel.Computer_License" FromRole="Computer" ToRole="License" />
+          <Property Name="FirmwareVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="License">
           <Key>
@@ -1084,6 +1139,7 @@
           <NavigationProperty Name="Ref_Building" Relationship="ITInventoryModel.FK_User__Building" FromRole="User" ToRole="Ref_Building" />
           <NavigationProperty Name="Ref_Location" Relationship="ITInventoryModel.FK_User__Location" FromRole="User" ToRole="Ref_Location" />
           <NavigationProperty Name="Licenses" Relationship="ITInventoryModel.User_License" FromRole="User" ToRole="License" />
+          <Property Name="InActive" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Computer__Memory">
           <End Type="ITInventoryModel.Ref_Memory" Role="Ref_Memory" Multiplicity="0..1" />
@@ -1345,6 +1401,48 @@
           <End Type="ITInventoryModel.License" Role="License" Multiplicity="*" />
           <End Type="ITInventoryModel.User" Role="User" Multiplicity="*" />
         </Association>
+        <EntityType Name="MaintenanceData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BudgetItem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OriginalPurchDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MaintenanceDataDetails" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceData" ToRole="MaintenanceDataDetail" />
+          <Property Name="ComputerId" Type="Int32" />
+          <Property Name="LicenseId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MaintenanceDataDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaintenanceDataId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Monthly" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Explanation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MaintenanceData" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceDataDetail" ToRole="MaintenanceData" />
+        </EntityType>
+        <Association Name="tblMaintenanceDataDetails_MaintenanceDataId_FK">
+          <End Type="ITInventoryModel.MaintenanceData" Role="MaintenanceData" Multiplicity="1" />
+          <End Type="ITInventoryModel.MaintenanceDataDetail" Role="MaintenanceDataDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceDataDetail">
+              <PropertyRef Name="MaintenanceDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1354,6 +1452,7 @@
           <EntitySetMapping Name="Computers">
             <EntityTypeMapping TypeName="ITInventoryModel.Computer">
               <MappingFragment StoreEntitySet="Computer">
+                <ScalarProperty Name="FirmwareVersion" ColumnName="FirmwareVersion" />
                 <ScalarProperty Name="AdditionalHW" ColumnName="AdditionalHW" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
@@ -1599,6 +1698,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ITInventoryModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
                 <ScalarProperty Name="LastDateEdited" ColumnName="LastDateEdited" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -1625,6 +1725,36 @@
               <ScalarProperty Name="Id" ColumnName="LicenseId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="MaintenanceDatas">
+            <EntityTypeMapping TypeName="ITInventoryModel.MaintenanceData">
+              <MappingFragment StoreEntitySet="MaintenanceData">
+                <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="OriginalPurchDate" ColumnName="OriginalPurchDate" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="BudgetItem" ColumnName="BudgetItem" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceDataDetails">
+            <EntityTypeMapping TypeName="ITInventoryModel.MaintenanceDataDetail">
+              <MappingFragment StoreEntitySet="MaintenanceDataDetails">
+                <ScalarProperty Name="AlternateInfo" ColumnName="AlternateInfo" />
+                <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+                <ScalarProperty Name="Monthly" ColumnName="Monthly" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="MaintenanceDataId" ColumnName="MaintenanceDataId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

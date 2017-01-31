@@ -215,6 +215,7 @@
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
     <Compile Include="ViewModels\GroupsAndOptionsViewModel.cs" />
+    <Compile Include="ViewModels\QuoteDtlViewModel.cs" />
     <Compile Include="ViewModels\QuoteViewModel.cs" />
   </ItemGroup>
   <ItemGroup />

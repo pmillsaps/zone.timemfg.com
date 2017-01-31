@@ -28,6 +28,7 @@ namespace Time.Data.EntityModels.ITInventory
         public string Notes { get; set; }
         public Nullable<System.DateTime> LastDateEdited { get; set; }
         public string LastEditedBy { get; set; }
+        public Nullable<bool> InActive { get; set; }
     
         public virtual ICollection<Computer> Computers { get; set; }
         public virtual ICollection<Monitor> Monitors { get; set; }
