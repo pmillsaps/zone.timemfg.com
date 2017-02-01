@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Time.Data.EntityModels.OrderLog.Install>
+
+@{
+    ViewBag.Title = "Install Type Index";
+}
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div>
+    @Html.ActionLink("Add a New Install Type", "Create", "Install", null, new { @class = "btn btn-primary" })
+</div>
+<hr />
+<table class="table table-striped table-bordered table-condensed">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.InstallName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstallName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.InstallId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.InstallId })
+            </td>
+        </tr>
+    }
+
+</table>

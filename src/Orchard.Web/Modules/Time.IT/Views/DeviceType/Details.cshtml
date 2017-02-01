@@ -1,0 +1,25 @@
+﻿@model Time.Data.EntityModels.ITInventory.Ref_DeviceType
+
+@{
+    ViewBag.Title = "Device Type Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Ref_DeviceType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceType)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

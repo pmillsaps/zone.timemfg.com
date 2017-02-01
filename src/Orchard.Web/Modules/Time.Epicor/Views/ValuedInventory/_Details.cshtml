@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.ValuedInventory>
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PartNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BOH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalculationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComparisonDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassId)
+            </th>
+        </tr>
+
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalculationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComparisonDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassId)
+            </td>
+        </tr>
+        }
+    </table>

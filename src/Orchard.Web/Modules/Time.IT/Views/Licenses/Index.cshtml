@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "Licenses Index";
+    Script.Require("jQuery");
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot();
+}
+<link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-2">
+        <a class="btn btn-primary" href="Licenses/Create">Add New License</a>
+    </div>
+    <div class="col-md-10">
+        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+    </div>
+</div>
+<table id="licensesTable" class="table table-striped table-hover table-bordered table-condensed">
+    <thead>
+        <tr class="success">
+            <td>@Html.Label("License")</td>
+            <td>@Html.Label("Qty")</td>
+            <td>@Html.Label("QtyAsgnd")</td>
+            <td>@Html.Label("License Key")</td>
+            <td>@Html.Label("Comp/User")</td>
+            <td>@Html.Label("PO")</td>
+            <td>@Html.Label("Note")</td>
+            <td>@Html.Label("Type")</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+</table>
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadLicenses", "Licenses")';
+            var oTable = $("#licensesTable").DataTable({
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary excelButton", filename: 'LicensesList', }],
+                order: [[0, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "clampClmn", targets: [6] }],
+                columns: [
+                    {
+                        data: null, render: function (data, type, row) {
+                            return '<a href="Licenses/Details/' + row.Id + '">' + row.Name + '</a>';
+                        }
+                    },
+                    { data: "Quantity" },
+                    { data: "QuantityAssigned" },
+                    { data: "LicenseKey" },
+                    { data: "CompOrUserName" },
+                    { data: "PO" },
+                    { data: "Note" },
+                    { data: "LicenseType" },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Licenses/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: "Id", sortable: false, render: function (data) {
+                            return '<a href="Licenses/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                        }
+                    }
+                ]
+            })
+        });
+    </script>
+}
+
+
+@*@model IEnumerable<Time.Data.EntityModels.ITInventory.License>
+
+    @{
+        ViewBag.Title = "License Index";
+    }
+
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <hr />
+
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken();
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.TextBox("search")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr />
+
+    <table class="table table-striped table-bordered table-condensed table-hover">
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityAssigned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenseKey)
+            </th>
+            <th>
+                Computer
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_LicenseType.LicenseType)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityAssigned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseKey)
+                </td>
+                <td>
+                    @if (item.Computers.Count() + item.Users.Count() == 1)
+                    {
+                        if (item.Computers.Count() == 1)
+                        {
+                            @item.Computers.FirstOrDefault().Name
+                        }
+                        if (item.Users.Count() == 1)
+                        {
+                            @item.Users.FirstOrDefault().Name
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_LicenseType.LicenseType)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+
+    @Html.ActionLink("Reset ALL License Counts", "RecountLicenses")*@
