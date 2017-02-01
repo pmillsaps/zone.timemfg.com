@@ -12,14 +12,16 @@
 <link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
-<h2>@ViewBag.Title</h2>
+<div class="row">
+    <h2>@ViewBag.Title</h2>
+    @Html.ActionLink("Go to Maintenance Data", "Index", "MaintenanceDatas", null, htmlAttributes: new { @class = "pull-right" })
+</div>
 
 @Html.Partial("_ModalForm")
 
 <div class="row">
     <div class="col-md-3">
         <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">New Warranty Details</a>
-        @*<a class="btn btn-primary popup" href="MaintenanceDataDetails/Create">Add New Warranty Details</a>*@
     </div>
     <div class="col-md-9">
         <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
@@ -41,6 +43,7 @@
                 <td>@Html.Label("Monthly")</td>
                 <td>@Html.Label("Explanation")</td>
                 <td>@Html.Label("Alternate Info")</td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -65,6 +68,7 @@
                 stateSave: true,
                 displayLength: -1,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "clampClmn", targets: [11] }],
                 columns: [
                     { data: "CompanyName", autoWidth: true },
                     { data: "BudgetItem", autoWidth: true },
@@ -80,14 +84,19 @@
                     { data: "AlternateInfo", autoWidth: true },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a class="editBtn btn-link" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
-                            //return '<a class="popup" href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            //return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
-                            //return '<a class="popup" href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            //return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }
                 ]
@@ -99,12 +108,12 @@
             });
 
             $(".editBtn").click(function (eve) {
-                var myId = $(this).data("id");
+                var myId = $(this).attr("data-id");
                 var url = '@Url.Action("Edit", "MaintenanceDataDetails")';
-                $("#form-content").load(url + "/" + myId);
+                $("#form-content").load(url, { id: myId });
             });
 
-            $(".editBtn").click(function (eve) {
+            $(".deleteBtn").click(function (eve) {
                 var myId = $(this).data("id");
                 var url = '@Url.Action("Delete", "MaintenanceDataDetails")';
                 $("#form-content").load(url + "/" + myId);
