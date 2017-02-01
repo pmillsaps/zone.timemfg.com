@@ -1,0 +1,65 @@
+﻿@model Time.Drawings.ViewModels.AdditionalDrawingViewModel
+
+@{
+    ViewBag.Title = "Add Additional Drawing";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(Model => Model.pdf.Drawing)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.pdf.Drawing)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(Model => Model.pdf.FileName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.pdf.FileName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(Model => Model.pdf.Directory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.pdf.Directory)
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SourceId)
+    @Html.HiddenFor(model => Model.pdf.Drawing)
+    @Html.HiddenFor(model => Model.pdf.FileName)
+    @Html.HiddenFor(model => Model.pdf.Directory)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                <strong>Additional Drawing</strong>
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownList("TargetId", "--- Select Additional Drawing ---")
+                @Html.ValidationMessageFor(model => model.TargetId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

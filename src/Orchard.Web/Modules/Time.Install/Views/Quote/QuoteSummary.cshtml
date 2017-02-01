@@ -1,0 +1,79 @@
+﻿@model Time.Install.Models.InstallQuoteSummary
+
+@{
+    ViewBag.Title = "Installation Quotation Summary";
+    Script.Require("jQuery");
+}
+
+<link href="~/Modules/Time.Install/Styles/Site.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Go to List of VSW Quoted Installs", "ListOfInstallQuotes")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to Aerial Quotes List without Install Qoute", "Index")
+</div>
+
+<hr />
+<h3>Aerial Quote Number: @Model.InstallQuotes.LiftQuoteNumber</h3>
+<h4>Lift: @Model.InstallQuotes.LiftName</h4>
+<hr />
+<div class="alert alert-info">
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
+    </dl>
+</div>
+
+<br />
+<div id="flip1">Click here to Display/Hide VSW Install Options</div>
+<div id="panel1">
+    @Html.Partial("_SummaryVSWOptions", Model)
+</div>
+
+<div id="flip2">Click here to Display/Hide Manually Added VSW Install Options</div>
+<div id="panel2">
+    @Html.Partial("_SummaryManuallyAddedVSWOptions", Model)
+</div>
+
+<div id="flip3">Click here to Display/Hide Time Options</div>
+<div id="panel3">
+    @Html.Partial("_SummaryTimeOptions", Model)
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('#flip1').click(function () {
+            $('#panel1').slideToggle('slow');
+        });
+
+        $('#flip2').click(function () {
+            $('#panel2').slideToggle('slow');
+        });
+
+        $('#flip3').click(function () {
+            $('#panel3').slideToggle('slow');
+        });
+    </script>
+}

@@ -1,0 +1,115 @@
+﻿@model Time.Data.EntityModels.ITInventory.MaintenanceDataDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>Details</h2>
+
+<div class="alert alert-info">
+    <h4>Maintenance Data Detail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaintenanceData.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaintenanceData.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaintenanceData.BudgetItem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaintenanceData.BudgetItem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaintenanceData.Supplier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaintenanceData.Supplier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaintenanceData.OriginalPurchDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaintenanceData.OriginalPurchDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monthly)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monthly)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Explanation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Explanation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlternateInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlternateInfo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
