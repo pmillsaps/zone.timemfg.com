@@ -38,7 +38,7 @@ namespace Time.IT.Controllers
                 mvm.CompanyName = item.MaintenanceData.CompanyName;
                 mvm.BudgetItem = item.MaintenanceData.BudgetItem;
                 mvm.Supplier = item.MaintenanceData.Supplier;
-                mvm.OriginalPurchDate = (item.MaintenanceData != null) ? item.MaintenanceData.OriginalPurchDate.Value.ToShortDateString() : "";
+                mvm.OriginalPurchDate = (item.MaintenanceData.OriginalPurchDate != null) ? item.MaintenanceData.OriginalPurchDate.Value.ToShortDateString() : "";
                 mvm.PurchaseDate = (item.PurchaseDate != null) ? item.PurchaseDate.ToShortDateString() : "";
                 mvm.ExpirationDate = (item.ExpirationDate != null) ? item.ExpirationDate.ToShortDateString() : "";
                 mvm.AccountNumber = item.AccountNumber;
@@ -70,6 +70,8 @@ namespace Time.IT.Controllers
         // GET: MaintenanceDataDetails/Create
         public ActionResult Create()
         {
+            ViewBag.NoModal = 0;
+            ViewBag.Duration = DurationYears("");
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem");
             return View();
         }
@@ -87,7 +89,8 @@ namespace Time.IT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Duration = DurationYears("");
+            ViewBag.NoModal = 1;
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
             return View(maintenanceDataDetail);
         }
@@ -104,6 +107,7 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Duration = DurationYears(maintenanceDataDetail.Duration);
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
             return View(maintenanceDataDetail);
         }
@@ -121,6 +125,7 @@ namespace Time.IT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Duration = DurationYears(maintenanceDataDetail.Duration);
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
             return View(maintenanceDataDetail);
         }
@@ -151,6 +156,21 @@ namespace Time.IT.Controllers
             return RedirectToAction("Index");
         }
 
+        public SelectList DurationYears(string yearSelected)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            for (int i = 1; i < 21; i++)
+            {
+                if(i < 10){
+                    items.Add(new SelectListItem() { Text = i + " Year", Value = i + " Year", Selected = false });
+                }
+                else{
+                    items.Add(new SelectListItem() { Text = i + " Years", Value = i + " Years", Selected = false });
+                }
+            }
+           return new SelectList(items, "Value", "Text", yearSelected);
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

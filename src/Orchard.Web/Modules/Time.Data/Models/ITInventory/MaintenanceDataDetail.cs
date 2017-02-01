@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Time.Data.EntityModels.ITInventory
 {
@@ -28,6 +29,7 @@ namespace Time.Data.EntityModels.ITInventory
         public string AccountNumber { get; set; }
 
         [Display(Name = "Alternate Info")]
+        [DataType(DataType.MultilineText)]
         public string AlternateInfo { get; set; }
     }
 }

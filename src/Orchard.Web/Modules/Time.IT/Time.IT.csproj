@@ -371,6 +371,10 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -573,6 +577,7 @@
     <Content Include="Views\MaintenanceDataDetails\Edit.cshtml" />
     <Content Include="Views\MaintenanceDataDetails\Index.cshtml" />
     <Content Include="Views\MaintenanceDataDetails\_ModalForm.cshtml" />
+    <Content Include="Views\MaintenanceDatas\_ModalForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

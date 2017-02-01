@@ -12,10 +12,16 @@
 <link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
-<h2>@ViewBag.Title</h2>
+<div class="row">
+    <h2>@ViewBag.Title</h2>
+    @Html.ActionLink("Go to Maintenance Data Details", "Index", "MaintenanceDataDetails", null, htmlAttributes: new { @class="pull-right" })
+</div>
+
+@Html.Partial("_ModalForm")
+
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="MaintenanceDatas/Create">Add New Data</a>
+        <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add New Data</a>
     </div>
     <div class="col-md-10">
         <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
@@ -82,6 +88,11 @@
                     }
                 ]
             })
+
+            $("#newBtn").click(function (eve) {
+                var url = '@Url.Action("Create", "MaintenanceDatas")';
+                $("#form-content").load(url);
+            });
         });
     </script>
 }

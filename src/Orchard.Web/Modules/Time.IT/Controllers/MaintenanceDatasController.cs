@@ -66,6 +66,7 @@ namespace Time.IT.Controllers
         // GET: MaintenanceDatas/Create
         public ActionResult Create()
         {
+            ViewBag.NoModal = 0;
             ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name");
             ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name");
             return View();
@@ -84,6 +85,7 @@ namespace Time.IT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.NoModal = 1;
             ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", maintenanceData.ComputerId);
             ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", maintenanceData.LicenseId);
             return View(maintenanceData);
