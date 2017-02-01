@@ -386,8 +386,10 @@
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Styles\buttons.bootstrap.min.css" />
+    <Content Include="Styles\dataTables.bootstrap.css" />
     <Content Include="Styles\dataTables.bootstrap.min.css" />
     <Content Include="Styles\customStyle.css" />
+    <Content Include="Styles\fixedHeader.bootstrap.min.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\font-awesome.min.css" />
     <Content Include="Styles\fonts\fontawesome-webfont.svg" />
@@ -560,6 +562,17 @@
     <Content Include="Styles\fonts\mobirise.eot" />
     <Content Include="Styles\fonts\mobirise.ttf" />
     <Content Include="Styles\fonts\mobrise.woff" />
+    <Content Include="Views\MaintenanceDatas\Create.cshtml" />
+    <Content Include="Views\MaintenanceDatas\Delete.cshtml" />
+    <Content Include="Views\MaintenanceDatas\Details.cshtml" />
+    <Content Include="Views\MaintenanceDatas\Edit.cshtml" />
+    <Content Include="Views\MaintenanceDatas\Index.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\Create.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\Delete.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\Details.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\Edit.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\Index.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\_ModalForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -580,6 +593,8 @@
     <Compile Include="Controllers\LicensesController.cs" />
     <Compile Include="Controllers\LicenseTypeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\MaintenanceDataDetailsController.cs" />
+    <Compile Include="Controllers\MaintenanceDatasController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\MemoryController.cs" />
     <Compile Include="Controllers\ModelController.cs" />
@@ -609,6 +624,8 @@
     <Compile Include="ViewModel\LinkLicenseViewModel.cs" />
     <Compile Include="ViewModel\LinkComputerViewModel.cs" />
     <Compile Include="ViewModel\LinkMonitorViewModel.cs" />
+    <Compile Include="ViewModel\MaintenanceDataDetailViewModel.cs" />
+    <Compile Include="ViewModel\MaintenanceDataViewModel.cs" />
     <Compile Include="ViewModel\ProcessViewModel.cs" />
     <Compile Include="ViewModel\ServerStatusViewModel.cs" />
   </ItemGroup>

@@ -48,5 +48,7 @@ namespace Time.Data.EntityModels.ITInventory
         public virtual DbSet<Ref_VideoCard> Ref_VideoCard { get; set; }
         public virtual DbSet<ScheduledTask> ScheduledTasks { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MaintenanceData> MaintenanceDatas { get; set; }
+        public virtual DbSet<MaintenanceDataDetail> MaintenanceDataDetails { get; set; }
     }
 }
