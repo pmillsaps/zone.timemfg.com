@@ -17,15 +17,29 @@
         <th>
             @Html.DisplayNameFor(model => model.PartLocation)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OnHand) @*used binqty for information to display, not onhand.  want it to say onhand though*@
-        </th>
+        @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+        {
+
+        }
+        else
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.OnHand) @*used binqty for information to display, not onhand.  want it to say onhand though*@
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.Type)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
+        @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+        {
+
+        }
+        else
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.InActive)
         </th>
@@ -38,9 +52,15 @@
         <th>
             @Html.DisplayNameFor(model => model.VendorPartNumber)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cost)
-        </th>
+        @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+        {
+
+        }
+        else {
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.ClassID)
         </th>
@@ -70,15 +90,29 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PartLocation)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.binqty)
-            </td>
+            @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+            {
+
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.binqty)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
+            @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+            {
+
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayNameFor(model => model.Price)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.InActive)
             </td>
@@ -91,9 +125,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VendorPartNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
+            @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+            {
+
+            }
+            else {
+                <td>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.ClassID)
             </td>

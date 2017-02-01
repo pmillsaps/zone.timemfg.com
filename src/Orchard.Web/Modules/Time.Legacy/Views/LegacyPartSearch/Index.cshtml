@@ -54,24 +54,31 @@
         <th>
             @Html.DisplayNameFor(model => model.PartType)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentMaterialCost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncrLastPurchaseCost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncrBuyoutCost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AggrBuyoutCost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncrLaborCost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AggrLaborCost)
-        </th>
+        @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+        {
+
+        }
+        else
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentMaterialCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncrLastPurchaseCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncrBuyoutCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AggrBuyoutCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncrLaborCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AggrLaborCost)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.DateLastRecieved)
         </th>
@@ -90,24 +97,31 @@
         <th>
             @Html.DisplayNameFor(model => model.Phantom)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ListPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice4)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice5)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice6)
-        </th>
+        @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+        {
+
+        }
+        else
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.ListPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice6)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.DrawingDate)
         </th>
@@ -167,24 +181,31 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PartType)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentMaterialCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IncrLastPurchaseCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IncrBuyoutCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AggrBuyoutCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IncrLaborCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AggrLaborCost)
-                </td>
+                @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+                {
+
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentMaterialCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IncrLastPurchaseCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IncrBuyoutCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AggrBuyoutCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IncrLaborCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AggrLaborCost)
+                    </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.DateLastRecieved)
                 </td>
@@ -203,24 +224,31 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Phantom)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ListPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice3)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice4)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice5)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice6)
-                </td>
+                @if (User.Identity.Name.ToUpper().Contains("TIMEMFG") || User.Identity.Name.ToUpper().Contains("VERSALIFTSOUTHW"))
+                {
+
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ListPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice3)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice4)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice5)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice6)
+                    </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.DrawingDate)
                 </td>

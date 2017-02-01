@@ -7,6 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 <hr />
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -64,10 +65,10 @@
         </div>
         <div class="row">
             @if (Model.PartData != null)
-                { <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.ExportToExcel)
-                @Html.LabelFor(model => model.ExportToExcel)
-            </div>
+            { <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.ExportToExcel)
+            @Html.LabelFor(model => model.ExportToExcel)
+        </div>
             }
         </div>
     </div>
