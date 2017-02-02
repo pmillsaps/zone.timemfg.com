@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Warranty Index";
+    ViewBag.Title = "IT Maintenance Index";
     Script.Require("jQuery");
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
@@ -13,15 +13,17 @@
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
 <div class="row">
-    <h2>@ViewBag.Title</h2>
-    @Html.ActionLink("Go to Maintenance Data Details", "Index", "MaintenanceDataDetails", null, htmlAttributes: new { @class="pull-right" })
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+        @Html.ActionLink("Go to Go to IT Maintenance Details", "Index", "MaintenanceDataDetails", null, htmlAttributes: new { @class = "pull-right" })
+    </div>
 </div>
 
 @Html.Partial("_ModalForm")
 
 <div class="row">
     <div class="col-md-2">
-        <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add New Data</a>
+        <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add Record</a>
     </div>
     <div class="col-md-10">
         <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
@@ -73,17 +75,20 @@
                     { data: "LicenseName" },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="MaintenanceDatas/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
+                            //return '<a href="MaintenanceDatas/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="MaintenanceDatas/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
+                            //return '<a href="MaintenanceDatas/Details/' + data + '"><span class="mbri-info"></span></a>';
                         }
                     },
                     {
                         data: "Id", sortable: false, render: function (data) {
-                            return '<a href="MaintenanceDatas/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
+                            //return '<a href="MaintenanceDatas/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }
                 ]
@@ -93,64 +98,82 @@
                 var url = '@Url.Action("Create", "MaintenanceDatas")';
                 $("#form-content").load(url);
             });
+
+            $('#mntncTable tbody').on('click', 'a.editBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Edit", "MaintenanceDatas")';
+                $("#form-content").load(url + "/" + myId);
+            });
+
+            $('#mntncTable tbody').on('click', 'a.deleteBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Delete", "MaintenanceDatas")';
+                $("#form-content").load(url + "/" + myId);
+            });
+
+            $('#mntncTable tbody').on('click', 'a.dtlsBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Details", "MaintenanceDatas")';
+                $("#form-content").load(url + "/" + myId);
+            });
         });
     </script>
 }
 
 @*@model IEnumerable<Time.Data.EntityModels.ITInventory.MaintenanceData>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+        ViewBag.Title = "Index";
+    }
 
-<h2>Index</h2>
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BudgetItem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Supplier)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OriginalPurchDate)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BudgetItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalPurchDate)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BudgetItem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Supplier)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccountNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OriginalPurchDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BudgetItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalPurchDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
 
-</table>*@
+    </table>*@

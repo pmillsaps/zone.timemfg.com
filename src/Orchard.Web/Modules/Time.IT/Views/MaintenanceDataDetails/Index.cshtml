@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Warranty Details Index";
+    ViewBag.Title = "IT Maintenance Details Index";
     Script.Require("jQuery");
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
@@ -13,15 +13,17 @@
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
 <div class="row">
-    <h2>@ViewBag.Title</h2>
-    @Html.ActionLink("Go to Maintenance Data", "Index", "MaintenanceDatas", null, htmlAttributes: new { @class = "pull-right" })
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+        @Html.ActionLink("Go to IT Maintenance", "Index", "MaintenanceDatas", null, htmlAttributes: new { @class = "pull-right" })
+    </div>
 </div>
 
 @Html.Partial("_ModalForm")
 
 <div class="row">
     <div class="col-md-3">
-        <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">New Warranty Details</a>
+        <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add Record</a>
     </div>
     <div class="col-md-9">
         <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
@@ -35,6 +37,7 @@
                 <td>@Html.Label("Budget Item")</td>
                 <td>@Html.Label("Supplier")</td>
                 <td>@Html.Label("Original Purch Date")</td>
+                <td>@Html.Label("PO/CC")</td>
                 <td>@Html.Label("Purch Date")</td>
                 <td>@Html.Label("Expn Date")</td>
                 <td>@Html.Label("Account#")</td>
@@ -74,6 +77,7 @@
                     { data: "BudgetItem", autoWidth: true },
                     { data: "Supplier", autoWidth: true },
                     { data: "OriginalPurchDate", autoWidth: true },
+                    { data: "PO_CC", autoWidth: true },
                     { data: "PurchaseDate", autoWidth: true },
                     { data: "ExpirationDate", autoWidth: true },
                     { data: "AccountNumber", autoWidth: true },
@@ -84,19 +88,20 @@
                     { data: "AlternateInfo", autoWidth: true },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            //return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
-                            return '<a href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
+                            //return '<a href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            //return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            //return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
-                            return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
+                            //return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }
                 ]
@@ -107,15 +112,21 @@
                 $("#form-content").load(url);
             });
 
-            $(".editBtn").click(function (eve) {
-                var myId = $(this).attr("data-id");
+            $('#mntncDetailsTable tbody').on('click', 'a.editBtn', function (eve) {
+                var myId = $(this).data("id");
                 var url = '@Url.Action("Edit", "MaintenanceDataDetails")';
-                $("#form-content").load(url, { id: myId });
+                $("#form-content").load(url + "/" + myId);
             });
 
-            $(".deleteBtn").click(function (eve) {
+            $('#mntncDetailsTable tbody').on('click', 'a.deleteBtn', function (eve) {
                 var myId = $(this).data("id");
                 var url = '@Url.Action("Delete", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+            });
+
+            $('#mntncDetailsTable tbody').on('click', 'a.dtlsBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Details", "MaintenanceDataDetails")';
                 $("#form-content").load(url + "/" + myId);
             });
         });

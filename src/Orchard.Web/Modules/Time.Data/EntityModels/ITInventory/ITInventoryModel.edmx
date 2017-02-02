@@ -86,6 +86,7 @@
           <Property Name="Monthly" Type="varchar" MaxLength="50" />
           <Property Name="Explanation" Type="varchar" MaxLength="50" />
           <Property Name="AlternateInfo" Type="varchar" MaxLength="50" />
+          <Property Name="PO_CC" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Monitor">
           <Key>
@@ -1430,6 +1431,7 @@
           <Property Name="Explanation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AlternateInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MaintenanceData" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceDataDetail" ToRole="MaintenanceData" />
+          <Property Name="PO_CC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="tblMaintenanceDataDetails_MaintenanceDataId_FK">
           <End Type="ITInventoryModel.MaintenanceData" Role="MaintenanceData" Multiplicity="1" />
@@ -1742,6 +1744,7 @@
           <EntitySetMapping Name="MaintenanceDataDetails">
             <EntityTypeMapping TypeName="ITInventoryModel.MaintenanceDataDetail">
               <MappingFragment StoreEntitySet="MaintenanceDataDetails">
+                <ScalarProperty Name="PO_CC" ColumnName="PO_CC" />
                 <ScalarProperty Name="AlternateInfo" ColumnName="AlternateInfo" />
                 <ScalarProperty Name="Explanation" ColumnName="Explanation" />
                 <ScalarProperty Name="Monthly" ColumnName="Monthly" />

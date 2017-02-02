@@ -73,14 +73,14 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-6">
                 <input type="submit" value="Create" class="btn btn-primary" />
-                @if (ViewBag.NoModal == 0)
+                @if (!ViewBag.NoModal)
                 {<input type="button" value="Close" data-dismiss="modal" class="btn btn-primary" />}
             </div>
         </div>
     </div>
 }
 
-@if (ViewBag.NoModal == 1)
+@if (ViewBag.NoModal)
 {
     <div>
         @Html.ActionLink("Back to List", "Index")
