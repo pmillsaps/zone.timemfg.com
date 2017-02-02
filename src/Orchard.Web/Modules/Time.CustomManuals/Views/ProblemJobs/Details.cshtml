@@ -1,0 +1,139 @@
+﻿@model Time.Data.EntityModels.CustomManuals.ProblemJob
+
+@{
+    ViewBag.Title = "Problem Job Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_CustomManualSideBar")
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="row">
+                <div class="col-md-10"><h4>@ViewBag.Title</h4><hr /></div>
+            </div>
+            @*<div class="row">
+                    <hr />
+                </div>*@
+            <div class="row">
+                <div class="col-md-10">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JobNumber)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.JobNumber)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SerialNumber)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.SerialNumber)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EnteredDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EnteredDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EntryPerson)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EntryPerson)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Problem)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Problem)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Language)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Language)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Language_Code)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Language_Code)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RequiredDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RequiredDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastCheckedDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.LastCheckedDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastCheckedPerson)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.LastCheckedPerson)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastCheckedMessage)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.LastCheckedMessage)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JobCleared)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.JobCleared)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JobClearedDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.JobClearedDate)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JobClearedBy)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.JobClearedBy)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ManuallyCleared)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ManuallyCleared)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ManuallyClearedBy)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ManuallyClearedBy)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ManuallyClearedNote)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ManuallyClearedNote)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.AutomaticEntryReason)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.AutomaticEntryReason)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.Ref_NIC>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.MAC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_CableNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_NICSpeed.NIC_Speed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_SwitchPort.SwitchPort)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MAC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_CableNo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_NICSpeed.NIC_Speed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_SwitchPort.SwitchPort)
+            </td>
+            <td>
+                @*<a href="@Url.Action("Edit", "NIC", new { id = item.Id })">Edit</a> |*@
+                @Html.ActionLink("Edit", "Edit", "NIC", new { id = item.Id }, null) |
+                @*<a href="@Url.Action("Delete", "NIC", new { id = item.Id })">Delete</a> |*@
+                @Html.ActionLink("Delete", "Delete", "NIC", new { id = item.Id }, null) |
+                @Html.ActionLink("Ping", "Ping", new { id = item.Id }) |
+                @Html.ActionLink("Wake", "Wake", new { id = item.Id })
+                @*@Html.ActionLink("Edit", "Edit", "NIC", null, new { id = item.Id }) |*@
+                @*@Html.ActionLink("Delete", "Delete", "NIC", null, new { id = item.Id })*@
+            </td>
+        </tr>
+    }
+</table>
