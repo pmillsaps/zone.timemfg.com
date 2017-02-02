@@ -94,14 +94,14 @@
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            //return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
-                            return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            //return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
-                            //return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            //return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
                         }
                     }
                 ]
@@ -118,7 +118,7 @@
                 $("#form-content").load(url + "/" + myId);
             });
 
-            $('#mntncDetailsTable tbody').on('click', 'a.deleteBtn', function (eve) {
+            @*$('#mntncDetailsTable tbody').on('click', 'a.deleteBtn', function (eve) {
                 var myId = $(this).data("id");
                 var url = '@Url.Action("Delete", "MaintenanceDataDetails")';
                 $("#form-content").load(url + "/" + myId);
@@ -128,7 +128,7 @@
                 var myId = $(this).data("id");
                 var url = '@Url.Action("Details", "MaintenanceDataDetails")';
                 $("#form-content").load(url + "/" + myId);
-            });
+            });*@
         });
     </script>
 }
