@@ -31,5 +31,8 @@ namespace Time.Data.EntityModels.ITInventory
         [Display(Name = "Alternate Info")]
         [DataType(DataType.MultilineText)]
         public string AlternateInfo { get; set; }
+
+        [Display(Name = "PO/CC")]
+        public string PO_CC { get; set; }
     }
 }

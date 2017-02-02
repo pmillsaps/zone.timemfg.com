@@ -47,6 +47,7 @@ namespace Time.IT.Controllers
                 mvm.Monthly = item.Monthly;
                 mvm.Explanation = item.Explanation;
                 mvm.AlternateInfo = item.AlternateInfo;
+                mvm.PO_CC = item.PO_CC;
                 model.Add(mvm);
             }
             return Json(new { data = model }, JsonRequestBehavior.AllowGet);
@@ -70,7 +71,7 @@ namespace Time.IT.Controllers
         // GET: MaintenanceDataDetails/Create
         public ActionResult Create()
         {
-            ViewBag.NoModal = 0;
+            ViewBag.NoModal = false;
             ViewBag.Duration = DurationYears("");
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem");
             return View();
@@ -89,8 +90,8 @@ namespace Time.IT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Duration = DurationYears("");
-            ViewBag.NoModal = 1;
+            ViewBag.Duration = DurationYears(maintenanceDataDetail.Duration);
+            ViewBag.NoModal = true;
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
             return View(maintenanceDataDetail);
         }
@@ -107,6 +108,7 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.NoModal = false;
             ViewBag.Duration = DurationYears(maintenanceDataDetail.Duration);
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
             return View(maintenanceDataDetail);
@@ -125,6 +127,7 @@ namespace Time.IT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.NoModal = true;
             ViewBag.Duration = DurationYears(maintenanceDataDetail.Duration);
             ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
             return View(maintenanceDataDetail);

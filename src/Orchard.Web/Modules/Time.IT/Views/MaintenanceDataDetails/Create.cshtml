@@ -26,6 +26,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.PO_CC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.PO_CC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PO_CC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">
                 @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control showDatePicker" , @placeholder = "Required field" } })
@@ -93,13 +101,13 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-6">
                 <input type="submit" value="Create" class="btn btn-primary" />
-                @if (ViewBag.NoModal == 0)
+                @if (!ViewBag.NoModal)
                 {<input type="button" value="Close" data-dismiss="modal" class="btn btn-primary" />}
             </div>
         </div>
     </div>
 }
-@if (ViewBag.NoModal == 1)
+@if (ViewBag.NoModal)
 {
     <div>
         @Html.ActionLink("Back to List", "Index")
