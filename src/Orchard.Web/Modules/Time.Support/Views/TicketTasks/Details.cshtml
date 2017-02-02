@@ -1,0 +1,66 @@
+﻿@model Time.Data.EntityModels.TimeMFG.TicketTask
+
+@{
+    ViewBag.Title = "Task Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>TicketTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Task)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Completed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Completed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompletionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketEmployee.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketEmployee.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketProject.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketProject.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

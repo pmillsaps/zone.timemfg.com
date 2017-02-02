@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "IT Maintenance Details Index";
+    Script.Require("jQuery");
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot();
+}
+<link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+        @Html.ActionLink("Go to IT Maintenance", "Index", "MaintenanceDatas", null, htmlAttributes: new { @class = "pull-right" })
+    </div>
+</div>
+
+@Html.Partial("_ModalForm")
+
+<div class="row">
+    <div class="col-md-3">
+        <a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add Record</a>
+    </div>
+    <div class="col-md-9">
+        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+    </div>
+</div>
+<div class="tableContainer">
+    <table id="mntncDetailsTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("CMPY Name")</td>
+                <td>@Html.Label("Budget Item")</td>
+                <td>@Html.Label("Supplier")</td>
+                <td>@Html.Label("Original Purch Date")</td>
+                <td>@Html.Label("PO/CC")</td>
+                <td>@Html.Label("Purch Date")</td>
+                <td>@Html.Label("Expn Date")</td>
+                <td>@Html.Label("Account#")</td>
+                <td>@Html.Label("Duration")</td>
+                <td>@Html.Label("Cost")</td>
+                <td>@Html.Label("Monthly")</td>
+                <td>@Html.Label("Explanation")</td>
+                <td>@Html.Label("Alternate Info")</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadMaintenanceDataDetails", "MaintenanceDataDetails")';
+            var oTable = $("#mntncDetailsTable").DataTable({
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary btn-sm excelButton", filename: 'MaintenanceDataDetailsList', }],
+                order: [[0, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "clampClmn", targets: [11] }],
+                columns: [
+                    { data: "CompanyName", autoWidth: true },
+                    { data: "BudgetItem", autoWidth: true },
+                    { data: "Supplier", autoWidth: true },
+                    { data: "OriginalPurchDate", autoWidth: true },
+                    { data: "PO_CC", autoWidth: true },
+                    { data: "PurchaseDate", autoWidth: true },
+                    { data: "ExpirationDate", autoWidth: true },
+                    { data: "AccountNumber", autoWidth: true },
+                    { data: "Duration", autoWidth: true },
+                    { data: "Cost", autoWidth: true },
+                    { data: "Monthly", autoWidth: true },
+                    { data: "Explanation", autoWidth: true },
+                    { data: "AlternateInfo", autoWidth: true },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
+                            //return '<a href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            //return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
+                            //return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                        }
+                    }
+                ]
+            })
+
+            $("#newBtn").click(function (eve) {
+                var url = '@Url.Action("Create", "MaintenanceDataDetails")';
+                $("#form-content").load(url);
+            });
+
+            $('#mntncDetailsTable tbody').on('click', 'a.editBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Edit", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+            });
+
+            $('#mntncDetailsTable tbody').on('click', 'a.deleteBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Delete", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+            });
+
+            $('#mntncDetailsTable tbody').on('click', 'a.dtlsBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Details", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+            });
+        });
+    </script>
+}
+
+@*@model IEnumerable<Time.Data.EntityModels.ITInventory.MaintenanceDataDetail>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monthly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Explanation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlternateInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaintenanceData.CompanyName)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monthly)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Explanation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlternateInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaintenanceData.CompanyName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@

@@ -1,0 +1,77 @@
+﻿@model Time.Drawings.EntityModels.Drawings_PDF
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Drawings Details</h4>
+    <p>
+        @Html.ActionLink("Add Additional Drawing", "AddAdditionalDrawing", new { id = Model.Id })
+    </p>
+    <hr />
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Drawing)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Drawing)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Directory)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Directory)
+            </dd>
+
+        </dl>
+    </div>
+    <p><strong>Additional Drawings</strong></p>
+
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th class="success">Drawings</th>
+        </tr>
+        @if (Model.AdditionalDrawings.Count() == 0)
+        {
+            <tr>
+                <td class="lead">
+                    No additional drawings found.
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model.AdditionalDrawings)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(itemModel => item.Drawing)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Add Additional Drawing", "AddAdditionalDrawing", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

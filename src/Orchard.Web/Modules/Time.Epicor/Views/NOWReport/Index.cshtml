@@ -1,0 +1,65 @@
+﻿@model Time.Epicor.ViewModels.NOWReportViewModel
+
+@{
+    ViewBag.Title = "Now Report";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.Query, null, htmlAttributes: new { @placeholder = "Search..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 text-primary">
+                @Html.CheckBoxFor(model => model.ExportToExcel)
+                @Html.LabelFor(model => model.ExportToExcel)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">Search By:</span>
+                    @Html.EnumDropDownListFor(model => model.Filter, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">Related Ops:</span>
+                    @Html.EnumDropDownListFor(model => model.Ops, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">Based on Operation:</span>
+                    @Html.EnumDropDownListFor(model => model.BasedOp, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+
+    <div>
+        <div class="col-md-2 bg-info">Not covered</div>
+        <div class="col-md-2 bg-primary">Partial</div>
+        <div class="col-md-2 bg-success">Covered</div>
+    </div>
+    <br />
+    <br />
+
+    @if (Model.Report != null)
+    {
+        @Html.Partial("_NOWReportDetails", Model.Report)
+    }
+</div>

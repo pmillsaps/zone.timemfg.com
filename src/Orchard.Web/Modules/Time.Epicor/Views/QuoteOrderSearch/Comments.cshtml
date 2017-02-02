@@ -1,0 +1,30 @@
+﻿@model Time.Data.EntityModels.Production.V_QuoteOrderInformation
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a href="javascript:history.back()">Back to List</a>
+</p>
+
+<br />
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <pre>@Html.DisplayFor(model => model.Comment)</pre>
+        </td>
+    </tr>
+</table>
+
+<p>
+    <a href="javascript:history.back()">Back to List</a>
+</p>

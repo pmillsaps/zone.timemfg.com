@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Send RTI Email";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-info">
+    <h4>Clicking the button below will immediately trigger the 'Ready To Invoice' Emails"</h4>
+    <h4>Are you sure you wish to do this?</h4>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Send RTI Email" class="btn btn-primary" />
+}
