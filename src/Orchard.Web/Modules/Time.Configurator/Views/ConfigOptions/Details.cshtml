@@ -1,0 +1,132 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfigOption
+
+@{
+    ViewBag.Title = "Config Option Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Config Option</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfigData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfigData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key01)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key01)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key02)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key02)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key03)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key03)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key04)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key04)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key05)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key05)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key06)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key06)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key07)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key07)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key08)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key08)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key09)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key09)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Key10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Key10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName, ConfigData = Model.ConfigData })
+</p>

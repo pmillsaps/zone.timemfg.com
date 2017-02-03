@@ -1,0 +1,26 @@
+﻿
+@{
+    // ViewBag.Title = "RTI Email Successfully Queued";
+}
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_CustomManualSideBar")
+
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="row">
+                <div class="col-md-12"><h4>@ViewBag.Title</h4></div>
+                @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <h4 class="alert alert-danger">@ViewBag.ErrorMessage</h4>
+                }
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+            <div class="row">
+                <h4>@ViewBag.Message</h4>
+            </div>
+        </div>
+    </div>
+</div>
