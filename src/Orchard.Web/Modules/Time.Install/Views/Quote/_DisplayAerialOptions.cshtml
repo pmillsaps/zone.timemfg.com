@@ -1,0 +1,19 @@
+﻿@model IList<Time.Install.Models.AerialOption>
+
+<table class="table">
+    <tr class="success">
+        <th>Qty &emsp; Price &emsp; OptionNum &emsp;&emsp;&emsp; Description</th>
+        <th>Hours</th>
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <tr>
+            <td><span style="white-space:pre">@Html.Label("aerialOptions[" + @i + "].QtyPartAndDescription", Model[i].QtyPartAndDescription)</span></td>
+            @Html.Hidden("aerialOptions[" + @i + "].QtyPartAndDescription", Model[i].QtyPartAndDescription)
+            <td>@Html.TextBox("aerialOptions[" + @i + "].Hours", Model[i].Hours, htmlAttributes: new { @class = "text-center spinner1" })</td>
+        </tr>
+    }
+</table>
+
+
+
