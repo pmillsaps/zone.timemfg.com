@@ -125,21 +125,20 @@ namespace Time.OrderLog.Controllers
                     foreach (var trans in item.OrderTrans)
                     {
                         oT = new OrderTransactions();
-
                         oT.PO = o.PONum;
                         oT.Date = trans.Date.ToString();
-                        oT.AsOfDate = trans.AsOfDate.ToString();
+                        //.AsOfDate = trans.AsOfDate.ToString();
                         var lift = db.LiftModels.FirstOrDefault(l => l.LiftModelId == trans.LiftModelId);
                         oT.LiftModel = lift.LiftModelName.ToString();
                         oT.NewQty = trans.NewQty;
                         oT.CancelQty = trans.CancelQty;
                         oT.UnitPrice = trans.Price;
                         oT.ExtPrice = (trans.NewQty - trans.CancelQty) * trans.Price;
-                        oT.Special = trans.Special;
-                        oT.Stock = trans.Stock;
-                        oT.Demo = trans.Demo;
-                        oT.RTG = trans.RTG;
-                        oT.TruGuard = trans.TruGuard;
+                        //oT.Special = trans.Special;
+                        //oT.Stock = trans.Stock;
+                        //.Demo = trans.Demo;
+                        //oT.RTG = trans.RTG;
+                        //oT.TruGuard = trans.TruGuard;
                         oT.Comment = trans.Comment;
 
                         orderT.Add(oT);
@@ -172,7 +171,7 @@ namespace Time.OrderLog.Controllers
                 var reports = db.OrderTrans.Where(x => x.Date >= dpVM.StartDate && x.Date <= dpVM.EndDate)
                                       .Include(d => d.Order.Dealer).Include(i => i.Order.Install)
                                       .Include(ir => ir.Order.Installer).Include(t => t.Order.Territory)
-                                      .Include(y => y.Order).GroupBy(x => x.OrderId).Select(x => x.FirstOrDefault()).ToList();
+                                      .Include(y => y.Order).GroupBy(x => x.OrderId).Select(x => x.FirstOrDefault()).OrderBy(x => x.Date).ToList();
                 var report = reports.Distinct().ToList();
 
                 // Generating the list of Orders
@@ -202,18 +201,38 @@ namespace Time.OrderLog.Controllers
 
                         oT.PO = o.PONum;
                         oT.Date = trans.Date.ToString();
-                        oT.AsOfDate = trans.AsOfDate.ToString();
+                        //oT.AsOfDate = trans.AsOfDate.ToString();   removed per ticket 17401
+                        oT.DealerName = item.Order.Dealer.DealerName;
                         var lift = db.LiftModels.FirstOrDefault(l => l.LiftModelId == trans.LiftModelId);
                         oT.LiftModel = lift.LiftModelName.ToString();
+                        if (item.Order.Install == null) oT.InstallType = "";
+                        else oT.InstallType = item.Order.Install.InstallName;
                         oT.NewQty = trans.NewQty;
                         oT.CancelQty = trans.CancelQty;
                         oT.UnitPrice = trans.Price;
                         oT.ExtPrice = (trans.NewQty - trans.CancelQty) * trans.Price;
-                        oT.Special = trans.Special;
-                        oT.Stock = trans.Stock;
-                        oT.Demo = trans.Demo;
-                        oT.RTG = trans.RTG;
-                        oT.TruGuard = trans.TruGuard;
+                        if (trans.Special != true)
+                            oT.Special = "";
+                        else
+                            oT.Special = "True";
+                        if (trans.Stock != true)
+                            oT.Stock = "";
+                        else
+                            oT.Stock = "True";
+                        if (trans.Demo != true)
+                            oT.Demo = "";
+                        else
+                            oT.Demo = "True";
+                        if (trans.RTG != true)
+                            oT.RTG = "";
+                        else
+                            oT.RTG = "True";
+                        if (trans.TruGuard != true)
+                            oT.TruGuard = "";
+                        else
+                            oT.TruGuard = "True";
+                        if (item.Order.Customer == null) oT.Customer = "";
+                        else oT.Customer = item.Order.Customer;
                         oT.Comment = trans.Comment;
 
                         orderT.Add(oT);

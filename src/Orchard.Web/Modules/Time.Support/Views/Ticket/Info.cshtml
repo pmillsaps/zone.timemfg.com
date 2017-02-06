@@ -6,7 +6,6 @@
     ViewBag.Title = "Support Ticket Info";
 }
 
-
 <div class="container">
     <div class="row">
 
@@ -143,6 +142,18 @@
                 </div>
             }
 
+            @*Ticket Cancellation just for User*@
+            @if ((Model.Ticket.TicketStatus.isReadyToCancel == false) && (Model.Ticket.TicketStatus.isReadyToComplete != true) && (Model.Ticket.TicketStatus.isOpen == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower()))
+            {
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-3">
+                            @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Cancel Ticket", border = 0, hspace = 2 })
+                        </div>
+                    </div>
+                </div>
+            }
+
             @*Ticket Re-Open*@
             @if ((Model.Ticket.TicketStatus.isOpen == false) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
             {
@@ -184,7 +195,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.TicketNote, htmlAttributes: new { @class = "col-md-2" })
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.TicketNote, new { htmlAttributes = new { @class = "form-control", @rows = 7 } })
+                            @Html.EditorFor(model => model.TicketNote, new { htmlAttributes = new { @class = "form-control", @rows = 7, onkeyup = "restrict(this)" } })
                             @Html.ValidationMessageFor(model => model.TicketNote, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -295,3 +306,16 @@
         </div>
     </div>
 </div>
+
+@using (Script.Foot())
+{
+    <script language="javascript" type="text/javascript">
+        function restrict(elem) {
+            var tf = (elem);
+            var rx = new RegExp;
+            rx = /[<>]/gi;
+
+            tf.value = tf.value.replace(rx, "");
+        }
+    </script>
+}
