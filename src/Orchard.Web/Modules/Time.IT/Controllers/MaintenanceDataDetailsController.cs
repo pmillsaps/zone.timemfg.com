@@ -65,6 +65,12 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.History = db.MaintenanceDataDetails.Where(x => x.MaintenanceDataId == maintenanceDataDetail.MaintenanceDataId).ToList();
+            var maintenanceData = db.MaintenanceDatas.FirstOrDefault(x => x.Id == maintenanceDataDetail.MaintenanceDataId);
+            if(maintenanceData.ComputerId != null)
+                ViewBag.Computer = db.Computers.FirstOrDefault(x => x.Id == maintenanceData.ComputerId);
+            if (maintenanceData.LicenseId != null)
+                ViewBag.License = db.Licenses.FirstOrDefault(x => x.Id == maintenanceData.LicenseId);
             return View(maintenanceDataDetail);
         }
 

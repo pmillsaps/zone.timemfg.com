@@ -62,6 +62,9 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.History = db.MaintenanceDataDetails.Where(x => x.MaintenanceDataId == id).ToList();
+            ViewBag.Computer = db.Computers.FirstOrDefault(x => x.Id == maintenanceData.ComputerId);
+            ViewBag.License = db.Licenses.FirstOrDefault(x => x.Id == maintenanceData.LicenseId);
             return View(maintenanceData);
         }
 

@@ -4,73 +4,137 @@
     ViewBag.Title = "Details";
 }
 <link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
 
+<p class="pull-right">
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<h2>@ViewBag.Title</h2>
 
-<h3>Details</h3>
-<div class="alert alert-info">
-    <h4>IT Maintenance</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </dt>
+<div class="mypanel-header"><h3>@Model.CompanyName &nbsp; @Model.BudgetItem</h3></div>
+<div class="mypanel-body">
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CompanyName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BudgetItem)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BudgetItem)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BudgetItem)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BudgetItem)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Supplier)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Supplier)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Supplier)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AccountNumber)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AccountNumber)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.AccountNumber)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OriginalPurchDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.OriginalPurchDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OriginalPurchDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.OriginalPurchDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ComputerId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ComputerId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ComputerId)
-        </dd>
+            @if (ViewBag.Computer != null)
+            {
+                <dd>
+                    @Html.Raw((string)ViewBag.Computer.Name)
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.ComputerId)
+                </dd>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LicenseId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LicenseId)
-        </dd>
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.LicenseId)
+            </dt>
+            @if (ViewBag.License != null)
+            {
+                <dd>
+                    @Html.Raw((string)ViewBag.License.Name)
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.LicenseId)
+                </dd>
+            }
+        </dl>
+    </div>
 </div>
 
+<br />
+<div class="mypanel-header"><h3>History</h3></div>
+<div class="mypanel-body">
+    <table class="table table-bordered table-condensed table-striped table-hover">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("Purchase Date")</td>
+                <td>@Html.Label("Expiration Date")</td>
+                <td>@Html.Label("Account Number")</td>
+                <td>@Html.Label("PO/CC")</td>
+                <td>@Html.Label("Duration")</td>
+                <td>@Html.Label("Cost")</td>
+                <td>@Html.Label("Monthly")</td>
+                <td>@Html.Label("Explanation")</td>
+                <td>@Html.Label("AlternateInfo")</td>
+            </tr>
+        </thead>
+        @foreach (var item in ViewBag.History)
+        {
+            <tr>
+                <td>@item.PurchaseDate.ToShortDateString()</td>
+                <td>@item.ExpirationDate.ToShortDateString()</td>
+                <td>@item.AccountNumber</td>
+                <td>@item.PO_CC</td>
+                <td>@item.Duration</td>
+                <td>@item.Cost</td>
+                <td>@item.Monthly</td>
+                <td>@item.Explanation</td>
+                <td>@item.AlternateInfo</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".mypanel-body").slideDown(2000);
+        });
+    </script>
+}
