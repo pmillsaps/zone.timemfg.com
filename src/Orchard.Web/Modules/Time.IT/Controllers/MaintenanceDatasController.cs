@@ -90,6 +90,7 @@ namespace Time.IT.Controllers
                 db.MaintenanceDatas.Add(maintenanceData);
                 db.SaveChanges();
                 status = true;
+                //return new JsonResult { Data = new { status = status } };
                 //return RedirectToAction("Index");
             }
             //ViewBag.NoModal = true;
@@ -97,6 +98,7 @@ namespace Time.IT.Controllers
             //ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", maintenanceData.LicenseId);
             //return View(maintenanceData);
             return new JsonResult { Data = new { status = status } };
+            //return PartialView("_Create");
         }
 
         // GET: MaintenanceDatas/Edit/5

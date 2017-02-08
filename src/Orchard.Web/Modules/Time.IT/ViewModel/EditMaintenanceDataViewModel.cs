@@ -25,9 +25,13 @@ namespace Time.IT.ViewModel
         public string AccountNumber { get; set; }
 
         [Display(Name = "Original Purch Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> OriginalPurchDate { get; set; }
 
         [Display(Name = "Expiration Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ExpirationDate { get; set; }
 
         [Display(Name = "Computer")]

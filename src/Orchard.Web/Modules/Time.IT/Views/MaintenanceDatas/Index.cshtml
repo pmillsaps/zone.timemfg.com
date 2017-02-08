@@ -1,11 +1,14 @@
 ﻿@{
     ViewBag.Title = "IT Maintenance Index";
     Script.Require("jQuery");
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jquery.validate.min.js").AtFoot();
 }
 <link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
@@ -101,22 +104,23 @@
                 $("#form-content").load(url);
 
                 $('#modalForm').on('submit', '#popupForm', function (e) {
-                    if ($("#CompanyName").val() != "" && $("#BudgetItem").val() != "") {
-                        var url = $('#popupForm')[0].action;
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: $('#popupForm').serialize(),
-                            success: function (data) {
-                                if (data.status) {
-                                    $('#modalForm').modal('hide');
-                                    location.reload(false)
-                                }
+                    //if ($("#CompanyName").val() != "" && $("#BudgetItem").val() != "") {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $('#modalForm').modal('hide');
+                                location.reload(false)
                             }
-                        })
-                    } else {
-                        alert("Company Name and Budget Item are required!")
-                    }
+                        }
+                    })
+                    //}
+                    //else {
+                    //    alert("Company Name and Budget Item are required!")
+                    //}
 
                     e.preventDefault();
                 })
@@ -128,27 +132,51 @@
                 $("#form-content").load(url + "/" + myId);
 
                 $('#modalForm').on('submit', '#popupForm', function (e) {
-                    if ($("#CompanyName").val() != "" && $("#BudgetItem").val() != "")
-                    {
-                        var url = $('#popupForm')[0].action;
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: $('#popupForm').serialize(),
-                            success: function (data) {
-                                if (data.status) {
-                                    $('#modalForm').modal('hide');
-                                    location.reload(false)
-                                }
+                    //if ($("#CompanyName").val() != "" && $("#BudgetItem").val() != "")
+                    //{
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $('#modalForm').modal('hide');
+                                location.reload(false)
                             }
-                        })
-                    } else {
-                        alert("Company Name and Budget Item are required!")
-                    }
+                        }
+                    })
+                    //}
+                    //else {
+                    //    alert("Company Name and Budget Item are required!")
+                    //}
 
                     e.preventDefault();
                 })
             });
+
+            $('#popupForm').validate({
+                rules: {
+                    CompanyName: {
+                        required: true
+                    },
+                    BudgetItem: {
+                        required: true
+                    }
+                },
+                messages: {
+                    CompanyName: {
+                        required: 'Company Name is required'
+                    },
+                    BudgetItem: 'Budget Item is required'
+                }
+            });
+            //$(".datepicker").datepicker({
+            //    showOtherMonths: true,
+            //    selectOtherMonths: true
+            //});
+
+            //$.fn.modal.Constructor.prototype.enforceFocus = function () { };
 
             @*$('#mntncTable tbody').on('click', 'a.deleteBtn', function (eve) {
                 var myId = $(this).data("id");

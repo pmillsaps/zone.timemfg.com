@@ -26,6 +26,8 @@ namespace Time.Data.EntityModels.ITInventory
         public string AccountNumber { get; set; }
 
         [DisplayName("Original Purch Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> OriginalPurchDate { get; set; }
 
         [DisplayName("Computer")]

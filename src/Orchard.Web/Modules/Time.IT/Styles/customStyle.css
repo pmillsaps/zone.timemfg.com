@@ -107,7 +107,8 @@ a{
     text-decoration: none !important;
 }
 
-.showDatePicker{ 
+.showDatePicker{
+    position: relative; 
     z-index:100000 !important; 
 }
 
@@ -131,3 +132,4 @@ a{
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
+
