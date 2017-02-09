@@ -18,5 +18,15 @@ namespace Time.Data.EntityModels.ITInventory
         public string Name { get; set; }
         [DataType(DataType.MultilineText)]
         public string Notes{ get; set; }
+        [DisplayName("Building")]
+        public Nullable<int> BuildingId { get; set; }
+        [DisplayName("Location")]
+        public Nullable<int> LocationId { get; set; }
+        [DisplayName("Last Date Edited")]
+        public Nullable<System.DateTime> LastDateEdited { get; set; }
+        [DisplayName("Last Edited By")]
+        public string LastEditedBy { get; set; }
+        [DisplayName("Inactive")]
+        public Nullable<bool> InActive { get; set; }
     }
 }

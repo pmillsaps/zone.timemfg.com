@@ -22,6 +22,11 @@ namespace Time.IT.Controllers
         // GET: Users
         public ActionResult Index(string search = "")
         {
+            ViewBag.ActiveUser = new List<SelectListItem>
+            {
+                new SelectListItem {Text="Active Users", Value= false.ToString(), Selected=true },
+                new SelectListItem {Text="Inactive Users", Value= true.ToString(), Selected=false }
+            };
             return View();
             //var users = db.Users.Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
 
@@ -34,11 +39,21 @@ namespace Time.IT.Controllers
         }
 
         // Load the data for the Index table
-        public ActionResult LoadUsers()
+        public ActionResult LoadUsers(string userStatus)
         {
+            bool? status = null;
+            if (userStatus == "True") status = Convert.ToBoolean(userStatus);
+            var users = db.Users.Where(x => x.InActive == status).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses).AsQueryable();
             var computers = db.Computers.ToList();
             List<UserViewModel> model = new List<UserViewModel>();
-            var users = db.Users.Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+            if(status == true)
+            {
+                users = db.Users.Where(x => x.InActive == true).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+            }
+            else
+            {
+                users = db.Users.Where(x => x.InActive == false || x.InActive == null).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+            }
             foreach (var item in users)
             {
                 UserViewModel uvm = new UserViewModel();
@@ -51,8 +66,8 @@ namespace Time.IT.Controllers
                 if(computers.Count(x => x.UserId == item.Id) == 1)
                 {
                     var cmp = computers.First(x => x.UserId == item.Id);
-                        uvm.ComputerId = cmp.Id;//(cmp == null) ? 0 : cmp.Id;
-                        uvm.ComputerName = cmp.Name;//(cmp == null) ? "" : cmp.Name;
+                        uvm.ComputerId = cmp.Id;
+                        uvm.ComputerName = cmp.Name;
                 }
                 else
                 {
@@ -331,6 +346,15 @@ namespace Time.IT.Controllers
             license.QuantityAssigned--;
             db.SaveChanges();
             return RedirectToAction("Details", new { id = user.Id });
+        }
+
+        // This method retrieves the software and hardware linked to a user and displays a
+        // warning, user must be unlinked of everything before he is marked as inactive 
+        public ActionResult SoftwareAndHardwareLinkedToUser(int id)
+        {
+            User user = db.Users.Find(id);
+
+            return PartialView("_LinkedSoftwareAndHardware", user);
         }
 
         protected override void Dispose(bool disposing)

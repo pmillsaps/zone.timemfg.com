@@ -116,13 +116,9 @@
             @if ((Model.Ticket.TicketStatus.isReadyToComplete == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
             {
                 <div class="row">
-                    <div class="col-md-12 col-md-offset-2">
-                        <div class="col-md-3">
+                    <div class="col-md-offset-2 col-md-10">
                             @Html.ActionLink("Complete Ticket", "Complete", new { completed = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Complete", border = 0, hspace = 2 })
-                        </div>
-                        <div class="col-md-3">
                             @Html.ActionLink("Deny Completion", "Complete", new { completed = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Deny", border = 0, hspace = 2 })
-                        </div>
                     </div>
                 </div>
             }
@@ -131,13 +127,9 @@
             @if ((Model.Ticket.TicketStatus.isReadyToCancel == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
             {
                 <div class="row">
-                    <div class="col-md-12 col-md-offset-2">
-                        <div class="col-md-3">
+                    <div class="col-md-offset-2 col-md-10">
                             @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Cancel Ticket", border = 0, hspace = 2 })
-                        </div>
-                        <div class="col-md-3">
                             @Html.ActionLink("Deny Cancellation", "CancelTicket", new { cancelled = false, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Deny Cancellation", border = 0, hspace = 2 })
-                        </div>
                     </div>
                 </div>
             }
@@ -146,10 +138,8 @@
             @if ((Model.Ticket.TicketStatus.isReadyToCancel == false) && (Model.Ticket.TicketStatus.isReadyToComplete != true) && (Model.Ticket.TicketStatus.isOpen == true) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower()))
             {
                 <div class="row">
-                    <div class="col-md-12 col-md-offset-2">
-                        <div class="col-md-3">
+                    <div class="col-md-offset-2 col-md-10">
                             @Html.ActionLink("Cancel Ticket", "CancelTicket", new { cancelled = true, ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Cancel Ticket", border = 0, hspace = 2 })
-                        </div>
                     </div>
                 </div>
             }
@@ -158,10 +148,8 @@
             @if ((Model.Ticket.TicketStatus.isOpen == false) && (Context.User.Identity.Name.ToLower() == Model.Ticket.RequestedBy.ToLower() || Model.IT || Model.Admin))
             {
                 <div class="row">
-                    <div class="col-md-12 col-md-offset-2">
-                        <div class="col-md-3">
+                    <div class="col-md-offset-2 col-md-10">
                             @Html.ActionLink("Re-Open Ticket", "ReOpen", new { ticketId = Model.Ticket.TicketID }, new { @class = "btn btn-primary", title = "Re-Open Ticket", border = 0, hspace = 2 })
-                        </div>
                     </div>
                 </div>
             }

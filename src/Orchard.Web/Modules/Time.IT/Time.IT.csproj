@@ -582,6 +582,8 @@
     <Content Include="Views\MaintenanceDatas\_Create.cshtml" />
     <Content Include="Views\MaintenanceDataDetails\_Create.cshtml" />
     <Content Include="Views\MaintenanceDataDetails\_Edit.cshtml" />
+    <Content Include="Views\Users\_ModalForm.cshtml" />
+    <Content Include="Views\Users\_LinkedSoftwareAndHardware.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
