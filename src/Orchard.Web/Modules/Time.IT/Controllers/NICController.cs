@@ -50,8 +50,8 @@ namespace Time.IT.Controllers
                 {
                     nvm.ComputerId = item.Computer.Id;
                     nvm.ComputerName = item.Computer.Name;
-                    nvm.UserId = item.Computer.User.Id;
-                    nvm.UserName = item.Computer.User.Name;
+                    nvm.UserId = (item.Computer.User == null) ? 0 : item.Computer.User.Id;
+                    nvm.UserName = (item.Computer.User ==  null) ? "" : item.Computer.User.Name;
                 }
                 model.Add(nvm);
             }
