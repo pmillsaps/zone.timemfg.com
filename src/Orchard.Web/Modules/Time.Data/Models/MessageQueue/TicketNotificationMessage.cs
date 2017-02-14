@@ -17,6 +17,9 @@ namespace Time.Data.Models.MessageQueue
             UpdateAssigned,
             CompletionPending,
             Completed,
+            ResourceChange,
+            ResourceComplete,
+            RequestedByChange,
 
             TaskAssignment,
             TaskCompleted

@@ -205,5 +205,56 @@ namespace Time.Support.Helpers
             var fullpath = Path.Combine(_AttachmentPath, fn);
             System.IO.File.WriteAllBytes(fullpath, buf);
         }
+
+        public static void SendResourceChangeNotification(this TicketProject ticket)
+        {
+            if (ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
+            {
+                try
+                {
+                    var msg = new ResourceChangeNotification(ticket);
+                    msg.SendEmail();
+                }
+                catch (Exception err)
+                {
+                    ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                               System.Web.HttpContext.Current.User.Identity.Name);
+                    Debug.Print(err.Message);
+                }
+            }
+        }
+
+        public static void SendResourceCompleteNotification(this TicketProject ticket)
+        {
+            if (ticket.ResourceDone == true && ticket.ResourceEmployeeID != ticket.AssignedEmployeeID)
+            {
+                try
+                {
+                    var msg = new ResourceCompleteNotification(ticket);
+                    msg.SendEmail();
+                }
+                catch (Exception err)
+                {
+                    ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                               System.Web.HttpContext.Current.User.Identity.Name);
+                    Debug.Print(err.Message);
+                }
+            }
+        }
+
+        public static void SendRequestedByChangeNotification(this TicketProject ticket)
+        {
+            try
+            {
+                var msg = new RequestedByChangeNotification(ticket);
+                msg.SendEmail();
+            }
+            catch (Exception err)
+            {
+                ErrorTools.SendEmail(System.Web.HttpContext.Current.Request.Url, err,
+                                                           System.Web.HttpContext.Current.User.Identity.Name);
+                Debug.Print(err.Message);
+            }
+        }
     }
 }

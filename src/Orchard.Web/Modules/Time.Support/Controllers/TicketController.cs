@@ -488,6 +488,14 @@ namespace Time.Support.Controllers
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
+
+                var command = new TicketNotificationMessage
+                {
+                    TicketId = ticketProject.TicketID,
+                    Notification = TicketNotificationMessage.NotificationType.ResourceChange,
+                    Sender = HttpContext.User.Identity.Name
+                };
+                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
             }
 
             if (ticket.ResourceDone != ticketProject.ResourceDone)
@@ -502,6 +510,14 @@ namespace Time.Support.Controllers
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
+
+                var command = new TicketNotificationMessage
+                {
+                    TicketId = ticketProject.TicketID,
+                    Notification = TicketNotificationMessage.NotificationType.ResourceComplete,
+                    Sender = HttpContext.User.Identity.Name
+                };
+                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
             }
 
             if (ticket.Status != ticketProject.Status)
@@ -952,6 +968,14 @@ namespace Time.Support.Controllers
                     Visibility = 1
                 });
                 _db.SaveChanges();
+
+                var command = new TicketNotificationMessage
+                {
+                    TicketId = ticketProject.TicketID,
+                    Notification = TicketNotificationMessage.NotificationType.RequestedByChange,
+                    Sender = HttpContext.User.Identity.Name
+                };
+                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
             }
 
             return RedirectToAction("Info", new { id });

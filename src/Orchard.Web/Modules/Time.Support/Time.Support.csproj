@@ -113,6 +113,9 @@
     <Content Include="Content\EmailTemplates\NotificationFooter.htm" />
     <Content Include="Content\EmailTemplates\NotificationHeader.htm" />
     <Content Include="Content\EmailTemplates\SupervisorNewTicketNotification.htm" />
+    <Content Include="Content\EmailTemplates\RequestByChangeNotification.htm" />
+    <Content Include="Content\EmailTemplates\ResourceChangeNotification.htm" />
+    <Content Include="Content\EmailTemplates\ResourceCompleteNotification.htm" />
     <Content Include="Content\EmailTemplates\UpdateNotification.htm" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
