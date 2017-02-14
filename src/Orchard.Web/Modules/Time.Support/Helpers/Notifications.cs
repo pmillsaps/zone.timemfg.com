@@ -534,8 +534,8 @@ namespace Time.Support.Helpers
 
         public override void SetupEmail()
         {
-            TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "ResourceCompleteNotification.htm");
-            Subject = String.Format("[Ticket #{0}] Resouce Complete - {1}", tp.TicketID, tp.Title);
+            TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "ResourceChangeNotification.htm");
+            Subject = String.Format("[Ticket #{0}] Resouce Changed - {1}", tp.TicketID, tp.Title);
         }
     }
 
