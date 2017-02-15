@@ -57,7 +57,7 @@ namespace Time.Epicor.Controllers
             }
             else
             {
-                var jobassembly = db.JobAsmbls.Where(x => x.JobNum == searchVM.SearchText && !(x.PartNum.Contains("QA")) && !(x.PartNum.Contains("-ENG")) && !(x.Description.Contains("Placeholder"))).Select(x => x.PartNum).ToList();
+                var jobassembly = db.JobAsmbls.Where(x => x.JobNum == searchVM.SearchText && !(x.PartNum.Contains("QA")) && !(x.PartNum.Contains("-ENG")) && !(x.Description.Contains("Placeholder")) && !(x.Description.Contains("Base Bill"))).Select(x => x.PartNum).ToList();
                 var jobmaterial = db.JobMtls.Where(x => x.JobNum == searchVM.SearchText && (x.MtlSeq < 10 || x.MtlSeq > 1400)).Select(x => x.PartNum).ToList();
                 foreach (var item in jobassembly)
                 {
