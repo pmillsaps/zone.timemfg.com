@@ -505,19 +505,22 @@ namespace Time.Support.Controllers
                 if (ticket.ResourceDone != false)
                     updateNote = string.Format("Zone: Resource Employee {0} Task Uncompleted" + Environment.NewLine, emp.FullName);
                 else
+                {
                     updateNote = string.Format("Zone: Resource Employee {0} is done with task" + Environment.NewLine, emp.FullName);
+
+                    var command = new TicketNotificationMessage
+                    {
+                        TicketId = ticketProject.TicketID,
+                        Notification = TicketNotificationMessage.NotificationType.ResourceComplete,
+                        Sender = HttpContext.User.Identity.Name
+                    };
+                    var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+                }
+
                 ticket.ResourceDone = ticketProject.ResourceDone;
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
-
-                var command = new TicketNotificationMessage
-                {
-                    TicketId = ticketProject.TicketID,
-                    Notification = TicketNotificationMessage.NotificationType.ResourceComplete,
-                    Sender = HttpContext.User.Identity.Name
-                };
-                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
             }
 
             if (ticket.Status != ticketProject.Status)
