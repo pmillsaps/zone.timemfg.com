@@ -507,4 +507,84 @@ namespace Time.Support.Helpers
             Subject = String.Format("[Ticket #{0}] {1} The Task Below has been completed", tp.TicketID, tp.Title);
         }
     }
+
+    public class ResourceChangeNotification : EmailNotifications
+    {
+        public ResourceChangeNotification(TicketProject ticket)
+        : base(ticket)
+        {
+            var e = GetEmailforNTUser(tp.RequestedBy);
+            SendTo.Add(e);
+            AddEmailSendToBcc(e);
+        }
+
+        public ResourceChangeNotification(TicketProject ticket, string username)
+            : base(ticket)
+        {
+            var e = GetEmailforNTUser(username);
+            SendTo.Add(e);
+            AddEmailSendToBcc(e);
+            if (ticket.TicketEmployee != null)
+            {
+                SendTo.Add(GetEmailforNTUser(ticket.TicketEmployee.NTLogin));
+                if (ticket.TicketEmployee1 != null && ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
+                    SendTo.Add(GetEmailforNTUser(ticket.TicketEmployee1.NTLogin));
+            }
+        }
+
+        public override void SetupEmail()
+        {
+            TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "ResourceChangeNotification.htm");
+            Subject = String.Format("[Ticket #{0}] Resouce Changed - {1}", tp.TicketID, tp.Title);
+        }
+    }
+
+    public class ResourceCompleteNotification : EmailNotifications
+    {
+        public ResourceCompleteNotification(TicketProject ticket)
+        : base(ticket)
+        {
+            var e = GetEmailforNTUser(tp.RequestedBy);
+            SendTo.Add(e);
+            AddEmailSendToBcc(e);
+        }
+
+        public ResourceCompleteNotification(TicketProject ticket, string username)
+            : base(ticket)
+        {
+            var e = GetEmailforNTUser(username);
+            SendTo.Add(e);
+            AddEmailSendToBcc(e);
+            if (ticket.TicketEmployee != null)
+            {
+                SendTo.Add(GetEmailforNTUser(ticket.TicketEmployee.NTLogin));
+                if (ticket.TicketEmployee1 != null && ticket.AssignedEmployeeID != ticket.ResourceEmployeeID)
+                    SendTo.Add(GetEmailforNTUser(ticket.TicketEmployee1.NTLogin));
+            }
+        }
+
+        public override void SetupEmail()
+        {
+            TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "ResourceCompleteNotification.htm");
+            Subject = String.Format("[Ticket #{0}] Resouce Complete - {1}", tp.TicketID, tp.Title);
+        }
+    }
+
+    public class RequestedByChangeNotification : EmailNotifications
+    {
+        public RequestedByChangeNotification(TicketProject ticket)
+        : base(ticket)
+        {
+        }
+
+        public override void SetupEmail()
+        {
+            TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "RequestedByChangeNotification.htm");
+            var e = GetEmailforNTUser(tp.RequestedBy);
+            SendTo.Add(e);
+            AddEmailSendToBcc(e);
+
+            Subject = String.Format("[Ticket #{0}] Requested By Changed - {1}", tp.TicketID, tp.Title);
+        }
+    }
 }
