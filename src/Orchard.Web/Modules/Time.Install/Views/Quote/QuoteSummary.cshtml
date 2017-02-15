@@ -1,0 +1,95 @@
+﻿@model Time.Install.Models.InstallQuoteSummary
+
+@{
+    ViewBag.Title = "Installation Quotation Summary";
+    Script.Require("jQuery");
+}
+
+<link href="~/Modules/Time.Install/Styles/Site.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Go to List of VSW Quoted Installs", "ListOfInstallQuotes")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to Aerial Quotes List without Install Qoute", "Index")
+</div>
+
+<hr />
+<h3>Aerial Quote Number: @Model.InstallQuotes.LiftQuoteNumber</h3>
+<h4>Lift: @Model.InstallQuotes.LiftName</h4>
+<hr />
+<div class="alert alert-info">
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
+        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
+    </dl>
+</div>
+
+<br />
+<div id="header1" class="mypanel-header"><h4 id="myH1" class="text-center">Display VSW Install Options</h4></div>
+<div id="panel1" class="mypanel-body">
+    @Html.Partial("_SummaryVSWOptions", Model)
+</div>
+<br />
+<div id="header2" class="mypanel-header"><h4 id="myH2" class="text-center">Display Manually Added VSW Install Options</h4></div>
+<div id="panel2" class="mypanel-body">
+    @Html.Partial("_SummaryManuallyAddedVSWOptions", Model)
+</div>
+<br />
+<div id="header3" class="mypanel-header"><h4 id="myH3" class="text-center">Display Aerial Options</h4></div>
+<div id="panel3" class="mypanel-body">
+    @Html.Partial("_SummaryTimeOptions", Model)
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('#header1').click(function () {
+            if ($("#myH1").text() == "Display VSW Install Options") {
+                $("#myH1").text("Hide VSW Install Options");
+            } else {
+                $("#myH1").text("Display VSW Install Options");
+            }
+            $('#panel1').slideToggle('slow');
+        });
+
+        $('#header2').click(function () {
+            if ($("#myH2").text() == "Display Manually Added VSW Install Options") {
+                $("#myH2").text("Hide Manually Added VSW Install Options");
+            } else {
+                $("#myH2").text("Display Manually Added VSW Install Options");
+            }
+            $('#panel2').slideToggle('slow');
+        });
+
+        $('#header3').click(function () {
+            if ($("#myH3").text() == "Display Aerial Options") {
+                $("#myH3").text("Hide Aerial Options");
+            } else {
+                $("#myH3").text("Display Aerial Options");
+            }
+            $('#panel3').slideToggle('slow');
+        });
+    </script>
+}

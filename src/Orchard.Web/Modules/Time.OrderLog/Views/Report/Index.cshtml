@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Reporting Index";
+}
+
+@Html.Partial("_Menu", ViewBag.Permissions as Time.OrderLog.Models.MenuViewModel)
+
+<div class="alert alert-info">
+    <h2>@ViewBag.Title</h2>
+
+    <ul>
+        <li>@Html.ActionLink("Daily Order Report", "DailyOrders")</li>
+        <li>@Html.ActionLink("Dealer Model Summary Report", "DealerSummary")</li>
+        <li>@Html.ActionLink("Territory Summary Report", "TerritorySummary")</li>
+        <li>@Html.ActionLink("Model Summary Report", "ModelSummary")</li>
+        <li>@Html.ActionLink("Executive Summary Report", "ExecutiveSummary")</li>
+        <li>@Html.ActionLink("Export Order Log To Excel", "ExportOrderLog", "OrderLog")</li>
+    </ul>
+</div>
