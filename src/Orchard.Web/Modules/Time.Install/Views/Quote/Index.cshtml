@@ -19,9 +19,11 @@
 </div>
 
 <hr />
-<div class="alert alert-success">
+<div class="alert alert-info">
     <p><strong>Note:</strong> A quote MUST have an INSTALLS(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
-    <p>To view or edit the details of an existing Install Quote go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong></p>
+    <p>To view or edit the details of an existing Inatallation Quotation go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong>.</p>
+    <p>To <span class="label label-primary">Start</span> a Inatallation Quotation, click the <i class="fa fa-hand-o-right" aria-hidden="true"></i> icon.</p>
+    <p>To <span class="label label-primary">Compose the Quote Presentation</span>, click on the <i class="fa fa-file-word-o" aria-hidden="true"></i> icon.</p>
 </div>
 <hr />
 <div class="tablecontainer">
@@ -37,8 +39,8 @@
                 <td>@Html.Label("Order Qty")</td>
                 <td>@Html.Label("Changed By")</td>
                 <td>@Html.Label("Change Date")</td>
-                <td>@Html.Label("Start Quote")</td>
-                <td>@Html.Label("Word Doc")</td>
+                <td></td>
+                <td></td>
             </tr>
         </thead>
     </table>

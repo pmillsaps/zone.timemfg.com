@@ -17,35 +17,36 @@
     @Html.ActionLink("Back to Aerial Quotes List without Install Qoute", "Index")
 </div>
 
-<hr />
-<h3>Aerial Quote Number: @Model.InstallQuotes.LiftQuoteNumber</h3>
-<h4>Lift: @Model.InstallQuotes.LiftName</h4>
-<hr />
-<div class="alert alert-info">
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
-        <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
-    </dl>
+<div class="mypanel-header">
+    <h3>Aerial Quote Number: @Model.InstallQuotes.LiftQuoteNumber</h3>
+    <h4>Lift: @Model.InstallQuotes.LiftName</h4>
 </div>
+<div id="panel4" class="mypanel-body">
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.InstallQuotedBy)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.InstallQuotedBy)</dd>
 
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.QuoteDate)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.QuoteDate)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallHours)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallHours)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPaintHours)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPaintHours)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceLabor)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceLabor)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalPriceMaterial)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalPriceMaterial)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.InstallQuotes.TotalInstallPrice)</dt>
+            <dd>@Html.DisplayFor(model => model.InstallQuotes.TotalInstallPrice)</dd>
+        </dl>
+    </div>
+</div>
 <br />
 <div id="header1" class="mypanel-header"><h4 id="myH1" class="text-center">Display VSW Install Options</h4></div>
 <div id="panel1" class="mypanel-body">
@@ -90,6 +91,10 @@
                 $("#myH3").text("Display Aerial Options");
             }
             $('#panel3').slideToggle('slow');
+        });
+
+        $(document).ready(function () {
+            $("#panel4").slideDown(2000);
         });
     </script>
 }

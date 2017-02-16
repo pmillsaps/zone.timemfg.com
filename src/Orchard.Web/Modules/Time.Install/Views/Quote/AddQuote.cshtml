@@ -36,9 +36,9 @@ else
 
     <div class="container">
         <ul class="nav nav-pills nav-justified">
-            <li class="active"><a data-toggle="tab" href="#tab1"><strong>Click here for Aerial Quote (TIME Options)</strong></a></li>
-            <li><a data-toggle="tab" href="#tab2"><strong>Click here for VSW Install Quote (VSW Options)</strong></a></li>
-            <li><a data-toggle="tab" href="#tab3"><strong>Click here to Add VSW Options Manually</strong></a></li>
+            <li class="active"><a id="timeOptions" data-toggle="tab" href="#tab1"><strong>Click here for Aerial Quote (TIME Options)</strong></a></li>
+            <li><a id="vswOptions" data-toggle="tab" href="#tab2"><strong>Click here for VSW Install Quote (VSW Options)</strong></a></li>
+            <li><a id="mnllyAdded" data-toggle="tab" href="#tab3"><strong>Click here to Add VSW Options Manually</strong></a></li>
         </ul>
 
         <div class="tab-content">
@@ -56,7 +56,7 @@ else
             </div>
         </div>
     </div>
-        <hr />
+    <hr />
         <div class="row">
             @if (Model.EditQuote)
             {

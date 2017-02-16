@@ -74,6 +74,7 @@ namespace Time.Install.Controllers
             foreach (var item in quotes)
             {
                 LoadInstallQuotes qvm = new LoadInstallQuotes();
+                qvm.Id = item.Id;
                 qvm.LiftName = item.LiftName;
                 qvm.LiftQuoteNumber = item.LiftQuoteNumber;
                 qvm.LiftQuoteLine = item.LiftQuoteLine;

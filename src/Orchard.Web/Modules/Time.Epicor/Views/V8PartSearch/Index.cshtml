@@ -2,10 +2,14 @@
 
 @{
     ViewBag.Title = "Vantage 8 Part Search";
-    if (Model.PartData != null) { ViewBag.Title = String.Format("Vantage 8 Part Search [{0}]", Model.PartData.Count); }
+    //if (Model.PartData != null) { ViewBag.Title = String.Format("Vantage 8 Part Search [{0}]", Model.PartData.Count); }
 }
 
-<h2>@ViewBag.Title</h2>
+@if (Model.PartData == null)
+{<h2>@ViewBag.Title</h2>}
+else
+{<h2>@ViewBag.Title <span class="label label-primary">@Model.PartData.Count</span></h2>}
+
 <hr />
 
 @using (Html.BeginForm())

@@ -62,9 +62,33 @@ table.dataTable thead .sorting_desc:after {
     margin-bottom:5px;
 }
 
+.fa-pencil-square-o {
+ font-size:25px; 
+ color:#adbcc3;
+}
+
+.fa-pencil-square-o:hover {
+ color: #0876a9;
+ text-shadow: 0px 0px 5px #0baaf4,
+ 0px 0px 10px #0baaf4, 
+ 0px 0px 15px #0baaf4;
+ transition-duration: 1s;}
+
+.fa-eye {
+ font-size:25px; 
+ color:#adbcc3;
+}
+
+.fa-eye:hover {
+ color: #008c00;
+ text-shadow: 0px 0px 5px #00b300,
+ 0px 0px 10px #00b300, 
+ 0px 0px 15px #00b300;
+ transition-duration: 1s;}
+
 .fa-hand-o-right {
  font-size:25px; 
- color:#CFD8DC;
+ color:#adbcc3;
 }
 
 .fa-hand-o-right:hover {
@@ -76,7 +100,7 @@ table.dataTable thead .sorting_desc:after {
 
 .fa-file-word-o {
  font-size:25px; 
- color:#CFD8DC;
+ color:#adbcc3;
 }
 
 .fa-file-word-o:hover {
@@ -88,7 +112,7 @@ table.dataTable thead .sorting_desc:after {
 
 .mbri-trash {
  font-size:25px; 
- color:#CFD8DC;}
+ color:#adbcc3;}
 
 .mbri-trash:hover {
  color: #940f3c;
@@ -99,7 +123,7 @@ table.dataTable thead .sorting_desc:after {
 
 .mbri-edit {
  font-size:25px; 
- color:#CFD8DC;}
+ color:#adbcc3;}
 
 .mbri-edit:hover {
  color: #0876a9;
@@ -110,7 +134,7 @@ table.dataTable thead .sorting_desc:after {
 
 .mbri-info {
  font-size:25px; 
- color:#CFD8DC;}
+ color:#adbcc3;}
 
 .mbri-info:hover {
  color: #008c00;
