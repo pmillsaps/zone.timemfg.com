@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Time.Drawings.EntityModels.Drawings_PDF>
+
+<table class="table table-striped table-hover">
+    <tr class="success">
+        <th>
+            Click drawing number to open:
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Drawing)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Drawing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Directory)
+            </th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.FileName, "ViewDrawing", new { id = item.Id })
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Drawing)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Directory)
+                </td>*@
+        </tr>
+    }
+</table>

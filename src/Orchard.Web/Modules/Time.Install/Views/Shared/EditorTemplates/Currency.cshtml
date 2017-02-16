@@ -1,0 +1,7 @@
+﻿@Model Time.Install.ViewModels.GroupsAndOptionsViewModel.Options.Price
+
+@{
+    IFormatProvider formatProvider =
+        new System.Globalization.CultureInfo("en-US");
+    <span class="currency">@Model.ToString("C", formatProvider)</span>
+}
