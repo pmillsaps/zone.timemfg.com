@@ -1,0 +1,161 @@
+﻿@model Time.Data.EntityModels.OrderLog.OrderTran
+
+@{
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    ViewBag.Title = "Add Order Transaction";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>OrderLine</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.OrderLineId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OrderLineId)
+                    @Html.ValidationMessageFor(model => model.OrderLineId)
+                </div>
+            </div>*@
+
+        @Html.HiddenFor(model => model.OrderId)
+        @Html.HiddenFor(model => model.Date)
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.OrderId, "OrderId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OrderId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.OrderId)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LiftModelId, "LiftModelId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("LiftModelId", "-- Select Lift Model --")
+                @Html.ValidationMessageFor(model => model.LiftModelId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewQty, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.NewQty)
+                @Html.ValidationMessageFor(model => model.NewQty)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CancelQty, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CancelQty)
+                @Html.ValidationMessageFor(model => model.CancelQty)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, new { @class= "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Price)
+                @Html.ValidationMessageFor(model => Model.Order.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Special, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Special)
+                @Html.ValidationMessageFor(model => model.Special)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stock, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Stock)
+                @Html.ValidationMessageFor(model => model.Stock)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Demo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Demo)
+                @Html.ValidationMessageFor(model => model.Demo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RTG, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RTG)
+                @Html.ValidationMessageFor(model => model.RTG)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TruGuard, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TruGuard)
+                @Html.ValidationMessageFor(model => model.TruGuard)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GSA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.GSA == null)
+                {
+                    @Html.CheckBox("GSA");
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.GSA)
+                }
+                @Html.ValidationMessageFor(model => model.GSA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AsOfDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AsOfDate, new { @class = "datepicker" })
+                @Html.ValidationMessageFor(model => model.AsOfDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Comment, new { @rows = 3 })
+                @Html.ValidationMessageFor(model => model.Comment)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Details", new { @id = ViewBag.OrderId })
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#AsOfDate").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+    </script>
+}

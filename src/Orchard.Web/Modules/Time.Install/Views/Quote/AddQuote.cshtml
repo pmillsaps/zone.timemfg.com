@@ -1,0 +1,138 @@
+﻿@model Time.Install.ViewModels.QuoteViewModel
+
+@{
+    Script.Require("jQueryUI_Accordion").AtFoot();
+    Script.Require("jQueryUI_Spinner").AtFoot();
+    Script.Include("~/Modules/Time.Install/Scripts/pace.min.js").AtFoot();
+    if (Model.EditQuote) { ViewBag.Title = "Editing Installation Quote"; }
+    else { ViewBag.Title = "Installation Quote"; }
+}
+
+<link href="~/Modules/Time.Install/Styles/jQueryCss.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to Aerial Quote List", "Index")
+</div>
+
+<h3>Aerial Quote Number: @Model.QuoteNum</h3>
+@if (Model.EditQuote)
+{<h4>Installation for @Model.InstallDescr</h4>}
+else
+{<h4>@Model.InstallDescr</h4>}
+<hr />
+@using (Html.BeginForm("AddQuoteConfirmed", "Quote", FormMethod.Post, htmlAttributes: new { id = "myForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.QuoteNum)
+    @Html.HiddenFor(model => model.InstallDescr)
+    @Html.HiddenFor(model => model.LiftFamilyId)
+    @Html.HiddenFor(model => model.EditQuote)
+
+    <div class="container">
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a id="timeOptions" data-toggle="tab" href="#tab1"><strong>Click here for Aerial Quote (TIME Options)</strong></a></li>
+            <li><a id="vswOptions" data-toggle="tab" href="#tab2"><strong>Click here for VSW Install Quote (VSW Options)</strong></a></li>
+            <li><a id="mnllyAdded" data-toggle="tab" href="#tab3"><strong>Click here to Add VSW Options Manually</strong></a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane fade in active">
+                <hr />
+                @Html.Partial("_DisplayAerialOptions", Model.AerialOptions)
+            </div>
+            <div id="tab2" class="tab-pane fade">
+                <hr />
+                @Html.Partial("_DisplayVSWOptions", Model.GroupAndOptions)
+            </div>
+            <div id="tab3" class="tab-pane fade">
+                <hr />
+                @Html.Partial("_DisplayManuallyAddedOptions", Model)
+            </div>
+        </div>
+    </div>
+    <hr />
+        <div class="row">
+            @if (Model.EditQuote)
+            {
+                <div class="col-sm-1">
+                    <input type="submit" value="Update Quote" class="btn btn-primary" />
+                </div>
+                @Html.Partial("_LoadingGifIndicator2")
+            }
+            else
+            {
+                <div class="col-sm-1">
+                    <input type="submit" value="Save Quote" class="btn btn-primary" />
+                </div>
+                @Html.Partial("_LoadingGifIndicator1")
+            }
+        </div>
+}
+<br />
+<div>
+    @Html.ActionLink("Back to Aerial Quote List", "Index")
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var editQuote = @Json.Encode(Model.EditQuote);
+            var count = @Json.Encode(Model.AddOptnMnlly.Count);
+            var x;
+            if(editQuote && count > 0){
+                x = count; //initial text box count
+            }
+            else{
+                x = 1; //initial text box count
+            }
+            $(".addCF").click(function () {
+                //x++; //text box increment
+                $("#customFields").append('<tr>'
+                                            + '<td><textarea name="addOptnMnlly[' + x + '].AddOptionManually" class="form-control" cols="100" rows="3" placeholder="Enter or Paste VSW Option"></textarea></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddQuantityManually" class="form-control text-center" placeholder="Quantity"></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddPriceManually" class="form-control text-center" placeholder="Price"></td>'
+                                            + '<td><input type="number" name="addOptnMnlly[' + x + '].AddInstallHoursManually" class="form-control text-center" placeholder="Labor Hours"></td>'
+                                            + '<td><input type="checkbox" name="addOptnMnlly[' + x + '].AddPaintFlagManually"  value="true"></td>'
+                                            + '<td><a href="javascript:void(0);" class="remCF">Remove</a></td>'
+                                            + '</tr>');
+                x++;//text box increment
+            });
+            $("#customFields").on('click', '.remCF', function () {
+                x--; // decrease the text box number
+                $(this).parent().parent().remove();
+            });
+        });
+
+        $(function () {
+            $("#accordion").accordion({
+                heightStyle: "content",
+                collapsible: true,
+                active: false
+            });
+        });
+
+        $(function () {
+            $(".spinner1").spinner({
+                //icons: { down: "ui-icon-caret-1-s", up: "ui-icon-caret-1-n" },
+                min: 0,
+                max: 100
+            });
+        });
+
+        $(function () {
+            $(".spinner2").spinner({
+                min: 0
+                //numberFormat: "C",
+                //culture:"en-US"
+            });
+        });
+    </script>
+}
