@@ -409,6 +409,8 @@ namespace Time.Support.Controllers
                 {
                     msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
 
+                    ticket.TicketEmployee1 = emp;
+
                     var command = new TicketNotificationMessage
                     {
                         TicketId = ticketProject.TicketID,
@@ -418,7 +420,6 @@ namespace Time.Support.Controllers
                     var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
 
                     ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
-                    ticket.TicketEmployee1 = emp;
                 }
                 else
                 {
