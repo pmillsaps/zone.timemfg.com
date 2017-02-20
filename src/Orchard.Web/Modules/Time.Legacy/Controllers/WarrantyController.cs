@@ -22,25 +22,103 @@ namespace Time.Legacy.Controllers
         private LegacyEntities db = new LegacyEntities();
 
         // GET: Warranty
-        public ActionResult Index(string search = "")
+        public ActionResult Index(string search = "", string ddl = "")
         {
             var combined = from o in db.WarrantyInformations
                            join o2 in db.WarrantyInvoices on o.SerialNumber equals o2.SerialNumber
                            where o.SerialNumber.Equals(o2.SerialNumber)
                            select new { Information = o, Invoice = o2 };
             //select new InsertWarranty { Information = o, Invoice = o2 };
-
-            if (search.Length < 3)
+            if (search.Length == 0)
             {
                 return View();
             }
-            else if (!String.IsNullOrEmpty(search))
+            else if (search.Length > 0 && ddl == "BeginsWith")
+            {
+                combined = combined.Where(x => x.Information.SerialNumber.StartsWith(search));
+
+                if (combined != null)
+                {
+                    List<InsertWarranty> final2 = new List<InsertWarranty>();
+                    var final = combined.Select(x => new
+                    {
+                        x.Information.Id,
+                        x.Information.SerialNumber,
+                        x.Information.EndUserName,
+                        x.Information.Phone,
+                        x.Information.Address,
+                        x.Invoice.LiftOrderNumber,
+                        x.Invoice.InvoiceNumber,
+                        x.Invoice.PoNumber,
+                        x.Information.Comments
+                    }).Distinct().OrderBy(x => x.SerialNumber).ToList();
+
+                    string temp = "";
+                    foreach (var item in final)
+                    {
+                        InsertWarranty iw = new InsertWarranty();
+                        iw.Id = item.Id;
+                        iw.SerialNumber = item.SerialNumber;
+                        iw.EndUserName = item.EndUserName;
+                        iw.Phone = item.Phone;
+                        iw.Address = item.Address;
+                        iw.LiftOrderNumber = item.LiftOrderNumber;
+                        iw.InvoiceNumber = item.InvoiceNumber;
+                        iw.PoNumber = item.PoNumber;
+                        iw.Comments = item.Comments;
+
+                        if (final2.Count == 0)
+                        {
+                            temp = iw.SerialNumber;
+                            final2.Add(iw);
+                        }
+                        if (item.SerialNumber != temp)
+                        {
+                            temp = iw.SerialNumber;
+                            final2.Add(iw);
+                        }
+                    }
+                    return View(final2);
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else if (!String.IsNullOrEmpty(search) && search.Length >= 3 && ddl != "BeginsWith")
             {
                 foreach (var item in search.Split(' '))
                 {
-                    combined = combined.Where(x => x.Information.SerialNumber.Contains(item) || x.Information.EndUserName.Contains(item)
-                        || x.Invoice.LiftOrderNumber.Contains(item) || x.Invoice.InvoiceNumber.Contains(item) || x.Invoice.CustomerId.Contains(item)
-                        || x.Invoice.PoNumber.Contains(item));
+                    if (ddl == "All")
+                    {
+                        combined = combined.Where(x => x.Information.SerialNumber.Contains(item) || x.Information.EndUserName.Contains(item)
+                                   || x.Invoice.LiftOrderNumber.Contains(item) || x.Invoice.InvoiceNumber.Contains(item) || x.Invoice.CustomerId.Contains(item)
+                                   || x.Invoice.PoNumber.Contains(item));
+                    }
+                    else if (ddl == "Serial")
+                    {
+                        combined = combined.Where(x => x.Information.SerialNumber.Contains(item));
+                    }
+                    else if (ddl == "EndUserName")
+                    {
+                        combined = combined.Where(x => x.Information.EndUserName.Contains(item));
+                    }
+                    else if (ddl == "LiftOrder")
+                    {
+                        combined = combined.Where(x => x.Invoice.LiftOrderNumber.Contains(item));
+                    }
+                    else if (ddl == "Invoice")
+                    {
+                        combined = combined.Where(x => x.Invoice.InvoiceNumber.Contains(item));
+                    }
+                    else if (ddl == "CustomerID")
+                    {
+                        combined = combined.Where(x => x.Invoice.CustomerId.Contains(item));
+                    }
+                    else if (ddl == "PO")
+                    {
+                        combined = combined.Where(x => x.Invoice.PoNumber.Contains(item));
+                    }
                 }
                 if (combined != null)
                 {
