@@ -516,14 +516,6 @@ namespace Time.Support.Helpers
             var e = GetEmailforNTUser(tp.RequestedBy);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
-        }
-
-        public ResourceChangeNotification(TicketProject ticket, string username)
-            : base(ticket)
-        {
-            var e = GetEmailforNTUser(username);
-            SendTo.Add(e);
-            AddEmailSendToBcc(e);
             if (ticket.TicketEmployee != null)
             {
                 SendTo.Add(GetEmailforNTUser(ticket.TicketEmployee.NTLogin));
@@ -535,7 +527,7 @@ namespace Time.Support.Helpers
         public override void SetupEmail()
         {
             TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "ResourceChangeNotification.htm");
-            Subject = String.Format("[Ticket #{0}] Resouce Changed - {1}", tp.TicketID, tp.Title);
+            Subject = String.Format("[Ticket #{0}] Resource Changed - {1}", tp.TicketID, tp.Title);
         }
     }
 
@@ -545,14 +537,6 @@ namespace Time.Support.Helpers
         : base(ticket)
         {
             var e = GetEmailforNTUser(tp.RequestedBy);
-            SendTo.Add(e);
-            AddEmailSendToBcc(e);
-        }
-
-        public ResourceCompleteNotification(TicketProject ticket, string username)
-            : base(ticket)
-        {
-            var e = GetEmailforNTUser(username);
             SendTo.Add(e);
             AddEmailSendToBcc(e);
             if (ticket.TicketEmployee != null)
@@ -566,7 +550,7 @@ namespace Time.Support.Helpers
         public override void SetupEmail()
         {
             TemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", "ResourceCompleteNotification.htm");
-            Subject = String.Format("[Ticket #{0}] Resouce Complete - {1}", tp.TicketID, tp.Title);
+            Subject = String.Format("[Ticket #{0}] Resource Complete - {1}", tp.TicketID, tp.Title);
         }
     }
 

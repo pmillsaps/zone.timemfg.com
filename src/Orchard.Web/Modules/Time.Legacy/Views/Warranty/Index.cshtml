@@ -8,25 +8,43 @@
 
 <br />
 <div class="alert alert-info">
-    <h4>Search By: Serial Number, End User Name, Lift Order #, Invoice #, Customer ID, or PO #</h4>
+    <h4>All: Search By Serial Number, End User Name, Lift Order #, Invoice #, Customer ID, or PO #</h4>
     <h5>For Example: AA9 KPL brings back everything that fits that criteria</h5>
+    <h5>Must be 3 or more characters long.</h5>
+    <br />
+    <h4>Serial # Begins With can be 1 character long, but will take longer to load because of the amount of rows returned.</h4>
+    <h5>For Example: Searching for "J" will return all Serial Numbers that start with J (over 2,000 rows).  Searching for "A" will return over 12,000 rows.</h5>
 </div>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken();
-        <div class="row">
-            <div class="col-md-4">
-                <div class="input-group">
-                    @Html.TextBox("search",null, htmlAttributes: new { @placeholder = "Search..." })
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary">Go!</button>
-                    </span>
-                </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                @Html.TextBox("search", null, htmlAttributes: new { @placeholder = "Search..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary">Go!</button>
+                </span>
             </div>
         </div>
-    }
-
+        <div class="col-md-2">
+            @{ var listItems = new List<SelectListItem>
+    {
+       new SelectListItem { Text = "All", Value="All" },
+       new SelectListItem { Text = "Serial #", Value="Serial" },
+       new SelectListItem { Text = "Serial # Begins With", Value="BeginsWith" },
+       new SelectListItem { Text = "End User Name", Value="EndUserName" },
+       new SelectListItem { Text = "Lift Order #", Value="LiftOrder" },
+       new SelectListItem { Text = "Invoice #", Value="Invoice" },
+       new SelectListItem { Text = "Customer ID", Value="CustomerID" },
+       new SelectListItem { Text = "PO #", Value="PO" }
+    };
+            }
+            @Html.DropDownList("ddl", new SelectList(listItems, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+                        }
 
 <br />
 

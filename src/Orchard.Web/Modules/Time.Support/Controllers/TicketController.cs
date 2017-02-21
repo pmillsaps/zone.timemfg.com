@@ -408,8 +408,18 @@ namespace Time.Support.Controllers
                 if (emp != null)
                 {
                     msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
-                    ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
+
                     ticket.TicketEmployee1 = emp;
+
+                    var command = new TicketNotificationMessage
+                    {
+                        TicketId = ticketProject.TicketID,
+                        Notification = TicketNotificationMessage.NotificationType.ResourceChange,
+                        Sender = HttpContext.User.Identity.Name
+                    };
+                    var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
+
+                    ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
                 }
                 else
                 {
@@ -488,14 +498,6 @@ namespace Time.Support.Controllers
                 msg += updateNote;
                 ticket.TicketNotes.Add(new TicketNote() { Note = updateNote, CreatedBy = User.Identity.Name, CreatedDate = DateTime.Now, Visibility = 1 });
                 _db.SaveChanges();
-
-                var command = new TicketNotificationMessage
-                {
-                    TicketId = ticketProject.TicketID,
-                    Notification = TicketNotificationMessage.NotificationType.ResourceChange,
-                    Sender = HttpContext.User.Identity.Name
-                };
-                var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
             }
 
             if (ticket.ResourceDone != ticketProject.ResourceDone)
