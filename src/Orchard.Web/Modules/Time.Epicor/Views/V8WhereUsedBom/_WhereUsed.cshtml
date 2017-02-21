@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Epicor.v_WhereUsed>
+
+<h4>Where Used</h4>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr class="success">
+        <th colspan="3">
+            @Html.DisplayNameFor(model => model.partnum)
+        </th>
+        <th colspan="4">
+            @Html.DisplayNameFor(model => model.partdescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.revisionnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.typecode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtyper)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.onhandqty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vendornum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.venpartnum)
+        </th>
+        <th colspan="4">
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phantombom)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.baseprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.personid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.buyerid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vendorid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.binqtyonhand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastmaterialcost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latest_Rev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenJobCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mtlpartnum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenJobs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fixedqty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.relatedoperation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mtlseq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.viewasasm)
+            </th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td colspan="3">
+                @Html.ActionLink(item.partnum, "Index", new { search = item.partnum })
+            </td>
+            <td colspan="4">
+                @Html.DisplayFor(modelItem => item.partdescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.revisionnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.typecode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.inactive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qtyper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.onhandqty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vendornum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.venpartnum)
+            </td>
+            <td colspan="4">
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phantombom)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.baseprice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.personid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.buyerid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.binqtyonhand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastmaterialcost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latest_Rev)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenJobCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenJobs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mtlpartnum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fixedqty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.relatedoperation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mtlseq)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.viewasasm)
+                </td>*@
+        </tr>
+    }
+</table>

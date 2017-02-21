@@ -1,0 +1,161 @@
+﻿@model Time.Data.EntityModels.ITInventory.User
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<h2>@ViewBag.Title</h2>
+@*@Html.Partial("_ModalForm")*@
+
+<div class="alert alert-info">
+    <p>User must be unlinked before he's flagged as <span class="label label-primary">Inactive</span>. Below is a list of all software and hardware linked to the user.</p>
+    <p>The <span class="label label-primary">Inactive</span> checkbox will stay disabled until the user is unlinked from everything. You can unlink the software and hardware from this page.</p>
+    <p>Once unlinked from everything, refresh the page and the <span class="label label-primary">Inactive</span> checkbox will be available.</p>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.LastDateEdited)
+        @Html.HiddenFor(model => model.LastEditedBy)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ComputerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ComputerId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ComputerId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BuildingId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BuildingId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("LocationId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CableId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CableId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CableId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SwitchPortId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SwitchPortId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SwitchPortId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control", @rows = 7 } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LastEditedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastEditedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastEditedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastEditedby, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastEditedby, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastEditedby, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @if ((Model.Computers == null || Model.Computers.Count == 0) && (Model.Monitors == null || Model.Monitors.Count == 0) && (Model.Licenses == null || Model.Licenses.Count == 0))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.InActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-1">
+                    @Html.CheckBox("InActive", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.InActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.InActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-1">
+                    @Html.CheckBox("InActive", new { htmlAttributes = new { @class = "form-control" }, @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.InActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div>
+    <h3>Computers</h3>
+    @Html.Partial("_Computers", Model.Computers.OrderBy(x => x.Name))
+</div>
+
+<div>
+    <h3>Monitors</h3>
+    @Html.Partial("_Monitors", Model.Monitors.OrderBy(x => x.Model))
+</div>
+
+<div>
+    <h3>Licenses</h3>
+    @Html.Partial("_Licenses", Model.Licenses.OrderBy(x => x.FullName))
+</div>
+
+@*@using (Script.Foot())
+    {
+        <script type="text/javascript">
+            $("#InActive").change(function () {
+                if ($(this).is(":checked")) {
+                    var id = @Model.Id;
+                    $("#modalForm").modal();
+                    var url = '@Url.Action("SoftwareAndHardwareLinkedToUser", "Users")';
+                    $("#form-content").load(url + "/" + id);
+                    //alert("Checked");
+                }
+            });
+        </script>
+    }*@

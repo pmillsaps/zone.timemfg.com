@@ -1,0 +1,145 @@
+﻿@model Time.Data.EntityModels.ITInventory.ScheduledTask
+
+@{
+    ViewBag.Title = "Scheduled Task Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Scheduled Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sunday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sunday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuesday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuesday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wednesday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wednesday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thursday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thursday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Friday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Friday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saturday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saturday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Program)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Program)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityRunAs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityRunAs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Databases)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Databases)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SharesLocations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SharesLocations)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Computer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Computer.Name)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditScheduledTask", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Computer", "Details", new { id = Model.ComputerId })
+</p>

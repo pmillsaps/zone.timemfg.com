@@ -1,0 +1,110 @@
+﻿@model Time.Epicor.ViewModels.LoadListView
+
+@{
+    //Script.Require("ShapesBase");
+    Style.Require("jQueryUI_DatePicker").AtHead();
+    Script.Require("jQueryUI_DatePicker").AtFoot();
+    //Layout.Title = T("Add Draw Date").ToString();
+    ViewBag.Title = "Create";
+}
+
+<h2>Create New Load List</h2>
+
+<div>
+    @Html.ActionLink("Back to LoadList Home Page", "Index", null, new { @class = "btn btn-primary" })
+</div>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoadList.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoadList.Name)
+                @Html.ValidationMessageFor(model => model.LoadList.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoadList.DateIssued, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.LoadList.DateIssued)
+                @Html.TextBoxFor(model => model.LoadList.DateIssued, new { @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.LoadList.DateIssued)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoadList.DateRevised, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.LoadList.DateRevised)
+                @Html.TextBoxFor(model => model.LoadList.DateRevised, new { @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.LoadList.DateRevised)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoadList.DateSchedShip, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("DateSchedShip")
+                @Html.ValidationMessageFor(model => model.LoadList.DateSchedShip)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MakeReady, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MakeReady)
+                @Html.ValidationMessageFor(model => model.MakeReady)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoadList.TruckingCompany, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoadList.TruckingCompany)
+                @Html.ValidationMessageFor(model => model.LoadList.TruckingCompany)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoadList.Comments, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoadList.Comments)
+                @Html.ValidationMessageFor(model => model.LoadList.Comments)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complete, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Complete)
+                @*@Html.CheckBoxFor(model => (model.Complete == 1 ? true : false))*@
+                @Html.ValidationMessageFor(model => model.Complete)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        $("#DateSchedShip").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true
+        });
+    </script>
+}
