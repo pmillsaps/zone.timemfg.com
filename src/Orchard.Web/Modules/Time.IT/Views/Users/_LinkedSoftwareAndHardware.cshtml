@@ -1,0 +1,67 @@
+﻿@model Time.Data.EntityModels.ITInventory.User
+
+@if ((Model.Computers == null || Model.Computers.Count == 0) && (Model.Monitors == null || Model.Monitors.Count == 0) && (Model.Licenses == null || Model.Licenses.Count == 0))
+{
+    <div class="alert alert-success">
+        <h3 class="text-center text-success">User's Linked Software and Hardware</h3>
+        <div>
+            <p>User can be flagged as Inactive. There are no software and hardware linked to the user.</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">
+        <h3 class="text-center text-danger">User's Linked Software and Hardware</h3>
+        <div>
+            <p class="text-danger">User must be unlinked before he's flaged as Inactive. Below is a list of all software and hardware linked to the user.</p>
+            <p class="text-danger">If you flag the user as Inactive without unlinkig him, the flag will be ignored.</p>
+        </div>
+    </div>
+    <div class="alert alert-info">
+        <h4>Computers</h4>
+        @if (Model.Computers == null || Model.Computers.Count == 0)
+        {
+            <p>There are no computers linked to this user.</p>
+        }
+        else
+        {
+            foreach (var item in Model.Computers)
+            {
+                <p>@item.Name</p>
+            }
+        }
+    </div>
+
+    <div class="alert alert-info">
+        <h4>Monitors</h4>
+        @if (Model.Monitors == null || Model.Monitors.Count == 0)
+        {
+            <p>There are no monitors linked to this user.</p>
+        }
+        else
+        {
+            foreach (var item in Model.Monitors)
+            {
+                <p>@item.Ref_Manufacturer.Name &nbsp;Model: @item.Model</p>
+            }
+        }
+
+    </div>
+
+    <div class="alert alert-info">
+        <h4>Licenses</h4>
+        @if (Model.Licenses == null || Model.Licenses.Count == 0)
+        {
+            <p>There are no licenses linked to this user.</p>
+        }
+        else
+        {
+            foreach (var item in Model.Licenses)
+            {
+                <p>@item.Name</p>
+            }
+        }
+    </div>
+}
+
