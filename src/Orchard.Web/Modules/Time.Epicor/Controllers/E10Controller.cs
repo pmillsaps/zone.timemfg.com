@@ -11,6 +11,8 @@ using Time.Data.EntityModels.Epicor;
 using Time.Data.EntityModels.Production;
 using Time.Data.Models;
 using Time.Data.Models.MessageQueue;
+using System.Text.RegularExpressions;
+using Time.Epicor.ViewModels;
 
 namespace Time.Epicor.Controllers
 {
@@ -117,6 +119,36 @@ namespace Time.Epicor.Controllers
             returnName += fullFileName.Substring(2);
 
             return returnName;
+        }
+
+        public ActionResult IssueOperation_S1(string job)
+        {
+            if (!String.IsNullOrEmpty(job))
+            {
+                var jobInfo = db.V_JobInformation.FirstOrDefault(x => x.JobNum == job);
+                if (jobInfo != null)
+                {
+                    if (jobInfo.JobComplete ?? false) ViewBag.ErrorMessage += String.Format("Job : {0} is already Complete..." + Environment.NewLine, job.ToUpper());
+                    if (jobInfo.JobClosed ?? false) ViewBag.ErrorMessage += String.Format("Job : {0} is already Closed..." + Environment.NewLine, job.ToUpper());
+                    if (String.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        var opers = db.JobOpers.Where(x => x.JobNum == job).OrderBy(x => x.OpDesc).Select(x => x.OpDesc).Distinct().ToList();
+                        var vm = new IssueOperationVM { JobNumber = job, Operations = opers };
+                        return View("IssueOperation_S2", vm);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = String.Format("Job : {0} does not exist...", job.ToUpper());
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult IssueOperation_S2(IssueOperationVM vm)
+        {
+            return View(vm);
         }
     }
 }

@@ -267,6 +267,8 @@
     <Content Include="Views\V8QuoteOrderSearch\Index.cshtml" />
     <Content Include="Views\V8QuoteOrderSearch\Comments.cshtml" />
     <Content Include="Views\QuoteOrderSearch\Comments.cshtml" />
+    <Content Include="Views\E10\IssueOperation_S1.cshtml" />
+    <Content Include="Views\E10\IssueOperation_S2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -331,6 +333,7 @@
     <Compile Include="ViewModels\EmailLoadListVM.cs" />
     <Compile Include="ViewModels\EpicorStatusViewModel.cs" />
     <Compile Include="ViewModels\IMViewModel.cs" />
+    <Compile Include="ViewModels\IssueOperationVM.cs" />
     <Compile Include="ViewModels\LoadListView.cs" />
     <Compile Include="ViewModels\MoveLoadListJobVM.cs" />
     <Compile Include="ViewModels\NOWReportViewModel.cs" />
