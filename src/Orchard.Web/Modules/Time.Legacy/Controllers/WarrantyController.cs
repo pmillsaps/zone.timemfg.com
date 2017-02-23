@@ -57,8 +57,15 @@ namespace Time.Legacy.Controllers
                     foreach (var item in final)
                     {
                         InsertWarranty iw = new InsertWarranty();
+                        var lift = "";
+                        if (item.LiftOrderNumber != "" && item.LiftOrderNumber != null)
+                            lift = db.InvoiceHeaders.Where(x => x.LiftOrderNumber == item.LiftOrderNumber && x.LiftModel != null && x.LiftModel != "").Select(x => x.LiftModel).FirstOrDefault();
+                        else
+                            lift = "";
+
                         iw.Id = item.Id;
                         iw.SerialNumber = item.SerialNumber;
+                        iw.LiftModel = lift;
                         iw.EndUserName = item.EndUserName;
                         iw.Phone = item.Phone;
                         iw.Address = item.Address;
@@ -140,8 +147,16 @@ namespace Time.Legacy.Controllers
                     foreach (var item in final)
                     {
                         InsertWarranty iw = new InsertWarranty();
+
+                        var lift = "";
+                        if (item.LiftOrderNumber != "" && item.LiftOrderNumber != null)
+                            lift = db.InvoiceHeaders.Where(x => x.LiftOrderNumber == item.LiftOrderNumber && x.LiftModel != null && x.LiftModel != "").Select(x => x.LiftModel).FirstOrDefault();
+                        else
+                            lift = "";
+
                         iw.Id = item.Id;
                         iw.SerialNumber = item.SerialNumber;
+                        iw.LiftModel = lift;
                         iw.EndUserName = item.EndUserName;
                         iw.Phone = item.Phone;
                         iw.Address = item.Address;

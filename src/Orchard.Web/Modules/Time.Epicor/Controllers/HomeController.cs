@@ -83,10 +83,5 @@ namespace Time.Epicor.Controllers
             }
             return View("MessageResult");
         }
-
-        public ActionResult ChangePrimBin()
-        {
-            return View();
-        }
     }
 }

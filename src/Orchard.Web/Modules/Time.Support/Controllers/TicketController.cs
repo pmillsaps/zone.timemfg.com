@@ -128,7 +128,7 @@ namespace Time.Support.Controllers
                     qry = qry.OrderByDescending(x => x.PriorityID).ToList();
                     break;
                 case "rated_desc":
-                    qry = qry.Where(x => x.TicketSequence != null).OrderBy(x => x.RequestedBy).ThenBy(x => x.TicketSequence).ToList();
+                    qry = qry.Where(x => x.TicketSequence != null).OrderBy(x => x.RequestedBy.ToUpper()).ThenBy(x => x.TicketSequence).ToList();
                     break;
                 default:
                     qry = qry.OrderBy(x => x.TicketID).ToList();
@@ -404,13 +404,10 @@ namespace Time.Support.Controllers
             if (ticketProject.ResourceEmployeeID != null && ticket.ResourceEmployeeID != ticketProject.ResourceEmployeeID)
             {
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
-
                 if (emp != null)
                 {
                     msg += string.Format("Resource Employee was changed: {0} -> {1}", ticket.TicketEmployee.FullName, emp.FullName);
-
                     ticket.TicketEmployee1 = emp;
-
                     var command = new TicketNotificationMessage
                     {
                         TicketId = ticketProject.TicketID,
@@ -418,7 +415,6 @@ namespace Time.Support.Controllers
                         Sender = HttpContext.User.Identity.Name
                     };
                     var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
-
                     ticket.ResourceEmployeeID = ticketProject.ResourceEmployeeID;
                 }
                 else

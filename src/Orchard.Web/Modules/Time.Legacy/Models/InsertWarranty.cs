@@ -13,6 +13,7 @@ namespace Time.Legacy.Models
 
         public int Id { get; set; }
         public string SerialNumber { get; set; }
+        public string LiftModel { get; set; }
         public string EndUserName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }

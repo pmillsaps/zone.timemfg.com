@@ -12,7 +12,9 @@ namespace Time.Data.Models.MessageQueue
     public class MSMQ
     {
         public static string ErrorMessage { get; set; }
-        private static string queueAddress = @"Aruba-Connect\time.messagequeue";
+
+        //private static string queueAddress = @"Aruba-Connect\time.messagequeue";
+        private static string queueAddress = GetSetting.String("QueueAddress");
 
         //public enum MessageType
         //{

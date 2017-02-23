@@ -54,6 +54,9 @@
             @Html.DisplayNameFor(model => model.SerialNumber)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.LiftModel)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.EndUserName)
         </th>
         <th>
@@ -91,6 +94,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftModel)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EndUserName)
