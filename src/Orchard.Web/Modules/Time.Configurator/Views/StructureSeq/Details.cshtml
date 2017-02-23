@@ -1,0 +1,80 @@
+﻿@model Time.Data.EntityModels.Configurator.StructureSeq
+
+@{
+    ViewBag.Title = "Structure Sequence Details";
+
+}
+
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Structure Sequence</h4>
+    <hr />
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfigData)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConfigData)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Sequence)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Sequence)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Lookup)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lookup)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Notes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Notes)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LookupSequence)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LookupSequence)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Global)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Global)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { ConfigNames = Model.ConfigName, ConfigData = Model.ConfigData })
+</p>

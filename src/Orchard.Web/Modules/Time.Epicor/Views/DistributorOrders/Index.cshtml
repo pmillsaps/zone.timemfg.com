@@ -1,0 +1,38 @@
+﻿@model Time.Epicor.ViewModels.DistributorOrderListVM
+
+@{
+    ViewBag.Title = "E10 Distributor Order List";
+}
+
+<h2>@ViewBag.Title (@Model.Orders.Count() records)</h2>
+<hr />
+
+@using (Html.BeginForm("Index", "DistributorOrders", FormMethod.Post, new { id = "DistributorSearch" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.Label("Select a Distributor:")</span>
+                @{
+                    Html.RenderAction("_DistributorList", new { id = Model.Distributor });
+                }
+            </div>
+        </div>
+    </div>
+                    }
+
+<br />
+
+@Html.Partial("_DistributorOrderList", Model.Orders)
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#Distributor').change(function () {
+                $('#DistributorSearch').submit();
+            });
+        });
+    </script>
+}
