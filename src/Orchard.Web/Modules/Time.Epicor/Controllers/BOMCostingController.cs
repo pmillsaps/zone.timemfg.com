@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Production;
+using Time.Data.Helpers;
 using Time.Epicor.Helpers;
 using Time.Epicor.Models;
 using Time.Epicor.ViewModels;
@@ -76,6 +77,10 @@ namespace Time.Epicor.Controllers
             }
             //IPartRepository sr = new SqlPartRepository();
             //if (searchVM.UseTestData == true) sr = new SqlTestPartRepository();
+
+            // Use Test Data
+            if (searchVM.UseTestData == true) db.ChangeDatabase(dataSource: "Aruba-E10Test");
+
             List<BOMInfo> tmpBOM = new List<BOMInfo>();
             foreach (string option in partList)
             {

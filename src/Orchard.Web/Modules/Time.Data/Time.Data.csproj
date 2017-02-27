@@ -847,6 +847,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VersaliftModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConnectionTools.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Configurator\ComplexStructure.cs" />
     <Compile Include="Models\Configurator\ConfigID.cs" />
