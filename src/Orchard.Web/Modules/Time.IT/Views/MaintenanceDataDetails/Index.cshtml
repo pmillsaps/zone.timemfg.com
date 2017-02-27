@@ -128,7 +128,7 @@
                     { data: "ExpirationDate", autoWidth: true },
                     { data: "AccountNumber", autoWidth: true },
                     { data: "Duration", autoWidth: true },
-                    { data: "Cost", autoWidth: true },
+                    { data: "Cost", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$') },
                     { data: "Monthly", autoWidth: true },
                     { data: "Explanation", autoWidth: true },
                     { data: "AlternateInfo", autoWidth: true },

@@ -5,6 +5,7 @@
 }
 
 <h2>Create</h2>
+<hr />
 
 @using (Html.BeginForm()) 
 {
@@ -13,7 +14,6 @@
         <br />
         <div class="form-horizontal">
             <h4>User</h4>
-            <hr />
             @Html.HiddenFor(x => x.Id)
             @Html.HiddenFor(x => x.LastDateEdited)
             @Html.HiddenFor(x => x.LastEditedBy)

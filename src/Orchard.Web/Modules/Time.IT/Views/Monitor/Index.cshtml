@@ -70,7 +70,7 @@
                     { data: "PurchaseDate", autoWidth: true},
                     { data: "PurchasedFrom", autoWidth: true },
                     { data: "PO", autoWidth: true },
-                    { data: "Cost", autoWidth: true },
+                    { data: "Cost", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$')},
                     { data: "MFRName", autoWidth: true },
                     { data: "Size", autoWidth: true },
                     { data: "UserName", autoWidth: true },

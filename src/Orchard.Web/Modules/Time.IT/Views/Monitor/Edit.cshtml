@@ -5,6 +5,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<hr />
 
 @using (Html.BeginForm())
 {
@@ -13,7 +14,6 @@
         <br />
         <div class="form-horizontal">
             <h4>Monitor</h4>
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
 
