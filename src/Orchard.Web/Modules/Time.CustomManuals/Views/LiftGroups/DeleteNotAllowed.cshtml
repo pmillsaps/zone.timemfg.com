@@ -1,0 +1,28 @@
+﻿@model Time.Data.EntityModels.CustomManuals.LiftGroup
+
+@{
+    ViewBag.Title = "Lift Group Delete Not Allowed";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Lift Group</h4>
+    <h4>Delete is not allowed, since this Lift Group is referenced either in the Lifts, or in the Formatting tables.</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Lift_Group, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.Lift_Group, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+
+<br />
+<br />
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
