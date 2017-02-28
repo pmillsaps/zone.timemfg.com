@@ -92,7 +92,8 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Cost)
+                @*@Html.DisplayFor(model => model.Cost)*@
+                @String.Format("{0:c}", Model.Cost)
             </dd>
 
             <dt>
@@ -180,7 +181,7 @@
                 <td>@item.AccountNumber</td>
                 <td>@item.PO_CC</td>
                 <td>@item.Duration</td>
-                <td>@item.Cost</td>
+                <td>@item.Cost.ToString("c")</td>
                 <td>@item.Monthly</td>
                 <td>@item.Explanation</td>
                 <td>@item.AlternateInfo</td>

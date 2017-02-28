@@ -7,6 +7,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<div align="right">@Html.ActionLink("Back to Computer List", "Index")</div>
 <hr />
 
 @using (Html.BeginForm())
@@ -180,7 +181,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.AdditionalHW, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.AdditionalHW, new { htmlAttributes = new { @class = "form-control", @rows = 9 } })
+                            @Html.EditorFor(model => model.AdditionalHW, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
                             @Html.ValidationMessageFor(model => model.AdditionalHW, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -188,7 +189,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control", @rows = 10 } })
+                            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control", @rows = 8 } })
                             @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -204,7 +205,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Computer List", "Index")
 </div>
 
 @using (Script.Foot())
