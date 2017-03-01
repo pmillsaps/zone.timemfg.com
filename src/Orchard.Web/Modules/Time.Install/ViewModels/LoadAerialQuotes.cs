@@ -16,5 +16,6 @@ namespace Time.Install.ViewModels
         public decimal OrderQty { get; set; }
         public string ChangedBy { get; set; }
         public string ChangeDate { get; set; }
+        public int LiftFamilyId { get; set; }
     }
 }

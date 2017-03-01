@@ -20,11 +20,15 @@ namespace Time.Data.EntityModels.Install
             this.InstallQuotes = new HashSet<InstallQuote>();
             this.VSWOptions = new HashSet<VSWOption>();
             this.TimeOptions = new HashSet<TimeOption>();
+            this.ChassisSpecsForWordDocs = new HashSet<ChassisSpecsForWordDoc>();
+            this.OptionTitleDescpForWordDocs = new HashSet<OptionTitleDescpForWordDoc>();
+            this.OptionTitlesForWordDocs = new HashSet<OptionTitlesForWordDoc>();
         }
     
         public int Id { get; set; }
         public string FamilyName { get; set; }
         public decimal InstallHours { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InstallQuote> InstallQuotes { get; set; }
@@ -32,5 +36,11 @@ namespace Time.Data.EntityModels.Install
         public virtual ICollection<VSWOption> VSWOptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeOption> TimeOptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChassisSpecsForWordDoc> ChassisSpecsForWordDocs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OptionTitleDescpForWordDoc> OptionTitleDescpForWordDocs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OptionTitlesForWordDoc> OptionTitlesForWordDocs { get; set; }
     }
 }

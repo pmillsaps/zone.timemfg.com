@@ -34,5 +34,10 @@ namespace Time.Data.EntityModels.Install
         public virtual DbSet<QuoteChangesLog> QuoteChangesLogs { get; set; }
         public virtual DbSet<TimeOption> TimeOptions { get; set; }
         public virtual DbSet<VSWOption> VSWOptions { get; set; }
+        public virtual DbSet<ChassisSpecsForWordDoc> ChassisSpecsForWordDocs { get; set; }
+        public virtual DbSet<InstallDetailsForWordDoc> InstallDetailsForWordDocs { get; set; }
+        public virtual DbSet<OptionTitleDescpForWordDoc> OptionTitleDescpForWordDocs { get; set; }
+        public virtual DbSet<OptionTitlesForWordDoc> OptionTitlesForWordDocs { get; set; }
+        public virtual DbSet<QuoteDeptUsersForWordDoc> QuoteDeptUsersForWordDocs { get; set; }
     }
 }

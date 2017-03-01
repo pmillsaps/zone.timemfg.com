@@ -21,8 +21,8 @@
 <hr />
 <div class="alert alert-info">
     <p><strong>Note:</strong> A quote MUST have an INSTALLS(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
-    <p>To view or edit the details of an existing Inatallation Quotation go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong>.</p>
-    <p>To <span class="label label-primary">Start</span> a Inatallation Quotation, click the <i class="fa fa-hand-o-right" aria-hidden="true"></i> icon.</p>
+    <p>To view or edit the details of an existing Installation Quotation go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong>.</p>
+    <p>To <span class="label label-primary">Start</span> a Installation Quotation, click the <i class="fa fa-hand-o-right" aria-hidden="true"></i> icon.</p>
     <p>To <span class="label label-primary">Compose the Quote Presentation</span>, click on the <i class="fa fa-file-word-o" aria-hidden="true"></i> icon.</p>
 </div>
 <hr />
@@ -79,8 +79,8 @@
                         }
                     },
                     {
-                        data: null, width: "20px", sortable: false, render: function (data, type, row) {
-                            return '<a class="wordDoc" href="#" data-quoteNum="' + row.QuoteNum + '" data-lineDesc="' + row.LineDesc + '"><i class="fa fa-file-word-o" aria-hidden="true"></i></a>';
+                        data: "LiftFamilyId", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Quote/CreateQuotePresentation/' + data + '"><i class="fa fa-file-word-o" aria-hidden="true"></i></a>';
                         }
                     }
                 ]

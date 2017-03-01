@@ -358,6 +358,9 @@
     <Compile Include="EntityModels\Epicor\v_WhereUsed.cs">
       <DependentUpon>EpicorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Install\ChassisSpecsForWordDoc.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Install\EpicorDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -376,6 +379,9 @@
     <Compile Include="EntityModels\Install\InstallDetail.cs">
       <DependentUpon>QuoteDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\Install\InstallDetailsForWordDoc.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\Install\InstallDetailsManuallyAddedOption.cs">
       <DependentUpon>QuoteDBModel.tt</DependentUpon>
     </Compile>
@@ -389,6 +395,12 @@
       <DependentUpon>QuoteDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Install\OptionGroup.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\OptionTitleDescpForWordDoc.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\OptionTitlesForWordDoc.cs">
       <DependentUpon>QuoteDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Install\PartRev.cs">
@@ -411,6 +423,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QuoteDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\Install\QuoteDeptUsersForWordDoc.cs">
+      <DependentUpon>QuoteDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModels\Install\QuoteDtl.cs">
       <DependentUpon>EpicorDBModel.tt</DependentUpon>
