@@ -48,6 +48,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocX, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DocX.1.0.0.22\lib\net40\DocX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -62,6 +66,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\AD.System.Web.Helpers.dll.2.0.0\lib\net20\System.Web.Helpers.dll</HintPath>
@@ -86,6 +91,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\TimeLogoSmall.jpg" />
+    <Content Include="Content\images\VSWLogoSmall.jpg" />
     <Content Include="Styles\images\ajax-loader.gif" />
     <Content Include="Styles\images\calendar-blue.gif" />
     <Content Include="Styles\images\calendar-green.gif" />
@@ -146,6 +153,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\wordDocStyles.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -192,6 +200,7 @@
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Views\Quote\_LoadingGifIndicator2.cshtml" />
     <Content Include="Views\Quote\_LoadingGifIndicator1.cshtml" />
+    <Content Include="Views\Quote\CreateQuotePresentation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -204,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business Logic\CreateQuotationPresentation.cs" />
     <Compile Include="Business Logic\InsertInstallDetailsIntoEpicorDb.cs" />
     <Compile Include="Business Logic\InsertIntoInstallDetailsAndManuallyAddedOptions.cs" />
     <Compile Include="Business Logic\InsertIntoInstallQuote.cs" />
@@ -220,7 +230,9 @@
     <Compile Include="Models\AddVSWOptionManually.cs" />
     <Compile Include="Models\AerialOption.cs" />
     <Compile Include="Models\InstallQuoteSummary.cs" />
+    <Compile Include="Models\QuotationPresentationModel.cs" />
     <Compile Include="Models\SplitOptions.cs" />
+    <Compile Include="Models\TitlesAndDescriptions.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />

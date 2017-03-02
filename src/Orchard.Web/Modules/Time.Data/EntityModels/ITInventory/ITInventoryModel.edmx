@@ -84,8 +84,8 @@
           <Property Name="Duration" Type="varchar" MaxLength="50" />
           <Property Name="Cost" Type="money" />
           <Property Name="Monthly" Type="varchar" MaxLength="50" />
-          <Property Name="Explanation" Type="varchar" MaxLength="50" />
-          <Property Name="AlternateInfo" Type="varchar" MaxLength="50" />
+          <Property Name="Explanation" Type="varchar(max)" />
+          <Property Name="AlternateInfo" Type="varchar(max)" />
           <Property Name="PO_CC" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Monitor">
@@ -1428,8 +1428,8 @@
           <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Monthly" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Explanation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AlternateInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Explanation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MaintenanceData" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceDataDetail" ToRole="MaintenanceData" />
           <Property Name="PO_CC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>

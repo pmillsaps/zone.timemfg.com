@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="VSWQuotesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChassisSpecsForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="int" Nullable="false" />
+          <Property Name="CbToAxDimension" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FrmSctnModulus" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FrmRsistngBndngMmnt" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FrontGAWR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RearGAWR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="GVWR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AprxCrbWghtStblty" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="InstallDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -17,6 +31,13 @@
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="ExtendedPrice" Type="money" StoreGeneratedPattern="Computed" />
           <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstallDetailsForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DetailLine" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="InstallDetailsManuallyAddedOption">
           <Key>
@@ -64,6 +85,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FamilyName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="OptionGroup">
           <Key>
@@ -71,6 +93,23 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GroupName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionTitleDescpForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="int" Nullable="false" />
+          <Property Name="OptionTitlesId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OptionTitlesForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiftFamilyId" Type="int" Nullable="false" />
+          <Property Name="OptionTitle" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="QuoteChangesLog">
           <Key>
@@ -81,6 +120,17 @@
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
           <Property Name="ValueChanged" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteDeptUsersForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PositionTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="TimeOption">
           <Key>
@@ -105,6 +155,18 @@
           <Property Name="InstallHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="PaintFlag" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="tblChassisSpecsForWordDoc_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="ChassisSpecsForWordDoc" Type="Self.ChassisSpecsForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChassisSpecsForWordDoc">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="tblInstallDetails_GroupId_FK">
           <End Role="OptionGroup" Type="Self.OptionGroup" Multiplicity="1" />
           <End Role="InstallDetails" Type="Self.InstallDetails" Multiplicity="*" />
@@ -189,6 +251,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="tblOptionTitleDescpForWordDoc_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="OptionTitleDescpForWordDoc" Type="Self.OptionTitleDescpForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionTitleDescpForWordDoc">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptionTitleDescpForWordDoc_OptionTitlesId">
+          <End Role="OptionTitlesForWordDoc" Type="Self.OptionTitlesForWordDoc" Multiplicity="1" />
+          <End Role="OptionTitleDescpForWordDoc" Type="Self.OptionTitleDescpForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionTitlesForWordDoc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionTitleDescpForWordDoc">
+              <PropertyRef Name="OptionTitlesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptionTitlesForWordDoc_LiftFamilyId_FK">
+          <End Role="LiftFamily" Type="Self.LiftFamily" Multiplicity="1" />
+          <End Role="OptionTitlesForWordDoc" Type="Self.OptionTitlesForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionTitlesForWordDoc">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="tblQuoteChangesLog_InstallQuoteId_FK">
           <End Role="InstallQuote" Type="Self.InstallQuote" Multiplicity="1" />
           <End Role="QuoteChangesLog" Type="Self.QuoteChangesLog" Multiplicity="*" />
@@ -214,15 +312,24 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="VSWQuotesModelStoreContainer">
+          <EntitySet Name="ChassisSpecsForWordDoc" EntityType="Self.ChassisSpecsForWordDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstallDetails" EntityType="Self.InstallDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstallDetailsForWordDoc" EntityType="Self.InstallDetailsForWordDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstallDetailsManuallyAddedOption" EntityType="Self.InstallDetailsManuallyAddedOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstallHourlyRate" EntityType="Self.InstallHourlyRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstallQuote" EntityType="Self.InstallQuote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LiftFamily" EntityType="Self.LiftFamily" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OptionGroup" EntityType="Self.OptionGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionTitleDescpForWordDoc" EntityType="Self.OptionTitleDescpForWordDoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionTitlesForWordDoc" EntityType="Self.OptionTitlesForWordDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuoteChangesLog" EntityType="Self.QuoteChangesLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteDeptUsersForWordDoc" EntityType="Self.QuoteDeptUsersForWordDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeOption" EntityType="Self.TimeOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VSWOption" EntityType="Self.VSWOption" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="tblChassisSpecsForWordDoc_LiftFamilyId_FK" Association="Self.tblChassisSpecsForWordDoc_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamily" />
+            <End Role="ChassisSpecsForWordDoc" EntitySet="ChassisSpecsForWordDoc" />
+          </AssociationSet>
           <AssociationSet Name="tblInstallDetails_GroupId_FK" Association="Self.tblInstallDetails_GroupId_FK">
             <End Role="OptionGroup" EntitySet="OptionGroup" />
             <End Role="InstallDetails" EntitySet="InstallDetails" />
@@ -250,6 +357,18 @@
           <AssociationSet Name="tblOptions_LiftFamilyId_FK" Association="Self.tblOptions_LiftFamilyId_FK">
             <End Role="LiftFamily" EntitySet="LiftFamily" />
             <End Role="VSWOption" EntitySet="VSWOption" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptionTitleDescpForWordDoc_LiftFamilyId_FK" Association="Self.tblOptionTitleDescpForWordDoc_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamily" />
+            <End Role="OptionTitleDescpForWordDoc" EntitySet="OptionTitleDescpForWordDoc" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptionTitleDescpForWordDoc_OptionTitlesId" Association="Self.tblOptionTitleDescpForWordDoc_OptionTitlesId">
+            <End Role="OptionTitlesForWordDoc" EntitySet="OptionTitlesForWordDoc" />
+            <End Role="OptionTitleDescpForWordDoc" EntitySet="OptionTitleDescpForWordDoc" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptionTitlesForWordDoc_LiftFamilyId_FK" Association="Self.tblOptionTitlesForWordDoc_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamily" />
+            <End Role="OptionTitlesForWordDoc" EntitySet="OptionTitlesForWordDoc" />
           </AssociationSet>
           <AssociationSet Name="tblQuoteChangesLog_InstallQuoteId_FK" Association="Self.tblQuoteChangesLog_InstallQuoteId_FK">
             <End Role="InstallQuote" EntitySet="InstallQuote" />
@@ -334,6 +453,10 @@
           <NavigationProperty Name="InstallQuotes" Relationship="Self.tblInstallQuote_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="InstallQuote" />
           <NavigationProperty Name="VSWOptions" Relationship="Self.tblOptions_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="VSWOption" />
           <NavigationProperty Name="TimeOptions" Relationship="Self.tblTimeOptions_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="TimeOption" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChassisSpecsForWordDocs" Relationship="VSWQuotesModel.tblChassisSpecsForWordDoc_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="ChassisSpecsForWordDoc" />
+          <NavigationProperty Name="OptionTitleDescpForWordDocs" Relationship="VSWQuotesModel.tblOptionTitleDescpForWordDoc_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="OptionTitleDescpForWordDoc" />
+          <NavigationProperty Name="OptionTitlesForWordDocs" Relationship="VSWQuotesModel.tblOptionTitlesForWordDoc_LiftFamilyId_FK" FromRole="LiftFamily" ToRole="OptionTitlesForWordDoc" />
         </EntityType>
         <EntityType Name="OptionGroup">
           <Key>
@@ -536,7 +659,130 @@
             <End Role="OptionGroup" EntitySet="OptionGroups" />
             <End Role="VSWOption" EntitySet="VSWOptions" />
           </AssociationSet>
+          <EntitySet Name="ChassisSpecsForWordDocs" EntityType="VSWQuotesModel.ChassisSpecsForWordDoc" />
+          <EntitySet Name="InstallDetailsForWordDocs" EntityType="VSWQuotesModel.InstallDetailsForWordDoc" />
+          <EntitySet Name="OptionTitleDescpForWordDocs" EntityType="VSWQuotesModel.OptionTitleDescpForWordDoc" />
+          <EntitySet Name="OptionTitlesForWordDocs" EntityType="VSWQuotesModel.OptionTitlesForWordDoc" />
+          <EntitySet Name="QuoteDeptUsersForWordDocs" EntityType="VSWQuotesModel.QuoteDeptUsersForWordDoc" />
+          <AssociationSet Name="tblChassisSpecsForWordDoc_LiftFamilyId_FK" Association="VSWQuotesModel.tblChassisSpecsForWordDoc_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamilies" />
+            <End Role="ChassisSpecsForWordDoc" EntitySet="ChassisSpecsForWordDocs" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptionTitleDescpForWordDoc_LiftFamilyId_FK" Association="VSWQuotesModel.tblOptionTitleDescpForWordDoc_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamilies" />
+            <End Role="OptionTitleDescpForWordDoc" EntitySet="OptionTitleDescpForWordDocs" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptionTitlesForWordDoc_LiftFamilyId_FK" Association="VSWQuotesModel.tblOptionTitlesForWordDoc_LiftFamilyId_FK">
+            <End Role="LiftFamily" EntitySet="LiftFamilies" />
+            <End Role="OptionTitlesForWordDoc" EntitySet="OptionTitlesForWordDocs" />
+          </AssociationSet>
+          <AssociationSet Name="tblOptionTitleDescpForWordDoc_OptionTitlesId" Association="VSWQuotesModel.tblOptionTitleDescpForWordDoc_OptionTitlesId">
+            <End Role="OptionTitlesForWordDoc" EntitySet="OptionTitlesForWordDocs" />
+            <End Role="OptionTitleDescpForWordDoc" EntitySet="OptionTitleDescpForWordDocs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ChassisSpecsForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftFamilyId" Type="Int32" Nullable="false" />
+          <Property Name="CbToAxDimension" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FrmSctnModulus" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FrmRsistngBndngMmnt" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FrontGAWR" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RearGAWR" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GVWR" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AprxCrbWghtStblty" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LiftFamily" Relationship="VSWQuotesModel.tblChassisSpecsForWordDoc_LiftFamilyId_FK" FromRole="ChassisSpecsForWordDoc" ToRole="LiftFamily" />
+        </EntityType>
+        <EntityType Name="InstallDetailsForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DetailLine" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OptionTitleDescpForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftFamilyId" Type="Int32" Nullable="false" />
+          <Property Name="OptionTitlesId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LiftFamily" Relationship="VSWQuotesModel.tblOptionTitleDescpForWordDoc_LiftFamilyId_FK" FromRole="OptionTitleDescpForWordDoc" ToRole="LiftFamily" />
+          <NavigationProperty Name="OptionTitlesForWordDoc" Relationship="VSWQuotesModel.tblOptionTitleDescpForWordDoc_OptionTitlesId" FromRole="OptionTitleDescpForWordDoc" ToRole="OptionTitlesForWordDoc" />
+        </EntityType>
+        <EntityType Name="OptionTitlesForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiftFamilyId" Type="Int32" Nullable="false" />
+          <Property Name="OptionTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LiftFamily" Relationship="VSWQuotesModel.tblOptionTitlesForWordDoc_LiftFamilyId_FK" FromRole="OptionTitlesForWordDoc" ToRole="LiftFamily" />
+          <NavigationProperty Name="OptionTitleDescpForWordDocs" Relationship="VSWQuotesModel.tblOptionTitleDescpForWordDoc_OptionTitlesId" FromRole="OptionTitlesForWordDoc" ToRole="OptionTitleDescpForWordDoc" />
+        </EntityType>
+        <EntityType Name="QuoteDeptUsersForWordDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PositionTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="tblChassisSpecsForWordDoc_LiftFamilyId_FK">
+          <End Type="VSWQuotesModel.LiftFamily" Role="LiftFamily" Multiplicity="1" />
+          <End Type="VSWQuotesModel.ChassisSpecsForWordDoc" Role="ChassisSpecsForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChassisSpecsForWordDoc">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptionTitleDescpForWordDoc_LiftFamilyId_FK">
+          <End Type="VSWQuotesModel.LiftFamily" Role="LiftFamily" Multiplicity="1" />
+          <End Type="VSWQuotesModel.OptionTitleDescpForWordDoc" Role="OptionTitleDescpForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionTitleDescpForWordDoc">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptionTitlesForWordDoc_LiftFamilyId_FK">
+          <End Type="VSWQuotesModel.LiftFamily" Role="LiftFamily" Multiplicity="1" />
+          <End Type="VSWQuotesModel.OptionTitlesForWordDoc" Role="OptionTitlesForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LiftFamily">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionTitlesForWordDoc">
+              <PropertyRef Name="LiftFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblOptionTitleDescpForWordDoc_OptionTitlesId">
+          <End Type="VSWQuotesModel.OptionTitlesForWordDoc" Role="OptionTitlesForWordDoc" Multiplicity="1" />
+          <End Type="VSWQuotesModel.OptionTitleDescpForWordDoc" Role="OptionTitleDescpForWordDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionTitlesForWordDoc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OptionTitleDescpForWordDoc">
+              <PropertyRef Name="OptionTitlesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -602,6 +848,7 @@
           <EntitySetMapping Name="LiftFamilies">
             <EntityTypeMapping TypeName="VSWQuotesModel.LiftFamily">
               <MappingFragment StoreEntitySet="LiftFamily">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
                 <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
@@ -649,6 +896,60 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="InstallHours" ColumnName="InstallHours" />
                 <ScalarProperty Name="PaintFlag" ColumnName="PaintFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChassisSpecsForWordDocs">
+            <EntityTypeMapping TypeName="VSWQuotesModel.ChassisSpecsForWordDoc">
+              <MappingFragment StoreEntitySet="ChassisSpecsForWordDoc">
+                <ScalarProperty Name="AprxCrbWghtStblty" ColumnName="AprxCrbWghtStblty" />
+                <ScalarProperty Name="GVWR" ColumnName="GVWR" />
+                <ScalarProperty Name="RearGAWR" ColumnName="RearGAWR" />
+                <ScalarProperty Name="FrontGAWR" ColumnName="FrontGAWR" />
+                <ScalarProperty Name="FrmRsistngBndngMmnt" ColumnName="FrmRsistngBndngMmnt" />
+                <ScalarProperty Name="FrmSctnModulus" ColumnName="FrmSctnModulus" />
+                <ScalarProperty Name="CbToAxDimension" ColumnName="CbToAxDimension" />
+                <ScalarProperty Name="LiftFamilyId" ColumnName="LiftFamilyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstallDetailsForWordDocs">
+            <EntityTypeMapping TypeName="VSWQuotesModel.InstallDetailsForWordDoc">
+              <MappingFragment StoreEntitySet="InstallDetailsForWordDoc">
+                <ScalarProperty Name="DetailLine" ColumnName="DetailLine" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionTitleDescpForWordDocs">
+            <EntityTypeMapping TypeName="VSWQuotesModel.OptionTitleDescpForWordDoc">
+              <MappingFragment StoreEntitySet="OptionTitleDescpForWordDoc">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OptionTitlesId" ColumnName="OptionTitlesId" />
+                <ScalarProperty Name="LiftFamilyId" ColumnName="LiftFamilyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionTitlesForWordDocs">
+            <EntityTypeMapping TypeName="VSWQuotesModel.OptionTitlesForWordDoc">
+              <MappingFragment StoreEntitySet="OptionTitlesForWordDoc">
+                <ScalarProperty Name="OptionTitle" ColumnName="OptionTitle" />
+                <ScalarProperty Name="LiftFamilyId" ColumnName="LiftFamilyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteDeptUsersForWordDocs">
+            <EntityTypeMapping TypeName="VSWQuotesModel.QuoteDeptUsersForWordDoc">
+              <MappingFragment StoreEntitySet="QuoteDeptUsersForWordDoc">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PositionTitle" ColumnName="PositionTitle" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

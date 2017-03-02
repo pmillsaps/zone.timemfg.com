@@ -23,6 +23,15 @@
         <AssociationConnector Association="VSWQuotesModel.tblOptions_LiftFamilyId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblTimeOptions_LiftFamilyId_FK" ManuallyRouted="false" />
         <AssociationConnector Association="VSWQuotesModel.tblOptions_GroupId_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VSWQuotesModel.ChassisSpecsForWordDoc" Width="1.5" PointX="5.25" PointY="12.75" />
+        <EntityTypeShape EntityType="VSWQuotesModel.InstallDetailsForWordDoc" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="VSWQuotesModel.OptionTitleDescpForWordDoc" Width="1.5" PointX="7.5" PointY="9.25" />
+        <EntityTypeShape EntityType="VSWQuotesModel.OptionTitlesForWordDoc" Width="1.5" PointX="5.25" PointY="9.125" />
+        <EntityTypeShape EntityType="VSWQuotesModel.QuoteDeptUsersForWordDoc" Width="1.5" PointX="9.75" PointY="8.75" />
+        <AssociationConnector Association="VSWQuotesModel.tblChassisSpecsForWordDoc_LiftFamilyId_FK" />
+        <AssociationConnector Association="VSWQuotesModel.tblOptionTitleDescpForWordDoc_LiftFamilyId_FK" />
+        <AssociationConnector Association="VSWQuotesModel.tblOptionTitlesForWordDoc_LiftFamilyId_FK" />
+        <AssociationConnector Association="VSWQuotesModel.tblOptionTitleDescpForWordDoc_OptionTitlesId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

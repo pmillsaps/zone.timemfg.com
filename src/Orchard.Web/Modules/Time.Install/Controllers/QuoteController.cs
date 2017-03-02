@@ -43,6 +43,11 @@ namespace Time.Install.Controllers
             var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS").ToList();
             // Uncomment this line when going live
             //var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS" && x.QuoteComment == "").ToList();
+            // Retrieving the LiftFamilyId
+            //var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
+            //var liftFmly = dbQ.LiftFamilies.FirstOrDefault(x => x.FamilyName == cfgName.ConfigID);
+            //quoteVM.LiftFamilyId = liftFmly.Id;
+
             foreach (var item in quotes)
             {
                 LoadAerialQuotes qvm = new LoadAerialQuotes();
@@ -55,6 +60,17 @@ namespace Time.Install.Controllers
                 qvm.OrderQty = item.OrderQty;
                 qvm.ChangedBy = item.ChangedBy;
                 qvm.ChangeDate = (item.ChangeDate != null)? item.ChangeDate.Value.ToShortDateString() : "";
+                var quoteDtls = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == item.QuoteNum && x.QuoteLine == 1);
+                var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
+                if (cfgName != null)
+                {
+                    var liftFmly = dbQ.LiftFamilies.FirstOrDefault(x => x.FamilyName == cfgName.ConfigID);
+                    qvm.LiftFamilyId = (liftFmly != null)? liftFmly.Id : 0;
+                }
+                else
+                {
+                    qvm.LiftFamilyId = 0;
+                }
                 model.Add(qvm);
             }
             return Json(new { data = model }, JsonRequestBehavior.AllowGet);
@@ -156,5 +172,22 @@ namespace Time.Install.Controllers
 
             return View(installQuoteSummary);
         }
+
+        // Method to generate the Word Document
+        public ActionResult CreateQuotePresentation(int? id)
+        {
+            var options = dbQ.OptionTitlesForWordDocs.Where(x => x.LiftFamilyId == id).ToList();
+            ViewBag.Users = new SelectList(dbQ.QuoteDeptUsersForWordDocs, "Id", "Name");
+            return View(options);
+        }
+
+        // POST Method to generate the Word Document
+        [HttpPost]
+        public ActionResult CreateWordDocument(string fileName, int? userId, int liftFamilyId, string listOfOptions)//FormCollection formItems
+        {
+            CreateQuotationPresentation.CreateDocument(fileName, userId, liftFamilyId, listOfOptions, dbQ);
+            return Json(new { success = true });
+        }
+
     }
 }
