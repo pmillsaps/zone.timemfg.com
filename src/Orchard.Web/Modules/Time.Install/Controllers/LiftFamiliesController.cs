@@ -29,9 +29,18 @@ namespace Time.Install.Controllers
         private VSWQuotesEntities db = new VSWQuotesEntities();
 
         // GET: LiftFamilies
-        public ActionResult Index()
+        public ActionResult Index(string Search)
         {
-            return View(db.LiftFamilies.ToList());
+            var liftFmls = db.LiftFamilies.Include(c => c.ChassisSpecsForWordDocs).AsQueryable();
+            if (String.IsNullOrEmpty(Search))
+            {
+                return View(liftFmls.ToList());
+            }
+            else
+            {
+                return View(liftFmls.Where(x => x.FamilyName.Contains(Search)).ToList());
+            }
+            
         }
 
         // GET: LiftFamilies/Details/5
