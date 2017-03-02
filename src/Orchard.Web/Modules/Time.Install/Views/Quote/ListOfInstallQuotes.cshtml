@@ -68,7 +68,7 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [{ sClass: "text-center", targets: [12, 13, 14] }],
                 columns: [
-                    { data: "Id", autoWidth: true },
+                    { data: "Id", autoWidth: true },// Listed but hidden
                     { data: "LiftName", autoWidth: true },
                     { data: "LiftQuoteNumber", autoWidth: true },
                     { data: "LiftInstallLine", autoWidth: true },
@@ -79,7 +79,7 @@
                     { data: "TotalInstallPrice", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$') },
                     { data: "TotalInstallHours", autoWidth: true },
                     { data: "TotalPaintHours", autoWidth: true },
-                    { data: "LiftFamilyId", autoWidth: true },
+                    { data: "LiftFamilyId", autoWidth: true },// Listed but hidden
                     {
                         data: null, width: "20px", sortable: false, render: function (data, type, row) {
                             return '<a class="editQuote" href="#" data-quoteNum="' + row.LiftQuoteNumber + '" data-lineDesc="' + row.LiftName + '" data-liftFamilyId="' + row.LiftFamilyId + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
@@ -98,6 +98,7 @@
                 ]
             })
 
+            // Hiding the Ids
             oTable.column(0).visible(false);
             oTable.column(11).visible(false);
 

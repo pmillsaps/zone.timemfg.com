@@ -201,6 +201,7 @@
     <Content Include="Views\Quote\_LoadingGifIndicator2.cshtml" />
     <Content Include="Views\Quote\_LoadingGifIndicator1.cshtml" />
     <Content Include="Views\Quote\CreateQuotePresentation.cshtml" />
+    <Content Include="Views\LiftFamilies\_ChassisSpecs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
