@@ -1,0 +1,112 @@
+﻿@model Time.Support.Models.MenuViewModel
+
+<div class="hidden-sm hidden-xs hidden col-md-0">
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+
+<div class="col-md-3 col-sm-3">
+
+    <div class="well bs-sidebar" id="sidebar">
+        <div class="btn-group-vertical">
+            <ul class="nav nav-pills nav-stacked btn-group-vertical">
+                <li>Menu</li>
+                <li>@Html.ActionLink("Overview", "Index", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                <li>@Html.ActionLink("Add Ticket", "Create", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                <li class="nav-divider"></li>
+
+                @if (Model.MyOpenTicketsbyStatus != null && Model.MyOpenTicketsbyStatus.Count() > 0)
+                {
+                    <li>My Tickets</li>
+                    <li>@Html.ActionLink("All Tickets", "All", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    foreach (var d in Model.MyOpenTicketsbyStatus)
+                    {
+                        <li>
+                            @Html.ActionLink(String.Format("{0} ({1})", d.TicketStatus.Name, d.Count), "MyStatus", new { id = d.TicketStatus.StatusID }, new { @style = "padding-top: 0; padding-bottom: 0;" })
+                        </li>
+                    }
+                    <li>@Html.ActionLink(String.Format("My Tasks ({0})", Model.TaskCount), "MyTasks", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li></li>
+                    <li class="nav-divider"></li>
+                }
+
+                <li>Tickets I Wrote</li>
+                <li>@Html.ActionLink(String.Format("Open Tickets ({0})", Model.MyOpenTicketCount), "MyOpenTickets", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                <li>@Html.ActionLink(String.Format("All Tickets ({0})", Model.MyTicketCount), "MyTickets", null, new { @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                <li class="nav-divider"></li>
+
+                @if (Model.Admin)
+                {
+                    <li>Assigned To</li>
+                    if (Model.OpenTicketsbyAssignment != null)
+                    {
+                        foreach (var d in Model.OpenTicketsbyAssignment)
+                        {
+                            <li>
+                                @Html.ActionLink(String.Format("{0} {1} ({2})", d.Employee.FirstName, d.Employee.LastName, d.Count), "Employee", new { id = d.Employee.EmployeeID }, new { @style = "padding-top: 0; padding-bottom: 0;" })
+                                @*<a style='padding-top: 0; padding-bottom: 0;' href='Support/AssignedTo/@Html.Encode(d.Employee.EmployeeID)'>@d.Employee.FirstName @d.Employee.LastName (@d.Count)</a>*@
+                            </li>
+                        }
+                    }
+                    <li class="nav-divider"></li>
+                }
+
+                @if (Model.IT || Model.Admin)
+                {
+                    <li>Reporting</li>
+                    <li>@Html.ActionLink("Print Tickets", "TicketsByDepartment", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("IT Zone Tickets", "CPTITickets", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Tickets By Resource", "TicketsByResource", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Tickets By Resource, Priority", "TicketsByResourcePriority", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Tickets By Resource, Rating", "TicketsByResourceRatingPriority", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Tickets By Requestor", "TicketsByRequestor", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Closed Tickets By Resource", "TicketsByResourceClosed", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Closed Tickets By Resource ->CompletionDate", "TicketsByResourceCompleteDateClosed", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Closed Tickets By Resource ->CompletionDate-Past Year", "TicketsByResourceCompleteDateClosedLimited", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("Tickets By Category", "TicketsByCategory", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("IT Meeting", "ITMeetingReport", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("My Assigned Tickets", "MyTickets", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+                    <li>@Html.ActionLink("My ITZone Tickets", "MyTicketsITZone", "Report", null, new { target = "_blank", @style = "padding-top: 0; padding-bottom: 0;" })</li>
+
+                    <li class="nav-divider"></li>
+                }
+
+                <li>Status</li>
+                @if (Model.OpenTicketsbyStatus != null)
+                {
+                    foreach (var d in Model.OpenTicketsbyStatus)
+                    {
+                        <li>
+                            @Html.ActionLink(String.Format("{0} ({1})", d.TicketStatus.Name, d.Count), "Status", new { id = d.TicketStatus.StatusID }, new { @style = "padding-top: 0; padding-bottom: 0;" })
+                        </li>
+                    }
+                }
+                <li class="nav-divider"></li>
+
+                <li>Category</li>
+                @if (Model.OpenTicketsbyCategory != null)
+                {
+                    foreach (var d in Model.OpenTicketsbyCategory)
+                    {
+                        <li>
+                            @Html.ActionLink(String.Format("{0} ({1})", d.TicketCategory.Name, d.Count), "Category", new { id = d.TicketCategory.CategoryID }, new { @style = "padding-top: 0; padding-bottom: 0;" })
+                        </li>
+                    }
+                }
+                <li class="nav-divider"></li>
+                <li>Departments</li>
+                @if (Model.OpenTicketsbyDepartment != null)
+                {
+                    foreach (var d in Model.OpenTicketsbyDepartment)
+                    {
+                        <li>
+                            @Html.ActionLink(String.Format("{0} ({1})", d.TicketDepartment.Name, d.Count), "Department", new { id = d.TicketDepartment.DepartmentID }, new { @style = "padding-top: 0; padding-bottom: 0;" })
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div> <!--well bs-sidebar affix-->
+</div> <!--col-md-3-->

@@ -1,0 +1,700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dependencies>
+  <Dependency>
+    <ExtensionId>HelloWorld</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/HelloWorld/bin/HelloWorld.dll</VirtualPath>
+    <Hash>48f350ffc4bbcdf9</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Lucene</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Lucene/bin/Lucene.dll</VirtualPath>
+<<<<<<< local
+    <Hash>922a79abcedde3a0</Hash>
+=======
+    <Hash>922a79b8f0c64822</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Markdown</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Markdown/bin/Markdown.dll</VirtualPath>
+<<<<<<< local
+    <Hash>923e31bf8f5856df</Hash>
+=======
+    <Hash>923e31ccaf156dda</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Alias</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Alias/bin/Orchard.Alias.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fa4e548279bc44</Hash>
+=======
+    <Hash>48fa4e61a493e0f3</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.AntiSpam</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.AntiSpam/bin/Orchard.AntiSpam.dll</VirtualPath>
+<<<<<<< local
+    <Hash>9257c50c54f49a2b</Hash>
+=======
+    <Hash>9257c52696a16bac</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.ArchiveLater</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.ArchiveLater/bin/Orchard.ArchiveLater.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4911ce6c0c3da228</Hash>
+=======
+    <Hash>4911ce7929f3e26c</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Autoroute</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Autoroute/bin/Orchard.Autoroute.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbaaabb98c21b148</Hash>
+=======
+    <Hash>dbaaabe0f0bc02a3</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Azure</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Azure/bin/Orchard.Azure.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4f5ee1441cee2252</Hash>
+=======
+    <Hash>be6be33c56c549e4</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Azure.MediaServices</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Azure.MediaServices/bin/Orchard.Azure.MediaServices.dll</VirtualPath>
+<<<<<<< local
+    <Hash>9785c1f861438ca2</Hash>
+=======
+    <Hash>741d95475fd267b3</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Blogs</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Blogs/bin/Orchard.Blogs.dll</VirtualPath>
+<<<<<<< local
+    <Hash>6e63a9273c457240</Hash>
+=======
+    <Hash>6e63a968e34761e2</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Caching</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Caching/bin/Orchard.Caching.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4900665a9b10554c</Hash>
+=======
+    <Hash>49006667c2a7a4db</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.CodeGeneration</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.CodeGeneration/bin/Orchard.CodeGeneration.dll</VirtualPath>
+<<<<<<< local
+    <Hash>49183672709888ce</Hash>
+=======
+    <Hash>4918367f9198fd76</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Comments</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Comments/bin/Orchard.Comments.dll</VirtualPath>
+<<<<<<< local
+    <Hash>2505326e6b0ce831</Hash>
+=======
+    <Hash>250532a2f134d9ca</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.ContentPermissions</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.ContentPermissions/bin/Orchard.ContentPermissions.dll</VirtualPath>
+<<<<<<< local
+    <Hash>6e77213abac379cc</Hash>
+=======
+    <Hash>6e77217c5da748be</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.ContentPicker</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.ContentPicker/bin/Orchard.ContentPicker.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4915c670014c6b89</Hash>
+=======
+    <Hash>4915c67d21fa7b86</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.ContentTypes</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.ContentTypes/bin/Orchard.ContentTypes.dll</VirtualPath>
+<<<<<<< local
+    <Hash>9265ed1a7d389c0f</Hash>
+=======
+    <Hash>9265ed34c10f34e3</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.CustomForms</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.CustomForms/bin/Orchard.CustomForms.dll</VirtualPath>
+<<<<<<< local
+    <Hash>251012794f8ef73f</Hash>
+=======
+    <Hash>251012add406bbd8</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.DesignerTools</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.DesignerTools/bin/Orchard.DesignerTools.dll</VirtualPath>
+<<<<<<< local
+    <Hash>251b4a848755d796</Hash>
+=======
+    <Hash>251b4ab90bd47525</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Email</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Email/bin/Orchard.Email.dll</VirtualPath>
+<<<<<<< local
+    <Hash>24fa42637996074e</Hash>
+=======
+    <Hash>24fa4297ffcf5e2b</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Fields</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Fields/bin/Orchard.Fields.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fdb657f12d9ffc</Hash>
+=======
+    <Hash>48fdb66510df947c</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Forms</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Forms/bin/Orchard.Forms.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fb36556ab73d1e</Hash>
+=======
+    <Hash>48fb36628cba090c</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.ImageEditor</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.ImageEditor/bin/Orchard.ImageEditor.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbc713d601c6cffc</Hash>
+=======
+    <Hash>dbc713fd61a49f0c</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.ImportExport</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.ImportExport/bin/Orchard.ImportExport.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4913e66e207a6af5</Hash>
+=======
+    <Hash>4913e67b40d59bf4</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Indexing</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Indexing/bin/Orchard.Indexing.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4904ae5ee5475d21</Hash>
+=======
+    <Hash>4904ae6c06c69ea7</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.JobsQueue</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.JobsQueue/bin/Orchard.JobsQueue.dll</VirtualPath>
+<<<<<<< local
+    <Hash>6e64c128532a171b</Hash>
+=======
+    <Hash>6e64c169fbf7153f</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.jQuery</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.jQuery/bin/Orchard.jQuery.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fefe593a114021</Hash>
+=======
+    <Hash>48fefe66572a2b76</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Lists</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Lists/bin/Orchard.Lists.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fb7655b00a57fa</Hash>
+=======
+    <Hash>48fb7662cf6b8fa6</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Localization</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Localization/bin/Orchard.Localization.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4912466c841df052</Hash>
+=======
+    <Hash>49124679a292a309</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Media</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Media/bin/Orchard.Media.dll</VirtualPath>
+<<<<<<< local
+    <Hash>923c31bd8b2a6679</Hash>
+=======
+    <Hash>923c31caab82b233</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.MediaLibrary</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.MediaLibrary/bin/Orchard.MediaLibrary.dll</VirtualPath>
+<<<<<<< local
+    <Hash>9264851913ff4db1</Hash>
+=======
+    <Hash>926485335657a89f</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.MediaPicker</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.MediaPicker/bin/Orchard.MediaPicker.dll</VirtualPath>
+<<<<<<< local
+    <Hash>db9e607a15d9b140</Hash>
+=======
+    <Hash>db9e609455411d5f</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.MediaProcessing</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.MediaProcessing/bin/Orchard.MediaProcessing.dll</VirtualPath>
+<<<<<<< local
+    <Hash>250c0f4217014179</Hash>
+=======
+    <Hash>250c0f697bc9a966</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Migrations</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Migrations/bin/Orchard.Migrations.dll</VirtualPath>
+<<<<<<< local
+    <Hash>490be66622e82fee</Hash>
+=======
+    <Hash>490be673413c11f1</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Modules</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Modules/bin/Orchard.Modules.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4901c65bfb2c0185</Hash>
+=======
+    <Hash>4901c6691d185d88</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.MultiTenancy</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.MultiTenancy/bin/Orchard.MultiTenancy.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4912e66d1d77624d</Hash>
+=======
+    <Hash>4912e67a3f80965b</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.OutputCache</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.OutputCache/bin/Orchard.OutputCache.dll</VirtualPath>
+<<<<<<< local
+    <Hash>490f266961112a62</Hash>
+=======
+    <Hash>490f267681387c88</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Packaging</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Packaging/bin/Orchard.Packaging.dll</VirtualPath>
+<<<<<<< local
+    <Hash>925d2d11b6fcb7bd</Hash>
+=======
+    <Hash>925d2d2bfae242ae</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Pages</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Pages/bin/Orchard.Pages.dll</VirtualPath>
+<<<<<<< local
+    <Hash>926485191d0c2224</Hash>
+=======
+    <Hash>92648533590c04e8</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Projections</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Projections/bin/Orchard.Projections.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbb1d3c0b6673145</Hash>
+=======
+    <Hash>dbb1d3e81a2244c7</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.PublishLater</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.PublishLater/bin/Orchard.PublishLater.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4912766cb18c4205</Hash>
+=======
+    <Hash>49127679d13dec2f</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Recipes</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Recipes/bin/Orchard.Recipes.dll</VirtualPath>
+<<<<<<< local
+    <Hash>2505326e673172a0</Hash>
+=======
+    <Hash>250532a2ed9469c6</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Roles</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Roles/bin/Orchard.Roles.dll</VirtualPath>
+<<<<<<< local
+    <Hash>24fb2a6461cecd40</Hash>
+=======
+    <Hash>24fb2a98e7e1135e</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Rules</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Rules/bin/Orchard.Rules.dll</VirtualPath>
+<<<<<<< local
+    <Hash>24fa8263b8c845c3</Hash>
+=======
+    <Hash>24fa82983ecc9e1f</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Scripting</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Scripting/bin/Orchard.Scripting.dll</VirtualPath>
+<<<<<<< local
+    <Hash>49089662cc053f06</Hash>
+=======
+    <Hash>4908966fee33399b</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Scripting.CSharp</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Scripting.CSharp/bin/Orchard.Scripting.CSharp.dll</VirtualPath>
+<<<<<<< local
+    <Hash>6e66edf75af4730d</Hash>
+=======
+    <Hash>6e66ee2bdf09cb23</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Scripting.Dlr</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Scripting.Dlr/bin/Orchard.Scripting.Dlr.dll</VirtualPath>
+<<<<<<< local
+    <Hash>1541ecc6b3cf575</Hash>
+=======
+    <Hash>1541ee6addcb6f7</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Search</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Search/bin/Orchard.Search.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbb673c55cce4336</Hash>
+=======
+    <Hash>dbb673ecbddb67b7</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.SecureSocketsLayer</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.SecureSocketsLayer/bin/Orchard.SecureSocketsLayer.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4926fe813c277de8</Hash>
+=======
+    <Hash>4926fe8e5f29ef8d</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Setup</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Setup/bin/Orchard.Setup.dll</VirtualPath>
+<<<<<<< local
+    <Hash>6e54f9188514c517</Hash>
+=======
+    <Hash>6e54f95a2bda1c39</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Tags</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Tags/bin/Orchard.Tags.dll</VirtualPath>
+<<<<<<< local
+    <Hash>24f6625f99d56a1a</Hash>
+=======
+    <Hash>24f662941ee97599</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.TaskLease</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.TaskLease/bin/Orchard.TaskLease.dll</VirtualPath>
+<<<<<<< local
+    <Hash>4907e6621f45a436</Hash>
+=======
+    <Hash>4907e66f3fe4498b</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Taxonomies</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Taxonomies/bin/Orchard.Taxonomies.dll</VirtualPath>
+<<<<<<< local
+    <Hash>250b227461a65a64</Hash>
+=======
+    <Hash>250b22a8e3d90c1a</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Templates</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Templates/bin/Orchard.Templates.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbadc3bca5a71588</Hash>
+=======
+    <Hash>dbadc3e40cd21124</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Themes</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Themes/bin/Orchard.Themes.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fe2e5862f176f0</Hash>
+=======
+    <Hash>48fe2e65850b2660</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Tokens</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Tokens/bin/Orchard.Tokens.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fe9e58d32bdec9</Hash>
+=======
+    <Hash>48fe9e65f53e1480</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Users</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Users/bin/Orchard.Users.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fb8e55c4cc95f5</Hash>
+=======
+    <Hash>48fb8e62e57a05d9</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Warmup</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Warmup/bin/Orchard.Warmup.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48fede5915818321</Hash>
+=======
+    <Hash>48fede6635defd12</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Widgets</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Widgets/bin/Orchard.Widgets.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbb0fbbfdbefe987</Hash>
+=======
+    <Hash>dbb0fbe74130190a</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.Workflows</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.Workflows/bin/Orchard.Workflows.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbabc3baa4284f81</Hash>
+=======
+    <Hash>dbabc3e2093ae0c0</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>PJS.Bootstrap</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Themes/PJS.Bootstrap/PJS.Bootstrap.csproj</VirtualPath>
+<<<<<<< local
+    <Hash>81122c3941786a61</Hash>
+=======
+    <Hash>81120fd06ac22c4c</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>SysCache</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/SysCache/bin/SysCache.dll</VirtualPath>
+<<<<<<< local
+    <Hash>9264e9e64d1578f5</Hash>
+=======
+    <Hash>9264e9f36c5b63f8</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+<<<<<<< local
+    <ExtensionId>Time.Domain</ExtensionId>
+=======
+    <ExtensionId>Time.Drawings</ExtensionId>
+>>>>>>> other
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+<<<<<<< local
+    <VirtualPath>~/Modules/Time.Domain/bin/Time.Domain.dll</VirtualPath>
+    <Hash>48f41e53e27540f9</Hash>
+=======
+    <VirtualPath>~/Modules/Time.Drawings/bin/Time.Drawings.dll</VirtualPath>
+    <Hash>dbce159e7e7e6f15</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Epicor</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Epicor/bin/Time.Epicor.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbc729384f4e504b</Hash>
+=======
+    <Hash>dbc72d925441203b</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.HelloWorld</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.HelloWorld/bin/Time.HelloWorld.dll</VirtualPath>
+<<<<<<< local
+    <Hash>49023e62042aeaab</Hash>
+=======
+    <Hash>49023e6528823dde</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Legacy</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Legacy/bin/Time.Legacy.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbc6c137e72849a5</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.Maps</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.Maps/bin/Time.Maps.dll</VirtualPath>
+    <Hash>48ede64da9ba9c6c</Hash>
+=======
+    <Hash>dbc6c591ec14b080</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Time.OrderLog</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Time.OrderLog/bin/Time.OrderLog.dll</VirtualPath>
+<<<<<<< local
+    <Hash>dbce093f2f82eb53</Hash>
+=======
+    <Hash>dbce0d9934eaec3e</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>TinyMce</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/TinyMce/bin/TinyMce.dll</VirtualPath>
+<<<<<<< local
+    <Hash>48e93e43702510b5</Hash>
+=======
+    <Hash>48e93e509239683f</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Upgrade</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Upgrade/bin/Upgrade.dll</VirtualPath>
+<<<<<<< local
+    <Hash>264e692ffbcf7ab0</Hash>
+=======
+    <Hash>264e69c06be988ab</Hash>
+>>>>>>> other
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Ventajou.ActiveDirectory</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Ventajou.ActiveDirectory/bin/Ventajou.ActiveDirectory.dll</VirtualPath>
+<<<<<<< local
+    <Hash>b7c007e37db92096</Hash>
+=======
+    <Hash>b7c0082848cc0b11</Hash>
+>>>>>>> other
+  </Dependency>
+</Dependencies>

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Return Part Info for a List of Parts";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.Label("Selected_Parts", "Selected Parts", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.TextArea("SelectedParts", "", htmlAttributes: new { @rows = 7 } )
+                @*@Html.ValidationMessageFor(model => model.LicenseId, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input id="saveBtn" type="submit" value="Export PartInfo" class="btn btn-primary" />
+                @*<input type="button" value="Close" data-dismiss="modal" class="btn btn-primary" />*@
+            </div>
+        </div>
+    </div>
+
+}

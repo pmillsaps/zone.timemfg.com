@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.User>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <caption class="lead"><strong>Linked Users</strong></caption>
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDateEdited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEditedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Building.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Location.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", "Users", new { id = item.Id })">@item.Name</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastDateEdited)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Building.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Location.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
