@@ -16,16 +16,15 @@ ul.listOptions {
         cursor: pointer;
         border: 1px solid Black;
         border-radius: 5px;
+        font-weight: bold;
     }
 
         ul.listOptions li:hover {
             background-color: #EFF5FB;
-            /*color: white;*/
             box-shadow: 0px 0px 15px #E72FA4, 
                         0px 0px 15px #E72FA4, 
                         0px 0px 15px #E72FA4;
             border-color: #A1136D;
-            /*transition-duration: 1s;*/
         }
 
 #availableOptions {
