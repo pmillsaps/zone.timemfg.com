@@ -1,0 +1,188 @@
+﻿@*@model IEnumerable<Time.Data.EntityModels.Install.QuoteDtl>*@
+@{
+    ViewBag.Title = "Aerial Quote Index";
+    Script.Require("jQuery");
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+}
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")
+</div>
+
+<hr />
+<div class="alert alert-info">
+    <p><strong>Note:</strong> A quote MUST have an INSTALLS(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
+    <p>To view or edit the details of an existing Installation Quotation go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong>.</p>
+    <p>To <span class="label label-primary">Start</span> a Installation Quotation, click the <i class="fa fa-hand-o-right" aria-hidden="true"></i> icon.</p>
+    <p>To <span class="label label-primary">Compose the Quote Presentation</span>, click on the <i class="fa fa-file-word-o" aria-hidden="true"></i> icon.</p>
+</div>
+<hr />
+<div class="tablecontainer">
+    <table id="quotesTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("Quote Num")</td>
+                <td>@Html.Label("Quote Line")</td>
+                <td>@Html.Label("Part Num")</td>
+                <td>@Html.Label("Line Desc")</td>
+                <td>@Html.Label("Last Update")</td>
+                <td>@Html.Label("LastDcd UserID")</td>
+                <td>@Html.Label("Order Qty")</td>
+                <td>@Html.Label("Changed By")</td>
+                <td>@Html.Label("Change Date")</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadQuotes", "Quote")';
+            var oTable = $("#quotesTable").DataTable({
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                order: [[0, "desc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "text-center", targets: [9, 10] }],
+                columns: [
+                    { data: "QuoteNum", autoWidth: true },
+                    { data: "QuoteLine", autoWidth: true },
+                    { data: "PartNum", autoWidth: true },
+                    { data: "LineDesc", autoWidth: true },
+                    { data: "LastUpdate", autoWidth: true },
+                    { data: "LastDcdUserId", autoWidth: true },
+                    { data: "OrderQty", autoWidth: true },
+                    { data: "ChangedBy", autoWidth: true },
+                    { data: "ChangeDate", autoWidth: true },
+                    {
+                        data: null, width: "20px", sortable: false, render: function (data, type, row) {
+                            return '<a class="startQuote" href="#" data-quoteNum="' + row.QuoteNum + '" data-lineDesc="' + row.LineDesc + '"><i class="fa fa-hand-o-right" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: "LiftFamilyId", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Quote/CreateQuotePresentation/' + data + '"><i class="fa fa-file-word-o" aria-hidden="true"></i></a>';
+                        }
+                    }
+                ]
+            })
+
+            $('#quotesTable tbody').on('click', 'a.startQuote', function () {
+                var qtNum = $(this).attr('data-quoteNum');
+                var lnDcr = $(this).attr('data-lineDesc');
+                var url = "Quote/AddQuote?quoteNum=" + qtNum + "&installDesc=" + lnDcr + "&editQuote=false";
+                window.open(url);
+            });
+        });
+    </script>
+}
+@*@using (Html.BeginForm("Index", "Quote", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="input-group">
+                @Html.TextBox("quote", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search for Aerial Quote..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<table class="table table-striped table-bordered">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LineDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDcdUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangeDate)
+        </th>
+        <th>Actions</th>
+    </tr>
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="10" class="lead bg-danger">No rows matched search criteria</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.QuoteNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.QuoteLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.PartNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LineDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LastUpdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LastDcdUserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.OrderQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ChangedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ChangeDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Start Install Quote", "AddQuote", new { quoteNum = item.QuoteNum, installDesc = item.LineDesc, editQuote = false })
+                </td>
+            </tr>
+        }
+    }
+</table>*@

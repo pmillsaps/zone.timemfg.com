@@ -1,0 +1,11 @@
+﻿Name: Time.EngOptions
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    Time.EngOptions:
+        Description: Engineering Options feature for Time Manufacturing
+		Category: .Time

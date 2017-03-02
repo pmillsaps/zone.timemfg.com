@@ -1,0 +1,243 @@
+﻿@{
+    ViewBag.Title = "IT Maintenance Details";
+    Script.Require("jQuery");
+    //Style.Require("jQueryUI_DatePicker").AtHead();
+    //Script.Require("jQueryUI_DatePicker").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot();
+    //Script.Include("~/Modules/Time.IT/Scripts/jquery.validate.min.js").AtFoot();
+}
+<link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+        @Html.ActionLink("Go to IT Maintenance", "Index", "MaintenanceDatas", null, htmlAttributes: new { @class = "pull-right" })
+    </div>
+</div>
+
+@*@Html.Partial("_ModalForm")*@
+
+<div class="row">
+    <div class="col-md-2">
+        @*<a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add Record</a>*@
+        @Html.ActionLink("Add Record", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-10">
+        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group">
+            <span class="input-group-addon">
+                @Html.Label("Displaying:")
+            </span>
+            @Html.DropDownList("Expiration")
+        </div>
+    </div>
+</div>
+<hr />
+<div class="tableContainer">
+    <table id="mntncDetailsTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("Company")</td>
+                <td>@Html.Label("Budget Item")</td>
+                <td>@Html.Label("Supplier")</td>
+                <td>@Html.Label("OrigPurchDate")</td>
+                <td>@Html.Label("PO/CC")</td>
+                <td>@Html.Label("PurchDate")</td>
+                <td>@Html.Label("ExpDate")</td>
+                <td>@Html.Label("Account#")</td>
+                <td>@Html.Label("Duration")</td>
+                <td>@Html.Label("Cost")</td>
+                <td>@Html.Label("Monthly")</td>
+                <td>@Html.Label("Explanation")</td>
+                <td>@Html.Label("Alternate Info")</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadMaintenanceDataDetails", "MaintenanceDataDetails")';
+            var oTable = $("#mntncDetailsTable");
+
+            $("#Expiration").change(function () {
+                oTable.DataTable().ajax.reload();
+            });
+
+            oTable.DataTable({
+                "ajax": function (data, callback, settings) {
+                    $.ajax({
+                        url: urlLM,
+                        type: "GET",
+                        dataType: "json",
+                        cache: false,
+                        data: {
+                            draw: data.draw,   // Needed for paging
+                            start: data.start,    // Needed for paging
+                            length: data.length, // Needed for paging
+                            licenseStatus: $("#Expiration").val(),
+                        },
+                        beforeSend: function (xhrObj) {
+                            // Whatever
+                        }
+                    })
+                    .done(function (data, textStatus, jqXHR) {
+                        // Callback function that must be executed when the required data
+                        // has been obtained.
+                        // That data should be passed into the callback as the only parameter.
+                        callback(data);
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    })
+                    .always(function (data, textStatus, jqXHR) {
+                        // Whatever
+                    });
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary btn-sm excelButton", filename: 'MaintenanceDataDetailsList', }],
+                order: [[6, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "clampClmn", targets: [11] }],
+                columns: [
+                    { data: "CompanyName", autoWidth: true },
+                    { data: "BudgetItem", autoWidth: true },
+                    { data: "Supplier", autoWidth: true },
+                    { data: "OriginalPurchDate", autoWidth: true },
+                    { data: "PO_CC", autoWidth: true },
+                    { data: "PurchaseDate", autoWidth: true },
+                    { data: "ExpirationDate", autoWidth: true },
+                    { data: "AccountNumber", autoWidth: true },
+                    { data: "Duration", autoWidth: true },
+                    { data: "Cost", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$') },
+                    { data: "Monthly", autoWidth: true },
+                    { data: "Explanation", autoWidth: true },
+                    { data: "AlternateInfo", autoWidth: true },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            //return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            //return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            //return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                        }
+                    }
+                ]
+            })
+
+            @*$('#modalForm').on('hidden', function () {
+                $(this).removeData('modal');
+            });
+
+            $("#newBtn").click(function (eve) {
+                //$('#modalForm').removeData('bs.modal');
+                var url = '@Url.Action("Create", "MaintenanceDataDetails")';
+                $("#form-content").load(url);
+
+                $('#modalForm').on('submit', '#popupForm', function (e) {
+                    //if ($("#PurchaseDate").val() != "" && $("#ExpirationDate").val() != "") {
+                        var url = $('#popupForm')[0].action;
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: $('#popupForm').serialize(),
+                            success: function (data) {
+                                if (data.status) {
+                                    $('#modalForm').modal('hide');
+                                    location.reload(false)
+                                }
+                            }
+                        })
+                    //} else {
+                    //    alert("Original Purchase Date and Expiration Date are required!")
+                    //}
+
+                    e.preventDefault();
+                })
+            });
+
+            $('#mntncDetailsTable tbody').on('click', 'a.editBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Edit", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+
+                $('#modalForm').on('submit', '#popupForm', function (e) {
+                    //if ($("#PurchaseDate").val() != "" && $("#ExpirationDate").val() != "") {
+                        var url = $('#popupForm')[0].action;
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: $('#popupForm').serialize(),
+                            success: function (data) {
+                                if (data.status) {
+                                    $('#modalForm').modal('hide');
+                                    location.reload(false)
+                                }
+                            }
+                        })
+                    //} else {
+                    //    alert("Original Purchase Date and Expiration Date are required!")
+                    //}
+
+                    e.preventDefault();
+                })
+            });
+
+            $('#popupForm').validate({
+                rules: {
+                    CompanyName: {
+                        required: true
+                    },
+                    BudgetItem: {
+                        required: true
+                    }
+                },
+                messages: {
+                    CompanyName: {
+                        required: 'Company Name is required'
+                    },
+                    BudgetItem: 'Budget Item is required'
+                }
+            });*@
+            @*$('#mntncDetailsTable tbody').on('click', 'a.deleteBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Delete", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+            });
+
+            $('#mntncDetailsTable tbody').on('click', 'a.dtlsBtn', function (eve) {
+                var myId = $(this).data("id");
+                var url = '@Url.Action("Details", "MaintenanceDataDetails")';
+                $("#form-content").load(url + "/" + myId);
+            });*@
+        });
+    </script>
+}

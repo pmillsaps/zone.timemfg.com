@@ -1,0 +1,25 @@
+﻿@model Time.Epicor.ViewModels.EpicorStatusViewModel
+
+@{
+    ViewBag.Title = "Epicor Status 2";
+}
+<h2>@ViewBag.Title</h2>
+
+<h5>MRP Status: <strong>@ViewBag.MRPStatus</strong><br /></h5>
+<hr />
+<h3>Active Tasks</h3>
+
+<div id="dvTasks">
+    @Html.RenderPartial("_Tasks", Model.tasks)
+</div>
+
+<div id="dvInterim">
+    <hr />
+    @Html.RenderPartial("_Interim", Model.imViewModel)
+</div>
+
+<div id="dvScheduled">
+    <hr />
+    <h3>Scheduled Tasks</h3>
+    @Html.RenderPartial("_SchedTasks", Model.tasks)
+</div>
