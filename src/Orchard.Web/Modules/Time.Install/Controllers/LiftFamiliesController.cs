@@ -10,6 +10,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Install;
+using Time.Install.ViewModels;
 
 namespace Time.Install.Controllers
 {
@@ -69,16 +70,23 @@ namespace Time.Install.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude = "Id")] LiftFamily liftFamily)
+        public ActionResult Create(LiftFamilyViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.LiftFamilies.Add(liftFamily);
+                // Adding the Lift Family
+                db.LiftFamilies.Add(vm.Lift);
                 db.SaveChanges();
+                // Adding the Installation Specs
+                var liftF = db.LiftFamilies.OrderByDescending(x => x.Id).FirstOrDefault();
+                vm.ChassisSpecs.LiftFamilyId = liftF.Id;
+                db.ChassisSpecsForWordDocs.Add(vm.ChassisSpecs);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            return View(liftFamily);
+            return View(vm);
         }
 
         // GET: LiftFamilies/Edit/5
@@ -93,7 +101,10 @@ namespace Time.Install.Controllers
             {
                 return HttpNotFound();
             }
-            return View(liftFamily);
+            LiftFamilyViewModel vm = new LiftFamilyViewModel();
+            vm.Lift = liftFamily;
+            vm.ChassisSpecs = db.ChassisSpecsForWordDocs.FirstOrDefault(x => x.LiftFamilyId == id);
+            return View(vm);
         }
 
         // POST: LiftFamilies/Edit/5
@@ -101,15 +112,15 @@ namespace Time.Install.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(LiftFamily liftFamily)
+        public ActionResult Edit(LiftFamilyViewModel vm)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(liftFamily).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(liftFamily);
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(liftFamily).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            return View(vm);
         }
 
         // GET: LiftFamilies/Delete/5

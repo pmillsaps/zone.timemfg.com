@@ -584,6 +584,11 @@
     <Content Include="Views\MaintenanceDataDetails\_Edit.cshtml" />
     <Content Include="Views\Users\_ModalForm.cshtml" />
     <Content Include="Views\Users\_LinkedSoftwareAndHardware.cshtml" />
+    <Content Include="Views\MaintDataCompanies\Create.cshtml" />
+    <Content Include="Views\MaintDataCompanies\Delete.cshtml" />
+    <Content Include="Views\MaintDataCompanies\Details.cshtml" />
+    <Content Include="Views\MaintDataCompanies\Edit.cshtml" />
+    <Content Include="Views\MaintDataCompanies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -604,6 +609,7 @@
     <Compile Include="Controllers\LicensesController.cs" />
     <Compile Include="Controllers\LicenseTypeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\MaintDataCompaniesController.cs" />
     <Compile Include="Controllers\MaintenanceDataDetailsController.cs" />
     <Compile Include="Controllers\MaintenanceDatasController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />

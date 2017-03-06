@@ -16,7 +16,7 @@ namespace Time.Data.EntityModels.ITInventory
     {
         [Required(ErrorMessage = "Company Name is required.")]
         [DisplayName("Company Name")]
-        public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
 
         [Required(ErrorMessage = "Budget Item is required.")]
         [DisplayName("Budget Item")]

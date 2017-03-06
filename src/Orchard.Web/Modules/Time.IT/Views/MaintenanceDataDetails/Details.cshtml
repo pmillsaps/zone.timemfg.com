@@ -16,11 +16,11 @@
     <div class="alert alert-info">
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.MaintenanceData.CompanyName)
+                @Html.DisplayNameFor(model => model.MaintenanceData.MaintDataCompany.CompanyName)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.MaintenanceData.CompanyName)
+                @Html.DisplayFor(model => model.MaintenanceData.MaintDataCompany.CompanyName)
             </dd>
 
             <dt>
@@ -162,9 +162,9 @@
     <table class="table table-bordered table-condensed table-striped table-hover">
         <thead>
             <tr class="success">
-                <td>@Html.Label("Purchase Date")</td>
-                <td>@Html.Label("Expiration Date")</td>
-                <td>@Html.Label("Account Number")</td>
+                <td>@Html.Label("PurchDate")</td>
+                <td>@Html.Label("ExpDate")</td>
+                <td>@Html.Label("Account#")</td>
                 <td>@Html.Label("PO/CC")</td>
                 <td>@Html.Label("Duration")</td>
                 <td>@Html.Label("Cost")</td>
@@ -181,7 +181,7 @@
                 <td>@item.AccountNumber</td>
                 <td>@item.PO_CC</td>
                 <td>@item.Duration</td>
-                <td>@item.Cost.ToString("c")</td>
+                <td>@Html.DisplayFor(x => x.Cost)</td>
                 <td>@item.Monthly</td>
                 <td>@item.Explanation</td>
                 <td>@item.AlternateInfo</td>

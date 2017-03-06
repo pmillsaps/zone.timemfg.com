@@ -13,7 +13,7 @@ namespace Time.IT.ViewModel
 
         [Display(Name = "Company Name")]
         [Required(ErrorMessage = "Company Name is required.")]
-        public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
 
         [Display(Name = "Budget Item")]
         [Required(ErrorMessage = "Budget Item is required.")]

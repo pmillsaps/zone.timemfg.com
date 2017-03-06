@@ -50,5 +50,6 @@ namespace Time.Data.EntityModels.ITInventory
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<MaintenanceData> MaintenanceDatas { get; set; }
         public virtual DbSet<MaintenanceDataDetail> MaintenanceDataDetails { get; set; }
+        public virtual DbSet<MaintDataCompany> MaintDataCompanies { get; set; }
     }
 }
