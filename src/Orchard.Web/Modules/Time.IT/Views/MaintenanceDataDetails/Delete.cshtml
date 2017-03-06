@@ -13,11 +13,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.MaintenanceData.CompanyName)
+            @Html.DisplayNameFor(model => model.MaintenanceData.MaintDataCompany.CompanyName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaintenanceData.BudgetItem)
+            @Html.DisplayFor(model => model.MaintenanceData.MaintDataCompany.CompanyName)
         </dd>
 
         <dt>
@@ -25,7 +25,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaintenanceData.CompanyName)
+            @Html.DisplayFor(model => model.MaintenanceData.BudgetItem)
         </dd>
 
         <dt>
@@ -103,7 +103,7 @@
 </div>
 
 @using (Html.BeginForm())
-            {
+{
     @Html.AntiForgeryToken()
 
     <div class="form-actions no-color">

@@ -33,7 +33,7 @@ namespace Time.IT.Controllers
             {
                 MaintenanceDataViewModel mvm = new MaintenanceDataViewModel();
                 mvm.Id = item.Id;
-                mvm.CompanyName = item.CompanyName;
+                mvm.CompanyName = item.MaintDataCompany.CompanyName;
                 mvm.BudgetItem = item.BudgetItem;
                 mvm.Supplier = item.Supplier;
                 mvm.AccountNumber = item.AccountNumber;
@@ -74,6 +74,7 @@ namespace Time.IT.Controllers
             ViewBag.Duration = DurationYears("");
             ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name");
             ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name");
+            ViewBag.CompanyId = new SelectList(db.MaintDataCompanies.OrderBy(x => x.CompanyName), "Id", "CompanyName");
             return View();
             //return PartialView("_Create");
         }
@@ -104,6 +105,7 @@ namespace Time.IT.Controllers
             ViewBag.Duration = DurationYears(vm.MntcDataDetail.Duration);
             ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", vm.MntcData.ComputerId);
             ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", vm.MntcData.LicenseId);
+            ViewBag.CompanyId = new SelectList(db.MaintDataCompanies.OrderBy(x => x.CompanyName), "Id", "CompanyName");
             //return View(maintenanceData);
             //return new JsonResult { Data = new { status = status } };
             //return PartialView("_Create");
@@ -129,7 +131,7 @@ namespace Time.IT.Controllers
             {
                 Id = maintenanceData.Id,
                 MntcDataDtlsId = mntcDtlsId,
-                CompanyName = maintenanceData.CompanyName,
+                CompanyId = maintenanceData.CompanyId,
                 BudgetItem = maintenanceData.BudgetItem,
                 Supplier = maintenanceData.Supplier,
                 AccountNumber = maintenanceData.AccountNumber,
@@ -140,6 +142,7 @@ namespace Time.IT.Controllers
             };
             ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", maintenanceData.ComputerId);
             ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", maintenanceData.LicenseId);
+            ViewBag.CompanyId = new SelectList(db.MaintDataCompanies.OrderBy(x => x.CompanyName), "Id", "CompanyName", maintenanceData.CompanyId);
             //return PartialView("_Edit", edtMntc);
             return View(edtMntc);
         }
@@ -156,7 +159,7 @@ namespace Time.IT.Controllers
             {
                 // Assigning the values for MaintenanceDatas
                 var mntncData = db.MaintenanceDatas.Find(edtMntc.Id);
-                mntncData.CompanyName = edtMntc.CompanyName;
+                mntncData.CompanyId = edtMntc.CompanyId;
                 mntncData.BudgetItem = edtMntc.BudgetItem;
                 mntncData.Supplier = edtMntc.Supplier;
                 mntncData.AccountNumber = edtMntc.AccountNumber;
@@ -166,7 +169,7 @@ namespace Time.IT.Controllers
                 // Modifying values in the db
                 db.MaintenanceDatas.Attach(mntncData);// MaintenanceDatas
                 var entry = db.Entry(mntncData);
-                entry.Property(e => e.CompanyName).IsModified = true;
+                entry.Property(e => e.CompanyId).IsModified = true;
                 entry.Property(e => e.BudgetItem).IsModified = true;
                 entry.Property(e => e.Supplier).IsModified = true;
                 entry.Property(e => e.AccountNumber).IsModified = true;
@@ -190,6 +193,7 @@ namespace Time.IT.Controllers
             }
             ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", edtMntc.ComputerId);
             ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", edtMntc.LicenseId);
+            ViewBag.CompanyId = new SelectList(db.MaintDataCompanies.OrderBy(x => x.CompanyName), "Id", "CompanyName", edtMntc.CompanyId);
             //return new JsonResult { Data = new { status = status } };
             return View(edtMntc);
         }
@@ -206,6 +210,8 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Computer = db.Computers.FirstOrDefault(x => x.Id == maintenanceData.ComputerId);
+            ViewBag.License = db.Licenses.FirstOrDefault(x => x.Id == maintenanceData.LicenseId);
             return View(maintenanceData);
         }
 

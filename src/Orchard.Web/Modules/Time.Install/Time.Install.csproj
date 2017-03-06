@@ -238,6 +238,7 @@
     <Compile Include="Routes.cs" />
     <Compile Include="ViewModels\AddOptionsViewModel.cs" />
     <Compile Include="ViewModels\GroupsAndOptionsViewModel.cs" />
+    <Compile Include="ViewModels\LiftFamilyViewModel.cs" />
     <Compile Include="ViewModels\LoadAerialQuotes.cs" />
     <Compile Include="ViewModels\LoadInstallQuotes.cs" />
     <Compile Include="ViewModels\QuoteViewModel.cs" />

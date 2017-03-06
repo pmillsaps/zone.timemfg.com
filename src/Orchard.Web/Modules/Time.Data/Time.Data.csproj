@@ -460,6 +460,9 @@
     <Compile Include="EntityModels\ITInventory\License.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\ITInventory\MaintDataCompany.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\ITInventory\MaintenanceData.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>
@@ -889,6 +892,7 @@
     <Compile Include="Models\Install\OptionGroup.cs" />
     <Compile Include="Models\Install\TimeOption.cs" />
     <Compile Include="Models\Install\VSWOption.cs" />
+    <Compile Include="Models\ITInventory\MaintDataCompany.cs" />
     <Compile Include="Models\ITInventory\MaintenanceData.cs" />
     <Compile Include="Models\ITInventory\MaintenanceDataDetail.cs" />
     <Compile Include="Models\ITInventory\Monitor.cs" />

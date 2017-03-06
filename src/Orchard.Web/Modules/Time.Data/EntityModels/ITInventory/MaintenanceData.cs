@@ -20,14 +20,15 @@ namespace Time.Data.EntityModels.ITInventory
         }
     
         public int Id { get; set; }
-        public string CompanyName { get; set; }
         public string BudgetItem { get; set; }
         public string Supplier { get; set; }
         public string AccountNumber { get; set; }
         public Nullable<System.DateTime> OriginalPurchDate { get; set; }
         public Nullable<int> ComputerId { get; set; }
         public Nullable<int> LicenseId { get; set; }
+        public int CompanyId { get; set; }
     
         public virtual ICollection<MaintenanceDataDetail> MaintenanceDataDetails { get; set; }
+        public virtual MaintDataCompany MaintDataCompany { get; set; }
     }
 }

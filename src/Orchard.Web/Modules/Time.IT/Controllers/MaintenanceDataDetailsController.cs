@@ -46,7 +46,7 @@ namespace Time.IT.Controllers
             {
                 MaintenanceDataDetailViewModel mvm = new MaintenanceDataDetailViewModel();
                 mvm.Id = item.Id;
-                mvm.CompanyName = item.MaintenanceData.CompanyName;
+                mvm.CompanyName = item.MaintenanceData.MaintDataCompany.CompanyName;
                 mvm.BudgetItem = item.MaintenanceData.BudgetItem;
                 mvm.Supplier = item.MaintenanceData.Supplier;
                 mvm.OriginalPurchDate = (item.MaintenanceData.OriginalPurchDate != null) ? item.MaintenanceData.OriginalPurchDate.Value.ToShortDateString() : "";

@@ -33,5 +33,8 @@ namespace Time.Data.EntityModels.ITInventory
 
         [Display(Name = "PO/CC")]
         public string PO_CC { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal? Cost { get; set; }
     }
 }
