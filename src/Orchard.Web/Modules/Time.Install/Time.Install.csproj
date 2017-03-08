@@ -202,6 +202,12 @@
     <Content Include="Views\Quote\_LoadingGifIndicator1.cshtml" />
     <Content Include="Views\Quote\CreateQuotePresentation.cshtml" />
     <Content Include="Views\LiftFamilies\_ChassisSpecs.cshtml" />
+    <Content Include="Views\OptionTitleDescpForWordDocs\Create.cshtml" />
+    <Content Include="Views\OptionTitleDescpForWordDocs\Delete.cshtml" />
+    <Content Include="Views\OptionTitleDescpForWordDocs\Details.cshtml" />
+    <Content Include="Views\OptionTitleDescpForWordDocs\Edit.cshtml" />
+    <Content Include="Views\OptionTitleDescpForWordDocs\Index.cshtml" />
+    <Content Include="Views\OptionTitleDescpForWordDocs\_LoadOptionTitlesAndDescr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -225,6 +231,7 @@
     <Compile Include="Controllers\InstallHourlyRatesController.cs" />
     <Compile Include="Controllers\LiftFamiliesController.cs" />
     <Compile Include="Controllers\OptionGroupsController.cs" />
+    <Compile Include="Controllers\OptionTitleDescpForWordDocsController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\TimeOptionsController.cs" />
     <Compile Include="Controllers\VSWOptionsController.cs" />
@@ -241,6 +248,7 @@
     <Compile Include="ViewModels\LiftFamilyViewModel.cs" />
     <Compile Include="ViewModels\LoadAerialQuotes.cs" />
     <Compile Include="ViewModels\LoadInstallQuotes.cs" />
+    <Compile Include="ViewModels\OptionTitlesAndDescrVM.cs" />
     <Compile Include="ViewModels\QuoteViewModel.cs" />
   </ItemGroup>
   <ItemGroup />

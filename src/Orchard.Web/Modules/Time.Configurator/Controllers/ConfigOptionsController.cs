@@ -43,7 +43,7 @@ namespace Time.Configurator.Controllers
             return View();
         }
 
-        // This method retrieves the ConfigOptions and the Key's Descrptions and appends them to the Index view. It's called from the Index view.
+        // This method retrieves the ConfigOptions and the Key's Descriptions and appends them to the Index view. It's called from the Index view.
         public JsonResult LoadOptions(string display, string ConfigNames, string ConfigData)
         {
             ConfigOptionsViewModel model = new ConfigOptionsViewModel();
