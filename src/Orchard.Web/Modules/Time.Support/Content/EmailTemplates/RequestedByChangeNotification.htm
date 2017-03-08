@@ -1,0 +1,99 @@
+﻿<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Lucida Sans;
+            background: #FFF;
+        }
+
+        #wrapper {
+            width: 700px;
+            border: solid 1px blue;
+        }
+
+        #title {
+            text-align: center;
+            padding: 25px 0 25px 0;
+        }
+
+            #title img {
+            }
+
+            #title h2 {
+                color: Black;
+            }
+
+        #headinfo ul {
+            list-style-type: none;
+            margin: 25px;
+            padding: 25px;
+            border: solid 1px black;
+        }
+
+            #headinfo ul li {
+                list-style-type: none;
+                color: Black;
+            }
+
+        #content {
+            margin: 25px;
+            color: Black;
+            background: White;
+            padding: 25px;
+            border: solid 1px black;
+        }
+
+        #ticketdescription {
+            margin: 25px;
+            padding: 25px;
+            background-color: #dddddd;
+            color: Black;
+        }
+
+        a {
+            color: #A8002A;
+            text-decoration: none;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    [header]
+    <div id="wrapper">
+        <div id="title">
+            <img alt="Time Manufacturing" src="http://www.timemfg.com/imgs/timelogo-graysmall.png" />
+            <h2>The Requester has been Changed!</h2>
+        </div>
+        <div id="headinfo">
+            <ul>
+                <li>Ticket #: [ticketnumber]</li>
+                <li>Status: [ticketstatus]</li>
+                <li>Requested By: [ticketrequestedby]</li>
+                <li>Date Requested: [ticketrequesteddate]</li>
+                <li>Assigned To: [ticketemployee]</li>
+            </ul>
+        </div>
+        <div id="content">
+            <h3>[tickettitle]</h3>
+            <p id="ticketdescription">[ticketdescription]</p>
+            <p id="notice">
+                Please check your ticket as it may require your attention.
+            </p>
+            <p id="followup">
+                You may follow up or add notes to your ticket at any time by visiting our <a href="http://my.timemfg.com">intranet</a> or going to the following url
+                directly.
+                <br />
+                Click on the link to view your ticket: <a href="[ticketurl]">Ticket #[ticketnumber]</a>
+            </p>
+            <p>
+                Note Added:<br />
+                [additionalbody]
+            </p>
+        </div>
+        [footer]
+    </div>
+</body>
+</html>

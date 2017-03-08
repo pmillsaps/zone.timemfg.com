@@ -1,0 +1,95 @@
+﻿<Time.Data.EntityModels.TimeMFG.Term_Property>
+
+    <table class="table table-bordered table-striped table-condensed table-hover">
+        <tr class="success">
+            <th>
+                Cell Phone
+            </th>
+            @if (ViewBag.CellPhone == true)
+            {
+                <th>
+                    Find My Phone Off
+                </th>
+                <th>
+                    Cell Received
+                </th>
+            }
+            <th>
+                Cables
+            </th>
+            @if (ViewBag.Cables == true)
+            {
+                <th>
+                    Cables Received
+                </th>
+            }
+            <th>
+                Office Key
+            </th>
+            @if (ViewBag.OfficeKey == true)
+            {
+                <th>
+                    Office Key Received
+                </th>
+            }
+            <th>
+                Building Key
+            </th>
+            @if (ViewBag.BuildingKey == true)
+            {
+                <th>
+                    Building Key Received
+                </th>
+            }
+            <th></th>
+        </tr>
+        @foreach (var item in ViewBag.Property as IEnumerable<Time.Data.EntityModels.TimeMFG.Term_Property>)
+        {
+            <tr>
+                <td>
+                    @Html.Raw((item.CellPhone) ? "Yes" : "No")
+                    @*@Html.DisplayFor(modelItem => item.CellPhone)*@
+                </td>
+                @if (ViewBag.CellPhone == true)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FMPOff)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CellReceived)
+                    </td>
+                }
+                <td>
+                    @Html.Raw((item.Cables) ? "Yes" : "No")
+                    @*@Html.DisplayFor(modelItem => item.Cables)*@
+                </td>
+                @if (ViewBag.Cables == true)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CablesReceived)
+                    </td>
+                }
+                <td>
+                    @Html.Raw((item.OfficeKey) ? "Yes" : "No")
+                    @*@Html.DisplayFor(modelItem => item.OfficeKey)*@
+                </td>
+                @if (ViewBag.OfficeKey == true)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OKeyReceived)
+                    </td>
+                }
+                <td>
+                    @Html.Raw((item.BuildingKey) ? "Yes" : "No")
+                    @*@Html.DisplayFor(modelItem => item.BuildingKey)*@
+                </td>
+                @if (ViewBag.BuildingKey == true)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BKeyReceived)
+                    </td>
+                }
+                <td>@Html.ActionLink("Edit Property", "EditProperty", new { id = ViewBag.PropID })</td>
+            </tr>
+        }
+    </table>

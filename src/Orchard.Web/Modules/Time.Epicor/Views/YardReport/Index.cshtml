@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Production.V_YardReport>
+
+@{
+    ViewBag.Title = "Yard Report";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+
+    <table class="table table-striped table-bordered table-condensed table-hover">
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.JobNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderLine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderRelNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OprSeq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClockInDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GreenDotDate)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderRelNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OprSeq)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClockInDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GreenDotDate)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

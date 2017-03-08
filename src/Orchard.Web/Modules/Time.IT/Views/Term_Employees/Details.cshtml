@@ -1,0 +1,94 @@
+﻿@model Time.Data.EntityModels.TimeMFG.Term_Employees
+
+@{
+    ViewBag.Title = "Termination Employee Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Term_Employees</h4>
+
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        @if (String.IsNullOrEmpty(Model.Email))
+        {
+            <dd>
+                <p>-</p>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Terminated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terminated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TerminatedDate)
+        </dt>
+
+        @if (Model.TerminatedDate == null)
+        {
+            <dd>
+                <p>-</p>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.TerminatedDate)
+            </dd>
+        }
+    </dl>
+</div>
+
+<br />
+<br />
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<hr />
+
+<h4>Property</h4>
+@Html.Partial("_Property")
+
+<hr />
+
+<h4>IT Info</h4>
+@Html.Partial("_ITInfo")
+
+@if (ViewBag.ITUser == true && ViewBag.UserID != 0)
+{
+    @Html.ActionLink("User Details", "Details", "Users", new { id = ViewBag.UserID }, null)
+}

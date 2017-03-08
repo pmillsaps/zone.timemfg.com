@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.OptionTitlesForWordDoc>
+@{
+    Script.Require("jQueryUI_Sortable").AtFoot();
+    ViewBag.Title = "Create Quote Presentation";
+}
+
+<link href="~/Modules/Time.Install/Styles/wordDocStyles.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title for @Model.First().LiftFamily.FamilyName</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <a id="showInfo" href="#instructions" data-toggle="collapse" class="btn btn-primary btn-xs">Show Instructions</a>
+        <div id="instructions" class="collapse alert alert-info">
+            <p>
+                The page is divided into two sections. The first section contains the lift <i>Options</i>.
+                The second section contains the <i>Document Area</i>, which by default lists all the available options.
+            </p>
+            <p><span class="label label-success">How to create a Quote Presentation:</span></p>
+            <p><span class="label label-primary">1.</span> Enter the file name. If no file name is entered, the file will use the default name: <i>QuoteFile.docx</i>.</p>
+            <p><span class="label label-primary">2.</span> Select the user. If no user is selected, the info for the user in the <i>Quotation Presentation</i> will be left empty.</p>
+            <p>
+                <span class="label label-primary">3.</span> Drag the options you don't want from the <i>Document Area</i> panel and drop them in the <i>Options</i> panel.
+                Once you have all the needed <i>Options</i> in the <i>Document Area</i>, you can sort those <i>Options</i> in the order you want them
+                to appear in the <i>Quotation Presentation</i>. Just drag them up or down.
+            </p>
+            <p>
+                <span class="label label-primary">4.</span> When you finish adding <i>Options</i> to the <i>Document Area</i> and the <i>Options</i> are in the order you want,
+                click on the <span class="label label-primary">Create Quote Presentation</span> button. The document will be generated and saved to your Desktop.
+            </p>
+            <p>
+                <span class="label label-warning">Notice:</span> If you don't move the file from your desktop to a different location, the file will be overwritten if you create another
+                <i>Quotation Presentation</i> with the same name.
+            </p>
+        </div>
+    </div>
+</div>
+<br />
+@using (Html.BeginForm("CreateQuotePresentation", "LiftFamilies", FormMethod.Post, new { id = "documentForm" }))
+{
+    @Html.HiddenFor(model => Model.First().LiftFamilyId)
+    <div class="row">
+        <div class="col-md-4">@Html.TextBox("FileName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Enter File Name..." })</div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.Label("Users:")</span>
+                @Html.DropDownList("Users", ViewBag.Users as SelectList, " -- Select User -- ", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        @*<div class="col-md-4"><a class="btn btn-primary" onclick="submitOptions()" href="#">Create Quote Presentation  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></a></div>*@
+        <div class="col-md-4"><a class="btn btn-primary" onclick="submitOptions()" href="#">Create Quote Presentation&nbsp;&nbsp;&nbsp;<i class="fa fa-cog fa-spin fa-3x fa-fw"></i></a></div>
+    </div>
+    <hr />
+    <table style="background-color:#EFF5FB;">
+        <tr>
+            <th style="text-align: center">
+                <h3>Options</h3>
+            </th>
+            <th style="text-align: center">
+                <h3>Document Area</h3>
+            </th>
+        </tr>
+        <tr>
+            <td style="vertical-align: top">
+                <ul id="availableOptions" class="listOptions" style="background-color: #D9EDF7; border:2px solid #2FA4E7;"></ul>
+            </td>
+            <td style="vertical-align: top; width: 600px;">
+                <ul id="selectedOptions" class="listOptions" style="background-color: #D2F398; border:2px solid #2FA4E7;">
+                    @foreach (var item in Model)
+                    {
+                        <li>@item.OptionTitle</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    </table>
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#availableOptions, #selectedOptions").sortable({
+                connectWith: ".listOptions"
+            }).disableSelection();
+        });
+
+        function gettoken() {
+            var token = '@Html.AntiForgeryToken()';
+            token = $(token).val();
+            return token;
+        }
+
+        function submitOptions() {
+            //Generate List of selected options
+            $(".fa-cog").show();
+            var outputList = $("#selectedOptions li").map(function () { return $(this).html(); }).get().join(',');
+            var liftFmlyId = $("#LiftFamilyId").val();
+            var uId = $("#Users").val();
+            var fName = $("#FileName").val();
+            var url = '@Url.Action("CreateWordDocument", "Quote")';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: {
+                    __RequestVerificationToken: gettoken(),
+                    fileName: fName,
+                    userId: uId,
+                    liftFamilyId: liftFmlyId,
+                    listOfOptions: outputList
+                },
+                success: function (data) {
+                    $(".fa-cog").hide();
+                    alert("Great! Your document is ready.\nThe Quotation Presentation was saved to your Desktop.");
+                },
+                error: function () {
+                    $(".fa-cog").hide();
+                    alert("Oops! Something went wrong.");
+                }
+            });
+        }
+
+        $("#showInfo").click(function () {
+            if ($(this).text() == "Show Instructions") {
+                $(this).text("Hide Instructions");
+            } else {
+                $(this).text("Show Instructions");
+            }
+        });
+    </script>
+}

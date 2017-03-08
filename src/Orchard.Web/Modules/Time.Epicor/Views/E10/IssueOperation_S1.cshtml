@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Issue Operation: Pick Job";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="error">@Html.DisplayWithBreaks((string)@ViewBag.ErrorMessage)</div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.Label("Job", "Job", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.TextBox("Job")
+                @*@Html.ValidationMessageFor(model => model.LicenseId, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input id="saveBtn" type="submit" value="Search For Job" class="btn btn-primary" />
+                @*<input type="button" value="Close" data-dismiss="modal" class="btn btn-primary" />*@
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,38 @@
+﻿@model jQueryDemo.Models.OptionsAndOptionsGroups
+
+
+<hr />
+<div id="accordion">
+    @for (int j = 0; j < Model.OptionGroups.Count; j++)
+    {
+        @Html.Hidden("optionGroups[" + @j + "].Id", Model.OptionGroups[j].Id)
+        @Html.Hidden("optionGroups[" + @j + "].GroupName", Model.OptionGroups[j].GroupName)
+        <h3>@Model.OptionGroups[j].GroupName</h3>
+        <div>
+            <table class="table">
+                <tr class="success">
+                    <th>Option</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Hours</th>
+                </tr>
+                @for (int i = 0; i < Model.Options.Count; i++)
+                {
+                    if (Model.Options[i].GroupId == Model.OptionGroups[j].Id)
+                    {
+                        <tr>
+                            <td>@Html.Label("options[" + @i + "].OptionName", Model.Options[i].OptionName)</td>
+                                @Html.Hidden("options[" + @i + "].Id", Model.Options[i].Id)
+                                @Html.Hidden("options[" + @i + "].OptionName", Model.Options[i].OptionName)
+                                @Html.Hidden("options[" + @i + "].LiftFamilyId", Model.Options[i].LiftFamilyId)
+                                @Html.Hidden("options[" + @i + "].GroupId", Model.Options[i].GroupId)
+                            <td>@Html.TextBox("options[" + @i + "].Quantity", Model.Options[i].Quantity)</td>
+                            <td>@Html.TextBox("options[" + @i + "].Price", Model.Options[i].Price)</td>
+                            <td>@Html.TextBox("options[" + @i + "].LaborHours", Model.Options[i].LaborHours)</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    }
+</div>
