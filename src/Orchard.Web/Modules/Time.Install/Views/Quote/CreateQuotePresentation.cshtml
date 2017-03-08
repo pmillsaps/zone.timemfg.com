@@ -124,9 +124,9 @@
                     $(".fa-cog").hide();
                     alert("Great! Your document is ready.\nThe Quotation Presentation was saved to your Desktop.");
                 },
-                error: function () {
+                error: function (xhr, ajaxOptions, thrownError) {
                     $(".fa-cog").hide();
-                    alert("Oops! Something went wrong.");
+                    alert(xhr.status + "Oops! Something went wrong.");
                 }
             });
         }

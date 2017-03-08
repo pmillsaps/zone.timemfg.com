@@ -214,12 +214,14 @@ namespace Time.Install.Controllers
         // POST: OptionTitleDescpForWordDocs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(OptionTitlesAndDescrVM model)
         {
-            OptionTitleDescpForWordDoc optionTitleDescpForWordDoc = db.OptionTitleDescpForWordDocs.Find(id);
-            db.OptionTitleDescpForWordDocs.Remove(optionTitleDescpForWordDoc);
+            OptionTitleDescpForWordDoc deleteDescp = db.OptionTitleDescpForWordDocs.Find(model.Id);
+            db.OptionTitleDescpForWordDocs.Remove(deleteDescp);
+            OptionTitlesForWordDoc deleteTitle = db.OptionTitlesForWordDocs.Find(model.OptionTitlesId);
+            db.OptionTitlesForWordDocs.Remove(deleteTitle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { FamilyName = model.FamilyName });
         }
 
         protected override void Dispose(bool disposing)
