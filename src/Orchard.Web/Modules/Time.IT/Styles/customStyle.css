@@ -163,7 +163,7 @@ a{
 .mypanel-header {
     color: #555;
     /*background-color: #dcdcdc;*/
-    background-color: #D2F398;
+    background: linear-gradient(to left, #CCCCCC , #E9E9E9);
     /*background-color: #CAF186;*/
     /*background-color: #D1F397;*/
     /*background-color: #C2EF74;*/

@@ -72,6 +72,12 @@ namespace Time.Install.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(LiftFamilyViewModel vm)
         {
+            // Prevents a duplicate from being created
+            var lFmly = db.LiftFamilies.FirstOrDefault(x => x.FamilyName == vm.Lift.FamilyName);
+
+            // Displays if previous code found a duplicate
+            if (lFmly != null) ModelState.AddModelError("", "Lift Family Name Already Exists");
+
             if (ModelState.IsValid)
             {
                 // Adding the Lift Family
@@ -114,12 +120,14 @@ namespace Time.Install.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(LiftFamilyViewModel vm)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(liftFamily).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
+            if (ModelState.IsValid)
+            {
+                db.Entry(vm.Lift).State = EntityState.Modified;
+                //db.SaveChanges();
+                db.Entry(vm.ChassisSpecs).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return View(vm);
         }
 
@@ -143,7 +151,10 @@ namespace Time.Install.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
+            ChassisSpecsForWordDoc chassisSpec = db.ChassisSpecsForWordDocs.FirstOrDefault(x => x.LiftFamilyId == id);
             LiftFamily liftFamily = db.LiftFamilies.Find(id);
+            db.ChassisSpecsForWordDocs.Remove(chassisSpec);
             db.LiftFamilies.Remove(liftFamily);
             db.SaveChanges();
             return RedirectToAction("Index");
