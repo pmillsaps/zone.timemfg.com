@@ -235,15 +235,15 @@ namespace Time.Legacy.Controllers
             ViewBag.WarrantyReturn = warrantyReturn;
 
             //pulls in data for the customer information in the details of each invoice
-            var customerInfo = db.InvoiceHeaders.FirstOrDefault(x => x.InvoiceNumber == warrantyInvoice.InvoiceNumber);
+            var customerInfo = db.InvoiceHeaders.FirstOrDefault(x => x.InvoiceNumber == warrantyInvoice.InvoiceNumber && x.CompanyId == warrantyInvoice.CompanyId);
             ViewBag.CustomerInfo = customerInfo;
 
             //pulls in data for the ship to information in the destails of each invoice
-            var shipTo = db.InvoiceShipToes.FirstOrDefault(x => x.InvoiceNumber == warrantyInvoice.InvoiceNumber);
+            var shipTo = db.InvoiceShipToes.FirstOrDefault(x => x.InvoiceNumber == warrantyInvoice.InvoiceNumber && x.CompanyId == warrantyInvoice.CompanyId);
             ViewBag.ShipTo = shipTo;
 
             //pulls in data for the invoice lines in the details of each invoice
-            var invoiceLines = db.InvoiceLineItems.Where(x => x.InvoiceNumber == warrantyInvoice.InvoiceNumber);
+            var invoiceLines = db.InvoiceLineItems.Where(x => x.InvoiceNumber == warrantyInvoice.InvoiceNumber && x.CompanyId == warrantyInvoice.CompanyId);
             ViewBag.InvoiceLines = invoiceLines;
 
             return View(warrantyInvoice);
