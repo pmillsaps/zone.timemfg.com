@@ -17,7 +17,7 @@ namespace Time.IT.Controllers
 {
     [Themed]
     [Authorize]
-    public class Term_EmployeesController : Controller
+    public class EmployeesController : Controller
     {
         private TimeMFGEntities db = new TimeMFGEntities();
         private ITInventoryEntities iti = new ITInventoryEntities();
@@ -25,14 +25,14 @@ namespace Time.IT.Controllers
 
         public IOrchardServices Services { get; set; }
 
-        public Term_EmployeesController(IOrchardServices services)
+        public EmployeesController(IOrchardServices services)
         {
             Services = services;
             db = new TimeMFGEntities();
             //Setup();
         }
 
-        public Term_EmployeesController(IOrchardServices services, TimeMFGEntities _db)
+        public EmployeesController(IOrchardServices services, TimeMFGEntities _db)
         {
             Services = services;
             db = _db;

@@ -589,16 +589,16 @@
     <Content Include="Views\MaintDataCompanies\Details.cshtml" />
     <Content Include="Views\MaintDataCompanies\Edit.cshtml" />
     <Content Include="Views\MaintDataCompanies\Index.cshtml" />
-    <Content Include="Views\Term_Employees\Create.cshtml" />
-    <Content Include="Views\Term_Employees\Delete.cshtml" />
-    <Content Include="Views\Term_Employees\Details.cshtml" />
-    <Content Include="Views\Term_Employees\Edit.cshtml" />
-    <Content Include="Views\Term_Employees\Index.cshtml" />
-    <Content Include="Views\Term_Employees\_ITInfo.cshtml" />
-    <Content Include="Views\Term_Employees\_Property.cshtml" />
-    <Content Include="Views\Term_Employees\AfterCreate.cshtml" />
-    <Content Include="Views\Term_Employees\EditITInfo.cshtml" />
-    <Content Include="Views\Term_Employees\EditProperty.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\_ITInfo.cshtml" />
+    <Content Include="Views\Employees\_Property.cshtml" />
+    <Content Include="Views\Employees\AfterCreate.cshtml" />
+    <Content Include="Views\Employees\EditITInfo.cshtml" />
+    <Content Include="Views\Employees\EditProperty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -639,7 +639,7 @@
     <Compile Include="Controllers\SoundController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
-    <Compile Include="Controllers\Term_EmployeesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Models\AfterCreateViewModel.cs" />
