@@ -62,7 +62,7 @@ namespace Time.IT.Controllers
                 uvm.Building = (item.Ref_Building == null) ? "" : item.Ref_Building.Name;
                 uvm.Location = (item.Ref_Location == null) ? "" : item.Ref_Location.Name;
                 uvm.LastDateEdited = (item.LastDateEdited == null) ? "" : item.LastDateEdited.Value.ToShortDateString();
-                uvm.LastEditedBy = item.LastEditedBy;
+                //uvm.LastEditedBy = item.LastEditedBy;                                                                      //removed per ticket 17681
                 if(computers.Count(x => x.UserId == item.Id) == 1)
                 {
                     var cmp = computers.First(x => x.UserId == item.Id);

@@ -13,7 +13,7 @@ namespace Time.IT.Models
         public string Location { get; set; }
         public string Notes { get; set; }
         public string LastDateEdited { get; set; }
-        public string LastEditedBy { get; set; }
+        //public string LastEditedBy { get; set; }
         public string ComputerName { get; set; }
         public int ComputerId { get; set; }
     }

@@ -39,7 +39,7 @@
             <td>@Html.Label("User Name")</td>
             <td>@Html.Label("Computer")</td>
             <td>@Html.Label("Edit Date")</td>
-            <td>@Html.Label("Edited By")</td>
+            @*<td>@Html.Label("Edited By")</td>                 removed per ticket 17681*@
             <td>@Html.Label("Building")</td>
             <td>@Html.Label("Location")</td>
             <td></td>
@@ -108,7 +108,7 @@
                         }
                     },
                     { data: "LastDateEdited", autoWidth: true },
-                    { data: "LastEditedBy", autoWidth: true },
+                    //{ data: "LastEditedBy", autoWidth: true },   //removed per ticket 17681
                     { data: "Building", autoWidth: true },
                     { data: "Location", autoWidth: true },
                     {
