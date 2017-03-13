@@ -52,7 +52,7 @@ namespace Time.IT.Controllers
 
                 return View(term);
             }
-            else if (search.Length == 0 && ddl == "NotTerminated")
+            else if (search.Length == 0 && ddl == "Employed")
             {
                 var term = db.Term_Employees.Where(x => x.Terminated == false).OrderBy(x => x.FName).ThenBy(x => x.LName).ToList();
 
@@ -70,7 +70,7 @@ namespace Time.IT.Controllers
 
                 return View(term);
             }
-            else if (search.Length >= 1 && ddl == "NotTerminated")
+            else if (search.Length >= 1 && ddl == "Employed")
             {
                 var term = db.Term_Employees.Where(x => x.Terminated == false && (x.FName.Contains(search) || x.LName.Contains(search) || x.Email.Contains(search))).OrderBy(x => x.FName).ThenBy(x => x.LName).ToList();
 
@@ -145,7 +145,7 @@ namespace Time.IT.Controllers
         }
 
         // GET: Term_Employees/Create
-        public ActionResult Create()
+        public ActionResult Create(string ddl = "")
         {
             return View();
         }
@@ -155,8 +155,17 @@ namespace Time.IT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Exclude = "Id")] Term_Employees term_Employees)
+        public ActionResult Create([Bind(Exclude = "Id")] Term_Employees term_Employees, string ddl)
         {
+            if (ddl == "Terminated")
+            {
+                term_Employees.Terminated = true;
+            }
+            else
+            {
+                term_Employees.Terminated = false;
+            }
+
             var user = iti.Users.Where(x => x.Name == term_Employees.FName + " " + term_Employees.LName).Select(x => x.Id).SingleOrDefault();
 
             var cellid = iti.Ref_DeviceType.Where(x => x.DeviceType == "Cell Phone").Select(x => x.Id).Single();
@@ -309,7 +318,7 @@ namespace Time.IT.Controllers
         }
 
         // GET: Term_Employees/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string ddl = "")
         {
             if (id == null)
             {
@@ -320,6 +329,7 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(term_Employees);
         }
 
@@ -328,9 +338,16 @@ namespace Time.IT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FName,LName,Email,Terminated,TerminatedDate")] Term_Employees term_Employees)
+        public ActionResult Edit([Bind(Include = "Id,FName,LName,Email,Terminated,TerminatedDate")] Term_Employees term_Employees, string ddl)
         {
-            //if (String.IsNullOrEmpty(term_Employees.Email)) term_Employees.Email = "-";
+            if (ddl == "Terminated")
+            {
+                term_Employees.Terminated = true;
+            }
+            else
+            {
+                term_Employees.Terminated = false;
+            }
 
             if (ModelState.IsValid)
             {

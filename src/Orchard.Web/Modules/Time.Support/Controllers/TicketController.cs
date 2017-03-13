@@ -501,10 +501,10 @@ namespace Time.Support.Controllers
                 string updateNote = "";
                 var emp = _db.TicketEmployees.Single(x => x.EmployeeID == ticketProject.ResourceEmployeeID);
                 if (ticket.ResourceDone != false)
-                    updateNote = string.Format("Zone: Resource Employee {0} Task Uncompleted" + Environment.NewLine, emp.FullName);
+                    updateNote = string.Format("Zone: Resource Employee {0} Assignment Uncompleted" + Environment.NewLine, emp.FullName);
                 else
                 {
-                    updateNote = string.Format("Zone: Resource Employee {0} is done with task" + Environment.NewLine, emp.FullName);
+                    updateNote = string.Format("Zone: Resource Employee {0} is done with Assignment" + Environment.NewLine, emp.FullName);
 
                     var command = new TicketNotificationMessage
                     {

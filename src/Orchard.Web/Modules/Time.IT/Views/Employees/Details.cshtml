@@ -13,7 +13,7 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FName)
+            First Name
         </dt>
 
         <dd>
@@ -21,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LName)
+            Last Name
         </dt>
 
         <dd>
@@ -29,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            Email
         </dt>
         @if (String.IsNullOrEmpty(Model.Email))
         {
@@ -44,16 +44,25 @@
             </dd>
         }
         <dt>
-            @Html.DisplayNameFor(model => model.Terminated)
+            Employed/Terminated
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Terminated)
+                @Html.Raw((Model.Terminated) ? "Terminated" : "Employed")
         </dd>
-
+        
+        @if (Model.Terminated == true)
+        {
         <dt>
-            @Html.DisplayNameFor(model => model.TerminatedDate)
+            Terminated Date
         </dt>
+        }
+        else
+        {
+            <dt>
+                Hire Date
+            </dt>
+        }
 
         @if (Model.TerminatedDate == null)
         {

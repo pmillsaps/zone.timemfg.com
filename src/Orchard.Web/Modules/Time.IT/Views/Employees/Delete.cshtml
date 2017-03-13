@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-<h4>Term_Employees</h4>
+<h4>Employees</h4>
 
 <hr />
 
@@ -14,7 +14,7 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FName)
+            First Name
         </dt>
 
         <dd>
@@ -22,7 +22,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LName)
+            Last Name
         </dt>
 
         <dd>
@@ -30,7 +30,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            Email
         </dt>
 
         @if (String.IsNullOrEmpty(Model.Email))
@@ -47,15 +47,15 @@
         }
 
         <dt>
-            @Html.DisplayNameFor(model => model.Terminated)
+            Employed/Terminated
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Terminated)
+            @Html.Raw((Model.Terminated) ? "Terminated" : "Employed")
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TerminatedDate)
+            Hire/Terminated Date
         </dt>
 
         @if (Model.TerminatedDate == null)
