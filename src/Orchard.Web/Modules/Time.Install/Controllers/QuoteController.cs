@@ -1,8 +1,10 @@
-﻿using Orchard;
+﻿using Novacode;
+using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -55,17 +57,17 @@ namespace Time.Install.Controllers
                 qvm.QuoteLine = item.QuoteLine;
                 qvm.PartNum = item.PartNum;
                 qvm.LineDesc = item.LineDesc;
-                qvm.LastUpdate = (item.LastUpdate != null)? item.LastUpdate.Value.ToShortDateString() : "";
+                qvm.LastUpdate = (item.LastUpdate != null) ? item.LastUpdate.Value.ToShortDateString() : "";
                 qvm.LastDcdUserId = item.LastDcdUserID;
                 qvm.OrderQty = item.OrderQty;
                 qvm.ChangedBy = item.ChangedBy;
-                qvm.ChangeDate = (item.ChangeDate != null)? item.ChangeDate.Value.ToShortDateString() : "";
+                qvm.ChangeDate = (item.ChangeDate != null) ? item.ChangeDate.Value.ToShortDateString() : "";
                 var quoteDtls = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == item.QuoteNum && x.QuoteLine == 1);
                 var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
                 if (cfgName != null)
                 {
                     var liftFmly = dbQ.LiftFamilies.FirstOrDefault(x => x.FamilyName == cfgName.ConfigID);
-                    qvm.LiftFamilyId = (liftFmly != null)? liftFmly.Id : 0;
+                    qvm.LiftFamilyId = (liftFmly != null) ? liftFmly.Id : 0;
                 }
                 else
                 {
@@ -99,7 +101,7 @@ namespace Time.Install.Controllers
                 qvm.QuoteDate = (item.QuoteDate != null) ? item.QuoteDate.ToShortDateString() : "";
                 qvm.TotalPriceLabor = item.TotalPriceLabor;
                 qvm.TotalPriceMaterial = item.TotalPriceMaterial;
-                qvm.TotalInstallPrice = (item.TotalInstallPrice != null)? item.TotalInstallPrice.Value : 0;
+                qvm.TotalInstallPrice = (item.TotalInstallPrice != null) ? item.TotalInstallPrice.Value : 0;
                 qvm.TotalInstallHours = item.TotalInstallHours;
                 qvm.TotalPaintHours = item.TotalPaintHours;
                 qvm.LiftFamilyId = item.LiftFamilyId;
@@ -126,7 +128,7 @@ namespace Time.Install.Controllers
             else
             {
                 quoteVM.LiftFamilyId = liftFamilyId.Value;
-            }          
+            }
             return View(LoadOptionsForQuote.GetOptions(quoteVM, dbE, dbQ));
         }
 
@@ -148,7 +150,7 @@ namespace Time.Install.Controllers
                 // Inserting the data into InstallQuote table
                 InsertIntoInstallQuote.InsertData(vm, dbQ, dbE);
                 // Inserting data into the InstallDetails tables
-                if(!vm.EditQuote) InsertIntoInstallDetailsAndManuallyAddedOptions.InsertData(vm, dbQ );
+                if (!vm.EditQuote) InsertIntoInstallDetailsAndManuallyAddedOptions.InsertData(vm, dbQ);
                 // Inserting the Install details into the Epicor db
                 var installQid = dbQ.InstallQuotes.Where(x => x.LiftQuoteNumber == vm.QuoteNum).Select(x => new { installId = x.Id }).Single();
                 InsertInstallDetailsIntoEpicorDb.InsertData(installQid.installId, dbQ, dbE);
@@ -173,20 +175,22 @@ namespace Time.Install.Controllers
             return View(installQuoteSummary);
         }
 
-        // Method to generate the Word Document
-        public ActionResult CreateQuotePresentation(int? id)
+        // Method to display the options to generate the Word Document
+        public ActionResult CreateQuotePresentation(int? id, string fileName, string userId, string liftFamilyId, string listOfOptions)
         {
             var options = dbQ.OptionTitlesForWordDocs.Where(x => x.LiftFamilyId == id).ToList();
             ViewBag.Users = new SelectList(dbQ.QuoteDeptUsersForWordDocs, "Id", "Name");
             return View(options);
         }
 
-        // POST Method to generate the Word Document
+        // Method to generate the Word Document
         [HttpPost]
-        public ActionResult CreateWordDocument(string fileName, int? userId, int liftFamilyId, string listOfOptions)//FormCollection formItems
+        [ValidateAntiForgeryToken]
+        public ActionResult GenerateDocument(string fileName, int? userId, int liftFamilyId, string listOfOptions)
         {
-            CreateQuotationPresentation.CreateDocument(fileName, userId, liftFamilyId, listOfOptions, dbQ);
-            return Json(new { success = true });
+            if (String.IsNullOrEmpty(fileName)) fileName = "QuotationFile";
+            var stream = CreateQuotationPresentation.CreateDocument(userId, liftFamilyId, listOfOptions, dbQ);
+            return File(stream.ToArray(), "application/octet-stream", fileName + ".docx");
         }
 
     }

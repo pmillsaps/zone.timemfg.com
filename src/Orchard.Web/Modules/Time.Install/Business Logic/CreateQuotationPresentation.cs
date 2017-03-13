@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Time.Data.EntityModels.Install;
 using Time.Install.Models;
 
@@ -11,11 +12,12 @@ namespace Time.Install.Business_Logic
 {
     public class CreateQuotationPresentation
     {
-        public static void CreateDocument(string fName, int? userId, int liftFamilyId, string listOfOptions, VSWQuotesEntities db)
+        
+        public static MemoryStream CreateDocument(int? userId, int liftFamilyId, string listOfOptions, VSWQuotesEntities db)
         {
             // Declaring all the variables needed and retrieving the data to create the document            
             QuotationPresentationModel model = new QuotationPresentationModel();// Loading the chassis specs and install details
-            model.LiftDescription = db.LiftFamilies.Where(x => x.Id == liftFamilyId).Select(x => x.Description).SingleOrDefault();
+            model.LiftDescription = db.LiftFamilies.Where(x => x.Id == liftFamilyId ).Select(x => x.Description).SingleOrDefault();
             model.ChassisSpecs = db.ChassisSpecsForWordDocs.FirstOrDefault(x => x.LiftFamilyId == liftFamilyId);
             model.InstallDetails = db.InstallDetailsForWordDocs.ToList();
             if (userId != null)//Loading the user
@@ -32,19 +34,15 @@ namespace Time.Install.Business_Logic
                 {
                     if (model.TitlesAndDesc.Titles[i] == item.OptionTitlesForWordDoc.OptionTitle)
                     {
-                        model.TitlesAndDesc.TitleDesc[i] = item.Description.Trim();
+                        model.TitlesAndDesc.TitleDesc[i] =  item.Description.Trim();
                         break;
                     }
                 }
             }
 
-            string fileName = "QuoteFile.docx"; // Creating the file path
-            if (!String.IsNullOrEmpty(fName)) fileName = fName + ".docx";
-            string desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string path = Path.Combine(desktopFolder, fileName);// The file is save to the desktop
-
+            MemoryStream stream = new MemoryStream();
             // Create a document.
-            using (DocX document = DocX.Create(path))
+            using (DocX document = DocX.Create(stream))
             {
                 System.Drawing.FontFamily fontF = new System.Drawing.FontFamily("Arial");
                 double fontSize = 10;
@@ -233,6 +231,7 @@ namespace Time.Install.Business_Logic
                 // Save this document.
                 document.Save();
             }// Release this document from memory.
+            return stream;
         }
     }
 }
