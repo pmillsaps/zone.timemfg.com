@@ -1,6 +1,6 @@
 ﻿@*@model IEnumerable<Time.Data.EntityModels.Install.QuoteDtl>*@
 @{
-    ViewBag.Title = "Aerial Quote Index";
+    ViewBag.Title = "List of Aerial Quotes";
     Script.Require("jQuery");
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.min.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
@@ -15,13 +15,12 @@
     @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 <div align="right">
-    @Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")
+    @Html.ActionLink("Go to List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")
 </div>
 
-<hr />
 <div class="alert alert-info">
     <p><strong>Note:</strong> A quote MUST have an INSTALLS(PartNum) line to be displayed. If a quote already has an Installation Quote, it won't be displayed in this list.</p>
-    <p>To view or edit the details of an existing Installation Quotation go to <strong>@Html.ActionLink("List Of VSW Quoted Installations", "ListOfInstallQuotes", "Quote")</strong>.</p>
+    <p>To view or edit the details of an existing Installation Quotation go to <strong>@Html.ActionLink("List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")</strong>.</p>
     <p>To <span class="label label-primary">Start</span> a Installation Quotation, click the <i class="fa fa-hand-o-right" aria-hidden="true"></i> icon.</p>
     <p>To <span class="label label-primary">Compose the Quote Presentation</span>, click on the <i class="fa fa-file-word-o" aria-hidden="true"></i> icon.</p>
 </div>

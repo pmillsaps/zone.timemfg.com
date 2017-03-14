@@ -198,6 +198,77 @@ namespace Time.IT.Controllers
             return View(edtMntc);
         }
 
+        // GET: MaintenanceDatas/CopyRecord/5
+        public ActionResult CopyRecord(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MaintenanceData maintData = db.MaintenanceDatas.Find(id);
+            if (maintData == null)
+            {
+                return HttpNotFound();
+            }
+            var mntcDetails = db.MaintenanceDataDetails.Where(x => x.MaintenanceDataId == maintData.Id).OrderByDescending(x => x.ExpirationDate).FirstOrDefault();
+            MaintenaceDataPlusDetailVM vm = new MaintenaceDataPlusDetailVM();
+            vm.MntcData = maintData;
+            vm.MntcDataDetail = mntcDetails;
+            ViewBag.Duration = DurationYears(mntcDetails.Duration);
+            ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", maintData.ComputerId);
+            ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", maintData.LicenseId);
+            ViewBag.CompanyId = new SelectList(db.MaintDataCompanies.OrderBy(x => x.CompanyName), "Id", "CompanyName", maintData.CompanyId);
+            return View(vm);
+        }
+
+        // POST: MaintenanceDatas/CopyRecord
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CopyRecord(MaintenaceDataPlusDetailVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                // Adding the Maintenance Data record
+                var mntncData = new MaintenanceData
+                {
+                    BudgetItem = vm.MntcData.BudgetItem,
+                    Supplier = vm.MntcData.Supplier,
+                    AccountNumber = vm.MntcData.AccountNumber,
+                    OriginalPurchDate = vm.MntcData.OriginalPurchDate,
+                    CompanyId = vm.MntcData.CompanyId,
+                    ComputerId = vm.MntcData.ComputerId,
+                    LicenseId = vm.MntcData.LicenseId
+                };
+                db.MaintenanceDatas.Add(mntncData);
+                db.SaveChanges();
+                // Adding the Maintenance Data Detail record
+                var mntdId = db.MaintenanceDatas.OrderByDescending(x => x.Id).FirstOrDefault();
+                //vm.MntcDataDetail.MaintenanceDataId = mntdId.Id;
+                var mntncDataDetail = new MaintenanceDataDetail
+                {
+                    MaintenanceDataId = mntdId.Id,
+                    PurchaseDate = vm.MntcDataDetail.PurchaseDate,
+                    ExpirationDate = vm.MntcDataDetail.ExpirationDate,
+                    AccountNumber = vm.MntcDataDetail.AccountNumber,
+                    Duration = vm.MntcDataDetail.Duration,
+                    Cost = vm.MntcDataDetail.Cost,
+                    Monthly = vm.MntcDataDetail.Monthly,
+                    Explanation = vm.MntcDataDetail.Explanation,
+                    AlternateInfo = vm.MntcDataDetail.AlternateInfo,
+                    PO_CC = vm.MntcDataDetail.PO_CC
+                };
+                db.MaintenanceDataDetails.Add(mntncDataDetail);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            ViewBag.Duration = DurationYears(vm.MntcDataDetail.Duration);
+            ViewBag.ComputerId = new SelectList(db.Computers.OrderBy(x => x.Name), "Id", "Name", vm.MntcData.ComputerId);
+            ViewBag.LicenseId = new SelectList(db.Licenses.OrderBy(x => x.Name), "Id", "Name", vm.MntcData.LicenseId);
+            ViewBag.CompanyId = new SelectList(db.MaintDataCompanies.OrderBy(x => x.CompanyName), "Id", "CompanyName");
+            return View();
+        }
+
         // GET: MaintenanceDatas/Delete/5
         public ActionResult Delete(int? id)
         {

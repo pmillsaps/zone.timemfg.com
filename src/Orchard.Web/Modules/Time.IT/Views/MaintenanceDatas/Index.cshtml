@@ -47,6 +47,7 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
         </tr>
     </thead>
 </table>
@@ -69,7 +70,7 @@
                 stateSave: true,
                 displayLength: -1,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                //columnDefs: [{ sClass: "clampClmn", targets: [6] }],
+                columnDefs: [{ sClass: "clampClmn", targets: [1] }],
                 columns: [
                     { data: "CompanyName" },
                     { data: "BudgetItem" },
@@ -82,19 +83,25 @@
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
                             //return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
-                            return '<a href="MaintenanceDatas/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a href="MaintenanceDatas/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
                             //return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
-                            return '<a href="MaintenanceDatas/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a href="MaintenanceDatas/CopyRecord/' + data + '"><i class="fa fa-files-o" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            //return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a href="MaintenanceDatas/Details/' + data + '"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                         }
                     },
                     {
                         data: "Id", sortable: false, render: function (data) {
                             //return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
-                            return '<a href="MaintenanceDatas/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="MaintenanceDatas/Delete/' + data + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                         }
                     }
                 ]

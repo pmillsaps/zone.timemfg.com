@@ -6,15 +6,16 @@
 
 <link href="~/Modules/Time.Install/Styles/wordDocStyles.css" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-md-6">
-        <h2>@ViewBag.Title for @Model.First().LiftFamily.FamilyName</h2>
-    </div>
-    <div class="col-md-6">
-        <div align="right" style="margin-top:31px;">
-            @Html.ActionLink("Back to Main Menu", "Index", "Home")
-        </div>
-    </div>
+
+<h2>@ViewBag.Title for @Model.First().LiftFamily.FamilyName</h2>
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes", "ListOfInstallQuotes", "Quote")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")
 </div>
 
 <hr />
@@ -46,42 +47,46 @@
     </div>
 </div>
 <br />
-@using (Html.BeginForm("CreateQuotePresentation", "LiftFamilies", FormMethod.Post, new { id = "documentForm" }))
+@using (Html.BeginForm("GenerateDocument", "Quote", FormMethod.Post, new { id = "wordDocForm" }))
 {
     @Html.HiddenFor(model => Model.First().LiftFamilyId)
+    @Html.Hidden("fileName", "")
+    @Html.Hidden("userId", "")
+    @Html.Hidden("listOfOptions", "")
+    @Html.AntiForgeryToken()
     <div class="row">
-        <div class="col-md-4">@Html.TextBox("FileName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Enter File Name..." })</div>
+        <div class="col-md-4">@Html.TextBox("fName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Enter File Name..." })</div>
         <div class="col-md-4">
             <div class="input-group">
                 <span class="input-group-addon">@Html.Label("Users:")</span>
                 @Html.DropDownList("Users", ViewBag.Users as SelectList, " -- Select User -- ", htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
-        @*<div class="col-md-4"><a class="btn btn-primary" onclick="submitOptions()" href="#">Create Quote Presentation  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></a></div>*@
-        <div class="col-md-4"><a class="btn btn-primary" onclick="submitOptions()" href="#">Create Quote Presentation&nbsp;&nbsp;&nbsp;<i class="fa fa-cog fa-spin fa-3x fa-fw"></i></a></div>
+        <div class="col-md-4"><input type="button" value="Create Quotation Presentation" onclick="submitForm()" class="btn btn-primary" /></div>
     </div>
     <hr />
     <table style="background-color:#EFF5FB;">
         <tr>
             <th style="text-align: center">
-                <h3>Options</h3>
+                <h3>Included Document Options</h3>
             </th>
             <th style="text-align: center">
-                <h3>Document Area</h3>
+                <h3>Discarded Options</h3>
             </th>
         </tr>
         <tr>
-            <td style="vertical-align: top">
-                <ul id="availableOptions" class="listOptions" style="background-color: #D9EDF7; border:2px solid #2FA4E7;"></ul>
-            </td>
             <td style="vertical-align: top; width: 600px;">
                 <ul id="selectedOptions" class="listOptions" style="background-color: #D2F398; border:2px solid #2FA4E7;">
                     @foreach (var item in Model)
                     {
-                        <li>@item.OptionTitle</li>
+                    <li>@item.OptionTitle</li>
                     }
                 </ul>
             </td>
+            <td style="vertical-align: top">
+                <ul id="availableOptions" class="listOptions" style="background-color: #D9EDF7; border:2px solid #2FA4E7;"></ul>
+            </td>
+
         </tr>
     </table>
 }
@@ -95,7 +100,25 @@
             }).disableSelection();
         });
 
-        function gettoken() {
+        function submitForm() {
+            var valueFName = $("#fName").val();
+            var valueuserId = $("#Users").val();
+            $("#fileName").val(valueFName);
+            $("#userId").val(valueuserId);
+            var outputList = $("#selectedOptions li").map(function () { return $(this).html(); }).get().join(',');
+            $("#listOfOptions").val(outputList);
+            $("#wordDocForm").submit();
+        }
+
+
+        $("#showInfo").click(function () {
+            if ($(this).text() == "Show Instructions") {
+                $(this).text("Hide Instructions");
+            } else {
+                $(this).text("Show Instructions");
+            }
+        });
+        @*function gettoken() {
             var token = '@Html.AntiForgeryToken()';
             token = $(token).val();
             return token;
@@ -108,13 +131,13 @@
             var liftFmlyId = $("#LiftFamilyId").val();
             var uId = $("#Users").val();
             var fName = $("#FileName").val();
-            var url = '@Url.Action("CreateWordDocument", "Quote")';
+            var url = '@Url.Action("CreateQuotePresentation", "Quote")';
             $.ajax({
                 url: url,
-                type: 'POST',
+                type: 'GET',
                 cache: false,
                 data: {
-                    __RequestVerificationToken: gettoken(),
+                    //__RequestVerificationToken: gettoken(),
                     fileName: fName,
                     userId: uId,
                     liftFamilyId: liftFmlyId,
@@ -122,21 +145,13 @@
                 },
                 success: function (data) {
                     $(".fa-cog").hide();
-                    alert("Great! Your document is ready.\nThe Quotation Presentation was saved to your Desktop.");
+                    //alert("Great! Your document is ready.\nThe Quotation Presentation was saved to your Desktop.");
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     $(".fa-cog").hide();
-                    alert(xhr.status + "Oops! Something went wrong.");
+                    //alert(xhr.status + "\nOops! Something went wrong.");
                 }
             });
-        }
-
-        $("#showInfo").click(function () {
-            if ($(this).text() == "Show Instructions") {
-                $(this).text("Hide Instructions");
-            } else {
-                $(this).text("Show Instructions");
-            }
-        });
+        }*@
     </script>
 }

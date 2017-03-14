@@ -117,7 +117,7 @@
                 stateSave: true,
                 displayLength: -1,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [{ sClass: "clampClmn", targets: [11] }],
+                columnDefs: [{ sClass: "clampClmn", targets: [1, 11] }],
                 columns: [
                     { data: "CompanyName", autoWidth: true },
                     { data: "BudgetItem", autoWidth: true },
@@ -135,19 +135,19 @@
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
                             //return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
-                            return '<a href="MaintenanceDataDetails/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="MaintenanceDataDetails/Details/' + data + '"><span class="mbri-info"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Details/' + data + '"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                             //return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
                             //return '<a class="deleteBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-trash"></span></a>';
-                            return '<a href="MaintenanceDataDetails/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="MaintenanceDataDetails/Delete/' + data + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                         }
                     }
                 ]
