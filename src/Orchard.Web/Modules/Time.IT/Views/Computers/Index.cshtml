@@ -20,7 +20,7 @@
         <a class="popup btn btn-primary" href="Computers/Create">Add New Computer</a>
     </div>
     <div class="col-md-10">
-        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns, plus the serial number.</strong></p>
     </div>
 </div>
 <div class="tablecontainer">
@@ -36,6 +36,7 @@
                 <td>@Html.Label("Build Date")</td>
                 <td>@Html.Label("Purch Date")</td>
                 <td>@Html.Label("Edit Date")</td>
+                <td>@Html.Label("Serial Number")</td> @*Listed but hidden*@
                 <td></td>
                 <td></td>
             </tr>
@@ -78,18 +79,21 @@
                     { data: "LastBuildDate", autoWidth: true },
                     { data: "PurchaseDate", autoWidth: true },
                     { data: "LastDateEdited", autoWidth: true },
+                    { data: "SerialNumber", autoWidth: true },// Listed but hidden
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="Computers/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a href="Computers/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="Computers/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="Computers/Delete/' + data + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                         }
                     }
                 ]
             })
+            // Hiding the serial number
+            oTable.column(9).visible(false);
         });
     </script>
 }

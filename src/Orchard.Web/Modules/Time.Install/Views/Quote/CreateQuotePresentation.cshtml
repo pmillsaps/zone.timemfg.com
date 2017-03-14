@@ -6,15 +6,16 @@
 
 <link href="~/Modules/Time.Install/Styles/wordDocStyles.css" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-md-6">
-        <h2>@ViewBag.Title for @Model.First().LiftFamily.FamilyName</h2>
-    </div>
-    <div class="col-md-6">
-        <div align="right" style="margin-top:31px;">
-            @Html.ActionLink("Back to Main Menu", "Index", "Home")
-        </div>
-    </div>
+
+<h2>@ViewBag.Title for @Model.First().LiftFamily.FamilyName</h2>
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes", "ListOfInstallQuotes", "Quote")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")
 </div>
 
 <hr />
@@ -78,14 +79,14 @@
                 <ul id="selectedOptions" class="listOptions" style="background-color: #D2F398; border:2px solid #2FA4E7;">
                     @foreach (var item in Model)
                     {
-                        <li>@item.OptionTitle</li>
+                    <li>@item.OptionTitle</li>
                     }
                 </ul>
             </td>
             <td style="vertical-align: top">
                 <ul id="availableOptions" class="listOptions" style="background-color: #D9EDF7; border:2px solid #2FA4E7;"></ul>
             </td>
-            
+
         </tr>
     </table>
 }

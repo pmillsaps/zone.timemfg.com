@@ -76,12 +76,12 @@
                     { data: "UserName", autoWidth: true },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="Monitor/Edit/' + data + '"><span class="mbri-edit"></span></a>';
+                            return '<a href="Monitor/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
                         }
                     },
                     {
                         data: "Id", width: "20px", sortable: false, render: function (data) {
-                            return '<a href="Monitor/Delete/' + data + '"><span class="mbri-trash"></span></a>';
+                            return '<a href="Monitor/Delete/' + data + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                         }
                     }
                 ]

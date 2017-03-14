@@ -1,14 +1,14 @@
 ﻿@model Time.Install.ViewModels.QuoteViewModel
 
-<div class="alert alert-danger">
+<div class="alert alert-info">
     <p>
-        <strong>When you add options manually:</strong> If you delete an option after adding several options, you must delete them in
+        <span class="label label-warning">When adding options manually:</span> If you delete an option after adding several options, you must delete them in
         sequential order, starting from the last one. If you delete an option from the middle, the options after the one deleted will not
         be imported.
     </p>
     <p>An alternative to deleting the option is to set its quantity to zero and that option will be ignore when the program saves the data.</p>
 </div>
-<a href="javascript:void(0);" class="addCF btn btn-primary">Add More Options</a>
+<a href="javascript:void(0);" class="addCF btn btn-primary">Add Option</a>
 <hr />
 <table class="table" id="customFields">
     <tr class="success">

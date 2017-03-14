@@ -16,7 +16,10 @@
     @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 <div align="right">
-    @Html.ActionLink("Back to Aerial Quote List", "Index")
+    @Html.ActionLink("Back to List of Aerial Quotes", "Index")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")
 </div>
 
 <h3>Aerial Quote Number: @Model.QuoteNum</h3>
@@ -37,8 +40,8 @@ else
     <div class="container">
         <ul class="nav nav-pills nav-justified">
             <li class="active"><a id="timeOptions" data-toggle="tab" href="#tab1"><strong>Aerial Quote (TIME Options)</strong></a></li>
-            <li><a id="vswOptions" data-toggle="tab" href="#tab2"><strong>Click here for VSW Install Quote (VSW Options)</strong></a></li>
-            <li><a id="mnllyAdded" data-toggle="tab" href="#tab3"><strong>Click here to Add VSW Options Manually</strong></a></li>
+            <li><a id="vswOptions" data-toggle="tab" href="#tab2"><strong>VSW Install Quote (VSW Options)</strong></a></li>
+            <li><a id="mnllyAdded" data-toggle="tab" href="#tab3"><strong>Add VSW Options Manually</strong></a></li>
         </ul>
 
         <div class="tab-content">
@@ -76,7 +79,7 @@ else
 }
 <br />
 <div>
-    @Html.ActionLink("Back to Aerial Quote List", "Index")
+    @Html.ActionLink("Back to List of Aerial Quotes", "Index")
 </div>
 
 @using (Script.Foot())
