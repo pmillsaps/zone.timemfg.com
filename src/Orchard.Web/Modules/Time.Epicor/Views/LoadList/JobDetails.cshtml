@@ -1,0 +1,100 @@
+﻿@model Time.Data.EntityModels.TimeMFG.LoadListJob
+
+@{
+    ViewBag.Title = "Load List Job Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.JobNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JobNumber)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CustomerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LiftModel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LiftModel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SerialNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SerialNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DistributorPO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DistributorPO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateATS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateATS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Destination)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Destination)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayWithBreaksFor(model => model.Comments)
+    </div>
+
+</fieldset>
+<p>
+    @Html.SecurityTrimmedActionLink("Edit | ", "EditJob", "LoadList", new { id = Model.Id }, null)
+    @Html.ActionLink("Back to List", "Details", new { id = Model.LoadListId })
+</p>
+
+    <tr>
+        @Html.Partial("_JobStatus", Model.LoadListJobStatus)
+    </tr>
+
+<br /><br /><br />
+<a id="commentToggle" href="javascript:toggle();">Show Job Comment History</a>
+
+<div id="CommentList" class="hidden">
+    @{Html.RenderAction("_ListJobComments", "LoadList", new { id = Model.Id });}
+</div>
+
+@section Scripts {
+    <script language='javascript'>
+        function toggle() {
+            var ele = document.getElementById("CommentList");
+            var text = document.getElementById("commentToggle");
+            if (ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show Job Comment History";
+            }
+            else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide Job Comment History";
+            }
+        }
+    </script>
+}

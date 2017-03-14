@@ -1,0 +1,164 @@
+﻿<Time.Data.EntityModels.TimeMFG.Term_ITInfo>
+
+    <table class="table table-bordered table-condensed table-striped table-hover">
+        <tr class="success">
+            @if ((String.IsNullOrEmpty(ViewBag.Email)) && (String.IsNullOrEmpty(ViewBag.EpicorAcc)))
+            {
+                <th>
+                    None
+                </th>
+            }
+            @if (!String.IsNullOrEmpty(ViewBag.Email))
+            {
+                <th>
+                    Windows Account Access
+                </th>
+                <th>
+                    Archive Email?
+                </th>
+                if (ViewBag.Archive == true)
+                {
+                    <th>
+                        Email Available to Who
+                    </th>
+                }
+                <th>
+                    Forward Emails?
+                </th>
+                if (ViewBag.FWEmail == true)
+                {
+                    <th>
+                        Forward to Who
+                    </th>
+                }
+                <th>
+                    Delete U Drive?
+                </th>
+                if (ViewBag.DeleteUDrive == true)
+                {
+                    <th>
+                        U Drive Available to Who
+                    </th>
+                }
+                <th>
+                    Desk Phone?
+                </th>
+                if (ViewBag.DeskPhone == true)
+                {
+                    <th>
+                        Desk Phone Foward?
+                    </th>
+                    if (ViewBag.DeskPhoneFW == true)
+                    {
+                        <th>
+                            DeskPhone Forward to Who
+                        </th>
+                    }
+                    <th>
+                        Desk Phone Rename?
+                    </th>
+                    if (ViewBag.DeskPhoneRename == true)
+                    {
+                        <th>
+                            Desk Phone Rename to Who
+                        </th>
+                    }
+                }
+            }
+            @if ((!String.IsNullOrEmpty(ViewBag.EpicorAcc)))
+            {
+                <th>
+                    Epicor Account
+                </th>
+                <th>
+                    Epicor User ID
+                </th>
+            }
+            <th></th>
+        </tr>
+        @if ((String.IsNullOrEmpty(ViewBag.Email)) && (String.IsNullOrEmpty(ViewBag.EpicorAcc)))
+        {
+            <tr>
+                <td colspan="2">
+                    <b><p>No Email, Windows Account, or Epicor Account for Employee found.  Click Edit above to enter an Email if they have a Windows Account to access Account questions.</p></b>
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in ViewBag.ITInfo as IEnumerable<Time.Data.EntityModels.TimeMFG.Term_ITInfo>)
+            {
+                <tr>
+                    @if (!String.IsNullOrEmpty(ViewBag.Email))
+                    {
+                        <td>
+                            @item.WindowsAccAccess
+                        </td>
+                        <td>
+                            @Html.Raw((item.ArchiveEmail) ? "Yes" : "No")
+                        </td>
+                        if (ViewBag.Archive == true)
+                        {
+                            <td>
+                                @item.EmailAtW
+                            </td>
+                        }
+                        <td>
+                            @Html.Raw((item.FowardEmails) ? "Yes" : "No")
+                        </td>
+                        if (ViewBag.FWEmail == true)
+                        {
+                            <td>
+                                @item.FowardAtW
+                            </td>
+                        }
+                        <td>
+                            @Html.Raw((item.DeleteUDrive) ? "Yes" : "No")
+                        </td>
+                        if (ViewBag.DeleteUDrive == true)
+                        {
+                            <td>
+                                @item.UDriveAtW
+                            </td>
+                        }
+                        <td>
+                            @Html.Raw((item.DeskPhone) ? "Yes" : "No")
+                        </td>
+                        if (ViewBag.DeskPhone == true)
+                        {
+                            <td>
+                                @Html.Raw((item.DeskPhoneFW) ? "Yes" : "No")
+                            </td>
+                            if (ViewBag.DeskPhoneFW == true)
+                            {
+                                <td>
+                                    @item.DeskPhoneFWtW
+                                </td>
+                            }
+                            <td>
+                                @Html.Raw((item.DeskPhoneRename) ? "Yes" : "No")
+                            </td>
+                            if (ViewBag.DeskPhoneRename == true)
+                            {
+                                <td>
+                                    @item.PhoneRenametW
+                                </td>
+                            }
+                        }
+                    }
+                    @if ((!String.IsNullOrEmpty(ViewBag.EpicorAcc)))
+                    {
+                        <td>
+                            @Html.Raw((item.EpicorAcc) ? "Yes" : "No")
+                        </td>
+                        <td>
+                            @item.EpicorUserID
+                        </td>
+                    }
+                    <td>
+                        @Html.ActionLink("Edit IT Info", "EditITInfo", new { id = ViewBag.InfoID })
+                    </td>
+                </tr>
+            }
+        }
+    </table>

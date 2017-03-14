@@ -1,0 +1,217 @@
+﻿@model Time.Data.EntityModels.TimeMFG.Term_Property
+
+@{
+    ViewBag.Title = "Edit Property";
+    ViewBag.CellPhone = Model.CellPhone;
+    ViewBag.Cables = Model.Cables;
+    ViewBag.OKey = Model.OfficeKey;
+    ViewBag.BKey = Model.BuildingKey;
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+@Html.ActionLink("Back to Details", "Details", new { id = Model.EmpID })
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.EmpID)
+
+    <div class="form-horizontal">
+        <div class="col-md-5">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CellPhone, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('CellPhoneRec');">
+                        @Html.EditorFor(model => model.CellPhone, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.CellPhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.CellPhone == false)
+            {
+                <div id="CellPhoneRec" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FMPOff, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.FMPOff, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FMPOff, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CellReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.CellReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CellReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="CellPhoneRec" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FMPOff, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.FMPOff, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FMPOff, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CellReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.CellReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CellReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Cables, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('CableRec');">
+                        @Html.EditorFor(model => model.Cables, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.Cables, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.Cables == false)
+            {
+                <div id="CableRec" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CablesReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.CablesReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CablesReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="CableRec" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CablesReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.CablesReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CablesReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OfficeKey, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('OKeyRec');">
+                        @Html.EditorFor(model => model.OfficeKey, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.OfficeKey, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.OfficeKey == false)
+            {
+                <div id="OKeyRec" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OKeyReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.OKeyReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.OKeyReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="OKeyRec" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OKeyReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.OKeyReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.OKeyReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BuildingKey, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('BKeyRec');">
+                        @Html.EditorFor(model => model.BuildingKey, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.BuildingKey, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.BuildingKey == false)
+            {
+                <div id="BKeyRec" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BKeyReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.BKeyReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BKeyReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="BKeyRec" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BKeyReceived, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.BKeyReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BKeyReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if (e.style.display == 'block' && ((id == "CellPhoneRec" && '@ViewBag.CellPhone == false') || (id == "CableRec" && '@ViewBag.CableRec == false') || (id == "OKeyRec" && '@ViewBag.OKey == false') || (id == "BKeyRec" && '@ViewBag.BKey == false')))
+           e.style.display = 'none';
+       else if (e.style.display == 'none' && ((id == "CellPhoneRec" && '@ViewBag.CellPhone == true') || (id == "CableRec" && '@ViewBag.CableRec == true') || (id == "OKeyRec" && '@ViewBag.OKey == true') || (id == "BKeyRec" && '@ViewBag.BKey == true')))
+           e.style.display = 'block';
+    }
+//-->
+    </script>
+}

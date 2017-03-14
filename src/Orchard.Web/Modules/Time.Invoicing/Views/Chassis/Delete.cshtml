@@ -1,0 +1,62 @@
+﻿@model Time.Invoicing.EntityModels.PcInvoice.Chassis
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>
+    Delete</h2>
+<h3>
+    Are you sure you want to delete this?</h3>
+<br />
+<fieldset>
+    <legend>Chassis</legend>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ModelYearLookup)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModelYearLookup.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ChassisModel.ChassisMake)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChassisModel.ChassisMake.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ChassisModel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChassisModel.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Transmission)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Transmission.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CALookup)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CALookup.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.GVWLookup)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GVWLookup.Name)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FullName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullName)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

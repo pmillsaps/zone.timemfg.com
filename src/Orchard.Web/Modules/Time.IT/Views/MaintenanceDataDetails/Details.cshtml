@@ -1,0 +1,205 @@
+﻿@model Time.Data.EntityModels.ITInventory.MaintenanceDataDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
+<p class="pull-right">
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<h2>@ViewBag.Title</h2>
+
+<div class="mypanel-header"><h3>IT Maintenance Detail</h3></div>
+<div class="mypanel-body">
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MaintenanceData.MaintDataCompany.CompanyName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaintenanceData.MaintDataCompany.CompanyName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaintenanceData.BudgetItem)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaintenanceData.BudgetItem)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaintenanceData.Supplier)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaintenanceData.Supplier)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaintenanceData.OriginalPurchDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaintenanceData.OriginalPurchDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PO_CC)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PO_CC)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PurchaseDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpirationDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Duration)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Duration)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Cost)
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.Cost)*@
+                @String.Format("{0:c}", Model.Cost)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Monthly)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Monthly)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Explanation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Explanation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AlternateInfo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AlternateInfo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaintenanceData.ComputerId)
+            </dt>
+
+            @if (ViewBag.Computer != null)
+            {
+                <dd>
+                    @Html.Raw((string)ViewBag.Computer.Name)
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.MaintenanceData.ComputerId)
+                </dd>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaintenanceData.LicenseId)
+            </dt>
+            @if (ViewBag.License != null)
+            {
+                <dd>
+                    @Html.Raw((string)ViewBag.License.Name)
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.MaintenanceData.LicenseId)
+                </dd>
+            }
+        </dl>
+    </div>
+</div>
+
+<br />
+<div class="mypanel-header"><h3>History</h3></div>
+<div class="mypanel-body">
+    <table class="table table-bordered table-condensed table-striped table-hover">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("PurchDate")</td>
+                <td>@Html.Label("ExpDate")</td>
+                <td>@Html.Label("Account#")</td>
+                <td>@Html.Label("PO/CC")</td>
+                <td>@Html.Label("Duration")</td>
+                <td>@Html.Label("Cost")</td>
+                <td>@Html.Label("Monthly")</td>
+                <td>@Html.Label("Explanation")</td>
+                <td>@Html.Label("AlternateInfo")</td>
+            </tr>
+        </thead>
+        @foreach (var item in ViewBag.History)
+            {
+            <tr>
+                <td>@item.PurchaseDate.ToShortDateString()</td>
+                <td>@item.ExpirationDate.ToShortDateString()</td>
+                <td>@item.AccountNumber</td>
+                <td>@item.PO_CC</td>
+                <td>@item.Duration</td>
+                <td>@Html.DisplayFor(x => x.Cost)</td>
+                <td>@item.Monthly</td>
+                <td>@item.Explanation</td>
+                <td>@item.AlternateInfo</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".mypanel-body").slideDown(2000);
+        });
+    </script>
+}
