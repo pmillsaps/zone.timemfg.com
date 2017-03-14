@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Time.Data.EntityModels.Install.OptionTitleDescpForWordDoc>
 
 @{
-    ViewBag.Title = "Option Name and Description for Quote Presentaion Index";
+    ViewBag.Title = "Option Name and Description for Quotation Presentation";
 }
 
 <link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
@@ -66,9 +66,9 @@
                         $.each(model, function (index, item) {
                             row += "<tr><td>" + item.FamilyName + "</td><td>" + item.OptionName +
                                    "</td><td>" + item.Description + "</td>" +
-                                   "<td><a href='OptionTitleDescpForWordDocs/Edit/" + item.Id + "'><span class='mbri-edit'></span></a></td>" +
-                                   "<td><a href='OptionTitleDescpForWordDocs/Details/" + item.Id + "'><span class='mbri-info'></span></a></td>" +
-                                   "<td><a href='OptionTitleDescpForWordDocs/Delete/" + item.Id + "'><span class='mbri-trash'></span></a></td></tr>";
+                                   "<td><a href='OptionTitleDescpForWordDocs/Edit/" + item.Id + "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td>" +
+                                   "<td><a href='OptionTitleDescpForWordDocs/Details/" + item.Id + "'><i class='fa fa-eye' aria-hidden='true'></i></a></td>" +
+                                   "<td><a href='OptionTitleDescpForWordDocs/Delete/" + item.Id + "'><i class='fa fa-trash-o' aria-hidden='true'></i></a></td></tr>";
                         });
                     }
                     optionsD.html(row);

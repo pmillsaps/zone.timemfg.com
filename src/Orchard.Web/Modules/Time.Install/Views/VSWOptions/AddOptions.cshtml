@@ -14,56 +14,48 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+@Html.Partial("_InstructionsAddOptions")
 <hr />
-<div class="alert alert-success">
-    <h4>Instructions:</h4>
-    <p>
-        To successfully import VSW options, this page needs three pieces of information: Option, Cost, and Hours. If one of these is missing the program will error out.
-        You can import more than one option at a time. Just copy all the options, cost, and hours for that group. Here is how to do it:
-    </p>
-    <p>&nbsp;</p>
-    <p><strong>1.</strong> Select a VSW Group from the drop down list</p>
-    <p><strong>2.</strong> Select the Lift Family from the drop down list</p>
-    <p><strong>3.</strong> Copy the options, cost, and hours from the Master Sheet in EXCEL and paste them in the text box</p>
-    <p>&nbsp;</p>
-    <p><strong>If you get an error while importing the options, make sure you have Option, Cost, and Hours for every option you pasted in the textbox.</strong></p>
-</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <div class="container-fluid bg-info" style="border-radius: 5px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <h4>Add VSW Options</h4>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LiftFamilyId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")
+                            @Html.ValidationMessageFor(model => model.LiftFamilyId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GroupId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("GroupId", optionLabel: "--- Select an Option Group ---")
+                            @Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LiftFamilyId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")
-                @Html.ValidationMessageFor(model => model.LiftFamilyId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OptionsToParse, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.OptionsToParse, new { @placeHolder = "Paste Option, Cost, and Hours here", @rows = 15, htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.OptionsToParse, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.GroupId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("GroupId", optionLabel: "--- Select an Option Group ---")
-                @Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.OptionsToParse, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.OptionsToParse, new { @placeHolder = "Paste Options Here", @rows = 15, htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OptionsToParse, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add Install Options" class="btn btn-primary" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add Install Options" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

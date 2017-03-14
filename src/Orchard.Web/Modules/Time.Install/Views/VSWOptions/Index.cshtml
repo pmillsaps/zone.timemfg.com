@@ -4,20 +4,22 @@
     ViewBag.Title = "VSW Install Options Index";
 }
 
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
 <h2>@ViewBag.Title</h2>
 
 <div align="right">
     @Html.ActionLink("Back to Main Menu", "Index", "Home")
 </div>
 
-<div class="alert alert-success">
+<div class="alert alert-info">
     <h4>There are two ways of adding options to an Option Group:</h4>
     <p>
-        <strong>1.</strong> If you want to add just one option, click on the link "Add VSW Install Option (One at a time)". Using this page will allow you to
+        <span class="label label-primary">1.</span> If you want to add just one option, click on the link <i>Add VSW Install Option (One at a time)</i>. Using this page will allow you to
         import one option at a time.
     </p>
     <p>
-        <strong>2.</strong> If you want to add more than one option at a time, click on the link "Add VSW Install Options (Two or more at a time)". On this page you will be 
+        <span class="label label-primary">2.</span> If you want to add more than one option at a time, click on the link <i>Add VSW Install Options (Two or more at a time)</i>. On this page you will be
         able to copy and paste as many options as you want from the EXCEL Master sheet and import them to the website.
     </p>
 </div>
@@ -32,15 +34,20 @@
 <hr />
 @using (Html.BeginForm("Index", "VSWOptions", FormMethod.Get))
 {
-    <div class="row">
-        <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
-        <div class="col-sm-3">@Html.DropDownList("GroupId", optionLabel: "--- Select an Option Group ---")</div>
-        <div class="col-sm-3"><input type="submit" value="Display Install Options" class="btn btn-primary" /></div>
+    <div class="row" style="margin-bottom:5px;">
+        <div class="pull-right col-md-4">
+            <div class="input-group">
+                @Html.DropDownList("GroupId", optionLabel: "--- Select an Option Group ---")
+                <span class="input-group-btn">
+                    <input type="submit" value="Go!" class="btn btn-primary" />
+                </span>
+            </div>
+        </div>
+        <div class="pull-right col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
     </div>
 }
 
-<hr />
-<table class="table table-striped">
+<table class="table table-striped table-bordered table-hover table-responsive">
     <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.OptionName)
@@ -61,12 +68,14 @@
             @Html.DisplayNameFor(model => model.OptionGroup.GroupName)
         </th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr>
 
     @if (Model == null || Model.Count() == 0)
     {
         <tr>
-            <td colspan="7" class="lead bg-danger">No rows matched search criteria</td>
+            <td colspan="9" class="bg-warning text-center">No rows matched search criteria</td>
         </tr>
     }
     else
@@ -93,9 +102,13 @@
                     @Html.DisplayFor(modelItem => item.OptionGroup.GroupName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <a href="@Url.Action("Edit", "VSWOptions", new { id = item.Id })"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "VSWOptions", new { id = item.Id })"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "VSWOptions", new { id = item.Id })"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </td>
             </tr>
         }
