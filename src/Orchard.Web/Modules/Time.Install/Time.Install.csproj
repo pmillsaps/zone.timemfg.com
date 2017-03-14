@@ -208,6 +208,13 @@
     <Content Include="Views\OptionTitleDescpForWordDocs\Edit.cshtml" />
     <Content Include="Views\OptionTitleDescpForWordDocs\Index.cshtml" />
     <Content Include="Views\OptionTitleDescpForWordDocs\_LoadOptionTitlesAndDescr.cshtml" />
+    <Content Include="Views\InstallDetailsForWordDocs\Create.cshtml" />
+    <Content Include="Views\InstallDetailsForWordDocs\Delete.cshtml" />
+    <Content Include="Views\InstallDetailsForWordDocs\Details.cshtml" />
+    <Content Include="Views\InstallDetailsForWordDocs\Edit.cshtml" />
+    <Content Include="Views\InstallDetailsForWordDocs\Index.cshtml" />
+    <Content Include="Views\VSWOptions\_InstructionsAddOptions.cshtml" />
+    <Content Include="Views\Quote\_InstructionsQuotePresentation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -228,6 +235,7 @@
     <Compile Include="Business Logic\LogQuoteChanges.cs" />
     <Compile Include="Business Logic\ParsingQuoteComments.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstallDetailsForWordDocsController.cs" />
     <Compile Include="Controllers\InstallHourlyRatesController.cs" />
     <Compile Include="Controllers\LiftFamiliesController.cs" />
     <Compile Include="Controllers\OptionGroupsController.cs" />

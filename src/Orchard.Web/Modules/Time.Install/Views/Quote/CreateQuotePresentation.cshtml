@@ -19,34 +19,9 @@
 </div>
 
 <hr />
-<div class="row">
-    <div class="col-md-12">
-        <a id="showInfo" href="#instructions" data-toggle="collapse" class="btn btn-primary btn-xs">Show Instructions</a>
-        <div id="instructions" class="collapse alert alert-info">
-            <p>
-                The page is divided into two sections. The first section contains the lift <i>Options</i>.
-                The second section contains the <i>Document Area</i>, which by default lists all the available options.
-            </p>
-            <p><span class="label label-success">How to create a Quote Presentation:</span></p>
-            <p><span class="label label-primary">1.</span> Enter the file name. If no file name is entered, the file will use the default name: <i>QuoteFile.docx</i>.</p>
-            <p><span class="label label-primary">2.</span> Select the user. If no user is selected, the info for the user in the <i>Quotation Presentation</i> will be left empty.</p>
-            <p>
-                <span class="label label-primary">3.</span> Drag the options you don't want from the <i>Document Area</i> panel and drop them in the <i>Options</i> panel.
-                Once you have all the needed <i>Options</i> in the <i>Document Area</i>, you can sort those <i>Options</i> in the order you want them
-                to appear in the <i>Quotation Presentation</i>. Just drag them up or down.
-            </p>
-            <p>
-                <span class="label label-primary">4.</span> When you finish adding <i>Options</i> to the <i>Document Area</i> and the <i>Options</i> are in the order you want,
-                click on the <span class="label label-primary">Create Quote Presentation</span> button. The document will be generated and saved to your Desktop.
-            </p>
-            <p>
-                <span class="label label-warning">Notice:</span> If you don't move the file from your desktop to a different location, the file will be overwritten if you create another
-                <i>Quotation Presentation</i> with the same name.
-            </p>
-        </div>
-    </div>
-</div>
+@Html.Partial("_InstructionsQuotePresentation")
 <br />
+
 @using (Html.BeginForm("GenerateDocument", "Quote", FormMethod.Post, new { id = "wordDocForm" }))
 {
     @Html.HiddenFor(model => Model.First().LiftFamilyId)

@@ -898,6 +898,7 @@
     <Compile Include="Models\GetSetting.cs" />
     <Compile Include="Models\Install\ChassisSpecsForWordDoc.cs" />
     <Compile Include="Models\Install\InstallDetail.cs" />
+    <Compile Include="Models\Install\InstallDetailsForWordDoc.cs" />
     <Compile Include="Models\Install\InstallHourlyRate.cs" />
     <Compile Include="Models\Install\InstallQuote.cs" />
     <Compile Include="Models\Install\LiftFamily.cs" />

@@ -1,13 +1,9 @@
-﻿using Novacode;
-using Orchard;
+﻿using Orchard;
 using Orchard.Localization;
 using Orchard.Themes;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.Install;
 using Time.Install.Business_Logic;
@@ -43,7 +39,8 @@ namespace Time.Install.Controllers
             List<LoadAerialQuotes> model = new List<LoadAerialQuotes>();
             // This line is for testing
             var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS").ToList();
-            // Uncomment this line when going live
+
+            // Uncomment this lines when going live
             //var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS" && x.QuoteComment == "").ToList();
             // Retrieving the LiftFamilyId
             //var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
@@ -193,5 +190,14 @@ namespace Time.Install.Controllers
             return File(stream.ToArray(), "application/octet-stream", fileName + ".docx");
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbQ.Dispose();
+                dbE.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

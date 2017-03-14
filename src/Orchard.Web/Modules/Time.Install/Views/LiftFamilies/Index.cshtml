@@ -70,13 +70,13 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a href="@Url.Action("Edit", "LiftFamilies", new { id = item.Id })"><span class="mbri-edit"></span></a>
+                <a href="@Url.Action("Edit", "LiftFamilies", new { id = item.Id })"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
             </td>
             <td>
-                <a href="@Url.Action("Details", "LiftFamilies", new { id = item.Id })"><span class="mbri-info"></span></a>
+                <a href="@Url.Action("Details", "LiftFamilies", new { id = item.Id })"><i class="fa fa-eye" aria-hidden="true"></i></a>
             </td>
             <td>
-                <a href="@Url.Action("Delete", "LiftFamilies", new { id = item.Id })"><span class="mbri-trash"></span></a>
+                <a href="@Url.Action("Delete", "LiftFamilies", new { id = item.Id })"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </td>
         </tr>
         <tr>

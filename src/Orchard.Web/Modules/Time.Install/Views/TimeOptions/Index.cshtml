@@ -14,15 +14,15 @@
     @Html.ActionLink("Create New Time Option", "Create")
 </p>
 
-<div class="alert alert-danger">
-    <p><strong>Note: </strong>When importing Time options, they must be imported individually. For example, you cannot import an option in this format: <strong>VK-1400-5/6/7/8</strong>.</p>
+<div class="alert alert-info">
+    <p><span class="label label-warning">Notice:</span> When importing Time options, they must be imported individually. For example, you cannot import an option in this format: <strong>VK-1400-5/6/7/8</strong>.</p>
     <p>It must be split up, in this case, in four different options: <strong>VK-1400-5, VK-1400-6, VK-1400-7</strong>, and <strong>VK-1400-8</strong> .</p>
 </div>
 <hr />
 @using (Html.BeginForm("Index", "TimeOptions", FormMethod.Get))
 {
-    <div class="row">
-        <div class="col-xs-4">
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-lg-offset-8 col-md-4">
             <div class="input-group">
                 @Html.DropDownList("LiftFamilyId", optionLabel: "--- Select Lift Family ---")
                 <span class="input-group-btn">
@@ -32,7 +32,7 @@
         </div>
     </div>
 }
-<hr />
+
 <table class="table table-striped">
     <tr class="success">
         <th>
@@ -53,7 +53,7 @@
     @if (Model == null || Model.Count() == 0)
     {
         <tr>
-            <td colspan="5" class="lead bg-danger">
+            <td colspan="5" class="bg-warning text-center">
                 No rows match search criteria
             </td>
         </tr>
