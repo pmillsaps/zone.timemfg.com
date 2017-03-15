@@ -220,13 +220,8 @@ a {
     border-bottom-left-radius: 3px;
 }
 
-/*.tableContainer {
-    position:fixed;
-    padding:80px;
-    margin:0;
-
-    top:300px;
-    left:0;
-
-    width: auto;
-}*/
+.tableContainer {
+    width: 1740px;
+    margin: 0 -300px;
+    /*outline: 1px solid green;*/
+}
