@@ -57,7 +57,7 @@
     <h3><i>Quotation Presentation</i> Data Entry</h3>
     <ul>
         <li>@Html.ActionLink("Lift Family", "Index", "LiftFamilies")
-        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="liftFamily"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="vswTimeliftFamily"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
         <li>@Html.ActionLink("Option Names and Descriptions", "Index", "OptionTitleDescpForWordDocs")
         <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="wordOptionsAndDescr"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
         <li>@Html.ActionLink("Installation Details", "Index", "InstallDetailsForWordDocs")
@@ -72,6 +72,14 @@
             var section = $(this).data("section");
             var url = '@Url.Action("MoreInfo", "Home")';
             $("#form-content").load(url + "?documentSection=" + section);
+        });
+
+        //$('body').on('hidden.bs.modal', '.modal', function () {
+        //    $(this).removeData('bs.modal');
+        //});
+
+        $('#modalForm').on('hidden', function () {
+            $(this).removeData('modal');
         });
     </script>
 }

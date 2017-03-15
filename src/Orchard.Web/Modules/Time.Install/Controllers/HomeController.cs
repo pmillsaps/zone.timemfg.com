@@ -34,13 +34,18 @@ namespace Time.Install.Controllers
             {
                 case "vswTimeliftFamily":
                     return PartialView("_vswTimeliftFamily");
-                    //break;
                 case "vswOptionGroup":
                     return PartialView("_vswOptionGroup");
-                    //break;
+                case "vswOptions":
+                    return PartialView("_vswOptions");
+                case "vswHourPaintRates":
+                    return PartialView("_vswHourPaintRates");
+                case "wordOptionsAndDescr":
+                    return PartialView("_wordOptionsAndDescr");
+                case "wordInstallDetails":
+                    return PartialView("_wordInstallDetails");
                 default:
                     return PartialView();
-                    //break;
             }
             
         }

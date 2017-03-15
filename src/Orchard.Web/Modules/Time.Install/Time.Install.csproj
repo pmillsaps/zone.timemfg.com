@@ -219,6 +219,10 @@
     <Content Include="Views\Home\_ModalForm.cshtml" />
     <Content Include="Views\Home\_vswTimeliftFamily.cshtml" />
     <Content Include="Views\Home\_vswOptionGroup.cshtml" />
+    <Content Include="Views\Home\_vswOptions.cshtml" />
+    <Content Include="Views\Home\_vswHourPaintRates.cshtml" />
+    <Content Include="Views\Home\_wordOptionsAndDescr.cshtml" />
+    <Content Include="Views\Home\_wordInstallDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
