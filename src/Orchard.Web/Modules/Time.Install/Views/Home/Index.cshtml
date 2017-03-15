@@ -62,6 +62,7 @@
         <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="wordOptionsAndDescr"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
         <li>@Html.ActionLink("Installation Details", "Index", "InstallDetailsForWordDocs")
         <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="wordInstallDetails"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+        <li>@Html.ActionLink("Users for the Quotation Presentation", "Index", "QuoteDeptUsersForWordDocs")</li>
     </ul>
 </div>
 
@@ -78,8 +79,8 @@
         //    $(this).removeData('bs.modal');
         //});
 
-        $('#modalForm').on('hidden', function () {
-            $(this).removeData('modal');
-        });
+        //$('#modalForm').on('hidden', function () {
+        //    $(this).removeData('modal');
+        //});
     </script>
 }

@@ -19,10 +19,12 @@
 
 <table class="table table-bordered table-hover table-responsive table-striped">
     <tr class="success">
-        <th>
+        <th class="col-md-11">
             @Html.DisplayNameFor(model => model.DetailLine)
         </th>
-        <th class="col-md-1"></th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -33,9 +35,11 @@
             </td>
             <td>
                 <a href="@Url.Action("Edit", "InstallDetailsForWordDocs", new { id = item.Id })"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
+            </td>
+            <td>
                 <a href="@Url.Action("Details", "InstallDetailsForWordDocs", new { id = item.Id })"><i class="fa fa-eye" aria-hidden="true"></i></a>
-
+            </td>
+            <td>
                 <a href="@Url.Action("Delete", "InstallDetailsForWordDocs", new { id = item.Id })"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </td>
         </tr>

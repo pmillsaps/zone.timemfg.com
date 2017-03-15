@@ -223,6 +223,11 @@
     <Content Include="Views\Home\_vswHourPaintRates.cshtml" />
     <Content Include="Views\Home\_wordOptionsAndDescr.cshtml" />
     <Content Include="Views\Home\_wordInstallDetails.cshtml" />
+    <Content Include="Views\QuoteDeptUsersForWordDocs\Create.cshtml" />
+    <Content Include="Views\QuoteDeptUsersForWordDocs\Delete.cshtml" />
+    <Content Include="Views\QuoteDeptUsersForWordDocs\Details.cshtml" />
+    <Content Include="Views\QuoteDeptUsersForWordDocs\Edit.cshtml" />
+    <Content Include="Views\QuoteDeptUsersForWordDocs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -249,6 +254,7 @@
     <Compile Include="Controllers\OptionGroupsController.cs" />
     <Compile Include="Controllers\OptionTitleDescpForWordDocsController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
+    <Compile Include="Controllers\QuoteDeptUsersForWordDocsController.cs" />
     <Compile Include="Controllers\TimeOptionsController.cs" />
     <Compile Include="Controllers\VSWOptionsController.cs" />
     <Compile Include="Models\AddVSWOptionManually.cs" />
