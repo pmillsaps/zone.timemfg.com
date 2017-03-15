@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Time.Data.EntityModels.Configurator;
 using Time.Data.EntityModels.Install;
 using Time.Install.ViewModels;
 
@@ -27,6 +28,7 @@ namespace Time.Install.Controllers
             Services = services;
         }
 
+        private ConfiguratorEntities dbC = new ConfiguratorEntities();
         private VSWQuotesEntities db = new VSWQuotesEntities();
 
         // GET: LiftFamilies
@@ -62,6 +64,8 @@ namespace Time.Install.Controllers
         // GET: LiftFamilies/Create
         public ActionResult Create()
         {
+            ViewBag.CFGAndItsLifts = dbC.Lookups.Where(x => x.ConfigName.StartsWith("CFG-") && x.ConfigData == "Lift").OrderBy(x => x.Data).ToList();
+            ViewBag.FamilyName = new SelectList(dbC.ConfiguratorNames, "ConfigName", "ConfigName");
             return View();
         }
 
@@ -76,7 +80,7 @@ namespace Time.Install.Controllers
             var lFmly = db.LiftFamilies.FirstOrDefault(x => x.FamilyName == vm.Lift.FamilyName);
 
             // Displays if previous code found a duplicate
-            if (lFmly != null) ModelState.AddModelError("", "Lift Family Name Already Exists");
+            if (lFmly != null) ModelState.AddModelError("", "Lift Family Name already exists.");
 
             if (ModelState.IsValid)
             {
@@ -91,7 +95,8 @@ namespace Time.Install.Controllers
 
                 return RedirectToAction("Index");
             }
-
+            ViewBag.CFGAndItsLifts = dbC.Lookups.Where(x => x.ConfigName.StartsWith("CFG-") && x.ConfigData == "Lift").OrderBy(x => x.Data).ToList();
+            ViewBag.FamilyName = new SelectList(dbC.ConfiguratorNames, "ConfigName", "ConfigName", vm.Lift.FamilyName);
             return View(vm);
         }
 
@@ -165,6 +170,7 @@ namespace Time.Install.Controllers
             if (disposing)
             {
                 db.Dispose();
+                dbC.Dispose();
             }
             base.Dispose(disposing);
         }

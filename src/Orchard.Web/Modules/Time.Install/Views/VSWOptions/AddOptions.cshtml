@@ -64,3 +64,16 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#showInfo").click(function () {
+            if ($(this).text() == "Show Instructions") {
+                $(this).text("Hide Instructions");
+            } else {
+                $(this).text("Show Instructions");
+            }
+        });
+    </script>
+}

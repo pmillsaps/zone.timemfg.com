@@ -215,6 +215,10 @@
     <Content Include="Views\InstallDetailsForWordDocs\Index.cshtml" />
     <Content Include="Views\VSWOptions\_InstructionsAddOptions.cshtml" />
     <Content Include="Views\Quote\_InstructionsQuotePresentation.cshtml" />
+    <Content Include="Views\LiftFamilies\_CFGsAndItsLifts.cshtml" />
+    <Content Include="Views\Home\_ModalForm.cshtml" />
+    <Content Include="Views\Home\_vswTimeliftFamily.cshtml" />
+    <Content Include="Views\Home\_vswOptionGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

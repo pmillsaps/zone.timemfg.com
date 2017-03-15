@@ -64,6 +64,16 @@ table.dataTable thead .sorting_desc_disabled {
     margin-bottom: 5px;
 }
 
+.fa-question-circle-o {
+    font-size: 15px;
+    color: #73A839;
+}
+
+.fa-lightbulb-o {
+    font-size: 90px;
+    color: #FF7700;
+}
+
 .fa-pencil-square-o {
     font-size: 25px;
     color: #adbcc3;
