@@ -37,6 +37,7 @@ namespace Time.Install.Controllers
         public ActionResult LoadQuotes()
         {
             List<LoadAerialQuotes> model = new List<LoadAerialQuotes>();
+
             // This line is for testing
             var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS").ToList();
 
@@ -70,6 +71,9 @@ namespace Time.Install.Controllers
                 {
                     qvm.LiftFamilyId = 0;
                 }
+                // Checking if the Lift Family has VSW options before allowing the user to do a quote.
+                var vswOptions = dbQ.VSWOptions.FirstOrDefault(x => x.LiftFamilyId == qvm.LiftFamilyId);
+                qvm.DoesThisLiftHaveVSWOptions = (vswOptions != null) ? true : false;
                 model.Add(qvm);
             }
             return Json(new { data = model }, JsonRequestBehavior.AllowGet);

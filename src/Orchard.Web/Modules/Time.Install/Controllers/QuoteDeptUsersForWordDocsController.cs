@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Orchard;
+using Orchard.Localization;
+using Orchard.Themes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,9 +13,20 @@ using Time.Data.EntityModels.Install;
 
 namespace Time.Install.Controllers
 {
+    [Themed]
+    [Authorize]
     public class QuoteDeptUsersForWordDocsController : Controller
     {
         private VSWQuotesEntities db = new VSWQuotesEntities();
+
+        private string ErrorMessage { get; set; }
+        public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
+
+        public QuoteDeptUsersForWordDocsController(IOrchardServices services)
+        {
+            Services = services;
+        }
 
         // GET: QuoteDeptUsersForWordDocs
         public ActionResult Index()
@@ -46,7 +60,7 @@ namespace Time.Install.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,PositionTitle,Phone,Fax,Email")] QuoteDeptUsersForWordDoc quoteDeptUsersForWordDoc)
+        public ActionResult Create([Bind(Exclude = "Id")] QuoteDeptUsersForWordDoc quoteDeptUsersForWordDoc)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +92,7 @@ namespace Time.Install.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,PositionTitle,Phone,Fax,Email")] QuoteDeptUsersForWordDoc quoteDeptUsersForWordDoc)
+        public ActionResult Edit(QuoteDeptUsersForWordDoc quoteDeptUsersForWordDoc)
         {
             if (ModelState.IsValid)
             {

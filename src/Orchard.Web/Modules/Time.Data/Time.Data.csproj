@@ -904,6 +904,7 @@
     <Compile Include="Models\Install\LiftFamily.cs" />
     <Compile Include="Models\Install\OptionGroup.cs" />
     <Compile Include="Models\Install\OptionTitleDescpForWordDoc.cs" />
+    <Compile Include="Models\Install\QuoteDeptUsersForWordDoc.cs" />
     <Compile Include="Models\Install\TimeOption.cs" />
     <Compile Include="Models\Install\VSWOption.cs" />
     <Compile Include="Models\ITInventory\MaintDataCompany.cs" />
