@@ -20,6 +20,14 @@
     <p><span class="label label-primary">3.</span> The description for the <i>Quotation Presentation</i> document, and</p>
     <p><span class="label label-primary">4.</span> The Installation Specifications for the <i>Quotation Presentation</i> document, if any. 
     Click the <span class="label label-primary">Show Installations Specs</span> button to display them.</p>
+    <p>Click the button below to display what sections of the previously used documents this page is related to.</p>
+    <a id="showInfo" href="#cfgsAndLifts" data-toggle="collapse" class="btn btn-primary btn-xs">Show Me</a>
+    <div id="cfgsAndLifts" class="collapse">
+        <div style="display:block; height:300px; overflow:scroll;">
+            @Html.Action("MoreInfo", "Home", new { documentSection = "vswTimeliftFamily" })
+        </div>
+    </div>
+
 </div>
 <hr />
 <div class="row">
