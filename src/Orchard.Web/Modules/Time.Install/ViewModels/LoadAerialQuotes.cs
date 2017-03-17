@@ -17,5 +17,6 @@ namespace Time.Install.ViewModels
         public string ChangedBy { get; set; }
         public string ChangeDate { get; set; }
         public int LiftFamilyId { get; set; }
+        public bool DoesThisLiftHaveVSWOptions { get; set; }
     }
 }

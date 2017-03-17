@@ -15,6 +15,7 @@
 <link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
+
 <div class="row">
     <div class="col-md-12">
         <h2>@ViewBag.Title</h2>
@@ -33,6 +34,7 @@
         <p style="margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
     </div>
 </div>
+
 <hr style="margin-top:5px;" />
 <div class="row">
     <div class="col-md-3">
@@ -44,8 +46,9 @@
         </div>
     </div>
 </div>
-<hr />
 <div class="tableContainer">
+    <hr />
+
     <table id="mntncDetailsTable" class="table table-striped table-hover table-bordered table-condensed">
         <thead>
             <tr class="success">
@@ -111,7 +114,7 @@
                         // Whatever
                     });
                 },
-                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
                 buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary btn-sm excelButton", filename: 'MaintenanceDataDetailsList', }],
                 order: [[6, "asc"]],
                 stateSave: true,

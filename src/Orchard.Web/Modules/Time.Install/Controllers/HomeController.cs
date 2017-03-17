@@ -27,5 +27,27 @@ namespace Time.Install.Controllers
         {
             return View();
         }
+
+        public ActionResult MoreInfo(string documentSection)
+        {
+            switch (documentSection)
+            {
+                case "vswTimeliftFamily":
+                    return PartialView("_vswTimeliftFamily");
+                case "vswOptionGroup":
+                    return PartialView("_vswOptionGroup");
+                case "vswOptions":
+                    return PartialView("_vswOptions");
+                case "vswHourPaintRates":
+                    return PartialView("_vswHourPaintRates");
+                case "wordOptionsAndDescr":
+                    return PartialView("_wordOptionsAndDescr");
+                case "wordInstallDetails":
+                    return PartialView("_wordInstallDetails");
+                default:
+                    return PartialView();
+            }
+            
+        }
     }
 }

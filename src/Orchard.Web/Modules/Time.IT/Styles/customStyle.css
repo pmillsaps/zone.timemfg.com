@@ -1,204 +1,212 @@
-﻿table.dataTable thead > tr > th.sorting_asc, 
-table.dataTable thead > tr > th.sorting_desc, 
+﻿table.dataTable thead > tr > th.sorting_asc,
+table.dataTable thead > tr > th.sorting_desc,
 table.dataTable thead > tr > th.sorting,
 table.dataTable thead > tr > td.sorting_asc,
 table.dataTable thead > tr > td.sorting_desc,
 table.dataTable thead > tr > td.sorting {
-  padding-right: 30px;
+    padding-right: 30px;
 }
 
 table.dataTable thead > tr > th:active,
 table.dataTable thead > tr > td:active {
-  outline: none;
+    outline: none;
 }
+
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc,
 table.dataTable thead .sorting_asc_disabled,
 table.dataTable thead .sorting_desc_disabled {
-  cursor: pointer;
-  position: relative;
-}
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:after {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  display: block;
-  font-family: 'FontAwesome';
-  opacity: 0.5;
+    cursor: pointer;
+    position: relative;
 }
 
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:after {
-    font-family: 'FontAwesome';
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        display: block;
+        font-family: 'FontAwesome';
+        opacity: 0.5;
+    }
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        font-family: 'FontAwesome';
+    }
+
+    table.dataTable thead .sorting:after {
+        /*content: "\f0dc";*/
+        color: #a4a4a4;
+        content: "\f176 \f175";
+    }
+
+    table.dataTable thead .sorting_asc:after {
+        /*content: "\f0de";*/
+        color: #000;
+        content: "\f160";
+    }
+
+    table.dataTable thead .sorting_desc:after {
+        /*content: "\f0dd";*/
+        color: #000;
+        content: "\f161";
+    }
+
+.excelButton {
+    margin-bottom: 5px;
 }
 
-table.dataTable thead .sorting:after {
-    /*content: "\f0dc";*/
-    color:#a4a4a4;
-    content: "\f176 \f175";
+.fa-question-circle-o {
+    font-size: 15px;
+    color: #73A839;
 }
 
-table.dataTable thead .sorting_asc:after {
-    /*content: "\f0de";*/
-    color:#000;
-    content: "\f160";
-}
-
-table.dataTable thead .sorting_desc:after {
-    /*content: "\f0dd";*/
-    color:#000;
-    content: "\f161";
-}
-
-.excelButton{
-    margin-bottom:5px;
+.fa-lightbulb-o {
+    font-size: 90px;
+    color: #FF7700;
 }
 
 .fa-pencil-square-o {
- font-size:25px; 
- color:#adbcc3;
+    font-size: 25px;
+    color: #adbcc3;
 }
 
-.fa-pencil-square-o:hover {
- color: #940f3c;/*0876a9;*/
- text-shadow: 0px 0px 5px #EC407A,/*0baaf4,*/
- 0px 0px 10px #EC407A, 
- 0px 0px 15px #EC407A;
- transition-duration: 1s;}
+    .fa-pencil-square-o:hover {
+        color: #940f3c; /*0876a9;*/
+        text-shadow: 0px 0px 5px #EC407A, /*0baaf4,*/
+        0px 0px 10px #EC407A, 0px 0px 15px #EC407A;
+        transition-duration: 1s;
+    }
 
 .fa-eye {
- font-size:25px; 
- color:#adbcc3;
+    font-size: 25px;
+    color: #adbcc3;
 }
 
-.fa-eye:hover {
- color: #008c00;
- text-shadow: 0px 0px 5px #00b300,
- 0px 0px 10px #00b300, 
- 0px 0px 15px #00b300;
- transition-duration: 1s;}
+    .fa-eye:hover {
+        color: #008c00;
+        text-shadow: 0px 0px 5px #00b300, 0px 0px 10px #00b300, 0px 0px 15px #00b300;
+        transition-duration: 1s;
+    }
 
 .fa-hand-o-right {
- font-size:25px; 
- color:#adbcc3;
+    font-size: 25px;
+    color: #adbcc3;
 }
 
-.fa-hand-o-right:hover {
- color: #008c00;
- text-shadow: 0px 0px 5px #00b300,
- 0px 0px 10px #00b300, 
- 0px 0px 15px #00b300;
- transition-duration: 1s;}
+    .fa-hand-o-right:hover {
+        color: #008c00;
+        text-shadow: 0px 0px 5px #00b300, 0px 0px 10px #00b300, 0px 0px 15px #00b300;
+        transition-duration: 1s;
+    }
 
 .fa-file-word-o {
- font-size:25px; 
- color:#adbcc3;
+    font-size: 25px;
+    color: #adbcc3;
 }
 
-.fa-file-word-o:hover {
- color: #3366ff;
- text-shadow: 0px 0px 5px #6e92ff,
- 0px 0px 10px #6e92ff, 
- 0px 0px 15px #6e92ff;
- transition-duration: 1s;}
+    .fa-file-word-o:hover {
+        color: #3366ff;
+        text-shadow: 0px 0px 5px #6e92ff, 0px 0px 10px #6e92ff, 0px 0px 15px #6e92ff;
+        transition-duration: 1s;
+    }
 
 .fa-trash-o {
- font-size:25px; 
- color:#adbcc3;
+    font-size: 25px;
+    color: #adbcc3;
 }
 
-.fa-trash-o:hover {
- color: #940f3c;
- text-shadow: 0px 0px 5px #EC407A,
- 0px 0px 10px #EC407A, 
- 0px 0px 15px #EC407A;
- transition-duration: 1s;}
+    .fa-trash-o:hover {
+        color: #940f3c;
+        text-shadow: 0px 0px 5px #EC407A, 0px 0px 10px #EC407A, 0px 0px 15px #EC407A;
+        transition-duration: 1s;
+    }
 
 .fa-files-o {
- font-size:25px; 
- color:#adbcc3;
+    font-size: 25px;
+    color: #adbcc3;
 }
 
-.fa-files-o:hover {
- color: #0876a9;
- text-shadow: 0px 0px 5px #0baaf4,
- 0px 0px 10px #0baaf4, 
- 0px 0px 15px #0baaf4;
- transition-duration: 1s;}
+    .fa-files-o:hover {
+        color: #0876a9;
+        text-shadow: 0px 0px 5px #0baaf4, 0px 0px 10px #0baaf4, 0px 0px 15px #0baaf4;
+        transition-duration: 1s;
+    }
 
 .mbri-pages {
- font-size:25px; 
- color:#adbcc3;}
+    font-size: 25px;
+    color: #adbcc3;
+}
 
-.mbri-pages:hover {
- color: #0876a9;
- text-shadow: 0px 0px 5px #0baaf4,
- 0px 0px 10px #0baaf4, 
- 0px 0px 15px #0baaf4;
- transition-duration: 1s;}
+    .mbri-pages:hover {
+        color: #0876a9;
+        text-shadow: 0px 0px 5px #0baaf4, 0px 0px 10px #0baaf4, 0px 0px 15px #0baaf4;
+        transition-duration: 1s;
+    }
 
 .mbri-trash {
- font-size:25px; 
- color:#adbcc3;}
+    font-size: 25px;
+    color: #adbcc3;
+}
 
-.mbri-trash:hover {
- color: #940f3c;
- text-shadow: 0px 0px 5px #EC407A,
- 0px 0px 10px #EC407A, 
- 0px 0px 15px #EC407A;
- transition-duration: 1s;}
+    .mbri-trash:hover {
+        color: #940f3c;
+        text-shadow: 0px 0px 5px #EC407A, 0px 0px 10px #EC407A, 0px 0px 15px #EC407A;
+        transition-duration: 1s;
+    }
 
 .mbri-edit {
- font-size:25px; 
- color:#adbcc3;}
+    font-size: 25px;
+    color: #adbcc3;
+}
 
-.mbri-edit:hover {
- color: #940f3c;
- text-shadow: 0px 0px 5px #EC407A,
- 0px 0px 10px #EC407A, 
- 0px 0px 15px #EC407A;
- transition-duration: 1s;}
+    .mbri-edit:hover {
+        color: #940f3c;
+        text-shadow: 0px 0px 5px #EC407A, 0px 0px 10px #EC407A, 0px 0px 15px #EC407A;
+        transition-duration: 1s;
+    }
 
 .mbri-info {
- font-size:25px; 
- color:#adbcc3;}
+    font-size: 25px;
+    color: #adbcc3;
+}
 
-.mbri-info:hover {
- color: #008c00;
- text-shadow: 0px 0px 5px #00b300,
- 0px 0px 10px #00b300, 
- 0px 0px 15px #00b300;
- transition-duration: 1s;}
+    .mbri-info:hover {
+        color: #008c00;
+        text-shadow: 0px 0px 5px #00b300, 0px 0px 10px #00b300, 0px 0px 15px #00b300;
+        transition-duration: 1s;
+    }
 
 .table td.clampClmn {
-  max-width: 250px;
-  word-wrap: break-word;
+    max-width: 250px;
+    word-wrap: break-word;
 }
 
-a{
-    text-decoration: none !important;
-}
-.a:hover{
+a {
     text-decoration: none !important;
 }
 
-.showDatePicker{
-    position: relative; 
-    z-index:100000 !important; 
+.a:hover {
+    text-decoration: none !important;
+}
+
+.showDatePicker {
+    position: relative;
+    z-index: 100000 !important;
 }
 
 .mypanel-header {
     color: #555;
     /*background-color: #dcdcdc;*/
-    background: linear-gradient(to left, #CCCCCC , #E9E9E9);
+    background: linear-gradient(to left, #CCCCCC, #E9E9E9);
     /*background-color: #CAF186;*/
     /*background-color: #D1F397;*/
     /*background-color: #C2EF74;*/
@@ -222,3 +230,8 @@ a{
     border-bottom-left-radius: 3px;
 }
 
+.tableContainer {
+    width: 1740px;
+    margin: 0 -300px;
+    /*outline: 1px solid green;*/
+}

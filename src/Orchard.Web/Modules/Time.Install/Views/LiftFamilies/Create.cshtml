@@ -12,22 +12,25 @@
 <div align="right">
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@Html.Partial("_CFGsAndItsLifts", ViewBag.CFGAndItsLifts as IEnumerable<Time.Data.EntityModels.Configurator.Lookup>)
 <hr />
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="container-fluid bg-info" style="border-radius: 5px;">
         <div class="row">
             <div class="col-md-6">
                 <h4>Lift Family</h4>
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
                 <div class="form-horizontal">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Lift.FamilyName, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.Lift.FamilyName, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus" } })
+                            @*@Html.EditorFor(model => model.Lift.FamilyName, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus" } })*@
+                            @Html.DropDownListFor(model => model.Lift.FamilyName, ViewBag.FamilyName as SelectList, new { htmlAttributes = new { @class = "form-control" }, @autofocus = "autofocus" })
                             @Html.ValidationMessageFor(model => model.Lift.FamilyName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -125,3 +128,16 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $("#showInfo").click(function () {
+            if ($(this).text() == "Show Lift Families") {
+                $(this).text("Hide Lift Families");
+            } else {
+                $(this).text("Show Lift Families");
+            }
+        });
+    </script>
+}
