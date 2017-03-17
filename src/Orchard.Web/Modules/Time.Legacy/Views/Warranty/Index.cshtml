@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Time.Legacy.Models.InsertWarranty>
+
+@{
+    ViewBag.Title = "Warranty Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+<div class="alert alert-info">
+    <h4>All: Search By Serial Number, End User Name, Lift Order #, Invoice #, Customer ID, or PO #</h4>
+    <h5>For Example: AA9 KPL brings back everything that fits that criteria</h5>
+    <h5>Must be 3 or more characters long.</h5>
+    <br />
+    <h4>Serial # Begins With can be 1 character long, but will take longer to load because of the amount of rows returned.</h4>
+    <h5>For Example: Searching for "J" will return all Serial Numbers that start with J (over 2,000 rows).  Searching for "A" will return over 12,000 rows.</h5>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                @Html.TextBox("search", null, htmlAttributes: new { @placeholder = "Search..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary">Go!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            @{ var listItems = new List<SelectListItem>
+    {
+       new SelectListItem { Text = "All", Value="All" },
+       new SelectListItem { Text = "Serial #", Value="Serial" },
+       new SelectListItem { Text = "Serial # Begins With", Value="BeginsWith" },
+       new SelectListItem { Text = "End User Name", Value="EndUserName" },
+       new SelectListItem { Text = "Lift Order #", Value="LiftOrder" },
+       new SelectListItem { Text = "Invoice #", Value="Invoice" },
+       new SelectListItem { Text = "Customer ID", Value="CustomerID" },
+       new SelectListItem { Text = "PO #", Value="PO" }
+    };
+            }
+            @Html.DropDownList("ddl", new SelectList(listItems, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+                        }
+
+<br />
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftOrderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PoNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="9">
+                @Html.Label("No rows match search criteria or search string is to short (must be 3 or more characters in length)")
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndUserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftOrderNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PoNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

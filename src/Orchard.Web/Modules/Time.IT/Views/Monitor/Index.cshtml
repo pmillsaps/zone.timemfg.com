@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Monitor Index";
+    Script.Require("jQuery");
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot(); 
+}
+<link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-2">
+        <a class="btn btn-primary" href="Monitor/Create" >Add New Monitor</a>
+    </div>
+    <div class="col-md-10">
+        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+    </div>
+</div>
+<div class="tablecontainer">
+    <table id="monitorsTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("Model")</td>
+                <td>@Html.Label("Serial No")</td>
+                <td>@Html.Label("Asset Id")</td>
+                <td>@Html.Label("Purchase Date")</td>
+                <td>@Html.Label("Purchased From")</td>
+                <td>@Html.Label("PO")</td>
+                <td>@Html.Label("Cost")</td>
+                <td>@Html.Label("MFR Name")</td>
+                <td>@Html.Label("Size")</td>
+                <td>@Html.Label("User Name")</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadMonitors", "Monitor")';
+            var oTable = $("#monitorsTable").DataTable({
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary btn-sm excelButton", filename: 'MonitorsList', }],
+                order: [[7, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columns: [
+                    {
+                        data: null, autoWidth: true, render: function (data, type, row) {
+                            return '<a href="Monitor/Details/' + row.Id + '">'+ row.Model +'</a>';
+                        }
+                    },
+                    { data: "SerialNo", autoWidth: true },
+                    { data: "AssetId", autoWidth: true },
+                    { data: "PurchaseDate", autoWidth: true},
+                    { data: "PurchasedFrom", autoWidth: true },
+                    { data: "PO", autoWidth: true },
+                    { data: "Cost", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$')},
+                    { data: "MFRName", autoWidth: true },
+                    { data: "Size", autoWidth: true },
+                    { data: "UserName", autoWidth: true },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Monitor/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="Monitor/Delete/' + data + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                        }
+                    }
+                ]
+            })
+        });
+    </script>
+}

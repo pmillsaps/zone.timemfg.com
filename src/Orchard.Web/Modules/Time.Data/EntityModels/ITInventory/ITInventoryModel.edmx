@@ -1,0 +1,1842 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ITInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="WindowsKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="MemoryId" Type="int" />
+          <Property Name="ProcessorId" Type="int" />
+          <Property Name="DeviceTypeId" Type="int" />
+          <Property Name="OSId" Type="int" />
+          <Property Name="VideoCardId" Type="int" />
+          <Property Name="SoundId" Type="int" />
+          <Property Name="LastEditedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastDateEdited" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="PO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="AssetTag" Type="nvarchar" MaxLength="50" />
+          <Property Name="BIOS_Version" Type="nvarchar" MaxLength="30" />
+          <Property Name="WarrantyExpirationDate" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="LastBuildDate" Type="datetime" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdditionalHW" Type="nvarchar(max)" />
+          <Property Name="FirmwareVersion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Computer_License">
+          <Key>
+            <PropertyRef Name="ComputerId" />
+            <PropertyRef Name="LicenseId" />
+          </Key>
+          <Property Name="ComputerId" Type="int" Nullable="false" />
+          <Property Name="LicenseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="LicenseKey" Type="nvarchar" MaxLength="255" />
+          <Property Name="QuantityAssigned" Type="int" Nullable="false" />
+          <Property Name="ComputerId" Type="int" />
+          <Property Name="LicenseTypeId" Type="int" />
+          <Property Name="PO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MaintDataCompany">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaintenanceData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BudgetItem" Type="varchar" MaxLength="200" />
+          <Property Name="Supplier" Type="varchar" MaxLength="200" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="200" />
+          <Property Name="OriginalPurchDate" Type="datetime" />
+          <Property Name="ComputerId" Type="int" />
+          <Property Name="LicenseId" Type="int" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaintenanceDataDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaintenanceDataId" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="200" />
+          <Property Name="Duration" Type="varchar" MaxLength="50" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Monthly" Type="varchar" MaxLength="200" />
+          <Property Name="Explanation" Type="varchar(max)" />
+          <Property Name="AlternateInfo" Type="varchar(max)" />
+          <Property Name="PO_CC" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Monitor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ManufacturerId" Type="int" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="SerialNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssetId" Type="nvarchar" MaxLength="50" />
+          <Property Name="SizeId" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="PurchasedFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="PO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Ref_Building">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_BuildYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_CableNo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_DeviceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceType" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_LicenseType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Memory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="GB" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Model">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ManufacturerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Ref_MonitorSizes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Size" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_NIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MAC" Type="nvarchar" MaxLength="50" />
+          <Property Name="IP" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpeedId" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="SwitchPortId" Type="int" />
+          <Property Name="CableId" Type="int" />
+          <Property Name="ComputerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Ref_NICSpeed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NIC_Speed" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_OS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OS" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Processor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Processor" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Sound">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sound" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_SwitchPort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SwitchPort" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_VideoCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VideoCard" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ManufacturerId" Type="int" />
+          <Property Name="VideoMemory" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ScheduledTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComputerId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sunday" Type="bit" Nullable="false" />
+          <Property Name="Monday" Type="bit" Nullable="false" />
+          <Property Name="Tuesday" Type="bit" Nullable="false" />
+          <Property Name="Wednesday" Type="bit" Nullable="false" />
+          <Property Name="Thursday" Type="bit" Nullable="false" />
+          <Property Name="Friday" Type="bit" Nullable="false" />
+          <Property Name="Saturday" Type="bit" Nullable="false" />
+          <Property Name="Program" Type="nvarchar" MaxLength="200" />
+          <Property Name="SecurityRunAs" Type="nvarchar" MaxLength="100" />
+          <Property Name="Databases" Type="nvarchar" MaxLength="100" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="200" />
+          <Property Name="SharesLocations" Type="nvarchar" MaxLength="200" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BuildingId" Type="int" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="LastDateEdited" Type="datetime" />
+          <Property Name="LastEditedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="InActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="User_License">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LicenseId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LicenseId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Model_Manufacturer">
+          <End Role="Ref_Manufacturer" Type="Self.Ref_Manufacturer" Multiplicity="0..1" />
+          <End Role="Ref_Model" Type="Self.Ref_Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Manufacturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_Model">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__Memory">
+          <End Role="Ref_Memory" Type="Self.Ref_Memory" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Memory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="MemoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__Model">
+          <End Role="Ref_Model" Type="Self.Ref_Model" Multiplicity="1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Model">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__Status">
+          <End Role="Ref_Status" Type="Self.Ref_Status" Multiplicity="1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__VideoCard">
+          <End Role="Ref_VideoCard" Type="Self.Ref_VideoCard" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_VideoCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="VideoCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_License_Computer">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Computer_License" Type="Self.Computer_License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer_License">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_License_License">
+          <End Role="License" Type="Self.License" Multiplicity="1" />
+          <End Role="Computer_License" Type="Self.Computer_License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="License">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer_License">
+              <PropertyRef Name="LicenseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_DeviceType">
+          <End Role="Ref_DeviceType" Type="Self.Ref_DeviceType" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_DeviceType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="DeviceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_OS">
+          <End Role="Ref_OS" Type="Self.Ref_OS" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_OS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="OSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_Processor">
+          <End Role="Ref_Processor" Type="Self.Ref_Processor" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Processor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="ProcessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_Sound">
+          <End Role="Ref_Sound" Type="Self.Ref_Sound" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Sound">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="SoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_License_Ref_LicenseType">
+          <End Role="Ref_LicenseType" Type="Self.Ref_LicenseType" Multiplicity="0..1" />
+          <End Role="License" Type="Self.License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_LicenseType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="License">
+              <PropertyRef Name="LicenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monitor_Manufacturer">
+          <End Role="Ref_Manufacturer" Type="Self.Ref_Manufacturer" Multiplicity="1" />
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Manufacturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monitor_Ref_MonitorSizes">
+          <End Role="Ref_MonitorSizes" Type="Self.Ref_MonitorSizes" Multiplicity="1" />
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_MonitorSizes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monitor_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Monitor" Type="Self.Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NIC__NICSpeed">
+          <End Role="Ref_NICSpeed" Type="Self.Ref_NICSpeed" Multiplicity="0..1" />
+          <End Role="Ref_NIC" Type="Self.Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_NICSpeed">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="SpeedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ref_NIC_Computer">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="0..1" />
+          <End Role="Ref_NIC" Type="Self.Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ref_NIC_Ref_CableNo">
+          <End Role="Ref_CableNo" Type="Self.Ref_CableNo" Multiplicity="0..1" />
+          <End Role="Ref_NIC" Type="Self.Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_CableNo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="CableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ref_NIC_Ref_SwitchPort">
+          <End Role="Ref_SwitchPort" Type="Self.Ref_SwitchPort" Multiplicity="0..1" />
+          <End Role="Ref_NIC" Type="Self.Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_SwitchPort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="SwitchPortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduledTasks_Computer">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="ScheduledTasks" Type="Self.ScheduledTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduledTasks">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User__Building">
+          <End Role="Ref_Building" Type="Self.Ref_Building" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User__Location">
+          <End Role="Ref_Location" Type="Self.Ref_Location" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_License_License">
+          <End Role="License" Type="Self.License" Multiplicity="1" />
+          <End Role="User_License" Type="Self.User_License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="License">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_License">
+              <PropertyRef Name="LicenseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_License_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_License" Type="Self.User_License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_License">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblMaintenanceData_CompanyId_FK">
+          <End Role="MaintDataCompany" Type="Self.MaintDataCompany" Multiplicity="1" />
+          <End Role="MaintenanceData" Type="Self.MaintenanceData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintDataCompany">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceData">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblMaintenanceDataDetails_MaintenanceDataId_FK">
+          <End Role="MaintenanceData" Type="Self.MaintenanceData" Multiplicity="1" />
+          <End Role="MaintenanceDataDetails" Type="Self.MaintenanceDataDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceDataDetails">
+              <PropertyRef Name="MaintenanceDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ITInventoryModelStoreContainer">
+          <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Computer_License" EntityType="Self.Computer_License" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="License" EntityType="Self.License" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintDataCompany" EntityType="Self.MaintDataCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceData" EntityType="Self.MaintenanceData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceDataDetails" EntityType="Self.MaintenanceDataDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monitor" EntityType="Self.Monitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Building" EntityType="Self.Ref_Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_BuildYear" EntityType="Self.Ref_BuildYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_CableNo" EntityType="Self.Ref_CableNo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_DeviceType" EntityType="Self.Ref_DeviceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_LicenseType" EntityType="Self.Ref_LicenseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Location" EntityType="Self.Ref_Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Manufacturer" EntityType="Self.Ref_Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Memory" EntityType="Self.Ref_Memory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Model" EntityType="Self.Ref_Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_MonitorSizes" EntityType="Self.Ref_MonitorSizes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_NIC" EntityType="Self.Ref_NIC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_NICSpeed" EntityType="Self.Ref_NICSpeed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_OS" EntityType="Self.Ref_OS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Processor" EntityType="Self.Ref_Processor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Sound" EntityType="Self.Ref_Sound" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Status" EntityType="Self.Ref_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_SwitchPort" EntityType="Self.Ref_SwitchPort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_VideoCard" EntityType="Self.Ref_VideoCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduledTasks" EntityType="Self.ScheduledTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_License" EntityType="Self.User_License" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Model_Manufacturer" Association="Self.FK__Model_Manufacturer">
+            <End Role="Ref_Manufacturer" EntitySet="Ref_Manufacturer" />
+            <End Role="Ref_Model" EntitySet="Ref_Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__Memory" Association="Self.FK_Computer__Memory">
+            <End Role="Ref_Memory" EntitySet="Ref_Memory" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__Model" Association="Self.FK_Computer__Model">
+            <End Role="Ref_Model" EntitySet="Ref_Model" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__Status" Association="Self.FK_Computer__Status">
+            <End Role="Ref_Status" EntitySet="Ref_Status" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__VideoCard" Association="Self.FK_Computer__VideoCard">
+            <End Role="Ref_VideoCard" EntitySet="Ref_VideoCard" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_License_Computer" Association="Self.FK_Computer_License_Computer">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="Computer_License" EntitySet="Computer_License" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_License_License" Association="Self.FK_Computer_License_License">
+            <End Role="License" EntitySet="License" />
+            <End Role="Computer_License" EntitySet="Computer_License" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_DeviceType" Association="Self.FK_Computer_Ref_DeviceType">
+            <End Role="Ref_DeviceType" EntitySet="Ref_DeviceType" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_OS" Association="Self.FK_Computer_Ref_OS">
+            <End Role="Ref_OS" EntitySet="Ref_OS" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_Processor" Association="Self.FK_Computer_Ref_Processor">
+            <End Role="Ref_Processor" EntitySet="Ref_Processor" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_Sound" Association="Self.FK_Computer_Ref_Sound">
+            <End Role="Ref_Sound" EntitySet="Ref_Sound" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_User" Association="Self.FK_Computer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_License_Ref_LicenseType" Association="Self.FK_License_Ref_LicenseType">
+            <End Role="Ref_LicenseType" EntitySet="Ref_LicenseType" />
+            <End Role="License" EntitySet="License" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monitor_Manufacturer" Association="Self.FK_Monitor_Manufacturer">
+            <End Role="Ref_Manufacturer" EntitySet="Ref_Manufacturer" />
+            <End Role="Monitor" EntitySet="Monitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monitor_Ref_MonitorSizes" Association="Self.FK_Monitor_Ref_MonitorSizes">
+            <End Role="Ref_MonitorSizes" EntitySet="Ref_MonitorSizes" />
+            <End Role="Monitor" EntitySet="Monitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monitor_User" Association="Self.FK_Monitor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Monitor" EntitySet="Monitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NIC__NICSpeed" Association="Self.FK_NIC__NICSpeed">
+            <End Role="Ref_NICSpeed" EntitySet="Ref_NICSpeed" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ref_NIC_Computer" Association="Self.FK_Ref_NIC_Computer">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ref_NIC_Ref_CableNo" Association="Self.FK_Ref_NIC_Ref_CableNo">
+            <End Role="Ref_CableNo" EntitySet="Ref_CableNo" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ref_NIC_Ref_SwitchPort" Association="Self.FK_Ref_NIC_Ref_SwitchPort">
+            <End Role="Ref_SwitchPort" EntitySet="Ref_SwitchPort" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduledTasks_Computer" Association="Self.FK_ScheduledTasks_Computer">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="ScheduledTasks" EntitySet="ScheduledTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User__Building" Association="Self.FK_User__Building">
+            <End Role="Ref_Building" EntitySet="Ref_Building" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User__Location" Association="Self.FK_User__Location">
+            <End Role="Ref_Location" EntitySet="Ref_Location" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_License_License" Association="Self.FK_User_License_License">
+            <End Role="License" EntitySet="License" />
+            <End Role="User_License" EntitySet="User_License" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_License_User" Association="Self.FK_User_License_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_License" EntitySet="User_License" />
+          </AssociationSet>
+          <AssociationSet Name="tblMaintenanceData_CompanyId_FK" Association="Self.tblMaintenanceData_CompanyId_FK">
+            <End Role="MaintDataCompany" EntitySet="MaintDataCompany" />
+            <End Role="MaintenanceData" EntitySet="MaintenanceData" />
+          </AssociationSet>
+          <AssociationSet Name="tblMaintenanceDataDetails_MaintenanceDataId_FK" Association="Self.tblMaintenanceDataDetails_MaintenanceDataId_FK">
+            <End Role="MaintenanceData" EntitySet="MaintenanceData" />
+            <End Role="MaintenanceDataDetails" EntitySet="MaintenanceDataDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ITInventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ITInventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Computers" EntityType="ITInventoryModel.Computer" />
+          <EntitySet Name="Licenses" EntityType="ITInventoryModel.License" />
+          <EntitySet Name="Monitors" EntityType="ITInventoryModel.Monitor" />
+          <EntitySet Name="Ref_Building" EntityType="ITInventoryModel.Ref_Building" />
+          <EntitySet Name="Ref_BuildYear" EntityType="ITInventoryModel.Ref_BuildYear" />
+          <EntitySet Name="Ref_CableNo" EntityType="ITInventoryModel.Ref_CableNo" />
+          <EntitySet Name="Ref_DeviceType" EntityType="ITInventoryModel.Ref_DeviceType" />
+          <EntitySet Name="Ref_LicenseType" EntityType="ITInventoryModel.Ref_LicenseType" />
+          <EntitySet Name="Ref_Location" EntityType="ITInventoryModel.Ref_Location" />
+          <EntitySet Name="Ref_Manufacturer" EntityType="ITInventoryModel.Ref_Manufacturer" />
+          <EntitySet Name="Ref_Memory" EntityType="ITInventoryModel.Ref_Memory" />
+          <EntitySet Name="Ref_Model" EntityType="ITInventoryModel.Ref_Model" />
+          <EntitySet Name="Ref_MonitorSizes" EntityType="ITInventoryModel.Ref_MonitorSizes" />
+          <EntitySet Name="Ref_NIC" EntityType="ITInventoryModel.Ref_NIC" />
+          <EntitySet Name="Ref_NICSpeed" EntityType="ITInventoryModel.Ref_NICSpeed" />
+          <EntitySet Name="Ref_OS" EntityType="ITInventoryModel.Ref_OS" />
+          <EntitySet Name="Ref_Processor" EntityType="ITInventoryModel.Ref_Processor" />
+          <EntitySet Name="Ref_Sound" EntityType="ITInventoryModel.Ref_Sound" />
+          <EntitySet Name="Ref_Status" EntityType="ITInventoryModel.Ref_Status" />
+          <EntitySet Name="Ref_SwitchPort" EntityType="ITInventoryModel.Ref_SwitchPort" />
+          <EntitySet Name="Ref_VideoCard" EntityType="ITInventoryModel.Ref_VideoCard" />
+          <EntitySet Name="ScheduledTasks" EntityType="ITInventoryModel.ScheduledTask" />
+          <EntitySet Name="Users" EntityType="ITInventoryModel.User" />
+          <AssociationSet Name="FK_Computer__Memory" Association="ITInventoryModel.FK_Computer__Memory">
+            <End Role="Ref_Memory" EntitySet="Ref_Memory" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__Model" Association="ITInventoryModel.FK_Computer__Model">
+            <End Role="Ref_Model" EntitySet="Ref_Model" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__Status" Association="ITInventoryModel.FK_Computer__Status">
+            <End Role="Ref_Status" EntitySet="Ref_Status" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer__VideoCard" Association="ITInventoryModel.FK_Computer__VideoCard">
+            <End Role="Ref_VideoCard" EntitySet="Ref_VideoCard" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_DeviceType" Association="ITInventoryModel.FK_Computer_Ref_DeviceType">
+            <End Role="Ref_DeviceType" EntitySet="Ref_DeviceType" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_OS" Association="ITInventoryModel.FK_Computer_Ref_OS">
+            <End Role="Ref_OS" EntitySet="Ref_OS" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_Processor" Association="ITInventoryModel.FK_Computer_Ref_Processor">
+            <End Role="Ref_Processor" EntitySet="Ref_Processor" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Ref_Sound" Association="ITInventoryModel.FK_Computer_Ref_Sound">
+            <End Role="Ref_Sound" EntitySet="Ref_Sound" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_User" Association="ITInventoryModel.FK_Computer_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ref_NIC_Computer" Association="ITInventoryModel.FK_Ref_NIC_Computer">
+            <End Role="Computer" EntitySet="Computers" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduledTasks_Computer" Association="ITInventoryModel.FK_ScheduledTasks_Computer">
+            <End Role="Computer" EntitySet="Computers" />
+            <End Role="ScheduledTask" EntitySet="ScheduledTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_License_Ref_LicenseType" Association="ITInventoryModel.FK_License_Ref_LicenseType">
+            <End Role="Ref_LicenseType" EntitySet="Ref_LicenseType" />
+            <End Role="License" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monitor_Manufacturer" Association="ITInventoryModel.FK_Monitor_Manufacturer">
+            <End Role="Ref_Manufacturer" EntitySet="Ref_Manufacturer" />
+            <End Role="Monitor" EntitySet="Monitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monitor_Ref_MonitorSizes" Association="ITInventoryModel.FK_Monitor_Ref_MonitorSizes">
+            <End Role="Ref_MonitorSizes" EntitySet="Ref_MonitorSizes" />
+            <End Role="Monitor" EntitySet="Monitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monitor_User" Association="ITInventoryModel.FK_Monitor_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Monitor" EntitySet="Monitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User__Building" Association="ITInventoryModel.FK_User__Building">
+            <End Role="Ref_Building" EntitySet="Ref_Building" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ref_NIC_Ref_CableNo" Association="ITInventoryModel.FK_Ref_NIC_Ref_CableNo">
+            <End Role="Ref_CableNo" EntitySet="Ref_CableNo" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User__Location" Association="ITInventoryModel.FK_User__Location">
+            <End Role="Ref_Location" EntitySet="Ref_Location" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Model_Manufacturer" Association="ITInventoryModel.FK__Model_Manufacturer">
+            <End Role="Ref_Manufacturer" EntitySet="Ref_Manufacturer" />
+            <End Role="Ref_Model" EntitySet="Ref_Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NIC__NICSpeed" Association="ITInventoryModel.FK_NIC__NICSpeed">
+            <End Role="Ref_NICSpeed" EntitySet="Ref_NICSpeed" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ref_NIC_Ref_SwitchPort" Association="ITInventoryModel.FK_Ref_NIC_Ref_SwitchPort">
+            <End Role="Ref_SwitchPort" EntitySet="Ref_SwitchPort" />
+            <End Role="Ref_NIC" EntitySet="Ref_NIC" />
+          </AssociationSet>
+          <AssociationSet Name="Computer_License" Association="ITInventoryModel.Computer_License">
+            <End Role="Computer" EntitySet="Computers" />
+            <End Role="License" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="User_License" Association="ITInventoryModel.User_License">
+            <End Role="License" EntitySet="Licenses" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="MaintenanceDatas" EntityType="ITInventoryModel.MaintenanceData" />
+          <EntitySet Name="MaintenanceDataDetails" EntityType="ITInventoryModel.MaintenanceDataDetail" />
+          <AssociationSet Name="tblMaintenanceDataDetails_MaintenanceDataId_FK" Association="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK">
+            <End Role="MaintenanceData" EntitySet="MaintenanceDatas" />
+            <End Role="MaintenanceDataDetail" EntitySet="MaintenanceDataDetails" />
+          </AssociationSet>
+          <EntitySet Name="MaintDataCompanies" EntityType="ITInventoryModel.MaintDataCompany" />
+          <AssociationSet Name="tblMaintenanceData_CompanyId_FK" Association="ITInventoryModel.tblMaintenanceData_CompanyId_FK">
+            <End Role="MaintDataCompany" EntitySet="MaintDataCompanies" />
+            <End Role="MaintenanceData" EntitySet="MaintenanceDatas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="WindowsKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemoryId" Type="Int32" />
+          <Property Name="ProcessorId" Type="Int32" />
+          <Property Name="DeviceTypeId" Type="Int32" />
+          <Property Name="OSId" Type="Int32" />
+          <Property Name="VideoCardId" Type="Int32" />
+          <Property Name="SoundId" Type="Int32" />
+          <Property Name="LastEditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastDateEdited" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="AssetTag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BIOS_Version" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="WarrantyExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="LastBuildDate" Type="DateTime" Precision="3" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHW" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ref_Memory" Relationship="ITInventoryModel.FK_Computer__Memory" FromRole="Computer" ToRole="Ref_Memory" />
+          <NavigationProperty Name="Ref_Model" Relationship="ITInventoryModel.FK_Computer__Model" FromRole="Computer" ToRole="Ref_Model" />
+          <NavigationProperty Name="Ref_Status" Relationship="ITInventoryModel.FK_Computer__Status" FromRole="Computer" ToRole="Ref_Status" />
+          <NavigationProperty Name="Ref_VideoCard" Relationship="ITInventoryModel.FK_Computer__VideoCard" FromRole="Computer" ToRole="Ref_VideoCard" />
+          <NavigationProperty Name="Ref_DeviceType" Relationship="ITInventoryModel.FK_Computer_Ref_DeviceType" FromRole="Computer" ToRole="Ref_DeviceType" />
+          <NavigationProperty Name="Ref_OS" Relationship="ITInventoryModel.FK_Computer_Ref_OS" FromRole="Computer" ToRole="Ref_OS" />
+          <NavigationProperty Name="Ref_Processor" Relationship="ITInventoryModel.FK_Computer_Ref_Processor" FromRole="Computer" ToRole="Ref_Processor" />
+          <NavigationProperty Name="Ref_Sound" Relationship="ITInventoryModel.FK_Computer_Ref_Sound" FromRole="Computer" ToRole="Ref_Sound" />
+          <NavigationProperty Name="User" Relationship="ITInventoryModel.FK_Computer_User" FromRole="Computer" ToRole="User" />
+          <NavigationProperty Name="Ref_NIC" Relationship="ITInventoryModel.FK_Ref_NIC_Computer" FromRole="Computer" ToRole="Ref_NIC" />
+          <NavigationProperty Name="ScheduledTasks" Relationship="ITInventoryModel.FK_ScheduledTasks_Computer" FromRole="Computer" ToRole="ScheduledTask" />
+          <NavigationProperty Name="Licenses" Relationship="ITInventoryModel.Computer_License" FromRole="Computer" ToRole="License" />
+          <Property Name="FirmwareVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="LicenseKey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="QuantityAssigned" Type="Int32" Nullable="false" />
+          <Property Name="ComputerId" Type="Int32" />
+          <Property Name="LicenseTypeId" Type="Int32" />
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ref_LicenseType" Relationship="ITInventoryModel.FK_License_Ref_LicenseType" FromRole="License" ToRole="Ref_LicenseType" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.Computer_License" FromRole="License" ToRole="Computer" />
+          <NavigationProperty Name="Users" Relationship="ITInventoryModel.User_License" FromRole="License" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Monitor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssetId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SizeId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="PurchasedFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="Ref_Manufacturer" Relationship="ITInventoryModel.FK_Monitor_Manufacturer" FromRole="Monitor" ToRole="Ref_Manufacturer" />
+          <NavigationProperty Name="Ref_MonitorSizes" Relationship="ITInventoryModel.FK_Monitor_Ref_MonitorSizes" FromRole="Monitor" ToRole="Ref_MonitorSizes" />
+          <NavigationProperty Name="User" Relationship="ITInventoryModel.FK_Monitor_User" FromRole="Monitor" ToRole="User" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ref_Building">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="ITInventoryModel.FK_User__Building" FromRole="Ref_Building" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Ref_BuildYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ref_CableNo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ref_NIC" Relationship="ITInventoryModel.FK_Ref_NIC_Ref_CableNo" FromRole="Ref_CableNo" ToRole="Ref_NIC" />
+        </EntityType>
+        <EntityType Name="Ref_DeviceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer_Ref_DeviceType" FromRole="Ref_DeviceType" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="Ref_LicenseType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Licenses" Relationship="ITInventoryModel.FK_License_Ref_LicenseType" FromRole="Ref_LicenseType" ToRole="License" />
+        </EntityType>
+        <EntityType Name="Ref_Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="ITInventoryModel.FK_User__Location" FromRole="Ref_Location" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Ref_Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Monitors" Relationship="ITInventoryModel.FK_Monitor_Manufacturer" FromRole="Ref_Manufacturer" ToRole="Monitor" />
+          <NavigationProperty Name="Ref_Model" Relationship="ITInventoryModel.FK__Model_Manufacturer" FromRole="Ref_Manufacturer" ToRole="Ref_Model" />
+        </EntityType>
+        <EntityType Name="Ref_Memory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GB" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer__Memory" FromRole="Ref_Memory" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="Ref_Model">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ManufacturerId" Type="Int32" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer__Model" FromRole="Ref_Model" ToRole="Computer" />
+          <NavigationProperty Name="Ref_Manufacturer" Relationship="ITInventoryModel.FK__Model_Manufacturer" FromRole="Ref_Model" ToRole="Ref_Manufacturer" />
+        </EntityType>
+        <EntityType Name="Ref_MonitorSizes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Size" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Monitors" Relationship="ITInventoryModel.FK_Monitor_Ref_MonitorSizes" FromRole="Ref_MonitorSizes" ToRole="Monitor" />
+        </EntityType>
+        <EntityType Name="Ref_NIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpeedId" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SwitchPortId" Type="Int32" />
+          <Property Name="CableId" Type="Int32" />
+          <Property Name="ComputerId" Type="Int32" />
+          <NavigationProperty Name="Computer" Relationship="ITInventoryModel.FK_Ref_NIC_Computer" FromRole="Ref_NIC" ToRole="Computer" />
+          <NavigationProperty Name="Ref_CableNo" Relationship="ITInventoryModel.FK_Ref_NIC_Ref_CableNo" FromRole="Ref_NIC" ToRole="Ref_CableNo" />
+          <NavigationProperty Name="Ref_NICSpeed" Relationship="ITInventoryModel.FK_NIC__NICSpeed" FromRole="Ref_NIC" ToRole="Ref_NICSpeed" />
+          <NavigationProperty Name="Ref_SwitchPort" Relationship="ITInventoryModel.FK_Ref_NIC_Ref_SwitchPort" FromRole="Ref_NIC" ToRole="Ref_SwitchPort" />
+        </EntityType>
+        <EntityType Name="Ref_NICSpeed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NIC_Speed" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ref_NIC" Relationship="ITInventoryModel.FK_NIC__NICSpeed" FromRole="Ref_NICSpeed" ToRole="Ref_NIC" />
+        </EntityType>
+        <EntityType Name="Ref_OS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OS" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer_Ref_OS" FromRole="Ref_OS" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="Ref_Processor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Processor" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer_Ref_Processor" FromRole="Ref_Processor" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="Ref_Sound">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sound" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer_Ref_Sound" FromRole="Ref_Sound" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="Ref_Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer__Status" FromRole="Ref_Status" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="Ref_SwitchPort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SwitchPort" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ref_NIC" Relationship="ITInventoryModel.FK_Ref_NIC_Ref_SwitchPort" FromRole="Ref_SwitchPort" ToRole="Ref_NIC" />
+        </EntityType>
+        <EntityType Name="Ref_VideoCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VideoCard" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManufacturerId" Type="Int32" />
+          <Property Name="VideoMemory" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer__VideoCard" FromRole="Ref_VideoCard" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="ScheduledTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComputerId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sunday" Type="Boolean" Nullable="false" />
+          <Property Name="Monday" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesday" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesday" Type="Boolean" Nullable="false" />
+          <Property Name="Thursday" Type="Boolean" Nullable="false" />
+          <Property Name="Friday" Type="Boolean" Nullable="false" />
+          <Property Name="Saturday" Type="Boolean" Nullable="false" />
+          <Property Name="Program" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityRunAs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Databases" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Purpose" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SharesLocations" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Computer" Relationship="ITInventoryModel.FK_ScheduledTasks_Computer" FromRole="ScheduledTask" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingId" Type="Int32" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastDateEdited" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer_User" FromRole="User" ToRole="Computer" />
+          <NavigationProperty Name="Monitors" Relationship="ITInventoryModel.FK_Monitor_User" FromRole="User" ToRole="Monitor" />
+          <NavigationProperty Name="Ref_Building" Relationship="ITInventoryModel.FK_User__Building" FromRole="User" ToRole="Ref_Building" />
+          <NavigationProperty Name="Ref_Location" Relationship="ITInventoryModel.FK_User__Location" FromRole="User" ToRole="Ref_Location" />
+          <NavigationProperty Name="Licenses" Relationship="ITInventoryModel.User_License" FromRole="User" ToRole="License" />
+          <Property Name="InActive" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Computer__Memory">
+          <End Type="ITInventoryModel.Ref_Memory" Role="Ref_Memory" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Memory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="MemoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__Model">
+          <End Type="ITInventoryModel.Ref_Model" Role="Ref_Model" Multiplicity="1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Model">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__Status">
+          <End Type="ITInventoryModel.Ref_Status" Role="Ref_Status" Multiplicity="1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer__VideoCard">
+          <End Type="ITInventoryModel.Ref_VideoCard" Role="Ref_VideoCard" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_VideoCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="VideoCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_DeviceType">
+          <End Type="ITInventoryModel.Ref_DeviceType" Role="Ref_DeviceType" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_DeviceType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="DeviceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_OS">
+          <End Type="ITInventoryModel.Ref_OS" Role="Ref_OS" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_OS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="OSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_Processor">
+          <End Type="ITInventoryModel.Ref_Processor" Role="Ref_Processor" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Processor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="ProcessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Ref_Sound">
+          <End Type="ITInventoryModel.Ref_Sound" Role="Ref_Sound" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Sound">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="SoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_User">
+          <End Type="ITInventoryModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ref_NIC_Computer">
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Ref_NIC" Role="Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduledTasks_Computer">
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="1" />
+          <End Type="ITInventoryModel.ScheduledTask" Role="ScheduledTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduledTask">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_License_Ref_LicenseType">
+          <End Type="ITInventoryModel.Ref_LicenseType" Role="Ref_LicenseType" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.License" Role="License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_LicenseType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="License">
+              <PropertyRef Name="LicenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monitor_Manufacturer">
+          <End Type="ITInventoryModel.Ref_Manufacturer" Role="Ref_Manufacturer" Multiplicity="1" />
+          <End Type="ITInventoryModel.Monitor" Role="Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Manufacturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monitor_Ref_MonitorSizes">
+          <End Type="ITInventoryModel.Ref_MonitorSizes" Role="Ref_MonitorSizes" Multiplicity="1" />
+          <End Type="ITInventoryModel.Monitor" Role="Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_MonitorSizes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monitor_User">
+          <End Type="ITInventoryModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Monitor" Role="Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Monitor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User__Building">
+          <End Type="ITInventoryModel.Ref_Building" Role="Ref_Building" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Building">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ref_NIC_Ref_CableNo">
+          <End Type="ITInventoryModel.Ref_CableNo" Role="Ref_CableNo" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Ref_NIC" Role="Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_CableNo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="CableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User__Location">
+          <End Type="ITInventoryModel.Ref_Location" Role="Ref_Location" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Model_Manufacturer">
+          <End Type="ITInventoryModel.Ref_Manufacturer" Role="Ref_Manufacturer" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Ref_Model" Role="Ref_Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Manufacturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_Model">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NIC__NICSpeed">
+          <End Type="ITInventoryModel.Ref_NICSpeed" Role="Ref_NICSpeed" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Ref_NIC" Role="Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_NICSpeed">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="SpeedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ref_NIC_Ref_SwitchPort">
+          <End Type="ITInventoryModel.Ref_SwitchPort" Role="Ref_SwitchPort" Multiplicity="0..1" />
+          <End Type="ITInventoryModel.Ref_NIC" Role="Ref_NIC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_SwitchPort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ref_NIC">
+              <PropertyRef Name="SwitchPortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Computer_License">
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="*" />
+          <End Type="ITInventoryModel.License" Role="License" Multiplicity="*" />
+        </Association>
+        <Association Name="User_License">
+          <End Type="ITInventoryModel.License" Role="License" Multiplicity="*" />
+          <End Type="ITInventoryModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MaintenanceData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BudgetItem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Supplier" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OriginalPurchDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MaintenanceDataDetails" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceData" ToRole="MaintenanceDataDetail" />
+          <Property Name="ComputerId" Type="Int32" />
+          <Property Name="LicenseId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MaintDataCompany" Relationship="ITInventoryModel.tblMaintenanceData_CompanyId_FK" FromRole="MaintenanceData" ToRole="MaintDataCompany" />
+        </EntityType>
+        <EntityType Name="MaintenanceDataDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaintenanceDataId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccountNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Monthly" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Explanation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AlternateInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MaintenanceData" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceDataDetail" ToRole="MaintenanceData" />
+          <Property Name="PO_CC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="tblMaintenanceDataDetails_MaintenanceDataId_FK">
+          <End Type="ITInventoryModel.MaintenanceData" Role="MaintenanceData" Multiplicity="1" />
+          <End Type="ITInventoryModel.MaintenanceDataDetail" Role="MaintenanceDataDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceDataDetail">
+              <PropertyRef Name="MaintenanceDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MaintDataCompany">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MaintenanceDatas" Relationship="ITInventoryModel.tblMaintenanceData_CompanyId_FK" FromRole="MaintDataCompany" ToRole="MaintenanceData" />
+        </EntityType>
+        <Association Name="tblMaintenanceData_CompanyId_FK">
+          <End Type="ITInventoryModel.MaintDataCompany" Role="MaintDataCompany" Multiplicity="1" />
+          <End Type="ITInventoryModel.MaintenanceData" Role="MaintenanceData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintDataCompany">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceData">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ITInventoryModelStoreContainer" CdmEntityContainer="ITInventoryEntities">
+          <EntitySetMapping Name="Computers">
+            <EntityTypeMapping TypeName="ITInventoryModel.Computer">
+              <MappingFragment StoreEntitySet="Computer">
+                <ScalarProperty Name="FirmwareVersion" ColumnName="FirmwareVersion" />
+                <ScalarProperty Name="AdditionalHW" ColumnName="AdditionalHW" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LastBuildDate" ColumnName="LastBuildDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="WarrantyExpirationDate" ColumnName="WarrantyExpirationDate" />
+                <ScalarProperty Name="BIOS_Version" ColumnName="BIOS_Version" />
+                <ScalarProperty Name="AssetTag" ColumnName="AssetTag" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="LastDateEdited" ColumnName="LastDateEdited" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="SoundId" ColumnName="SoundId" />
+                <ScalarProperty Name="VideoCardId" ColumnName="VideoCardId" />
+                <ScalarProperty Name="OSId" ColumnName="OSId" />
+                <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
+                <ScalarProperty Name="ProcessorId" ColumnName="ProcessorId" />
+                <ScalarProperty Name="MemoryId" ColumnName="MemoryId" />
+                <ScalarProperty Name="WindowsKey" ColumnName="WindowsKey" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="ITInventoryModel.License">
+              <MappingFragment StoreEntitySet="License">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="LicenseTypeId" ColumnName="LicenseTypeId" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="QuantityAssigned" ColumnName="QuantityAssigned" />
+                <ScalarProperty Name="LicenseKey" ColumnName="LicenseKey" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monitors">
+            <EntityTypeMapping TypeName="ITInventoryModel.Monitor">
+              <MappingFragment StoreEntitySet="Monitor">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="PurchasedFrom" ColumnName="PurchasedFrom" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Building">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Building">
+              <MappingFragment StoreEntitySet="Ref_Building">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_BuildYear">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_BuildYear">
+              <MappingFragment StoreEntitySet="Ref_BuildYear">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_CableNo">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_CableNo">
+              <MappingFragment StoreEntitySet="Ref_CableNo">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_DeviceType">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_DeviceType">
+              <MappingFragment StoreEntitySet="Ref_DeviceType">
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_LicenseType">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_LicenseType">
+              <MappingFragment StoreEntitySet="Ref_LicenseType">
+                <ScalarProperty Name="LicenseType" ColumnName="LicenseType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Location">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Location">
+              <MappingFragment StoreEntitySet="Ref_Location">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Manufacturer">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Manufacturer">
+              <MappingFragment StoreEntitySet="Ref_Manufacturer">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Memory">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Memory">
+              <MappingFragment StoreEntitySet="Ref_Memory">
+                <ScalarProperty Name="GB" ColumnName="GB" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Model">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Model">
+              <MappingFragment StoreEntitySet="Ref_Model">
+                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_MonitorSizes">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_MonitorSizes">
+              <MappingFragment StoreEntitySet="Ref_MonitorSizes">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_NIC">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_NIC">
+              <MappingFragment StoreEntitySet="Ref_NIC">
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="CableId" ColumnName="CableId" />
+                <ScalarProperty Name="SwitchPortId" ColumnName="SwitchPortId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SpeedId" ColumnName="SpeedId" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="MAC" ColumnName="MAC" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_NICSpeed">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_NICSpeed">
+              <MappingFragment StoreEntitySet="Ref_NICSpeed">
+                <ScalarProperty Name="NIC_Speed" ColumnName="NIC_Speed" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_OS">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_OS">
+              <MappingFragment StoreEntitySet="Ref_OS">
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Processor">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Processor">
+              <MappingFragment StoreEntitySet="Ref_Processor">
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Sound">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Sound">
+              <MappingFragment StoreEntitySet="Ref_Sound">
+                <ScalarProperty Name="Sound" ColumnName="Sound" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Status">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_Status">
+              <MappingFragment StoreEntitySet="Ref_Status">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_SwitchPort">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_SwitchPort">
+              <MappingFragment StoreEntitySet="Ref_SwitchPort">
+                <ScalarProperty Name="SwitchPort" ColumnName="SwitchPort" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_VideoCard">
+            <EntityTypeMapping TypeName="ITInventoryModel.Ref_VideoCard">
+              <MappingFragment StoreEntitySet="Ref_VideoCard">
+                <ScalarProperty Name="VideoMemory" ColumnName="VideoMemory" />
+                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
+                <ScalarProperty Name="VideoCard" ColumnName="VideoCard" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduledTasks">
+            <EntityTypeMapping TypeName="ITInventoryModel.ScheduledTask">
+              <MappingFragment StoreEntitySet="ScheduledTasks">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="SharesLocations" ColumnName="SharesLocations" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Databases" ColumnName="Databases" />
+                <ScalarProperty Name="SecurityRunAs" ColumnName="SecurityRunAs" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="DOM" ColumnName="DOM" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ITInventoryModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="LastDateEdited" ColumnName="LastDateEdited" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Computer_License" TypeName="ITInventoryModel.Computer_License" StoreEntitySet="Computer_License">
+            <EndProperty Name="License">
+              <ScalarProperty Name="Id" ColumnName="LicenseId" />
+            </EndProperty>
+            <EndProperty Name="Computer">
+              <ScalarProperty Name="Id" ColumnName="ComputerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="User_License" TypeName="ITInventoryModel.User_License" StoreEntitySet="User_License">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="License">
+              <ScalarProperty Name="Id" ColumnName="LicenseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="MaintenanceDatas">
+            <EntityTypeMapping TypeName="ITInventoryModel.MaintenanceData">
+              <MappingFragment StoreEntitySet="MaintenanceData">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="OriginalPurchDate" ColumnName="OriginalPurchDate" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="BudgetItem" ColumnName="BudgetItem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceDataDetails">
+            <EntityTypeMapping TypeName="ITInventoryModel.MaintenanceDataDetail">
+              <MappingFragment StoreEntitySet="MaintenanceDataDetails">
+                <ScalarProperty Name="PO_CC" ColumnName="PO_CC" />
+                <ScalarProperty Name="AlternateInfo" ColumnName="AlternateInfo" />
+                <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+                <ScalarProperty Name="Monthly" ColumnName="Monthly" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="MaintenanceDataId" ColumnName="MaintenanceDataId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintDataCompanies">
+            <EntityTypeMapping TypeName="ITInventoryModel.MaintDataCompany">
+              <MappingFragment StoreEntitySet="MaintDataCompany">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

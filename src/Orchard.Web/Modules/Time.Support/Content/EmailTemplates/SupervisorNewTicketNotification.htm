@@ -1,0 +1,120 @@
+﻿<html>
+<head>
+    <style type="text/css">
+        body
+        {
+           font-family: Lucida Sans;
+           background: #FFF;
+        }
+        #wrapper
+        {
+            width: 700px;  
+            border: solid 1px blue;
+        }
+        #title
+        {
+            text-align: center;
+            padding:25px 0 25px 0;
+        }
+        #title img
+        {
+        }
+        #title h2
+        {
+            color: Black;
+        }
+        
+        #headinfo ul
+        {
+            list-style-type: none;
+            margin: 25px;
+            padding: 25px;
+            border: solid 1px black;
+        }
+        #headinfo ul li
+        {
+            list-style-type: none;
+            color: Black;
+        }
+        #content
+        {
+            margin: 25px;
+            color: Black;
+            background: White;
+            padding: 25px;
+            border: solid 1px black;
+        }
+        #ticketdescription
+        {
+            margin: 25px;
+            padding: 25px;
+            background-color: #dddddd;
+            color: Black;
+        }
+        a
+        {
+            color: #A8002A;
+            text-decoration: none;
+        }
+        .clear
+        {
+            clear: both;
+        }
+        .button-link
+        {
+            width: 95%;
+            font: bold 20px Arial;
+            text-decoration: none;
+            background-color: #182f6b;
+            color: #ffffff;
+            padding: 2px 6px 2px 6px;
+            border-top: 1px solid #CCCCCC;
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            border-left: 1px solid #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+    [header]
+    <div id="wrapper">
+       <div id="title">
+            <img alt="Time Manufacturing" src="http://www.timemfg.com/imgs/timelogo-whitesmall.png" />
+            <h2>Ticket Awaiting Supervisor Approval</h2>
+        </div>
+        <div id="headinfo">
+            <ul>
+                <li>Ticket #: [ticketnumber]</li>
+                <li>Status: [ticketstatus]</li>
+                <li>Requested By: [ticketrequestedby]</li>
+                <li>Date Requested: [ticketrequesteddate]</li>
+            </ul>
+        </div>
+        <div id="content">
+            <center><a href="[ticketurl]">Supervisor: Click HERE to View this Ticket.</a></center>
+            <br /><br />
+            Click the button below to approve this ticket
+            <br />
+            <br />
+            <center><a class="button-link" href ="http://www.versalift.com/SupportTicket/ApproveTicket/[ticketapprovalcode]" >Approve Ticket</a></center>
+
+            <h3>[tickettitle]</h3>
+            <p id="ticketdescription">[ticketdescription]</p>
+            <p id="notice">
+                This ticket has been created, and you are the Supervisor of record for the assigned department.  
+                Please look at the ticket, and either 'Approve' or 'Deny' it based on whether it is needed or not.
+                If this ticket doesn't actually belong to your department, please inform IT so it can be assigned
+                to the correct department.
+            </p>
+            <p id="followup">You may follow up or add notes to your ticket at any time by visiting the <a href="http://my.timemfg.com">intranet</a> or going to the following url
+                directly. <br />
+                Click on the link to view your ticket: <a href="[ticketurl]">Ticket #[ticketnumber]</a>
+            </p>
+            <p>
+                [additionalbody]
+            </p>
+        </div>
+        [footer]
+    </div>
+</body>
+</html>

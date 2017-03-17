@@ -1,0 +1,20 @@
+﻿@model Time.OrderLog.Models.MenuViewModel
+
+<ul class="list-inline">
+    <li>@Html.ActionLink("Home", "Index", "OrderLog", null, new { @class = "btn btn-primary" })</li>
+    @if (Model.EditOrders)
+    {
+        <li>@Html.ActionLink("Dealers", "Index", "Dealer", null, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Lift Models", "Index", "LiftModel", null, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Territories", "Index", "Territory", null, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Regions", "Index", "Region", null, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Installers", "Index", "Installer", null, new { @class = "btn btn-primary" })</li>
+        <li>@Html.ActionLink("Install Types", "Index", "Install", null, new { @class = "btn btn-primary" })</li>
+    }
+    @if (Model.OrderLogReporting || Model.EditOrders)
+    {
+        <li>@Html.ActionLink("Reporting", "Index", "Report", null, new { @class = "btn btn-primary" })</li>
+    }
+</ul>
+
+<hr />

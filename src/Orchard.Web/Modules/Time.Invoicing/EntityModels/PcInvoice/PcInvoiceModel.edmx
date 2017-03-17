@@ -1,0 +1,2096 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PCInvoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CALookups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NotificationEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chassis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelYearId" Type="int" Nullable="false" />
+          <Property Name="ChassisModelId" Type="int" Nullable="false" />
+          <Property Name="TransmissionId" Type="int" Nullable="false" />
+          <Property Name="CALookupId" Type="int" Nullable="false" />
+          <Property Name="GVWLookupId" Type="int" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChassisMakes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChassisModels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ChassisMakeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar(max)" />
+          <Property Name="Address2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Zip" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="ContactName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Phone2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FobLookups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GVWLookups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvoiceHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="int" Nullable="false" />
+          <Property Name="OrderDetaiIId" Type="int" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="255" />
+          <Property Name="InvoiceAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="InvoiceNumberTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Template" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MiscChargeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MiscInstall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="int" Nullable="false" />
+          <Property Name="OrderDetailId" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="255" />
+          <Property Name="InstallPO" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="InstallPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelYearLookups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NLog_Error">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="time_stamp" Type="datetime" Nullable="false" />
+          <Property Name="host" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="source" Type="nvarchar" MaxLength="50" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="level" Type="nvarchar" MaxLength="50" />
+          <Property Name="logger" Type="nvarchar" MaxLength="50" />
+          <Property Name="stacktrace" Type="nvarchar(max)" />
+          <Property Name="allxml" Type="ntext" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sequence" Type="int" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="int" Nullable="false" />
+          <Property Name="PurchaseOrder" Type="nvarchar(max)" />
+          <Property Name="VehicleNumber" Type="nvarchar(max)" />
+          <Property Name="VIN" Type="nvarchar(max)" />
+          <Property Name="DropShipCode" Type="nvarchar(max)" />
+          <Property Name="ScheduledBuildDate" Type="datetime" />
+          <Property Name="ActualBuildDate" Type="datetime" />
+          <Property Name="EstimatedShipDate" Type="datetime" />
+          <Property Name="ActualShipDate" Type="datetime" />
+          <Property Name="BodyType" Type="nvarchar(max)" />
+          <Property Name="BodyPO" Type="nvarchar(max)" />
+          <Property Name="BodyPoIssueDate" Type="datetime" />
+          <Property Name="BodyPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BodySerial" Type="nvarchar(max)" />
+          <Property Name="ReqBodyShipDate" Type="datetime" />
+          <Property Name="EstBodyShipDate" Type="datetime" />
+          <Property Name="BodyShipDate" Type="datetime" />
+          <Property Name="BodyReceivedDate" Type="datetime" />
+          <Property Name="BodyCompany" Type="nvarchar(max)" />
+          <Property Name="LiftModel" Type="nvarchar(max)" />
+          <Property Name="LiftOrder" Type="nvarchar(max)" />
+          <Property Name="SalesOrder" Type="int" />
+          <Property Name="SalesOrderLine" Type="int" />
+          <Property Name="SalesOrderRelease" Type="int" />
+          <Property Name="LiftSerial" Type="nvarchar(max)" />
+          <Property Name="LiftATSDate" Type="datetime" />
+          <Property Name="InstallPO" Type="nvarchar(max)" />
+          <Property Name="InstallPODateIssued" Type="datetime" />
+          <Property Name="InstallPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PrelimInvoiceDate" Type="datetime" />
+          <Property Name="PCInvoiceNumber" Type="nvarchar(max)" />
+          <Property Name="BaseLiftPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="UpfitterId" Type="int" />
+          <Property Name="ShipToId" Type="int" />
+          <Property Name="ChassisId" Type="int" />
+          <Property Name="ChassisPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InvoiceNumber" Type="nvarchar(max)" />
+          <Property Name="LastInvoiceAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FreightDelivery" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FreightLift" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FreightPlatform" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FreightBody" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="InServiceAcct" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ExtWarrAcct" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="OrderDetailsOrderOptionsLinks">
+          <Key>
+            <PropertyRef Name="OrderDetailId" />
+            <PropertyRef Name="OrderOptionId" />
+          </Key>
+          <Property Name="OrderDetailId" Type="int" Nullable="false" />
+          <Property Name="OrderOptionId" Type="int" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="int" Nullable="false" />
+          <Property Name="Include" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderHeaders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PurchaseOrder" Type="nvarchar(max)" />
+          <Property Name="DropShipCode" Type="nvarchar(max)" />
+          <Property Name="PreliminaryInvoiceMessage" Type="nvarchar(max)" />
+          <Property Name="PreliminaryInvoiceEmail" Type="nvarchar" MaxLength="200" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="UpfitterId" Type="int" />
+          <Property Name="ChassisId" Type="int" />
+          <Property Name="ShipToId" Type="int" />
+          <Property Name="QuoteNum" Type="nvarchar(max)" />
+          <Property Name="InvoiceNumberTemplateId" Type="int" />
+          <Property Name="OrderYear" Type="int" />
+          <Property Name="FoblookupId" Type="int" />
+          <Property Name="FobPlace" Type="nvarchar" MaxLength="250" />
+          <Property Name="TermsLookupId" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderOptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="OptionNum" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Print" Type="bit" Nullable="false" />
+          <Property Name="OptionSeq" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MiscCharge" Type="bit" Nullable="false" />
+          <Property Name="MiscChargeTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="ShipToes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Address1" Type="nvarchar(max)" />
+          <Property Name="Address2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Zip" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Phone2" Type="nvarchar(max)" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Abbreviation" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TaskQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Submitter" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="VehicleNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderDetailId" Type="int" Nullable="false" />
+          <Property Name="OrderLines" Type="nvarchar(max)" />
+          <Property Name="AdditionalMessage" Type="nvarchar" MaxLength="255" />
+          <Property Name="InProcess" Type="bit" Nullable="false" />
+          <Property Name="Cancelled" Type="bit" Nullable="false" />
+          <Property Name="Completed" Type="bit" Nullable="false" />
+          <Property Name="EmailSent" Type="bit" Nullable="false" />
+          <Property Name="CompletedDate" Type="datetime" />
+          <Property Name="Result" Type="nvarchar(max)" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceAmount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TermsLookups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Transmissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Upfitters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Address1" Type="nvarchar(max)" />
+          <Property Name="Address2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Zip" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Chassis_dbo_CALookups_CALookupId">
+          <End Role="CALookups" Type="Self.CALookups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CALookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="CALookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId">
+          <End Role="ChassisModels" Type="Self.ChassisModels" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChassisModels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="ChassisModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId">
+          <End Role="GVWLookups" Type="Self.GVWLookups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GVWLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="GVWLookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId">
+          <End Role="ModelYearLookups" Type="Self.ModelYearLookups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelYearLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="ModelYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_Transmissions_TransmissionId">
+          <End Role="Transmissions" Type="Self.Transmissions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transmissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="TransmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId">
+          <End Role="ChassisMakes" Type="Self.ChassisMakes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChassisModels" Type="Self.ChassisModels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChassisMakes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChassisModels">
+              <PropertyRef Name="ChassisMakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_Chassis_ChassisId">
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chassis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ChassisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId">
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_ShipToes_ShipToId">
+          <End Role="ShipToes" Type="Self.ShipToes" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipToes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ShipToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId">
+          <End Role="Upfitters" Type="Self.Upfitters" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Upfitters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="UpfitterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Categories_CategoryId">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Chassis_ChassisId">
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chassis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="ChassisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId">
+          <End Role="FobLookups" Type="Self.FobLookups" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FobLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="FoblookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId">
+          <End Role="InvoiceNumberTemplates" Type="Self.InvoiceNumberTemplates" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceNumberTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="InvoiceNumberTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId">
+          <End Role="ShipToes" Type="Self.ShipToes" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipToes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="ShipToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId">
+          <End Role="TermsLookups" Type="Self.TermsLookups" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TermsLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="TermsLookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId">
+          <End Role="Upfitters" Type="Self.Upfitters" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Upfitters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="UpfitterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId">
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderOptions" Type="Self.OrderOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderOptions">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShipToes_dbo_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ShipToes" Type="Self.ShipToes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShipToes">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceHistory_OrderDetails">
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+          <End Role="InvoiceHistory" Type="Self.InvoiceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceHistory">
+              <PropertyRef Name="OrderDetaiIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceHistory_OrderHeaders">
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="1" />
+          <End Role="InvoiceHistory" Type="Self.InvoiceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceHistory">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiscInstall_OrderDetails">
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+          <End Role="MiscInstall" Type="Self.MiscInstall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MiscInstall">
+              <PropertyRef Name="OrderDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiscInstall_OrderHeaders">
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="1" />
+          <End Role="MiscInstall" Type="Self.MiscInstall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MiscInstall">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailsOrderOptionsLinks_OrderDetails">
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+          <End Role="OrderDetailsOrderOptionsLinks" Type="Self.OrderDetailsOrderOptionsLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetailsOrderOptionsLinks">
+              <PropertyRef Name="OrderDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailsOrderOptionsLinks_OrderHeaders">
+          <End Role="OrderHeaders" Type="Self.OrderHeaders" Multiplicity="1" />
+          <End Role="OrderDetailsOrderOptionsLinks" Type="Self.OrderDetailsOrderOptionsLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetailsOrderOptionsLinks">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailsOrderOptionsLinks_OrderOptions">
+          <End Role="OrderOptions" Type="Self.OrderOptions" Multiplicity="1" />
+          <End Role="OrderDetailsOrderOptionsLinks" Type="Self.OrderDetailsOrderOptionsLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderOptions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetailsOrderOptionsLinks">
+              <PropertyRef Name="OrderOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOptions_MiscChargeType">
+          <End Role="MiscChargeType" Type="Self.MiscChargeType" Multiplicity="0..1" />
+          <End Role="OrderOptions" Type="Self.OrderOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MiscChargeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderOptions">
+              <PropertyRef Name="MiscChargeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PCInvoiceModelStoreContainer">
+          <EntitySet Name="CALookups" EntityType="Self.CALookups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chassis" EntityType="Self.Chassis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChassisMakes" EntityType="Self.ChassisMakes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChassisModels" EntityType="Self.ChassisModels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FobLookups" EntityType="Self.FobLookups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GVWLookups" EntityType="Self.GVWLookups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceHistory" EntityType="Self.InvoiceHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceNumberTemplates" EntityType="Self.InvoiceNumberTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MiscChargeType" EntityType="Self.MiscChargeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MiscInstall" EntityType="Self.MiscInstall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelYearLookups" EntityType="Self.ModelYearLookups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NLog_Error" EntityType="Self.NLog_Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetailsOrderOptionsLinks" EntityType="Self.OrderDetailsOrderOptionsLinks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderHeaders" EntityType="Self.OrderHeaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderOptions" EntityType="Self.OrderOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShipToes" EntityType="Self.ShipToes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskQueue" EntityType="Self.TaskQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TermsLookups" EntityType="Self.TermsLookups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transmissions" EntityType="Self.Transmissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Upfitters" EntityType="Self.Upfitters" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Chassis_dbo_CALookups_CALookupId" Association="Self.FK_dbo_Chassis_dbo_CALookups_CALookupId">
+            <End Role="CALookups" EntitySet="CALookups" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId" Association="Self.FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId">
+            <End Role="ChassisModels" EntitySet="ChassisModels" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId" Association="Self.FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId">
+            <End Role="GVWLookups" EntitySet="GVWLookups" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId" Association="Self.FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId">
+            <End Role="ModelYearLookups" EntitySet="ModelYearLookups" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_Transmissions_TransmissionId" Association="Self.FK_dbo_Chassis_dbo_Transmissions_TransmissionId">
+            <End Role="Transmissions" EntitySet="Transmissions" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId" Association="Self.FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId">
+            <End Role="ChassisMakes" EntitySet="ChassisMakes" />
+            <End Role="ChassisModels" EntitySet="ChassisModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_Chassis_ChassisId" Association="Self.FK_dbo_OrderDetails_dbo_Chassis_ChassisId">
+            <End Role="Chassis" EntitySet="Chassis" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId" Association="Self.FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_ShipToes_ShipToId" Association="Self.FK_dbo_OrderDetails_dbo_ShipToes_ShipToId">
+            <End Role="ShipToes" EntitySet="ShipToes" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId" Association="Self.FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId">
+            <End Role="Upfitters" EntitySet="Upfitters" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Categories_CategoryId" Association="Self.FK_dbo_OrderHeaders_dbo_Categories_CategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Chassis_ChassisId" Association="Self.FK_dbo_OrderHeaders_dbo_Chassis_ChassisId">
+            <End Role="Chassis" EntitySet="Chassis" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Customers_CustomerId" Association="Self.FK_dbo_OrderHeaders_dbo_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId" Association="Self.FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId">
+            <End Role="FobLookups" EntitySet="FobLookups" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId" Association="Self.FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId">
+            <End Role="InvoiceNumberTemplates" EntitySet="InvoiceNumberTemplates" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId" Association="Self.FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId">
+            <End Role="ShipToes" EntitySet="ShipToes" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId" Association="Self.FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId">
+            <End Role="TermsLookups" EntitySet="TermsLookups" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId" Association="Self.FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId">
+            <End Role="Upfitters" EntitySet="Upfitters" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId" Association="Self.FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="OrderOptions" EntitySet="OrderOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShipToes_dbo_Customers_CustomerId" Association="Self.FK_dbo_ShipToes_dbo_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ShipToes" EntitySet="ShipToes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceHistory_OrderDetails" Association="Self.FK_InvoiceHistory_OrderDetails">
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+            <End Role="InvoiceHistory" EntitySet="InvoiceHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceHistory_OrderHeaders" Association="Self.FK_InvoiceHistory_OrderHeaders">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="InvoiceHistory" EntitySet="InvoiceHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiscInstall_OrderDetails" Association="Self.FK_MiscInstall_OrderDetails">
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+            <End Role="MiscInstall" EntitySet="MiscInstall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiscInstall_OrderHeaders" Association="Self.FK_MiscInstall_OrderHeaders">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="MiscInstall" EntitySet="MiscInstall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailsOrderOptionsLinks_OrderDetails" Association="Self.FK_OrderDetailsOrderOptionsLinks_OrderDetails">
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+            <End Role="OrderDetailsOrderOptionsLinks" EntitySet="OrderDetailsOrderOptionsLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailsOrderOptionsLinks_OrderHeaders" Association="Self.FK_OrderDetailsOrderOptionsLinks_OrderHeaders">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="OrderDetailsOrderOptionsLinks" EntitySet="OrderDetailsOrderOptionsLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailsOrderOptionsLinks_OrderOptions" Association="Self.FK_OrderDetailsOrderOptionsLinks_OrderOptions">
+            <End Role="OrderOptions" EntitySet="OrderOptions" />
+            <End Role="OrderDetailsOrderOptionsLinks" EntitySet="OrderDetailsOrderOptionsLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOptions_MiscChargeType" Association="Self.FK_OrderOptions_MiscChargeType">
+            <End Role="MiscChargeType" EntitySet="MiscChargeType" />
+            <End Role="OrderOptions" EntitySet="OrderOptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PCInvoiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CALookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_Chassis_dbo_CALookups_CALookupId" FromRole="CALookups" ToRole="Chassis" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NotificationEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_Categories_CategoryId" FromRole="Categories" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="Chassis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelYearId" Type="Int32" Nullable="false" />
+          <Property Name="ChassisModelId" Type="Int32" Nullable="false" />
+          <Property Name="TransmissionId" Type="Int32" Nullable="false" />
+          <Property Name="CALookupId" Type="Int32" Nullable="false" />
+          <Property Name="GVWLookupId" Type="Int32" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CALookup" Relationship="Self.FK_dbo_Chassis_dbo_CALookups_CALookupId" FromRole="Chassis" ToRole="CALookups" />
+          <NavigationProperty Name="ChassisModel" Relationship="Self.FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId" FromRole="Chassis" ToRole="ChassisModels" />
+          <NavigationProperty Name="GVWLookup" Relationship="Self.FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId" FromRole="Chassis" ToRole="GVWLookups" />
+          <NavigationProperty Name="ModelYearLookup" Relationship="Self.FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId" FromRole="Chassis" ToRole="ModelYearLookups" />
+          <NavigationProperty Name="Transmission" Relationship="Self.FK_dbo_Chassis_dbo_Transmissions_TransmissionId" FromRole="Chassis" ToRole="Transmissions" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetails_dbo_Chassis_ChassisId" FromRole="Chassis" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_Chassis_ChassisId" FromRole="Chassis" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="ChassisMake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChassisModels" Relationship="Self.FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId" FromRole="ChassisMakes" ToRole="ChassisModels" />
+        </EntityType>
+        <EntityType Name="ChassisModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChassisMakeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId" FromRole="ChassisModels" ToRole="Chassis" />
+          <NavigationProperty Name="ChassisMake" Relationship="Self.FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId" FromRole="ChassisModels" ToRole="ChassisMakes" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_Customers_CustomerId" FromRole="Customers" ToRole="OrderHeaders" />
+          <NavigationProperty Name="ShipToes" Relationship="Self.FK_dbo_ShipToes_dbo_Customers_CustomerId" FromRole="Customers" ToRole="ShipToes" />
+        </EntityType>
+        <EntityType Name="FobLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId" FromRole="FobLookups" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="GVWLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId" FromRole="GVWLookups" ToRole="Chassis" />
+        </EntityType>
+        <EntityType Name="InvoiceHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDetaiIId" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_InvoiceHistory_OrderDetails" FromRole="InvoiceHistory" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderHeader" Relationship="Self.FK_InvoiceHistory_OrderHeaders" FromRole="InvoiceHistory" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="InvoiceNumberTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Template" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId" FromRole="InvoiceNumberTemplates" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="MiscChargeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrderOptions" Relationship="Self.FK_OrderOptions_MiscChargeType" FromRole="MiscChargeType" ToRole="OrderOptions" />
+        </EntityType>
+        <EntityType Name="MiscInstall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDetailId" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InstallPO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InstallPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_MiscInstall_OrderDetails" FromRole="MiscInstall" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderHeader" Relationship="Self.FK_MiscInstall_OrderHeaders" FromRole="MiscInstall" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="ModelYearLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId" FromRole="ModelYearLookups" ToRole="Chassis" />
+        </EntityType>
+        <EntityType Name="NLog_Error">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="time_stamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="host" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stacktrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="allxml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DropShipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduledBuildDate" Type="DateTime" Precision="3" />
+          <Property Name="ActualBuildDate" Type="DateTime" Precision="3" />
+          <Property Name="EstimatedShipDate" Type="DateTime" Precision="3" />
+          <Property Name="ActualShipDate" Type="DateTime" Precision="3" />
+          <Property Name="BodyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyPoIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="BodyPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BodySerial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReqBodyShipDate" Type="DateTime" Precision="3" />
+          <Property Name="EstBodyShipDate" Type="DateTime" Precision="3" />
+          <Property Name="BodyShipDate" Type="DateTime" Precision="3" />
+          <Property Name="BodyReceivedDate" Type="DateTime" Precision="3" />
+          <Property Name="BodyCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LiftModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LiftOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrder" Type="Int32" />
+          <Property Name="SalesOrderLine" Type="Int32" />
+          <Property Name="SalesOrderRelease" Type="Int32" />
+          <Property Name="LiftSerial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LiftATSDate" Type="DateTime" Precision="3" />
+          <Property Name="InstallPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InstallPODateIssued" Type="DateTime" Precision="3" />
+          <Property Name="InstallPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrelimInvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="PCInvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BaseLiftPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpfitterId" Type="Int32" />
+          <Property Name="ShipToId" Type="Int32" />
+          <Property Name="ChassisId" Type="Int32" />
+          <Property Name="ChassisPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastInvoiceAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreightDelivery" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreightLift" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreightPlatform" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FreightBody" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InServiceAcct" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ExtWarrAcct" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_OrderDetails_dbo_Chassis_ChassisId" FromRole="OrderDetails" ToRole="Chassis" />
+          <NavigationProperty Name="InvoiceHistories" Relationship="Self.FK_InvoiceHistory_OrderDetails" FromRole="OrderDetails" ToRole="InvoiceHistory" />
+          <NavigationProperty Name="MiscInstalls" Relationship="Self.FK_MiscInstall_OrderDetails" FromRole="OrderDetails" ToRole="MiscInstall" />
+          <NavigationProperty Name="OrderHeader" Relationship="Self.FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId" FromRole="OrderDetails" ToRole="OrderHeaders" />
+          <NavigationProperty Name="ShipTo" Relationship="Self.FK_dbo_OrderDetails_dbo_ShipToes_ShipToId" FromRole="OrderDetails" ToRole="ShipToes" />
+          <NavigationProperty Name="Upfitter" Relationship="Self.FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId" FromRole="OrderDetails" ToRole="Upfitters" />
+          <NavigationProperty Name="OrderDetailsOrderOptionsLinks" Relationship="Self.FK_OrderDetailsOrderOptionsLinks_OrderDetails" FromRole="OrderDetails" ToRole="OrderDetailsOrderOptionsLinks" />
+        </EntityType>
+        <EntityType Name="OrderDetailsOrderOptionsLink">
+          <Key>
+            <PropertyRef Name="OrderDetailId" />
+            <PropertyRef Name="OrderOptionId" />
+          </Key>
+          <Property Name="OrderDetailId" Type="Int32" Nullable="false" />
+          <Property Name="OrderOptionId" Type="Int32" Nullable="false" />
+          <Property Name="OrderHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="Include" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetailsOrderOptionsLinks_OrderDetails" FromRole="OrderDetailsOrderOptionsLinks" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderHeader" Relationship="Self.FK_OrderDetailsOrderOptionsLinks_OrderHeaders" FromRole="OrderDetailsOrderOptionsLinks" ToRole="OrderHeaders" />
+          <NavigationProperty Name="OrderOption" Relationship="Self.FK_OrderDetailsOrderOptionsLinks_OrderOptions" FromRole="OrderDetailsOrderOptionsLinks" ToRole="OrderOptions" />
+        </EntityType>
+        <EntityType Name="OrderHeader">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DropShipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreliminaryInvoiceMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreliminaryInvoiceEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="UpfitterId" Type="Int32" />
+          <Property Name="ChassisId" Type="Int32" />
+          <Property Name="ShipToId" Type="Int32" />
+          <Property Name="QuoteNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumberTemplateId" Type="Int32" />
+          <Property Name="OrderYear" Type="Int32" />
+          <Property Name="FoblookupId" Type="Int32" />
+          <Property Name="FobPlace" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TermsLookupId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_OrderHeaders_dbo_Categories_CategoryId" FromRole="OrderHeaders" ToRole="Categories" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_OrderHeaders_dbo_Chassis_ChassisId" FromRole="OrderHeaders" ToRole="Chassis" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_OrderHeaders_dbo_Customers_CustomerId" FromRole="OrderHeaders" ToRole="Customers" />
+          <NavigationProperty Name="FobLookup" Relationship="Self.FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId" FromRole="OrderHeaders" ToRole="FobLookups" />
+          <NavigationProperty Name="InvoiceHistories" Relationship="Self.FK_InvoiceHistory_OrderHeaders" FromRole="OrderHeaders" ToRole="InvoiceHistory" />
+          <NavigationProperty Name="InvoiceNumberTemplate" Relationship="Self.FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId" FromRole="OrderHeaders" ToRole="InvoiceNumberTemplates" />
+          <NavigationProperty Name="MiscInstalls" Relationship="Self.FK_MiscInstall_OrderHeaders" FromRole="OrderHeaders" ToRole="MiscInstall" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId" FromRole="OrderHeaders" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderDetailsOrderOptionsLinks" Relationship="Self.FK_OrderDetailsOrderOptionsLinks_OrderHeaders" FromRole="OrderHeaders" ToRole="OrderDetailsOrderOptionsLinks" />
+          <NavigationProperty Name="ShipTo" Relationship="Self.FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId" FromRole="OrderHeaders" ToRole="ShipToes" />
+          <NavigationProperty Name="TermsLookup" Relationship="Self.FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId" FromRole="OrderHeaders" ToRole="TermsLookups" />
+          <NavigationProperty Name="Upfitter" Relationship="Self.FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId" FromRole="OrderHeaders" ToRole="Upfitters" />
+          <NavigationProperty Name="OrderOptions" Relationship="Self.FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId" FromRole="OrderHeaders" ToRole="OrderOptions" />
+        </EntityType>
+        <EntityType Name="OrderOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderHeaderId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="OptionNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Print" Type="Boolean" Nullable="false" />
+          <Property Name="OptionSeq" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MiscCharge" Type="Boolean" Nullable="false" />
+          <Property Name="MiscChargeTypeId" Type="Int32" />
+          <NavigationProperty Name="MiscChargeType" Relationship="Self.FK_OrderOptions_MiscChargeType" FromRole="OrderOptions" ToRole="MiscChargeType" />
+          <NavigationProperty Name="OrderDetailsOrderOptionsLinks" Relationship="Self.FK_OrderDetailsOrderOptionsLinks_OrderOptions" FromRole="OrderOptions" ToRole="OrderDetailsOrderOptionsLinks" />
+          <NavigationProperty Name="OrderHeader" Relationship="Self.FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId" FromRole="OrderOptions" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="ShipTo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_ShipToes_dbo_Customers_CustomerId" FromRole="ShipToes" ToRole="Customers" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetails_dbo_ShipToes_ShipToId" FromRole="ShipToes" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId" FromRole="ShipToes" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Abbreviation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TaskQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Submitter" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TaskType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderDetailId" Type="Int32" Nullable="false" />
+          <Property Name="OrderLines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InProcess" Type="Boolean" Nullable="false" />
+          <Property Name="Cancelled" Type="Boolean" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="EmailSent" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="3" />
+          <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TermsLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId" FromRole="TermsLookups" ToRole="OrderHeaders" />
+        </EntityType>
+        <EntityType Name="Transmission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Chassis" Relationship="Self.FK_dbo_Chassis_dbo_Transmissions_TransmissionId" FromRole="Transmissions" ToRole="Chassis" />
+        </EntityType>
+        <EntityType Name="Upfitter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId" FromRole="Upfitters" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderHeaders" Relationship="Self.FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId" FromRole="Upfitters" ToRole="OrderHeaders" />
+        </EntityType>
+        <Association Name="FK_dbo_Chassis_dbo_CALookups_CALookupId">
+          <End Role="CALookups" Type="Self.CALookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CALookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="CALookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Categories_CategoryId">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId">
+          <End Role="ChassisModels" Type="Self.ChassisModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChassisModels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="ChassisModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId">
+          <End Role="GVWLookups" Type="Self.GVWLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GVWLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="GVWLookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId">
+          <End Role="ModelYearLookups" Type="Self.ModelYearLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelYearLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="ModelYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Chassis_dbo_Transmissions_TransmissionId">
+          <End Role="Transmissions" Type="Self.Transmission" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transmissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chassis">
+              <PropertyRef Name="TransmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_Chassis_ChassisId">
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chassis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ChassisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Chassis_ChassisId">
+          <End Role="Chassis" Type="Self.Chassis" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chassis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="ChassisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId">
+          <End Role="ChassisMakes" Type="Self.ChassisMake" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChassisModels" Type="Self.ChassisModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChassisMakes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChassisModels">
+              <PropertyRef Name="ChassisMakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ShipToes_dbo_Customers_CustomerId">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ShipToes" Type="Self.ShipTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShipToes">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId">
+          <End Role="FobLookups" Type="Self.FobLookup" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FobLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="FoblookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceHistory_OrderDetails">
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="1" />
+          <End Role="InvoiceHistory" Type="Self.InvoiceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceHistory">
+              <PropertyRef Name="OrderDetaiIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceHistory_OrderHeaders">
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="1" />
+          <End Role="InvoiceHistory" Type="Self.InvoiceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceHistory">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId">
+          <End Role="InvoiceNumberTemplates" Type="Self.InvoiceNumberTemplate" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceNumberTemplates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="InvoiceNumberTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOptions_MiscChargeType">
+          <End Role="MiscChargeType" Type="Self.MiscChargeType" Multiplicity="0..1" />
+          <End Role="OrderOptions" Type="Self.OrderOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MiscChargeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderOptions">
+              <PropertyRef Name="MiscChargeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiscInstall_OrderDetails">
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="1" />
+          <End Role="MiscInstall" Type="Self.MiscInstall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MiscInstall">
+              <PropertyRef Name="OrderDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiscInstall_OrderHeaders">
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="1" />
+          <End Role="MiscInstall" Type="Self.MiscInstall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MiscInstall">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId">
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_ShipToes_ShipToId">
+          <End Role="ShipToes" Type="Self.ShipTo" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipToes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ShipToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId">
+          <End Role="Upfitters" Type="Self.Upfitter" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Upfitters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="UpfitterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailsOrderOptionsLinks_OrderDetails">
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="1" />
+          <End Role="OrderDetailsOrderOptionsLinks" Type="Self.OrderDetailsOrderOptionsLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetailsOrderOptionsLinks">
+              <PropertyRef Name="OrderDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailsOrderOptionsLinks_OrderHeaders">
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="1" />
+          <End Role="OrderDetailsOrderOptionsLinks" Type="Self.OrderDetailsOrderOptionsLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetailsOrderOptionsLinks">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetailsOrderOptionsLinks_OrderOptions">
+          <End Role="OrderOptions" Type="Self.OrderOption" Multiplicity="1" />
+          <End Role="OrderDetailsOrderOptionsLinks" Type="Self.OrderDetailsOrderOptionsLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderOptions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetailsOrderOptionsLinks">
+              <PropertyRef Name="OrderOptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId">
+          <End Role="ShipToes" Type="Self.ShipTo" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipToes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="ShipToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId">
+          <End Role="TermsLookups" Type="Self.TermsLookup" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TermsLookups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="TermsLookupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId">
+          <End Role="Upfitters" Type="Self.Upfitter" Multiplicity="0..1" />
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Upfitters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderHeaders">
+              <PropertyRef Name="UpfitterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId">
+          <End Role="OrderHeaders" Type="Self.OrderHeader" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderOptions" Type="Self.OrderOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderHeaders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderOptions">
+              <PropertyRef Name="OrderHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PCInvoiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CALookups" EntityType="Self.CALookup" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Chassis" EntityType="Self.Chassis" />
+          <EntitySet Name="ChassisMakes" EntityType="Self.ChassisMake" />
+          <EntitySet Name="ChassisModels" EntityType="Self.ChassisModel" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="FobLookups" EntityType="Self.FobLookup" />
+          <EntitySet Name="GVWLookups" EntityType="Self.GVWLookup" />
+          <EntitySet Name="InvoiceHistories" EntityType="Self.InvoiceHistory" />
+          <EntitySet Name="InvoiceNumberTemplates" EntityType="Self.InvoiceNumberTemplate" />
+          <EntitySet Name="MiscChargeTypes" EntityType="Self.MiscChargeType" />
+          <EntitySet Name="MiscInstalls" EntityType="Self.MiscInstall" />
+          <EntitySet Name="ModelYearLookups" EntityType="Self.ModelYearLookup" />
+          <EntitySet Name="NLog_Error" EntityType="Self.NLog_Error" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="OrderDetailsOrderOptionsLinks" EntityType="Self.OrderDetailsOrderOptionsLink" />
+          <EntitySet Name="OrderHeaders" EntityType="Self.OrderHeader" />
+          <EntitySet Name="OrderOptions" EntityType="Self.OrderOption" />
+          <EntitySet Name="ShipToes" EntityType="Self.ShipTo" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="TaskQueues" EntityType="Self.TaskQueue" />
+          <EntitySet Name="TermsLookups" EntityType="Self.TermsLookup" />
+          <EntitySet Name="Transmissions" EntityType="Self.Transmission" />
+          <EntitySet Name="Upfitters" EntityType="Self.Upfitter" />
+          <AssociationSet Name="FK_dbo_Chassis_dbo_CALookups_CALookupId" Association="Self.FK_dbo_Chassis_dbo_CALookups_CALookupId">
+            <End Role="CALookups" EntitySet="CALookups" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Categories_CategoryId" Association="Self.FK_dbo_OrderHeaders_dbo_Categories_CategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId" Association="Self.FK_dbo_Chassis_dbo_ChassisModels_ChassisModelId">
+            <End Role="ChassisModels" EntitySet="ChassisModels" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId" Association="Self.FK_dbo_Chassis_dbo_GVWLookups_GVWLookupId">
+            <End Role="GVWLookups" EntitySet="GVWLookups" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId" Association="Self.FK_dbo_Chassis_dbo_ModelYearLookups_ModelYearId">
+            <End Role="ModelYearLookups" EntitySet="ModelYearLookups" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Chassis_dbo_Transmissions_TransmissionId" Association="Self.FK_dbo_Chassis_dbo_Transmissions_TransmissionId">
+            <End Role="Transmissions" EntitySet="Transmissions" />
+            <End Role="Chassis" EntitySet="Chassis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_Chassis_ChassisId" Association="Self.FK_dbo_OrderDetails_dbo_Chassis_ChassisId">
+            <End Role="Chassis" EntitySet="Chassis" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Chassis_ChassisId" Association="Self.FK_dbo_OrderHeaders_dbo_Chassis_ChassisId">
+            <End Role="Chassis" EntitySet="Chassis" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId" Association="Self.FK_dbo_ChassisModels_dbo_ChassisMakes_ChassisMakeId">
+            <End Role="ChassisMakes" EntitySet="ChassisMakes" />
+            <End Role="ChassisModels" EntitySet="ChassisModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Customers_CustomerId" Association="Self.FK_dbo_OrderHeaders_dbo_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ShipToes_dbo_Customers_CustomerId" Association="Self.FK_dbo_ShipToes_dbo_Customers_CustomerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ShipToes" EntitySet="ShipToes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId" Association="Self.FK_dbo_OrderHeaders_dbo_FobLookups_FobLookupId">
+            <End Role="FobLookups" EntitySet="FobLookups" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceHistory_OrderDetails" Association="Self.FK_InvoiceHistory_OrderDetails">
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+            <End Role="InvoiceHistory" EntitySet="InvoiceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceHistory_OrderHeaders" Association="Self.FK_InvoiceHistory_OrderHeaders">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="InvoiceHistory" EntitySet="InvoiceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId" Association="Self.FK_dbo_OrderHeaders_dbo_InvoiceNumberTemplates_InvoiceNumberTemplateId">
+            <End Role="InvoiceNumberTemplates" EntitySet="InvoiceNumberTemplates" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOptions_MiscChargeType" Association="Self.FK_OrderOptions_MiscChargeType">
+            <End Role="MiscChargeType" EntitySet="MiscChargeTypes" />
+            <End Role="OrderOptions" EntitySet="OrderOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiscInstall_OrderDetails" Association="Self.FK_MiscInstall_OrderDetails">
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+            <End Role="MiscInstall" EntitySet="MiscInstalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiscInstall_OrderHeaders" Association="Self.FK_MiscInstall_OrderHeaders">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="MiscInstall" EntitySet="MiscInstalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId" Association="Self.FK_dbo_OrderDetails_dbo_OrderHeaders_OrderHeaderId">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_ShipToes_ShipToId" Association="Self.FK_dbo_OrderDetails_dbo_ShipToes_ShipToId">
+            <End Role="ShipToes" EntitySet="ShipToes" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId" Association="Self.FK_dbo_OrderDetails_dbo_Upfitters_UpfitterId">
+            <End Role="Upfitters" EntitySet="Upfitters" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailsOrderOptionsLinks_OrderDetails" Association="Self.FK_OrderDetailsOrderOptionsLinks_OrderDetails">
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+            <End Role="OrderDetailsOrderOptionsLinks" EntitySet="OrderDetailsOrderOptionsLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailsOrderOptionsLinks_OrderHeaders" Association="Self.FK_OrderDetailsOrderOptionsLinks_OrderHeaders">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="OrderDetailsOrderOptionsLinks" EntitySet="OrderDetailsOrderOptionsLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetailsOrderOptionsLinks_OrderOptions" Association="Self.FK_OrderDetailsOrderOptionsLinks_OrderOptions">
+            <End Role="OrderOptions" EntitySet="OrderOptions" />
+            <End Role="OrderDetailsOrderOptionsLinks" EntitySet="OrderDetailsOrderOptionsLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId" Association="Self.FK_dbo_OrderHeaders_dbo_ShipToes_ShipToId">
+            <End Role="ShipToes" EntitySet="ShipToes" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId" Association="Self.FK_dbo_OrderHeaders_dbo_TermsLookups_TermsLookupId">
+            <End Role="TermsLookups" EntitySet="TermsLookups" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId" Association="Self.FK_dbo_OrderHeaders_dbo_Upfitters_UpfitterId">
+            <End Role="Upfitters" EntitySet="Upfitters" />
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId" Association="Self.FK_dbo_OrderOptions_dbo_OrderHeaders_OrderHeaderId">
+            <End Role="OrderHeaders" EntitySet="OrderHeaders" />
+            <End Role="OrderOptions" EntitySet="OrderOptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PCInvoiceModelStoreContainer" CdmEntityContainer="PCInvoiceEntities">
+          <EntitySetMapping Name="CALookups">
+            <EntityTypeMapping TypeName="PCInvoiceModel.CALookup">
+              <MappingFragment StoreEntitySet="CALookups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PCInvoiceModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NotificationEmail" ColumnName="NotificationEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chassis">
+            <EntityTypeMapping TypeName="PCInvoiceModel.Chassis">
+              <MappingFragment StoreEntitySet="Chassis">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ModelYearId" ColumnName="ModelYearId" />
+                <ScalarProperty Name="ChassisModelId" ColumnName="ChassisModelId" />
+                <ScalarProperty Name="TransmissionId" ColumnName="TransmissionId" />
+                <ScalarProperty Name="CALookupId" ColumnName="CALookupId" />
+                <ScalarProperty Name="GVWLookupId" ColumnName="GVWLookupId" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChassisMakes">
+            <EntityTypeMapping TypeName="PCInvoiceModel.ChassisMake">
+              <MappingFragment StoreEntitySet="ChassisMakes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChassisModels">
+            <EntityTypeMapping TypeName="PCInvoiceModel.ChassisModel">
+              <MappingFragment StoreEntitySet="ChassisModels">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ChassisMakeId" ColumnName="ChassisMakeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="PCInvoiceModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PCInvoiceModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FobLookups">
+            <EntityTypeMapping TypeName="PCInvoiceModel.FobLookup">
+              <MappingFragment StoreEntitySet="FobLookups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GVWLookups">
+            <EntityTypeMapping TypeName="PCInvoiceModel.GVWLookup">
+              <MappingFragment StoreEntitySet="GVWLookups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceHistories">
+            <EntityTypeMapping TypeName="PCInvoiceModel.InvoiceHistory">
+              <MappingFragment StoreEntitySet="InvoiceHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderHeaderId" ColumnName="OrderHeaderId" />
+                <ScalarProperty Name="OrderDetaiIId" ColumnName="OrderDetaiIId" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceNumberTemplates">
+            <EntityTypeMapping TypeName="PCInvoiceModel.InvoiceNumberTemplate">
+              <MappingFragment StoreEntitySet="InvoiceNumberTemplates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Template" ColumnName="Template" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MiscChargeTypes">
+            <EntityTypeMapping TypeName="PCInvoiceModel.MiscChargeType">
+              <MappingFragment StoreEntitySet="MiscChargeType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MiscInstalls">
+            <EntityTypeMapping TypeName="PCInvoiceModel.MiscInstall">
+              <MappingFragment StoreEntitySet="MiscInstall">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderHeaderId" ColumnName="OrderHeaderId" />
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="InstallPO" ColumnName="InstallPO" />
+                <ScalarProperty Name="InstallPrice" ColumnName="InstallPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelYearLookups">
+            <EntityTypeMapping TypeName="PCInvoiceModel.ModelYearLookup">
+              <MappingFragment StoreEntitySet="ModelYearLookups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NLog_Error">
+            <EntityTypeMapping TypeName="PCInvoiceModel.NLog_Error">
+              <MappingFragment StoreEntitySet="NLog_Error">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="logger" ColumnName="logger" />
+                <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+                <ScalarProperty Name="allxml" ColumnName="allxml" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="PCInvoiceModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="OrderHeaderId" ColumnName="OrderHeaderId" />
+                <ScalarProperty Name="PurchaseOrder" ColumnName="PurchaseOrder" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="DropShipCode" ColumnName="DropShipCode" />
+                <ScalarProperty Name="ScheduledBuildDate" ColumnName="ScheduledBuildDate" />
+                <ScalarProperty Name="ActualBuildDate" ColumnName="ActualBuildDate" />
+                <ScalarProperty Name="EstimatedShipDate" ColumnName="EstimatedShipDate" />
+                <ScalarProperty Name="ActualShipDate" ColumnName="ActualShipDate" />
+                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+                <ScalarProperty Name="BodyPO" ColumnName="BodyPO" />
+                <ScalarProperty Name="BodyPoIssueDate" ColumnName="BodyPoIssueDate" />
+                <ScalarProperty Name="BodyPrice" ColumnName="BodyPrice" />
+                <ScalarProperty Name="BodySerial" ColumnName="BodySerial" />
+                <ScalarProperty Name="ReqBodyShipDate" ColumnName="ReqBodyShipDate" />
+                <ScalarProperty Name="EstBodyShipDate" ColumnName="EstBodyShipDate" />
+                <ScalarProperty Name="BodyShipDate" ColumnName="BodyShipDate" />
+                <ScalarProperty Name="BodyReceivedDate" ColumnName="BodyReceivedDate" />
+                <ScalarProperty Name="BodyCompany" ColumnName="BodyCompany" />
+                <ScalarProperty Name="LiftModel" ColumnName="LiftModel" />
+                <ScalarProperty Name="LiftOrder" ColumnName="LiftOrder" />
+                <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
+                <ScalarProperty Name="SalesOrderLine" ColumnName="SalesOrderLine" />
+                <ScalarProperty Name="SalesOrderRelease" ColumnName="SalesOrderRelease" />
+                <ScalarProperty Name="LiftSerial" ColumnName="LiftSerial" />
+                <ScalarProperty Name="LiftATSDate" ColumnName="LiftATSDate" />
+                <ScalarProperty Name="InstallPO" ColumnName="InstallPO" />
+                <ScalarProperty Name="InstallPODateIssued" ColumnName="InstallPODateIssued" />
+                <ScalarProperty Name="InstallPrice" ColumnName="InstallPrice" />
+                <ScalarProperty Name="PrelimInvoiceDate" ColumnName="PrelimInvoiceDate" />
+                <ScalarProperty Name="PCInvoiceNumber" ColumnName="PCInvoiceNumber" />
+                <ScalarProperty Name="BaseLiftPrice" ColumnName="BaseLiftPrice" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="UpfitterId" ColumnName="UpfitterId" />
+                <ScalarProperty Name="ShipToId" ColumnName="ShipToId" />
+                <ScalarProperty Name="ChassisId" ColumnName="ChassisId" />
+                <ScalarProperty Name="ChassisPrice" ColumnName="ChassisPrice" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="LastInvoiceAmount" ColumnName="LastInvoiceAmount" />
+                <ScalarProperty Name="FreightDelivery" ColumnName="FreightDelivery" />
+                <ScalarProperty Name="FreightLift" ColumnName="FreightLift" />
+                <ScalarProperty Name="FreightPlatform" ColumnName="FreightPlatform" />
+                <ScalarProperty Name="FreightBody" ColumnName="FreightBody" />
+                <ScalarProperty Name="InServiceAcct" ColumnName="InServiceAcct" />
+                <ScalarProperty Name="ExtWarrAcct" ColumnName="ExtWarrAcct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetailsOrderOptionsLinks">
+            <EntityTypeMapping TypeName="PCInvoiceModel.OrderDetailsOrderOptionsLink">
+              <MappingFragment StoreEntitySet="OrderDetailsOrderOptionsLinks">
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+                <ScalarProperty Name="OrderOptionId" ColumnName="OrderOptionId" />
+                <ScalarProperty Name="OrderHeaderId" ColumnName="OrderHeaderId" />
+                <ScalarProperty Name="Include" ColumnName="Include" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderHeaders">
+            <EntityTypeMapping TypeName="PCInvoiceModel.OrderHeader">
+              <MappingFragment StoreEntitySet="OrderHeaders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PurchaseOrder" ColumnName="PurchaseOrder" />
+                <ScalarProperty Name="DropShipCode" ColumnName="DropShipCode" />
+                <ScalarProperty Name="PreliminaryInvoiceMessage" ColumnName="PreliminaryInvoiceMessage" />
+                <ScalarProperty Name="PreliminaryInvoiceEmail" ColumnName="PreliminaryInvoiceEmail" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="UpfitterId" ColumnName="UpfitterId" />
+                <ScalarProperty Name="ChassisId" ColumnName="ChassisId" />
+                <ScalarProperty Name="ShipToId" ColumnName="ShipToId" />
+                <ScalarProperty Name="QuoteNum" ColumnName="QuoteNum" />
+                <ScalarProperty Name="InvoiceNumberTemplateId" ColumnName="InvoiceNumberTemplateId" />
+                <ScalarProperty Name="OrderYear" ColumnName="OrderYear" />
+                <ScalarProperty Name="FoblookupId" ColumnName="FoblookupId" />
+                <ScalarProperty Name="FobPlace" ColumnName="FobPlace" />
+                <ScalarProperty Name="TermsLookupId" ColumnName="TermsLookupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderOptions">
+            <EntityTypeMapping TypeName="PCInvoiceModel.OrderOption">
+              <MappingFragment StoreEntitySet="OrderOptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderHeaderId" ColumnName="OrderHeaderId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OptionNum" ColumnName="OptionNum" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Print" ColumnName="Print" />
+                <ScalarProperty Name="OptionSeq" ColumnName="OptionSeq" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="MiscCharge" ColumnName="MiscCharge" />
+                <ScalarProperty Name="MiscChargeTypeId" ColumnName="MiscChargeTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShipToes">
+            <EntityTypeMapping TypeName="PCInvoiceModel.ShipTo">
+              <MappingFragment StoreEntitySet="ShipToes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="PCInvoiceModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskQueues">
+            <EntityTypeMapping TypeName="PCInvoiceModel.TaskQueue">
+              <MappingFragment StoreEntitySet="TaskQueue">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Submitter" ColumnName="Submitter" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+                <ScalarProperty Name="OrderLines" ColumnName="OrderLines" />
+                <ScalarProperty Name="AdditionalMessage" ColumnName="AdditionalMessage" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="EmailSent" ColumnName="EmailSent" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TermsLookups">
+            <EntityTypeMapping TypeName="PCInvoiceModel.TermsLookup">
+              <MappingFragment StoreEntitySet="TermsLookups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transmissions">
+            <EntityTypeMapping TypeName="PCInvoiceModel.Transmission">
+              <MappingFragment StoreEntitySet="Transmissions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Upfitters">
+            <EntityTypeMapping TypeName="PCInvoiceModel.Upfitter">
+              <MappingFragment StoreEntitySet="Upfitters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

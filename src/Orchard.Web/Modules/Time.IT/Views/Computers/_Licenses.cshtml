@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.License>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LicenseKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_LicenseType.LicenseType)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", "Licenses", new { id = item.Id })">@item.Name</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicenseKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_LicenseType.LicenseType)
+            </td>
+            <td>
+                @Html.ActionLink("Un-Link", "UnLinkLicense", new { id = item.Id, ComputerId = ViewBag.ComputerId })
+            </td>
+        </tr>
+    }
+</table>

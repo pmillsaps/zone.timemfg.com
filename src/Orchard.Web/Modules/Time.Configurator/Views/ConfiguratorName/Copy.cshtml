@@ -1,0 +1,165 @@
+﻿@model Time.Data.EntityModels.Configurator.ConfiguratorName
+
+@{
+    ViewBag.Title = "Copy Existing Configurator into New Configurator";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    
+    <div class="row">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <br />
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.ConfigName, "New Configurator Name", htmlAttributes: new { @class = "lead" })
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.ConfigName)
+            @Html.ValidationMessageFor(model => model.ConfigName, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Create New Configurator" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+<br /><br />
+
+<p>
+    <h3><u>Data shown is from the @ViewBag.ConfiguratorName Configurator</u></h3>
+</p>
+@*Structure Table*@
+<h3>Structures</h3>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            ConfigName
+        </th>
+        <th>
+            ConfigData
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.Structure as IEnumerable<Time.Data.EntityModels.Configurator.Structure>)
+    {
+        <tr>
+            <td>
+                @item.ConfigName
+            </td>
+            <td>
+                @item.ConfigData
+            </td>
+        </tr>
+    }
+</table>
+
+@*Structure Sequence Table*@
+<h3>Structure Sequence</h3>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            ConfigName
+        </th>
+        <th>
+            ConfigData
+        </th>
+        <th>
+            Sequence
+        </th>
+        <th>
+            Lookup
+        </th>
+        <th>
+            LookupSequence
+        </th>
+        <th>
+            Global
+        </th>
+    </tr>
+    @foreach (var item1 in ViewBag.StructureSeq as IEnumerable<Time.Data.EntityModels.Configurator.StructureSeq>)
+    {
+        <tr>
+            <td>
+                @item1.ConfigName
+            </td>
+            <td>
+                @item1.ConfigData
+            </td>
+            <td>
+                @item1.Sequence
+            </td>
+            <td>
+                @item1.Lookup
+            </td>
+            <td>
+                @item1.LookupSequence
+            </td>
+            <td>
+                @Html.CheckBox("StructureSeq", @item1.Global, new { @disabled = "disabled" })
+            </td>
+        </tr>
+    }
+</table>
+
+@*Lookup Table*@
+<h3>Lookups</h3>
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            ConfigName
+        </th>
+        <th>
+            ConfigData
+        </th>
+        <th>
+            Sequence
+        </th>
+        <th>
+            Data
+        </th>
+        <th>
+            PickDefault
+        </th>
+        <th>
+            Inactive
+        </th>
+    </tr>
+    @foreach (var item2 in ViewBag.Lookup as IEnumerable<Time.Data.EntityModels.Configurator.Lookup>)
+    {
+        <tr>
+            <td>
+                @item2.ConfigName
+            </td>
+            <td>
+                @item2.ConfigData
+            </td>
+            <td>
+                @item2.Sequence
+            </td>
+            <td>
+                @item2.Data
+            </td>
+            <td>
+                @Html.CheckBox("Lookup", @item2.PickDefault, new { @disabled = "disabled" })
+            </td>
+            <td>
+                @Html.CheckBox("Lookup", @item2.Inactive, new { @disabled = "disabled" })
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
