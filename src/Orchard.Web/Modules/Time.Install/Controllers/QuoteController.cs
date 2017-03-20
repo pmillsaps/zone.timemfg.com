@@ -39,11 +39,12 @@ namespace Time.Install.Controllers
             List<LoadAerialQuotes> model = new List<LoadAerialQuotes>();
 
             // This line is for testing
-            var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS").ToList();
+            //var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS").ToList();
 
             // Uncomment this lines when going live
-            //var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS" && x.QuoteComment == "").ToList();
-            // Retrieving the LiftFamilyId
+            var quotes = dbE.QuoteDtls.Where(x => x.PartNum == "INSTALLS" && x.QuoteComment == "").ToList();
+
+            //// Retrieving the LiftFamilyId
             //var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
             //var liftFmly = dbQ.LiftFamilies.FirstOrDefault(x => x.FamilyName == cfgName.ConfigID);
             //quoteVM.LiftFamilyId = liftFmly.Id;
