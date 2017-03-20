@@ -62,7 +62,7 @@ namespace Time.Install.Controllers
                 qvm.ChangedBy = item.ChangedBy;
                 qvm.ChangeDate = (item.ChangeDate != null) ? item.ChangeDate.Value.ToShortDateString() : "";
                 var quoteDtls = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == item.QuoteNum && x.QuoteLine == 1);
-                var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
+                var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum && ( x.RevisionNum == "CFG" || x.RevisionNum == "New" || x.RevisionNum == "IMPLT" || x.RevisionNum == "A") && x.ConfigID != "CFG-Generic");
                 if (cfgName != null)
                 {
                     var liftFmly = dbQ.LiftFamilies.FirstOrDefault(x => x.FamilyName == cfgName.ConfigID);
@@ -123,7 +123,8 @@ namespace Time.Install.Controllers
             if (liftFamilyId == null)// Retrieving the LiftFamilyId used to load its VSW options
             {
                 var quoteDtls = dbE.QuoteDtls.FirstOrDefault(x => x.QuoteNum == quoteNum && x.QuoteLine == 1);
-                var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
+                var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum && (x.RevisionNum == "CFG" || x.RevisionNum == "New" || x.RevisionNum == "IMPLT" || x.RevisionNum == "A") && x.ConfigID != "CFG-Generic");
+                //var cfgName = dbE.PartRevs.FirstOrDefault(x => x.PartNum == quoteDtls.PartNum);
                 var liftFmly = dbQ.LiftFamilies.FirstOrDefault(x => x.FamilyName == cfgName.ConfigID);
                 quoteVM.LiftFamilyId = liftFmly.Id;
             }
