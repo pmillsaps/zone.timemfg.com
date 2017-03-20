@@ -18,7 +18,7 @@ namespace Time.IT
         public IEnumerable<Permission> GetPermissions()
         {
             return new[] {
-                IT, ITAdmin
+                IT, ITAdmin, EmployeeMaintenance
             };
         }
 
@@ -27,11 +27,15 @@ namespace Time.IT
             return new[] {
                 new PermissionStereotype {
                     Name = "Administrator",
-                    Permissions = new[] {IT, ITAdmin}
+                    Permissions = new[] {ITAdmin}
                 },
                 new PermissionStereotype {
                     Name = "IT",
                     Permissions = new[] {IT, ITAdmin}
+                },
+                new PermissionStereotype {
+                    Name = "Maintenance",
+                    Permissions = new[] {EmployeeMaintenance}
                 },
             };
         }

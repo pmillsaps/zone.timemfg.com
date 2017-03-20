@@ -1,5 +1,6 @@
 ﻿using Orchard.Themes;
 using Orchard;
+using Orchard.Localization;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,6 +25,7 @@ namespace Time.IT.Controllers
         private ProductionEntities prod = new ProductionEntities();
 
         public IOrchardServices Services { get; set; }
+        public Localizer T { get; set; }
 
         public EmployeesController(IOrchardServices services)
         {
@@ -42,6 +44,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees
         public ActionResult Index(string search = "", string ddl = "")
         {
+            if ((!Services.Authorizer.Authorize(Permissions.ITAdmin, T("You Do Not Have Permission to View this Page"))) || (!Services.Authorizer.Authorize(Permissions.IT, T("You Do Not Have Permission to View this Page"))) || (!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (search.Length == 0 && ddl == "All")
             {
                 return View(db.Term_Employees.OrderBy(x => x.FName).ThenBy(x => x.LName).ToList());

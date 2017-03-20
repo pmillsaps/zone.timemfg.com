@@ -134,7 +134,7 @@ namespace Time.Epicor.ViewModels
         {
             using (var db = new EpicorEntities())
             {
-                db.Database.CommandTimeout = 1200;   // Added to get rid of timeOut errors PEM 2014-06-16
+                db.Database.CommandTimeout = 0;   // Added to get rid of timeOut errors PEM 2014-06-16
 
                 //var repo = new SqlPartRepository(db);
                 var model = GetParts();
@@ -171,6 +171,7 @@ namespace Time.Epicor.ViewModels
                     case SearchType.VendorPartNumber:
                         //var vn = int.Parse(Query);
                         model = model.Where(c => c.VendorPartNumber.Contains(Query));
+                        //RowCount = model.Count();
                         break;
 
                     default:
@@ -186,17 +187,17 @@ namespace Time.Epicor.ViewModels
 
                 model = (string.IsNullOrEmpty(OrderBy)) ? model.OrderBy(o => o.PartNumber) : model.OrderBy(OrderBy);
 
-                RowCount = model.Count();
-                if (this.PageSize != 0)
-                {
-                    model = model.Skip(PageSize * (PageNum)).Take(PageSize);
-                    _TotalPages = RowCount / PageSize;
-                }
+                //RowCount = model.Count();
+                //if (this.PageSize != 0)
+                //{
+                //    model = model.Skip(PageSize * (PageNum)).Take(PageSize);
+                //    _TotalPages = RowCount / PageSize;
+                //}
 
                 PartData = model.ToList();
                 if (RestrictData)
                 {
-                    foreach (var item in PartData)
+                    foreach (var item in model)
                     {
                         item.Cost = null;
                         item.binqty = null;
@@ -219,7 +220,7 @@ namespace Time.Epicor.ViewModels
                 Cost = x.lastmaterialcost,
                 VendorName = x.name,
                 VendorID = x.vendorid,
-                VendorPartNumber = db.v_BillOfMaterials.Where(y => y.mtlpartnum == x.partnum).Select(y => y.VenPartNum).FirstOrDefault().ToString(),
+                VendorPartNumber = db.v_BillOfMaterials.Where(y => y.partnum == x.partnum).Select(y => y.VenPartNum).FirstOrDefault().ToString(),
                 Type = x.typecode,
                 InActive = x.inactive == 1,
                 isPhantom = x.phantombom == 1,
