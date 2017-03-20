@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.LiftFamily>
+
+@{
+    ViewBag.Title = "Lift Family Index";
+}
+
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+
+<div class="alert alert-info">
+    <h4>The information in these pages includes:</h4>
+    <p><span class="label label-primary">1.</span> The Lift Family Name.</p>
+    <p><span class="label label-primary">2.</span> The base Labor Hours for that Lift Family.</p>
+    <p><span class="label label-primary">3.</span> The description for the <i>Quotation Presentation</i> document, and</p>
+    <p><span class="label label-primary">4.</span> The Installation Specifications for the <i>Quotation Presentation</i> document, if any. 
+    Click the <span class="label label-primary">Show Installations Specs</span> button to display them.</p>
+    <p><span class="label label-success">Tip:</span> Click the button <span class="label label-primary">Show Pictures</span> to display what sections of the previously used documents this page is related to.</p>
+</div>
+<a id="showInfo" href="#cfgsAndLifts" data-toggle="collapse" class="btn btn-primary btn-xs">Show Pictures</a>
+<div id="cfgsAndLifts" class="collapse">
+    <div style="display:block; height:300px; overflow:scroll;">
+        @Html.Action("MoreInfo", "Home", new { documentSection = "vswTimeliftFamily" })
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <a id="specs" style="margin-top:17px;" href="javascript:toggleChassisSpecs();" class="btn btn-primary btn-xs">Show Installations Specs</a>
+    </div>
+    <div class="col-md-5">
+        <a style="margin-top:17px;" class="btn btn-primary btn-xs" href="@Url.Action("Create", "LiftFamilies")">Create New Lift Family</a>
+    </div>
+    @using (Html.BeginForm("Index", "LiftFamilies", FormMethod.Get))
+    {
+        <div class="col-md-4 pull-right" style="margin-bottom:5px;">
+            <div class="input-group">
+                @Html.TextBox("Search", null, new { @placeholder = "Search for Family Lift..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+    }
+</div>
+
+<table class="table table-striped table-bordered table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.FamilyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstallHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstallHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "LiftFamilies", new { id = item.Id })"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "LiftFamilies", new { id = item.Id })"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", "LiftFamilies", new { id = item.Id })"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        <tr>
+            @Html.Partial("_ChassisSpecs", item.ChassisSpecsForWordDocs)
+        </tr>
+    }
+</table>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () { $('.chassisSpecs').hide(); })
+        function toggleChassisSpecs() {
+            $('.chassisSpecs').toggle();
+            if ($("#specs").text() == "Show Installations Specs") {
+                $("#specs").text("Hide Installations Specs");
+            } else {
+                $("#specs").text("Show Installations Specs");
+            }
+        }
+
+        $("#showInfo").click(function () {
+            if ($(this).text() == "Show Pictures") {
+                $(this).text("Hide Pictures");
+            } else {
+                $(this).text("Show Pictures");
+            }
+        });
+    </script>
+}

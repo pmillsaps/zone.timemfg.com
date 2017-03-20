@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.Term_Employees>
+
+@{
+    ViewBag.Title = "Employee Maintenance List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New Employee", "Create")
+</p>
+
+<br />
+
+<div class="alert alert-info">
+    <h5>You may search by First Name, Last Name, or Email Address.  Use the drop down list to further narrow down the results.</h5>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                @Html.TextBox("search", null, htmlAttributes: new { @placeholder = "Search..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary">Go!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            @{ var listItems = new List<SelectListItem>
+    {
+       new SelectListItem { Text = "All", Value="All" },
+       new SelectListItem { Text = "Employed", Value="Employed" },
+       new SelectListItem { Text = "Terminated", Value="Terminated" },
+    };
+            }
+            @Html.DropDownList("ddl", new SelectList(listItems, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+                }
+
+<br />
+
+<table class="table table-bordered table-hover table-condensed table-striped">
+    <tr class="success">
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Employed/Terminated
+        </th>
+        <th>
+            Hire/Terminated Date
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="9">
+                @Html.Label("No rows match the search criteria")
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>
+                @if (item.Email == null)
+                {
+                    <td>
+                        -
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                }
+                <td>
+                    @Html.Raw((item.Terminated) ? "Terminated" : "Employed")
+                    @*@Html.DisplayFor(modelItem => item.Terminated)*@
+                </td>
+
+                @if (item.TerminatedDate == null)
+                {
+                    <td>
+                        -
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TerminatedDate)
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+</table>

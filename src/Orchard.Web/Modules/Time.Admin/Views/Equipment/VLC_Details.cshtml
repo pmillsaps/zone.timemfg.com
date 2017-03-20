@@ -1,0 +1,74 @@
+﻿@model Time.Admin.EntityModels.Versalift.VersaliftLiftCategory
+
+@{
+    ViewBag.Title = "Versalift Lift Category Details for versalift.com";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>VersaliftLiftCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryParentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryParentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverrideURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverrideURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoURL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "VLC_Edit", new { id = Model.CategoryID }) |
+    @Html.ActionLink("Back to List", "VLC_Index")
+</p>

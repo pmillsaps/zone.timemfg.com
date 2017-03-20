@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "NIC Index";
+    Script.Require("jQuery");
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.buttons.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/jszip.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/buttons.html5.min.js").AtFoot();
+}
+<link href="~/Modules/Time.IT/Styles/buttons.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-12">
+        <p><strong>All New NIC's must be created from the Computer Screen (Add NIC).</strong></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+    </div>
+</div>
+<br />
+<table id="nicsTable" class="table table-striped table-hover table-bordered table-condensed">
+    <thead>
+        <tr class="success">
+            <td>@Html.Label("MAC")</td>
+            <td>@Html.Label("IP")</td>
+            <td>@Html.Label("Computer")</td>
+            <td>@Html.Label("User")</td>
+            <td>@Html.Label("Type")</td>
+            <td>@Html.Label("Cable")</td>
+            <td>@Html.Label("NIC Speed")</td>
+            <td>@Html.Label("Switch Port")</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+</table>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadNICs", "NIC")';
+            var oTable = $("#nicsTable").DataTable({
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary btn-sm excelButton", filename: 'NICsList', }],
+                order: [[0, "asc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columns: [
+                    { data: "MAC", autoWidth: true },
+                    { data: "IP", autoWidth: true },
+                    {
+                        "data": null, autoWidth: true, render: function (data, type, row) {
+                            return '<a href="Computers/Details/' + row.ComputerId + '">' + row.ComputerName + '</a>';
+                        }
+                    },
+                    {
+                        data: null, autoWidth: true, render: function (data, type, row) {
+                            return '<a href="Users/Details/' + row.UserId + '">' + row.UserName + '</a>';
+                        }
+                    },
+                    { data: "Type", autoWidth: true },
+                    { data: "CableName", autoWidth: true },
+                    { data: "NICSpeed", autoWidth: true },
+                    { data: "SwitchPort", autoWidth: true },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="NIC/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="NIC/Details/' + data + '"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        "data": "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="NIC/Delete/' + data + '"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                        }
+                    }
+                ]
+            })
+        });
+    </script>
+}
+
+@*@model IEnumerable<Time.Data.EntityModels.ITInventory.Ref_NIC>
+
+    @{
+        ViewBag.Title = "NIC Index";
+    }
+
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+        All New NIC's must be created from the Computer Screen (Add NIC)
+    </p>
+
+    <hr />
+
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken();
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.TextBox("search")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-1">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+        <div class="col-md-2">
+            [@Model.Count()]
+        </div>
+    </div>
+    <div>
+        Search includes:MAC, IP, Type, Cable No, SwitchPort
+    </div>
+
+    <hr />
+
+    <table class="table table-striped table-bordered table-condensed table-hover">
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.MAC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Computer)
+            </th>
+            <th>
+                User
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_CableNo.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_NICSpeed.NIC_Speed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_SwitchPort.SwitchPort)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MAC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IP)
+                </td>
+                <td>
+                    @if (item.Computer != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Computer.Name)
+                        @Html.ActionLink(item.Computer.Name, "Details", "Computers", new { id = item.Computer.Id }, null)
+                    }
+                </td>
+                <td>
+                    @if (item.Computer != null)
+                    {
+                        if (item.Computer.User != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Computer.User.Name)
+                            @Html.ActionLink(item.Computer.User.Name, "Details", "Users", new { id = item.Computer.User.Id }, null)
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_CableNo.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_NICSpeed.NIC_Speed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_SwitchPort.SwitchPort)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>*@

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "VSW Installation Quotation And TIME Quotation Presentation";
+}
+
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+@Html.Partial("_ModalForm")
+
+<div class="container-fluid alert alert-info">
+    <div class="row">
+        <div class="col-md-1 text-center">
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-11">
+            <p><span class="label label-success">Tip:</span> Most of the following links have a corresponding section in the documents previously used;
+            which are the Excel document <i>Installation Quotation</i> and the Word document <i>Quotation Presentation</i>.</p>
+            <p>Click the <i class="fa fa-question-circle-o" aria-hidden="true"></i> icon for more information on what sections of these documents the links
+            are related to. This will help you navigate to the right pages when you need to view, create, edit, or delete.</p>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="alert alert-info">
+    <h3><i>Installation Quotation</i> and <i>Quotation Presentation</i></h3>
+    <ul>
+        <li>@Html.ActionLink("List of Aerial Quotes", "Index", "Quote")</li>
+        <li>@Html.ActionLink("List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")</li>
+    </ul>
+    <br />
+</div>
+
+<br />
+<div class="alert alert-info">
+    <h3>VSW <i>Installation Quotation</i> Data Entry</h3>
+    <ul>
+        <li>@Html.ActionLink("Lift Family", "Index", "LiftFamilies")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="vswTimeliftFamily"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+
+        <li>@Html.ActionLink("Time Options with Install Hours", "Index", "TimeOptions")</li>
+
+        <li>@Html.ActionLink("VSW Option Group (Groups Only)", "Index", "OptionGroups")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="vswOptionGroup"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+
+        <li>@Html.ActionLink("VSW Install Options (Groups with Options)", "Index", "VSWOptions")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="vswOptions"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+
+        <li>@Html.ActionLink("VSW Hour/Paint Rates", "Index", "InstallHourlyRates")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="vswHourPaintRates"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+    </ul>
+</div>
+
+<br />
+<div class="alert alert-info">
+    <h3>TIME <i>Quotation Presentation</i> Data Entry</h3>
+    <ul>
+        <li>@Html.ActionLink("Lift Family", "Index", "LiftFamilies")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="vswTimeliftFamily"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+
+        <li>@Html.ActionLink("Option Names and Descriptions", "Index", "OptionTitleDescpForWordDocs")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="wordOptionsAndDescr"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+
+        <li>@Html.ActionLink("Installation Details", "Index", "InstallDetailsForWordDocs")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="wordInstallDetails"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+
+        <li>
+            @Html.ActionLink("Users for the Quotation Presentation", "Index", "QuoteDeptUsersForWordDocs")
+        <a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-section="quoteDeptUsers"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
+    </li></li>
+    </ul>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $('.dtlsBtn').click(function () {
+            var section = $(this).data("section");
+            var url = '@Url.Action("MoreInfo", "Home")';
+            $("#form-content").load(url + "?documentSection=" + section);
+        });
+    </script>
+}

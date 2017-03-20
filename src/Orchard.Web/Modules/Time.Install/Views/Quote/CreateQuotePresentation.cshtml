@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.OptionTitlesForWordDoc>
+@{
+    Script.Require("jQueryUI_Sortable").AtFoot();
+    ViewBag.Title = "Create Quote Presentation";
+}
+
+<link href="~/Modules/Time.Install/Styles/wordDocStyles.css" rel="stylesheet" />
+
+
+<h2>@ViewBag.Title for @Model.First().LiftFamily.FamilyName</h2>
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes", "ListOfInstallQuotes", "Quote")
+</div>
+<div align="right">
+    @Html.ActionLink("Back to List of Aerial Quotes with Installation Quotation", "ListOfInstallQuotes", "Quote")
+</div>
+
+@Html.Partial("_InstructionsQuotePresentation")
+<br />
+
+@using (Html.BeginForm("GenerateDocument", "Quote", FormMethod.Post, new { id = "wordDocForm" }))
+{
+    @Html.HiddenFor(model => Model.First().LiftFamilyId)
+    @Html.Hidden("fileName", "")
+    @Html.Hidden("userId", "")
+    @Html.Hidden("listOfOptions", "")
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">@Html.TextBox("fName", null, htmlAttributes: new { @class = "form-control", @placeholder = "Enter File Name..." })</div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.Label("Users:")</span>
+                @Html.DropDownList("Users", ViewBag.Users as SelectList, " -- Select User -- ", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4"><input type="button" value="Create Quotation Presentation" onclick="submitForm()" class="btn btn-primary" /></div>
+    </div>
+    <hr />
+    <table style="background-color:#EFF5FB;">
+        <tr>
+            <th style="text-align: center">
+                <h3>Included Document Options</h3>
+            </th>
+            <th style="text-align: center">
+                <h3>Discarded Options</h3>
+            </th>
+        </tr>
+        <tr>
+            <td style="vertical-align: top; width: 600px;">
+                <ul id="selectedOptions" class="listOptions" style="background-color: #D2F398; border:2px solid #2FA4E7;">
+                    @foreach (var item in Model)
+                    {
+                    <li>@item.OptionTitle</li>
+                    }
+                </ul>
+            </td>
+            <td style="vertical-align: top">
+                <ul id="availableOptions" class="listOptions" style="background-color: #D9EDF7; border:2px solid #2FA4E7;"></ul>
+            </td>
+
+        </tr>
+    </table>
+}
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#availableOptions, #selectedOptions").sortable({
+                connectWith: ".listOptions"
+            }).disableSelection();
+        });
+
+        function submitForm() {
+            var valueFName = $("#fName").val();
+            var valueuserId = $("#Users").val();
+            $("#fileName").val(valueFName);
+            $("#userId").val(valueuserId);
+            var outputList = $("#selectedOptions li").map(function () { return $(this).html(); }).get().join(',');
+            $("#listOfOptions").val(outputList);
+            $("#wordDocForm").submit();
+        }
+
+
+        $("#showInfo").click(function () {
+            if ($(this).text() == "Show Instructions") {
+                $(this).text("Hide Instructions");
+            } else {
+                $(this).text("Show Instructions");
+            }
+        });
+        @*function gettoken() {
+            var token = '@Html.AntiForgeryToken()';
+            token = $(token).val();
+            return token;
+        }
+
+        function submitOptions() {
+            //Generate List of selected options
+            $(".fa-cog").show();
+            var outputList = $("#selectedOptions li").map(function () { return $(this).html(); }).get().join(',');
+            var liftFmlyId = $("#LiftFamilyId").val();
+            var uId = $("#Users").val();
+            var fName = $("#FileName").val();
+            var url = '@Url.Action("CreateQuotePresentation", "Quote")';
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                data: {
+                    //__RequestVerificationToken: gettoken(),
+                    fileName: fName,
+                    userId: uId,
+                    liftFamilyId: liftFmlyId,
+                    listOfOptions: outputList
+                },
+                success: function (data) {
+                    $(".fa-cog").hide();
+                    //alert("Great! Your document is ready.\nThe Quotation Presentation was saved to your Desktop.");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $(".fa-cog").hide();
+                    //alert(xhr.status + "\nOops! Something went wrong.");
+                }
+            });
+        }*@
+    </script>
+}
