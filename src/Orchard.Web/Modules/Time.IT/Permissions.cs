@@ -27,15 +27,15 @@ namespace Time.IT
             return new[] {
                 new PermissionStereotype {
                     Name = "Administrator",
-                    Permissions = new[] {ITAdmin}
+                    Permissions = new[] {IT, EmployeeMaintenance }
                 },
                 new PermissionStereotype {
                     Name = "IT",
-                    Permissions = new[] {IT, ITAdmin}
+                    Permissions = new[] {IT, EmployeeMaintenance }
                 },
                 new PermissionStereotype {
                     Name = "Maintenance",
-                    Permissions = new[] {EmployeeMaintenance}
+                    Permissions = new[] { EmployeeMaintenance }
                 },
             };
         }

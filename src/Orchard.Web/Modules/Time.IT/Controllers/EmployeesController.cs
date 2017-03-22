@@ -44,7 +44,7 @@ namespace Time.IT.Controllers
         // GET: Term_Employees
         public ActionResult Index(string search = "", string ddl = "")
         {
-            if ((!Services.Authorizer.Authorize(Permissions.ITAdmin, T("You Do Not Have Permission to View this Page"))) || (!Services.Authorizer.Authorize(Permissions.IT, T("You Do Not Have Permission to View this Page"))) || (!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
                 return new HttpUnauthorizedResult();
 
             if (search.Length == 0 && ddl == "All")
@@ -90,6 +90,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/Details/5
         public ActionResult Details(int? id)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -152,6 +155,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/Create
         public ActionResult Create(string ddl = "")
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             return View();
         }
 
@@ -162,6 +168,9 @@ namespace Time.IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Exclude = "Id")] Term_Employees term_Employees, string ddl)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (ddl == "Terminated")
             {
                 term_Employees.Terminated = true;
@@ -236,6 +245,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/AfterCreate/5
         public ActionResult AfterCreate(int id, string ddl = "")
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             var prop = db.Term_Property.Where(x => x.EmpID == id).Single();
             var info = db.Term_ITInfo.Where(x => x.EmpID == id).Single();
 
@@ -282,6 +294,9 @@ namespace Time.IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AfterCreate([Bind(Include = "")] AfterCreateViewModel afterCreate, Term_Property term_property, Term_ITInfo term_itinfo, string ddl)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             term_property.Id = db.Term_Property.Where(x => x.EmpID == term_property.EmpID).Select(x => x.Id).Single();
             term_itinfo.Id = db.Term_ITInfo.Where(x => x.EmpID == term_itinfo.EmpID).Select(x => x.Id).Single();
 
@@ -325,6 +340,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/Edit/5
         public ActionResult Edit(int? id, string ddl = "")
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -345,6 +363,9 @@ namespace Time.IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FName,LName,Email,Terminated,TerminatedDate")] Term_Employees term_Employees, string ddl)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (ddl == "Terminated")
             {
                 term_Employees.Terminated = true;
@@ -366,6 +387,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/EditProperty/5
         public ActionResult EditProperty(int? id)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -385,6 +409,9 @@ namespace Time.IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProperty([Bind(Include = "Id,EmpId,CellPhone,FMPOff,CellReceived,Cables,CablesReceived,OfficeKey,OKeyReceived,BuildingKey,BKeyReceived")] Term_Property term_property)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (term_property.CellPhone == false)
             {
                 term_property.FMPOff = false;
@@ -406,6 +433,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/EditITInfo/5
         public ActionResult EditITInfo(int? id, string ddl = "")
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -429,6 +459,9 @@ namespace Time.IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditITInfo([Bind(Include = "Id,EmpID,WindowsAccAccess,ArchiveEmail,EmailAtW,FowardEmails,FowardAtW,DeleteUDrive,UDriveAtW,DeskPhone,DeskPhoneFW,DeskPhoneFWtW,DeskPhoneRename,PhoneRenametW,EpicorACC,EpicorUserID")] Term_ITInfo term_itinfo, string ddl)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (ddl == "None") term_itinfo.WindowsAccAccess = "No Windows Account";
             else if (ddl == "Active") term_itinfo.WindowsAccAccess = "Active Windows Account";
             else term_itinfo.WindowsAccAccess = "Deactivate Windows Account";
@@ -458,6 +491,9 @@ namespace Time.IT.Controllers
         // GET: Term_Employees/Delete/5
         public ActionResult Delete(int? id)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -475,6 +511,9 @@ namespace Time.IT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if ((!Services.Authorizer.Authorize(Permissions.EmployeeMaintenance, T("You Do Not Have Permission to View this Page"))))
+                return new HttpUnauthorizedResult();
+
             Term_Employees term_Employees = db.Term_Employees.Find(id);
             Term_Property term_Property = db.Term_Property.Where(x => x.EmpID == id).Single();
             Term_ITInfo term_ITInfo = db.Term_ITInfo.Where(x => x.EmpID == id).Single();
