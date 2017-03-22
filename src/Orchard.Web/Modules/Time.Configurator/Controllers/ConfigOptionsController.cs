@@ -74,6 +74,7 @@ namespace Time.Configurator.Controllers
                     if (item.Key08 == null) item.Key08 = "";
                     if (item.Key09 == null) item.Key09 = "";
                     if (item.Key10 == null) item.Key10 = "";
+                    if (item.PartNum == null) item.PartNum = "";
                 }
                 model.ConfigOptions = configOptions.ToList();
                 model.KeyDescriptions = keys.ToList();

@@ -47,6 +47,9 @@
             var configUrl = '@Url.Action("LoadOptions", "ConfigOptions")';
             var cName = $("#ConfigNames").val();
             var cData = $("#ConfigData").val();
+            if (cData == "Select a CFG first") {
+                cData = GetURLParameter('ConfigData');
+            }
             var disp;
             if ($("input:radio[name=display]").is(':checked')) disp = $("input:radio[name=display]:checked").val();
             var optionsD = $("#optionsDiv");
@@ -91,9 +94,27 @@
             });
         };// End of GetConfigOptions function
 
+        // Get the URL parameters. This function is used when navigating back to the index page after creating or editing a record.
+        function GetURLParameter(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return decodeURIComponent(sParameterName[1]);
+                }
+            }
+        }
+
         $(document).ready(function () {
-            if ($("#ConfigNames").val() != "") {
+            var cfgName = GetURLParameter('ConfigNames');
+            if (cfgName != null) {
+                $("#ConfigNames option").filter(function (index) { return $(this).text() === cfgName; }).attr('selected', 'selected');
                 GetConfigData();
+            }
+
+            if ($("#ConfigNames").val() != "") {
+                GetConfigOptions();
             }
         });
 
