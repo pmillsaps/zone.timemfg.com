@@ -42,13 +42,13 @@
             <span class="input-group-addon">
                 @Html.Label("Displaying:")
             </span>
-            @Html.DropDownList("Expiration")
+            @Html.DropDownList("Expired")
         </div>
     </div>
 </div>
-<div class="tableContainer">
-    <hr />
+<hr />
 
+<div class="wideContainer">
     <table id="mntncDetailsTable" class="table table-striped table-hover table-bordered table-condensed">
         <thead>
             <tr class="success">
@@ -59,10 +59,10 @@
                 <td>@Html.Label("PO/CC")</td>
                 <td>@Html.Label("PurchDate")</td>
                 <td>@Html.Label("ExpDate")</td>
+                <td>@Html.Label("Expired?")</td>
                 <td>@Html.Label("Account#")</td>
                 <td>@Html.Label("Duration")</td>
                 <td>@Html.Label("Cost")</td>
-                <td>@Html.Label("Monthly")</td>
                 <td>@Html.Label("Explanation")</td>
                 <td>@Html.Label("Alternate Info")</td>
                 <td></td>
@@ -80,7 +80,7 @@
             var urlLM = '@Url.Action("LoadMaintenanceDataDetails", "MaintenanceDataDetails")';
             var oTable = $("#mntncDetailsTable");
 
-            $("#Expiration").change(function () {
+            $("#Expired").change(function () {
                 oTable.DataTable().ajax.reload();
             });
 
@@ -95,7 +95,7 @@
                             draw: data.draw,   // Needed for paging
                             start: data.start,    // Needed for paging
                             length: data.length, // Needed for paging
-                            licenseStatus: $("#Expiration").val(),
+                            licenseStatus: $("#Expired").val(),
                         },
                         beforeSend: function (xhrObj) {
                             // Whatever
@@ -120,7 +120,7 @@
                 stateSave: true,
                 displayLength: -1,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [{ sClass: "clampClmn", targets: [1, 11] }],
+                columnDefs: [{ sClass: "clampClmn", targets: [1, 11, 12]}, {sClass: "text-center", targets: [7] }],
                 columns: [
                     { data: "CompanyName", autoWidth: true },
                     { data: "BudgetItem", autoWidth: true },
@@ -129,10 +129,10 @@
                     { data: "PO_CC", autoWidth: true },
                     { data: "PurchaseDate", autoWidth: true },
                     { data: "ExpirationDate", autoWidth: true },
+                    { data: "Expired", autoWidth: true, sortable: false},
                     { data: "AccountNumber", autoWidth: true },
                     { data: "Duration", autoWidth: true },
                     { data: "Cost", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$') },
-                    { data: "Monthly", autoWidth: true },
                     { data: "Explanation", autoWidth: true },
                     { data: "AlternateInfo", autoWidth: true },
                     {

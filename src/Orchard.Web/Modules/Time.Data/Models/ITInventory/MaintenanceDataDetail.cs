@@ -36,5 +36,8 @@ namespace Time.Data.EntityModels.ITInventory
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? Cost { get; set; }
+
+        [Display(Name = "Expired?")]
+        public bool Expired { get; set; }
     }
 }

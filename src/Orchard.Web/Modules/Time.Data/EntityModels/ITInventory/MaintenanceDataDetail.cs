@@ -25,6 +25,7 @@ namespace Time.Data.EntityModels.ITInventory
         public string Explanation { get; set; }
         public string AlternateInfo { get; set; }
         public string PO_CC { get; set; }
+        public bool Expired { get; set; }
     
         public virtual MaintenanceData MaintenanceData { get; set; }
     }

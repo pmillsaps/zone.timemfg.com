@@ -21,5 +21,6 @@ namespace Time.IT.ViewModel
         public string Explanation { get; set; }
         public string AlternateInfo { get; set; }
         public string PO_CC { get; set; }
+        public string Expired { get; set; }
     }
 }

@@ -64,6 +64,16 @@ table.dataTable thead .sorting_desc_disabled {
     margin-bottom: 5px;
 }
 
+.fa-check-square-o {
+    font-size: 25px;
+    color: #495B63;
+}
+
+.fa-square-o {
+    font-size: 25px;
+    color: #495B63;
+}
+
 .fa-address-card-o {
     font-size: 160px;
     /*color: #73A839;*/
@@ -240,9 +250,9 @@ a {
     border-bottom-left-radius: 3px;
 }
 
-.tableContainer {
+.wideContainer {
     width: 1740px;
-    margin: 0 -300px;
+    margin: 0 -330px;
     /*outline: 1px solid green;*/
 }
 

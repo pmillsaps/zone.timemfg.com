@@ -94,6 +94,7 @@
           <Property Name="Explanation" Type="varchar(max)" />
           <Property Name="AlternateInfo" Type="varchar(max)" />
           <Property Name="PO_CC" Type="varchar" MaxLength="200" />
+          <Property Name="Expired" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Monitor">
           <Key>
@@ -1462,6 +1463,7 @@
           <Property Name="AlternateInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MaintenanceData" Relationship="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" FromRole="MaintenanceDataDetail" ToRole="MaintenanceData" />
           <Property Name="PO_CC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Expired" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="tblMaintenanceDataDetails_MaintenanceDataId_FK">
           <End Type="ITInventoryModel.MaintenanceData" Role="MaintenanceData" Multiplicity="1" />
@@ -1794,6 +1796,7 @@
           <EntitySetMapping Name="MaintenanceDataDetails">
             <EntityTypeMapping TypeName="ITInventoryModel.MaintenanceDataDetail">
               <MappingFragment StoreEntitySet="MaintenanceDataDetails">
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
                 <ScalarProperty Name="PO_CC" ColumnName="PO_CC" />
                 <ScalarProperty Name="AlternateInfo" ColumnName="AlternateInfo" />
                 <ScalarProperty Name="Explanation" ColumnName="Explanation" />

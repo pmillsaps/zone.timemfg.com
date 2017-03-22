@@ -21,10 +21,10 @@ namespace Time.IT.Controllers
         // GET: MaintenanceDataDetails
         public ActionResult Index()
         {
-            ViewBag.Expiration = new List<SelectListItem>
+            ViewBag.Expired = new List<SelectListItem>
             {
-                new SelectListItem {Text="Non-Expired", Value= "Non-Expired", Selected=true },
-                new SelectListItem {Text="Expired", Value= "Expired", Selected=false }
+                new SelectListItem {Text="Non-Expired", Value= false.ToString(), Selected=true },
+                new SelectListItem {Text="Expired", Value= true.ToString(), Selected=false }
             };
             return View();
         }
@@ -32,15 +32,17 @@ namespace Time.IT.Controllers
         // Load the data for the Index table
         public ActionResult LoadMaintenanceDataDetails(string licenseStatus)
         {
+            bool? status = null;
+            if (!String.IsNullOrEmpty(licenseStatus)) status = Convert.ToBoolean(licenseStatus);
             List<MaintenanceDataDetailViewModel> model = new List<MaintenanceDataDetailViewModel>();
             var maintData = db.MaintenanceDataDetails.Include(m => m.MaintenanceData).AsQueryable();
-            if (licenseStatus == "Non-Expired")
+            if (status == null || status == false)
             {
-                maintData = maintData.Where(x => x.ExpirationDate > DateTime.Now);
+                maintData = maintData.Where(x => x.Expired == null || x.Expired == false);
             }
             else
             {
-                maintData = maintData.Where(x => x.ExpirationDate < DateTime.Now);
+                maintData = maintData.Where(x => x.Expired == true);
             }
             foreach (var item in maintData)
             {
@@ -59,6 +61,7 @@ namespace Time.IT.Controllers
                 mvm.Explanation = item.Explanation;
                 mvm.AlternateInfo = item.AlternateInfo;
                 mvm.PO_CC = item.PO_CC;
+                mvm.Expired = (item.Expired == null || item.Expired == false) ? "No" : "Yes";
                 model.Add(mvm);
             }
             return Json(new { data = model }, JsonRequestBehavior.AllowGet);
