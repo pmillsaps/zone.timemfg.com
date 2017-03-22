@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "NIC Index";
+    ViewBag.Title = "NICs Index";
     Script.Require("jQuery");
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
@@ -13,34 +13,31 @@
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
 <h2>@ViewBag.Title</h2>
-<div class="row">
+<div class="row alert alert-info">
     <div class="col-md-12">
-        <p><strong>All New NIC's must be created from the Computer Screen (Add NIC).</strong></p>
+        <p><span class="label label-warning">Notice:</span> All New NIC's must be created from the Computer Screen (Add NIC). All columns are sortable. The Search includes all columns.</p>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-md-12">
-        <p><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
-    </div>
+    <table id="nicsTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("MAC")</td>
+                <td>@Html.Label("IP")</td>
+                <td>@Html.Label("Computer")</td>
+                <td>@Html.Label("User")</td>
+                <td>@Html.Label("Type")</td>
+                <td>@Html.Label("Cable")</td>
+                <td>@Html.Label("NIC Speed")</td>
+                <td>@Html.Label("Switch Port")</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
 </div>
-<br />
-<table id="nicsTable" class="table table-striped table-hover table-bordered table-condensed">
-    <thead>
-        <tr class="success">
-            <td>@Html.Label("MAC")</td>
-            <td>@Html.Label("IP")</td>
-            <td>@Html.Label("Computer")</td>
-            <td>@Html.Label("User")</td>
-            <td>@Html.Label("Type")</td>
-            <td>@Html.Label("Cable")</td>
-            <td>@Html.Label("NIC Speed")</td>
-            <td>@Html.Label("Switch Port")</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </thead>
-</table>
 
 @using (Script.Foot())
 {

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Monitor Index";
+    ViewBag.Title = "Monitors Index";
     Script.Require("jQuery");
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.js").AtFoot();
     Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
@@ -13,20 +13,21 @@
 <link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
 
 <h2>@ViewBag.Title</h2>
-<div class="row">
+<div class="row alert alert-info">
     <div class="col-md-2">
         <a class="btn btn-primary" href="Monitor/Create" >Add New Monitor</a>
     </div>
     <div class="col-md-10">
-        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+        <p><span class="label label-warning">Note:</span> All columns are sortable. The Search includes all columns, plus the <i>Notes.</i></p>
     </div>
 </div>
-<div class="tablecontainer">
+<div class="row tablecontainer">
     <table id="monitorsTable" class="table table-striped table-hover table-bordered table-condensed">
         <thead>
             <tr class="success">
                 <td>@Html.Label("Model")</td>
                 <td>@Html.Label("Serial No")</td>
+                <td>@Html.Label("Notes")</td>       @*Listed but hidden*@
                 <td>@Html.Label("Asset Id")</td>
                 <td>@Html.Label("Purchase Date")</td>
                 <td>@Html.Label("Purchased From")</td>
@@ -55,7 +56,7 @@
                 },
                 dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
                 buttons: [{ extend: "excel", text: "Export to Excel", className: "btn btn-primary btn-sm excelButton", filename: 'MonitorsList', }],
-                order: [[7, "asc"]],
+                order: [[8, "asc"]],
                 stateSave: true,
                 displayLength: -1,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -66,6 +67,7 @@
                         }
                     },
                     { data: "SerialNo", autoWidth: true },
+                    { data: "Notes", autoWidth: true }, // Listed but hidden
                     { data: "AssetId", autoWidth: true },
                     { data: "PurchaseDate", autoWidth: true},
                     { data: "PurchasedFrom", autoWidth: true },
@@ -86,6 +88,8 @@
                     }
                 ]
             })
+            // Hiding these columns
+            oTable.column(2).visible(false);
         });
     </script>
 }

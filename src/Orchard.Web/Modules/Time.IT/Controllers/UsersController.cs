@@ -48,17 +48,18 @@ namespace Time.IT.Controllers
             List<UserViewModel> model = new List<UserViewModel>();
             if(status == true)
             {
-                users = db.Users.Where(x => x.InActive == true).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+                users = users.Where(x => x.InActive == true).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
             }
             else
             {
-                users = db.Users.Where(x => x.InActive == false || x.InActive == null).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+                users = users.Where(x => x.InActive == false || x.InActive == null).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
             }
             foreach (var item in users)
             {
                 UserViewModel uvm = new UserViewModel();
                 uvm.Id = item.Id;
                 uvm.Name = item.Name;
+                uvm.Notes = item.Notes;
                 uvm.Building = (item.Ref_Building == null) ? "" : item.Ref_Building.Name;
                 uvm.Location = (item.Ref_Location == null) ? "" : item.Ref_Location.Name;
                 uvm.LastDateEdited = (item.LastDateEdited == null) ? "" : item.LastDateEdited.Value.ToShortDateString();
