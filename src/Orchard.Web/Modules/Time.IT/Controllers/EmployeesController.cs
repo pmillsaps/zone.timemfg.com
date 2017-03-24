@@ -284,6 +284,9 @@ namespace Time.IT.Controllers
             var windows = db.Term_ITInfo.Where(x => x.EmpID == id).Select(x => x.WindowsAccAccess).Single();
             ViewBag.Windows = windows;
 
+            var terminate = db.Term_Employees.Where(x => x.Id == prop.EmpID).Select(x => x.Terminated).Single().ToString();
+            ViewBag.Terminated = terminate;
+
             return View(afterCreate);
         }
 
@@ -399,6 +402,10 @@ namespace Time.IT.Controllers
             {
                 return HttpNotFound();
             }
+
+            var terminate = db.Term_Employees.Where(x => x.Id == term_property.EmpID).Select(x => x.Terminated).Single().ToString();
+            ViewBag.Terminated = terminate;
+
             return View(term_property);
         }
 
@@ -448,6 +455,9 @@ namespace Time.IT.Controllers
 
             var windows = db.Term_ITInfo.Where(x => x.Id == id).Select(x => x.WindowsAccAccess).Single();
             ViewBag.Windows = windows;
+
+            var terminate = db.Term_Employees.Where(x => x.Id == term_itinfo.EmpID).Select(x => x.Terminated).Single().ToString();
+            ViewBag.Terminated = terminate;
 
             return View(term_itinfo);
         }

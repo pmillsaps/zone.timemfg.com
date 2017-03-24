@@ -15,6 +15,7 @@ namespace Time.Data.Models.MessageQueue
             Assignment,
             Update,
             UpdateAssigned,
+            UpdateAttachment,
             CompletionPending,
             Completed,
             ResourceChange,
@@ -30,5 +31,6 @@ namespace Time.Data.Models.MessageQueue
         public int TicketId { get; set; }
         public int NoteId { get; set; }
         public int TaskId { get; set; }
+        public int AttachId { get; set; }
     }
 }
