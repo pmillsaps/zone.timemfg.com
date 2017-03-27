@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Time.Epicor.Content.Reports {
+namespace Time.Epicor.Properties.Content.Reports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace Time.Epicor.Content.Reports {
         
         public override string FullResourceName {
             get {
-                return "Time.Epicor.Content.Reports.LoadListExternal.rpt";
+                return "Time.Epicor.Properties.Content.Reports.LoadListExternal.rpt";
             }
             set {
                 // Do nothing

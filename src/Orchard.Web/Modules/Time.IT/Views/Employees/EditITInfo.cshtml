@@ -30,7 +30,7 @@
     <div class="form-horizontal">
         <div class="col-md-7">
             <div class="form-group">
-                @Html.LabelFor(model => model.WindowsAccAccess, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.WindowsAccAccess, "Windows Account Access", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-6">
                     @if (ViewBag.Windows == "No Windows Account")
                     {
@@ -75,7 +75,7 @@
             <hr style="border:dashed" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ArchiveEmail, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.ArchiveEmail, "Archive Email?", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-2">
                     <a href="#" onclick="toggle_visibility('Archive');">
                         @Html.EditorFor(model => model.ArchiveEmail, new { htmlAttributes = new { @class = "form-control" } })
@@ -88,7 +88,7 @@
             {
                 <div id="Archive" style="display:none;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.EmailAtW, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.EmailAtW, "Email Available to Who?", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.EmailAtW, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EmailAtW, "", new { @class = "text-danger" })
@@ -100,7 +100,7 @@
             {
                 <div id="Archive" style="display:block;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.EmailAtW, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.EmailAtW, "Email Available to Who?", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.EmailAtW, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EmailAtW, "", new { @class = "text-danger" })
@@ -110,7 +110,7 @@
             }
 
             <div class="form-group">
-                @Html.LabelFor(model => model.FowardEmails, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.FowardEmails, "Forward Emails?", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-2">
                     <a href="#" onclick="toggle_visibility('FowardEM');">
                         @Html.EditorFor(model => model.FowardEmails, new { htmlAttributes = new { @class = "form-control" } })
@@ -123,7 +123,7 @@
             {
                 <div id="FowardEM" style="display:none;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.FowardAtW, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.FowardAtW, "Forward Emails Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.FowardAtW, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.FowardAtW, "", new { @class = "text-danger" })
@@ -135,7 +135,7 @@
             {
                 <div id="FowardEM" style="display:block;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.FowardAtW, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.FowardAtW, "Forward Emails Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.FowardAtW, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.FowardAtW, "", new { @class = "text-danger" })
@@ -147,7 +147,7 @@
             <hr style="border:dashed" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DeleteUDrive, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.DeleteUDrive, "Delete U Drive?", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-2">
                     <a href="#" onclick="toggle_visibility('UDrive');">
                         @Html.EditorFor(model => model.DeleteUDrive, new { htmlAttributes = new { @class = "form-control" } })
@@ -160,7 +160,7 @@
             {
                 <div id="UDrive" style="display:none;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.UDriveAtW, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.UDriveAtW, "U Drive Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.UDriveAtW, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.UDriveAtW, "", new { @class = "text-danger" })
@@ -172,7 +172,7 @@
             {
                 <div id="UDrive" style="display:block;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.UDriveAtW, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.UDriveAtW, "U Drive Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.UDriveAtW, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.UDriveAtW, "", new { @class = "text-danger" })
@@ -184,7 +184,7 @@
             <hr style="border:dashed" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DeskPhone, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.DeskPhone, "Desk Phone?", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-2">
                     <a href="#" onclick="toggle_visibility('Phone');">
                         @Html.EditorFor(model => model.DeskPhone, new { htmlAttributes = new { @class = "form-control" } })
@@ -197,7 +197,7 @@
             {
                 <div id="Phone" style="display:none;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.DeskPhoneFW, htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.LabelFor(model => model.DeskPhoneFW, "Desk Phone Forward?", htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-2">
                             <a href="#" onclick="toggle_visibility('PhoneFW');">
                                 @Html.EditorFor(model => model.DeskPhoneFW, new { htmlAttributes = new { @class = "form-control" } })
@@ -210,7 +210,7 @@
                     {
                         <div id="PhoneFW" style="display:none;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DeskPhoneFWtW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
@@ -222,7 +222,7 @@
                     {
                         <div id="PhoneFW" style="display:block;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DeskPhoneFWtW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
@@ -231,7 +231,7 @@
                         </div>
                     }
                     <div class="form-group">
-                        @Html.LabelFor(model => model.DeskPhoneRename, htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.LabelFor(model => model.DeskPhoneRename, "Desk Phone Rename?", htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-2">
                             <a href="#" onclick="toggle_visibility('PhoneRe');">
                                 @Html.EditorFor(model => model.DeskPhoneRename, new { htmlAttributes = new { @class = "form-control" } })
@@ -244,7 +244,7 @@
                     {
                         <div id="PhoneRe" style="display:none;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.PhoneRenametW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
@@ -256,7 +256,7 @@
                     {
                         <div id="PhoneRe" style="display:block;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.PhoneRenametW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
@@ -271,7 +271,7 @@
             {
                 <div id="Phone" style="display:block;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.DeskPhoneFW, htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.LabelFor(model => model.DeskPhoneFW, "Desk Phone Forward?", htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-2">
                             <a href="#" onclick="toggle_visibility('PhoneFW');">
                                 @Html.EditorFor(model => model.DeskPhoneFW, new { htmlAttributes = new { @class = "form-control" } })
@@ -284,7 +284,7 @@
                     {
                         <div id="PhoneFW" style="display:block;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DeskPhoneFWtW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
@@ -296,7 +296,7 @@
                     {
                         <div id="PhoneFW" style="display:none;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DeskPhoneFWtW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
@@ -306,7 +306,7 @@
                     }
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.DeskPhoneRename, htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.LabelFor(model => model.DeskPhoneRename, "Desk Phone Rename?", htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-2">
                             <a href="#" onclick="toggle_visibility('PhoneRe');">
                                 @Html.EditorFor(model => model.DeskPhoneRename, new { htmlAttributes = new { @class = "form-control" } })
@@ -319,7 +319,7 @@
                     {
                         <div id="PhoneRe" style="display:block;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.PhoneRenametW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
@@ -331,7 +331,7 @@
                     {
                         <div id="PhoneRe" style="display:none;">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.PhoneRenametW, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
@@ -346,7 +346,7 @@
             <hr style="border:dashed" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.EpicorAcc, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.LabelFor(model => model.EpicorAcc, "Epicor Account?", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-2">
                     <a href="#" onclick="toggle_visibility('Epic');">
                         @Html.EditorFor(model => model.EpicorAcc, new { htmlAttributes = new { @class = "form-control" } })

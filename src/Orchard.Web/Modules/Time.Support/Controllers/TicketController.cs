@@ -1073,6 +1073,13 @@ namespace Time.Support.Controllers
                     f.UploadedDate = DateTime.Now;
                     var attach = ticket.TicketAttachments.FirstOrDefault(x => x.FileName.ToUpper() == f.FileName.ToUpper());
 
+                    var attachment = new TicketAttachment()
+                    {
+                        UploadedDate = f.UploadedDate,
+                        Description = f.Description,
+                        UploadedBy = f.UploadedBy
+                    };
+
                     try
                     {
                         fileBlob.StoreAttachmentFile(ticket.TicketID);
@@ -1087,8 +1094,9 @@ namespace Time.Support.Controllers
                         var command = new TicketNotificationMessage
                         {
                             TicketId = ticket.TicketID,
-                            Notification = TicketNotificationMessage.NotificationType.Update,
+                            Notification = TicketNotificationMessage.NotificationType.UpdateAttachment,
                             Sender = HttpContext.User.Identity.Name,
+                            AttachId = ticket.TicketAttachments.OrderByDescending(x => x.UploadedDate).First().AttachmentID
                         };
                         var success = MSMQ.SendQueueMessage(command, MessageType.TicketNotification.Value);
                         return RedirectToAction("Info", new { id = ticket.TicketID });

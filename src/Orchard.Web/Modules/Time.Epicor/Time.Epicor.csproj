@@ -138,31 +138,31 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\CheckboxEmpty.png" />
-    <Content Include="Content\Images\CheckboxFull.png" />
-    <Content Include="Content\Images\loadingAnimation.gif" />
-    <Content Include="Content\Images\transparent.gif" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\Web.config">
+    <Content Include="Properties\Content\bootstrap-theme.css" />
+    <Content Include="Properties\Content\bootstrap-theme.min.css" />
+    <Content Include="Properties\Content\bootstrap.css" />
+    <Content Include="Properties\Content\bootstrap.min.css" />
+    <Content Include="Properties\Content\Images\CheckboxEmpty.png" />
+    <Content Include="Properties\Content\Images\CheckboxFull.png" />
+    <Content Include="Properties\Content\Images\loadingAnimation.gif" />
+    <Content Include="Properties\Content\Images\transparent.gif" />
+    <Content Include="Properties\Content\Site.css" />
+    <Content Include="Properties\Content\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\Images\Web.config">
+    <Content Include="Properties\Content\Images\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\WebGrid.css" />
+    <Content Include="Properties\Content\WebGrid.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Properties\Content\bootstrap.min.css.map" />
+    <Content Include="Properties\Content\bootstrap.css.map" />
+    <Content Include="Properties\Content\bootstrap-theme.min.css.map" />
+    <Content Include="Properties\Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\Time.Epicor.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -288,7 +288,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\Reports\LoadListExternal.cs">
+    <Compile Include="Properties\Content\Reports\LoadListExternal.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LoadListExternal.rpt</DependentUpon>
@@ -350,7 +350,7 @@
     <Compile Include="ViewModels\WhereUsedBomVM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Reports\LoadListExternal.rpt">
+    <EmbeddedResource Include="Properties\Content\Reports\LoadListExternal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LoadListExternal.cs</LastGenOutput>
     </EmbeddedResource>
@@ -372,11 +372,11 @@
     <Content Include="Views\Interim\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Reports\LoadList.rpt" />
-    <Content Include="Content\Reports\LoadListStatus.rpt" />
+    <Content Include="Properties\Content\Reports\LoadList.rpt" />
+    <Content Include="Properties\Content\Reports\LoadListStatus.rpt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Attachments\" />
+    <Folder Include="Properties\Content\Attachments\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
