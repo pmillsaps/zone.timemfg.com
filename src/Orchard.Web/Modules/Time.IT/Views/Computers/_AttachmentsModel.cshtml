@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.AttachmentForModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.ActionLink(item.FileName, "DownloadAttachment", new { id = item.ModelId, modelOrComputer = "Model", fileName = item.FileName })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadedDate)
+        </td>
+    </tr>
+}
+

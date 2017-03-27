@@ -24,7 +24,7 @@
 
             @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
             {
-                <div class="row alert-danger">
+                <div class="row alert alert-danger">
                     @Html.Raw(ViewBag.ErrorMessage)
                 </div>
             }
@@ -38,7 +38,7 @@
 
             @if (!string.IsNullOrEmpty(ViewBag.Notice))
             {
-                <div class="row alert-info">
+                <div class="row alert alert-info">
                     @Html.Raw(ViewBag.Notice)
                 </div>
             }

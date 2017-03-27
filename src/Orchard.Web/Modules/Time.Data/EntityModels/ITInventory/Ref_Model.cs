@@ -17,6 +17,7 @@ namespace Time.Data.EntityModels.ITInventory
         public Ref_Model()
         {
             this.Computers = new HashSet<Computer>();
+            this.AttachmentForModels = new HashSet<AttachmentForModel>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,6 @@ namespace Time.Data.EntityModels.ITInventory
     
         public virtual ICollection<Computer> Computers { get; set; }
         public virtual Ref_Manufacturer Ref_Manufacturer { get; set; }
+        public virtual ICollection<AttachmentForModel> AttachmentForModels { get; set; }
     }
 }

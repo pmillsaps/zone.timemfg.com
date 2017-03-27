@@ -48,11 +48,11 @@ namespace Time.IT.Controllers
             List<UserViewModel> model = new List<UserViewModel>();
             if(status == true)
             {
-                users = users.Where(x => x.InActive == true).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+                users = db.Users.Where(x => x.InActive == true).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
             }
             else
             {
-                users = users.Where(x => x.InActive == false || x.InActive == null).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
+                users = db.Users.Where(x => x.InActive == false || x.InActive == null).Include(u => u.Ref_Building).Include(u => u.Ref_Location).Include(u => u.Monitors).Include(u => u.Licenses);
             }
             foreach (var item in users)
             {

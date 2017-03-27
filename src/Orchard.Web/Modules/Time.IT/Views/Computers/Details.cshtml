@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Computer Details";
+    ViewBag.StatusMessage = TempData["StatusMessage"];
+    ViewBag.ErrorMessage = TempData["ErrorMessage"];
 }
 <link href="~/Modules/Time.IT/Styles/style.css" rel="stylesheet" />
 
@@ -9,14 +11,16 @@
 
 @if (ViewBag.ErrorMessage != null)
 {
-    <div class="alert alert-warning">
+    <div class="alert alert-warning alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         @ViewBag.ErrorMessage
     </div>
 }
 
 @if (ViewBag.StatusMessage != null)
 {
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         @ViewBag.StatusMessage
     </div>
 }
@@ -207,28 +211,52 @@
     @Html.ActionLink("Computer List", "Index") |
     @if (Model.UserId != null)
     {
-        @*<a href="@Url.Action("Details", "Users", new { id = Model.UserId })">User Details</a>*@
         @Html.ActionLink("User Details", "Details", "Users", new { id = Model.UserId }, null)
     }
 </p>
-
+<hr />
 <div>
     <p>
-        @Html.ActionLink("Add NIC Card", "AddNIC", new { id = Model.Id })
+        @Html.ActionLink("Add NIC Card", "AddNIC", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
     </p>
     @Html.Partial("_NIC", Model.Ref_NIC)
 </div>
 
 <div>
     <p>
-        @Html.ActionLink("Link License", "LinkLicense", new { id = Model.Id })
+        @Html.ActionLink("Link License", "LinkLicense", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
     </p>
     @Html.Partial("_Licenses", Model.Licenses)
 </div>
 
 <div>
     <p>
-        @Html.ActionLink("Add Scheduled Task", "AddScheduledTask", new { id = Model.Id })
+        @Html.ActionLink("Add Scheduled Task", "AddScheduledTask", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
     </p>
     @Html.Partial("_ScheduledTasks", Model.ScheduledTasks)
+</div>
+
+<div>
+    <p>
+        @Html.ActionLink("Upload Attachment", "UploadAttachment", new { modelId = Model.ModelId, cmprModel = Model.Ref_Model.Model, compId = Model.Id }, new { @class = "btn btn-primary btn-xs" })
+    </p>
+    <table class="table table-striped table-bordered table-condensed table-hover">
+        <tr class="success">
+            <th>
+                @Html.Label("FileName")
+            </th>
+            <th>
+                @Html.Label("Description")
+            </th>
+            <th>
+                @Html.Label("UploadedBy")
+            </th>
+            <th>
+                @Html.Label("UploadedDate")
+            </th>
+        </tr>
+        @Html.Partial("_AttachmentsModel", Model.Ref_Model.AttachmentForModels)
+        @Html.Partial("_AttachmentsComputer", Model.AttachmentForComputers)
+    </table>
+
 </div>

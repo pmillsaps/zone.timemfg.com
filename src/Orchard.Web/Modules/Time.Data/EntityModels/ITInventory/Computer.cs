@@ -19,6 +19,7 @@ namespace Time.Data.EntityModels.ITInventory
             this.Ref_NIC = new HashSet<Ref_NIC>();
             this.ScheduledTasks = new HashSet<ScheduledTask>();
             this.Licenses = new HashSet<License>();
+            this.AttachmentForComputers = new HashSet<AttachmentForComputer>();
         }
     
         public int Id { get; set; }
@@ -60,5 +61,6 @@ namespace Time.Data.EntityModels.ITInventory
         public virtual ICollection<Ref_NIC> Ref_NIC { get; set; }
         public virtual ICollection<ScheduledTask> ScheduledTasks { get; set; }
         public virtual ICollection<License> Licenses { get; set; }
+        public virtual ICollection<AttachmentForComputer> AttachmentForComputers { get; set; }
     }
 }

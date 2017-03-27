@@ -24,34 +24,36 @@
 
 @*@Html.Partial("_ModalForm")*@
 
-<div class="row">
+<div class="row alert alert-info">
     <div class="col-md-2">
         @*<a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add Record</a>*@
         @Html.ActionLink("New Record", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
     </div>
     <div class="col-md-10">
-        <p style="margin-bottom:20px; margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+        <p><span class="label label-warning">Note:</span> All columns are sortable. The Search includes all columns.</p>
     </div>
 </div>
-<table id="mntncTable" class="table table-striped table-hover table-bordered table-condensed">
-    <thead>
-        <tr class="success">
-            <td>@Html.Label("Company")</td>
-            <td>@Html.Label("Budget Item")</td>
-            <td>@Html.Label("Supplier")</td>
-            <td>@Html.Label("Account#")</td>
-            <td>@Html.Label("OrigPurchDate")</td>
-            <td>@Html.Label("ExpDate")</td>
-            <td>@Html.Label("Computer")</td>
-            <td>@Html.Label("License")</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </thead>
-</table>
 
+<div class="row">
+    <table id="mntncTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("Company")</td>
+                <td>@Html.Label("Budget Item")</td>
+                <td>@Html.Label("Supplier")</td>
+                <td>@Html.Label("Account#")</td>
+                <td>@Html.Label("OrigPurchDate")</td>
+                <td>@Html.Label("ExpDate")</td>
+                <td>@Html.Label("Computer")</td>
+                <td>@Html.Label("License")</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>
 
 @using (Script.Foot())
 {

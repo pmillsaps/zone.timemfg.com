@@ -51,5 +51,7 @@ namespace Time.Data.EntityModels.ITInventory
         public virtual DbSet<MaintenanceData> MaintenanceDatas { get; set; }
         public virtual DbSet<MaintenanceDataDetail> MaintenanceDataDetails { get; set; }
         public virtual DbSet<MaintDataCompany> MaintDataCompanies { get; set; }
+        public virtual DbSet<AttachmentForComputer> AttachmentForComputers { get; set; }
+        public virtual DbSet<AttachmentForModel> AttachmentForModels { get; set; }
     }
 }

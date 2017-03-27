@@ -442,6 +442,12 @@
     <Compile Include="EntityModels\Install\VSWOption.cs">
       <DependentUpon>QuoteDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModels\ITInventory\AttachmentForComputer.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModels\ITInventory\AttachmentForModel.cs">
+      <DependentUpon>ITInventoryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModels\ITInventory\Computer.cs">
       <DependentUpon>ITInventoryModel.tt</DependentUpon>
     </Compile>

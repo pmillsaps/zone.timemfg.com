@@ -25,13 +25,13 @@
 
 @*@Html.Partial("_ModalForm")*@
 
-<div class="row">
+<div class="row alert alert-info">
     <div class="col-md-2">
         @*<a id="newBtn" data-toggle="modal" href="#modalForm" class="btn btn-primary">Add Record</a>*@
         @Html.ActionLink("Add Record", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
     </div>
     <div class="col-md-10">
-        <p style="margin-top:20px;"><strong>Note: All columns are sortable. The Search includes all columns.</strong></p>
+        <p><span class="label label-warning">Note:</span> All columns are sortable. The Search includes all columns.</p>
     </div>
 </div>
 

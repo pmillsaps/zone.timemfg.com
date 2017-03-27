@@ -5,6 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ITInventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AttachmentForComputer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComputerId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FileExt" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="UploadedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttachmentForModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FileExt" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="UploadedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Computer">
           <Key>
             <PropertyRef Name="Id" />
@@ -595,6 +619,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="tblAttachmentForComputer_ComputerId_FK">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="AttachmentForComputer" Type="Self.AttachmentForComputer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttachmentForComputer">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblAttachmentForModel_ModelId_FK">
+          <End Role="Ref_Model" Type="Self.Ref_Model" Multiplicity="1" />
+          <End Role="AttachmentForModel" Type="Self.AttachmentForModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Model">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttachmentForModel">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="tblMaintenanceData_CompanyId_FK">
           <End Role="MaintDataCompany" Type="Self.MaintDataCompany" Multiplicity="1" />
           <End Role="MaintenanceData" Type="Self.MaintenanceData" Multiplicity="*" />
@@ -620,6 +668,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ITInventoryModelStoreContainer">
+          <EntitySet Name="AttachmentForComputer" EntityType="Self.AttachmentForComputer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttachmentForModel" EntityType="Self.AttachmentForModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Computer_License" EntityType="Self.Computer_License" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="License" EntityType="Self.License" Schema="dbo" store:Type="Tables" />
@@ -747,6 +797,14 @@
           <AssociationSet Name="FK_User_License_User" Association="Self.FK_User_License_User">
             <End Role="User" EntitySet="User" />
             <End Role="User_License" EntitySet="User_License" />
+          </AssociationSet>
+          <AssociationSet Name="tblAttachmentForComputer_ComputerId_FK" Association="Self.tblAttachmentForComputer_ComputerId_FK">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="AttachmentForComputer" EntitySet="AttachmentForComputer" />
+          </AssociationSet>
+          <AssociationSet Name="tblAttachmentForModel_ModelId_FK" Association="Self.tblAttachmentForModel_ModelId_FK">
+            <End Role="Ref_Model" EntitySet="Ref_Model" />
+            <End Role="AttachmentForModel" EntitySet="AttachmentForModel" />
           </AssociationSet>
           <AssociationSet Name="tblMaintenanceData_CompanyId_FK" Association="Self.tblMaintenanceData_CompanyId_FK">
             <End Role="MaintDataCompany" EntitySet="MaintDataCompany" />
@@ -888,6 +946,16 @@
             <End Role="MaintDataCompany" EntitySet="MaintDataCompanies" />
             <End Role="MaintenanceData" EntitySet="MaintenanceDatas" />
           </AssociationSet>
+          <EntitySet Name="AttachmentForComputers" EntityType="ITInventoryModel.AttachmentForComputer" />
+          <EntitySet Name="AttachmentForModels" EntityType="ITInventoryModel.AttachmentForModel" />
+          <AssociationSet Name="tblAttachmentForComputer_ComputerId_FK" Association="ITInventoryModel.tblAttachmentForComputer_ComputerId_FK">
+            <End Role="Computer" EntitySet="Computers" />
+            <End Role="AttachmentForComputer" EntitySet="AttachmentForComputers" />
+          </AssociationSet>
+          <AssociationSet Name="tblAttachmentForModel_ModelId_FK" Association="ITInventoryModel.tblAttachmentForModel_ModelId_FK">
+            <End Role="Ref_Model" EntitySet="Ref_Model" />
+            <End Role="AttachmentForModel" EntitySet="AttachmentForModels" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Computer">
           <Key>
@@ -931,6 +999,7 @@
           <NavigationProperty Name="ScheduledTasks" Relationship="ITInventoryModel.FK_ScheduledTasks_Computer" FromRole="Computer" ToRole="ScheduledTask" />
           <NavigationProperty Name="Licenses" Relationship="ITInventoryModel.Computer_License" FromRole="Computer" ToRole="License" />
           <Property Name="FirmwareVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AttachmentForComputers" Relationship="ITInventoryModel.tblAttachmentForComputer_ComputerId_FK" FromRole="Computer" ToRole="AttachmentForComputer" />
         </EntityType>
         <EntityType Name="License">
           <Key>
@@ -1044,6 +1113,7 @@
           <Property Name="ManufacturerId" Type="Int32" />
           <NavigationProperty Name="Computers" Relationship="ITInventoryModel.FK_Computer__Model" FromRole="Ref_Model" ToRole="Computer" />
           <NavigationProperty Name="Ref_Manufacturer" Relationship="ITInventoryModel.FK__Model_Manufacturer" FromRole="Ref_Model" ToRole="Ref_Manufacturer" />
+          <NavigationProperty Name="AttachmentForModels" Relationship="ITInventoryModel.tblAttachmentForModel_ModelId_FK" FromRole="Ref_Model" ToRole="AttachmentForModel" />
         </EntityType>
         <EntityType Name="Ref_MonitorSizes">
           <Key>
@@ -1497,6 +1567,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AttachmentForComputer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComputerId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FileExt" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Computer" Relationship="ITInventoryModel.tblAttachmentForComputer_ComputerId_FK" FromRole="AttachmentForComputer" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="AttachmentForModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FileExt" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ref_Model" Relationship="ITInventoryModel.tblAttachmentForModel_ModelId_FK" FromRole="AttachmentForModel" ToRole="Ref_Model" />
+        </EntityType>
+        <Association Name="tblAttachmentForComputer_ComputerId_FK">
+          <End Type="ITInventoryModel.Computer" Role="Computer" Multiplicity="1" />
+          <End Type="ITInventoryModel.AttachmentForComputer" Role="AttachmentForComputer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttachmentForComputer">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblAttachmentForModel_ModelId_FK">
+          <End Type="ITInventoryModel.Ref_Model" Role="Ref_Model" Multiplicity="1" />
+          <End Type="ITInventoryModel.AttachmentForModel" Role="AttachmentForModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Model">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttachmentForModel">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1815,6 +1935,32 @@
             <EntityTypeMapping TypeName="ITInventoryModel.MaintDataCompany">
               <MappingFragment StoreEntitySet="MaintDataCompany">
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttachmentForComputers">
+            <EntityTypeMapping TypeName="ITInventoryModel.AttachmentForComputer">
+              <MappingFragment StoreEntitySet="AttachmentForComputer">
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileExt" ColumnName="FileExt" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttachmentForModels">
+            <EntityTypeMapping TypeName="ITInventoryModel.AttachmentForModel">
+              <MappingFragment StoreEntitySet="AttachmentForModel">
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileExt" ColumnName="FileExt" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -56,6 +56,10 @@
         <AssociationConnector Association="ITInventoryModel.tblMaintenanceDataDetails_MaintenanceDataId_FK" />
         <EntityTypeShape EntityType="ITInventoryModel.MaintDataCompany" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="ITInventoryModel.tblMaintenanceData_CompanyId_FK" />
+        <EntityTypeShape EntityType="ITInventoryModel.AttachmentForComputer" Width="1.5" PointX="7.5" PointY="27" />
+        <EntityTypeShape EntityType="ITInventoryModel.AttachmentForModel" Width="1.5" PointX="5.25" PointY="20.875" />
+        <AssociationConnector Association="ITInventoryModel.tblAttachmentForComputer_ComputerId_FK" />
+        <AssociationConnector Association="ITInventoryModel.tblAttachmentForModel_ModelId_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

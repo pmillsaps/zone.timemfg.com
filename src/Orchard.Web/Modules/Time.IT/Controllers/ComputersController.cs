@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 using Time.Data.EntityModels.ITInventory;
 using Time.Data.Models.MessageQueue;
+using Time.IT.Helpers;
 using Time.IT.Models;
 using Time.IT.ViewModel;
 
@@ -544,6 +545,107 @@ namespace Time.IT.Controllers
             db.ScheduledTasks.Remove(scheduledTask);
             db.SaveChanges();
             return RedirectToAction("Details", new { id = computerId });
+        }
+
+        // User has the option to upload an attachment related to a Computer or a Model
+        public ActionResult UploadAttachment(int modelId, string cmprModel, int compId)
+        {
+            UploadAttachmentViewModel model = new UploadAttachmentViewModel();
+            ViewBag.ModelOrComputer = new List<SelectListItem>
+                {
+                    new SelectListItem {Text="Attachment for Model", Value= "Model", Selected=false },
+                    new SelectListItem {Text="Attachment for Computer", Value= "Computer", Selected=false }
+                };
+            model.ComputerId = compId;
+            model.ComputerModel = cmprModel;
+            model.ModelId = modelId;
+            return View(model);
+        }
+
+        // Handles the attachment uploads
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadAttachment(UploadAttachmentViewModel vm, HttpPostedFileBase fileBlob)
+        {
+            // Displays if no selection was made or no file was selected
+            if (vm.ModelOrComputer == null) ModelState.AddModelError("", "You must select Model or Computer in the drop down list.");
+            if (fileBlob == null) ModelState.AddModelError("", "You must select a file to upload.");
+
+            if (ModelState.IsValid)
+            {
+                // Saving file info to the database
+                string fN = fileBlob.FileName.Substring(fileBlob.FileName.LastIndexOf("\\") + 1).ToLower();
+                string fExt = fN.Substring(fN.LastIndexOf(".") + 1).ToLower();
+                if (vm.ModelOrComputer == "Model")
+                {
+                    AttachmentForModel attachment = new AttachmentForModel
+                    {
+                        ModelId = vm.ModelId,
+                        FileName = fN,
+                        FileExt = fExt,
+                        Description = vm.Description,
+                        UploadedBy = System.Web.HttpContext.Current.User.Identity.Name,
+                        UploadedDate = DateTime.Now
+                    };
+                    db.AttachmentForModels.Add(attachment);
+                }
+                else
+                {
+                    AttachmentForComputer attachment = new AttachmentForComputer
+                    {
+                        ComputerId = vm.ComputerId,
+                        FileName = fN,
+                        FileExt = fExt,
+                        Description = vm.Description,
+                        UploadedBy = System.Web.HttpContext.Current.User.Identity.Name,
+                        UploadedDate = DateTime.Now
+                    };
+                    db.AttachmentForComputers.Add(attachment);
+                }
+                db.SaveChanges();
+                // Uploading the file
+                fileBlob.Upload(vm.ModelOrComputer, vm.ComputerModel, vm.ComputerId);
+                TempData["StatusMessage"] = "Attachment uploaded successfully!";
+                return RedirectToAction("Details", new { id = vm.ComputerId });
+            }
+            ViewBag.ModelOrComputer = new List<SelectListItem>
+                {
+                    new SelectListItem {Text="Attachment for Model", Value= "Model", Selected=false },
+                    new SelectListItem {Text="Attachment for Computer", Value= "Computer", Selected=false }
+                };
+            return View(vm);
+        }
+
+        // This method downloads the attachments
+        public ActionResult DownloadAttachment(int id, string modelOrComputer, string fileName)
+        {
+            string path;
+            if (modelOrComputer == "Model")
+            {
+                var compModel = db.Ref_Model.FirstOrDefault(x => x.ID == id);
+                AttachmentForModel attachment = db.AttachmentForModels.FirstOrDefault(x => x.ModelId == id && x.FileName == fileName);
+                path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerModel\{0}\{1}", compModel.Model, attachment.FileName));
+            }
+            else
+            {
+                AttachmentForComputer attachment = db.AttachmentForComputers.FirstOrDefault(x => x.ComputerId == id && x.FileName == fileName);
+                path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerId\{0}\{1}", attachment.ComputerId, attachment.FileName));
+            }           
+            //var fi = new FileInfo(path);
+            if (!System.IO.File.Exists(path))
+            {
+                TempData["ErrorMessage"] = "File not found!";
+                RedirectToAction("Details", new { id = id });
+            }
+            byte[] filedata = System.IO.File.ReadAllBytes(path);
+            string contentType = MimeMapping.GetMimeMapping(path);
+            var cd = new System.Net.Mime.ContentDisposition
+            {
+                FileName = path,
+                Inline = false
+            };
+            Response.AppendHeader("Content-Disposition", cd.ToString());
+            return File(filedata, contentType);
         }
 
         protected override void Dispose(bool disposing)

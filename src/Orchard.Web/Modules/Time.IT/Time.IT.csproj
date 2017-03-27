@@ -600,6 +600,9 @@
     <Content Include="Views\Employees\EditITInfo.cshtml" />
     <Content Include="Views\Employees\EditProperty.cshtml" />
     <Content Include="Views\MaintenanceDatas\CopyRecord.cshtml" />
+    <Content Include="Views\Computers\_AttachmentsModel.cshtml" />
+    <Content Include="Views\Computers\UploadAttachment.cshtml" />
+    <Content Include="Views\Computers\_AttachmentsComputer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">
@@ -643,6 +646,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Helpers\UploadDownloadAttachments.cs" />
     <Compile Include="Models\AfterCreateViewModel.cs" />
     <Compile Include="Models\ComputersViewModel.cs" />
     <Compile Include="Models\LicensesViewModel.cs" />
@@ -660,10 +664,9 @@
     <Compile Include="ViewModel\MaintenanceDataViewModel.cs" />
     <Compile Include="ViewModel\ProcessViewModel.cs" />
     <Compile Include="ViewModel\ServerStatusViewModel.cs" />
+    <Compile Include="ViewModel\UploadAttachmentViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Time.IT.pubxml" />
