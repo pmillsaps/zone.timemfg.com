@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Production.V_DistributorOrderList>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.OrderNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PONum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NeedByDate)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.orderline)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LineDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpenLine)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderNum)
+            </td>
+            <td>
+                (@Html.DisplayFor(modelItem => item.CustNum))&nbsp;@Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PONum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NeedByDate)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.orderline)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.PartNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LineDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderQty)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.openline)*@
+
+                @{if (item.OpenLine == true)
+                {
+                        <img src=@Url.Content("~/Media/Default/Page/CheckboxFull.png") />
+                        @*<img src='/Content/images/CheckboxFull.png' />*@
+                    }
+                    else
+                    {
+                        <img src=@Url.Content("~/Media/Default/Page/CheckboxEmpty.png") />
+                        @*<img src='/Content/images/CheckboxEmpty.png' />*@
+                    }
+                }
+            </td>
+        </tr>
+                    }
+</table>

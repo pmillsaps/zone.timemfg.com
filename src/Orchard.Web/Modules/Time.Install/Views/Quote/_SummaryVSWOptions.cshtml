@@ -1,0 +1,40 @@
+﻿@model Time.Install.Models.InstallQuoteSummary
+
+@{ int count = 0; // This variable is used to display the category name in the summary
+}
+
+<table class="table table-striped">
+    <tr class="success">
+        <th>Option</th>
+        <th class="text-right">Quantity</th>
+        <th class="text-right">Price</th>
+        <th class="text-right">Hours</th>
+        <th class="text-right">Extended Price</th>
+    </tr>
+
+    @foreach (var item in Model.OptionGroups)
+    {
+        foreach (var option in Model.InstallDetails)
+        {
+            if (item.Id == option.GroupId)
+            {
+                if(count == 0)
+                {
+                    <tr>
+                        <td colspan="5" style="background-color: #D9EDF7;"><strong>@Html.DisplayFor(model => item.GroupName)</strong></td>
+                    </tr>
+                    count++;
+                }
+                <tr>
+                    <td>@Html.DisplayFor(model => option.VSWOption.OptionName)</td>
+                    <td class="text-right">@Html.DisplayFor(model => option.Quantity)</td>
+                    <td class="text-right">@Html.DisplayFor(model => option.Price)</td>
+                    <td class="text-right">@Html.DisplayFor(model => option.InstallHours)</td>
+                    <td class="text-right">@Html.DisplayFor(model => option.ExtendedPrice)</td>
+                </tr>
+            }
+        }
+        count = 0;
+    }
+</table>
+
