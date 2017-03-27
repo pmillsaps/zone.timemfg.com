@@ -617,25 +617,25 @@ namespace Time.IT.Controllers
         }
 
         // This method downloads the attachments
-        public ActionResult DownloadAttachment(int id, string modelOrComputer)
+        public ActionResult DownloadAttachment(int id, string modelOrComputer, string fileName)
         {
             string path;
             if (modelOrComputer == "Model")
             {
                 var compModel = db.Ref_Model.FirstOrDefault(x => x.ID == id);
-                AttachmentForModel attachment = db.AttachmentForModels.FirstOrDefault(x => x.Id == id);
-                path = Server.MapPath(String.Format(@"~\Modules\Time.Support\Content\AttachmentFiles\ByComputerModel\{0}\{1}", compModel.Model, attachment.FileName));
+                AttachmentForModel attachment = db.AttachmentForModels.FirstOrDefault(x => x.ModelId == id && x.FileName == fileName);
+                path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerModel\{0}\{1}", compModel.Model, attachment.FileName));
             }
             else
             {
-                AttachmentForComputer attachment = db.AttachmentForComputers.FirstOrDefault(x => x.Id == id);
-                path = Server.MapPath(String.Format(@"~\Modules\Time.Support\Content\AttachmentFiles\ByComputerId\{0}\{1}", attachment.ComputerId, attachment.FileName));
+                AttachmentForComputer attachment = db.AttachmentForComputers.FirstOrDefault(x => x.ComputerId == id && x.FileName == fileName);
+                path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerId\{0}\{1}", attachment.ComputerId, attachment.FileName));
             }           
             //var fi = new FileInfo(path);
             if (!System.IO.File.Exists(path))
             {
                 TempData["ErrorMessage"] = "File not found!";
-                RedirectToAction("Info", new { id = id });
+                RedirectToAction("Details", new { id = id });
             }
             byte[] filedata = System.IO.File.ReadAllBytes(path);
             string contentType = MimeMapping.GetMimeMapping(path);

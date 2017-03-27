@@ -4,7 +4,7 @@
 {
     <tr>
         <td>
-            @Html.ActionLink(item.FileName, "DownloadAttachment", new { id = item.ModelId, modelOrComputer = "Model" })
+            @Html.ActionLink(item.FileName, "DownloadAttachment", new { id = item.ModelId, modelOrComputer = "Model", fileName = item.FileName })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)

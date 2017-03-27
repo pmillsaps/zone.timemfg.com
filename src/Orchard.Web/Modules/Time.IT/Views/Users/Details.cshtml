@@ -64,24 +64,24 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
+<hr />
 <div>
     <p>
-        @Html.ActionLink("Link Computer", "LinkComputer", new { id = Model.Id })
+        @Html.ActionLink("Link Computer", "LinkComputer", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
     </p>
     @Html.Partial("_Computers", Model.Computers.OrderBy(x => x.Name))
 </div>
 
 <div>
     <p>
-        @Html.ActionLink("Add Monitor", "AddMonitor", new { id = Model.Id }) | @Html.ActionLink("Link Monitor", "LinkMonitor", new { id = Model.Id })
+        @Html.ActionLink("Add Monitor", "AddMonitor", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })  @Html.ActionLink("Link Monitor", "LinkMonitor", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
     </p>
     @Html.Partial("_Monitors", Model.Monitors.OrderBy(x => x.Model))
 </div>
 
 <div>
     <p>
-        @Html.ActionLink("Link License", "LinkLicense", new { id = Model.Id })
+        @Html.ActionLink("Link License", "LinkLicense", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
     </p>
     @Html.Partial("_Licenses", Model.Licenses.OrderBy(x => x.FullName))
 </div>
