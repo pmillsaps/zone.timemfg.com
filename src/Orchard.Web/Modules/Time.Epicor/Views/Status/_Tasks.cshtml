@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Epicor.systask>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.taskdescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.starttime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.submituser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.taskstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.activitymsg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tasknote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastactivitydate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastactivitytime)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.taskdescription)
+            </td>
+            <td>
+                @item.startdate.Value.ToShortDateString()
+            </td>
+            <td>
+                @if (item.starttime != null)
+                {
+                    TimeSpan t = TimeSpan.FromSeconds((double)item.starttime);
+
+                    string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        t.Hours,
+                        t.Minutes,
+                        t.Seconds);
+
+                    <span>@answer</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.submituser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.taskstatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.activitymsg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tasknote)
+            </td>
+            <td>
+                @if (item.lastactivitydate != null)
+                { <span>@item.lastactivitydate.Value.ToShortDateString()</span> }
+            </td>
+            <td>
+                @if (item.lastactivitytime != null && item.lastactivitytime != 0)
+                {
+                    TimeSpan t2 = TimeSpan.FromSeconds((double)item.lastactivitytime);
+
+                    string answer2 = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        t2.Hours,
+                        t2.Minutes,
+                        t2.Seconds);
+                    <span>@answer2</span>
+                }
+            </td>
+        </tr>
+    }
+</table>

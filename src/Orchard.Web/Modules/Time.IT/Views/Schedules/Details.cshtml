@@ -1,0 +1,211 @@
+﻿@model Time.Data.EntityModels.TimeMFG.SysTaskSchedule
+
+@{
+    ViewBag.Title = "Schedule Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>SysTaskSchedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchedType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchedType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NextRunOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NextRunOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Recurrences)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recurrences)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthlyOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthlyOption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOfMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOfMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeekOfMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeekOfMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOfWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOfWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EveryNWeeks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EveryNWeeks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastRunOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastRunOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mondays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mondays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuesdays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuesdays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wednesdays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wednesdays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thursdays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thursdays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fridays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fridays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saturdays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saturdays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sundays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sundays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartHour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartHour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartMinute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartMinute)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WindowStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WindowStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WindowEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WindowEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WindowMinutes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WindowMinutes)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@Html.Partial("_SysTasks", Model.SysTasks)
