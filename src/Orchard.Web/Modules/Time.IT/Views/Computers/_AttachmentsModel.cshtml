@@ -4,7 +4,7 @@
 {
     <tr>
         <td>
-            @Html.ActionLink(item.FileName, "DownloadAttachment", new { id = item.ModelId, modelOrComputer = "Model", fileName = item.FileName })
+            @Html.ActionLink(item.FileName, "DownloadAttachment", new { id = item.ModelId, modelOrComputer = "Model", fileName = item.FileName, computerId = ViewData["computerId"] })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
@@ -14,6 +14,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UploadedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteAttachment", new { id = item.ModelId, modelOrComputer = "Model", fileName = item.FileName, computerId = ViewData["computerId"] })
         </td>
     </tr>
 }

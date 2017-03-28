@@ -9,25 +9,30 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <div class="container-fluid alert alert-info">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <h4>Link License View Model</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-horizontal">
-        <h4>Link License View Model</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(x => x.ComputerId)
 
-        @Html.HiddenFor(x => x.ComputerId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LicenseId, "LicenseId", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("LicenseId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
+                            @Html.ValidationMessageFor(model => model.LicenseId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LicenseId, "LicenseId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LicenseId", null, htmlAttributes: new { @class = "form-control" }, optionLabel: "-- Select --")
-                @Html.ValidationMessageFor(model => model.LicenseId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Link License" class="btn btn-primary" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Link License" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
