@@ -8,73 +8,81 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>License</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="container-fluid alert alert-info">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>License</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Quantity)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LicenseKey)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LicenseKey)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LicenseKey)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.LicenseKey)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.QuantityAssigned)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.QuantityAssigned)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.QuantityAssigned)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.QuantityAssigned)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ComputerId)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ComputerId)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ComputerId)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.ComputerId)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Note)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ref_LicenseType.LicenseType)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ref_LicenseType.LicenseType)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ref_LicenseType.LicenseType)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ref_LicenseType.LicenseType)
+                    </dd>
 
-    </dl>
+                </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" /> |
-            @Html.ActionLink("Back to List", "Index")
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-primary" /> |
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                }
+            </div>
         </div>
-    }
+    </div>
+    
 </div>

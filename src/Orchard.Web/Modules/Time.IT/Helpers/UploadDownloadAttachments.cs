@@ -16,11 +16,11 @@ namespace Time.IT.Helpers
             file.InputStream.Read(buf, 0, file.ContentLength);
             var fn = file.FileName.Substring(file.FileName.LastIndexOf("\\") + 1).ToLower();
 
-            if (ByModelOrId == "Model")
+            if (ByModelOrId == "Model")// Checking if is by model
             {
                 _AttachmentPath = HttpContext.Current.Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerModel\{0}\", Model));
             }
-            else
+            else// Else by computer specific
             {
                 _AttachmentPath = HttpContext.Current.Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerId\{0}\", compId));
             }

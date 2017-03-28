@@ -13,6 +13,7 @@ namespace Time.IT.ViewModel
         public int ComputerId { get; set; }
         public int ModelId { get; set; }
         public string ComputerModel { get; set; }
+        public string FileName { get; set; }
 
         [Required]
         public string Description { get; set; }

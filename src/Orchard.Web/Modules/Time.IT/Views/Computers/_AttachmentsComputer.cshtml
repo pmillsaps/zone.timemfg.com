@@ -15,5 +15,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.UploadedDate)
         </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteAttachment", new { id = item.ComputerId, modelOrComputer = "Computer", fileName = item.FileName })
+        </td>
     </tr>
 }

@@ -547,7 +547,8 @@ namespace Time.IT.Controllers
             return RedirectToAction("Details", new { id = computerId });
         }
 
-        // User has the option to upload an attachment related to a Computer or a Model
+        // This method uploads attachments
+        // User has the option to upload an attachment related to a specific computer or a computer model
         public ActionResult UploadAttachment(int modelId, string cmprModel, int compId)
         {
             UploadAttachmentViewModel model = new UploadAttachmentViewModel();
@@ -568,7 +569,7 @@ namespace Time.IT.Controllers
         public ActionResult UploadAttachment(UploadAttachmentViewModel vm, HttpPostedFileBase fileBlob)
         {
             // Displays if no selection was made or no file was selected
-            if (vm.ModelOrComputer == null) ModelState.AddModelError("", "You must select Model or Computer in the drop down list.");
+            if (vm.ModelOrComputer == null) ModelState.AddModelError("", "You must select Attachment for Model or Attachment for Computer in the drop down list.");
             if (fileBlob == null) ModelState.AddModelError("", "You must select a file to upload.");
 
             if (ModelState.IsValid)
@@ -576,7 +577,7 @@ namespace Time.IT.Controllers
                 // Saving file info to the database
                 string fN = fileBlob.FileName.Substring(fileBlob.FileName.LastIndexOf("\\") + 1).ToLower();
                 string fExt = fN.Substring(fN.LastIndexOf(".") + 1).ToLower();
-                if (vm.ModelOrComputer == "Model")
+                if (vm.ModelOrComputer == "Model")// Checking if is by model
                 {
                     AttachmentForModel attachment = new AttachmentForModel
                     {
@@ -589,7 +590,7 @@ namespace Time.IT.Controllers
                     };
                     db.AttachmentForModels.Add(attachment);
                 }
-                else
+                else// Else by computer specific
                 {
                     AttachmentForComputer attachment = new AttachmentForComputer
                     {
@@ -608,6 +609,7 @@ namespace Time.IT.Controllers
                 TempData["StatusMessage"] = "Attachment uploaded successfully!";
                 return RedirectToAction("Details", new { id = vm.ComputerId });
             }
+
             ViewBag.ModelOrComputer = new List<SelectListItem>
                 {
                     new SelectListItem {Text="Attachment for Model", Value= "Model", Selected=false },
@@ -616,26 +618,28 @@ namespace Time.IT.Controllers
             return View(vm);
         }
 
-        // This method downloads the attachments
-        public ActionResult DownloadAttachment(int id, string modelOrComputer, string fileName)
+        // This method downloads the uploaded attachments
+        public ActionResult DownloadAttachment(int id, string modelOrComputer, string fileName, int? computerId)
         {
             string path;
-            if (modelOrComputer == "Model")
+            int compId;
+            if (modelOrComputer == "Model")// Checking if is by model
             {
+                compId = computerId.Value;
                 var compModel = db.Ref_Model.FirstOrDefault(x => x.ID == id);
                 AttachmentForModel attachment = db.AttachmentForModels.FirstOrDefault(x => x.ModelId == id && x.FileName == fileName);
                 path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerModel\{0}\{1}", compModel.Model, attachment.FileName));
             }
-            else
+            else// Else by computer specific
             {
+                compId = id;
                 AttachmentForComputer attachment = db.AttachmentForComputers.FirstOrDefault(x => x.ComputerId == id && x.FileName == fileName);
                 path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerId\{0}\{1}", attachment.ComputerId, attachment.FileName));
-            }           
-            //var fi = new FileInfo(path);
+            }
             if (!System.IO.File.Exists(path))
             {
                 TempData["ErrorMessage"] = "File not found!";
-                RedirectToAction("Details", new { id = id });
+                RedirectToAction("Details", new { id = compId });
             }
             byte[] filedata = System.IO.File.ReadAllBytes(path);
             string contentType = MimeMapping.GetMimeMapping(path);
@@ -646,6 +650,74 @@ namespace Time.IT.Controllers
             };
             Response.AppendHeader("Content-Disposition", cd.ToString());
             return File(filedata, contentType);
+        }
+
+        // This method deletes the uploaded attachment and its folder
+        public ActionResult DeleteAttachment(int id, string modelOrComputer, string fileName, int? computerId)
+        {
+            UploadAttachmentViewModel vm = new UploadAttachmentViewModel();
+            if (modelOrComputer == "Model")// Checking if is by model
+            {
+                var compModel = db.Ref_Model.Where(x => x.ID == id).Select(x => new { model = x.Model }).Single();
+                vm.ComputerModel = compModel.model;
+                var description = db.AttachmentForModels.Where(x => x.ModelId == id && x.FileName == fileName).Select(x => new { descr = x.Description }).Single();
+                vm.Description = description.descr;
+                vm.ModelId = id;
+                vm.ComputerId = computerId.Value;
+            }
+            else// Else by computer specific
+            {
+                var description = db.AttachmentForComputers.Where(x => x.ComputerId == id && x.FileName == fileName).Select(x => new { descr = x.Description }).Single();
+                vm.Description = description.descr;
+                vm.ComputerId = id;
+            }
+            vm.FileName = fileName;
+            vm.ModelOrComputer = modelOrComputer;
+
+            return View(vm);
+        }
+        // Deleting attachment confirmed
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAttachment(UploadAttachmentViewModel vm)
+        {
+            string path;
+            if (vm.ModelOrComputer == "Model")// Checking if is by model
+            {
+                var attach = db.AttachmentForModels.Where(x => x.ModelId == vm.ModelId);
+                if (attach.Count() > 1)// Deleting the file only if there are more than one file in the folder
+                {
+                    path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerModel\{0}\{1}", vm.ComputerModel, vm.FileName));
+                    System.IO.File.Delete(path);
+                }
+                else// Deleting the file and folder if there is only one file in the folder
+                {
+                    path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerModel\{0}", vm.ComputerModel));
+                    Directory.Delete(path, true);
+                }
+                // Deleting the file info from the db    
+                AttachmentForModel attachment = db.AttachmentForModels.First(x => x.ModelId == vm.ModelId && x.FileName == vm.FileName);
+                db.AttachmentForModels.Remove(attachment);               
+            }
+            else// Else by computer specific
+            {
+                var attach = db.AttachmentForComputers.Where(x => x.ComputerId == vm.ComputerId);
+                if (attach.Count() > 1)// Deleting the file only if there are more than one file in the folder
+                {
+                    path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerId\{0}\{1}", vm.ComputerId, vm.FileName));
+                    System.IO.File.Delete(path);
+                }
+                else// Deleting the file and folder if there is only one file in the folder
+                {
+                    path = Server.MapPath(String.Format(@"~\Modules\Time.IT\Content\AttachmentFiles\ByComputerId\{0}", vm.ComputerId));
+                    Directory.Delete(path, true);
+                }
+                // Deleting the file info from the db    
+                AttachmentForComputer attachment = db.AttachmentForComputers.First(x => x.ComputerId == vm.ComputerId && x.FileName == vm.FileName);
+                db.AttachmentForComputers.Remove(attachment);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = vm.ComputerId });
         }
 
         protected override void Dispose(bool disposing)

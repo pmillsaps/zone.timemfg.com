@@ -128,7 +128,8 @@
 }
 
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") | 
+    @Html.ActionLink("Back to User", "Details", new { id = Model.Id})
 </p>
 
 <div>

@@ -4,34 +4,44 @@
     ViewBag.Title = "Memory Index";
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>@ViewBag.Title</h2>
+        </div>
+        <div class="panel-body">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <hr />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-striped table-bordered table-condensed table-hover">
-    <tr class="success">
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GB)
-        </th>
-        <th></th>
-    </tr>
+            <table class="table table-striped table-bordered table-condensed table-hover">
+                <tr class="success">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GB)
+                    </th>
+                    <th></th>
+                </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Name, "Edit", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GB)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Name, "Edit", new { id = item.Id })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GB)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+

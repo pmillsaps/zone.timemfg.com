@@ -254,8 +254,9 @@
             <th>
                 @Html.Label("UploadedDate")
             </th>
+            <th></th>
         </tr>
-        @Html.Partial("_AttachmentsModel", Model.Ref_Model.AttachmentForModels)
+        @Html.Partial("_AttachmentsModel", Model.Ref_Model.AttachmentForModels, new ViewDataDictionary { { "computerId", Model.Id } })
         @Html.Partial("_AttachmentsComputer", Model.AttachmentForComputers)
     </table>
 
