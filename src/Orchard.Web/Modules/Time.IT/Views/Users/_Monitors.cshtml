@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.Monitor>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_MonitorSizes.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetId)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchasedFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>*@
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Edit", "Monitor", new { id = item.Id })">@item.Model</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Manufacturer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_MonitorSizes.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssetId)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchasedFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>*@
+
+            <td>
+                <a href="@Url.Action("Edit", "Monitor", new { id = item.Id })">Edit</a> |
+                @*<a href="@Url.Action("Un-Link", "Monitor", new { id = item.Id })">Delete</a>*@
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                @Html.ActionLink("Un-Link", "UnLinkMonitor", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

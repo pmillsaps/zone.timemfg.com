@@ -1,0 +1,40 @@
+﻿@model Time.Epicor.ViewModels.IssueOperationVM
+
+@{
+    ViewBag.Title = "Issue Operation: Verification";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to Issue this operation on this Job?</h3>
+<div>
+    @*<h4>IssueOperationVM</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operation)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Verify Issue Operations?" class="btn btn-default" /> |
+            @Html.ActionLink("Reset", "IssueOperation_S1")
+        </div>
+    }
+</div>

@@ -1,0 +1,16 @@
+﻿@model Time.Install.Models.InstallQuoteSummary
+
+<table class="table table-striped">
+    <tr class="success">
+        <th>Qty &emsp; Price &emsp; OptionNum &emsp;&emsp;&emsp; Description</th>
+        <th class="text-right">Hours</th>
+    </tr>
+    @foreach (var item in Model.AerialOptions.Where(x => x.Hours > 0))
+    {
+        <tr>
+            <td><span style="white-space:pre">@Html.DisplayFor(model => item.QtyPartAndDescription)</span></td>
+            <td class="text-right">@Html.DisplayFor(model => item.Hours)</td>
+        </tr>
+    }
+</table>
+

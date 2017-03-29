@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Production.IMPartBin>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BinNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnhandQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LotNum)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BinNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OnhandQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LotNum)
+            </td>
+        </tr>
+    }
+</table>

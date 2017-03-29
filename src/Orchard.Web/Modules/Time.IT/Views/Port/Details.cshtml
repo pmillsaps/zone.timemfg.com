@@ -1,0 +1,25 @@
+﻿@model Time.Data.EntityModels.ITInventory.Ref_SwitchPort
+
+@{
+    ViewBag.Title = "Switch Port Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Ref_SwitchPort</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SwitchPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SwitchPort)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
