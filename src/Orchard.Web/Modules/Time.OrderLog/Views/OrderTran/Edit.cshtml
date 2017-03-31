@@ -25,9 +25,9 @@
         @Html.HiddenFor(model => model.OrderId)
         @Html.HiddenFor(model => model.LiftModelId)
         @Html.HiddenFor(model => model.LiftModel.LiftModelId)
-        @Html.HiddenFor(model => model.CancelQty)
-        @Html.HiddenFor(model => model.NewQty)
-        @*Html.HiddenFor(model => model.Price)*@
+        @*Html.HiddenFor(model => model.CancelQty)
+        Html.HiddenFor(model => model.NewQty)
+        Html.HiddenFor(model => model.Price)*@
         @Html.HiddenFor(model => model.Date)
         @Html.HiddenFor(model => model.AsOfDate)
 
@@ -59,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NewQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.NewQty, new { @readonly = "readonly" })
+                @Html.TextBoxFor(model => model.NewQty)
                 @Html.ValidationMessageFor(model => model.NewQty)
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CancelQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CancelQty, new { @readonly = "readonly" })
+                @Html.TextBoxFor(model => model.CancelQty)
                 @Html.ValidationMessageFor(model => model.CancelQty)
             </div>
         </div>

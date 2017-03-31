@@ -145,6 +145,7 @@
     <Content Include="Views\Report\ExecutiveSummary.cshtml" />
     <Content Include="Views\OrderLog\ExportOrderLog.cshtml" />
     <Content Include="Views\Report\TerritorySummary.cshtml" />
+    <Content Include="Views\OrderTran\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

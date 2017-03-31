@@ -213,20 +213,26 @@ namespace Time.OrderLog.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.returnUrl = Request.UrlReferrer;
+
             return View(ordertran);
         }
 
         // POST: /OrderLine/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string returnUrl)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditOrders, T("You Do Not Have Permission to Edit")))
                 return new HttpUnauthorizedResult();
             OrderTran ordertran = db.OrderTrans.Find(id);
             db.OrderTrans.Remove(ordertran);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            if (String.IsNullOrEmpty(returnUrl))
+                return RedirectToAction("Details", "OrderLog", new { id = ordertran.OrderId });
+            else
+                return Redirect(returnUrl);
         }
 
         protected override void Dispose(bool disposing)

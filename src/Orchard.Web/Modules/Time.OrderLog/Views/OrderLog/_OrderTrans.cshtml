@@ -62,7 +62,8 @@
                     </td>
                 }
                 <td>@Html.DisplayFor(modelItem => item.Comment)</td>
-                <td>@Html.ActionLink("Edit", "Edit", "OrderTran", new { id = item.OrderTranId }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "OrderTran", new { id = item.OrderTranId }, null) | 
+                @Html.ActionLink("Delete", "Delete", "OrderTran", new { id = item.OrderTranId }, null) </td>
             </tr>
         }
     </table>
