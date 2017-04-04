@@ -359,7 +359,7 @@
             {
                 <div id="Epic" style="display:none;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.EpicorUserID, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.EpicorUserID, "Epicor User ID", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.EpicorUserID, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EpicorUserID, "", new { @class = "text-danger" })
@@ -371,7 +371,7 @@
             {
                 <div id="Epic" style="display:block;">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.EpicorUserID, htmlAttributes: new { @class = "control-label col-md-3" })
+                        @Html.LabelFor(model => model.EpicorUserID, "Epicor User ID", htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.EpicorUserID, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.EpicorUserID, "", new { @class = "text-danger" })

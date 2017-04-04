@@ -107,7 +107,7 @@ namespace Time.IT.Controllers
 
         public ActionResult ClearActiveQueue()
         {
-            if (!Services.Authorizer.Authorize(Permissions.ITAdmin, T("You Do Not Have Permission to Clear the Queue")))
+            if (!Services.Authorizer.Authorize(Permissions.IT, T("You Do Not Have Permission to Clear the Queue")))
                 return new HttpUnauthorizedResult();
             using (var db = new TimeMFGEntities())
             {

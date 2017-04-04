@@ -3,7 +3,7 @@
 
 <div class="col-md-12">
     <h2>Active Messaging Process</h2>
-    @if (Authorizer.Authorize(Permissions.ITAdmin) && Model.Count() > 0)
+    @if (Authorizer.Authorize(Permissions.IT) && Model.Count() > 0)
     {
         @Html.ActionLink("Clear Active MSMQ_Status", "ClearActiveQueue")
     }
