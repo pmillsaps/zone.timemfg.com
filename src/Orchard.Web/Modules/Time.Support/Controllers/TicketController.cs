@@ -272,7 +272,7 @@ namespace Time.Support.Controllers
             if (ModelState.IsValid)
             {
                 if (ticketProject.PriorityID > 4) ticketProject.PriorityID = 4; // highest a new ticket can be set is 4=High
-                ticketProject.Status = 1;   // Set Ticket Status to 1=Waiting Supervisor Approval
+                ticketProject.Status = 1;   // Set Ticket Status to 1= Awaiting Supervisor Approval
 
                 var user = HttpContext.User.Identity.Name;
                 var groups = ADHelper.GetGroupNames(user);
@@ -289,7 +289,7 @@ namespace Time.Support.Controllers
                 ticketProject.RequestedByFriendly = HttpContext.User.Identity.Name;
                 _db.TicketStatusHistories.Add(new TicketStatusHistory { TicketStatus = ticketProject.TicketStatus, CreateDate = DateTime.Now });
 
-                // Approval COdeGen
+                // Approval CodeGen
                 if (ticketProject.Status == 1)
                 {
                     var codegen = new CreateRandomCode();
