@@ -68,6 +68,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
     </table>
@@ -139,6 +140,12 @@
                         data: "Id", width: "20px", sortable: false, render: function (data) {
                             //return '<a class="editBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-edit"></span></a>';
                             return '<a href="MaintenanceDataDetails/Edit/' + data + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: "Id", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="MaintenanceDataDetails/CopyRecord/' + data + '"><i class="fa fa-files-o" aria-hidden="true"></i></a>';
+                            //return '<a class="dtlsBtn" data-toggle="modal" href="#modalForm" data-id="' + data + '"><span class="mbri-info"></span></a>';
                         }
                     },
                     {

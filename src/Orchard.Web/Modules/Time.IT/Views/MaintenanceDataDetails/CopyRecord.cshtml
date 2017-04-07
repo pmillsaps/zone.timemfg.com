@@ -3,12 +3,13 @@
 @{
     Style.Require("jQueryUI_DatePicker").AtHead();
     Script.Require("jQueryUI_DatePicker").AtFoot();
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Copy IT Maintenance Detail";
 }
 
 <h3>@ViewBag.Title</h3>
+@Html.Partial("_ModalForm")
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "copyRecordForm" }))
 {
     @Html.AntiForgeryToken()
     <div class="container-fluid alert alert-info">
@@ -16,6 +17,7 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
+            @Html.Hidden("setOldRecordToExpired")
 
             <div class="form-group">
                 @Html.Label("Budget Item", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -108,7 +110,8 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @*<input id="submitBtn" type="submit" value="Copy Detail" class="btn btn-primary" />*@
+                    <a class="dtlsBtn btn btn-primary" data-toggle="modal" href="#modalForm">Copy Record</a>
                 </div>
             </div>
         </div>
@@ -122,6 +125,16 @@
 @using (Script.Foot())
 {
     <script type="text/javascript">
+        $('#modalForm').on('click', '#yesBtn', function (e) {
+            //alert("You clicked the yes button.");
+            $("#setOldRecordToExpired").val("True");
+            $("#copyRecordForm").submit();
+        });
+        $('#modalForm').on('click', '#noBtn', function (e) {
+            //alert("You clicked the no button.");
+            $("#setOldRecordToExpired").val("False");
+            $("#copyRecordForm").submit();
+        });
 
         $(".showDatePicker").datepicker({
             showOtherMonths: true,
