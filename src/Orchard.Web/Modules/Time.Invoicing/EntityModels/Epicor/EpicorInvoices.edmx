@@ -1,0 +1,2094 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EpicorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.jobprod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="jobprod">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="company" Type="varchar" MaxLength="8" />
+          <Property Name="jobnum" Type="varchar" MaxLength="14" />
+          <Property Name="ordernum" Type="int" />
+          <Property Name="orderline" Type="int" />
+          <Property Name="orderrelnum" Type="int" />
+          <Property Name="prodqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="warehousecode" Type="varchar" MaxLength="8" />
+          <Property Name="targetjobnum" Type="varchar" MaxLength="14" />
+          <Property Name="targetassemblyseq" Type="int" />
+          <Property Name="targetmtlseq" Type="int" />
+          <Property Name="shippedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="receivedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="allocatedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="callnum" Type="int" />
+          <Property Name="callline" Type="int" />
+          <Property Name="tflinenum" Type="varchar" MaxLength="14" />
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar01" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar02" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar03" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar04" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar05" Type="varchar" MaxLength="50" />
+          <Property Name="number01" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="datetime" />
+          <Property Name="date02" Type="datetime" />
+          <Property Name="date03" Type="datetime" />
+          <Property Name="date04" Type="datetime" />
+          <Property Name="date05" Type="datetime" />
+          <Property Name="checkbox01" Type="tinyint" />
+          <Property Name="checkbox02" Type="tinyint" />
+          <Property Name="checkbox03" Type="tinyint" />
+          <Property Name="checkbox04" Type="tinyint" />
+          <Property Name="checkbox05" Type="tinyint" />
+          <Property Name="plant" Type="varchar" MaxLength="8" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.orderdtl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="orderdtl">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="voidline" Type="tinyint" />
+          <Property Name="openline" Type="tinyint" />
+          <Property Name="company" Type="varchar" MaxLength="8" />
+          <Property Name="ordernum" Type="int" />
+          <Property Name="orderline" Type="int" />
+          <Property Name="linetype" Type="varchar" MaxLength="8" />
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="linedesc" Type="text" />
+          <Property Name="reference" Type="varchar" MaxLength="10" />
+          <Property Name="ium" Type="varchar" MaxLength="2" />
+          <Property Name="revisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="poline" Type="varchar" MaxLength="5" />
+          <Property Name="commissionable" Type="tinyint" />
+          <Property Name="discountpercent" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="unitprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="docunitprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="orderqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="discount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="docdiscount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="requestdate" Type="datetime" />
+          <Property Name="prodcode" Type="varchar" MaxLength="8" />
+          <Property Name="obsolete803_repsplit##1" Type="int" />
+          <Property Name="obsolete803_repsplit##2" Type="int" />
+          <Property Name="obsolete803_repsplit##3" Type="int" />
+          <Property Name="obsolete803_repsplit##4" Type="int" />
+          <Property Name="obsolete803_repsplit##5" Type="int" />
+          <Property Name="obsolete803_reprate##1" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate##2" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate##3" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate##4" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate##5" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="xpartnum" Type="varchar" MaxLength="50" />
+          <Property Name="xrevisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="pricepercode" Type="varchar" MaxLength="1" />
+          <Property Name="ordercomment" Type="text" />
+          <Property Name="shipcomment" Type="text" />
+          <Property Name="invoicecomment" Type="text" />
+          <Property Name="picklistcomment" Type="text" />
+          <Property Name="taxcatid" Type="varchar" MaxLength="10" />
+          <Property Name="advancebillbal" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="docadvancebillbal" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="quotenum" Type="int" />
+          <Property Name="quoteline" Type="int" />
+          <Property Name="tmbilling" Type="tinyint" />
+          <Property Name="origwhynotax" Type="varchar" MaxLength="3" />
+          <Property Name="needbydate" Type="datetime" />
+          <Property Name="custnum" Type="int" />
+          <Property Name="rework" Type="tinyint" />
+          <Property Name="rmanum" Type="int" />
+          <Property Name="rmaline" Type="int" />
+          <Property Name="character01" Type="text" />
+          <Property Name="character02" Type="text" />
+          <Property Name="character03" Type="text" />
+          <Property Name="character04" Type="text" />
+          <Property Name="character05" Type="text" />
+          <Property Name="character06" Type="text" />
+          <Property Name="character07" Type="text" />
+          <Property Name="character08" Type="text" />
+          <Property Name="character09" Type="text" />
+          <Property Name="character10" Type="text" />
+          <Property Name="number01" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number06" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number07" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number08" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number09" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number10" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="datetime" />
+          <Property Name="date02" Type="datetime" />
+          <Property Name="date03" Type="datetime" />
+          <Property Name="date04" Type="datetime" />
+          <Property Name="date05" Type="datetime" />
+          <Property Name="checkbox01" Type="tinyint" />
+          <Property Name="checkbox02" Type="tinyint" />
+          <Property Name="checkbox03" Type="tinyint" />
+          <Property Name="checkbox04" Type="tinyint" />
+          <Property Name="checkbox05" Type="tinyint" />
+          <Property Name="projectid" Type="varchar" MaxLength="25" />
+          <Property Name="contractnum" Type="int" />
+          <Property Name="contractcode" Type="varchar" MaxLength="8" />
+          <Property Name="basepartnum" Type="varchar" MaxLength="50" />
+          <Property Name="warranty" Type="tinyint" />
+          <Property Name="warrantycode" Type="varchar" MaxLength="8" />
+          <Property Name="materialduration" Type="int" />
+          <Property Name="laborduration" Type="int" />
+          <Property Name="miscduration" Type="int" />
+          <Property Name="materialmod" Type="varchar" MaxLength="8" />
+          <Property Name="labormod" Type="varchar" MaxLength="8" />
+          <Property Name="warrantycomment" Type="text" />
+          <Property Name="onsite" Type="tinyint" />
+          <Property Name="matcovered" Type="tinyint" />
+          <Property Name="labcovered" Type="tinyint" />
+          <Property Name="misccovered" Type="tinyint" />
+          <Property Name="salesum" Type="varchar" MaxLength="2" />
+          <Property Name="sellingfactor" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="sellingquantity" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="salescatid" Type="varchar" MaxLength="4" />
+          <Property Name="shiplinecomplete" Type="tinyint" />
+          <Property Name="cumeqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="cumedate" Type="datetime" />
+          <Property Name="mktgcampaignid" Type="varchar" MaxLength="8" />
+          <Property Name="mktgevntseq" Type="int" />
+          <Property Name="lockqty" Type="tinyint" />
+          <Property Name="linked" Type="tinyint" />
+          <Property Name="icponum" Type="int" />
+          <Property Name="icpoline" Type="int" />
+          <Property Name="extcompany" Type="varchar" MaxLength="8" />
+          <Property Name="lastconfigdate" Type="datetime" />
+          <Property Name="lastconfigtime" Type="int" />
+          <Property Name="lastconfiguserid" Type="varchar" MaxLength="20" />
+          <Property Name="configunitprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="configbaseunitprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="pricelistcode" Type="varchar" MaxLength="10" />
+          <Property Name="breaklistcode" Type="varchar" MaxLength="10" />
+          <Property Name="pricingqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="lockprice" Type="tinyint" />
+          <Property Name="listprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="doclistprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="ordbasedprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="docordbasedprice" Type="decimal" Precision="17" Scale="5" />
+          <Property Name="pricegroupcode" Type="varchar" MaxLength="10" />
+          <Property Name="overridepricelist" Type="tinyint" />
+          <Property Name="baserevisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="pricingvalue" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="number11" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number12" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number13" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number14" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number15" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number16" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number17" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number18" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number19" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number20" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="date06" Type="datetime" />
+          <Property Name="date07" Type="datetime" />
+          <Property Name="date08" Type="datetime" />
+          <Property Name="date09" Type="datetime" />
+          <Property Name="date10" Type="datetime" />
+          <Property Name="date11" Type="datetime" />
+          <Property Name="date12" Type="datetime" />
+          <Property Name="date13" Type="datetime" />
+          <Property Name="date14" Type="datetime" />
+          <Property Name="date15" Type="datetime" />
+          <Property Name="date16" Type="datetime" />
+          <Property Name="date17" Type="datetime" />
+          <Property Name="date18" Type="datetime" />
+          <Property Name="date19" Type="datetime" />
+          <Property Name="date20" Type="datetime" />
+          <Property Name="checkbox06" Type="tinyint" />
+          <Property Name="checkbox07" Type="tinyint" />
+          <Property Name="checkbox08" Type="tinyint" />
+          <Property Name="checkbox09" Type="tinyint" />
+          <Property Name="checkbox10" Type="tinyint" />
+          <Property Name="checkbox11" Type="tinyint" />
+          <Property Name="checkbox12" Type="tinyint" />
+          <Property Name="checkbox13" Type="tinyint" />
+          <Property Name="checkbox14" Type="tinyint" />
+          <Property Name="checkbox15" Type="tinyint" />
+          <Property Name="checkbox16" Type="tinyint" />
+          <Property Name="checkbox17" Type="tinyint" />
+          <Property Name="checkbox18" Type="tinyint" />
+          <Property Name="checkbox19" Type="tinyint" />
+          <Property Name="checkbox20" Type="tinyint" />
+          <Property Name="shortchar01" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar02" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar03" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar04" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar05" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar06" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar07" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar08" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar09" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar10" Type="varchar" MaxLength="50" />
+          <Property Name="displayseq" Type="decimal" Precision="9" Scale="3" />
+          <Property Name="kitparentline" Type="int" />
+          <Property Name="kitallowupdate" Type="tinyint" />
+          <Property Name="kitshipcomplete" Type="tinyint" />
+          <Property Name="kitbackflush" Type="tinyint" />
+          <Property Name="kitprintcompsps" Type="tinyint" />
+          <Property Name="kitprintcompsinv" Type="tinyint" />
+          <Property Name="kitpricing" Type="varchar" MaxLength="1" />
+          <Property Name="kitqtyper" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="sellingfactordirection" Type="varchar" MaxLength="1" />
+          <Property Name="reprate1" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="reprate2" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="reprate3" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="reprate4" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="reprate5" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="repsplit1" Type="int" />
+          <Property Name="repsplit2" Type="int" />
+          <Property Name="repsplit3" Type="int" />
+          <Property Name="repsplit4" Type="int" />
+          <Property Name="repsplit5" Type="int" />
+          <Property Name="demandcontractline" Type="int" />
+          <Property Name="createnewjob" Type="tinyint" />
+          <Property Name="donotshipbeforedate" Type="datetime" />
+          <Property Name="getdtls" Type="tinyint" />
+          <Property Name="donotshipafterdate" Type="datetime" />
+          <Property Name="schedjob" Type="tinyint" />
+          <Property Name="reljob" Type="tinyint" />
+          <Property Name="enablecreatenewjob" Type="tinyint" />
+          <Property Name="enablegetdtls" Type="tinyint" />
+          <Property Name="enableschedjob" Type="tinyint" />
+          <Property Name="enablereljob" Type="tinyint" />
+          <Property Name="countersalewarehouse" Type="varchar" MaxLength="8" />
+          <Property Name="countersalebinnum" Type="varchar" MaxLength="10" />
+          <Property Name="countersalelotnum" Type="varchar" MaxLength="30" />
+          <Property Name="countersaledimcode" Type="varchar" MaxLength="6" />
+          <Property Name="demanddtlrejected" Type="tinyint" />
+          <Property Name="kitflag" Type="varchar" MaxLength="1" />
+          <Property Name="kitsloaded" Type="tinyint" />
+          <Property Name="obsolete803_taxexempt" Type="varchar" MaxLength="3" />
+          <Property Name="demandcontractnum" Type="int" />
+          <Property Name="demandheadseq" Type="int" />
+          <Property Name="demanddtlseq" Type="int" />
+          <Property Name="changedby" Type="varchar" MaxLength="20" />
+          <Property Name="changedate" Type="datetime" />
+          <Property Name="changetime" Type="int" />
+          <Property Name="reversecharge" Type="tinyint" />
+          <Property Name="totalreleases" Type="int" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orderrel">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="company" Type="varchar" MaxLength="8" />
+          <Property Name="ordernum" Type="int" />
+          <Property Name="orderline" Type="int" />
+          <Property Name="orderrelnum" Type="int" />
+          <Property Name="linetype" Type="varchar" MaxLength="8" />
+          <Property Name="reqdate" Type="datetime" />
+          <Property Name="ourreqqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="shiptonum" Type="varchar" MaxLength="14" />
+          <Property Name="shipviacode" Type="varchar" MaxLength="4" />
+          <Property Name="openrelease" Type="tinyint" />
+          <Property Name="firmrelease" Type="tinyint" />
+          <Property Name="make" Type="tinyint" />
+          <Property Name="ourjobqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="ourjobshippedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="voidrelease" Type="tinyint" />
+          <Property Name="ourstockqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="warehousecode" Type="varchar" MaxLength="8" />
+          <Property Name="ourstockshippedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="revisionnum" Type="varchar" MaxLength="12" />
+          <Property Name="taxexempt" Type="varchar" MaxLength="3" />
+          <Property Name="shpconnum" Type="int" />
+          <Property Name="needbydate" Type="datetime" />
+          <Property Name="reference" Type="varchar" MaxLength="30" />
+          <Property Name="character01" Type="text" />
+          <Property Name="character02" Type="text" />
+          <Property Name="character03" Type="text" />
+          <Property Name="character04" Type="text" />
+          <Property Name="character05" Type="text" />
+          <Property Name="character06" Type="text" />
+          <Property Name="character07" Type="text" />
+          <Property Name="character08" Type="text" />
+          <Property Name="character09" Type="text" />
+          <Property Name="character10" Type="text" />
+          <Property Name="number01" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number06" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number07" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number08" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number09" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number10" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="datetime" />
+          <Property Name="date02" Type="datetime" />
+          <Property Name="date03" Type="datetime" />
+          <Property Name="date04" Type="datetime" />
+          <Property Name="date05" Type="datetime" />
+          <Property Name="checkbox01" Type="tinyint" />
+          <Property Name="checkbox02" Type="tinyint" />
+          <Property Name="checkbox03" Type="tinyint" />
+          <Property Name="checkbox04" Type="tinyint" />
+          <Property Name="checkbox05" Type="tinyint" />
+          <Property Name="plant" Type="varchar" MaxLength="8" />
+          <Property Name="sellingreqqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="sellingjobqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="sellingjobshippedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="sellingstockqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="sellingstockshippedqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="selectforpicking" Type="tinyint" />
+          <Property Name="stagingwarehousecode" Type="varchar" MaxLength="8" />
+          <Property Name="stagingbinnum" Type="varchar" MaxLength="10" />
+          <Property Name="pickerror" Type="varchar" MaxLength="1" />
+          <Property Name="cumeqty" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="cumedate" Type="datetime" />
+          <Property Name="linked" Type="tinyint" />
+          <Property Name="icponum" Type="int" />
+          <Property Name="icpoline" Type="int" />
+          <Property Name="icporelnum" Type="int" />
+          <Property Name="extcompany" Type="varchar" MaxLength="8" />
+          <Property Name="number11" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number12" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number13" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number14" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number15" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number16" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number17" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number18" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number19" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number20" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="date06" Type="datetime" />
+          <Property Name="date07" Type="datetime" />
+          <Property Name="date08" Type="datetime" />
+          <Property Name="date09" Type="datetime" />
+          <Property Name="date10" Type="datetime" />
+          <Property Name="date11" Type="datetime" />
+          <Property Name="date12" Type="datetime" />
+          <Property Name="date13" Type="datetime" />
+          <Property Name="date14" Type="datetime" />
+          <Property Name="date15" Type="datetime" />
+          <Property Name="date16" Type="datetime" />
+          <Property Name="date17" Type="datetime" />
+          <Property Name="date18" Type="datetime" />
+          <Property Name="date19" Type="datetime" />
+          <Property Name="date20" Type="datetime" />
+          <Property Name="checkbox06" Type="tinyint" />
+          <Property Name="checkbox07" Type="tinyint" />
+          <Property Name="checkbox08" Type="tinyint" />
+          <Property Name="checkbox09" Type="tinyint" />
+          <Property Name="checkbox10" Type="tinyint" />
+          <Property Name="checkbox11" Type="tinyint" />
+          <Property Name="checkbox12" Type="tinyint" />
+          <Property Name="checkbox13" Type="tinyint" />
+          <Property Name="checkbox14" Type="tinyint" />
+          <Property Name="checkbox15" Type="tinyint" />
+          <Property Name="checkbox16" Type="tinyint" />
+          <Property Name="checkbox17" Type="tinyint" />
+          <Property Name="checkbox18" Type="tinyint" />
+          <Property Name="checkbox19" Type="tinyint" />
+          <Property Name="checkbox20" Type="tinyint" />
+          <Property Name="shortchar01" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar02" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar03" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar04" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar05" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar06" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar07" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar08" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar09" Type="varchar" MaxLength="50" />
+          <Property Name="shortchar10" Type="varchar" MaxLength="50" />
+          <Property Name="schedulenumber" Type="varchar" MaxLength="30" />
+          <Property Name="markfornum" Type="varchar" MaxLength="14" />
+          <Property Name="dropshipname" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipaddress1" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipaddress2" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipaddress3" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipcity" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipstate" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipzip" Type="varchar" MaxLength="10" />
+          <Property Name="dropshipcountry" Type="varchar" MaxLength="50" />
+          <Property Name="dropshipcountrynum" Type="int" />
+          <Property Name="ran" Type="varchar" MaxLength="30" />
+          <Property Name="demandreference" Type="varchar" MaxLength="30" />
+          <Property Name="demandschedrejected" Type="tinyint" />
+          <Property Name="datepickticketprinted" Type="datetime" />
+          <Property Name="resdelivery" Type="tinyint" />
+          <Property Name="satdelivery" Type="tinyint" />
+          <Property Name="satpickup" Type="tinyint" />
+          <Property Name="verbalconf" Type="tinyint" />
+          <Property Name="hazmat" Type="tinyint" />
+          <Property Name="doconly" Type="tinyint" />
+          <Property Name="refnotes" Type="varchar" MaxLength="500" />
+          <Property Name="applychrg" Type="tinyint" />
+          <Property Name="chrgamount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="cod" Type="tinyint" />
+          <Property Name="codfreight" Type="tinyint" />
+          <Property Name="codcheck" Type="tinyint" />
+          <Property Name="codamount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="groundtype" Type="varchar" MaxLength="8" />
+          <Property Name="notifyflag" Type="tinyint" />
+          <Property Name="notifyemail" Type="varchar" MaxLength="500" />
+          <Property Name="declaredins" Type="tinyint" />
+          <Property Name="declaredamt" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="servsatdelivery" Type="tinyint" />
+          <Property Name="servsatpickup" Type="tinyint" />
+          <Property Name="servsignature" Type="tinyint" />
+          <Property Name="servalert" Type="tinyint" />
+          <Property Name="servpod" Type="tinyint" />
+          <Property Name="servaod" Type="tinyint" />
+          <Property Name="servhomedel" Type="tinyint" />
+          <Property Name="deliverytype" Type="varchar" MaxLength="8" />
+          <Property Name="servdeliverydate" Type="datetime" />
+          <Property Name="servphone" Type="varchar" MaxLength="20" />
+          <Property Name="servinstruct" Type="varchar" MaxLength="100" />
+          <Property Name="servrelease" Type="tinyint" />
+          <Property Name="servauthnum" Type="varchar" MaxLength="50" />
+          <Property Name="servref1" Type="varchar" MaxLength="50" />
+          <Property Name="servref2" Type="varchar" MaxLength="50" />
+          <Property Name="servref3" Type="varchar" MaxLength="50" />
+          <Property Name="servref4" Type="varchar" MaxLength="50" />
+          <Property Name="servref5" Type="varchar" MaxLength="50" />
+          <Property Name="overridecarrier" Type="tinyint" />
+          <Property Name="overrideservice" Type="tinyint" />
+          <Property Name="dockingstation" Type="varchar" MaxLength="30" />
+          <Property Name="location" Type="varchar" MaxLength="30" />
+          <Property Name="transportid" Type="varchar" MaxLength="30" />
+          <Property Name="shipbytime" Type="int" />
+          <Property Name="changedby" Type="varchar" MaxLength="20" />
+          <Property Name="changedate" Type="datetime" />
+          <Property Name="changetime" Type="int" />
+          <Property Name="taxconnectcalc" Type="tinyint" />
+          <Property Name="getdflttaxids" Type="tinyint" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MfgSys803.dbo.serialno' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="serialno">
+          <Key>
+            <PropertyRef Name="createdby" />
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="company" Type="varchar" MaxLength="8" />
+          <Property Name="partnum" Type="varchar" MaxLength="50" />
+          <Property Name="serialnumber" Type="varchar" MaxLength="40" />
+          <Property Name="snstatus" Type="varchar" MaxLength="10" />
+          <Property Name="jobnum" Type="varchar" MaxLength="14" />
+          <Property Name="assemblyseq" Type="int" />
+          <Property Name="mtlseq" Type="int" />
+          <Property Name="packnum" Type="int" />
+          <Property Name="packline" Type="int" />
+          <Property Name="voided" Type="tinyint" />
+          <Property Name="scrapped" Type="tinyint" />
+          <Property Name="vendornum" Type="int" />
+          <Property Name="purpoint" Type="varchar" MaxLength="4" />
+          <Property Name="packslip" Type="varchar" MaxLength="20" />
+          <Property Name="packslipline" Type="int" />
+          <Property Name="selected" Type="tinyint" />
+          <Property Name="prevsnstatus" Type="varchar" MaxLength="10" />
+          <Property Name="snprefix" Type="varchar" MaxLength="30" />
+          <Property Name="snformat" Type="varchar" MaxLength="10" />
+          <Property Name="snbasestructure" Type="varchar" MaxLength="10" />
+          <Property Name="snbasenumber" Type="varchar" MaxLength="30" />
+          <Property Name="scrapreasoncode" Type="varchar" MaxLength="5" />
+          <Property Name="snreference" Type="varchar" MaxLength="30" />
+          <Property Name="rmanum" Type="int" />
+          <Property Name="rmaline" Type="int" />
+          <Property Name="rmareceipt" Type="int" />
+          <Property Name="dmrnum" Type="int" />
+          <Property Name="createdate" Type="datetime" />
+          <Property Name="dmractionnum" Type="int" />
+          <Property Name="failselect" Type="tinyint" />
+          <Property Name="contractnum" Type="int" />
+          <Property Name="contractline" Type="int" />
+          <Property Name="linedetailnum" Type="int" />
+          <Property Name="rmadisp" Type="int" />
+          <Property Name="nonconfnum" Type="int" />
+          <Property Name="character01" Type="text" />
+          <Property Name="character02" Type="text" />
+          <Property Name="character03" Type="text" />
+          <Property Name="character04" Type="text" />
+          <Property Name="character05" Type="text" />
+          <Property Name="character06" Type="text" />
+          <Property Name="character07" Type="text" />
+          <Property Name="character08" Type="text" />
+          <Property Name="character09" Type="text" />
+          <Property Name="character10" Type="text" />
+          <Property Name="number01" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number06" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number07" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number08" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number09" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="number10" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="datetime" />
+          <Property Name="date02" Type="datetime" />
+          <Property Name="date03" Type="datetime" />
+          <Property Name="date04" Type="datetime" />
+          <Property Name="date05" Type="datetime" />
+          <Property Name="checkbox01" Type="tinyint" />
+          <Property Name="checkbox02" Type="tinyint" />
+          <Property Name="checkbox03" Type="tinyint" />
+          <Property Name="checkbox04" Type="tinyint" />
+          <Property Name="checkbox05" Type="tinyint" />
+          <Property Name="warehousecode" Type="varchar" MaxLength="8" />
+          <Property Name="binnum" Type="varchar" MaxLength="10" />
+          <Property Name="contexpiredate" Type="datetime" />
+          <Property Name="warrexpiration" Type="datetime" />
+          <Property Name="custnum" Type="int" />
+          <Property Name="shiptonum" Type="varchar" MaxLength="14" />
+          <Property Name="createdby" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="modifiedby" Type="varchar" MaxLength="20" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedtime" Type="int" />
+          <Property Name="shippedfrom" Type="varchar" MaxLength="1" />
+          <Property Name="tranadd" Type="tinyint" />
+          <Property Name="temptranid" Type="int" />
+          <Property Name="tfpacknum" Type="int" />
+          <Property Name="tfpackline" Type="int" />
+          <Property Name="ordernum" Type="int" />
+          <Property Name="orderline" Type="int" />
+          <Property Name="orderrelnum" Type="int" />
+          <Property Name="PROGRESS_RECID" Type="bigint" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EpicorModelStoreContainer">
+          <EntitySet Name="orderrel" EntityType="Self.orderrel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jobprod" EntityType="Self.jobprod" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [jobprod].[company] AS [company], 
+    [jobprod].[jobnum] AS [jobnum], 
+    [jobprod].[ordernum] AS [ordernum], 
+    [jobprod].[orderline] AS [orderline], 
+    [jobprod].[orderrelnum] AS [orderrelnum], 
+    [jobprod].[prodqty] AS [prodqty], 
+    [jobprod].[warehousecode] AS [warehousecode], 
+    [jobprod].[targetjobnum] AS [targetjobnum], 
+    [jobprod].[targetassemblyseq] AS [targetassemblyseq], 
+    [jobprod].[targetmtlseq] AS [targetmtlseq], 
+    [jobprod].[shippedqty] AS [shippedqty], 
+    [jobprod].[receivedqty] AS [receivedqty], 
+    [jobprod].[allocatedqty] AS [allocatedqty], 
+    [jobprod].[callnum] AS [callnum], 
+    [jobprod].[callline] AS [callline], 
+    [jobprod].[tflinenum] AS [tflinenum], 
+    [jobprod].[partnum] AS [partnum], 
+    [jobprod].[shortchar01] AS [shortchar01], 
+    [jobprod].[shortchar02] AS [shortchar02], 
+    [jobprod].[shortchar03] AS [shortchar03], 
+    [jobprod].[shortchar04] AS [shortchar04], 
+    [jobprod].[shortchar05] AS [shortchar05], 
+    [jobprod].[number01] AS [number01], 
+    [jobprod].[number02] AS [number02], 
+    [jobprod].[number03] AS [number03], 
+    [jobprod].[number04] AS [number04], 
+    [jobprod].[number05] AS [number05], 
+    [jobprod].[date01] AS [date01], 
+    [jobprod].[date02] AS [date02], 
+    [jobprod].[date03] AS [date03], 
+    [jobprod].[date04] AS [date04], 
+    [jobprod].[date05] AS [date05], 
+    [jobprod].[checkbox01] AS [checkbox01], 
+    [jobprod].[checkbox02] AS [checkbox02], 
+    [jobprod].[checkbox03] AS [checkbox03], 
+    [jobprod].[checkbox04] AS [checkbox04], 
+    [jobprod].[checkbox05] AS [checkbox05], 
+    [jobprod].[plant] AS [plant], 
+    [jobprod].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [jobprod].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[jobprod] AS [jobprod]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="orderdtl" EntityType="Self.orderdtl" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [orderdtl].[voidline] AS [voidline], 
+    [orderdtl].[openline] AS [openline], 
+    [orderdtl].[company] AS [company], 
+    [orderdtl].[ordernum] AS [ordernum], 
+    [orderdtl].[orderline] AS [orderline], 
+    [orderdtl].[linetype] AS [linetype], 
+    [orderdtl].[partnum] AS [partnum], 
+    [orderdtl].[linedesc] AS [linedesc], 
+    [orderdtl].[reference] AS [reference], 
+    [orderdtl].[ium] AS [ium], 
+    [orderdtl].[revisionnum] AS [revisionnum], 
+    [orderdtl].[poline] AS [poline], 
+    [orderdtl].[commissionable] AS [commissionable], 
+    [orderdtl].[discountpercent] AS [discountpercent], 
+    [orderdtl].[unitprice] AS [unitprice], 
+    [orderdtl].[docunitprice] AS [docunitprice], 
+    [orderdtl].[orderqty] AS [orderqty], 
+    [orderdtl].[discount] AS [discount], 
+    [orderdtl].[docdiscount] AS [docdiscount], 
+    [orderdtl].[requestdate] AS [requestdate], 
+    [orderdtl].[prodcode] AS [prodcode], 
+    [orderdtl].[obsolete803_repsplit##1] AS [obsolete803_repsplit##1], 
+    [orderdtl].[obsolete803_repsplit##2] AS [obsolete803_repsplit##2], 
+    [orderdtl].[obsolete803_repsplit##3] AS [obsolete803_repsplit##3], 
+    [orderdtl].[obsolete803_repsplit##4] AS [obsolete803_repsplit##4], 
+    [orderdtl].[obsolete803_repsplit##5] AS [obsolete803_repsplit##5], 
+    [orderdtl].[obsolete803_reprate##1] AS [obsolete803_reprate##1], 
+    [orderdtl].[obsolete803_reprate##2] AS [obsolete803_reprate##2], 
+    [orderdtl].[obsolete803_reprate##3] AS [obsolete803_reprate##3], 
+    [orderdtl].[obsolete803_reprate##4] AS [obsolete803_reprate##4], 
+    [orderdtl].[obsolete803_reprate##5] AS [obsolete803_reprate##5], 
+    [orderdtl].[xpartnum] AS [xpartnum], 
+    [orderdtl].[xrevisionnum] AS [xrevisionnum], 
+    [orderdtl].[pricepercode] AS [pricepercode], 
+    [orderdtl].[ordercomment] AS [ordercomment], 
+    [orderdtl].[shipcomment] AS [shipcomment], 
+    [orderdtl].[invoicecomment] AS [invoicecomment], 
+    [orderdtl].[picklistcomment] AS [picklistcomment], 
+    [orderdtl].[taxcatid] AS [taxcatid], 
+    [orderdtl].[advancebillbal] AS [advancebillbal], 
+    [orderdtl].[docadvancebillbal] AS [docadvancebillbal], 
+    [orderdtl].[quotenum] AS [quotenum], 
+    [orderdtl].[quoteline] AS [quoteline], 
+    [orderdtl].[tmbilling] AS [tmbilling], 
+    [orderdtl].[origwhynotax] AS [origwhynotax], 
+    [orderdtl].[needbydate] AS [needbydate], 
+    [orderdtl].[custnum] AS [custnum], 
+    [orderdtl].[rework] AS [rework], 
+    [orderdtl].[rmanum] AS [rmanum], 
+    [orderdtl].[rmaline] AS [rmaline], 
+    [orderdtl].[character01] AS [character01], 
+    [orderdtl].[character02] AS [character02], 
+    [orderdtl].[character03] AS [character03], 
+    [orderdtl].[character04] AS [character04], 
+    [orderdtl].[character05] AS [character05], 
+    [orderdtl].[character06] AS [character06], 
+    [orderdtl].[character07] AS [character07], 
+    [orderdtl].[character08] AS [character08], 
+    [orderdtl].[character09] AS [character09], 
+    [orderdtl].[character10] AS [character10], 
+    [orderdtl].[number01] AS [number01], 
+    [orderdtl].[number02] AS [number02], 
+    [orderdtl].[number03] AS [number03], 
+    [orderdtl].[number04] AS [number04], 
+    [orderdtl].[number05] AS [number05], 
+    [orderdtl].[number06] AS [number06], 
+    [orderdtl].[number07] AS [number07], 
+    [orderdtl].[number08] AS [number08], 
+    [orderdtl].[number09] AS [number09], 
+    [orderdtl].[number10] AS [number10], 
+    [orderdtl].[date01] AS [date01], 
+    [orderdtl].[date02] AS [date02], 
+    [orderdtl].[date03] AS [date03], 
+    [orderdtl].[date04] AS [date04], 
+    [orderdtl].[date05] AS [date05], 
+    [orderdtl].[checkbox01] AS [checkbox01], 
+    [orderdtl].[checkbox02] AS [checkbox02], 
+    [orderdtl].[checkbox03] AS [checkbox03], 
+    [orderdtl].[checkbox04] AS [checkbox04], 
+    [orderdtl].[checkbox05] AS [checkbox05], 
+    [orderdtl].[projectid] AS [projectid], 
+    [orderdtl].[contractnum] AS [contractnum], 
+    [orderdtl].[contractcode] AS [contractcode], 
+    [orderdtl].[basepartnum] AS [basepartnum], 
+    [orderdtl].[warranty] AS [warranty], 
+    [orderdtl].[warrantycode] AS [warrantycode], 
+    [orderdtl].[materialduration] AS [materialduration], 
+    [orderdtl].[laborduration] AS [laborduration], 
+    [orderdtl].[miscduration] AS [miscduration], 
+    [orderdtl].[materialmod] AS [materialmod], 
+    [orderdtl].[labormod] AS [labormod], 
+    [orderdtl].[warrantycomment] AS [warrantycomment], 
+    [orderdtl].[onsite] AS [onsite], 
+    [orderdtl].[matcovered] AS [matcovered], 
+    [orderdtl].[labcovered] AS [labcovered], 
+    [orderdtl].[misccovered] AS [misccovered], 
+    [orderdtl].[salesum] AS [salesum], 
+    [orderdtl].[sellingfactor] AS [sellingfactor], 
+    [orderdtl].[sellingquantity] AS [sellingquantity], 
+    [orderdtl].[salescatid] AS [salescatid], 
+    [orderdtl].[shiplinecomplete] AS [shiplinecomplete], 
+    [orderdtl].[cumeqty] AS [cumeqty], 
+    [orderdtl].[cumedate] AS [cumedate], 
+    [orderdtl].[mktgcampaignid] AS [mktgcampaignid], 
+    [orderdtl].[mktgevntseq] AS [mktgevntseq], 
+    [orderdtl].[lockqty] AS [lockqty], 
+    [orderdtl].[linked] AS [linked], 
+    [orderdtl].[icponum] AS [icponum], 
+    [orderdtl].[icpoline] AS [icpoline], 
+    [orderdtl].[extcompany] AS [extcompany], 
+    [orderdtl].[lastconfigdate] AS [lastconfigdate], 
+    [orderdtl].[lastconfigtime] AS [lastconfigtime], 
+    [orderdtl].[lastconfiguserid] AS [lastconfiguserid], 
+    [orderdtl].[configunitprice] AS [configunitprice], 
+    [orderdtl].[configbaseunitprice] AS [configbaseunitprice], 
+    [orderdtl].[pricelistcode] AS [pricelistcode], 
+    [orderdtl].[breaklistcode] AS [breaklistcode], 
+    [orderdtl].[pricingqty] AS [pricingqty], 
+    [orderdtl].[lockprice] AS [lockprice], 
+    [orderdtl].[listprice] AS [listprice], 
+    [orderdtl].[doclistprice] AS [doclistprice], 
+    [orderdtl].[ordbasedprice] AS [ordbasedprice], 
+    [orderdtl].[docordbasedprice] AS [docordbasedprice], 
+    [orderdtl].[pricegroupcode] AS [pricegroupcode], 
+    [orderdtl].[overridepricelist] AS [overridepricelist], 
+    [orderdtl].[baserevisionnum] AS [baserevisionnum], 
+    [orderdtl].[pricingvalue] AS [pricingvalue], 
+    [orderdtl].[number11] AS [number11], 
+    [orderdtl].[number12] AS [number12], 
+    [orderdtl].[number13] AS [number13], 
+    [orderdtl].[number14] AS [number14], 
+    [orderdtl].[number15] AS [number15], 
+    [orderdtl].[number16] AS [number16], 
+    [orderdtl].[number17] AS [number17], 
+    [orderdtl].[number18] AS [number18], 
+    [orderdtl].[number19] AS [number19], 
+    [orderdtl].[number20] AS [number20], 
+    [orderdtl].[date06] AS [date06], 
+    [orderdtl].[date07] AS [date07], 
+    [orderdtl].[date08] AS [date08], 
+    [orderdtl].[date09] AS [date09], 
+    [orderdtl].[date10] AS [date10], 
+    [orderdtl].[date11] AS [date11], 
+    [orderdtl].[date12] AS [date12], 
+    [orderdtl].[date13] AS [date13], 
+    [orderdtl].[date14] AS [date14], 
+    [orderdtl].[date15] AS [date15], 
+    [orderdtl].[date16] AS [date16], 
+    [orderdtl].[date17] AS [date17], 
+    [orderdtl].[date18] AS [date18], 
+    [orderdtl].[date19] AS [date19], 
+    [orderdtl].[date20] AS [date20], 
+    [orderdtl].[checkbox06] AS [checkbox06], 
+    [orderdtl].[checkbox07] AS [checkbox07], 
+    [orderdtl].[checkbox08] AS [checkbox08], 
+    [orderdtl].[checkbox09] AS [checkbox09], 
+    [orderdtl].[checkbox10] AS [checkbox10], 
+    [orderdtl].[checkbox11] AS [checkbox11], 
+    [orderdtl].[checkbox12] AS [checkbox12], 
+    [orderdtl].[checkbox13] AS [checkbox13], 
+    [orderdtl].[checkbox14] AS [checkbox14], 
+    [orderdtl].[checkbox15] AS [checkbox15], 
+    [orderdtl].[checkbox16] AS [checkbox16], 
+    [orderdtl].[checkbox17] AS [checkbox17], 
+    [orderdtl].[checkbox18] AS [checkbox18], 
+    [orderdtl].[checkbox19] AS [checkbox19], 
+    [orderdtl].[checkbox20] AS [checkbox20], 
+    [orderdtl].[shortchar01] AS [shortchar01], 
+    [orderdtl].[shortchar02] AS [shortchar02], 
+    [orderdtl].[shortchar03] AS [shortchar03], 
+    [orderdtl].[shortchar04] AS [shortchar04], 
+    [orderdtl].[shortchar05] AS [shortchar05], 
+    [orderdtl].[shortchar06] AS [shortchar06], 
+    [orderdtl].[shortchar07] AS [shortchar07], 
+    [orderdtl].[shortchar08] AS [shortchar08], 
+    [orderdtl].[shortchar09] AS [shortchar09], 
+    [orderdtl].[shortchar10] AS [shortchar10], 
+    [orderdtl].[displayseq] AS [displayseq], 
+    [orderdtl].[kitparentline] AS [kitparentline], 
+    [orderdtl].[kitallowupdate] AS [kitallowupdate], 
+    [orderdtl].[kitshipcomplete] AS [kitshipcomplete], 
+    [orderdtl].[kitbackflush] AS [kitbackflush], 
+    [orderdtl].[kitprintcompsps] AS [kitprintcompsps], 
+    [orderdtl].[kitprintcompsinv] AS [kitprintcompsinv], 
+    [orderdtl].[kitpricing] AS [kitpricing], 
+    [orderdtl].[kitqtyper] AS [kitqtyper], 
+    [orderdtl].[sellingfactordirection] AS [sellingfactordirection], 
+    [orderdtl].[reprate1] AS [reprate1], 
+    [orderdtl].[reprate2] AS [reprate2], 
+    [orderdtl].[reprate3] AS [reprate3], 
+    [orderdtl].[reprate4] AS [reprate4], 
+    [orderdtl].[reprate5] AS [reprate5], 
+    [orderdtl].[repsplit1] AS [repsplit1], 
+    [orderdtl].[repsplit2] AS [repsplit2], 
+    [orderdtl].[repsplit3] AS [repsplit3], 
+    [orderdtl].[repsplit4] AS [repsplit4], 
+    [orderdtl].[repsplit5] AS [repsplit5], 
+    [orderdtl].[demandcontractline] AS [demandcontractline], 
+    [orderdtl].[createnewjob] AS [createnewjob], 
+    [orderdtl].[donotshipbeforedate] AS [donotshipbeforedate], 
+    [orderdtl].[getdtls] AS [getdtls], 
+    [orderdtl].[donotshipafterdate] AS [donotshipafterdate], 
+    [orderdtl].[schedjob] AS [schedjob], 
+    [orderdtl].[reljob] AS [reljob], 
+    [orderdtl].[enablecreatenewjob] AS [enablecreatenewjob], 
+    [orderdtl].[enablegetdtls] AS [enablegetdtls], 
+    [orderdtl].[enableschedjob] AS [enableschedjob], 
+    [orderdtl].[enablereljob] AS [enablereljob], 
+    [orderdtl].[countersalewarehouse] AS [countersalewarehouse], 
+    [orderdtl].[countersalebinnum] AS [countersalebinnum], 
+    [orderdtl].[countersalelotnum] AS [countersalelotnum], 
+    [orderdtl].[countersaledimcode] AS [countersaledimcode], 
+    [orderdtl].[demanddtlrejected] AS [demanddtlrejected], 
+    [orderdtl].[kitflag] AS [kitflag], 
+    [orderdtl].[kitsloaded] AS [kitsloaded], 
+    [orderdtl].[obsolete803_taxexempt] AS [obsolete803_taxexempt], 
+    [orderdtl].[demandcontractnum] AS [demandcontractnum], 
+    [orderdtl].[demandheadseq] AS [demandheadseq], 
+    [orderdtl].[demanddtlseq] AS [demanddtlseq], 
+    [orderdtl].[changedby] AS [changedby], 
+    [orderdtl].[changedate] AS [changedate], 
+    [orderdtl].[changetime] AS [changetime], 
+    [orderdtl].[reversecharge] AS [reversecharge], 
+    [orderdtl].[totalreleases] AS [totalreleases], 
+    [orderdtl].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [orderdtl].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[orderdtl] AS [orderdtl]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="serialno" EntityType="Self.serialno" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [serialno].[company] AS [company], 
+    [serialno].[partnum] AS [partnum], 
+    [serialno].[serialnumber] AS [serialnumber], 
+    [serialno].[snstatus] AS [snstatus], 
+    [serialno].[jobnum] AS [jobnum], 
+    [serialno].[assemblyseq] AS [assemblyseq], 
+    [serialno].[mtlseq] AS [mtlseq], 
+    [serialno].[packnum] AS [packnum], 
+    [serialno].[packline] AS [packline], 
+    [serialno].[voided] AS [voided], 
+    [serialno].[scrapped] AS [scrapped], 
+    [serialno].[vendornum] AS [vendornum], 
+    [serialno].[purpoint] AS [purpoint], 
+    [serialno].[packslip] AS [packslip], 
+    [serialno].[packslipline] AS [packslipline], 
+    [serialno].[selected] AS [selected], 
+    [serialno].[prevsnstatus] AS [prevsnstatus], 
+    [serialno].[snprefix] AS [snprefix], 
+    [serialno].[snformat] AS [snformat], 
+    [serialno].[snbasestructure] AS [snbasestructure], 
+    [serialno].[snbasenumber] AS [snbasenumber], 
+    [serialno].[scrapreasoncode] AS [scrapreasoncode], 
+    [serialno].[snreference] AS [snreference], 
+    [serialno].[rmanum] AS [rmanum], 
+    [serialno].[rmaline] AS [rmaline], 
+    [serialno].[rmareceipt] AS [rmareceipt], 
+    [serialno].[dmrnum] AS [dmrnum], 
+    [serialno].[createdate] AS [createdate], 
+    [serialno].[dmractionnum] AS [dmractionnum], 
+    [serialno].[failselect] AS [failselect], 
+    [serialno].[contractnum] AS [contractnum], 
+    [serialno].[contractline] AS [contractline], 
+    [serialno].[linedetailnum] AS [linedetailnum], 
+    [serialno].[rmadisp] AS [rmadisp], 
+    [serialno].[nonconfnum] AS [nonconfnum], 
+    [serialno].[character01] AS [character01], 
+    [serialno].[character02] AS [character02], 
+    [serialno].[character03] AS [character03], 
+    [serialno].[character04] AS [character04], 
+    [serialno].[character05] AS [character05], 
+    [serialno].[character06] AS [character06], 
+    [serialno].[character07] AS [character07], 
+    [serialno].[character08] AS [character08], 
+    [serialno].[character09] AS [character09], 
+    [serialno].[character10] AS [character10], 
+    [serialno].[number01] AS [number01], 
+    [serialno].[number02] AS [number02], 
+    [serialno].[number03] AS [number03], 
+    [serialno].[number04] AS [number04], 
+    [serialno].[number05] AS [number05], 
+    [serialno].[number06] AS [number06], 
+    [serialno].[number07] AS [number07], 
+    [serialno].[number08] AS [number08], 
+    [serialno].[number09] AS [number09], 
+    [serialno].[number10] AS [number10], 
+    [serialno].[date01] AS [date01], 
+    [serialno].[date02] AS [date02], 
+    [serialno].[date03] AS [date03], 
+    [serialno].[date04] AS [date04], 
+    [serialno].[date05] AS [date05], 
+    [serialno].[checkbox01] AS [checkbox01], 
+    [serialno].[checkbox02] AS [checkbox02], 
+    [serialno].[checkbox03] AS [checkbox03], 
+    [serialno].[checkbox04] AS [checkbox04], 
+    [serialno].[checkbox05] AS [checkbox05], 
+    [serialno].[warehousecode] AS [warehousecode], 
+    [serialno].[binnum] AS [binnum], 
+    [serialno].[contexpiredate] AS [contexpiredate], 
+    [serialno].[warrexpiration] AS [warrexpiration], 
+    [serialno].[custnum] AS [custnum], 
+    [serialno].[shiptonum] AS [shiptonum], 
+    [serialno].[createdby] AS [createdby], 
+    [serialno].[modifiedby] AS [modifiedby], 
+    [serialno].[modifieddate] AS [modifieddate], 
+    [serialno].[modifiedtime] AS [modifiedtime], 
+    [serialno].[shippedfrom] AS [shippedfrom], 
+    [serialno].[tranadd] AS [tranadd], 
+    [serialno].[temptranid] AS [temptranid], 
+    [serialno].[tfpacknum] AS [tfpacknum], 
+    [serialno].[tfpackline] AS [tfpackline], 
+    [serialno].[ordernum] AS [ordernum], 
+    [serialno].[orderline] AS [orderline], 
+    [serialno].[orderrelnum] AS [orderrelnum], 
+    [serialno].[PROGRESS_RECID] AS [PROGRESS_RECID], 
+    [serialno].[PROGRESS_RECID_IDENT_] AS [PROGRESS_RECID_IDENT_]
+    FROM [dbo].[serialno] AS [serialno]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EpicorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="orderrel">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="company" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ordernum" Type="Int32" />
+          <Property Name="orderline" Type="Int32" />
+          <Property Name="orderrelnum" Type="Int32" />
+          <Property Name="linetype" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="reqdate" Type="DateTime" Precision="3" />
+          <Property Name="ourreqqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="shiptonum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="shipviacode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="openrelease" Type="Byte" />
+          <Property Name="firmrelease" Type="Byte" />
+          <Property Name="make" Type="Byte" />
+          <Property Name="ourjobqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="ourjobshippedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="voidrelease" Type="Byte" />
+          <Property Name="ourstockqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="warehousecode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ourstockshippedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="revisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="taxexempt" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="shpconnum" Type="Int32" />
+          <Property Name="needbydate" Type="DateTime" Precision="3" />
+          <Property Name="reference" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="character01" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character02" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character03" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character04" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character05" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character06" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character08" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character09" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character10" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="number01" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number06" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number07" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number08" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number09" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number10" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="DateTime" Precision="3" />
+          <Property Name="date02" Type="DateTime" Precision="3" />
+          <Property Name="date03" Type="DateTime" Precision="3" />
+          <Property Name="date04" Type="DateTime" Precision="3" />
+          <Property Name="date05" Type="DateTime" Precision="3" />
+          <Property Name="checkbox01" Type="Byte" />
+          <Property Name="checkbox02" Type="Byte" />
+          <Property Name="checkbox03" Type="Byte" />
+          <Property Name="checkbox04" Type="Byte" />
+          <Property Name="checkbox05" Type="Byte" />
+          <Property Name="plant" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="sellingreqqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="sellingjobqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="sellingjobshippedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="sellingstockqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="sellingstockshippedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="selectforpicking" Type="Byte" />
+          <Property Name="stagingwarehousecode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="stagingbinnum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="pickerror" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="cumeqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="cumedate" Type="DateTime" Precision="3" />
+          <Property Name="linked" Type="Byte" />
+          <Property Name="icponum" Type="Int32" />
+          <Property Name="icpoline" Type="Int32" />
+          <Property Name="icporelnum" Type="Int32" />
+          <Property Name="extcompany" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="number11" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number12" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number13" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number14" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number15" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number16" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number17" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number18" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number19" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number20" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="date06" Type="DateTime" Precision="3" />
+          <Property Name="date07" Type="DateTime" Precision="3" />
+          <Property Name="date08" Type="DateTime" Precision="3" />
+          <Property Name="date09" Type="DateTime" Precision="3" />
+          <Property Name="date10" Type="DateTime" Precision="3" />
+          <Property Name="date11" Type="DateTime" Precision="3" />
+          <Property Name="date12" Type="DateTime" Precision="3" />
+          <Property Name="date13" Type="DateTime" Precision="3" />
+          <Property Name="date14" Type="DateTime" Precision="3" />
+          <Property Name="date15" Type="DateTime" Precision="3" />
+          <Property Name="date16" Type="DateTime" Precision="3" />
+          <Property Name="date17" Type="DateTime" Precision="3" />
+          <Property Name="date18" Type="DateTime" Precision="3" />
+          <Property Name="date19" Type="DateTime" Precision="3" />
+          <Property Name="date20" Type="DateTime" Precision="3" />
+          <Property Name="checkbox06" Type="Byte" />
+          <Property Name="checkbox07" Type="Byte" />
+          <Property Name="checkbox08" Type="Byte" />
+          <Property Name="checkbox09" Type="Byte" />
+          <Property Name="checkbox10" Type="Byte" />
+          <Property Name="checkbox11" Type="Byte" />
+          <Property Name="checkbox12" Type="Byte" />
+          <Property Name="checkbox13" Type="Byte" />
+          <Property Name="checkbox14" Type="Byte" />
+          <Property Name="checkbox15" Type="Byte" />
+          <Property Name="checkbox16" Type="Byte" />
+          <Property Name="checkbox17" Type="Byte" />
+          <Property Name="checkbox18" Type="Byte" />
+          <Property Name="checkbox19" Type="Byte" />
+          <Property Name="checkbox20" Type="Byte" />
+          <Property Name="shortchar01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar04" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar05" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar06" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar07" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar08" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar09" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="schedulenumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="markfornum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipaddress1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipaddress2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipaddress3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipcity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipstate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipzip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipcountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dropshipcountrynum" Type="Int32" />
+          <Property Name="ran" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="demandreference" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="demandschedrejected" Type="Byte" />
+          <Property Name="datepickticketprinted" Type="DateTime" Precision="3" />
+          <Property Name="resdelivery" Type="Byte" />
+          <Property Name="satdelivery" Type="Byte" />
+          <Property Name="satpickup" Type="Byte" />
+          <Property Name="verbalconf" Type="Byte" />
+          <Property Name="hazmat" Type="Byte" />
+          <Property Name="doconly" Type="Byte" />
+          <Property Name="refnotes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="applychrg" Type="Byte" />
+          <Property Name="chrgamount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="cod" Type="Byte" />
+          <Property Name="codfreight" Type="Byte" />
+          <Property Name="codcheck" Type="Byte" />
+          <Property Name="codamount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="groundtype" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="notifyflag" Type="Byte" />
+          <Property Name="notifyemail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="declaredins" Type="Byte" />
+          <Property Name="declaredamt" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="servsatdelivery" Type="Byte" />
+          <Property Name="servsatpickup" Type="Byte" />
+          <Property Name="servsignature" Type="Byte" />
+          <Property Name="servalert" Type="Byte" />
+          <Property Name="servpod" Type="Byte" />
+          <Property Name="servaod" Type="Byte" />
+          <Property Name="servhomedel" Type="Byte" />
+          <Property Name="deliverytype" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="servdeliverydate" Type="DateTime" Precision="3" />
+          <Property Name="servphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="servinstruct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="servrelease" Type="Byte" />
+          <Property Name="servauthnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="servref1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="servref2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="servref3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="servref4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="servref5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="overridecarrier" Type="Byte" />
+          <Property Name="overrideservice" Type="Byte" />
+          <Property Name="dockingstation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="transportid" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="shipbytime" Type="Int32" />
+          <Property Name="changedby" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="changedate" Type="DateTime" Precision="3" />
+          <Property Name="changetime" Type="Int32" />
+          <Property Name="taxconnectcalc" Type="Byte" />
+          <Property Name="getdflttaxids" Type="Byte" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="jobprod">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="company" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="jobnum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="ordernum" Type="Int32" />
+          <Property Name="orderline" Type="Int32" />
+          <Property Name="orderrelnum" Type="Int32" />
+          <Property Name="prodqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="warehousecode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="targetjobnum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="targetassemblyseq" Type="Int32" />
+          <Property Name="targetmtlseq" Type="Int32" />
+          <Property Name="shippedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="receivedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="allocatedqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="callnum" Type="Int32" />
+          <Property Name="callline" Type="Int32" />
+          <Property Name="tflinenum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar04" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar05" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="number01" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="DateTime" Precision="3" />
+          <Property Name="date02" Type="DateTime" Precision="3" />
+          <Property Name="date03" Type="DateTime" Precision="3" />
+          <Property Name="date04" Type="DateTime" Precision="3" />
+          <Property Name="date05" Type="DateTime" Precision="3" />
+          <Property Name="checkbox01" Type="Byte" />
+          <Property Name="checkbox02" Type="Byte" />
+          <Property Name="checkbox03" Type="Byte" />
+          <Property Name="checkbox04" Type="Byte" />
+          <Property Name="checkbox05" Type="Byte" />
+          <Property Name="plant" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="orderdtl">
+          <Key>
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="voidline" Type="Byte" />
+          <Property Name="openline" Type="Byte" />
+          <Property Name="company" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ordernum" Type="Int32" />
+          <Property Name="orderline" Type="Int32" />
+          <Property Name="linetype" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="linedesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="reference" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ium" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="revisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="poline" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="commissionable" Type="Byte" />
+          <Property Name="discountpercent" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="unitprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="docunitprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="orderqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="discount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="docdiscount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="requestdate" Type="DateTime" Precision="3" />
+          <Property Name="prodcode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="obsolete803_repsplit__1" Type="Int32" />
+          <Property Name="obsolete803_repsplit__2" Type="Int32" />
+          <Property Name="obsolete803_repsplit__3" Type="Int32" />
+          <Property Name="obsolete803_repsplit__4" Type="Int32" />
+          <Property Name="obsolete803_repsplit__5" Type="Int32" />
+          <Property Name="obsolete803_reprate__1" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate__2" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate__3" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate__4" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="obsolete803_reprate__5" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="xpartnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="xrevisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="pricepercode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ordercomment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="shipcomment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="invoicecomment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="picklistcomment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="taxcatid" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="advancebillbal" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="docadvancebillbal" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="quotenum" Type="Int32" />
+          <Property Name="quoteline" Type="Int32" />
+          <Property Name="tmbilling" Type="Byte" />
+          <Property Name="origwhynotax" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="needbydate" Type="DateTime" Precision="3" />
+          <Property Name="custnum" Type="Int32" />
+          <Property Name="rework" Type="Byte" />
+          <Property Name="rmanum" Type="Int32" />
+          <Property Name="rmaline" Type="Int32" />
+          <Property Name="character01" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character02" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character03" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character04" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character05" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character06" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character08" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character09" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character10" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="number01" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number06" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number07" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number08" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number09" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number10" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="DateTime" Precision="3" />
+          <Property Name="date02" Type="DateTime" Precision="3" />
+          <Property Name="date03" Type="DateTime" Precision="3" />
+          <Property Name="date04" Type="DateTime" Precision="3" />
+          <Property Name="date05" Type="DateTime" Precision="3" />
+          <Property Name="checkbox01" Type="Byte" />
+          <Property Name="checkbox02" Type="Byte" />
+          <Property Name="checkbox03" Type="Byte" />
+          <Property Name="checkbox04" Type="Byte" />
+          <Property Name="checkbox05" Type="Byte" />
+          <Property Name="projectid" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="contractnum" Type="Int32" />
+          <Property Name="contractcode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="basepartnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="warranty" Type="Byte" />
+          <Property Name="warrantycode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="materialduration" Type="Int32" />
+          <Property Name="laborduration" Type="Int32" />
+          <Property Name="miscduration" Type="Int32" />
+          <Property Name="materialmod" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="labormod" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="warrantycomment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="onsite" Type="Byte" />
+          <Property Name="matcovered" Type="Byte" />
+          <Property Name="labcovered" Type="Byte" />
+          <Property Name="misccovered" Type="Byte" />
+          <Property Name="salesum" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="sellingfactor" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="sellingquantity" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="salescatid" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="shiplinecomplete" Type="Byte" />
+          <Property Name="cumeqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="cumedate" Type="DateTime" Precision="3" />
+          <Property Name="mktgcampaignid" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="mktgevntseq" Type="Int32" />
+          <Property Name="lockqty" Type="Byte" />
+          <Property Name="linked" Type="Byte" />
+          <Property Name="icponum" Type="Int32" />
+          <Property Name="icpoline" Type="Int32" />
+          <Property Name="extcompany" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="lastconfigdate" Type="DateTime" Precision="3" />
+          <Property Name="lastconfigtime" Type="Int32" />
+          <Property Name="lastconfiguserid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="configunitprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="configbaseunitprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="pricelistcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="breaklistcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="pricingqty" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="lockprice" Type="Byte" />
+          <Property Name="listprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="doclistprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="ordbasedprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="docordbasedprice" Type="Decimal" Precision="17" Scale="5" />
+          <Property Name="pricegroupcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="overridepricelist" Type="Byte" />
+          <Property Name="baserevisionnum" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="pricingvalue" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="number11" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number12" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number13" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number14" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number15" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number16" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number17" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number18" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number19" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number20" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="date06" Type="DateTime" Precision="3" />
+          <Property Name="date07" Type="DateTime" Precision="3" />
+          <Property Name="date08" Type="DateTime" Precision="3" />
+          <Property Name="date09" Type="DateTime" Precision="3" />
+          <Property Name="date10" Type="DateTime" Precision="3" />
+          <Property Name="date11" Type="DateTime" Precision="3" />
+          <Property Name="date12" Type="DateTime" Precision="3" />
+          <Property Name="date13" Type="DateTime" Precision="3" />
+          <Property Name="date14" Type="DateTime" Precision="3" />
+          <Property Name="date15" Type="DateTime" Precision="3" />
+          <Property Name="date16" Type="DateTime" Precision="3" />
+          <Property Name="date17" Type="DateTime" Precision="3" />
+          <Property Name="date18" Type="DateTime" Precision="3" />
+          <Property Name="date19" Type="DateTime" Precision="3" />
+          <Property Name="date20" Type="DateTime" Precision="3" />
+          <Property Name="checkbox06" Type="Byte" />
+          <Property Name="checkbox07" Type="Byte" />
+          <Property Name="checkbox08" Type="Byte" />
+          <Property Name="checkbox09" Type="Byte" />
+          <Property Name="checkbox10" Type="Byte" />
+          <Property Name="checkbox11" Type="Byte" />
+          <Property Name="checkbox12" Type="Byte" />
+          <Property Name="checkbox13" Type="Byte" />
+          <Property Name="checkbox14" Type="Byte" />
+          <Property Name="checkbox15" Type="Byte" />
+          <Property Name="checkbox16" Type="Byte" />
+          <Property Name="checkbox17" Type="Byte" />
+          <Property Name="checkbox18" Type="Byte" />
+          <Property Name="checkbox19" Type="Byte" />
+          <Property Name="checkbox20" Type="Byte" />
+          <Property Name="shortchar01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar04" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar05" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar06" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar07" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar08" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar09" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortchar10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="displayseq" Type="Decimal" Precision="9" Scale="3" />
+          <Property Name="kitparentline" Type="Int32" />
+          <Property Name="kitallowupdate" Type="Byte" />
+          <Property Name="kitshipcomplete" Type="Byte" />
+          <Property Name="kitbackflush" Type="Byte" />
+          <Property Name="kitprintcompsps" Type="Byte" />
+          <Property Name="kitprintcompsinv" Type="Byte" />
+          <Property Name="kitpricing" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="kitqtyper" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="sellingfactordirection" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="reprate1" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="reprate2" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="reprate3" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="reprate4" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="reprate5" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="repsplit1" Type="Int32" />
+          <Property Name="repsplit2" Type="Int32" />
+          <Property Name="repsplit3" Type="Int32" />
+          <Property Name="repsplit4" Type="Int32" />
+          <Property Name="repsplit5" Type="Int32" />
+          <Property Name="demandcontractline" Type="Int32" />
+          <Property Name="createnewjob" Type="Byte" />
+          <Property Name="donotshipbeforedate" Type="DateTime" Precision="3" />
+          <Property Name="getdtls" Type="Byte" />
+          <Property Name="donotshipafterdate" Type="DateTime" Precision="3" />
+          <Property Name="schedjob" Type="Byte" />
+          <Property Name="reljob" Type="Byte" />
+          <Property Name="enablecreatenewjob" Type="Byte" />
+          <Property Name="enablegetdtls" Type="Byte" />
+          <Property Name="enableschedjob" Type="Byte" />
+          <Property Name="enablereljob" Type="Byte" />
+          <Property Name="countersalewarehouse" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="countersalebinnum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="countersalelotnum" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="countersaledimcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="demanddtlrejected" Type="Byte" />
+          <Property Name="kitflag" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="kitsloaded" Type="Byte" />
+          <Property Name="obsolete803_taxexempt" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="demandcontractnum" Type="Int32" />
+          <Property Name="demandheadseq" Type="Int32" />
+          <Property Name="demanddtlseq" Type="Int32" />
+          <Property Name="changedby" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="changedate" Type="DateTime" Precision="3" />
+          <Property Name="changetime" Type="Int32" />
+          <Property Name="reversecharge" Type="Byte" />
+          <Property Name="totalreleases" Type="Int32" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="serialno">
+          <Key>
+            <PropertyRef Name="createdby" />
+            <PropertyRef Name="PROGRESS_RECID_IDENT_" />
+          </Key>
+          <Property Name="company" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="partnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serialnumber" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="snstatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="jobnum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="assemblyseq" Type="Int32" />
+          <Property Name="mtlseq" Type="Int32" />
+          <Property Name="packnum" Type="Int32" />
+          <Property Name="packline" Type="Int32" />
+          <Property Name="voided" Type="Byte" />
+          <Property Name="scrapped" Type="Byte" />
+          <Property Name="vendornum" Type="Int32" />
+          <Property Name="purpoint" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="packslip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="packslipline" Type="Int32" />
+          <Property Name="selected" Type="Byte" />
+          <Property Name="prevsnstatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="snprefix" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="snformat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="snbasestructure" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="snbasenumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="scrapreasoncode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="snreference" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="rmanum" Type="Int32" />
+          <Property Name="rmaline" Type="Int32" />
+          <Property Name="rmareceipt" Type="Int32" />
+          <Property Name="dmrnum" Type="Int32" />
+          <Property Name="createdate" Type="DateTime" Precision="3" />
+          <Property Name="dmractionnum" Type="Int32" />
+          <Property Name="failselect" Type="Byte" />
+          <Property Name="contractnum" Type="Int32" />
+          <Property Name="contractline" Type="Int32" />
+          <Property Name="linedetailnum" Type="Int32" />
+          <Property Name="rmadisp" Type="Int32" />
+          <Property Name="nonconfnum" Type="Int32" />
+          <Property Name="character01" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character02" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character03" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character04" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character05" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character06" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character07" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character08" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character09" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="character10" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="number01" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number02" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number03" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number04" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number05" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number06" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number07" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number08" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number09" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="number10" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="date01" Type="DateTime" Precision="3" />
+          <Property Name="date02" Type="DateTime" Precision="3" />
+          <Property Name="date03" Type="DateTime" Precision="3" />
+          <Property Name="date04" Type="DateTime" Precision="3" />
+          <Property Name="date05" Type="DateTime" Precision="3" />
+          <Property Name="checkbox01" Type="Byte" />
+          <Property Name="checkbox02" Type="Byte" />
+          <Property Name="checkbox03" Type="Byte" />
+          <Property Name="checkbox04" Type="Byte" />
+          <Property Name="checkbox05" Type="Byte" />
+          <Property Name="warehousecode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="binnum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contexpiredate" Type="DateTime" Precision="3" />
+          <Property Name="warrexpiration" Type="DateTime" Precision="3" />
+          <Property Name="custnum" Type="Int32" />
+          <Property Name="shiptonum" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="createdby" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modifiedby" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedtime" Type="Int32" />
+          <Property Name="shippedfrom" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="tranadd" Type="Byte" />
+          <Property Name="temptranid" Type="Int32" />
+          <Property Name="tfpacknum" Type="Int32" />
+          <Property Name="tfpackline" Type="Int32" />
+          <Property Name="ordernum" Type="Int32" />
+          <Property Name="orderline" Type="Int32" />
+          <Property Name="orderrelnum" Type="Int32" />
+          <Property Name="PROGRESS_RECID" Type="Int64" />
+          <Property Name="PROGRESS_RECID_IDENT_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="EpicorInvoiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="orderrels" EntityType="Self.orderrel" />
+          <EntitySet Name="jobprods" EntityType="Self.jobprod" />
+          <EntitySet Name="orderdtls" EntityType="Self.orderdtl" />
+          <EntitySet Name="serialnoes" EntityType="Self.serialno" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EpicorModelStoreContainer" CdmEntityContainer="EpicorInvoiceEntities">
+          <EntitySetMapping Name="orderrels">
+            <EntityTypeMapping TypeName="EpicorModel.orderrel">
+              <MappingFragment StoreEntitySet="orderrel">
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="ordernum" ColumnName="ordernum" />
+                <ScalarProperty Name="orderline" ColumnName="orderline" />
+                <ScalarProperty Name="orderrelnum" ColumnName="orderrelnum" />
+                <ScalarProperty Name="linetype" ColumnName="linetype" />
+                <ScalarProperty Name="reqdate" ColumnName="reqdate" />
+                <ScalarProperty Name="ourreqqty" ColumnName="ourreqqty" />
+                <ScalarProperty Name="shiptonum" ColumnName="shiptonum" />
+                <ScalarProperty Name="shipviacode" ColumnName="shipviacode" />
+                <ScalarProperty Name="openrelease" ColumnName="openrelease" />
+                <ScalarProperty Name="firmrelease" ColumnName="firmrelease" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="ourjobqty" ColumnName="ourjobqty" />
+                <ScalarProperty Name="ourjobshippedqty" ColumnName="ourjobshippedqty" />
+                <ScalarProperty Name="voidrelease" ColumnName="voidrelease" />
+                <ScalarProperty Name="ourstockqty" ColumnName="ourstockqty" />
+                <ScalarProperty Name="warehousecode" ColumnName="warehousecode" />
+                <ScalarProperty Name="ourstockshippedqty" ColumnName="ourstockshippedqty" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+                <ScalarProperty Name="revisionnum" ColumnName="revisionnum" />
+                <ScalarProperty Name="taxexempt" ColumnName="taxexempt" />
+                <ScalarProperty Name="shpconnum" ColumnName="shpconnum" />
+                <ScalarProperty Name="needbydate" ColumnName="needbydate" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="character01" ColumnName="character01" />
+                <ScalarProperty Name="character02" ColumnName="character02" />
+                <ScalarProperty Name="character03" ColumnName="character03" />
+                <ScalarProperty Name="character04" ColumnName="character04" />
+                <ScalarProperty Name="character05" ColumnName="character05" />
+                <ScalarProperty Name="character06" ColumnName="character06" />
+                <ScalarProperty Name="character07" ColumnName="character07" />
+                <ScalarProperty Name="character08" ColumnName="character08" />
+                <ScalarProperty Name="character09" ColumnName="character09" />
+                <ScalarProperty Name="character10" ColumnName="character10" />
+                <ScalarProperty Name="number01" ColumnName="number01" />
+                <ScalarProperty Name="number02" ColumnName="number02" />
+                <ScalarProperty Name="number03" ColumnName="number03" />
+                <ScalarProperty Name="number04" ColumnName="number04" />
+                <ScalarProperty Name="number05" ColumnName="number05" />
+                <ScalarProperty Name="number06" ColumnName="number06" />
+                <ScalarProperty Name="number07" ColumnName="number07" />
+                <ScalarProperty Name="number08" ColumnName="number08" />
+                <ScalarProperty Name="number09" ColumnName="number09" />
+                <ScalarProperty Name="number10" ColumnName="number10" />
+                <ScalarProperty Name="date01" ColumnName="date01" />
+                <ScalarProperty Name="date02" ColumnName="date02" />
+                <ScalarProperty Name="date03" ColumnName="date03" />
+                <ScalarProperty Name="date04" ColumnName="date04" />
+                <ScalarProperty Name="date05" ColumnName="date05" />
+                <ScalarProperty Name="checkbox01" ColumnName="checkbox01" />
+                <ScalarProperty Name="checkbox02" ColumnName="checkbox02" />
+                <ScalarProperty Name="checkbox03" ColumnName="checkbox03" />
+                <ScalarProperty Name="checkbox04" ColumnName="checkbox04" />
+                <ScalarProperty Name="checkbox05" ColumnName="checkbox05" />
+                <ScalarProperty Name="plant" ColumnName="plant" />
+                <ScalarProperty Name="sellingreqqty" ColumnName="sellingreqqty" />
+                <ScalarProperty Name="sellingjobqty" ColumnName="sellingjobqty" />
+                <ScalarProperty Name="sellingjobshippedqty" ColumnName="sellingjobshippedqty" />
+                <ScalarProperty Name="sellingstockqty" ColumnName="sellingstockqty" />
+                <ScalarProperty Name="sellingstockshippedqty" ColumnName="sellingstockshippedqty" />
+                <ScalarProperty Name="selectforpicking" ColumnName="selectforpicking" />
+                <ScalarProperty Name="stagingwarehousecode" ColumnName="stagingwarehousecode" />
+                <ScalarProperty Name="stagingbinnum" ColumnName="stagingbinnum" />
+                <ScalarProperty Name="pickerror" ColumnName="pickerror" />
+                <ScalarProperty Name="cumeqty" ColumnName="cumeqty" />
+                <ScalarProperty Name="cumedate" ColumnName="cumedate" />
+                <ScalarProperty Name="linked" ColumnName="linked" />
+                <ScalarProperty Name="icponum" ColumnName="icponum" />
+                <ScalarProperty Name="icpoline" ColumnName="icpoline" />
+                <ScalarProperty Name="icporelnum" ColumnName="icporelnum" />
+                <ScalarProperty Name="extcompany" ColumnName="extcompany" />
+                <ScalarProperty Name="number11" ColumnName="number11" />
+                <ScalarProperty Name="number12" ColumnName="number12" />
+                <ScalarProperty Name="number13" ColumnName="number13" />
+                <ScalarProperty Name="number14" ColumnName="number14" />
+                <ScalarProperty Name="number15" ColumnName="number15" />
+                <ScalarProperty Name="number16" ColumnName="number16" />
+                <ScalarProperty Name="number17" ColumnName="number17" />
+                <ScalarProperty Name="number18" ColumnName="number18" />
+                <ScalarProperty Name="number19" ColumnName="number19" />
+                <ScalarProperty Name="number20" ColumnName="number20" />
+                <ScalarProperty Name="date06" ColumnName="date06" />
+                <ScalarProperty Name="date07" ColumnName="date07" />
+                <ScalarProperty Name="date08" ColumnName="date08" />
+                <ScalarProperty Name="date09" ColumnName="date09" />
+                <ScalarProperty Name="date10" ColumnName="date10" />
+                <ScalarProperty Name="date11" ColumnName="date11" />
+                <ScalarProperty Name="date12" ColumnName="date12" />
+                <ScalarProperty Name="date13" ColumnName="date13" />
+                <ScalarProperty Name="date14" ColumnName="date14" />
+                <ScalarProperty Name="date15" ColumnName="date15" />
+                <ScalarProperty Name="date16" ColumnName="date16" />
+                <ScalarProperty Name="date17" ColumnName="date17" />
+                <ScalarProperty Name="date18" ColumnName="date18" />
+                <ScalarProperty Name="date19" ColumnName="date19" />
+                <ScalarProperty Name="date20" ColumnName="date20" />
+                <ScalarProperty Name="checkbox06" ColumnName="checkbox06" />
+                <ScalarProperty Name="checkbox07" ColumnName="checkbox07" />
+                <ScalarProperty Name="checkbox08" ColumnName="checkbox08" />
+                <ScalarProperty Name="checkbox09" ColumnName="checkbox09" />
+                <ScalarProperty Name="checkbox10" ColumnName="checkbox10" />
+                <ScalarProperty Name="checkbox11" ColumnName="checkbox11" />
+                <ScalarProperty Name="checkbox12" ColumnName="checkbox12" />
+                <ScalarProperty Name="checkbox13" ColumnName="checkbox13" />
+                <ScalarProperty Name="checkbox14" ColumnName="checkbox14" />
+                <ScalarProperty Name="checkbox15" ColumnName="checkbox15" />
+                <ScalarProperty Name="checkbox16" ColumnName="checkbox16" />
+                <ScalarProperty Name="checkbox17" ColumnName="checkbox17" />
+                <ScalarProperty Name="checkbox18" ColumnName="checkbox18" />
+                <ScalarProperty Name="checkbox19" ColumnName="checkbox19" />
+                <ScalarProperty Name="checkbox20" ColumnName="checkbox20" />
+                <ScalarProperty Name="shortchar01" ColumnName="shortchar01" />
+                <ScalarProperty Name="shortchar02" ColumnName="shortchar02" />
+                <ScalarProperty Name="shortchar03" ColumnName="shortchar03" />
+                <ScalarProperty Name="shortchar04" ColumnName="shortchar04" />
+                <ScalarProperty Name="shortchar05" ColumnName="shortchar05" />
+                <ScalarProperty Name="shortchar06" ColumnName="shortchar06" />
+                <ScalarProperty Name="shortchar07" ColumnName="shortchar07" />
+                <ScalarProperty Name="shortchar08" ColumnName="shortchar08" />
+                <ScalarProperty Name="shortchar09" ColumnName="shortchar09" />
+                <ScalarProperty Name="shortchar10" ColumnName="shortchar10" />
+                <ScalarProperty Name="schedulenumber" ColumnName="schedulenumber" />
+                <ScalarProperty Name="markfornum" ColumnName="markfornum" />
+                <ScalarProperty Name="dropshipname" ColumnName="dropshipname" />
+                <ScalarProperty Name="dropshipaddress1" ColumnName="dropshipaddress1" />
+                <ScalarProperty Name="dropshipaddress2" ColumnName="dropshipaddress2" />
+                <ScalarProperty Name="dropshipaddress3" ColumnName="dropshipaddress3" />
+                <ScalarProperty Name="dropshipcity" ColumnName="dropshipcity" />
+                <ScalarProperty Name="dropshipstate" ColumnName="dropshipstate" />
+                <ScalarProperty Name="dropshipzip" ColumnName="dropshipzip" />
+                <ScalarProperty Name="dropshipcountry" ColumnName="dropshipcountry" />
+                <ScalarProperty Name="dropshipcountrynum" ColumnName="dropshipcountrynum" />
+                <ScalarProperty Name="ran" ColumnName="ran" />
+                <ScalarProperty Name="demandreference" ColumnName="demandreference" />
+                <ScalarProperty Name="demandschedrejected" ColumnName="demandschedrejected" />
+                <ScalarProperty Name="datepickticketprinted" ColumnName="datepickticketprinted" />
+                <ScalarProperty Name="resdelivery" ColumnName="resdelivery" />
+                <ScalarProperty Name="satdelivery" ColumnName="satdelivery" />
+                <ScalarProperty Name="satpickup" ColumnName="satpickup" />
+                <ScalarProperty Name="verbalconf" ColumnName="verbalconf" />
+                <ScalarProperty Name="hazmat" ColumnName="hazmat" />
+                <ScalarProperty Name="doconly" ColumnName="doconly" />
+                <ScalarProperty Name="refnotes" ColumnName="refnotes" />
+                <ScalarProperty Name="applychrg" ColumnName="applychrg" />
+                <ScalarProperty Name="chrgamount" ColumnName="chrgamount" />
+                <ScalarProperty Name="cod" ColumnName="cod" />
+                <ScalarProperty Name="codfreight" ColumnName="codfreight" />
+                <ScalarProperty Name="codcheck" ColumnName="codcheck" />
+                <ScalarProperty Name="codamount" ColumnName="codamount" />
+                <ScalarProperty Name="groundtype" ColumnName="groundtype" />
+                <ScalarProperty Name="notifyflag" ColumnName="notifyflag" />
+                <ScalarProperty Name="notifyemail" ColumnName="notifyemail" />
+                <ScalarProperty Name="declaredins" ColumnName="declaredins" />
+                <ScalarProperty Name="declaredamt" ColumnName="declaredamt" />
+                <ScalarProperty Name="servsatdelivery" ColumnName="servsatdelivery" />
+                <ScalarProperty Name="servsatpickup" ColumnName="servsatpickup" />
+                <ScalarProperty Name="servsignature" ColumnName="servsignature" />
+                <ScalarProperty Name="servalert" ColumnName="servalert" />
+                <ScalarProperty Name="servpod" ColumnName="servpod" />
+                <ScalarProperty Name="servaod" ColumnName="servaod" />
+                <ScalarProperty Name="servhomedel" ColumnName="servhomedel" />
+                <ScalarProperty Name="deliverytype" ColumnName="deliverytype" />
+                <ScalarProperty Name="servdeliverydate" ColumnName="servdeliverydate" />
+                <ScalarProperty Name="servphone" ColumnName="servphone" />
+                <ScalarProperty Name="servinstruct" ColumnName="servinstruct" />
+                <ScalarProperty Name="servrelease" ColumnName="servrelease" />
+                <ScalarProperty Name="servauthnum" ColumnName="servauthnum" />
+                <ScalarProperty Name="servref1" ColumnName="servref1" />
+                <ScalarProperty Name="servref2" ColumnName="servref2" />
+                <ScalarProperty Name="servref3" ColumnName="servref3" />
+                <ScalarProperty Name="servref4" ColumnName="servref4" />
+                <ScalarProperty Name="servref5" ColumnName="servref5" />
+                <ScalarProperty Name="overridecarrier" ColumnName="overridecarrier" />
+                <ScalarProperty Name="overrideservice" ColumnName="overrideservice" />
+                <ScalarProperty Name="dockingstation" ColumnName="dockingstation" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="transportid" ColumnName="transportid" />
+                <ScalarProperty Name="shipbytime" ColumnName="shipbytime" />
+                <ScalarProperty Name="changedby" ColumnName="changedby" />
+                <ScalarProperty Name="changedate" ColumnName="changedate" />
+                <ScalarProperty Name="changetime" ColumnName="changetime" />
+                <ScalarProperty Name="taxconnectcalc" ColumnName="taxconnectcalc" />
+                <ScalarProperty Name="getdflttaxids" ColumnName="getdflttaxids" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jobprods">
+            <EntityTypeMapping TypeName="EpicorModel.jobprod">
+              <MappingFragment StoreEntitySet="jobprod">
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+                <ScalarProperty Name="ordernum" ColumnName="ordernum" />
+                <ScalarProperty Name="orderline" ColumnName="orderline" />
+                <ScalarProperty Name="orderrelnum" ColumnName="orderrelnum" />
+                <ScalarProperty Name="prodqty" ColumnName="prodqty" />
+                <ScalarProperty Name="warehousecode" ColumnName="warehousecode" />
+                <ScalarProperty Name="targetjobnum" ColumnName="targetjobnum" />
+                <ScalarProperty Name="targetassemblyseq" ColumnName="targetassemblyseq" />
+                <ScalarProperty Name="targetmtlseq" ColumnName="targetmtlseq" />
+                <ScalarProperty Name="shippedqty" ColumnName="shippedqty" />
+                <ScalarProperty Name="receivedqty" ColumnName="receivedqty" />
+                <ScalarProperty Name="allocatedqty" ColumnName="allocatedqty" />
+                <ScalarProperty Name="callnum" ColumnName="callnum" />
+                <ScalarProperty Name="callline" ColumnName="callline" />
+                <ScalarProperty Name="tflinenum" ColumnName="tflinenum" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+                <ScalarProperty Name="shortchar01" ColumnName="shortchar01" />
+                <ScalarProperty Name="shortchar02" ColumnName="shortchar02" />
+                <ScalarProperty Name="shortchar03" ColumnName="shortchar03" />
+                <ScalarProperty Name="shortchar04" ColumnName="shortchar04" />
+                <ScalarProperty Name="shortchar05" ColumnName="shortchar05" />
+                <ScalarProperty Name="number01" ColumnName="number01" />
+                <ScalarProperty Name="number02" ColumnName="number02" />
+                <ScalarProperty Name="number03" ColumnName="number03" />
+                <ScalarProperty Name="number04" ColumnName="number04" />
+                <ScalarProperty Name="number05" ColumnName="number05" />
+                <ScalarProperty Name="date01" ColumnName="date01" />
+                <ScalarProperty Name="date02" ColumnName="date02" />
+                <ScalarProperty Name="date03" ColumnName="date03" />
+                <ScalarProperty Name="date04" ColumnName="date04" />
+                <ScalarProperty Name="date05" ColumnName="date05" />
+                <ScalarProperty Name="checkbox01" ColumnName="checkbox01" />
+                <ScalarProperty Name="checkbox02" ColumnName="checkbox02" />
+                <ScalarProperty Name="checkbox03" ColumnName="checkbox03" />
+                <ScalarProperty Name="checkbox04" ColumnName="checkbox04" />
+                <ScalarProperty Name="checkbox05" ColumnName="checkbox05" />
+                <ScalarProperty Name="plant" ColumnName="plant" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderdtls">
+            <EntityTypeMapping TypeName="EpicorModel.orderdtl">
+              <MappingFragment StoreEntitySet="orderdtl">
+                <ScalarProperty Name="voidline" ColumnName="voidline" />
+                <ScalarProperty Name="openline" ColumnName="openline" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="ordernum" ColumnName="ordernum" />
+                <ScalarProperty Name="orderline" ColumnName="orderline" />
+                <ScalarProperty Name="linetype" ColumnName="linetype" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+                <ScalarProperty Name="linedesc" ColumnName="linedesc" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="ium" ColumnName="ium" />
+                <ScalarProperty Name="revisionnum" ColumnName="revisionnum" />
+                <ScalarProperty Name="poline" ColumnName="poline" />
+                <ScalarProperty Name="commissionable" ColumnName="commissionable" />
+                <ScalarProperty Name="discountpercent" ColumnName="discountpercent" />
+                <ScalarProperty Name="unitprice" ColumnName="unitprice" />
+                <ScalarProperty Name="docunitprice" ColumnName="docunitprice" />
+                <ScalarProperty Name="orderqty" ColumnName="orderqty" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="docdiscount" ColumnName="docdiscount" />
+                <ScalarProperty Name="requestdate" ColumnName="requestdate" />
+                <ScalarProperty Name="prodcode" ColumnName="prodcode" />
+                <ScalarProperty Name="obsolete803_repsplit__1" ColumnName="obsolete803_repsplit##1" />
+                <ScalarProperty Name="obsolete803_repsplit__2" ColumnName="obsolete803_repsplit##2" />
+                <ScalarProperty Name="obsolete803_repsplit__3" ColumnName="obsolete803_repsplit##3" />
+                <ScalarProperty Name="obsolete803_repsplit__4" ColumnName="obsolete803_repsplit##4" />
+                <ScalarProperty Name="obsolete803_repsplit__5" ColumnName="obsolete803_repsplit##5" />
+                <ScalarProperty Name="obsolete803_reprate__1" ColumnName="obsolete803_reprate##1" />
+                <ScalarProperty Name="obsolete803_reprate__2" ColumnName="obsolete803_reprate##2" />
+                <ScalarProperty Name="obsolete803_reprate__3" ColumnName="obsolete803_reprate##3" />
+                <ScalarProperty Name="obsolete803_reprate__4" ColumnName="obsolete803_reprate##4" />
+                <ScalarProperty Name="obsolete803_reprate__5" ColumnName="obsolete803_reprate##5" />
+                <ScalarProperty Name="xpartnum" ColumnName="xpartnum" />
+                <ScalarProperty Name="xrevisionnum" ColumnName="xrevisionnum" />
+                <ScalarProperty Name="pricepercode" ColumnName="pricepercode" />
+                <ScalarProperty Name="ordercomment" ColumnName="ordercomment" />
+                <ScalarProperty Name="shipcomment" ColumnName="shipcomment" />
+                <ScalarProperty Name="invoicecomment" ColumnName="invoicecomment" />
+                <ScalarProperty Name="picklistcomment" ColumnName="picklistcomment" />
+                <ScalarProperty Name="taxcatid" ColumnName="taxcatid" />
+                <ScalarProperty Name="advancebillbal" ColumnName="advancebillbal" />
+                <ScalarProperty Name="docadvancebillbal" ColumnName="docadvancebillbal" />
+                <ScalarProperty Name="quotenum" ColumnName="quotenum" />
+                <ScalarProperty Name="quoteline" ColumnName="quoteline" />
+                <ScalarProperty Name="tmbilling" ColumnName="tmbilling" />
+                <ScalarProperty Name="origwhynotax" ColumnName="origwhynotax" />
+                <ScalarProperty Name="needbydate" ColumnName="needbydate" />
+                <ScalarProperty Name="custnum" ColumnName="custnum" />
+                <ScalarProperty Name="rework" ColumnName="rework" />
+                <ScalarProperty Name="rmanum" ColumnName="rmanum" />
+                <ScalarProperty Name="rmaline" ColumnName="rmaline" />
+                <ScalarProperty Name="character01" ColumnName="character01" />
+                <ScalarProperty Name="character02" ColumnName="character02" />
+                <ScalarProperty Name="character03" ColumnName="character03" />
+                <ScalarProperty Name="character04" ColumnName="character04" />
+                <ScalarProperty Name="character05" ColumnName="character05" />
+                <ScalarProperty Name="character06" ColumnName="character06" />
+                <ScalarProperty Name="character07" ColumnName="character07" />
+                <ScalarProperty Name="character08" ColumnName="character08" />
+                <ScalarProperty Name="character09" ColumnName="character09" />
+                <ScalarProperty Name="character10" ColumnName="character10" />
+                <ScalarProperty Name="number01" ColumnName="number01" />
+                <ScalarProperty Name="number02" ColumnName="number02" />
+                <ScalarProperty Name="number03" ColumnName="number03" />
+                <ScalarProperty Name="number04" ColumnName="number04" />
+                <ScalarProperty Name="number05" ColumnName="number05" />
+                <ScalarProperty Name="number06" ColumnName="number06" />
+                <ScalarProperty Name="number07" ColumnName="number07" />
+                <ScalarProperty Name="number08" ColumnName="number08" />
+                <ScalarProperty Name="number09" ColumnName="number09" />
+                <ScalarProperty Name="number10" ColumnName="number10" />
+                <ScalarProperty Name="date01" ColumnName="date01" />
+                <ScalarProperty Name="date02" ColumnName="date02" />
+                <ScalarProperty Name="date03" ColumnName="date03" />
+                <ScalarProperty Name="date04" ColumnName="date04" />
+                <ScalarProperty Name="date05" ColumnName="date05" />
+                <ScalarProperty Name="checkbox01" ColumnName="checkbox01" />
+                <ScalarProperty Name="checkbox02" ColumnName="checkbox02" />
+                <ScalarProperty Name="checkbox03" ColumnName="checkbox03" />
+                <ScalarProperty Name="checkbox04" ColumnName="checkbox04" />
+                <ScalarProperty Name="checkbox05" ColumnName="checkbox05" />
+                <ScalarProperty Name="projectid" ColumnName="projectid" />
+                <ScalarProperty Name="contractnum" ColumnName="contractnum" />
+                <ScalarProperty Name="contractcode" ColumnName="contractcode" />
+                <ScalarProperty Name="basepartnum" ColumnName="basepartnum" />
+                <ScalarProperty Name="warranty" ColumnName="warranty" />
+                <ScalarProperty Name="warrantycode" ColumnName="warrantycode" />
+                <ScalarProperty Name="materialduration" ColumnName="materialduration" />
+                <ScalarProperty Name="laborduration" ColumnName="laborduration" />
+                <ScalarProperty Name="miscduration" ColumnName="miscduration" />
+                <ScalarProperty Name="materialmod" ColumnName="materialmod" />
+                <ScalarProperty Name="labormod" ColumnName="labormod" />
+                <ScalarProperty Name="warrantycomment" ColumnName="warrantycomment" />
+                <ScalarProperty Name="onsite" ColumnName="onsite" />
+                <ScalarProperty Name="matcovered" ColumnName="matcovered" />
+                <ScalarProperty Name="labcovered" ColumnName="labcovered" />
+                <ScalarProperty Name="misccovered" ColumnName="misccovered" />
+                <ScalarProperty Name="salesum" ColumnName="salesum" />
+                <ScalarProperty Name="sellingfactor" ColumnName="sellingfactor" />
+                <ScalarProperty Name="sellingquantity" ColumnName="sellingquantity" />
+                <ScalarProperty Name="salescatid" ColumnName="salescatid" />
+                <ScalarProperty Name="shiplinecomplete" ColumnName="shiplinecomplete" />
+                <ScalarProperty Name="cumeqty" ColumnName="cumeqty" />
+                <ScalarProperty Name="cumedate" ColumnName="cumedate" />
+                <ScalarProperty Name="mktgcampaignid" ColumnName="mktgcampaignid" />
+                <ScalarProperty Name="mktgevntseq" ColumnName="mktgevntseq" />
+                <ScalarProperty Name="lockqty" ColumnName="lockqty" />
+                <ScalarProperty Name="linked" ColumnName="linked" />
+                <ScalarProperty Name="icponum" ColumnName="icponum" />
+                <ScalarProperty Name="icpoline" ColumnName="icpoline" />
+                <ScalarProperty Name="extcompany" ColumnName="extcompany" />
+                <ScalarProperty Name="lastconfigdate" ColumnName="lastconfigdate" />
+                <ScalarProperty Name="lastconfigtime" ColumnName="lastconfigtime" />
+                <ScalarProperty Name="lastconfiguserid" ColumnName="lastconfiguserid" />
+                <ScalarProperty Name="configunitprice" ColumnName="configunitprice" />
+                <ScalarProperty Name="configbaseunitprice" ColumnName="configbaseunitprice" />
+                <ScalarProperty Name="pricelistcode" ColumnName="pricelistcode" />
+                <ScalarProperty Name="breaklistcode" ColumnName="breaklistcode" />
+                <ScalarProperty Name="pricingqty" ColumnName="pricingqty" />
+                <ScalarProperty Name="lockprice" ColumnName="lockprice" />
+                <ScalarProperty Name="listprice" ColumnName="listprice" />
+                <ScalarProperty Name="doclistprice" ColumnName="doclistprice" />
+                <ScalarProperty Name="ordbasedprice" ColumnName="ordbasedprice" />
+                <ScalarProperty Name="docordbasedprice" ColumnName="docordbasedprice" />
+                <ScalarProperty Name="pricegroupcode" ColumnName="pricegroupcode" />
+                <ScalarProperty Name="overridepricelist" ColumnName="overridepricelist" />
+                <ScalarProperty Name="baserevisionnum" ColumnName="baserevisionnum" />
+                <ScalarProperty Name="pricingvalue" ColumnName="pricingvalue" />
+                <ScalarProperty Name="number11" ColumnName="number11" />
+                <ScalarProperty Name="number12" ColumnName="number12" />
+                <ScalarProperty Name="number13" ColumnName="number13" />
+                <ScalarProperty Name="number14" ColumnName="number14" />
+                <ScalarProperty Name="number15" ColumnName="number15" />
+                <ScalarProperty Name="number16" ColumnName="number16" />
+                <ScalarProperty Name="number17" ColumnName="number17" />
+                <ScalarProperty Name="number18" ColumnName="number18" />
+                <ScalarProperty Name="number19" ColumnName="number19" />
+                <ScalarProperty Name="number20" ColumnName="number20" />
+                <ScalarProperty Name="date06" ColumnName="date06" />
+                <ScalarProperty Name="date07" ColumnName="date07" />
+                <ScalarProperty Name="date08" ColumnName="date08" />
+                <ScalarProperty Name="date09" ColumnName="date09" />
+                <ScalarProperty Name="date10" ColumnName="date10" />
+                <ScalarProperty Name="date11" ColumnName="date11" />
+                <ScalarProperty Name="date12" ColumnName="date12" />
+                <ScalarProperty Name="date13" ColumnName="date13" />
+                <ScalarProperty Name="date14" ColumnName="date14" />
+                <ScalarProperty Name="date15" ColumnName="date15" />
+                <ScalarProperty Name="date16" ColumnName="date16" />
+                <ScalarProperty Name="date17" ColumnName="date17" />
+                <ScalarProperty Name="date18" ColumnName="date18" />
+                <ScalarProperty Name="date19" ColumnName="date19" />
+                <ScalarProperty Name="date20" ColumnName="date20" />
+                <ScalarProperty Name="checkbox06" ColumnName="checkbox06" />
+                <ScalarProperty Name="checkbox07" ColumnName="checkbox07" />
+                <ScalarProperty Name="checkbox08" ColumnName="checkbox08" />
+                <ScalarProperty Name="checkbox09" ColumnName="checkbox09" />
+                <ScalarProperty Name="checkbox10" ColumnName="checkbox10" />
+                <ScalarProperty Name="checkbox11" ColumnName="checkbox11" />
+                <ScalarProperty Name="checkbox12" ColumnName="checkbox12" />
+                <ScalarProperty Name="checkbox13" ColumnName="checkbox13" />
+                <ScalarProperty Name="checkbox14" ColumnName="checkbox14" />
+                <ScalarProperty Name="checkbox15" ColumnName="checkbox15" />
+                <ScalarProperty Name="checkbox16" ColumnName="checkbox16" />
+                <ScalarProperty Name="checkbox17" ColumnName="checkbox17" />
+                <ScalarProperty Name="checkbox18" ColumnName="checkbox18" />
+                <ScalarProperty Name="checkbox19" ColumnName="checkbox19" />
+                <ScalarProperty Name="checkbox20" ColumnName="checkbox20" />
+                <ScalarProperty Name="shortchar01" ColumnName="shortchar01" />
+                <ScalarProperty Name="shortchar02" ColumnName="shortchar02" />
+                <ScalarProperty Name="shortchar03" ColumnName="shortchar03" />
+                <ScalarProperty Name="shortchar04" ColumnName="shortchar04" />
+                <ScalarProperty Name="shortchar05" ColumnName="shortchar05" />
+                <ScalarProperty Name="shortchar06" ColumnName="shortchar06" />
+                <ScalarProperty Name="shortchar07" ColumnName="shortchar07" />
+                <ScalarProperty Name="shortchar08" ColumnName="shortchar08" />
+                <ScalarProperty Name="shortchar09" ColumnName="shortchar09" />
+                <ScalarProperty Name="shortchar10" ColumnName="shortchar10" />
+                <ScalarProperty Name="displayseq" ColumnName="displayseq" />
+                <ScalarProperty Name="kitparentline" ColumnName="kitparentline" />
+                <ScalarProperty Name="kitallowupdate" ColumnName="kitallowupdate" />
+                <ScalarProperty Name="kitshipcomplete" ColumnName="kitshipcomplete" />
+                <ScalarProperty Name="kitbackflush" ColumnName="kitbackflush" />
+                <ScalarProperty Name="kitprintcompsps" ColumnName="kitprintcompsps" />
+                <ScalarProperty Name="kitprintcompsinv" ColumnName="kitprintcompsinv" />
+                <ScalarProperty Name="kitpricing" ColumnName="kitpricing" />
+                <ScalarProperty Name="kitqtyper" ColumnName="kitqtyper" />
+                <ScalarProperty Name="sellingfactordirection" ColumnName="sellingfactordirection" />
+                <ScalarProperty Name="reprate1" ColumnName="reprate1" />
+                <ScalarProperty Name="reprate2" ColumnName="reprate2" />
+                <ScalarProperty Name="reprate3" ColumnName="reprate3" />
+                <ScalarProperty Name="reprate4" ColumnName="reprate4" />
+                <ScalarProperty Name="reprate5" ColumnName="reprate5" />
+                <ScalarProperty Name="repsplit1" ColumnName="repsplit1" />
+                <ScalarProperty Name="repsplit2" ColumnName="repsplit2" />
+                <ScalarProperty Name="repsplit3" ColumnName="repsplit3" />
+                <ScalarProperty Name="repsplit4" ColumnName="repsplit4" />
+                <ScalarProperty Name="repsplit5" ColumnName="repsplit5" />
+                <ScalarProperty Name="demandcontractline" ColumnName="demandcontractline" />
+                <ScalarProperty Name="createnewjob" ColumnName="createnewjob" />
+                <ScalarProperty Name="donotshipbeforedate" ColumnName="donotshipbeforedate" />
+                <ScalarProperty Name="getdtls" ColumnName="getdtls" />
+                <ScalarProperty Name="donotshipafterdate" ColumnName="donotshipafterdate" />
+                <ScalarProperty Name="schedjob" ColumnName="schedjob" />
+                <ScalarProperty Name="reljob" ColumnName="reljob" />
+                <ScalarProperty Name="enablecreatenewjob" ColumnName="enablecreatenewjob" />
+                <ScalarProperty Name="enablegetdtls" ColumnName="enablegetdtls" />
+                <ScalarProperty Name="enableschedjob" ColumnName="enableschedjob" />
+                <ScalarProperty Name="enablereljob" ColumnName="enablereljob" />
+                <ScalarProperty Name="countersalewarehouse" ColumnName="countersalewarehouse" />
+                <ScalarProperty Name="countersalebinnum" ColumnName="countersalebinnum" />
+                <ScalarProperty Name="countersalelotnum" ColumnName="countersalelotnum" />
+                <ScalarProperty Name="countersaledimcode" ColumnName="countersaledimcode" />
+                <ScalarProperty Name="demanddtlrejected" ColumnName="demanddtlrejected" />
+                <ScalarProperty Name="kitflag" ColumnName="kitflag" />
+                <ScalarProperty Name="kitsloaded" ColumnName="kitsloaded" />
+                <ScalarProperty Name="obsolete803_taxexempt" ColumnName="obsolete803_taxexempt" />
+                <ScalarProperty Name="demandcontractnum" ColumnName="demandcontractnum" />
+                <ScalarProperty Name="demandheadseq" ColumnName="demandheadseq" />
+                <ScalarProperty Name="demanddtlseq" ColumnName="demanddtlseq" />
+                <ScalarProperty Name="changedby" ColumnName="changedby" />
+                <ScalarProperty Name="changedate" ColumnName="changedate" />
+                <ScalarProperty Name="changetime" ColumnName="changetime" />
+                <ScalarProperty Name="reversecharge" ColumnName="reversecharge" />
+                <ScalarProperty Name="totalreleases" ColumnName="totalreleases" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="serialnoes">
+            <EntityTypeMapping TypeName="EpicorModel.serialno">
+              <MappingFragment StoreEntitySet="serialno">
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="partnum" ColumnName="partnum" />
+                <ScalarProperty Name="serialnumber" ColumnName="serialnumber" />
+                <ScalarProperty Name="snstatus" ColumnName="snstatus" />
+                <ScalarProperty Name="jobnum" ColumnName="jobnum" />
+                <ScalarProperty Name="assemblyseq" ColumnName="assemblyseq" />
+                <ScalarProperty Name="mtlseq" ColumnName="mtlseq" />
+                <ScalarProperty Name="packnum" ColumnName="packnum" />
+                <ScalarProperty Name="packline" ColumnName="packline" />
+                <ScalarProperty Name="voided" ColumnName="voided" />
+                <ScalarProperty Name="scrapped" ColumnName="scrapped" />
+                <ScalarProperty Name="vendornum" ColumnName="vendornum" />
+                <ScalarProperty Name="purpoint" ColumnName="purpoint" />
+                <ScalarProperty Name="packslip" ColumnName="packslip" />
+                <ScalarProperty Name="packslipline" ColumnName="packslipline" />
+                <ScalarProperty Name="selected" ColumnName="selected" />
+                <ScalarProperty Name="prevsnstatus" ColumnName="prevsnstatus" />
+                <ScalarProperty Name="snprefix" ColumnName="snprefix" />
+                <ScalarProperty Name="snformat" ColumnName="snformat" />
+                <ScalarProperty Name="snbasestructure" ColumnName="snbasestructure" />
+                <ScalarProperty Name="snbasenumber" ColumnName="snbasenumber" />
+                <ScalarProperty Name="scrapreasoncode" ColumnName="scrapreasoncode" />
+                <ScalarProperty Name="snreference" ColumnName="snreference" />
+                <ScalarProperty Name="rmanum" ColumnName="rmanum" />
+                <ScalarProperty Name="rmaline" ColumnName="rmaline" />
+                <ScalarProperty Name="rmareceipt" ColumnName="rmareceipt" />
+                <ScalarProperty Name="dmrnum" ColumnName="dmrnum" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="dmractionnum" ColumnName="dmractionnum" />
+                <ScalarProperty Name="failselect" ColumnName="failselect" />
+                <ScalarProperty Name="contractnum" ColumnName="contractnum" />
+                <ScalarProperty Name="contractline" ColumnName="contractline" />
+                <ScalarProperty Name="linedetailnum" ColumnName="linedetailnum" />
+                <ScalarProperty Name="rmadisp" ColumnName="rmadisp" />
+                <ScalarProperty Name="nonconfnum" ColumnName="nonconfnum" />
+                <ScalarProperty Name="character01" ColumnName="character01" />
+                <ScalarProperty Name="character02" ColumnName="character02" />
+                <ScalarProperty Name="character03" ColumnName="character03" />
+                <ScalarProperty Name="character04" ColumnName="character04" />
+                <ScalarProperty Name="character05" ColumnName="character05" />
+                <ScalarProperty Name="character06" ColumnName="character06" />
+                <ScalarProperty Name="character07" ColumnName="character07" />
+                <ScalarProperty Name="character08" ColumnName="character08" />
+                <ScalarProperty Name="character09" ColumnName="character09" />
+                <ScalarProperty Name="character10" ColumnName="character10" />
+                <ScalarProperty Name="number01" ColumnName="number01" />
+                <ScalarProperty Name="number02" ColumnName="number02" />
+                <ScalarProperty Name="number03" ColumnName="number03" />
+                <ScalarProperty Name="number04" ColumnName="number04" />
+                <ScalarProperty Name="number05" ColumnName="number05" />
+                <ScalarProperty Name="number06" ColumnName="number06" />
+                <ScalarProperty Name="number07" ColumnName="number07" />
+                <ScalarProperty Name="number08" ColumnName="number08" />
+                <ScalarProperty Name="number09" ColumnName="number09" />
+                <ScalarProperty Name="number10" ColumnName="number10" />
+                <ScalarProperty Name="date01" ColumnName="date01" />
+                <ScalarProperty Name="date02" ColumnName="date02" />
+                <ScalarProperty Name="date03" ColumnName="date03" />
+                <ScalarProperty Name="date04" ColumnName="date04" />
+                <ScalarProperty Name="date05" ColumnName="date05" />
+                <ScalarProperty Name="checkbox01" ColumnName="checkbox01" />
+                <ScalarProperty Name="checkbox02" ColumnName="checkbox02" />
+                <ScalarProperty Name="checkbox03" ColumnName="checkbox03" />
+                <ScalarProperty Name="checkbox04" ColumnName="checkbox04" />
+                <ScalarProperty Name="checkbox05" ColumnName="checkbox05" />
+                <ScalarProperty Name="warehousecode" ColumnName="warehousecode" />
+                <ScalarProperty Name="binnum" ColumnName="binnum" />
+                <ScalarProperty Name="contexpiredate" ColumnName="contexpiredate" />
+                <ScalarProperty Name="warrexpiration" ColumnName="warrexpiration" />
+                <ScalarProperty Name="custnum" ColumnName="custnum" />
+                <ScalarProperty Name="shiptonum" ColumnName="shiptonum" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedtime" ColumnName="modifiedtime" />
+                <ScalarProperty Name="shippedfrom" ColumnName="shippedfrom" />
+                <ScalarProperty Name="tranadd" ColumnName="tranadd" />
+                <ScalarProperty Name="temptranid" ColumnName="temptranid" />
+                <ScalarProperty Name="tfpacknum" ColumnName="tfpacknum" />
+                <ScalarProperty Name="tfpackline" ColumnName="tfpackline" />
+                <ScalarProperty Name="ordernum" ColumnName="ordernum" />
+                <ScalarProperty Name="orderline" ColumnName="orderline" />
+                <ScalarProperty Name="orderrelnum" ColumnName="orderrelnum" />
+                <ScalarProperty Name="PROGRESS_RECID" ColumnName="PROGRESS_RECID" />
+                <ScalarProperty Name="PROGRESS_RECID_IDENT_" ColumnName="PROGRESS_RECID_IDENT_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

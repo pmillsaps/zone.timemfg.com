@@ -1,0 +1,226 @@
+﻿@*@model IEnumerable<Time.Data.EntityModels.Install.InstallQuote>*@
+@{
+    ViewBag.Title = "Aerial Quotes with Installation Quotation";
+    Script.Require("jQuery");
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/jquery.dataTables.min.js").AtFoot();
+    Script.Include("~/Modules/Time.IT/Scripts/DataTables/dataTables.bootstrap.min.js").AtFoot();
+}
+<link href="~/Modules/Time.IT/Styles/font-awesome.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+<link href="~/Modules/Time.IT/Styles/mobirise.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Go to List of Aerial Quotes", "Index")
+</div>
+
+<div class="alert alert-info">
+    <p>This page displays the <i>Aerial Quotes</i> that have an <i>Installation Quotation</i>. You can search for, update, or view the summary of a specific quote.</p>
+    <p>If you want to create a <i>Quotation Presentation</i>, you can start in this page as well.</p>
+    <p><span class="label label-success">How to:</span></p>
+    <p><span class="label label-primary">Edit</span> an <i>Installation Quotation</i>, click the <i class="fa fa-pencil-square-o" aria-hidden="true"></i> icon.</p>
+    <p><span class="label label-primary">View a Summary</span> of the <i>Installation Quotation</i>, click the <i class="fa fa-eye" aria-hidden="true"></i> icon.</p>
+    <p><span class="label label-primary">Create</span> the <i>Quotation Presentation</i> click the <i class="fa fa-file-word-o" aria-hidden="true"></i> icon.</p>
+</div>
+<hr />
+<div class="tablecontainer">
+    <table id="quotesTable" class="table table-striped table-hover table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <td>@Html.Label("Id")</td> @*Listed but hidden*@
+                <td>@Html.Label("Lift Name")</td>
+                <td>@Html.Label("Quote Number")</td>
+                <td>@Html.Label("Install Line")</td>
+                <td>@Html.Label("Quoted By")</td>
+                <td>@Html.Label("Quote Date")</td>
+                <td>@Html.Label("Total Price Labor")</td>
+                <td>@Html.Label("Total Price Material")</td>
+                <td>@Html.Label("Total Install Price")</td>
+                <td>@Html.Label("Total Install Hours")</td>
+                <td>@Html.Label("Total Paint Hours")</td>
+                <td>@Html.Label("LiftFamilyId")</td> @*Listed but hidden*@
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var urlLM = '@Url.Action("LoadInstallationQuotes", "Quote")';
+            var oTable = $("#quotesTable").DataTable({
+                ajax: {
+                    url: urlLM,
+                    type: "GET",
+                    datatype: "json"
+                },
+                dom: "<'row'<'col-md-3'l><'col-md-3'B><'col-md-6 text-right'f>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7 text-right'p>>",
+                order: [[2, "desc"]],
+                stateSave: true,
+                displayLength: -1,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [{ sClass: "text-center", targets: [12, 13, 14] }],
+                columns: [
+                    { data: "Id", autoWidth: true },// Listed but hidden
+                    { data: "LiftName", autoWidth: true },
+                    { data: "LiftQuoteNumber", autoWidth: true },
+                    { data: "LiftInstallLine", autoWidth: true },
+                    { data: "InstallQuotedBy", autoWidth: true },
+                    { data: "QuoteDate", autoWidth: true },
+                    { data: "TotalPriceLabor", autoWidth: true,  render: $.fn.dataTable.render.number( ',', '.', 2, '$')},
+                    { data: "TotalPriceMaterial", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$') },
+                    { data: "TotalInstallPrice", autoWidth: true, render: $.fn.dataTable.render.number(',', '.', 2, '$') },
+                    { data: "TotalInstallHours", autoWidth: true },
+                    { data: "TotalPaintHours", autoWidth: true },
+                    { data: "LiftFamilyId", autoWidth: true },// Listed but hidden
+                    {
+                        data: null, width: "20px", sortable: false, render: function (data, type, row) {
+                            return '<a class="editQuote" href="#" data-quoteNum="' + row.LiftQuoteNumber + '" data-lineDesc="' + row.LiftName + '" data-liftFamilyId="' + row.LiftFamilyId + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: null, width: "20px", sortable: false, render: function (data, type, row) {
+                            return '<a class="summary" href="#" data-quoteNum="' + row.LiftQuoteNumber + '" data-quoteId="' + row.Id + '" data-liftFamilyId="' + row.LiftFamilyId + '"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                        }
+                    },
+                    {
+                        data: "LiftFamilyId", width: "20px", sortable: false, render: function (data) {
+                            return '<a href="CreateQuotePresentation/' + data + '"><i class="fa fa-file-word-o" aria-hidden="true"></i></a>';
+                        }
+                    }
+                ]
+            })
+
+            // Hiding the Ids
+            oTable.column(0).visible(false);
+            oTable.column(11).visible(false);
+
+            $('#quotesTable tbody').on('click', 'a.editQuote', function () {
+                var qtNum = $(this).attr('data-quoteNum');
+                var lnDcr = $(this).attr('data-lineDesc');
+                var lftFmlyId = $(this).attr('data-liftFamilyId');
+                var url = "AddQuote?quoteNum=" + qtNum + "&installDesc=" + lnDcr + "&editQuote=true&liftFamilyId=" + lftFmlyId;
+                window.open(url);
+            });
+
+            $('#quotesTable tbody').on('click', 'a.summary', function () {
+                var qtNum = $(this).attr('data-quoteNum');
+                var qtId = $(this).attr('data-quoteId');
+                var lftFmlyId = $(this).attr('data-liftFamilyId');
+                var url = "QuoteSummary?installQuoteId=" + qtId + "&quoteNum=" + qtNum + "&liftFamilyId=" + lftFmlyId;
+                window.open(url);
+            });
+        });
+    </script>
+}
+@*@using (Html.BeginForm("ListOfInstallQuotes", "Quote", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="input-group">
+                @Html.TextBox("liftQuoteNum", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search for Quote Number..." })
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<table class="table table-striped table-hover table-bordered table-condensed">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.LiftName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftQuoteNumber)
+        </th>
+        <th>
+                @Html.DisplayNameFor(model => model.LiftQuoteLine)
+            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftInstallLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstallQuotedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPriceLabor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPriceMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalInstallPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalInstallHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPaintHours)
+        </th>
+        <th>Quote Actions</th>
+    </tr>
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="11" class="lead bg-danger">No rows matched search criteria</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftQuoteNumber)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.LiftQuoteLine)
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftInstallLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstallQuotedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuoteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPriceLabor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPriceMaterial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalInstallPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalInstallHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPaintHours)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "AddQuote", new { quoteNum = item.LiftQuoteNumber, installDesc = item.LiftName, editQuote = true, liftFamilyId = item.LiftFamilyId }) |
+                    @Html.ActionLink("Summary", "QuoteSummary", new { installQuoteId = item.Id, quoteNum = item.LiftQuoteNumber, liftFamilyId = item.LiftFamilyId })
+                </td>
+            </tr>
+        }
+    }
+</table>*@

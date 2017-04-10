@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Configurator.Lookup>
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="alert alert-info">
+            <span class="label label-success">Tip:</span> If you don't know what Lift Family to select, click on the button below to see a list
+            of Lifts and what Lift Family they belong to.
+        </p>
+        <a id="showInfo" href="#cfgsAndLifts" data-toggle="collapse" class="btn btn-primary btn-xs">Show Lift Families</a>
+        <div id="cfgsAndLifts" class="collapse alert alert-info">
+            <div style="display:block; height:300px; overflow:scroll;">
+                <table class="table table-striped">
+                    <tr class="success">
+                        <th>@Html.Label("Lift")</th>
+                        <th>@Html.Label("Family Name")</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Data</td>
+                            <td>@item.ConfigName</td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

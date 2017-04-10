@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Time.Data.EntityModels.TimeMFG.LoadListJobComment>
+
+@*<h2>Comment History</h2>*@
+
+<table class="Comments table table-striped table-bordered table-condensed">
+    <caption class="lead"><b>Comment History</b></caption>
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnteredBy)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnteredBy)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,76 @@
+﻿@model Time.Data.EntityModels.Install.TimeOption
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
+<h2>Delete</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+
+<h3>Are you sure you want to delete this?</h3>
+    
+<div>
+    <div class="mypanel-header"><h4>TIME Option</h4></div>
+    <div class="mypanel-body">
+        <div class="alert alert-info">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Option)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Option)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.InstallHours)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.InstallHours)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PaintFlag)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PaintFlag)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LiftFamily.FamilyName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LiftFamily.FamilyName)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-primary" /> |
+                    @Html.ActionLink("Back to List", "Index", new { LiftFamilyId = Model.LiftFamilyId })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".mypanel-body").slideDown(2000);
+        });
+    </script>
+}

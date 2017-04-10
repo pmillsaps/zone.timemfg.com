@@ -1,0 +1,409 @@
+﻿@model Time.Data.EntityModels.TimeMFG.Term_ITInfo
+
+@{
+    ViewBag.Title = "Edit IT Info";
+    ViewBag.Archive = Model.ArchiveEmail;
+    ViewBag.FowardEM = Model.FowardEmails;
+    ViewBag.UDrive = Model.DeleteUDrive;
+    ViewBag.Phone = Model.DeskPhone;
+    ViewBag.PhoneFW = Model.DeskPhoneFW;
+    ViewBag.PhoneRe = Model.DeskPhoneRename;
+    ViewBag.Epic = Model.EpicorAcc;
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+@Html.ActionLink("Back to Details", "Details", new { id = Model.EmpID })
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.EmpID)
+
+    <div class="form-horizontal">
+        <div class="col-md-7">
+            <div class="form-group">
+                @Html.LabelFor(model => model.WindowsAccAccess, "Windows Account Access", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-6">
+                    @if (ViewBag.Windows == "No Windows Account")
+                    {
+
+                        var accOptions = new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "No Windows Account", Value="None" },
+                            new SelectListItem { Text = "Active Windows Account", Value="Active" },
+                            new SelectListItem { Text = "Deactivate Windows Account", Value="Deactivate" }
+                        };
+
+                        @Html.DropDownList("ddl", new SelectList(accOptions, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                    }
+                    else if (ViewBag.Windows == "Active Windows Account")
+                    {
+
+                        var accOptions = new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Active Windows Account", Value="Active" },
+                            new SelectListItem { Text = "No Windows Account", Value="None" },
+                            new SelectListItem { Text = "Deactivate Windows Account", Value="Deactivate" }
+                        };
+
+                        @Html.DropDownList("ddl", new SelectList(accOptions, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        var accOptions = new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "Deactivate Windows Account", Value="Deactivate" },
+                            new SelectListItem { Text = "No Windows Account", Value="None" },
+                            new SelectListItem { Text = "Active Windows Account", Value="Active" }
+
+                        };
+                        @Html.DropDownList("ddl", new SelectList(accOptions, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                    }
+                    @*@Html.EditorFor(model => model.WindowsAccAccess, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.WindowsAccAccess, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ArchiveEmail, "Archive Email?", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('Archive');">
+                        @Html.EditorFor(model => model.ArchiveEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.ArchiveEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.ArchiveEmail == false)
+            {
+                <div id="Archive" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EmailAtW, "Email Available to Who?", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.EmailAtW, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EmailAtW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="Archive" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EmailAtW, "Email Available to Who?", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.EmailAtW, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EmailAtW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FowardEmails, "Forward Emails?", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('FowardEM');">
+                        @Html.EditorFor(model => model.FowardEmails, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.FowardEmails, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.FowardEmails == false)
+            {
+                <div id="FowardEM" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FowardAtW, "Forward Emails Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.FowardAtW, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FowardAtW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="FowardEM" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FowardAtW, "Forward Emails Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.FowardAtW, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FowardAtW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeleteUDrive, "Delete U Drive?", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('UDrive');">
+                        @Html.EditorFor(model => model.DeleteUDrive, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.DeleteUDrive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.DeleteUDrive == false)
+            {
+                <div id="UDrive" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UDriveAtW, "U Drive Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.UDriveAtW, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UDriveAtW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="UDrive" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UDriveAtW, "U Drive Available to Who", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.UDriveAtW, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UDriveAtW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeskPhone, "Desk Phone?", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('Phone');">
+                        @Html.EditorFor(model => model.DeskPhone, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.DeskPhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.DeskPhone == false)
+            {
+                <div id="Phone" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeskPhoneFW, "Desk Phone Forward?", htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-2">
+                            <a href="#" onclick="toggle_visibility('PhoneFW');">
+                                @Html.EditorFor(model => model.DeskPhoneFW, new { htmlAttributes = new { @class = "form-control" } })
+                            </a>
+                            @Html.ValidationMessageFor(model => model.DeskPhoneFW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @if (Model.DeskPhoneFW == false)
+                    {
+                        <div id="PhoneFW" style="display:none;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="PhoneFW" style="display:block;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeskPhoneRename, "Desk Phone Rename?", htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-2">
+                            <a href="#" onclick="toggle_visibility('PhoneRe');">
+                                @Html.EditorFor(model => model.DeskPhoneRename, new { htmlAttributes = new { @class = "form-control" } })
+                            </a>
+                            @Html.ValidationMessageFor(model => model.DeskPhoneRename, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @if (Model.DeskPhoneRename == false)
+                    {
+                        <div id="PhoneRe" style="display:none;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="PhoneRe" style="display:block;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <div id="Phone" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeskPhoneFW, "Desk Phone Forward?", htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-2">
+                            <a href="#" onclick="toggle_visibility('PhoneFW');">
+                                @Html.EditorFor(model => model.DeskPhoneFW, new { htmlAttributes = new { @class = "form-control" } })
+                            </a>
+                            @Html.ValidationMessageFor(model => model.DeskPhoneFW, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @if (Model.DeskPhoneFW == true)
+                    {
+                        <div id="PhoneFW" style="display:block;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="PhoneFW" style="display:none;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DeskPhoneFWtW, "Phone Forward to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.DeskPhoneFWtW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DeskPhoneFWtW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeskPhoneRename, "Desk Phone Rename?", htmlAttributes: new { @class = "control-label col-md-5" })
+                        <div class="col-md-2">
+                            <a href="#" onclick="toggle_visibility('PhoneRe');">
+                                @Html.EditorFor(model => model.DeskPhoneRename, new { htmlAttributes = new { @class = "form-control" } })
+                            </a>
+                            @Html.ValidationMessageFor(model => model.DeskPhoneRename, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @if (Model.DeskPhoneRename == true)
+                    {
+                        <div id="PhoneRe" style="display:block;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="PhoneRe" style="display:none;">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PhoneRenametW, "Phone Rename to Who?", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.PhoneRenametW, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneRenametW, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+
+            <hr style="border:dashed" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EpicorAcc, "Epicor Account?", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-2">
+                    <a href="#" onclick="toggle_visibility('Epic');">
+                        @Html.EditorFor(model => model.EpicorAcc, new { htmlAttributes = new { @class = "form-control" } })
+                    </a>
+                    @Html.ValidationMessageFor(model => model.EpicorAcc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Model.EpicorAcc == false)
+            {
+                <div id="Epic" style="display:none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EpicorUserID, "Epicor User ID", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.EpicorUserID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EpicorUserID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="Epic" style="display:block;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EpicorUserID, "Epicor User ID", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.EpicorUserID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EpicorUserID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if (e.style.display == 'block' && ((id == "Archive" && '@ViewBag.Archive == false') || (id == "FowardEM" && '@ViewBag.FowardEM == false') || (id == "UDrive" && '@ViewBag.UDrive == false') || (id == "Phone" && '@ViewBag.Phone == false') || (id == "PhoneFW" && '@ViewBag.PhoneFW == false') || (id == "PhoneRe" && '@ViewBag.PhoneRe == false') || (id == "Epic" && '@ViewBag.Epic == false')))
+           e.style.display = 'none';
+       else if (e.style.display == 'none' && ((id == "Archive" && '@ViewBag.Archive == true') || (id == "FowardEM" && '@ViewBag.FowardEM == true') || (id == "UDrive" && '@ViewBag.UDrive == true') || (id == "Phone" && '@ViewBag.Phone == true') || (id == "PhoneFW" && '@ViewBag.PhoneFW == true') || (id == "PhoneRe" && '@ViewBag.PhoneRe == true') || (id == "Epic" && '@ViewBag.Epic == true')))
+           e.style.display = 'block';
+    }
+//-->
+    </script>
+}
