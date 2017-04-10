@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Time.Data.EntityModels.Install.TimeOption>
+
+@{
+    ViewBag.Title = "TIME Options with Install Hours Index";
+}
+
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+
+<div class="alert alert-info">
+    <p><span class="label label-warning">Notice:</span> When importing Time options, they must be imported individually. For example, you cannot import an option in this format: <strong>VK-1400-5/6/7/8</strong>.</p>
+    <p>It must be split up, in this case, in four different options: <strong>VK-1400-5, VK-1400-6, VK-1400-7</strong>, and <strong>VK-1400-8</strong> .</p>
+</div>
+<hr />
+@using (Html.BeginForm("Index", "TimeOptions", FormMethod.Get))
+{
+    <div class="row" style="margin-bottom:5px;">
+        <div class="col-md-8">
+            <a  style="margin-top:15px;" class="btn btn-primary btn-xs" href="@Url.Action("Create", "TimeOptions")">Create New TIME Option</a>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.DropDownList("LiftFamilyId", optionLabel: "--- Select Lift Family ---")
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table table-bordered table-hover table-responsive table-striped">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.Option)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstallHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaintFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LiftFamily.FamilyName)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @if (Model == null || Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="6" class="bg-warning text-center">
+                No rows match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Option)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstallHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaintFlag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiftFamily.FamilyName)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "TimeOptions", new { id = item.Id })"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                </td>
+                @*<td>
+                    <a href="@Url.Action("Details", "TimeOptions", new { id = item.Id })"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </td>*@
+                <td>
+                    <a href="@Url.Action("Delete", "TimeOptions", new { id = item.Id })"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

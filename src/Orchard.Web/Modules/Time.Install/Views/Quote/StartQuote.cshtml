@@ -1,0 +1,99 @@
+﻿@model Time.Install.ViewModels.QuoteViewModel
+
+@{
+    if (Model.EditQuote) { ViewBag.Title = "Edit Installation Quote"; }
+    else { ViewBag.Title = "Start Installation Quote"; }
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div align="right">
+    @Html.ActionLink("Back to Main Menu", "Index", "Home")
+</div>
+<div align="right">
+    @Html.ActionLink("Go to Aerial Quotes List without Installation Quote", "Index")
+</div>
+
+<hr />
+<h3>Aerial Quote Num: @Model.QuoteNum</h3>
+@if (Model.EditQuote)
+{<h4>Installation for @Model.InstallDescr</h4>}
+else
+{<h4>@Model.InstallDescr</h4>}
+<hr />
+
+@if (ViewBag.AerialOptions != null)
+{
+    using (Html.BeginForm("AddQuote", "Quote", FormMethod.Post, htmlAttributes: new { id = "myForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.QuoteNum)
+        @Html.HiddenFor(model => model.InstallDescr)
+        @Html.HiddenFor(model => model.EditQuote)
+        <h4>Please, select a Family Lift to continue.</h4>
+        <div class="row">
+            @if (Model.EditQuote)
+            {
+                <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", null, optionLabel: "--- Select a Lift Family ---", htmlAttributes: new { @disabled = "disabled" })</div>
+                @Html.HiddenFor(model => model.LiftFamilyId)
+                @Html.ValidationMessageFor(model => model.LiftFamilyId)
+                <div class="col-sm-2">
+                    <input type="submit" value="Edit Installation Quote" class="btn btn-primary" id="startInstall" />
+                </div>
+                @Html.Partial("_LoadingGifIndicator2")
+            }
+            else
+            {
+                <div class="col-sm-3">@Html.DropDownList("LiftFamilyId", optionLabel: "--- Select a Lift Family ---")</div>
+                @Html.HiddenFor(model => model.LiftFamilyId)
+                @Html.ValidationMessageFor(model => model.LiftFamilyId)
+                <div class="col-sm-2">
+                    <input type="submit" value="Display Install Options" class="btn btn-primary" id="startInstall" />
+                </div>
+                @Html.Partial("_LoadingGifIndicator1")
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Lift has not been configured yet. Installation Quote is not available.</strong>
+    </div>
+}
+@if (ViewBag.AlreadyExist == 1)
+{
+    <hr />
+    <div class="alert alert-danger">An Install quote already exists for this Aerial Quote. If you want to Edit an existing Install quote, go to "Install Quotes Index"</div>
+    <hr />
+}
+<hr />
+@Html.ActionLink("Back to Aerial Quote List", "Index")
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        // The following lines of code disable the button until the user makes a selection in the drop down list
+        $(document).ready(startInstallBtnEnabled);
+
+        function startInstallBtnEnabled() {
+            if (verifyFamilyLiftDDL()) {
+                $("#startInstall").prop("disabled", false);
+            }
+            else {
+                $("#startInstall").prop("disabled", true);
+            }
+        }
+
+        function verifyFamilyLiftDDL() {
+            if ($("#LiftFamilyId").val() != "") {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        $("#LiftFamilyId").change(startInstallBtnEnabled);
+    </script>
+}

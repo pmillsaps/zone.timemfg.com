@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Time.Data.EntityModels.ITInventory.AttachmentForComputer>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.ActionLink(item.FileName, "DownloadAttachment", new { id = item.ComputerId, modelOrComputer = "Computer", fileName = item.FileName })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteAttachment", new { id = item.ComputerId, modelOrComputer = "Computer", fileName = item.FileName })
+        </td>
+    </tr>
+}

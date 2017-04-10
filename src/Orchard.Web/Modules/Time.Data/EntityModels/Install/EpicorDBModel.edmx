@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PartRev">
+          <Key>
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="PartNum" />
+            <PropertyRef Name="RevisionNum" />
+            <PropertyRef Name="AltMethod" />
+          </Key>
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="RevShortDesc" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RevDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="ApprovedDate" Type="date" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="EffectiveDate" Type="date" />
+          <Property Name="TLRLaborCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="TLRBurdenCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="TLRMaterialCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="TLRSubcontractCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="TLRMtlBurCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="TLRSetupLaborCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="TLRSetupBurdenCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="LLRLaborCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="LLRBurdenCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="LLRMaterialCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="LLRSubcontractCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="LLRMtlBurCost" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="LLRSetupLaborCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="LLRSetupBurdenCost" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="RollupDate" Type="date" />
+          <Property Name="DrawNum" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ECO" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Method" Type="bit" Nullable="false" />
+          <Property Name="AutoRecOpr" Type="int" Nullable="false" />
+          <Property Name="FinalOpr" Type="int" Nullable="false" />
+          <Property Name="PDMObjID" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Configured" Type="bit" Nullable="false" />
+          <Property Name="WebConfigured" Type="bit" Nullable="false" />
+          <Property Name="ShowInputPrice" Type="bit" Nullable="false" />
+          <Property Name="AltMethod" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="AltMethodDesc" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Plant" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ParentAltMethod" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="UseStaging" Type="bit" Nullable="false" />
+          <Property Name="UseAltRevForParts" Type="bit" Nullable="false" />
+          <Property Name="OwnershipStatus" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ExtConfig" Type="bit" Nullable="false" />
+          <Property Name="ValRefDes" Type="bit" Nullable="false" />
+          <Property Name="PcGlobalPart" Type="bit" Nullable="false" />
+          <Property Name="PcEntprsConf" Type="bit" Nullable="false" />
+          <Property Name="GlobalRev" Type="bit" Nullable="false" />
+          <Property Name="RoughCutCode" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="RMAInspPlan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RMASpecID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RMASampleSize" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="RMASampleSizePct" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="BasePartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BaseRevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="ConfigID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RegenConfig" Type="bit" Nullable="false" />
+          <Property Name="SIValuesGroupSeq" Type="int" Nullable="false" />
+          <Property Name="SIValuesHeadNum" Type="int" Nullable="false" />
+          <Property Name="ExternalMES" Type="bit" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProcessMode" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="DefaultConfigPart" Type="bit" Nullable="false" />
+          <Property Name="CoPartsReqQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="MtlCostPct" Type="decimal" Precision="8" Scale="5" Nullable="false" />
+          <Property Name="LaborCostPct" Type="decimal" Precision="8" Scale="5" Nullable="false" />
+          <Property Name="CoPartsPerOp" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteDtl">
+          <Key>
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="QuoteNum" />
+            <PropertyRef Name="QuoteLine" />
+          </Key>
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="QuoteNum" Type="int" Nullable="false" />
+          <Property Name="QuoteLine" Type="int" Nullable="false" />
+          <Property Name="Ordered" Type="bit" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LineDesc" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="ProdCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="XPartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuoteComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LeadTime" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Template" Type="bit" Nullable="false" />
+          <Property Name="DrawNum" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="JobComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MfgDetail" Type="bit" Nullable="false" />
+          <Property Name="TaxCatID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="XRevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="CustNum" Type="int" Nullable="false" />
+          <Property Name="Quoted" Type="bit" Nullable="false" />
+          <Property Name="Expired" Type="bit" Nullable="false" />
+          <Property Name="WIStartDate" Type="date" />
+          <Property Name="WIStartHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIDueDate" Type="date" />
+          <Property Name="WIDueHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="BasePartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SellingExpectedQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SellingExpectedUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="ConfidencePct" Type="int" Nullable="false" />
+          <Property Name="LastUpdate" Type="date" />
+          <Property Name="LastDcdUserID" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocDiscount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="ExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="ReqShipDate" Type="date" />
+          <Property Name="OrderQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SellingExpFactor" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MultiRel" Type="bit" Nullable="false" />
+          <Property Name="POLine" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SalesCatID" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="TerritoryID" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="CurrentStage" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CreatedFrom" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="AnalysisCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PDMObjID" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="LastConfigDate" Type="date" />
+          <Property Name="LastConfigTime" Type="int" Nullable="false" />
+          <Property Name="LastConfigUserID" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="ConfigUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ConfigBaseUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="BaseRevisionNum" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="PriceListCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="BreakListCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PricingQty" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="ListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="OrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocOrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PriceGroupCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OverridePriceList" Type="bit" Nullable="false" />
+          <Property Name="PricingValue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="ExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ExpPricePerCode" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="MiscQtyNum" Type="int" Nullable="false" />
+          <Property Name="Engineer" Type="bit" Nullable="false" />
+          <Property Name="ReadyToQuote" Type="bit" Nullable="false" />
+          <Property Name="KitAllowUpdate" Type="bit" Nullable="false" />
+          <Property Name="KitShipComplete" Type="bit" Nullable="false" />
+          <Property Name="KitBackFlush" Type="bit" Nullable="false" />
+          <Property Name="KitPrintCompsPS" Type="bit" Nullable="false" />
+          <Property Name="KitPrintCompsInv" Type="bit" Nullable="false" />
+          <Property Name="KitPricing" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="KitParentLine" Type="int" Nullable="false" />
+          <Property Name="KitQtyPer" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DisplaySeq" Type="decimal" Precision="9" Scale="3" Nullable="false" />
+          <Property Name="ProjectID" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="SellingFactorDirection" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="MakeDirect" Type="bit" Nullable="false" />
+          <Property Name="PhaseID" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="KitFlag" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="KitsLoaded" Type="bit" Nullable="false" />
+          <Property Name="TaxExempt" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ChangedBy" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="ChangeDate" Type="date" />
+          <Property Name="ChangeTime" Type="int" Nullable="false" />
+          <Property Name="OwnershipStatus" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Rpt1Discount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2Discount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3Discount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1ExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2ExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3ExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1ExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2ExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3ExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1ListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2ListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3ListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1OrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2OrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3OrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1ExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2ExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3ExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="InDiscount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocInDiscount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="InExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocInExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="InListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InOrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInOrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InDiscount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2InDiscount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3InDiscount" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1InExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2InExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3InExpectedRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1InExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InExpUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InOrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InOrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InOrdBasedPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocInExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1InExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2InExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3InExtPriceDtl" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="WorstCsPct" Type="int" Nullable="false" />
+          <Property Name="BestCsPct" Type="int" Nullable="false" />
+          <Property Name="WorstCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocWorstCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1WorstCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2WorstCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3WorstCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="BestCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocBestCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1BestCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2BestCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3BestCsRevenue" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="KitCompOrigSeq" Type="int" Nullable="false" />
+          <Property Name="KitCompOrigPart" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SmartStringProcessed" Type="bit" Nullable="false" />
+          <Property Name="SmartString" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LineType" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ContractNum" Type="int" Nullable="false" />
+          <Property Name="ContractCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="DiscBreakListCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="RenewalNbr" Type="int" Nullable="false" />
+          <Property Name="DiscListPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DemandContractNum" Type="int" Nullable="false" />
+          <Property Name="OverrideDiscPriceList" Type="bit" Nullable="false" />
+          <Property Name="DemandContractLine" Type="int" Nullable="false" />
+          <Property Name="DemandHedSeq" Type="int" Nullable="false" />
+          <Property Name="DemandDtlSeq" Type="int" Nullable="false" />
+          <Property Name="ExtCompany" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="ICPOLine" Type="int" Nullable="false" />
+          <Property Name="ICPONum" Type="int" Nullable="false" />
+          <Property Name="Linked" Type="bit" Nullable="false" />
+          <Property Name="LockPrice" Type="bit" Nullable="false" />
+          <Property Name="LockQty" Type="bit" Nullable="false" />
+          <Property Name="VoidLine" Type="bit" Nullable="false" />
+          <Property Name="Warranty" Type="bit" Nullable="false" />
+          <Property Name="WarrantyCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="WarrantyComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GroupSeq" Type="int" Nullable="false" />
+          <Property Name="EstimateGUID" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="RFQCurrBaseEst" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="RFQTemplate" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreateEstimate" Type="bit" Nullable="false" />
+          <Property Name="Rating" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstimateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExternalMES" Type="bit" Nullable="false" />
+          <Property Name="NeedByDate" Type="date" />
+          <Property Name="ProcessMode" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ECCQuoteNum" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ECCQuoteLine" Type="int" Nullable="false" />
+          <Property Name="ECCCmmtRef" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ECCComment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContractID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PCLinkRemoved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteQty">
+          <Key>
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="QuoteNum" />
+            <PropertyRef Name="QuoteLine" />
+            <PropertyRef Name="QtyNum" />
+          </Key>
+          <Property Name="Company" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="QuoteNum" Type="int" Nullable="false" />
+          <Property Name="QuoteLine" Type="int" Nullable="false" />
+          <Property Name="QtyNum" Type="int" Nullable="false" />
+          <Property Name="OurQuantity" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PricePerCode" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="MtlBurMarkUp" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="MaterialMarkUp" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="SubcontractMarkUp" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="LaborMarkUp" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="BurdenMarkUp" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="MiscCostDesc" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MiscCost" Type="decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="MiscCostMarkUp" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="CommissionPct" Type="decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="PercentType" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="IUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="SalesUM" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="SellingFactor" Type="decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="SellingQuantity" Type="decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SellingFactorDirection" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="MarkUpID" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="ChangedBy" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="ChangeDate" Type="date" />
+          <Property Name="ChangeTime" Type="int" Nullable="false" />
+          <Property Name="Rpt1UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3UnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InUnitPrice" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PriceSource" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PricePerAdl1000" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="TotalSellPrice" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="SysRevID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SysRowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocPricePerAdl1000" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="DocTotalSellPrice" Type="decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="UserChangedUnitPrice" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="PartRev" EntityType="Self.PartRev" Schema="Erp" store:Type="Tables" />
+          <EntitySet Name="QuoteDtl" EntityType="Self.QuoteDtl" Schema="Erp" store:Type="Tables" />
+          <EntitySet Name="QuoteQty" EntityType="Self.QuoteQty" Schema="Erp" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="QuoteDtl">
+          <Key>
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="QuoteNum" />
+            <PropertyRef Name="QuoteLine" />
+          </Key>
+          <Property Name="Company" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuoteNum" Type="Int32" Nullable="false" />
+          <Property Name="QuoteLine" Type="Int32" Nullable="false" />
+          <Property Name="Ordered" Type="Boolean" Nullable="false" />
+          <Property Name="PartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LineDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RevisionNum" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProdCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XPartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuoteComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LeadTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Template" Type="Boolean" Nullable="false" />
+          <Property Name="DrawNum" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MfgDetail" Type="Boolean" Nullable="false" />
+          <Property Name="TaxCatID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XRevisionNum" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustNum" Type="Int32" Nullable="false" />
+          <Property Name="Quoted" Type="Boolean" Nullable="false" />
+          <Property Name="Expired" Type="Boolean" Nullable="false" />
+          <Property Name="WIStartDate" Type="DateTime" Precision="0" />
+          <Property Name="WIStartHour" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="WIDueDate" Type="DateTime" Precision="0" />
+          <Property Name="WIDueHour" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="BasePartNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SellingExpectedQty" Type="Decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SellingExpectedUM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfidencePct" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="0" />
+          <Property Name="LastDcdUserID" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiscountPercent" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocDiscount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="ExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="ReqShipDate" Type="DateTime" Precision="0" />
+          <Property Name="OrderQty" Type="Decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SellingExpFactor" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="MultiRel" Type="Boolean" Nullable="false" />
+          <Property Name="POLine" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SalesCatID" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TerritoryID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentStage" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedFrom" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnalysisCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PDMObjID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastConfigDate" Type="DateTime" Precision="0" />
+          <Property Name="LastConfigTime" Type="Int32" Nullable="false" />
+          <Property Name="LastConfigUserID" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ConfigBaseUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="BaseRevisionNum" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PriceListCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BreakListCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PricingQty" Type="Decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="ListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="OrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocOrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PriceGroupCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OverridePriceList" Type="Boolean" Nullable="false" />
+          <Property Name="PricingValue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="ExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ExpPricePerCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiscQtyNum" Type="Int32" Nullable="false" />
+          <Property Name="Engineer" Type="Boolean" Nullable="false" />
+          <Property Name="ReadyToQuote" Type="Boolean" Nullable="false" />
+          <Property Name="KitAllowUpdate" Type="Boolean" Nullable="false" />
+          <Property Name="KitShipComplete" Type="Boolean" Nullable="false" />
+          <Property Name="KitBackFlush" Type="Boolean" Nullable="false" />
+          <Property Name="KitPrintCompsPS" Type="Boolean" Nullable="false" />
+          <Property Name="KitPrintCompsInv" Type="Boolean" Nullable="false" />
+          <Property Name="KitPricing" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KitParentLine" Type="Int32" Nullable="false" />
+          <Property Name="KitQtyPer" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="DisplaySeq" Type="Decimal" Precision="9" Scale="3" Nullable="false" />
+          <Property Name="ProjectID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SellingFactorDirection" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MakeDirect" Type="Boolean" Nullable="false" />
+          <Property Name="PhaseID" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KitFlag" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KitsLoaded" Type="Boolean" Nullable="false" />
+          <Property Name="TaxExempt" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangedBy" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeDate" Type="DateTime" Precision="0" />
+          <Property Name="ChangeTime" Type="Int32" Nullable="false" />
+          <Property Name="OwnershipStatus" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rpt1Discount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2Discount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3Discount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1ExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2ExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3ExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1ExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2ExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3ExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1ListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2ListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3ListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1OrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2OrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3OrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1ExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2ExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3ExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="InDiscount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocInDiscount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="InExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocInExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="InListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InOrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInOrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InDiscount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2InDiscount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3InDiscount" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1InExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2InExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3InExpectedRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1InExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InExpUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InOrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InOrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InOrdBasedPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocInExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1InExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2InExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3InExtPriceDtl" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="WorstCsPct" Type="Int32" Nullable="false" />
+          <Property Name="BestCsPct" Type="Int32" Nullable="false" />
+          <Property Name="WorstCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocWorstCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1WorstCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2WorstCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3WorstCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="BestCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="DocBestCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt1BestCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt2BestCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="Rpt3BestCsRevenue" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="KitCompOrigSeq" Type="Int32" Nullable="false" />
+          <Property Name="KitCompOrigPart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SmartStringProcessed" Type="Boolean" Nullable="false" />
+          <Property Name="SmartString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LineType" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContractNum" Type="Int32" Nullable="false" />
+          <Property Name="ContractCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiscBreakListCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RenewalNbr" Type="Int32" Nullable="false" />
+          <Property Name="DiscListPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DemandContractNum" Type="Int32" Nullable="false" />
+          <Property Name="OverrideDiscPriceList" Type="Boolean" Nullable="false" />
+          <Property Name="DemandContractLine" Type="Int32" Nullable="false" />
+          <Property Name="DemandHedSeq" Type="Int32" Nullable="false" />
+          <Property Name="DemandDtlSeq" Type="Int32" Nullable="false" />
+          <Property Name="ExtCompany" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ICPOLine" Type="Int32" Nullable="false" />
+          <Property Name="ICPONum" Type="Int32" Nullable="false" />
+          <Property Name="Linked" Type="Boolean" Nullable="false" />
+          <Property Name="LockPrice" Type="Boolean" Nullable="false" />
+          <Property Name="LockQty" Type="Boolean" Nullable="false" />
+          <Property Name="VoidLine" Type="Boolean" Nullable="false" />
+          <Property Name="Warranty" Type="Boolean" Nullable="false" />
+          <Property Name="WarrantyCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WarrantyComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupSeq" Type="Int32" Nullable="false" />
+          <Property Name="EstimateGUID" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RFQCurrBaseEst" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RFQTemplate" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateEstimate" Type="Boolean" Nullable="false" />
+          <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EstimateUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+          <Property Name="ExternalMES" Type="Boolean" Nullable="false" />
+          <Property Name="NeedByDate" Type="DateTime" Precision="0" />
+          <Property Name="ProcessMode" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ECCQuoteNum" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ECCQuoteLine" Type="Int32" Nullable="false" />
+          <Property Name="ECCCmmtRef" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ECCComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContractID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PCLinkRemoved" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteQty">
+          <Key>
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="QuoteNum" />
+            <PropertyRef Name="QuoteLine" />
+            <PropertyRef Name="QtyNum" />
+          </Key>
+          <Property Name="Company" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuoteNum" Type="Int32" Nullable="false" />
+          <Property Name="QuoteLine" Type="Int32" Nullable="false" />
+          <Property Name="QtyNum" Type="Int32" Nullable="false" />
+          <Property Name="OurQuantity" Type="Decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PricePerCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MtlBurMarkUp" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="MaterialMarkUp" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="SubcontractMarkUp" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="LaborMarkUp" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="BurdenMarkUp" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="MiscCostDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiscCost" Type="Decimal" Precision="17" Scale="3" Nullable="false" />
+          <Property Name="MiscCostMarkUp" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="CommissionPct" Type="Decimal" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="PercentType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IUM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SalesUM" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SellingFactor" Type="Decimal" Precision="18" Scale="8" Nullable="false" />
+          <Property Name="SellingQuantity" Type="Decimal" Precision="22" Scale="8" Nullable="false" />
+          <Property Name="SellingFactorDirection" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MarkUpID" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangedBy" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChangeDate" Type="DateTime" Precision="0" />
+          <Property Name="ChangeTime" Type="Int32" Nullable="false" />
+          <Property Name="Rpt1UnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2UnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3UnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="InUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="DocInUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt1InUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt2InUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="Rpt3InUnitPrice" Type="Decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="PriceSource" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PricePerAdl1000" Type="Decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="TotalSellPrice" Type="Decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+          <Property Name="DocPricePerAdl1000" Type="Decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="DocTotalSellPrice" Type="Decimal" Precision="14" Scale="5" Nullable="false" />
+          <Property Name="UserChangedUnitPrice" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EpicorInstallEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="QuoteDtls" EntityType="Self.QuoteDtl" />
+          <EntitySet Name="QuoteQties" EntityType="Self.QuoteQty" />
+          <EntitySet Name="PartRevs" EntityType="TestModel.PartRev" />
+        </EntityContainer>
+        <EntityType Name="PartRev">
+          <Key>
+            <PropertyRef Name="Company" />
+            <PropertyRef Name="PartNum" />
+            <PropertyRef Name="RevisionNum" />
+            <PropertyRef Name="AltMethod" />
+          </Key>
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="RevShortDesc" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RevDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedBy" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="EffectiveDate" Type="DateTime" Precision="0" />
+          <Property Name="TLRLaborCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="TLRBurdenCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="TLRMaterialCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="TLRSubcontractCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="TLRMtlBurCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="TLRSetupLaborCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="TLRSetupBurdenCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="LLRLaborCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="LLRBurdenCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="LLRMaterialCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="LLRSubcontractCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="LLRMtlBurCost" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="LLRSetupLaborCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="LLRSetupBurdenCost" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="RollupDate" Type="DateTime" Precision="0" />
+          <Property Name="DrawNum" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ECO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Method" Type="Boolean" Nullable="false" />
+          <Property Name="AutoRecOpr" Type="Int32" Nullable="false" />
+          <Property Name="FinalOpr" Type="Int32" Nullable="false" />
+          <Property Name="PDMObjID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Configured" Type="Boolean" Nullable="false" />
+          <Property Name="WebConfigured" Type="Boolean" Nullable="false" />
+          <Property Name="ShowInputPrice" Type="Boolean" Nullable="false" />
+          <Property Name="AltMethod" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="AltMethodDesc" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Plant" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ParentAltMethod" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="UseStaging" Type="Boolean" Nullable="false" />
+          <Property Name="UseAltRevForParts" Type="Boolean" Nullable="false" />
+          <Property Name="OwnershipStatus" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ExtConfig" Type="Boolean" Nullable="false" />
+          <Property Name="ValRefDes" Type="Boolean" Nullable="false" />
+          <Property Name="PcGlobalPart" Type="Boolean" Nullable="false" />
+          <Property Name="PcEntprsConf" Type="Boolean" Nullable="false" />
+          <Property Name="GlobalRev" Type="Boolean" Nullable="false" />
+          <Property Name="RoughCutCode" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="RMAInspPlan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RMASpecID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RMASampleSize" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="RMASampleSizePct" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="BasePartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BaseRevisionNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RegenConfig" Type="Boolean" Nullable="false" />
+          <Property Name="SIValuesGroupSeq" Type="Int32" Nullable="false" />
+          <Property Name="SIValuesHeadNum" Type="Int32" Nullable="false" />
+          <Property Name="ExternalMES" Type="Boolean" Nullable="false" />
+          <Property Name="SysRevID" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SysRowID" Type="Guid" Nullable="false" />
+          <Property Name="ProcessMode" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultConfigPart" Type="Boolean" Nullable="false" />
+          <Property Name="CoPartsReqQty" Type="Decimal" Nullable="false" Precision="22" Scale="8" />
+          <Property Name="MtlCostPct" Type="Decimal" Nullable="false" Precision="8" Scale="5" />
+          <Property Name="LaborCostPct" Type="Decimal" Nullable="false" Precision="8" Scale="5" />
+          <Property Name="CoPartsPerOp" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="EpicorInstallEntities">
+          <EntitySetMapping Name="QuoteDtls">
+            <EntityTypeMapping TypeName="TestModel.QuoteDtl">
+              <MappingFragment StoreEntitySet="QuoteDtl">
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="QuoteNum" ColumnName="QuoteNum" />
+                <ScalarProperty Name="QuoteLine" ColumnName="QuoteLine" />
+                <ScalarProperty Name="Ordered" ColumnName="Ordered" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="LineDesc" ColumnName="LineDesc" />
+                <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+                <ScalarProperty Name="ProdCode" ColumnName="ProdCode" />
+                <ScalarProperty Name="XPartNum" ColumnName="XPartNum" />
+                <ScalarProperty Name="QuoteComment" ColumnName="QuoteComment" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="Template" ColumnName="Template" />
+                <ScalarProperty Name="DrawNum" ColumnName="DrawNum" />
+                <ScalarProperty Name="JobComment" ColumnName="JobComment" />
+                <ScalarProperty Name="MfgDetail" ColumnName="MfgDetail" />
+                <ScalarProperty Name="TaxCatID" ColumnName="TaxCatID" />
+                <ScalarProperty Name="XRevisionNum" ColumnName="XRevisionNum" />
+                <ScalarProperty Name="CustNum" ColumnName="CustNum" />
+                <ScalarProperty Name="Quoted" ColumnName="Quoted" />
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
+                <ScalarProperty Name="WIStartDate" ColumnName="WIStartDate" />
+                <ScalarProperty Name="WIStartHour" ColumnName="WIStartHour" />
+                <ScalarProperty Name="WIDueDate" ColumnName="WIDueDate" />
+                <ScalarProperty Name="WIDueHour" ColumnName="WIDueHour" />
+                <ScalarProperty Name="BasePartNum" ColumnName="BasePartNum" />
+                <ScalarProperty Name="SellingExpectedQty" ColumnName="SellingExpectedQty" />
+                <ScalarProperty Name="SellingExpectedUM" ColumnName="SellingExpectedUM" />
+                <ScalarProperty Name="ConfidencePct" ColumnName="ConfidencePct" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="LastDcdUserID" ColumnName="LastDcdUserID" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="DocDiscount" ColumnName="DocDiscount" />
+                <ScalarProperty Name="ExpectedRevenue" ColumnName="ExpectedRevenue" />
+                <ScalarProperty Name="DocExpectedRevenue" ColumnName="DocExpectedRevenue" />
+                <ScalarProperty Name="ReqShipDate" ColumnName="ReqShipDate" />
+                <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+                <ScalarProperty Name="SellingExpFactor" ColumnName="SellingExpFactor" />
+                <ScalarProperty Name="MultiRel" ColumnName="MultiRel" />
+                <ScalarProperty Name="POLine" ColumnName="POLine" />
+                <ScalarProperty Name="SalesCatID" ColumnName="SalesCatID" />
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+                <ScalarProperty Name="CurrentStage" ColumnName="CurrentStage" />
+                <ScalarProperty Name="CreatedFrom" ColumnName="CreatedFrom" />
+                <ScalarProperty Name="AnalysisCode" ColumnName="AnalysisCode" />
+                <ScalarProperty Name="PDMObjID" ColumnName="PDMObjID" />
+                <ScalarProperty Name="LastConfigDate" ColumnName="LastConfigDate" />
+                <ScalarProperty Name="LastConfigTime" ColumnName="LastConfigTime" />
+                <ScalarProperty Name="LastConfigUserID" ColumnName="LastConfigUserID" />
+                <ScalarProperty Name="ConfigUnitPrice" ColumnName="ConfigUnitPrice" />
+                <ScalarProperty Name="ConfigBaseUnitPrice" ColumnName="ConfigBaseUnitPrice" />
+                <ScalarProperty Name="BaseRevisionNum" ColumnName="BaseRevisionNum" />
+                <ScalarProperty Name="PriceListCode" ColumnName="PriceListCode" />
+                <ScalarProperty Name="BreakListCode" ColumnName="BreakListCode" />
+                <ScalarProperty Name="PricingQty" ColumnName="PricingQty" />
+                <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
+                <ScalarProperty Name="DocListPrice" ColumnName="DocListPrice" />
+                <ScalarProperty Name="OrdBasedPrice" ColumnName="OrdBasedPrice" />
+                <ScalarProperty Name="DocOrdBasedPrice" ColumnName="DocOrdBasedPrice" />
+                <ScalarProperty Name="PriceGroupCode" ColumnName="PriceGroupCode" />
+                <ScalarProperty Name="OverridePriceList" ColumnName="OverridePriceList" />
+                <ScalarProperty Name="PricingValue" ColumnName="PricingValue" />
+                <ScalarProperty Name="ExpUnitPrice" ColumnName="ExpUnitPrice" />
+                <ScalarProperty Name="DocExpUnitPrice" ColumnName="DocExpUnitPrice" />
+                <ScalarProperty Name="ExpPricePerCode" ColumnName="ExpPricePerCode" />
+                <ScalarProperty Name="MiscQtyNum" ColumnName="MiscQtyNum" />
+                <ScalarProperty Name="Engineer" ColumnName="Engineer" />
+                <ScalarProperty Name="ReadyToQuote" ColumnName="ReadyToQuote" />
+                <ScalarProperty Name="KitAllowUpdate" ColumnName="KitAllowUpdate" />
+                <ScalarProperty Name="KitShipComplete" ColumnName="KitShipComplete" />
+                <ScalarProperty Name="KitBackFlush" ColumnName="KitBackFlush" />
+                <ScalarProperty Name="KitPrintCompsPS" ColumnName="KitPrintCompsPS" />
+                <ScalarProperty Name="KitPrintCompsInv" ColumnName="KitPrintCompsInv" />
+                <ScalarProperty Name="KitPricing" ColumnName="KitPricing" />
+                <ScalarProperty Name="KitParentLine" ColumnName="KitParentLine" />
+                <ScalarProperty Name="KitQtyPer" ColumnName="KitQtyPer" />
+                <ScalarProperty Name="DisplaySeq" ColumnName="DisplaySeq" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="SellingFactorDirection" ColumnName="SellingFactorDirection" />
+                <ScalarProperty Name="MakeDirect" ColumnName="MakeDirect" />
+                <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+                <ScalarProperty Name="KitFlag" ColumnName="KitFlag" />
+                <ScalarProperty Name="KitsLoaded" ColumnName="KitsLoaded" />
+                <ScalarProperty Name="TaxExempt" ColumnName="TaxExempt" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+                <ScalarProperty Name="OwnershipStatus" ColumnName="OwnershipStatus" />
+                <ScalarProperty Name="Rpt1Discount" ColumnName="Rpt1Discount" />
+                <ScalarProperty Name="Rpt2Discount" ColumnName="Rpt2Discount" />
+                <ScalarProperty Name="Rpt3Discount" ColumnName="Rpt3Discount" />
+                <ScalarProperty Name="Rpt1ExpectedRevenue" ColumnName="Rpt1ExpectedRevenue" />
+                <ScalarProperty Name="Rpt2ExpectedRevenue" ColumnName="Rpt2ExpectedRevenue" />
+                <ScalarProperty Name="Rpt3ExpectedRevenue" ColumnName="Rpt3ExpectedRevenue" />
+                <ScalarProperty Name="Rpt1ExpUnitPrice" ColumnName="Rpt1ExpUnitPrice" />
+                <ScalarProperty Name="Rpt2ExpUnitPrice" ColumnName="Rpt2ExpUnitPrice" />
+                <ScalarProperty Name="Rpt3ExpUnitPrice" ColumnName="Rpt3ExpUnitPrice" />
+                <ScalarProperty Name="Rpt1ListPrice" ColumnName="Rpt1ListPrice" />
+                <ScalarProperty Name="Rpt2ListPrice" ColumnName="Rpt2ListPrice" />
+                <ScalarProperty Name="Rpt3ListPrice" ColumnName="Rpt3ListPrice" />
+                <ScalarProperty Name="Rpt1OrdBasedPrice" ColumnName="Rpt1OrdBasedPrice" />
+                <ScalarProperty Name="Rpt2OrdBasedPrice" ColumnName="Rpt2OrdBasedPrice" />
+                <ScalarProperty Name="Rpt3OrdBasedPrice" ColumnName="Rpt3OrdBasedPrice" />
+                <ScalarProperty Name="ExtPriceDtl" ColumnName="ExtPriceDtl" />
+                <ScalarProperty Name="DocExtPriceDtl" ColumnName="DocExtPriceDtl" />
+                <ScalarProperty Name="Rpt1ExtPriceDtl" ColumnName="Rpt1ExtPriceDtl" />
+                <ScalarProperty Name="Rpt2ExtPriceDtl" ColumnName="Rpt2ExtPriceDtl" />
+                <ScalarProperty Name="Rpt3ExtPriceDtl" ColumnName="Rpt3ExtPriceDtl" />
+                <ScalarProperty Name="InDiscount" ColumnName="InDiscount" />
+                <ScalarProperty Name="DocInDiscount" ColumnName="DocInDiscount" />
+                <ScalarProperty Name="InExpectedRevenue" ColumnName="InExpectedRevenue" />
+                <ScalarProperty Name="DocInExpectedRevenue" ColumnName="DocInExpectedRevenue" />
+                <ScalarProperty Name="InListPrice" ColumnName="InListPrice" />
+                <ScalarProperty Name="DocInListPrice" ColumnName="DocInListPrice" />
+                <ScalarProperty Name="InOrdBasedPrice" ColumnName="InOrdBasedPrice" />
+                <ScalarProperty Name="DocInOrdBasedPrice" ColumnName="DocInOrdBasedPrice" />
+                <ScalarProperty Name="InExpUnitPrice" ColumnName="InExpUnitPrice" />
+                <ScalarProperty Name="DocInExpUnitPrice" ColumnName="DocInExpUnitPrice" />
+                <ScalarProperty Name="Rpt1InDiscount" ColumnName="Rpt1InDiscount" />
+                <ScalarProperty Name="Rpt2InDiscount" ColumnName="Rpt2InDiscount" />
+                <ScalarProperty Name="Rpt3InDiscount" ColumnName="Rpt3InDiscount" />
+                <ScalarProperty Name="Rpt1InExpectedRevenue" ColumnName="Rpt1InExpectedRevenue" />
+                <ScalarProperty Name="Rpt2InExpectedRevenue" ColumnName="Rpt2InExpectedRevenue" />
+                <ScalarProperty Name="Rpt3InExpectedRevenue" ColumnName="Rpt3InExpectedRevenue" />
+                <ScalarProperty Name="Rpt1InExpUnitPrice" ColumnName="Rpt1InExpUnitPrice" />
+                <ScalarProperty Name="Rpt2InExpUnitPrice" ColumnName="Rpt2InExpUnitPrice" />
+                <ScalarProperty Name="Rpt3InExpUnitPrice" ColumnName="Rpt3InExpUnitPrice" />
+                <ScalarProperty Name="Rpt1InListPrice" ColumnName="Rpt1InListPrice" />
+                <ScalarProperty Name="Rpt2InListPrice" ColumnName="Rpt2InListPrice" />
+                <ScalarProperty Name="Rpt3InListPrice" ColumnName="Rpt3InListPrice" />
+                <ScalarProperty Name="Rpt1InOrdBasedPrice" ColumnName="Rpt1InOrdBasedPrice" />
+                <ScalarProperty Name="Rpt2InOrdBasedPrice" ColumnName="Rpt2InOrdBasedPrice" />
+                <ScalarProperty Name="Rpt3InOrdBasedPrice" ColumnName="Rpt3InOrdBasedPrice" />
+                <ScalarProperty Name="InExtPriceDtl" ColumnName="InExtPriceDtl" />
+                <ScalarProperty Name="DocInExtPriceDtl" ColumnName="DocInExtPriceDtl" />
+                <ScalarProperty Name="Rpt1InExtPriceDtl" ColumnName="Rpt1InExtPriceDtl" />
+                <ScalarProperty Name="Rpt2InExtPriceDtl" ColumnName="Rpt2InExtPriceDtl" />
+                <ScalarProperty Name="Rpt3InExtPriceDtl" ColumnName="Rpt3InExtPriceDtl" />
+                <ScalarProperty Name="WorstCsPct" ColumnName="WorstCsPct" />
+                <ScalarProperty Name="BestCsPct" ColumnName="BestCsPct" />
+                <ScalarProperty Name="WorstCsRevenue" ColumnName="WorstCsRevenue" />
+                <ScalarProperty Name="DocWorstCsRevenue" ColumnName="DocWorstCsRevenue" />
+                <ScalarProperty Name="Rpt1WorstCsRevenue" ColumnName="Rpt1WorstCsRevenue" />
+                <ScalarProperty Name="Rpt2WorstCsRevenue" ColumnName="Rpt2WorstCsRevenue" />
+                <ScalarProperty Name="Rpt3WorstCsRevenue" ColumnName="Rpt3WorstCsRevenue" />
+                <ScalarProperty Name="BestCsRevenue" ColumnName="BestCsRevenue" />
+                <ScalarProperty Name="DocBestCsRevenue" ColumnName="DocBestCsRevenue" />
+                <ScalarProperty Name="Rpt1BestCsRevenue" ColumnName="Rpt1BestCsRevenue" />
+                <ScalarProperty Name="Rpt2BestCsRevenue" ColumnName="Rpt2BestCsRevenue" />
+                <ScalarProperty Name="Rpt3BestCsRevenue" ColumnName="Rpt3BestCsRevenue" />
+                <ScalarProperty Name="KitCompOrigSeq" ColumnName="KitCompOrigSeq" />
+                <ScalarProperty Name="KitCompOrigPart" ColumnName="KitCompOrigPart" />
+                <ScalarProperty Name="SmartStringProcessed" ColumnName="SmartStringProcessed" />
+                <ScalarProperty Name="SmartString" ColumnName="SmartString" />
+                <ScalarProperty Name="LineType" ColumnName="LineType" />
+                <ScalarProperty Name="ContractNum" ColumnName="ContractNum" />
+                <ScalarProperty Name="ContractCode" ColumnName="ContractCode" />
+                <ScalarProperty Name="DiscBreakListCode" ColumnName="DiscBreakListCode" />
+                <ScalarProperty Name="RenewalNbr" ColumnName="RenewalNbr" />
+                <ScalarProperty Name="DiscListPrice" ColumnName="DiscListPrice" />
+                <ScalarProperty Name="DemandContractNum" ColumnName="DemandContractNum" />
+                <ScalarProperty Name="OverrideDiscPriceList" ColumnName="OverrideDiscPriceList" />
+                <ScalarProperty Name="DemandContractLine" ColumnName="DemandContractLine" />
+                <ScalarProperty Name="DemandHedSeq" ColumnName="DemandHedSeq" />
+                <ScalarProperty Name="DemandDtlSeq" ColumnName="DemandDtlSeq" />
+                <ScalarProperty Name="ExtCompany" ColumnName="ExtCompany" />
+                <ScalarProperty Name="ICPOLine" ColumnName="ICPOLine" />
+                <ScalarProperty Name="ICPONum" ColumnName="ICPONum" />
+                <ScalarProperty Name="Linked" ColumnName="Linked" />
+                <ScalarProperty Name="LockPrice" ColumnName="LockPrice" />
+                <ScalarProperty Name="LockQty" ColumnName="LockQty" />
+                <ScalarProperty Name="VoidLine" ColumnName="VoidLine" />
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+                <ScalarProperty Name="WarrantyCode" ColumnName="WarrantyCode" />
+                <ScalarProperty Name="WarrantyComment" ColumnName="WarrantyComment" />
+                <ScalarProperty Name="GroupSeq" ColumnName="GroupSeq" />
+                <ScalarProperty Name="EstimateGUID" ColumnName="EstimateGUID" />
+                <ScalarProperty Name="RFQCurrBaseEst" ColumnName="RFQCurrBaseEst" />
+                <ScalarProperty Name="RFQTemplate" ColumnName="RFQTemplate" />
+                <ScalarProperty Name="CreateEstimate" ColumnName="CreateEstimate" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="EstimateUserID" ColumnName="EstimateUserID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="ExternalMES" ColumnName="ExternalMES" />
+                <ScalarProperty Name="NeedByDate" ColumnName="NeedByDate" />
+                <ScalarProperty Name="ProcessMode" ColumnName="ProcessMode" />
+                <ScalarProperty Name="ECCQuoteNum" ColumnName="ECCQuoteNum" />
+                <ScalarProperty Name="ECCQuoteLine" ColumnName="ECCQuoteLine" />
+                <ScalarProperty Name="ECCCmmtRef" ColumnName="ECCCmmtRef" />
+                <ScalarProperty Name="ECCComment" ColumnName="ECCComment" />
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="PCLinkRemoved" ColumnName="PCLinkRemoved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteQties">
+            <EntityTypeMapping TypeName="TestModel.QuoteQty">
+              <MappingFragment StoreEntitySet="QuoteQty">
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="QuoteNum" ColumnName="QuoteNum" />
+                <ScalarProperty Name="QuoteLine" ColumnName="QuoteLine" />
+                <ScalarProperty Name="QtyNum" ColumnName="QtyNum" />
+                <ScalarProperty Name="OurQuantity" ColumnName="OurQuantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DocUnitPrice" ColumnName="DocUnitPrice" />
+                <ScalarProperty Name="PricePerCode" ColumnName="PricePerCode" />
+                <ScalarProperty Name="MtlBurMarkUp" ColumnName="MtlBurMarkUp" />
+                <ScalarProperty Name="MaterialMarkUp" ColumnName="MaterialMarkUp" />
+                <ScalarProperty Name="SubcontractMarkUp" ColumnName="SubcontractMarkUp" />
+                <ScalarProperty Name="LaborMarkUp" ColumnName="LaborMarkUp" />
+                <ScalarProperty Name="BurdenMarkUp" ColumnName="BurdenMarkUp" />
+                <ScalarProperty Name="MiscCostDesc" ColumnName="MiscCostDesc" />
+                <ScalarProperty Name="MiscCost" ColumnName="MiscCost" />
+                <ScalarProperty Name="MiscCostMarkUp" ColumnName="MiscCostMarkUp" />
+                <ScalarProperty Name="CommissionPct" ColumnName="CommissionPct" />
+                <ScalarProperty Name="PercentType" ColumnName="PercentType" />
+                <ScalarProperty Name="IUM" ColumnName="IUM" />
+                <ScalarProperty Name="SalesUM" ColumnName="SalesUM" />
+                <ScalarProperty Name="SellingFactor" ColumnName="SellingFactor" />
+                <ScalarProperty Name="SellingQuantity" ColumnName="SellingQuantity" />
+                <ScalarProperty Name="SellingFactorDirection" ColumnName="SellingFactorDirection" />
+                <ScalarProperty Name="MarkUpID" ColumnName="MarkUpID" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="ChangeTime" ColumnName="ChangeTime" />
+                <ScalarProperty Name="Rpt1UnitPrice" ColumnName="Rpt1UnitPrice" />
+                <ScalarProperty Name="Rpt2UnitPrice" ColumnName="Rpt2UnitPrice" />
+                <ScalarProperty Name="Rpt3UnitPrice" ColumnName="Rpt3UnitPrice" />
+                <ScalarProperty Name="InUnitPrice" ColumnName="InUnitPrice" />
+                <ScalarProperty Name="DocInUnitPrice" ColumnName="DocInUnitPrice" />
+                <ScalarProperty Name="Rpt1InUnitPrice" ColumnName="Rpt1InUnitPrice" />
+                <ScalarProperty Name="Rpt2InUnitPrice" ColumnName="Rpt2InUnitPrice" />
+                <ScalarProperty Name="Rpt3InUnitPrice" ColumnName="Rpt3InUnitPrice" />
+                <ScalarProperty Name="PriceSource" ColumnName="PriceSource" />
+                <ScalarProperty Name="PricePerAdl1000" ColumnName="PricePerAdl1000" />
+                <ScalarProperty Name="TotalSellPrice" ColumnName="TotalSellPrice" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="DocPricePerAdl1000" ColumnName="DocPricePerAdl1000" />
+                <ScalarProperty Name="DocTotalSellPrice" ColumnName="DocTotalSellPrice" />
+                <ScalarProperty Name="UserChangedUnitPrice" ColumnName="UserChangedUnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartRevs">
+            <EntityTypeMapping TypeName="TestModel.PartRev">
+              <MappingFragment StoreEntitySet="PartRev">
+                <ScalarProperty Name="CoPartsPerOp" ColumnName="CoPartsPerOp" />
+                <ScalarProperty Name="LaborCostPct" ColumnName="LaborCostPct" />
+                <ScalarProperty Name="MtlCostPct" ColumnName="MtlCostPct" />
+                <ScalarProperty Name="CoPartsReqQty" ColumnName="CoPartsReqQty" />
+                <ScalarProperty Name="DefaultConfigPart" ColumnName="DefaultConfigPart" />
+                <ScalarProperty Name="ProcessMode" ColumnName="ProcessMode" />
+                <ScalarProperty Name="SysRowID" ColumnName="SysRowID" />
+                <ScalarProperty Name="SysRevID" ColumnName="SysRevID" />
+                <ScalarProperty Name="ExternalMES" ColumnName="ExternalMES" />
+                <ScalarProperty Name="SIValuesHeadNum" ColumnName="SIValuesHeadNum" />
+                <ScalarProperty Name="SIValuesGroupSeq" ColumnName="SIValuesGroupSeq" />
+                <ScalarProperty Name="RegenConfig" ColumnName="RegenConfig" />
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+                <ScalarProperty Name="BaseRevisionNum" ColumnName="BaseRevisionNum" />
+                <ScalarProperty Name="BasePartNum" ColumnName="BasePartNum" />
+                <ScalarProperty Name="RMASampleSizePct" ColumnName="RMASampleSizePct" />
+                <ScalarProperty Name="RMASampleSize" ColumnName="RMASampleSize" />
+                <ScalarProperty Name="RMASpecID" ColumnName="RMASpecID" />
+                <ScalarProperty Name="RMAInspPlan" ColumnName="RMAInspPlan" />
+                <ScalarProperty Name="RoughCutCode" ColumnName="RoughCutCode" />
+                <ScalarProperty Name="GlobalRev" ColumnName="GlobalRev" />
+                <ScalarProperty Name="PcEntprsConf" ColumnName="PcEntprsConf" />
+                <ScalarProperty Name="PcGlobalPart" ColumnName="PcGlobalPart" />
+                <ScalarProperty Name="ValRefDes" ColumnName="ValRefDes" />
+                <ScalarProperty Name="ExtConfig" ColumnName="ExtConfig" />
+                <ScalarProperty Name="OwnershipStatus" ColumnName="OwnershipStatus" />
+                <ScalarProperty Name="UseAltRevForParts" ColumnName="UseAltRevForParts" />
+                <ScalarProperty Name="UseStaging" ColumnName="UseStaging" />
+                <ScalarProperty Name="ParentAltMethod" ColumnName="ParentAltMethod" />
+                <ScalarProperty Name="Plant" ColumnName="Plant" />
+                <ScalarProperty Name="AltMethodDesc" ColumnName="AltMethodDesc" />
+                <ScalarProperty Name="AltMethod" ColumnName="AltMethod" />
+                <ScalarProperty Name="ShowInputPrice" ColumnName="ShowInputPrice" />
+                <ScalarProperty Name="WebConfigured" ColumnName="WebConfigured" />
+                <ScalarProperty Name="Configured" ColumnName="Configured" />
+                <ScalarProperty Name="PDMObjID" ColumnName="PDMObjID" />
+                <ScalarProperty Name="FinalOpr" ColumnName="FinalOpr" />
+                <ScalarProperty Name="AutoRecOpr" ColumnName="AutoRecOpr" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="ECO" ColumnName="ECO" />
+                <ScalarProperty Name="DrawNum" ColumnName="DrawNum" />
+                <ScalarProperty Name="RollupDate" ColumnName="RollupDate" />
+                <ScalarProperty Name="LLRSetupBurdenCost" ColumnName="LLRSetupBurdenCost" />
+                <ScalarProperty Name="LLRSetupLaborCost" ColumnName="LLRSetupLaborCost" />
+                <ScalarProperty Name="LLRMtlBurCost" ColumnName="LLRMtlBurCost" />
+                <ScalarProperty Name="LLRSubcontractCost" ColumnName="LLRSubcontractCost" />
+                <ScalarProperty Name="LLRMaterialCost" ColumnName="LLRMaterialCost" />
+                <ScalarProperty Name="LLRBurdenCost" ColumnName="LLRBurdenCost" />
+                <ScalarProperty Name="LLRLaborCost" ColumnName="LLRLaborCost" />
+                <ScalarProperty Name="TLRSetupBurdenCost" ColumnName="TLRSetupBurdenCost" />
+                <ScalarProperty Name="TLRSetupLaborCost" ColumnName="TLRSetupLaborCost" />
+                <ScalarProperty Name="TLRMtlBurCost" ColumnName="TLRMtlBurCost" />
+                <ScalarProperty Name="TLRSubcontractCost" ColumnName="TLRSubcontractCost" />
+                <ScalarProperty Name="TLRMaterialCost" ColumnName="TLRMaterialCost" />
+                <ScalarProperty Name="TLRBurdenCost" ColumnName="TLRBurdenCost" />
+                <ScalarProperty Name="TLRLaborCost" ColumnName="TLRLaborCost" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="RevDescription" ColumnName="RevDescription" />
+                <ScalarProperty Name="RevShortDesc" ColumnName="RevShortDesc" />
+                <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

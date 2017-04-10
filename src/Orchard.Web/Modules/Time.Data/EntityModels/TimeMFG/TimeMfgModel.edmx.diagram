@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9f59051108e4e3f9ff2482c1e1e8943" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListComment" Width="1.5" PointX="12" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListDistributor" Width="1.5" PointX="12" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListEmail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListImage" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListJobComment" Width="1.5" PointX="14.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListJob" Width="1.5" PointX="12" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketAttachment" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketCategory" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketDepartment" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketEmployee" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketLink" Width="1.5" PointX="8.125" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketNote" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketPriority" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketProject" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketStatusHistory" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketTask" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketRequestor" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="TimeMFGModel.FK_LoadListJobComment_LoadListJobs" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketAttachments_TicketProjects" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketDepartment_TicketEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketEmployees1" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketTasks_TicketEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketLinks_TicketProjects" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketLinks_TicketProjects1" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketNotes_TicketProjects" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketPriorities" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketStatusHistory_TicketProjects" ManuallyRouted="false" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketTasks_TicketProjects" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TimeMFGModel.Setting" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketVisibility" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.WaterTest" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.SysTask" Width="1.5" PointX="16.625" PointY="6.5" />
+        <EntityTypeShape EntityType="TimeMFGModel.SysTaskSchedule" Width="1.5" PointX="13.75" PointY="4" />
+        <AssociationConnector Association="TimeMFGModel.FK_SysTask_SysTaskSchedule" />
+        <EntityTypeShape EntityType="TimeMFGModel.TicketStatus" Width="1.5" PointX="3.625" PointY="14" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketProjects_TicketStatuses" />
+        <AssociationConnector Association="TimeMFGModel.FK_TicketStatusHistory_TicketStatuses" />
+        <EntityTypeShape EntityType="TimeMFGModel.Message_Type" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.MSMQ_Status" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.NLog_Entries" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.ValuedInventory" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.V_ValuedInventoryByPeriod" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.V_ClassIdSummary" Width="1.5" PointX="14.375" PointY="15.75" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadListJobStatu" Width="1.5" PointX="14.25" PointY="23.5" />
+        <AssociationConnector Association="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs" />
+        <EntityTypeShape EntityType="TimeMFGModel.LoadList" Width="1.5" PointX="9.75" PointY="16.375" />
+        <AssociationConnector Association="TimeMFGModel.FK_LoadListComment_LoadList" />
+        <AssociationConnector Association="TimeMFGModel.FK_LoadListImage_LoadList" />
+        <AssociationConnector Association="TimeMFGModel.FK_LoadListJobs_LoadList" />
+        <AssociationConnector Association="TimeMFGModel.LoadList_Distributor" />
+        <EntityTypeShape EntityType="TimeMFGModel.Term_Employees" Width="1.5" PointX="16.375" PointY="19.125" />
+        <EntityTypeShape EntityType="TimeMFGModel.Term_ITInfo" Width="1.5" PointX="18.625" PointY="20.375" />
+        <EntityTypeShape EntityType="TimeMFGModel.Term_Property" Width="1.5" PointX="18.625" PointY="16.25" />
+        <AssociationConnector Association="TimeMFGModel.FK_Term_ITInfo_Term_Employees" />
+        <AssociationConnector Association="TimeMFGModel.FK_Term_Property_Term_Employees" />
+        <EntityTypeShape EntityType="TimeMFGModel.Term_Item" Width="1.5" PointX="18.625" PointY="25.375" />
+        <AssociationConnector Association="TimeMFGModel.FK_Term_Item_Term_Employee" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

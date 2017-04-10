@@ -1,0 +1,56 @@
+﻿@model Time.Data.EntityModels.Install.OptionTitleDescpForWordDoc
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/Modules/Time.IT/Styles/customStyle.css" rel="stylesheet" />
+
+<h2>Details</h2>
+
+<div class="mypanel-header">
+    <h4>Option Name and Description For Quotation Presentation</h4>
+</div>
+<div id="panel" class="mypanel-body">
+    <div class="alert alert-info">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.LiftFamily.FamilyName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LiftFamily.FamilyName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OptionTitlesForWordDoc.OptionTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OptionTitlesForWordDoc.OptionTitle)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { FamilyName = Model.LiftFamily.FamilyName, OptionName = Model.OptionTitlesForWordDoc.OptionTitle })
+</p>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#panel").slideDown(2000);
+        });
+    </script>
+}

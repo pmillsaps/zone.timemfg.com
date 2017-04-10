@@ -1,0 +1,2404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeMFGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LoadList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateIssued" Type="datetime" Nullable="false" />
+          <Property Name="DateRevised" Type="datetime" />
+          <Property Name="DateSchedShip" Type="datetime" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="TruckingCompany" Type="nvarchar" MaxLength="75" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="Complete" Type="bit" Nullable="false" />
+          <Property Name="Distributors" Type="nvarchar" MaxLength="200" />
+          <Property Name="MakeReady" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoadList_Distributor">
+          <Key>
+            <PropertyRef Name="LoadListId" />
+            <PropertyRef Name="DistributorId" />
+          </Key>
+          <Property Name="LoadListId" Type="int" Nullable="false" />
+          <Property Name="DistributorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoadListComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoadListId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="EnteredBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LoadListDistributors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LoadListEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoadListImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoadListId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+          <Property Name="UploadedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoadListJobComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoadListJobId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="EnteredBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LoadListJobs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoadListId" Type="int" Nullable="false" />
+          <Property Name="JobNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LiftModel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DistributorPO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateATS" Type="datetime" Nullable="false" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="100" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ShipTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="SalesOrder" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LoadListJobStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoadListJobId" Type="int" Nullable="false" />
+          <Property Name="JobNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssemblySeq" Type="int" Nullable="false" />
+          <Property Name="OprSeq" Type="int" Nullable="false" />
+          <Property Name="OpCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OpComplete" Type="bit" Nullable="false" />
+          <Property Name="IgnoreFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SimpleMessage" Type="bit" />
+        </EntityType>
+        <EntityType Name="MSMQ_Status">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+            <PropertyRef Name="MachineName" />
+          </Key>
+          <Property Name="ProcessID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="MachineName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NLog_Entries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="time_stamp" Type="datetime" Nullable="false" />
+          <Property Name="host" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="source" Type="nvarchar" MaxLength="50" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="level" Type="nvarchar" MaxLength="50" />
+          <Property Name="logger" Type="nvarchar" MaxLength="50" />
+          <Property Name="stacktrace" Type="nvarchar(max)" />
+          <Property Name="allxml" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="String" Type="bit" Nullable="false" />
+          <Property Name="Int" Type="bit" Nullable="false" />
+          <Property Name="Password" Type="bit" Nullable="false" />
+          <Property Name="UsedFor" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SysTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="SysTaskSchedNum" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskMessage" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubmitUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Recurring" Type="bit" Nullable="false" />
+          <Property Name="EmailRecipients" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="SysTaskSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchedType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NextRunOn" Type="datetime" />
+          <Property Name="Recurrences" Type="int" Nullable="false" />
+          <Property Name="EffectiveDate" Type="datetime" />
+          <Property Name="MonthlyOption" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DayOfMonth" Type="int" Nullable="false" />
+          <Property Name="WeekOfMonth" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DayOfWeek" Type="int" Nullable="false" />
+          <Property Name="EveryNWeeks" Type="int" Nullable="false" />
+          <Property Name="LastRunOn" Type="datetime" />
+          <Property Name="Mondays" Type="bit" Nullable="false" />
+          <Property Name="Tuesdays" Type="bit" Nullable="false" />
+          <Property Name="Wednesdays" Type="bit" Nullable="false" />
+          <Property Name="Thursdays" Type="bit" Nullable="false" />
+          <Property Name="Fridays" Type="bit" Nullable="false" />
+          <Property Name="Saturdays" Type="bit" Nullable="false" />
+          <Property Name="Sundays" Type="bit" Nullable="false" />
+          <Property Name="StartHour" Type="int" Nullable="false" />
+          <Property Name="StartMinute" Type="int" Nullable="false" />
+          <Property Name="WindowStart" Type="int" Nullable="false" />
+          <Property Name="WindowEnd" Type="int" Nullable="false" />
+          <Property Name="WindowMinutes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Term_Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Terminated" Type="bit" Nullable="false" />
+          <Property Name="TerminatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Term_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="TypeOfItem" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemReceived" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Term_ITInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="WindowsAccAccess" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ArchiveEmail" Type="bit" Nullable="false" />
+          <Property Name="EmailAtW" Type="varchar" MaxLength="50" />
+          <Property Name="FowardEmails" Type="bit" Nullable="false" />
+          <Property Name="FowardAtW" Type="varchar" MaxLength="50" />
+          <Property Name="DeleteUDrive" Type="bit" Nullable="false" />
+          <Property Name="UDriveAtW" Type="varchar" MaxLength="50" />
+          <Property Name="DeskPhone" Type="bit" Nullable="false" />
+          <Property Name="DeskPhoneFW" Type="bit" Nullable="false" />
+          <Property Name="DeskPhoneFWtW" Type="varchar" MaxLength="50" />
+          <Property Name="DeskPhoneRename" Type="bit" Nullable="false" />
+          <Property Name="PhoneRenametW" Type="varchar" MaxLength="50" />
+          <Property Name="EpicorAcc" Type="bit" Nullable="false" />
+          <Property Name="EpicorUserID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Term_Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="CellPhone" Type="bit" Nullable="false" />
+          <Property Name="FMPOff" Type="bit" Nullable="false" />
+          <Property Name="CellReceived" Type="bit" Nullable="false" />
+          <Property Name="Cables" Type="bit" Nullable="false" />
+          <Property Name="CablesReceived" Type="bit" Nullable="false" />
+          <Property Name="OfficeKey" Type="bit" Nullable="false" />
+          <Property Name="OKeyReceived" Type="bit" Nullable="false" />
+          <Property Name="BuildingKey" Type="bit" Nullable="false" />
+          <Property Name="BKeyReceived" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketAttachments">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileExt" Type="varchar" MaxLength="15" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="UploadedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketCategories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prefix" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SupervisorID" Type="int" />
+          <Property Name="ITOnly" Type="bit" />
+        </EntityType>
+        <EntityType Name="TicketEmployees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="NTLogin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="30" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketLinks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceTicketId" Type="int" Nullable="false" />
+          <Property Name="TargetTicketId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketNotes">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="int" />
+          <Property Name="Note" Type="varchar(max)" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Visibility" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketPriorities">
+          <Key>
+            <PropertyRef Name="PriorityID" />
+          </Key>
+          <Property Name="PriorityID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketProjects">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="PriorityID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="PrivateNotes" Type="ntext" />
+          <Property Name="RequestedBy" Type="varchar" MaxLength="100" />
+          <Property Name="RequestedByFriendly" Type="varchar" MaxLength="150" />
+          <Property Name="RequestedDate" Type="datetime" />
+          <Property Name="AssignedEmployeeID" Type="int" />
+          <Property Name="ResourceEmployeeID" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="ApprovalDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ProjectBeginDate" Type="datetime" />
+          <Property Name="ProjectEndDate" Type="datetime" />
+          <Property Name="TicketSequence" Type="int" />
+          <Property Name="CompletionDate" Type="datetime" />
+          <Property Name="ApprovalCode" Type="varchar" MaxLength="50" />
+          <Property Name="Focused" Type="bit" />
+          <Property Name="DateLastChanged" Type="datetime" />
+          <Property Name="ResourceDone" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketRequestors">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Division" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="30" />
+          <Property Name="Birthdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TicketStatuses">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="isOpen" Type="bit" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="isSupRequest" Type="bit" Nullable="false" />
+          <Property Name="isReadyToComplete" Type="bit" Nullable="false" />
+          <Property Name="isReadyToCancel" Type="bit" Nullable="false" />
+          <Property Name="isAssignedVisible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketStatusHistory">
+          <Key>
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="TicketID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketTasks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="int" Nullable="false" />
+          <Property Name="AssignedTo" Type="int" />
+          <Property Name="Task" Type="varchar(max)" />
+          <Property Name="Completed" Type="bit" Nullable="false" />
+          <Property Name="CompletionDate" Type="datetime" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="Requestor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketVisibility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ValuedInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="BOH" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="CalculationDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="CurrentCost" Type="decimal" Precision="17" Scale="5" Nullable="false" />
+          <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
+          <Property Name="PeriodYear" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="WaterTests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="GallonsUsed" Type="int" Nullable="false" />
+          <Property Name="PH" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Temp" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="SysDateTime" Type="datetime" Nullable="false" />
+          <Property Name="SysUser" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SysComputer" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TimeMFG.dbo.V_ClassIdSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ClassIdSummary">
+          <Key>
+            <PropertyRef Name="ExtCost" />
+            <PropertyRef Name="ComparisonDate" />
+          </Key>
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
+          <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" Nullable="false" />
+          <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_ValuedInventoryByPeriod">
+          
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="PeriodYear" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="nvarchar" MaxLength="10" />
+          <Property Name="ComparisonDate" Type="datetime" Nullable="false" />
+          <Property Name="ExtCost" Type="decimal" Precision="38" Scale="10" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LoadList_Distributor_LoadList">
+          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
+          <End Role="LoadList_Distributor" Type="Self.LoadList_Distributor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadList_Distributor">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadList_Distributor_LoadListDistributors">
+          <End Role="LoadListDistributors" Type="Self.LoadListDistributors" Multiplicity="1" />
+          <End Role="LoadList_Distributor" Type="Self.LoadList_Distributor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadListDistributors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadList_Distributor">
+              <PropertyRef Name="DistributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListComment_LoadList">
+          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoadListComment" Type="Self.LoadListComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListComment">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListImage_LoadList">
+          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
+          <End Role="LoadListImage" Type="Self.LoadListImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListImage">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListJobComment_LoadListJobs">
+          <End Role="LoadListJobs" Type="Self.LoadListJobs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoadListJobComment" Type="Self.LoadListJobComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadListJobs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJobComment">
+              <PropertyRef Name="LoadListJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListJobs_LoadList">
+          <End Role="LoadList" Type="Self.LoadList" Multiplicity="1" />
+          <End Role="LoadListJobs" Type="Self.LoadListJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJobs">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListJobStatus_LoadListJobs">
+          <End Role="LoadListJobs" Type="Self.LoadListJobs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoadListJobStatus" Type="Self.LoadListJobStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadListJobs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJobStatus">
+              <PropertyRef Name="LoadListJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysTask_SysTaskSchedule">
+          <End Role="SysTaskSchedule" Type="Self.SysTaskSchedule" Multiplicity="1" />
+          <End Role="SysTask" Type="Self.SysTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysTaskSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysTask">
+              <PropertyRef Name="SysTaskSchedNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Term_Item_Term_Employee">
+          <End Role="Term_Employees" Type="Self.Term_Employees" Multiplicity="1" />
+          <End Role="Term_Item" Type="Self.Term_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_Item">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Term_ITInfo_Term_Employees">
+          <End Role="Term_Employees" Type="Self.Term_Employees" Multiplicity="1" />
+          <End Role="Term_ITInfo" Type="Self.Term_ITInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_ITInfo">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Term_Property_Term_Employees">
+          <End Role="Term_Employees" Type="Self.Term_Employees" Multiplicity="1" />
+          <End Role="Term_Property" Type="Self.Term_Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_Property">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketAttachments_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="1" />
+          <End Role="TicketAttachments" Type="Self.TicketAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketAttachments">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketDepartment_TicketEmployees">
+          <End Role="TicketEmployees" Type="Self.TicketEmployees" Multiplicity="0..1" />
+          <End Role="TicketDepartment" Type="Self.TicketDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketDepartment">
+              <PropertyRef Name="SupervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketLinks_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="1" />
+          <End Role="TicketLinks" Type="Self.TicketLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketLinks">
+              <PropertyRef Name="SourceTicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketLinks_TicketProjects1">
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="1" />
+          <End Role="TicketLinks" Type="Self.TicketLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketLinks">
+              <PropertyRef Name="TargetTicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketNotes_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="0..1" />
+          <End Role="TicketNotes" Type="Self.TicketNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketNotes">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketCategories">
+          <End Role="TicketCategories" Type="Self.TicketCategories" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketCategories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketDepartment">
+          <End Role="TicketDepartment" Type="Self.TicketDepartment" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketDepartment">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketEmployees">
+          <End Role="TicketEmployees" Type="Self.TicketEmployees" Multiplicity="0..1" />
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="AssignedEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketEmployees1">
+          <End Role="TicketEmployees" Type="Self.TicketEmployees" Multiplicity="0..1" />
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="ResourceEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketPriorities">
+          <End Role="TicketPriorities" Type="Self.TicketPriorities" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketPriorities">
+              <PropertyRef Name="PriorityID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="PriorityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketStatuses">
+          <End Role="TicketStatuses" Type="Self.TicketStatuses" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketStatuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketStatusHistory_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="1" />
+          <End Role="TicketStatusHistory" Type="Self.TicketStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketStatusHistory">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketStatusHistory_TicketStatuses">
+          <End Role="TicketStatuses" Type="Self.TicketStatuses" Multiplicity="1" />
+          <End Role="TicketStatusHistory" Type="Self.TicketStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketStatuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="TicketStatusHistory">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTasks_TicketEmployees">
+          <End Role="TicketEmployees" Type="Self.TicketEmployees" Multiplicity="0..1" />
+          <End Role="TicketTasks" Type="Self.TicketTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketTasks">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTasks_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProjects" Multiplicity="1" />
+          <End Role="TicketTasks" Type="Self.TicketTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketTasks">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeMFGModelStoreContainer">
+          <EntitySet Name="LoadList" EntityType="Self.LoadList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadList_Distributor" EntityType="Self.LoadList_Distributor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListComment" EntityType="Self.LoadListComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListDistributors" EntityType="Self.LoadListDistributors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListEmail" EntityType="Self.LoadListEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListImage" EntityType="Self.LoadListImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListJobComment" EntityType="Self.LoadListJobComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadListJobStatus" EntityType="Self.LoadListJobStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message_Type" EntityType="Self.Message_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MSMQ_Status" EntityType="Self.MSMQ_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NLog_Entries" EntityType="Self.NLog_Entries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysTask" EntityType="Self.SysTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysTaskSchedule" EntityType="Self.SysTaskSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Term_Employees" EntityType="Self.Term_Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Term_Item" EntityType="Self.Term_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Term_ITInfo" EntityType="Self.Term_ITInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Term_Property" EntityType="Self.Term_Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketAttachments" EntityType="Self.TicketAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketCategories" EntityType="Self.TicketCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketDepartment" EntityType="Self.TicketDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketEmployees" EntityType="Self.TicketEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketLinks" EntityType="Self.TicketLinks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketNotes" EntityType="Self.TicketNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketPriorities" EntityType="Self.TicketPriorities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketProjects" EntityType="Self.TicketProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketRequestors" EntityType="Self.TicketRequestors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketStatuses" EntityType="Self.TicketStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketStatusHistory" EntityType="Self.TicketStatusHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketTasks" EntityType="Self.TicketTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketVisibility" EntityType="Self.TicketVisibility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValuedInventory" EntityType="Self.ValuedInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaterTests" EntityType="Self.WaterTests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_ClassIdSummary" EntityType="Self.V_ClassIdSummary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ClassIdSummary].[ClassId] AS [ClassId], 
+    [V_ClassIdSummary].[ExtCost] AS [ExtCost], 
+    [V_ClassIdSummary].[ComparisonDate] AS [ComparisonDate]
+    FROM [dbo].[V_ClassIdSummary] AS [V_ClassIdSummary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ValuedInventoryByPeriod" EntityType="Self.V_ValuedInventoryByPeriod" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ValuedInventoryByPeriod].[PeriodYear] AS [PeriodYear], 
+    [V_ValuedInventoryByPeriod].[ClassId] AS [ClassId], 
+    [V_ValuedInventoryByPeriod].[ComparisonDate] AS [ComparisonDate], 
+    [V_ValuedInventoryByPeriod].[ExtCost] AS [ExtCost], 
+    [V_ValuedInventoryByPeriod].[Id] AS [Id]
+    FROM [dbo].[V_ValuedInventoryByPeriod] AS [V_ValuedInventoryByPeriod]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_LoadList_Distributor_LoadList" Association="Self.FK_LoadList_Distributor_LoadList">
+            <End Role="LoadList" EntitySet="LoadList" />
+            <End Role="LoadList_Distributor" EntitySet="LoadList_Distributor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadList_Distributor_LoadListDistributors" Association="Self.FK_LoadList_Distributor_LoadListDistributors">
+            <End Role="LoadListDistributors" EntitySet="LoadListDistributors" />
+            <End Role="LoadList_Distributor" EntitySet="LoadList_Distributor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListComment_LoadList" Association="Self.FK_LoadListComment_LoadList">
+            <End Role="LoadList" EntitySet="LoadList" />
+            <End Role="LoadListComment" EntitySet="LoadListComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListImage_LoadList" Association="Self.FK_LoadListImage_LoadList">
+            <End Role="LoadList" EntitySet="LoadList" />
+            <End Role="LoadListImage" EntitySet="LoadListImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListJobComment_LoadListJobs" Association="Self.FK_LoadListJobComment_LoadListJobs">
+            <End Role="LoadListJobs" EntitySet="LoadListJobs" />
+            <End Role="LoadListJobComment" EntitySet="LoadListJobComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListJobs_LoadList" Association="Self.FK_LoadListJobs_LoadList">
+            <End Role="LoadList" EntitySet="LoadList" />
+            <End Role="LoadListJobs" EntitySet="LoadListJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListJobStatus_LoadListJobs" Association="Self.FK_LoadListJobStatus_LoadListJobs">
+            <End Role="LoadListJobs" EntitySet="LoadListJobs" />
+            <End Role="LoadListJobStatus" EntitySet="LoadListJobStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysTask_SysTaskSchedule" Association="Self.FK_SysTask_SysTaskSchedule">
+            <End Role="SysTaskSchedule" EntitySet="SysTaskSchedule" />
+            <End Role="SysTask" EntitySet="SysTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Term_Item_Term_Employee" Association="Self.FK_Term_Item_Term_Employee">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_Item" EntitySet="Term_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Term_ITInfo_Term_Employees" Association="Self.FK_Term_ITInfo_Term_Employees">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_ITInfo" EntitySet="Term_ITInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Term_Property_Term_Employees" Association="Self.FK_Term_Property_Term_Employees">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_Property" EntitySet="Term_Property" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketAttachments_TicketProjects" Association="Self.FK_TicketAttachments_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketAttachments" EntitySet="TicketAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketDepartment_TicketEmployees" Association="Self.FK_TicketDepartment_TicketEmployees">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketDepartment" EntitySet="TicketDepartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketLinks_TicketProjects" Association="Self.FK_TicketLinks_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketLinks" EntitySet="TicketLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketLinks_TicketProjects1" Association="Self.FK_TicketLinks_TicketProjects1">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketLinks" EntitySet="TicketLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketNotes_TicketProjects" Association="Self.FK_TicketNotes_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketNotes" EntitySet="TicketNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketCategories" Association="Self.FK_TicketProjects_TicketCategories">
+            <End Role="TicketCategories" EntitySet="TicketCategories" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketDepartment" Association="Self.FK_TicketProjects_TicketDepartment">
+            <End Role="TicketDepartment" EntitySet="TicketDepartment" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketEmployees" Association="Self.FK_TicketProjects_TicketEmployees">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketEmployees1" Association="Self.FK_TicketProjects_TicketEmployees1">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketPriorities" Association="Self.FK_TicketProjects_TicketPriorities">
+            <End Role="TicketPriorities" EntitySet="TicketPriorities" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketStatuses" Association="Self.FK_TicketProjects_TicketStatuses">
+            <End Role="TicketStatuses" EntitySet="TicketStatuses" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketStatusHistory_TicketProjects" Association="Self.FK_TicketStatusHistory_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketStatusHistory" EntitySet="TicketStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketStatusHistory_TicketStatuses" Association="Self.FK_TicketStatusHistory_TicketStatuses">
+            <End Role="TicketStatuses" EntitySet="TicketStatuses" />
+            <End Role="TicketStatusHistory" EntitySet="TicketStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTasks_TicketEmployees" Association="Self.FK_TicketTasks_TicketEmployees">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketTasks" EntitySet="TicketTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTasks_TicketProjects" Association="Self.FK_TicketTasks_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketTasks" EntitySet="TicketTasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TimeMFGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LoadListComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadListId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoadList" Relationship="TimeMFGModel.FK_LoadListComment_LoadList" FromRole="LoadListComment" ToRole="LoadList" />
+        </EntityType>
+        <EntityType Name="LoadListDistributor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoadLists" Relationship="TimeMFGModel.LoadList_Distributor" FromRole="LoadListDistributor" ToRole="LoadList" />
+        </EntityType>
+        <EntityType Name="LoadListEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoadListImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadListId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UploadedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LoadList" Relationship="TimeMFGModel.FK_LoadListImage_LoadList" FromRole="LoadListImage" ToRole="LoadList" />
+        </EntityType>
+        <EntityType Name="LoadListJobComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadListJobId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoadListJob" Relationship="Self.FK_LoadListJobComment_LoadListJobs" FromRole="LoadListJobComment" ToRole="LoadListJobs" />
+        </EntityType>
+        <EntityType Name="LoadListJob">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadListId" Type="Int32" Nullable="false" />
+          <Property Name="JobNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LiftModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DistributorPO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateATS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Destination" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ShipTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoadListJobComments" Relationship="Self.FK_LoadListJobComment_LoadListJobs" FromRole="LoadListJobs" ToRole="LoadListJobComment" />
+          <NavigationProperty Name="LoadListJobStatus" Relationship="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs" FromRole="LoadListJob" ToRole="LoadListJobStatu" />
+          <NavigationProperty Name="LoadList" Relationship="TimeMFGModel.FK_LoadListJobs_LoadList" FromRole="LoadListJob" ToRole="LoadList" />
+        </EntityType>
+        <EntityType Name="TicketAttachment">
+          <Key>
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="AttachmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FileExt" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TicketProject" Relationship="Self.FK_TicketAttachments_TicketProjects" FromRole="TicketAttachments" ToRole="TicketProjects" />
+        </EntityType>
+        <EntityType Name="TicketCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketCategories" FromRole="TicketCategories" ToRole="TicketProjects" />
+        </EntityType>
+        <EntityType Name="TicketDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="Prefix" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SupervisorID" Type="Int32" />
+          <NavigationProperty Name="TicketEmployee" Relationship="Self.FK_TicketDepartment_TicketEmployees" FromRole="TicketDepartment" ToRole="TicketEmployees" />
+          <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketDepartment" FromRole="TicketDepartment" ToRole="TicketProjects" />
+          <Property Name="ITOnly" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TicketEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NTLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Extension" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="3" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TicketDepartments" Relationship="Self.FK_TicketDepartment_TicketEmployees" FromRole="TicketEmployees" ToRole="TicketDepartment" />
+          <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketEmployees" FromRole="TicketEmployees" ToRole="TicketProjects" />
+          <NavigationProperty Name="TicketProjects1" Relationship="Self.FK_TicketProjects_TicketEmployees1" FromRole="TicketEmployees" ToRole="TicketProjects" />
+          <NavigationProperty Name="TicketTasks" Relationship="Self.FK_TicketTasks_TicketEmployees" FromRole="TicketEmployees" ToRole="TicketTasks" />
+        </EntityType>
+        <EntityType Name="TicketLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceTicketId" Type="Int32" Nullable="false" />
+          <Property Name="TargetTicketId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TicketProject" Relationship="Self.FK_TicketLinks_TicketProjects" FromRole="TicketLinks" ToRole="TicketProjects" />
+          <NavigationProperty Name="TicketProject1" Relationship="Self.FK_TicketLinks_TicketProjects1" FromRole="TicketLinks" ToRole="TicketProjects" />
+        </EntityType>
+        <EntityType Name="TicketNote">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Visibility" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TicketProject" Relationship="Self.FK_TicketNotes_TicketProjects" FromRole="TicketNotes" ToRole="TicketProjects" />
+        </EntityType>
+        <EntityType Name="TicketPriority">
+          <Key>
+            <PropertyRef Name="PriorityID" />
+          </Key>
+          <Property Name="PriorityID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TicketProjects" Relationship="Self.FK_TicketProjects_TicketPriorities" FromRole="TicketPriorities" ToRole="TicketProjects" />
+        </EntityType>
+        <EntityType Name="TicketProject">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="PriorityID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrivateNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RequestedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RequestedByFriendly" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
+          <Property Name="AssignedEmployeeID" Type="Int32" />
+          <Property Name="ResourceEmployeeID" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectBeginDate" Type="DateTime" Precision="3" />
+          <Property Name="ProjectEndDate" Type="DateTime" Precision="3" />
+          <Property Name="TicketSequence" Type="Int32" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TicketAttachments" Relationship="Self.FK_TicketAttachments_TicketProjects" FromRole="TicketProjects" ToRole="TicketAttachments" />
+          <NavigationProperty Name="TicketCategory" Relationship="Self.FK_TicketProjects_TicketCategories" FromRole="TicketProjects" ToRole="TicketCategories" />
+          <NavigationProperty Name="TicketDepartment" Relationship="Self.FK_TicketProjects_TicketDepartment" FromRole="TicketProjects" ToRole="TicketDepartment" />
+          <NavigationProperty Name="TicketEmployee" Relationship="Self.FK_TicketProjects_TicketEmployees" FromRole="TicketProjects" ToRole="TicketEmployees" />
+          <NavigationProperty Name="TicketEmployee1" Relationship="Self.FK_TicketProjects_TicketEmployees1" FromRole="TicketProjects" ToRole="TicketEmployees" />
+          <NavigationProperty Name="TicketLinks" Relationship="Self.FK_TicketLinks_TicketProjects" FromRole="TicketProjects" ToRole="TicketLinks" />
+          <NavigationProperty Name="TicketLinks1" Relationship="Self.FK_TicketLinks_TicketProjects1" FromRole="TicketProjects" ToRole="TicketLinks" />
+          <NavigationProperty Name="TicketNotes" Relationship="Self.FK_TicketNotes_TicketProjects" FromRole="TicketProjects" ToRole="TicketNotes" />
+          <NavigationProperty Name="TicketPriority" Relationship="Self.FK_TicketProjects_TicketPriorities" FromRole="TicketProjects" ToRole="TicketPriorities" />
+          <NavigationProperty Name="TicketStatusHistories" Relationship="Self.FK_TicketStatusHistory_TicketProjects" FromRole="TicketProjects" ToRole="TicketStatusHistory" />
+          <NavigationProperty Name="TicketTasks" Relationship="Self.FK_TicketTasks_TicketProjects" FromRole="TicketProjects" ToRole="TicketTasks" />
+          <Property Name="Focused" Type="Boolean" />
+          <Property Name="DateLastChanged" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TicketStatus" Relationship="TimeMFGModel.FK_TicketProjects_TicketStatuses" FromRole="TicketProject" ToRole="TicketStatus" />
+          <Property Name="ResourceDone" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketStatusHistory">
+          <Key>
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="TicketID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TicketProject" Relationship="Self.FK_TicketStatusHistory_TicketProjects" FromRole="TicketStatusHistory" ToRole="TicketProjects" />
+          <NavigationProperty Name="TicketStatus" Relationship="TimeMFGModel.FK_TicketStatusHistory_TicketStatuses" FromRole="TicketStatusHistory" ToRole="TicketStatus" />
+        </EntityType>
+        <EntityType Name="TicketTask">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Int32" Nullable="false" />
+          <Property Name="AssignedTo" Type="Int32" />
+          <Property Name="Task" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TicketEmployee" Relationship="Self.FK_TicketTasks_TicketEmployees" FromRole="TicketTasks" ToRole="TicketEmployees" />
+          <NavigationProperty Name="TicketProject" Relationship="Self.FK_TicketTasks_TicketProjects" FromRole="TicketTasks" ToRole="TicketProjects" />
+          <Property Name="Requestor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TicketRequestor">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_LoadListJobComment_LoadListJobs">
+          <End Role="LoadListJobs" Type="Self.LoadListJob" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoadListJobComment" Type="Self.LoadListJobComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadListJobs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJobComment">
+              <PropertyRef Name="LoadListJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketAttachments_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="1" />
+          <End Role="TicketAttachments" Type="Self.TicketAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketAttachments">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketCategories">
+          <End Role="TicketCategories" Type="Self.TicketCategory" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketCategories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketDepartment_TicketEmployees">
+          <End Role="TicketEmployees" Type="Self.TicketEmployee" Multiplicity="0..1" />
+          <End Role="TicketDepartment" Type="Self.TicketDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketDepartment">
+              <PropertyRef Name="SupervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketDepartment">
+          <End Role="TicketDepartment" Type="Self.TicketDepartment" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketDepartment">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketEmployees">
+          <End Role="TicketEmployees" Type="Self.TicketEmployee" Multiplicity="0..1" />
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="AssignedEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketEmployees1">
+          <End Role="TicketEmployees" Type="Self.TicketEmployee" Multiplicity="0..1" />
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="ResourceEmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTasks_TicketEmployees">
+          <End Role="TicketEmployees" Type="Self.TicketEmployee" Multiplicity="0..1" />
+          <End Role="TicketTasks" Type="Self.TicketTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketEmployees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TicketTasks">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketLinks_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="1" />
+          <End Role="TicketLinks" Type="Self.TicketLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketLinks">
+              <PropertyRef Name="SourceTicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketLinks_TicketProjects1">
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="1" />
+          <End Role="TicketLinks" Type="Self.TicketLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketLinks">
+              <PropertyRef Name="TargetTicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketNotes_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="0..1" />
+          <End Role="TicketNotes" Type="Self.TicketNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketNotes">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketProjects_TicketPriorities">
+          <End Role="TicketPriorities" Type="Self.TicketPriority" Multiplicity="1" />
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketPriorities">
+              <PropertyRef Name="PriorityID" />
+            </Principal>
+            <Dependent Role="TicketProjects">
+              <PropertyRef Name="PriorityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketStatusHistory_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="1" />
+          <End Role="TicketStatusHistory" Type="Self.TicketStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketStatusHistory">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTasks_TicketProjects">
+          <End Role="TicketProjects" Type="Self.TicketProject" Multiplicity="1" />
+          <End Role="TicketTasks" Type="Self.TicketTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketProjects">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketTasks">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeMFGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LoadListComments" EntityType="Self.LoadListComment" />
+          <EntitySet Name="LoadListDistributors" EntityType="Self.LoadListDistributor" />
+          <EntitySet Name="LoadListEmails" EntityType="Self.LoadListEmail" />
+          <EntitySet Name="LoadListImages" EntityType="Self.LoadListImage" />
+          <EntitySet Name="LoadListJobComments" EntityType="Self.LoadListJobComment" />
+          <EntitySet Name="LoadListJobs" EntityType="Self.LoadListJob" />
+          <EntitySet Name="TicketAttachments" EntityType="Self.TicketAttachment" />
+          <EntitySet Name="TicketCategories" EntityType="Self.TicketCategory" />
+          <EntitySet Name="TicketDepartments" EntityType="Self.TicketDepartment" />
+          <EntitySet Name="TicketEmployees" EntityType="Self.TicketEmployee" />
+          <EntitySet Name="TicketLinks" EntityType="Self.TicketLink" />
+          <EntitySet Name="TicketNotes" EntityType="Self.TicketNote" />
+          <EntitySet Name="TicketPriorities" EntityType="Self.TicketPriority" />
+          <EntitySet Name="TicketProjects" EntityType="Self.TicketProject" />
+          <EntitySet Name="TicketStatusHistories" EntityType="Self.TicketStatusHistory" />
+          <EntitySet Name="TicketTasks" EntityType="Self.TicketTask" />
+          <EntitySet Name="TicketRequestors" EntityType="Self.TicketRequestor" />
+          <AssociationSet Name="FK_LoadListJobComment_LoadListJobs" Association="Self.FK_LoadListJobComment_LoadListJobs">
+            <End Role="LoadListJobs" EntitySet="LoadListJobs" />
+            <End Role="LoadListJobComment" EntitySet="LoadListJobComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketAttachments_TicketProjects" Association="Self.FK_TicketAttachments_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketAttachments" EntitySet="TicketAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketCategories" Association="Self.FK_TicketProjects_TicketCategories">
+            <End Role="TicketCategories" EntitySet="TicketCategories" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketDepartment_TicketEmployees" Association="Self.FK_TicketDepartment_TicketEmployees">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketDepartment" EntitySet="TicketDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketDepartment" Association="Self.FK_TicketProjects_TicketDepartment">
+            <End Role="TicketDepartment" EntitySet="TicketDepartments" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketEmployees" Association="Self.FK_TicketProjects_TicketEmployees">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketEmployees1" Association="Self.FK_TicketProjects_TicketEmployees1">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTasks_TicketEmployees" Association="Self.FK_TicketTasks_TicketEmployees">
+            <End Role="TicketEmployees" EntitySet="TicketEmployees" />
+            <End Role="TicketTasks" EntitySet="TicketTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketLinks_TicketProjects" Association="Self.FK_TicketLinks_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketLinks" EntitySet="TicketLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketLinks_TicketProjects1" Association="Self.FK_TicketLinks_TicketProjects1">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketLinks" EntitySet="TicketLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketNotes_TicketProjects" Association="Self.FK_TicketNotes_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketNotes" EntitySet="TicketNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketProjects_TicketPriorities" Association="Self.FK_TicketProjects_TicketPriorities">
+            <End Role="TicketPriorities" EntitySet="TicketPriorities" />
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketStatusHistory_TicketProjects" Association="Self.FK_TicketStatusHistory_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketStatusHistory" EntitySet="TicketStatusHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTasks_TicketProjects" Association="Self.FK_TicketTasks_TicketProjects">
+            <End Role="TicketProjects" EntitySet="TicketProjects" />
+            <End Role="TicketTasks" EntitySet="TicketTasks" />
+          </AssociationSet>
+          <EntitySet Name="Settings" EntityType="TimeMFGModel.Setting" />
+          <EntitySet Name="TicketVisibilities" EntityType="TimeMFGModel.TicketVisibility" />
+          <EntitySet Name="WaterTests" EntityType="TimeMFGModel.WaterTest" />
+          <EntitySet Name="SysTasks" EntityType="TimeMFGModel.SysTask" />
+          <EntitySet Name="SysTaskSchedules" EntityType="TimeMFGModel.SysTaskSchedule" />
+          <AssociationSet Name="FK_SysTask_SysTaskSchedule" Association="TimeMFGModel.FK_SysTask_SysTaskSchedule">
+            <End Role="SysTaskSchedule" EntitySet="SysTaskSchedules" />
+            <End Role="SysTask" EntitySet="SysTasks" />
+          </AssociationSet>
+          <EntitySet Name="TicketStatuses" EntityType="TimeMFGModel.TicketStatus" />
+          <AssociationSet Name="FK_TicketProjects_TicketStatuses" Association="TimeMFGModel.FK_TicketProjects_TicketStatuses">
+            <End Role="TicketStatus" EntitySet="TicketStatuses" />
+            <End Role="TicketProject" EntitySet="TicketProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketStatusHistory_TicketStatuses" Association="TimeMFGModel.FK_TicketStatusHistory_TicketStatuses">
+            <End Role="TicketStatus" EntitySet="TicketStatuses" />
+            <End Role="TicketStatusHistory" EntitySet="TicketStatusHistories" />
+          </AssociationSet>
+          <EntitySet Name="Message_Type" EntityType="TimeMFGModel.Message_Type" />
+          <EntitySet Name="MSMQ_Status" EntityType="TimeMFGModel.MSMQ_Status" />
+          <EntitySet Name="NLog_Entries" EntityType="TimeMFGModel.NLog_Entries" />
+          <EntitySet Name="ValuedInventories" EntityType="TimeMFGModel.ValuedInventory" />
+          <EntitySet Name="V_ValuedInventoryByPeriod" EntityType="TimeMFGModel.V_ValuedInventoryByPeriod" />
+          <EntitySet Name="V_ClassIdSummary" EntityType="TimeMFGModel.V_ClassIdSummary" />
+          <EntitySet Name="LoadListJobStatus" EntityType="TimeMFGModel.LoadListJobStatu" />
+          <AssociationSet Name="FK_LoadListJobStatus_LoadListJobs" Association="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs">
+            <End Role="LoadListJob" EntitySet="LoadListJobs" />
+            <End Role="LoadListJobStatu" EntitySet="LoadListJobStatus" />
+          </AssociationSet>
+          <EntitySet Name="LoadLists" EntityType="TimeMFGModel.LoadList" />
+          <AssociationSet Name="FK_LoadListComment_LoadList" Association="TimeMFGModel.FK_LoadListComment_LoadList">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListComment" EntitySet="LoadListComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListImage_LoadList" Association="TimeMFGModel.FK_LoadListImage_LoadList">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListImage" EntitySet="LoadListImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoadListJobs_LoadList" Association="TimeMFGModel.FK_LoadListJobs_LoadList">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListJob" EntitySet="LoadListJobs" />
+          </AssociationSet>
+          <AssociationSet Name="LoadList_Distributor" Association="TimeMFGModel.LoadList_Distributor">
+            <End Role="LoadList" EntitySet="LoadLists" />
+            <End Role="LoadListDistributor" EntitySet="LoadListDistributors" />
+          </AssociationSet>
+          <EntitySet Name="Term_Employees" EntityType="TimeMFGModel.Term_Employees" />
+          <EntitySet Name="Term_ITInfo" EntityType="TimeMFGModel.Term_ITInfo" />
+          <EntitySet Name="Term_Property" EntityType="TimeMFGModel.Term_Property" />
+          <AssociationSet Name="FK_Term_ITInfo_Term_Employees" Association="TimeMFGModel.FK_Term_ITInfo_Term_Employees">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_ITInfo" EntitySet="Term_ITInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Term_Property_Term_Employees" Association="TimeMFGModel.FK_Term_Property_Term_Employees">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_Property" EntitySet="Term_Property" />
+          </AssociationSet>
+          <EntitySet Name="Term_Item" EntityType="TimeMFGModel.Term_Item" />
+          <AssociationSet Name="FK_Term_Item_Term_Employee" Association="TimeMFGModel.FK_Term_Item_Term_Employee">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_Item" EntitySet="Term_Item" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="String" Type="Boolean" Nullable="false" />
+          <Property Name="Int" Type="Boolean" Nullable="false" />
+          <Property Name="UsedFor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketVisibility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WaterTest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GallonsUsed" Type="Int32" Nullable="false" />
+          <Property Name="PH" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="Temp" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="SysDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SysUser" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SysComputer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="SysTaskSchedNum" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubmitUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Recurring" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysTaskSchedule" Relationship="TimeMFGModel.FK_SysTask_SysTaskSchedule" FromRole="SysTask" ToRole="SysTaskSchedule" />
+          <Property Name="EmailRecipients" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysTaskSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SchedType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NextRunOn" Type="DateTime" Precision="3" />
+          <Property Name="Recurrences" Type="Int32" Nullable="false" />
+          <Property Name="EffectiveDate" Type="DateTime" Precision="3" />
+          <Property Name="MonthlyOption" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DayOfMonth" Type="Int32" Nullable="false" />
+          <Property Name="WeekOfMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DayOfWeek" Type="Int32" Nullable="false" />
+          <Property Name="EveryNWeeks" Type="Int32" Nullable="false" />
+          <Property Name="LastRunOn" Type="DateTime" Precision="3" />
+          <Property Name="Mondays" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesdays" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesdays" Type="Boolean" Nullable="false" />
+          <Property Name="Thursdays" Type="Boolean" Nullable="false" />
+          <Property Name="Fridays" Type="Boolean" Nullable="false" />
+          <Property Name="Saturdays" Type="Boolean" Nullable="false" />
+          <Property Name="Sundays" Type="Boolean" Nullable="false" />
+          <Property Name="StartHour" Type="Int32" Nullable="false" />
+          <Property Name="StartMinute" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysTasks" Relationship="TimeMFGModel.FK_SysTask_SysTaskSchedule" FromRole="SysTaskSchedule" ToRole="SysTask" />
+          <Property Name="WindowStart" Type="Int32" Nullable="false" />
+          <Property Name="WindowEnd" Type="Int32" Nullable="false" />
+          <Property Name="WindowMinutes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_SysTask_SysTaskSchedule">
+          <End Type="TimeMFGModel.SysTaskSchedule" Role="SysTaskSchedule" Multiplicity="1" />
+          <End Type="TimeMFGModel.SysTask" Role="SysTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysTaskSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysTask">
+              <PropertyRef Name="SysTaskSchedNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TicketStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isOpen" Type="Boolean" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isSupRequest" Type="Boolean" Nullable="false" />
+          <Property Name="isReadyToComplete" Type="Boolean" Nullable="false" />
+          <Property Name="isReadyToCancel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TicketProjects" Relationship="TimeMFGModel.FK_TicketProjects_TicketStatuses" FromRole="TicketStatus" ToRole="TicketProject" />
+          <NavigationProperty Name="TicketStatusHistories" Relationship="TimeMFGModel.FK_TicketStatusHistory_TicketStatuses" FromRole="TicketStatus" ToRole="TicketStatusHistory" />
+          <Property Name="isAssignedVisible" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TicketProjects_TicketStatuses">
+          <End Type="TimeMFGModel.TicketStatus" Role="TicketStatus" Multiplicity="1" />
+          <End Type="TimeMFGModel.TicketProject" Role="TicketProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="TicketProject">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketStatusHistory_TicketStatuses">
+          <End Type="TimeMFGModel.TicketStatus" Role="TicketStatus" Multiplicity="1" />
+          <End Type="TimeMFGModel.TicketStatusHistory" Role="TicketStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="TicketStatusHistory">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Message_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MessageType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SimpleMessage" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MSMQ_Status">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+            <PropertyRef Name="MachineName" />
+          </Key>
+          <Property Name="ProcessID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PID" Type="Int32" Nullable="false" />
+          <Property Name="MachineName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="NLog_Entries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="time_stamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="host" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stacktrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="allxml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ValuedInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartNum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BOH" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="CalculationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="CurrentCost" Type="Decimal" Nullable="false" Precision="17" Scale="5" />
+          <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PeriodYear" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_ValuedInventoryByPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="PeriodYear" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExtCost" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_ClassIdSummary">
+          <Key>
+            <PropertyRef Name="ExtCost" />
+            <PropertyRef Name="ComparisonDate" />
+          </Key>
+          <Property Name="ClassId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ExtCost" Type="Decimal" Nullable="false" Precision="38" Scale="10" />
+          <Property Name="ComparisonDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="LoadListJobStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadListJobId" Type="Int32" Nullable="false" />
+          <Property Name="JobNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssemblySeq" Type="Int32" Nullable="false" />
+          <Property Name="OprSeq" Type="Int32" Nullable="false" />
+          <Property Name="OpCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OpComplete" Type="Boolean" Nullable="false" />
+          <Property Name="IgnoreFlag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LoadListJob" Relationship="TimeMFGModel.FK_LoadListJobStatus_LoadListJobs" FromRole="LoadListJobStatu" ToRole="LoadListJob" />
+        </EntityType>
+        <Association Name="FK_LoadListJobStatus_LoadListJobs">
+          <End Type="TimeMFGModel.LoadListJob" Role="LoadListJob" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeMFGModel.LoadListJobStatu" Role="LoadListJobStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadListJob">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJobStatu">
+              <PropertyRef Name="LoadListJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LoadList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateRevised" Type="DateTime" Precision="3" />
+          <Property Name="DateSchedShip" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="TruckingCompany" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Complete" Type="Boolean" Nullable="false" />
+          <Property Name="Distributors" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MakeReady" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LoadListComments" Relationship="TimeMFGModel.FK_LoadListComment_LoadList" FromRole="LoadList" ToRole="LoadListComment" />
+          <NavigationProperty Name="LoadListImages" Relationship="TimeMFGModel.FK_LoadListImage_LoadList" FromRole="LoadList" ToRole="LoadListImage" />
+          <NavigationProperty Name="LoadListJobs" Relationship="TimeMFGModel.FK_LoadListJobs_LoadList" FromRole="LoadList" ToRole="LoadListJob" />
+          <NavigationProperty Name="LoadListDistributors" Relationship="TimeMFGModel.LoadList_Distributor" FromRole="LoadList" ToRole="LoadListDistributor" />
+        </EntityType>
+        <Association Name="FK_LoadListComment_LoadList">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeMFGModel.LoadListComment" Role="LoadListComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListComment">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListImage_LoadList">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="1" />
+          <End Type="TimeMFGModel.LoadListImage" Role="LoadListImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListImage">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoadListJobs_LoadList">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="1" />
+          <End Type="TimeMFGModel.LoadListJob" Role="LoadListJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoadListJob">
+              <PropertyRef Name="LoadListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LoadList_Distributor">
+          <End Type="TimeMFGModel.LoadList" Role="LoadList" Multiplicity="*" />
+          <End Type="TimeMFGModel.LoadListDistributor" Role="LoadListDistributor" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Term_Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Terminated" Type="Boolean" Nullable="false" />
+          <Property Name="TerminatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Term_ITInfo" Relationship="TimeMFGModel.FK_Term_ITInfo_Term_Employees" FromRole="Term_Employees" ToRole="Term_ITInfo" />
+          <NavigationProperty Name="Term_Property" Relationship="TimeMFGModel.FK_Term_Property_Term_Employees" FromRole="Term_Employees" ToRole="Term_Property" />
+          <NavigationProperty Name="Term_Item" Relationship="TimeMFGModel.FK_Term_Item_Term_Employee" FromRole="Term_Employees" ToRole="Term_Item" />
+        </EntityType>
+        <EntityType Name="Term_ITInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="WindowsAccAccess" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ArchiveEmail" Type="Boolean" Nullable="false" />
+          <Property Name="EmailAtW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FowardEmails" Type="Boolean" Nullable="false" />
+          <Property Name="FowardAtW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteUDrive" Type="Boolean" Nullable="false" />
+          <Property Name="UDriveAtW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeskPhone" Type="Boolean" Nullable="false" />
+          <Property Name="DeskPhoneFW" Type="Boolean" Nullable="false" />
+          <Property Name="DeskPhoneFWtW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeskPhoneRename" Type="Boolean" Nullable="false" />
+          <Property Name="PhoneRenametW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EpicorAcc" Type="Boolean" Nullable="false" />
+          <Property Name="EpicorUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Term_Employees" Relationship="TimeMFGModel.FK_Term_ITInfo_Term_Employees" FromRole="Term_ITInfo" ToRole="Term_Employees" />
+        </EntityType>
+        <EntityType Name="Term_Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="CellPhone" Type="Boolean" Nullable="false" />
+          <Property Name="FMPOff" Type="Boolean" Nullable="false" />
+          <Property Name="CellReceived" Type="Boolean" Nullable="false" />
+          <Property Name="Cables" Type="Boolean" Nullable="false" />
+          <Property Name="CablesReceived" Type="Boolean" Nullable="false" />
+          <Property Name="OfficeKey" Type="Boolean" Nullable="false" />
+          <Property Name="OKeyReceived" Type="Boolean" Nullable="false" />
+          <Property Name="BuildingKey" Type="Boolean" Nullable="false" />
+          <Property Name="BKeyReceived" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Term_Employees" Relationship="TimeMFGModel.FK_Term_Property_Term_Employees" FromRole="Term_Property" ToRole="Term_Employees" />
+        </EntityType>
+        <Association Name="FK_Term_ITInfo_Term_Employees">
+          <End Type="TimeMFGModel.Term_Employees" Role="Term_Employees" Multiplicity="1" />
+          <End Type="TimeMFGModel.Term_ITInfo" Role="Term_ITInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_ITInfo">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Term_Property_Term_Employees">
+          <End Type="TimeMFGModel.Term_Employees" Role="Term_Employees" Multiplicity="1" />
+          <End Type="TimeMFGModel.Term_Property" Role="Term_Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_Property">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Term_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="TypeOfItem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemReceived" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Term_Employees" Relationship="TimeMFGModel.FK_Term_Item_Term_Employee" FromRole="Term_Item" ToRole="Term_Employees" />
+        </EntityType>
+        <Association Name="FK_Term_Item_Term_Employee">
+          <End Type="TimeMFGModel.Term_Employees" Role="Term_Employees" Multiplicity="1" />
+          <End Type="TimeMFGModel.Term_Item" Role="Term_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_Item">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TimeMFGModelStoreContainer" CdmEntityContainer="TimeMFGEntities">
+          <EntitySetMapping Name="LoadListComments">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListComment">
+              <MappingFragment StoreEntitySet="LoadListComment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoadListId" ColumnName="LoadListId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadListDistributors">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListDistributor">
+              <MappingFragment StoreEntitySet="LoadListDistributors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadListEmails">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListEmail">
+              <MappingFragment StoreEntitySet="LoadListEmail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadListImages">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListImage">
+              <MappingFragment StoreEntitySet="LoadListImage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoadListId" ColumnName="LoadListId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadListJobComments">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListJobComment">
+              <MappingFragment StoreEntitySet="LoadListJobComment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoadListJobId" ColumnName="LoadListJobId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadListJobs">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListJob">
+              <MappingFragment StoreEntitySet="LoadListJobs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoadListId" ColumnName="LoadListId" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="LiftModel" ColumnName="LiftModel" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="DistributorPO" ColumnName="DistributorPO" />
+                <ScalarProperty Name="DateATS" ColumnName="DateATS" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
+                <ScalarProperty Name="SalesOrder" ColumnName="SalesOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketAttachments">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketAttachment">
+              <MappingFragment StoreEntitySet="TicketAttachments">
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileExt" ColumnName="FileExt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketCategories">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketCategory">
+              <MappingFragment StoreEntitySet="TicketCategories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketDepartments">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketDepartment">
+              <MappingFragment StoreEntitySet="TicketDepartment">
+                <ScalarProperty Name="ITOnly" ColumnName="ITOnly" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketEmployees">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketEmployee">
+              <MappingFragment StoreEntitySet="TicketEmployees">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NTLogin" ColumnName="NTLogin" />
+                <ScalarProperty Name="EmailName" ColumnName="EmailName" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketLinks">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketLink">
+              <MappingFragment StoreEntitySet="TicketLinks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SourceTicketId" ColumnName="SourceTicketId" />
+                <ScalarProperty Name="TargetTicketId" ColumnName="TargetTicketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketNotes">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketNote">
+              <MappingFragment StoreEntitySet="TicketNotes">
+                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketPriorities">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketPriority">
+              <MappingFragment StoreEntitySet="TicketPriorities">
+                <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketProjects">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketProject">
+              <MappingFragment StoreEntitySet="TicketProjects">
+                <ScalarProperty Name="ResourceDone" ColumnName="ResourceDone" />
+                <ScalarProperty Name="DateLastChanged" ColumnName="DateLastChanged" />
+                <ScalarProperty Name="Focused" ColumnName="Focused" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="PrivateNotes" ColumnName="PrivateNotes" />
+                <ScalarProperty Name="RequestedBy" ColumnName="RequestedBy" />
+                <ScalarProperty Name="RequestedByFriendly" ColumnName="RequestedByFriendly" />
+                <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
+                <ScalarProperty Name="AssignedEmployeeID" ColumnName="AssignedEmployeeID" />
+                <ScalarProperty Name="ResourceEmployeeID" ColumnName="ResourceEmployeeID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ProjectBeginDate" ColumnName="ProjectBeginDate" />
+                <ScalarProperty Name="ProjectEndDate" ColumnName="ProjectEndDate" />
+                <ScalarProperty Name="TicketSequence" ColumnName="TicketSequence" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="ApprovalCode" ColumnName="ApprovalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketStatusHistories">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketStatusHistory">
+              <MappingFragment StoreEntitySet="TicketStatusHistory">
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketTasks">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketTask">
+              <MappingFragment StoreEntitySet="TicketTasks">
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Requestor" ColumnName="Requestor" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketRequestors">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketRequestor">
+              <MappingFragment StoreEntitySet="TicketRequestors">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="EmailName" ColumnName="EmailName" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="TimeMFGModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UsedFor" ColumnName="UsedFor" />
+                <ScalarProperty Name="Int" ColumnName="Int" />
+                <ScalarProperty Name="String" ColumnName="String" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketVisibilities">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketVisibility">
+              <MappingFragment StoreEntitySet="TicketVisibility">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaterTests">
+            <EntityTypeMapping TypeName="TimeMFGModel.WaterTest">
+              <MappingFragment StoreEntitySet="WaterTests">
+                <ScalarProperty Name="SysComputer" ColumnName="SysComputer" />
+                <ScalarProperty Name="SysUser" ColumnName="SysUser" />
+                <ScalarProperty Name="SysDateTime" ColumnName="SysDateTime" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="PH" ColumnName="PH" />
+                <ScalarProperty Name="GallonsUsed" ColumnName="GallonsUsed" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysTasks">
+            <EntityTypeMapping TypeName="TimeMFGModel.SysTask">
+              <MappingFragment StoreEntitySet="SysTask">
+                <ScalarProperty Name="EmailRecipients" ColumnName="EmailRecipients" />
+                <ScalarProperty Name="Recurring" ColumnName="Recurring" />
+                <ScalarProperty Name="SubmitUser" ColumnName="SubmitUser" />
+                <ScalarProperty Name="TaskMessage" ColumnName="TaskMessage" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SysTaskSchedNum" ColumnName="SysTaskSchedNum" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysTaskSchedules">
+            <EntityTypeMapping TypeName="TimeMFGModel.SysTaskSchedule">
+              <MappingFragment StoreEntitySet="SysTaskSchedule">
+                <ScalarProperty Name="WindowMinutes" ColumnName="WindowMinutes" />
+                <ScalarProperty Name="WindowEnd" ColumnName="WindowEnd" />
+                <ScalarProperty Name="WindowStart" ColumnName="WindowStart" />
+                <ScalarProperty Name="StartMinute" ColumnName="StartMinute" />
+                <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+                <ScalarProperty Name="Sundays" ColumnName="Sundays" />
+                <ScalarProperty Name="Saturdays" ColumnName="Saturdays" />
+                <ScalarProperty Name="Fridays" ColumnName="Fridays" />
+                <ScalarProperty Name="Thursdays" ColumnName="Thursdays" />
+                <ScalarProperty Name="Wednesdays" ColumnName="Wednesdays" />
+                <ScalarProperty Name="Tuesdays" ColumnName="Tuesdays" />
+                <ScalarProperty Name="Mondays" ColumnName="Mondays" />
+                <ScalarProperty Name="LastRunOn" ColumnName="LastRunOn" />
+                <ScalarProperty Name="EveryNWeeks" ColumnName="EveryNWeeks" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+                <ScalarProperty Name="MonthlyOption" ColumnName="MonthlyOption" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="Recurrences" ColumnName="Recurrences" />
+                <ScalarProperty Name="NextRunOn" ColumnName="NextRunOn" />
+                <ScalarProperty Name="SchedType" ColumnName="SchedType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketStatuses">
+            <EntityTypeMapping TypeName="TimeMFGModel.TicketStatus">
+              <MappingFragment StoreEntitySet="TicketStatuses">
+                <ScalarProperty Name="isAssignedVisible" ColumnName="isAssignedVisible" />
+                <ScalarProperty Name="isReadyToCancel" ColumnName="isReadyToCancel" />
+                <ScalarProperty Name="isReadyToComplete" ColumnName="isReadyToComplete" />
+                <ScalarProperty Name="isSupRequest" ColumnName="isSupRequest" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isOpen" ColumnName="isOpen" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message_Type">
+            <EntityTypeMapping TypeName="TimeMFGModel.Message_Type">
+              <MappingFragment StoreEntitySet="Message_Type">
+                <ScalarProperty Name="SimpleMessage" ColumnName="SimpleMessage" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MSMQ_Status">
+            <EntityTypeMapping TypeName="TimeMFGModel.MSMQ_Status">
+              <MappingFragment StoreEntitySet="MSMQ_Status">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NLog_Entries">
+            <EntityTypeMapping TypeName="TimeMFGModel.NLog_Entries">
+              <MappingFragment StoreEntitySet="NLog_Entries">
+                <ScalarProperty Name="allxml" ColumnName="allxml" />
+                <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+                <ScalarProperty Name="logger" ColumnName="logger" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValuedInventories">
+            <EntityTypeMapping TypeName="TimeMFGModel.ValuedInventory">
+              <MappingFragment StoreEntitySet="ValuedInventory">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="PeriodYear" ColumnName="PeriodYear" />
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
+                <ScalarProperty Name="CurrentCost" ColumnName="CurrentCost" />
+                <ScalarProperty Name="TransactionCost" ColumnName="TransactionCost" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="CalculationDate" ColumnName="CalculationDate" />
+                <ScalarProperty Name="BOH" ColumnName="BOH" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PartNum" ColumnName="PartNum" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ValuedInventoryByPeriod">
+            <EntityTypeMapping TypeName="TimeMFGModel.V_ValuedInventoryByPeriod">
+              <MappingFragment StoreEntitySet="V_ValuedInventoryByPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExtCost" ColumnName="ExtCost" />
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="PeriodYear" ColumnName="PeriodYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ClassIdSummary">
+            <EntityTypeMapping TypeName="TimeMFGModel.V_ClassIdSummary">
+              <MappingFragment StoreEntitySet="V_ClassIdSummary">
+                <ScalarProperty Name="ComparisonDate" ColumnName="ComparisonDate" />
+                <ScalarProperty Name="ExtCost" ColumnName="ExtCost" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadListJobStatus">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadListJobStatu">
+              <MappingFragment StoreEntitySet="LoadListJobStatus">
+                <ScalarProperty Name="IgnoreFlag" ColumnName="IgnoreFlag" />
+                <ScalarProperty Name="OpComplete" ColumnName="OpComplete" />
+                <ScalarProperty Name="OpCode" ColumnName="OpCode" />
+                <ScalarProperty Name="OprSeq" ColumnName="OprSeq" />
+                <ScalarProperty Name="AssemblySeq" ColumnName="AssemblySeq" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+                <ScalarProperty Name="LoadListJobId" ColumnName="LoadListJobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadLists">
+            <EntityTypeMapping TypeName="TimeMFGModel.LoadList">
+              <MappingFragment StoreEntitySet="LoadList">
+                <ScalarProperty Name="MakeReady" ColumnName="MakeReady" />
+                <ScalarProperty Name="Distributors" ColumnName="Distributors" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TruckingCompany" ColumnName="TruckingCompany" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateSchedShip" ColumnName="DateSchedShip" />
+                <ScalarProperty Name="DateRevised" ColumnName="DateRevised" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LoadList_Distributor" TypeName="TimeMFGModel.LoadList_Distributor" StoreEntitySet="LoadList_Distributor">
+            <EndProperty Name="LoadListDistributor">
+              <ScalarProperty Name="Id" ColumnName="DistributorId" />
+            </EndProperty>
+            <EndProperty Name="LoadList">
+              <ScalarProperty Name="Id" ColumnName="LoadListId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Term_Employees">
+            <EntityTypeMapping TypeName="TimeMFGModel.Term_Employees">
+              <MappingFragment StoreEntitySet="Term_Employees">
+                <ScalarProperty Name="TerminatedDate" ColumnName="TerminatedDate" />
+                <ScalarProperty Name="Terminated" ColumnName="Terminated" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Term_ITInfo">
+            <EntityTypeMapping TypeName="TimeMFGModel.Term_ITInfo">
+              <MappingFragment StoreEntitySet="Term_ITInfo">
+                <ScalarProperty Name="EpicorUserID" ColumnName="EpicorUserID" />
+                <ScalarProperty Name="EpicorAcc" ColumnName="EpicorAcc" />
+                <ScalarProperty Name="PhoneRenametW" ColumnName="PhoneRenametW" />
+                <ScalarProperty Name="DeskPhoneRename" ColumnName="DeskPhoneRename" />
+                <ScalarProperty Name="DeskPhoneFWtW" ColumnName="DeskPhoneFWtW" />
+                <ScalarProperty Name="DeskPhoneFW" ColumnName="DeskPhoneFW" />
+                <ScalarProperty Name="DeskPhone" ColumnName="DeskPhone" />
+                <ScalarProperty Name="UDriveAtW" ColumnName="UDriveAtW" />
+                <ScalarProperty Name="DeleteUDrive" ColumnName="DeleteUDrive" />
+                <ScalarProperty Name="FowardAtW" ColumnName="FowardAtW" />
+                <ScalarProperty Name="FowardEmails" ColumnName="FowardEmails" />
+                <ScalarProperty Name="EmailAtW" ColumnName="EmailAtW" />
+                <ScalarProperty Name="ArchiveEmail" ColumnName="ArchiveEmail" />
+                <ScalarProperty Name="WindowsAccAccess" ColumnName="WindowsAccAccess" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Term_Property">
+            <EntityTypeMapping TypeName="TimeMFGModel.Term_Property">
+              <MappingFragment StoreEntitySet="Term_Property">
+                <ScalarProperty Name="BKeyReceived" ColumnName="BKeyReceived" />
+                <ScalarProperty Name="BuildingKey" ColumnName="BuildingKey" />
+                <ScalarProperty Name="OKeyReceived" ColumnName="OKeyReceived" />
+                <ScalarProperty Name="OfficeKey" ColumnName="OfficeKey" />
+                <ScalarProperty Name="CablesReceived" ColumnName="CablesReceived" />
+                <ScalarProperty Name="Cables" ColumnName="Cables" />
+                <ScalarProperty Name="CellReceived" ColumnName="CellReceived" />
+                <ScalarProperty Name="FMPOff" ColumnName="FMPOff" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Term_Item">
+            <EntityTypeMapping TypeName="TimeMFGModel.Term_Item">
+              <MappingFragment StoreEntitySet="Term_Item">
+                <ScalarProperty Name="ItemReceived" ColumnName="ItemReceived" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeOfItem" ColumnName="TypeOfItem" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
