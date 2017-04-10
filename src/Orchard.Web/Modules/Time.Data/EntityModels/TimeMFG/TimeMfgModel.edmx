@@ -208,6 +208,16 @@
           <Property Name="Terminated" Type="bit" Nullable="false" />
           <Property Name="TerminatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Term_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="TypeOfItem" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemReceived" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Term_ITInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -560,6 +570,18 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Term_Item_Term_Employee">
+          <End Role="Term_Employees" Type="Self.Term_Employees" Multiplicity="1" />
+          <End Role="Term_Item" Type="Self.Term_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_Item">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Term_ITInfo_Term_Employees">
           <End Role="Term_Employees" Type="Self.Term_Employees" Multiplicity="1" />
           <End Role="Term_ITInfo" Type="Self.Term_ITInfo" Multiplicity="*" />
@@ -781,6 +803,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <EntitySet Name="SysTask" EntityType="Self.SysTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysTaskSchedule" EntityType="Self.SysTaskSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Term_Employees" EntityType="Self.Term_Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Term_Item" EntityType="Self.Term_Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Term_ITInfo" EntityType="Self.Term_ITInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Term_Property" EntityType="Self.Term_Property" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketAttachments" EntityType="Self.TicketAttachments" Schema="dbo" store:Type="Tables" />
@@ -845,6 +868,10 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <AssociationSet Name="FK_SysTask_SysTaskSchedule" Association="Self.FK_SysTask_SysTaskSchedule">
             <End Role="SysTaskSchedule" EntitySet="SysTaskSchedule" />
             <End Role="SysTask" EntitySet="SysTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Term_Item_Term_Employee" Association="Self.FK_Term_Item_Term_Employee">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_Item" EntitySet="Term_Item" />
           </AssociationSet>
           <AssociationSet Name="FK_Term_ITInfo_Term_Employees" Association="Self.FK_Term_ITInfo_Term_Employees">
             <End Role="Term_Employees" EntitySet="Term_Employees" />
@@ -1458,6 +1485,11 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
             <End Role="Term_Employees" EntitySet="Term_Employees" />
             <End Role="Term_Property" EntitySet="Term_Property" />
           </AssociationSet>
+          <EntitySet Name="Term_Item" EntityType="TimeMFGModel.Term_Item" />
+          <AssociationSet Name="FK_Term_Item_Term_Employee" Association="TimeMFGModel.FK_Term_Item_Term_Employee">
+            <End Role="Term_Employees" EntitySet="Term_Employees" />
+            <End Role="Term_Item" EntitySet="Term_Item" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -1761,6 +1793,7 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
           <Property Name="TerminatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Term_ITInfo" Relationship="TimeMFGModel.FK_Term_ITInfo_Term_Employees" FromRole="Term_Employees" ToRole="Term_ITInfo" />
           <NavigationProperty Name="Term_Property" Relationship="TimeMFGModel.FK_Term_Property_Term_Employees" FromRole="Term_Employees" ToRole="Term_Property" />
+          <NavigationProperty Name="Term_Item" Relationship="TimeMFGModel.FK_Term_Item_Term_Employee" FromRole="Term_Employees" ToRole="Term_Item" />
         </EntityType>
         <EntityType Name="Term_ITInfo">
           <Key>
@@ -1821,6 +1854,29 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Term_Property">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Term_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="TypeOfItem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemReceived" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Term_Employees" Relationship="TimeMFGModel.FK_Term_Item_Term_Employee" FromRole="Term_Item" ToRole="Term_Employees" />
+        </EntityType>
+        <Association Name="FK_Term_Item_Term_Employee">
+          <End Type="TimeMFGModel.Term_Employees" Role="Term_Employees" Multiplicity="1" />
+          <End Type="TimeMFGModel.Term_Item" Role="Term_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Term_Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Term_Item">
               <PropertyRef Name="EmpID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2306,6 +2362,17 @@ warning 6002: The table/view 'TimeMFG.dbo.V_ValuedInventoryByPeriod' does not ha
                 <ScalarProperty Name="CellReceived" ColumnName="CellReceived" />
                 <ScalarProperty Name="FMPOff" ColumnName="FMPOff" />
                 <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Term_Item">
+            <EntityTypeMapping TypeName="TimeMFGModel.Term_Item">
+              <MappingFragment StoreEntitySet="Term_Item">
+                <ScalarProperty Name="ItemReceived" ColumnName="ItemReceived" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeOfItem" ColumnName="TypeOfItem" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

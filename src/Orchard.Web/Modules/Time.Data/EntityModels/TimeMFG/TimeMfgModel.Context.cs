@@ -59,5 +59,6 @@ namespace Time.Data.EntityModels.TimeMFG
         public virtual DbSet<Term_Employees> Term_Employees { get; set; }
         public virtual DbSet<Term_ITInfo> Term_ITInfo { get; set; }
         public virtual DbSet<Term_Property> Term_Property { get; set; }
+        public virtual DbSet<Term_Item> Term_Item { get; set; }
     }
 }

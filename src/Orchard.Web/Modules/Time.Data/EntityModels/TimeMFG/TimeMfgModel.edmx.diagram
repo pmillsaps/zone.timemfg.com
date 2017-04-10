@@ -63,6 +63,8 @@
         <EntityTypeShape EntityType="TimeMFGModel.Term_Property" Width="1.5" PointX="18.625" PointY="16.25" />
         <AssociationConnector Association="TimeMFGModel.FK_Term_ITInfo_Term_Employees" />
         <AssociationConnector Association="TimeMFGModel.FK_Term_Property_Term_Employees" />
+        <EntityTypeShape EntityType="TimeMFGModel.Term_Item" Width="1.5" PointX="18.625" PointY="25.375" />
+        <AssociationConnector Association="TimeMFGModel.FK_Term_Item_Term_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

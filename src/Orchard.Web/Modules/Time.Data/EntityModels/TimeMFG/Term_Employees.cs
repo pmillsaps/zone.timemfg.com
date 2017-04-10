@@ -18,6 +18,7 @@ namespace Time.Data.EntityModels.TimeMFG
         {
             this.Term_ITInfo = new HashSet<Term_ITInfo>();
             this.Term_Property = new HashSet<Term_Property>();
+            this.Term_Item = new HashSet<Term_Item>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,6 @@ namespace Time.Data.EntityModels.TimeMFG
     
         public virtual ICollection<Term_ITInfo> Term_ITInfo { get; set; }
         public virtual ICollection<Term_Property> Term_Property { get; set; }
+        public virtual ICollection<Term_Item> Term_Item { get; set; }
     }
 }
