@@ -604,6 +604,7 @@
     <Content Include="Views\Computers\UploadAttachment.cshtml" />
     <Content Include="Views\Computers\_AttachmentsComputer.cshtml" />
     <Content Include="Views\Computers\DeleteAttachment.cshtml" />
+    <Content Include="Views\MaintenanceDataDetails\CopyRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

@@ -187,6 +187,62 @@ namespace Time.IT.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: MaintenanceDatas/CopyRecord/5
+        public ActionResult CopyRecord(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MaintenanceDataDetail maintenanceDataDetail = db.MaintenanceDataDetails.Find(id);
+            if (maintenanceDataDetail == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Duration = DurationYears(maintenanceDataDetail.Duration);
+            ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", maintenanceDataDetail.MaintenanceDataId);
+            maintenanceDataDetail.PO_CC = "";
+            maintenanceDataDetail.PurchaseDate = DateTime.MinValue;
+            maintenanceDataDetail.ExpirationDate = DateTime.MinValue;
+            return View(maintenanceDataDetail);
+        }
+
+        // POST: MaintenanceDatas/CopyRecord
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CopyRecord(MaintenanceDataDetail mDD, bool setOldRecordToExpired)
+        {
+            if (ModelState.IsValid)
+            {
+                MaintenanceDataDetail newDetail = new MaintenanceDataDetail // Saving the new record
+                {
+                    MaintenanceDataId = mDD.MaintenanceDataId,
+                    PurchaseDate = mDD.PurchaseDate,
+                    ExpirationDate = mDD.ExpirationDate,
+                    AccountNumber = mDD.AccountNumber,
+                    Duration = mDD.Duration,
+                    Cost = mDD.Cost,
+                    Monthly = mDD.Monthly,
+                    Explanation = mDD.Explanation,
+                    AlternateInfo = mDD.AlternateInfo,
+                    PO_CC = mDD.PO_CC,
+                    Expired = mDD.Expired
+                };
+                db.MaintenanceDataDetails.Add(newDetail);
+
+                if (setOldRecordToExpired)// Setting the old record to Expired
+                {
+                    var oldDetail = db.MaintenanceDataDetails.Find(mDD.Id);
+                    oldDetail.Expired = true;
+                    db.Entry(oldDetail).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Duration = DurationYears(mDD.Duration);
+            ViewBag.MaintenanceDataId = new SelectList(db.MaintenanceDatas, "Id", "BudgetItem", mDD.MaintenanceDataId);
+            return View(mDD);
+        }
         // Loads the years for the Create and Edit pages
         public SelectList DurationYears(string yearSelected)
         {
